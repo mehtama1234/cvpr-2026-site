@@ -1,7 +1,7 @@
 [
  {
   "id": "Wu_PhyGaP_Physically-Grounded_Gaussians_with_Polarization_Cues_CVPR_2026",
-  "file": "Wu_PhyGaP_Physically-Grounded_Gaussians_with_Polarization_.png",
+  "file": "Wu_PhyGaP_Physically-Grounded_Gaussians_with_Polarization_.jpg",
   "title": "PhyGaP: Physically-Grounded Gaussians with Polarization Cues",
   "authors": [],
   "theme": "3D & Gaussian Splatting",
@@ -13,7 +13,7 @@
  },
  {
   "id": "Wu_PQDT_Pseudo-Query_Dual_Transformer_for_Robust_Point_Cloud_Restoration_CVPR_2026",
-  "file": "Wu_PQDT_Pseudo-Query_Dual_Transformer_for_Robust_Point_Clo.png",
+  "file": "Wu_PQDT_Pseudo-Query_Dual_Transformer_for_Robust_Point_Clo.jpg",
   "title": "PQDT: Pseudo-Query Dual Transformer for Robust Point Cloud Restoration",
   "authors": [],
   "theme": "3D & Gaussian Splatting",
@@ -24,8 +24,46 @@
   "h": 413
  },
  {
+  "id": "An_Hg-I2P_Bridging_Modalities_for_Generalizable_Image-to-Point-Cloud_Registration_via_Heterogeneous_Graphs_CVPR_2026",
+  "file": "An_Hg-I2P_Bridging_Modalities_for_Generalizable_Image-to-P.jpg",
+  "title": "Hg-I2P: Bridging Modalities for Generalizable Image-to-Point-Cloud Registration via Heterogeneous Graphs",
+  "authors": [
+   "Pei An",
+   "Junfeng Ding",
+   "Jiaqi Yang",
+   "Yulong Wang",
+   "Jie Ma",
+   "Liangliang Nan"
+  ],
+  "theme": "3D & Gaussian Splatting",
+  "novelty": "A unified heterogeneous graph that simultaneously refines cross-modal features (HE-adapting) and prunes incorrect correspondences (HC-pruning), with multi-path edge mining that exploits both modalities' neighborhood structures to predict reliable cross-modal links.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/An_Hg-I2P_Bridging_Modalities_for_Generalizable_Image-to-Point-Cloud_Registration_via_Heterogeneous_Graphs_CVPR_2026.html",
+  "repo": "https://github.com/anpei96/hg-",
+  "w": 1971,
+  "h": 1172
+ },
+ {
+  "id": "Yu_InfiniDepth_Arbitrary-Resolution_and_Fine-Grained_Depth_Estimation_with_Neural_Implicit_Fields_CVPR_2026",
+  "file": "Yu_InfiniDepth_Arbitrary-Resolution_and_Fine-Grained_Depth.jpg",
+  "title": "InfiniDepth: Arbitrary-Resolution and Fine-Grained Depth Estimation with Neural Implicit Fields",
+  "authors": [
+   "Hao Yu",
+   "Haotong Lin",
+   "Jiawei Wang",
+   "Jiaxin Li",
+   "Yida Wang",
+   "Xueyang Zhang"
+  ],
+  "theme": "3D & Gaussian Splatting",
+  "novelty": "Continuous neural implicit depth representation enabling arbitrary-resolution prediction with localized feature gathering for fine geometric detail recovery without training resolution constraints.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Yu_InfiniDepth_Arbitrary-Resolution_and_Fine-Grained_Depth_Estimation_with_Neural_Implicit_Fields_CVPR_2026.html",
+  "repo": "https://github.com/zju3dv/InfiniDepth",
+  "w": 3084,
+  "h": 1338
+ },
+ {
   "id": "Lu_PDD_Manifold-Prior_Diverse_Distillation_for_Medical_Anomaly_Detection_CVPR_2026",
-  "file": "Lu_PDD_Manifold-Prior_Diverse_Distillation_for_Medical_Ano.png",
+  "file": "Lu_PDD_Manifold-Prior_Diverse_Distillation_for_Medical_Ano.jpg",
   "title": "PDD: Manifold-Prior Diverse Distillation for Medical Anomaly Detection",
   "authors": [],
   "theme": "Generation",
@@ -36,8 +74,46 @@
   "h": 452
  },
  {
+  "id": "Feng_Repurposing_3D_Generative_Model_for_Autoregressive_Layout_Generation_CVPR_2026",
+  "file": "Feng_Repurposing_3D_Generative_Model_for_Autoregressive_La.jpg",
+  "title": "Repurposing 3D Generative Model for Autoregressive Layout Generation",
+  "authors": [
+   "Haoran Feng",
+   "Yifan Niu",
+   "Zehuan Huang",
+   "Yang-Tian Sun",
+   "Chunchao Guo",
+   "Yuxin Peng"
+  ],
+  "theme": "Generation",
+  "novelty": "First framework to repurpose a pretrained 3D generative model (TRELLIS-based) for autoregressive layout generation with identity-aware embeddings and dual-guidance self-rollout distillation to eliminate exposure bias.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Feng_Repurposing_3D_Generative_Model_for_Autoregressive_Layout_Generation_CVPR_2026.html",
+  "repo": "https://github.com/fenghora/LaviGen",
+  "w": 1708,
+  "h": 1080
+ },
+ {
+  "id": "An_BiProLoRA_Bilevel_Prompt_LoRA_for_Real_Scene_Recovery_CVPR_2026",
+  "file": "An_BiProLoRA_Bilevel_Prompt_LoRA_for_Real_Scene_Recovery_C.jpg",
+  "title": "BiProLoRA: Bilevel Prompt LoRA for Real Scene Recovery",
+  "authors": [
+   "Nan An",
+   "Long Ma",
+   "Tengyu Ma",
+   "Zhu Liu",
+   "Yingchi Liu",
+   "Risheng Liu"
+  ],
+  "theme": "Generation",
+  "novelty": "Framing prompt-LoRA co-training as bilevel hyperparameter optimization, where prompts act as hyperparameters steering LoRA's synthetic training, enabling their complementary mutual reinforcement for robust synthetic-to-real adaptation.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/An_BiProLoRA_Bilevel_Prompt_LoRA_for_Real_Scene_Recovery_CVPR_2026.html",
+  "repo": "https://github.com/Defender0527/BiProLoRA",
+  "w": 539,
+  "h": 720
+ },
+ {
   "id": "Feng_SO-Bench_A_Structural_Output_Evaluation_of_Multimodal_LLM_CVPR_2026",
-  "file": "Feng_SO-Bench_A_Structural_Output_Evaluation_of_Multimodal.png",
+  "file": "Feng_SO-Bench_A_Structural_Output_Evaluation_of_Multimodal.jpg",
   "title": "SO-Bench: A Structural Output Evaluation of Multimodal LLM",
   "authors": [
    "Di Feng",
@@ -55,8 +131,65 @@
   "h": 1200
  },
  {
+  "id": "Hu_AVION_Aerial_Vision-Language_Instruction_from_Offline_Teacher_to_Prompt-Tuned_Network_CVPR_2026",
+  "file": "Hu_AVION_Aerial_Vision-Language_Instruction_from_Offline_T.jpg",
+  "title": "AVION: Aerial Vision-Language Instruction from Offline Teacher to Prompt-Tuned Network",
+  "authors": [
+   "Yu Hu",
+   "Jianyang Gu",
+   "Hao Liu",
+   "Yue Cao",
+   "Jozsef Hamari",
+   "Zheng Liu"
+  ],
+  "theme": "Vision-Language",
+  "novelty": "Tri-aspect knowledge distillation (visual, textual, logit) from a domain-specific teacher with LLM-enriched textual prototypes to a prompt-tuned lightweight student for efficient remote sensing VLM adaptation.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Hu_AVION_Aerial_Vision-Language_Instruction_from_Offline_Teacher_to_Prompt-Tuned_Network_CVPR_2026.html",
+  "repo": "https://github.com/yuhu990424/AVION",
+  "w": 5275,
+  "h": 2653
+ },
+ {
+  "id": "Xu_Progressive_Cross-Modal_Causal_Intervention_for_Long-Term_Action_Recognition_CVPR_2026",
+  "file": "Xu_Progressive_Cross-Modal_Causal_Intervention_for_Long-Te.jpg",
+  "title": "Progressive Cross-Modal Causal Intervention for Long-Term Action Recognition",
+  "authors": [
+   "Shaowu Xu",
+   "Xibin Jia",
+   "Chao Fan",
+   "Junyu Gao",
+   "Jing Chang",
+   "Qianmei Sun"
+  ],
+  "theme": "Vision-Language",
+  "novelty": "Multi-stage causal intervention framework that explicitly models causal relationships in cross-modal fusion rather than relying on statistical correlations.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Xu_Progressive_Cross-Modal_Causal_Intervention_for_Long-Term_Action_Recognition_CVPR_2026.html",
+  "repo": "https://github.com/xushaowu/PCMCI",
+  "w": 456,
+  "h": 446
+ },
+ {
+  "id": "Chng_SenseSearch_Empowering_Vision-Language_Models_with_High-Resolution_Agentic_Search-Reasoning_via_Reinforcement_CVPR_2026",
+  "file": "Chng_SenseSearch_Empowering_Vision-Language_Models_with_Hi.jpg",
+  "title": "SenseSearch: Empowering Vision-Language Models with High-Resolution Agentic Search-Reasoning via Reinforcement Learning",
+  "authors": [
+   "Yong Xien Chng",
+   "Tao Hu",
+   "Wenwen Tong",
+   "Xueheng Li",
+   "Jiandong Chen",
+   "Haojia Yu"
+  ],
+  "theme": "Vision-Language",
+  "novelty": "The first end-to-end agentic VLM that coordinates multiple tool types (search and cropping) through RL-based reasoning, introducing BN-GSPO to stabilize training on multi-tool trajectories.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Chng_SenseSearch_Empowering_Vision-Language_Models_with_High-Resolution_Agentic_Search-Reasoning_via_Reinforcement_CVPR_2026.html",
+  "repo": "https://github.com/OpenSenseNova/SenseNova-MARS",
+  "w": 1299,
+  "h": 763
+ },
+ {
   "id": "Cao_Generalizable_Video_Quality_Assessment_via_Weak-to-Strong_Learning_CVPR_2026",
-  "file": "Cao_Generalizable_Video_Quality_Assessment_via_Weak-to-Str.png",
+  "file": "Cao_Generalizable_Video_Quality_Assessment_via_Weak-to-Str.jpg",
   "title": "Generalizable Video Quality Assessment via Weak-to-Strong Learning",
   "authors": [
    "Linhan Cao, Wei Sun, Xiangyang Zhu, et al."
@@ -70,7 +203,7 @@
  },
  {
   "id": "Wu_GEM_Generating_LiDAR_World_Model_via_Deformable_Mamba_CVPR_2026",
-  "file": "Wu_GEM_Generating_LiDAR_World_Model_via_Deformable_Mamba_C.png",
+  "file": "Wu_GEM_Generating_LiDAR_World_Model_via_Deformable_Mamba_C.jpg",
   "title": "GEM: Generating LiDAR World Model via Deformable Mamba",
   "authors": [
    "Yang Wu",
@@ -88,8 +221,45 @@
   "h": 575
  },
  {
+  "id": "Chen_Wavelet-based_Frame_Selection_by_Detecting_Semantic_Boundary_for_Long_Video_CVPR_2026",
+  "file": "Chen_Wavelet-based_Frame_Selection_by_Detecting_Semantic_B.jpg",
+  "title": "Wavelet-based Frame Selection by Detecting Semantic Boundary for Long Video Understanding",
+  "authors": [
+   "Wang Chen",
+   "Yuhui Zeng",
+   "Yongdong Luo",
+   "Tianyu Xie",
+   "Luojun Lin",
+   "Jiayi Ji"
+  ],
+  "theme": "Video",
+  "novelty": "Reframes frame selection as a signal-processing problem using wavelet multi-resolution analysis to detect semantic boundaries, prioritizing narrative structure over isolated relevance scores.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Wavelet-based_Frame_Selection_by_Detecting_Semantic_Boundary_for_Long_Video_CVPR_2026.html",
+  "repo": "https://github.com/MAC-AutoML/WFS-SB",
+  "w": 2946,
+  "h": 870
+ },
+ {
+  "id": "Che_LEMON_A_Large_Endoscopic_MONocular_Dataset_and_Foundation_Model_for_CVPR_2026",
+  "file": "Che_LEMON_A_Large_Endoscopic_MONocular_Dataset_and_Foundat.jpg",
+  "title": "LEMON: A Large Endoscopic MONocular Dataset and Foundation Model for Perception in Surgical Settings",
+  "authors": [
+   "Chengan Che",
+   "Chao Wang",
+   "Tom Vercauteren",
+   "Sophia Tsoka",
+   "Luis C. Garcia-Peraza-Herrera"
+  ],
+  "theme": "Video",
+  "novelty": "First large-scale surgical video dataset aggregated from online sources with automated curation pipeline; proposes self-supervised augmented distillation for surgical foundation models.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Che_LEMON_A_Large_Endoscopic_MONocular_Dataset_and_Foundation_Model_for_CVPR_2026.html",
+  "repo": "https://github.com/visurg-ai/LEMON",
+  "w": 672,
+  "h": 539
+ },
+ {
   "id": "Bo_Focus_on_Background_Exploring_SAMs_Potential_in_Few-shot_Medical_Image_CVPR_2026",
-  "file": "Bo_Focus_on_Background_Exploring_SAMs_Potential_in_Few-sho.png",
+  "file": "Bo_Focus_on_Background_Exploring_SAMs_Potential_in_Few-sho.jpg",
   "title": "Focus on Background: Exploring SAM's Potential in Few-shot Medical Image Segmentation",
   "authors": [
    "Yuntian Bo",
@@ -105,8 +275,62 @@
   "h": 1848
  },
  {
+  "id": "Cai_RAID_Retrieval-Augmented_Anomaly_Detection_CVPR_2026",
+  "file": "Cai_RAID_Retrieval-Augmented_Anomaly_Detection_CVPR_2026.jpg",
+  "title": "RAID: Retrieval-Augmented Anomaly Detection",
+  "authors": [
+   "Mingxiu Cai",
+   "Zhe Zhang",
+   "Gaochang Wu",
+   "Tianyou Chai",
+   "Xiatian Zhu"
+  ],
+  "theme": "Perception",
+  "novelty": "Reconceptualizing UAD as a Retrieval-Augmented Generation paradigm where hierarchical retrieval (class\u2192semantic\u2192instance) reduces matching dimensionality and a guided MoE filter leverages retrieved semantic prototypes as dual guidance to suppress matching noise in the anomaly cost volume.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Cai_RAID_Retrieval-Augmented_Anomaly_Detection_CVPR_2026.html",
+  "repo": "https://github.com/Mingxiu-Cai/RAID",
+  "w": 1024,
+  "h": 1024
+ },
+ {
+  "id": "Li_FastRef_Fast_Prototype_Refinement_for_Few-shot_Industrial_Anomaly_Detection_CVPR_2026",
+  "file": "Li_FastRef_Fast_Prototype_Refinement_for_Few-shot_Industri.jpg",
+  "title": "FastRef: Fast Prototype Refinement for Few-shot Industrial Anomaly Detection",
+  "authors": [
+   "Yufei Li",
+   "Long Tian",
+   "Yuyang Dai",
+   "Wenchao Chen",
+   "Liang Bao",
+   "Xiyang Liu"
+  ],
+  "theme": "Perception",
+  "novelty": "The key insight is using optimal transport to balance characteristic transfer and anomaly suppression, enabling efficient prototype refinement at test time without retraining.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Li_FastRef_Fast_Prototype_Refinement_for_Few-shot_Industrial_Anomaly_Detection_CVPR_2026.html",
+  "repo": "https://github.com/liyufei25/FastRef",
+  "w": 2951,
+  "h": 2841
+ },
+ {
+  "id": "Hong_From_Infusion_to_Assimilation_Distillation_for_Medical_Image_Segmentation_CVPR_2026",
+  "file": "Hong_From_Infusion_to_Assimilation_Distillation_for_Medica.jpg",
+  "title": "From Infusion to Assimilation Distillation for Medical Image Segmentation",
+  "authors": [
+   "Jiankang Hong",
+   "Ye Luo",
+   "Yinan Liu",
+   "Junsong Yuan"
+  ],
+  "theme": "Perception",
+  "novelty": "The key innovation is recognizing that poor knowledge distillation generalization stems from insufficient knowledge internalization, and addressing this through a two-stage framework that infuses teacher knowledge while actively assimilating it into the student model through contrastive self-optimization and reverse feature constraints.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Hong_From_Infusion_to_Assimilation_Distillation_for_Medical_Image_Segmentation_CVPR_2026.html",
+  "repo": "https://github.com/hjklearn/IAD",
+  "w": 2478,
+  "h": 1632
+ },
+ {
   "id": "Gao_A_Unified_Perspective_on_Adversarial_Membership_Manipulation_in_Vision_Models_CVPR_2026",
-  "file": "Gao_A_Unified_Perspective_on_Adversarial_Membership_Manipu.png",
+  "file": "Gao_A_Unified_Perspective_on_Adversarial_Membership_Manipu.jpg",
   "title": "A Unified Perspective on Adversarial Membership Manipulation in Vision Models",
   "authors": [
    "Zitao Gao",
@@ -123,8 +347,46 @@
   "h": 932
  },
  {
+  "id": "Song_EnergyAction_Unimanual_to_Bimanual_Composition_with_Energy-Based_Models_CVPR_2026",
+  "file": "Song_EnergyAction_Unimanual_to_Bimanual_Composition_with_E.jpg",
+  "title": "EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models",
+  "authors": [
+   "Mingchen Song",
+   "Xiang Deng",
+   "Jie Wei",
+   "Dongmei Jiang",
+   "Liqiang Nie",
+   "Weili Guan"
+  ],
+  "theme": "Embodied / driving",
+  "novelty": "First framework to compositionally transfer unimanual manipulation policies to bimanual tasks using EBM composition with energy-based coordination.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Song_EnergyAction_Unimanual_to_Bimanual_Composition_with_Energy-Based_Models_CVPR_2026.html",
+  "repo": "https://github.com/codeshop715/EnergyAction",
+  "w": 375,
+  "h": 263
+ },
+ {
+  "id": "Nguyen_LEAD_Minimizing_Learner-Expert_Asymmetry_in_End-to-End_Driving_CVPR_2026",
+  "file": "Nguyen_LEAD_Minimizing_Learner-Expert_Asymmetry_in_End-to-.jpg",
+  "title": "LEAD: Minimizing Learner\u2013Expert Asymmetry in End-to-End Driving",
+  "authors": [
+   "Long Nguyen",
+   "Micha Fauth",
+   "Bernhard Jaeger",
+   "Daniel Dauner",
+   "Maximilian Igl",
+   "Andreas Geiger"
+  ],
+  "theme": "Embodied / driving",
+  "novelty": "Systematic analysis identifying three critical sources of expert-student misalignment; expert redesign (rather than model improvement) becomes the bottleneck for closed-loop driving performance, achieved 95 DS on Bench2Drive through asymmetry reduction.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Nguyen_LEAD_Minimizing_Learner-Expert_Asymmetry_in_End-to-End_Driving_CVPR_2026.html",
+  "repo": "https://github.com/kesai-labs/lead",
+  "w": 3782,
+  "h": 2282
+ },
+ {
   "id": "Wei_NuWa_Deriving_Lightweight_Class-Specific_Vision_Transformers_for_Edge_Devices_CVPR_2026",
-  "file": "Wei_NuWa_Deriving_Lightweight_Class-Specific_Vision_Transf.png",
+  "file": "Wei_NuWa_Deriving_Lightweight_Class-Specific_Vision_Transf.jpg",
   "title": "NuWa: Deriving Lightweight Class-Specific Vision Transformers for Edge Devices",
   "authors": [
    "Ziteng Wei",
@@ -143,7 +405,7 @@
  },
  {
   "id": "Galor_Hist2Style_Histogram-Guided_Stylization_with_Bilateral_Grids_CVPR_2026",
-  "file": "Galor_Hist2Style_Histogram-Guided_Stylization_with_Bilater.png",
+  "file": "Galor_Hist2Style_Histogram-Guided_Stylization_with_Bilater.jpg",
   "title": "Hist2Style: Histogram-Guided Stylization with Bilateral Grids",
   "authors": [
    "Dekel Galor",
@@ -161,8 +423,43 @@
   "h": 851
  },
  {
+  "id": "Huang_RevINN_An_End-to-End_Invertible_Neural_Network_for_Reversible_Adversarial_Examples_CVPR_2026",
+  "file": "Huang_RevINN_An_End-to-End_Invertible_Neural_Network_for_R.jpg",
+  "title": "RevINN: An End-to-End Invertible Neural Network for Reversible Adversarial Examples",
+  "authors": [
+   "Jielun Huang",
+   "Chi-Man Pun",
+   "Guoheng Huang"
+  ],
+  "theme": "Learning foundations",
+  "novelty": "First end-to-end INN that unifies adversarial perturbation and reversible information hiding entirely in the wavelet frequency domain, eliminating the two-stage pipeline and its associated error accumulation.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Huang_RevINN_An_End-to-End_Invertible_Neural_Network_for_Reversible_Adversarial_Examples_CVPR_2026.html",
+  "repo": "https://github.com/WongJaylen/RevINN",
+  "w": 800,
+  "h": 700
+ },
+ {
+  "id": "Tao_Learning_Mutual_View_Information_Graph_for_Adaptive_Adversarial_Collaborative_Perception_CVPR_2026",
+  "file": "Tao_Learning_Mutual_View_Information_Graph_for_Adaptive_Ad.jpg",
+  "title": "Learning Mutual View Information Graph for Adaptive Adversarial Collaborative Perception",
+  "authors": [
+   "Yihang Tao",
+   "Senkang Hu",
+   "Haonan An",
+   "Zhengru Fang",
+   "Hangcheng Cao",
+   "Yuguang Fang"
+  ],
+  "theme": "Learning foundations",
+  "novelty": "Unified mutual view information graph representation that captures vulnerabilities across diverse defensive configurations, enabling adaptive attacks generalizable across different defense mechanisms.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Tao_Learning_Mutual_View_Information_Graph_for_Adaptive_Adversarial_Collaborative_Perception_CVPR_2026.html",
+  "repo": "https://github.com/yihangtao/MVIG.git",
+  "w": 2966,
+  "h": 1582
+ },
+ {
   "id": "Abousamra_TopoSlide_Topologically-Informed_Histopathology_Whole_Slide_Image_Representation_Learning_CVPR_2026",
-  "file": "Abousamra_TopoSlide_Topologically-Informed_Histopathology_.png",
+  "file": "Abousamra_TopoSlide_Topologically-Informed_Histopathology_.jpg",
   "title": "TopoSlide: Topologically-Informed Histopathology Whole Slide Image Representation Learning",
   "authors": [
    "Shahira Abousamra",
@@ -178,7 +475,7 @@
  },
  {
   "id": "Zhang_Orthogonal_Spatial-Aware_Multi-View_Anchor_Graph_Clustering_for_Incomplete_Remote_Sensing_CVPR_2026",
-  "file": "Zhang_Orthogonal_Spatial-Aware_Multi-View_Anchor_Graph_Clu.png",
+  "file": "Zhang_Orthogonal_Spatial-Aware_Multi-View_Anchor_Graph_Clu.jpg",
   "title": "Orthogonal Spatial-Aware Multi-View Anchor Graph Clustering for Incomplete Remote Sensing Image Data",
   "authors": [
    "Zhang et al."
@@ -189,5 +486,19 @@
   "repo": "https://github.com/ZhangYongshan/OSMAGC",
   "w": 7285,
   "h": 3667
+ },
+ {
+  "id": "Cao_Cross-Scale_Pansharpening_via_ScaleFormer_and_the_PanScale_Benchmark_CVPR_2026",
+  "file": "Cao_Cross-Scale_Pansharpening_via_ScaleFormer_and_the_PanS.jpg",
+  "title": "Cross-Scale Pansharpening via ScaleFormer and the PanScale Benchmark",
+  "authors": [
+   "Cao et al."
+  ],
+  "theme": "Frontier / science",
+  "novelty": "Reframing pansharpening cross-scale generalization as sequence-length generalization and using RoPE with SAP bucketed training to achieve zero-shot performance at unseen resolution ratios.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Cao_Cross-Scale_Pansharpening_via_ScaleFormer_and_the_PanScale_Benchmark_CVPR_2026.html",
+  "repo": "https://github.com/caoke-963/ScaleFormer",
+  "w": 800,
+  "h": 800
  }
 ]
