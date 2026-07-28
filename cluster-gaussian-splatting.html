@@ -1,0 +1,177 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gaussian Splatting — a 3D scene as a cloud of blobs</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+ .dframe{position:relative;border:1px solid #1E2A33;border-radius:10px 10px 0 0;overflow:hidden;background:#0D131A}
+ .dframe canvas{display:block;width:100%;height:320px}
+ @media(max-width:560px){.dframe canvas{height:250px}}
+ .dctl{display:flex;align-items:center;gap:12px;border:1px solid #1E2A33;border-top:none;border-radius:0 0 10px 10px;background:#0b1116;padding:9px 12px;margin-bottom:8px}
+ .dpp{flex:none;width:34px;height:28px;border:1px solid #1a6b62;background:#0e1a1a;color:#37E1CE;font-family:ui-monospace,monospace;font-size:12px;border-radius:5px;cursor:pointer}
+ .dscrub{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:3px;background:linear-gradient(90deg,#1a6b62,#2A3A45);cursor:pointer}
+ .dscrub::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#37E1CE;box-shadow:0 0 8px rgba(55,225,206,.6);cursor:pointer}
+ .dscrub::-moz-range-thumb{width:14px;height:14px;border:none;border-radius:50%;background:#37E1CE}
+ .dph{flex:none;font-family:ui-monospace,monospace;font-size:12px;color:#8A9AA3;min-width:120px;text-align:right}
+ .dcap{font-family:ui-monospace,monospace;font-size:12.5px;color:#B37A1E;margin:2px 0 2px}
+</style></head><body><header><div class="wrap"><div class="bug">CVPR 2026 · cluster explainer · 3D</div><h1>Gaussian Splatting — a 3D scene as a cloud of blobs</h1><p>285 CVPR 2026 papers all build on one idea: store a scene as thousands of soft colored 3D blobs you can redraw from any angle, fast. Here&#x27;s the shared problem, and the families of related work — with an original diagram you can scrub.</p></div></header><nav><div class="wrap"><a href="index.html">← All themes</a><a href="techniques.html">Animated mechanisms</a><a href="figures.html">Key papers</a><a href="#families">The families</a></div></nav><div class="wrap"><article class="doc"><div class="dcap">▸ scrub: a few photos → fit a cloud of Gaussians → orbit a virtual camera to any new view</div><div class="dframe"><canvas data-diag="gsplat"></canvas></div><h2>The problem — from first principles</h2>
+
+<p>Photography is a lossy process. Each photograph throws away depth—the camera collapses a 3D scene onto a 2D image sensor, and that distance information is lost. If you want to store a scene so you can later recreate it from any angle (not just the few angles your camera captured), you need a 3D representation: something compact enough to fit in memory, flexible enough to learn from partial views, and quick enough to render in real time.</p>
+
+<p>The classical approaches stumble. Meshes are precise—you can export them to game engines and CAD tools—but they're slow to fit from images; finding the right triangle topology is a discrete, non-differentiable problem. Neural fields (continuous implicit functions like NeRF) can be optimized end-to-end from images, but rendering them is expensive: each pixel shoots a ray through the scene and samples the function dozens of times. For real-time rendering—think AR, robotics, autonomous driving—you need something faster.</p>
+
+<p>Gaussian Splatting's core idea is deceptively simple: represent the scene not as a mesh or a volumetric grid, but as a cloud of thousands of small, soft, colored 3D blobs. Each blob is a Gaussian (a smooth bell curve in 3D space); it has a position, a size (covariance), a color, and an opacity. To render the scene from a new viewpoint, project each Gaussian onto the image plane, and blend them in order from back to front. Because projection and blending are both differentiable and highly parallel, you can train the Gaussians by comparing rendered images to ground-truth photos, and the optimization converges in minutes instead of hours. The rendering itself runs in real time on modern GPUs.</p>
+
+<p>The fundamental hardness remains: building a good 3D model from limited views, handling occlusions, capturing fine detail, dealing with changing light and motion. But Gaussian Splatting shifts the problem into a form the GPU can solve fast. That shift unlocked a whole research direction.</p>
+
+<h2>The families — how the field extends it</h2>
+
+<h3>Sparse views, few photos, single images</h3>
+
+<p>Many scenes you want to capture can't be photographed from every angle. Medical scans, archaeological sites, or casual phone videos leave huge blind spots. The research pushed here asks: how much geometry can you infer from geometry alone? <b>SR3R</b> learns to predict Gaussians directly from low-resolution sparse views via a feed-forward network, skipping per-scene optimization. <b>TWINGS</b> uses non-rigid surface deformation to initialize Gaussians from sparse angles, addressing scale ambiguity. <b>Wavelet-Driven 3D Anomaly Detection</b> exploits frequency-domain priors to stabilize sparse-view fitting. <b>HeroGS</b> stacks pseudo-dense labels and geometric consistency. <b>TokenSplat</b> does token-level feature aggregation with asymmetric dual-flow to decouple pose reasoning from scene encoding. <b>Generalizable Sparse-View 3D Reconstruction</b> combines appearance disentanglement (for lighting) with occlusion handling in one unified forward model. <b>MetroGS</b> integrates monocular depth priors with multi-view refinement. <b>Intrinsic Geometry-Appearance Consistency Optimization</b> enforces coupled geometry-appearance regularization as a first principle for sparse views.</p>
+
+<h3>Dynamic scenes and video</h3>
+
+<p>The real world moves. People dance, liquids flow, fabrics deform. Extending Gaussian Splatting to video (4D: space and time) requires new trade-offs. How do you represent deformation? Do you store motion explicitly, or learn it implicitly? <b>ReFlow</b> learns 3D motion directly from video via 3D-2D motion consistency. <b>SharpTimeGS</b> uses learnable lifespan as a unified temporal attribute controlling visibility and motion across static and dynamic regions. <b>MoRGS</b> reasons per-Gaussian motion with lightweight sparse flow supervision. <b>DGGT</b> reconstructs 4D driving scenes with pose-free input, treating camera pose as a model output. <b>4DSurf</b> enforces temporal consistency via SDF flow regularization with overlapping segment partitions. <b>AeroDGS</b> applies physics-guided optimization to aerial 4D reconstruction. <b>MSCD-GS</b> separately models static and dynamic motion with cooperative deblurring. <b>Deformable Gaussian Occupancy</b> decouples rigid and nonrigid motion through per-Gaussian rigidity masks. <b>Space-Time Forecasting</b> integrates object-level motion modeling for long-term physically consistent prediction.</p>
+
+<h3>Materials, lighting, and inverse rendering</h3>
+
+<p>Photorealism isn't just color; it's how light bounces off surfaces. If you want to edit a scene (change the lighting, swap a material) or render it in a new environment, you need to disentangle intrinsic material properties from illumination. <b>LumiMotion</b> leverages motion as a supervisory signal for material and illumination estimation in dynamic scenes. <b>GHPT</b> combines GPU hardware ray tracing with differentiable Gaussian rendering for real-time indirect illumination and material estimation. <b>MatSpray</b> fuses diffusion-based 2D PBR priors with 3D Gaussian geometry via ray tracing. <b>SunFaded</b> separates intrinsic albedo from view-dependent lighting for robust dark-scene reconstruction. <b>SGS-Intrinsic</b> achieves geometry and material-lighting disentanglement from sparse indoor images via semantic-invariant representation. <b>Physically Inspired Gaussian Splatting for HDR</b> decomposes appearance into reflectance and illumination. <b>GOR-IS</b> removes 3D objects by modeling global light transport in material space. <b>GLINT</b> enables scene-scale transparency through decomposed radiance representation. <b>PhysIR-Splat</b> assigns temperature and emissivity per Gaussian primitive with full thermal radiative transfer.</p>
+
+<h3>Real-time rendering, compression, and speed</h3>
+
+<p>Gaussian Splatting is already fast, but real-world deployment demands faster: mobile phones, embedded systems, driving at 30 Hz with rendering to spare. Compression matters when you have scenes with millions of Gaussians. <b>EcoSplat</b> lets users specify a target primitive count at inference, learning importance-aware opacity ranking to pick the top-K. <b>CGHair</b> achieves 200x memory reduction via hair-card-guided clustering. <b>Learning Compact 3D Representations</b> condenses 4D Gaussians via learnable query tokens (65x fewer primitives, 15x less memory). <b>Faster-GS</b> consolidates optimization improvements achieving 5x faster training with 30% less VRAM. <b>FastGS</b> trains full scenes in under 100 seconds. <b>Layered 4D-Rotor Gaussian Splatting</b> achieves 22.3x compression via temporal factorization and covariance quantization. <b>SEELE</b> unifies acceleration across all pipeline stages. <b>Turbo-GS</b> identifies and addresses high-resolution bottlenecks (DuplicateWithKeys, SortPairs). <b>CaT-GS</b> caches inter-frame consistency for large-scale rendering.</p>
+
+<h3>Fusing vision and language, segmentation, and reasoning</h3>
+
+<p>A scene is more than pixels and geometry. It has objects, semantics, parts that mean something. As vision-language models (like CLIP) became powerful, researchers began asking: can you train Gaussians to understand semantic meaning, anchor to language, or enable interactive questioning? <b>ReLaGS</b> integrates relational language reasoning for spatial grounding. <b>ExtrinSplat</b> decouples geometry and semantics for open-vocabulary scene understanding. <b>OnlinePG</b> performs online panoptic mapping with open-vocabulary segmentation. <b>LangRef3DGS</b> combines Dirichlet Process class discovery with gradient adaptation for semantic feature separation. <b>Geometry-Aware Cross-Modal Graph Alignment</b> aligns language and geometry for referring segmentation. <b>GenSplat</b> uses progressive curriculum learning to align Gaussian primitives with multi-level linguistic concepts. <b>MLLMSplat</b> adapts multimodal large language models for 3DGS understanding, generation, and editing. <b>REALM</b> deploys an MLLM-agent framework for 3D reasoning segmentation without extensive 3D-specific training. <b>LightSplat</b> achieves open-vocabulary scene understanding in five seconds via compact 2-byte masks and single-step graph clustering.</p>
+
+<h3>Generative synthesis and novel view generation</h3>
+
+<p>Instead of fitting Gaussians to observed images, can you generate new scenes from scratch—or interpolate between them? This opens a different axis: using diffusion models, flow matching, or other generative priors to synthesize plausible 3D worlds. <b>DIFF4SPLAT</b> feeds video diffusion directly into 3D Gaussian generation, synthesizing deformable Gaussians in a single feed-forward pass. <b>WonderZoom</b> uses scale-adaptive Gaussian surfels for dynamic incremental refinement during generative synthesis. <b>GaussianZoom</b> progressively zooms in with VLM-guided semantic detail. <b>GenieDrive</b> decouples physics prediction (occupancy) from rendering. <b>PhysGM</b> jointly predicts 3DGS and physical properties in one pass. <b>Choreographing a World of Dynamic Objects</b> distills multi-object 4D motion from video generative models. <b>Let it Snow</b> combines particle trajectories with Video-SDS and physics regularization for dynamic weather. <b>ScenTok</b> offers a compressed diffusable token space for 3D scenes, balancing size and fidelity. <b>Splatent</b> optimizes directly in VAE latent space with tiled multi-view attention.</p>
+
+<h3>Robotics, autonomous driving, and spatial perception</h3>
+
+<p>3D scenes matter for action. Robots must navigate and manipulate; autonomous vehicles must predict what's ahead and where obstacles are. Gaussian Splatting, as a differentiable 3D representation, became a natural bridge between visual perception and control. <b>Video2Robo</b> generates robot training data from single monocular videos using 3DGS for trajectory extraction and photorealistic synthesis. <b>GaussianDWM</b> is a unified world model for both scene understanding and multi-modal generation in autonomous driving. <b>RaGS</b> fuses radar and camera via 3DGS as an intermediate representation. <b>ParkGaussian</b> adapts 3DGS for parking scenes with surround-view fisheye sensors. <b>GeoPredict</b> combines predictive 3D Gaussian geometry with kinematic trajectory prediction for VLA (vision-language-action) manipulation. <b>From Manuals to Actions</b> generates multimodal procedural manuals as visual prompts for robotic manipulation. <b>MAGICIAN</b> uses Gaussians to imagine future uncertainty for long-horizon active mapping. <b>Sensor2Sensor</b> translates monocular videos into synthetic multi-sensor autonomous vehicle logs via 4DGS. <b>DynamicVGGT</b> extends static point-map prediction to 4D dynamic scenes.</p>
+
+<h3>Specialized cameras and modalities: event, thermal, polarization, medical</h3>
+
+<p>Traditional cameras capture RGB frames. But the world has many sensors: event cameras (respond to brightness changes), thermal (capture heat), polarization (material properties), medical imagers (ultrasound, electron microscopy, CT). Fitting Gaussians to these modalities requires rethinking the observation model. <b>3D Gaussian Splatting from Unposed Spike Streams</b> reconstructs from event camera data without camera poses. <b>Thermal is Always Wild</b> addresses photometric drift and limited dynamic range in thermal novel-view synthesis. <b>DirectFisheye-GS</b> natively integrates the Kannala-Brandt fisheye model with exact Jacobians. <b>PolarGuide-GSDR</b> embeds polarization priors for reflective scenes. <b>eRetinexGS</b> combines Retinex models with event-frame hybrid guidance for low-light enhancement. <b>EMGauss</b> reframes electron-microscopy axial super-resolution as 3D dynamic scene rendering. <b>GaussianPile</b> models finite focal-zone point spread functions for slice-based volumetric imaging. <b>GS-ASM</b> uses 2D Gaussian splatting for active stereo matching with proxy label synthesis. <b>FastEventDGS</b> reconstructs dynamic scenes from a single monocular event camera. <b>Splat-Based Metal Artifact Reduction</b> combines Gaussian splatting with polychromatic X-ray physics. <b>Adaptive Anisotropic Gaussian Splatting for MRI</b> applies 2D Gaussian splatting to medical super-resolution.</p>
+
+<h3>Avatars and human-centric applications</h3>
+
+<p>People are the most complex and expressive subject matter. Reconstructing a human head or full body as an animatable avatar—capable of changing expression, pose, or lighting—became a major benchmark for Gaussian Splatting. <b>RelightAnyone</b> decouples OLAT (one-light-at-a-time) data from identity generalization. <b>OMG-Avatar</b> enables dynamic multi-level-of-detail rendering from one shot. <b>ELITE</b> combines 3D priors with generative adaptation for efficient head avatar synthesis. <b>HyperGaussians</b> improves facial detail via high-dimensional Gaussian conditioning. <b>UIKA</b> establishes multi-view correspondence through UV-guided dual-space attention. <b>Feed-forward Gaussian Registration for Head Avatar</b> achieves 10x speedup with semantic editing. <b>EmoTaG</b> controls emotion in talking head synthesis. <b>EmoDiffTalk</b> applies emotion-aware diffusion to editable Gaussian heads. <b>Large-scale Codec Avatars</b> shows that million-scale pretraining resolves fidelity-generalization trade-off. <b>HumanNOVA</b> creates photorealistic avatars from single images at sub-second speed. <b>PhysHead</b> combines physics-guided hair simulation with learnable appearance. <b>STAvatar</b> enables soft binding and temporal density control. <b>Tavatar</b> maintains topology consistency for animation. <b>SketchFaceGS</b> enables sketch-based real-time face editing. <b>Multi-view Consistent 3D Gaussian Head Avatars</b> leverages state space modeling without multi-view supervision. <b>FlexAvatar</b> supports flexible, animatable head reconstruction at scale.</p>
+
+<h3>Robustness, adversarial, and out-of-distribution scenarios</h3>
+
+<p>In the real world, things go wrong. Cameras get jostled, scenes degrade, adversaries try to fool your model. Gaussian Splatting had to learn to handle noise, outliers, and distributional shift. <b>DualSplat</b> bootstraps pseudo-masks from reconstruction failures for transient detection. <b>NimbusGS</b> decomposes weather degradations into transmission and particulates. <b>RemedyGS</b> defends against computation cost attacks via detection and adversarial training. <b>Wavelet-Driven 3D Anomaly Detection</b> uses frequency-domain information for robust sparse-view fitting. <b>HAD</b> tackles hallucination in diffusion-assisted reconstruction via pixel-wise hallucination scores. <b>PoInit-of-View</b> shows that poisoning SfM initialization transfers across 3D systems. <b>ULF-Loc</b> formally proves and corrects alpha-blending bias in 3DGS localization. <b>PR-IQA</b> reformulates quality estimation as completion without ground-truth. <b>VAD-GS</b> introduces visibility-aware densification for urban scenes. <b>S2D</b> uses diffusion-based artifact fixing with point cloud guidance.</p>
+
+<h2>Where it stands</h2>
+
+<p>What basically works now: You can reconstruct high-fidelity 3D scenes from 10–50 casual photographs in minutes, render them in real time, and edit them interactively. You can capture human heads and bodies as animatable avatars. You can reconstruct dynamic scenes from video. You can fit Gaussians from diverse sensors (event cameras, thermal, medical imaging). You can embed semantic labels, language, and interactive reasoning. For many applications—AR, VR, robotics, autonomous driving—Gaussian Splatting is already the default choice.</p>
+
+<p>What is still open: Truly few-shot and single-image reconstruction remains challenging; generalization to new scenes from a trained model is improving but not solved. Mesh extraction is fast but not always water-tight or simulation-ready. Fitting Gaussians to very large scenes (city-scale) still requires careful engineering and hierarchical approaches. Handling extremely complex materials (caustics, sub-surface scattering) remains difficult. Long-horizon video (hours of capture) and continuous online reconstruction hit memory limits. Finally, the theory is still incomplete—we don't fully understand why Gaussians are so effective at this task, or how to predict a priori what density and configuration of primitives a scene needs.</p>
+
+<p style="margin-top:18px"><a href="techniques.html">→ The mechanisms, animated</a> · <a href="figures.html">Key papers, explained</a> · <a href="index.html">All themes</a></p></article></div><div class="wrap"><footer>CVPR 2026 · one cluster of related papers, connected from first principles · diagram is an original schematic (CC0).</footer></div><script>
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const C={panel:"#0D131A",sig:"#37E1CE",sigd:"#1a6b62",amb:"#E8A13A",dim:"#5E7079",dim2:"#8A9AA3",ink:"#E9F1F2",line:"#1E2A33"};
+const M="ui-monospace,monospace";
+function dots(x,w,h){x.fillStyle="rgba(55,225,206,.045)";for(let y=13;y<h;y+=21)for(let i=13;i<w;i+=21){x.beginPath();x.arc(i,y,1,0,7);x.fill();}}
+function rnd(s){s=Math.sin(s*127.1)*43758.5;return s-Math.floor(s);}
+const DIAG={
+ gsplat(x,w,h,p){
+   const cx=w*0.54,cy=h*0.52,N=46,scale=Math.min(w,h)*0.34;
+   // deterministic blob cloud shaped like a rough object (two lobes)
+   const B=[];
+   for(let i=0;i<N;i++){
+     const a=rnd(i*1.7)*6.283, r=0.35+rnd(i*3.1)*0.6, yy=(rnd(i*5.3)-0.5)*1.3;
+     const lobe=i%2?0.4:-0.4;
+     B.push({x:Math.cos(a)*r+lobe, y:yy, z:Math.sin(a)*r,
+       col:i%3===0?[55,225,206]:i%3===1?[232,161,58]:[150,180,190], s:0.10+rnd(i*7)*0.12});
+   }
+   // input cameras (left)
+   x.strokeStyle=C.dim;x.lineWidth=1.4;
+   for(let k=0;k<3;k++){const ky=cy-46+k*46, kx=w*0.10;
+     x.strokeRect(kx-11,ky-8,22,16);x.beginPath();x.moveTo(kx+11,ky-5);x.lineTo(kx+19,ky-9);x.lineTo(kx+19,ky+9);x.lineTo(kx+11,ky+5);x.stroke();
+     x.strokeStyle="rgba(55,225,206,.25)";x.beginPath();x.moveTo(kx+19,ky);x.lineTo(cx-scale*0.5,cy);x.stroke();x.strokeStyle=C.dim;}
+   x.fillStyle=C.dim2;x.font="11px "+M;x.textAlign="center";x.fillText("a few photos",w*0.10,cy+70);
+   const FIT=0.46, fitting=p<FIT;
+   const shown = fitting ? Math.max(6,Math.floor(p/FIT*N)) : N;
+   const az = fitting ? 0.5 : (p-FIT)/(1-FIT)*6.283;  // orbit in render phase
+   const conv = fitting ? p/FIT : 1;                    // color convergence
+   const proj=B.slice(0,shown).map(b=>{
+     const X=b.x*Math.cos(az)-b.z*Math.sin(az), Z=b.x*Math.sin(az)+b.z*Math.cos(az);
+     return {sx:cx+X*scale, sy:cy+b.y*scale, depth:Z, b};});
+   proj.sort((a,b)=>a.depth-b.depth);
+   for(const q of proj){
+     const dscale=1+q.depth*0.28, rad=q.b.s*scale*dscale;
+     const [r,g,bl]=q.b.col; const alpha=(0.28+0.4*(q.depth+1)/2)*(0.4+0.6*conv);
+     const grd=x.createRadialGradient(q.sx,q.sy,1,q.sx,q.sy,rad);
+     grd.addColorStop(0,`rgba(${r},${g},${bl},${alpha})`);grd.addColorStop(1,`rgba(${r},${g},${bl},0)`);
+     x.fillStyle=grd;x.beginPath();x.ellipse(q.sx,q.sy,rad,rad*0.78,0,0,7);x.fill();
+   }
+   // virtual camera orbiting (render phase)
+   if(!fitting){const va=az; const vx=cx+Math.cos(va+3.14)*scale*1.5, vy=cy+Math.sin(va*0.5)*scale*0.4;
+     x.fillStyle=C.sig;x.beginPath();x.arc(vx,vy,4,0,7);x.fill();
+     x.strokeStyle="rgba(55,225,206,.5)";x.beginPath();x.moveTo(vx,vy);x.lineTo(cx,cy);x.stroke();
+     x.fillStyle=C.sig;x.font="11px "+M;x.textAlign="center";x.fillText("virtual camera",vx,vy-10);}
+   // readout
+   x.font="12px "+M;x.textAlign="left";
+   if(fitting){x.fillStyle=C.amb;x.fillText("fitting Gaussians · "+shown+"/"+N,16,h-16);}
+   else{x.fillStyle=C.sig;x.fillText("novel view · "+Math.round(az*57.3)+"°",16,h-16);}
+   x.textAlign="right";x.fillStyle=C.dim2;x.fillText(fitting?"from "+3+" photos":"any angle, real-time",w-16,h-16);
+ },
+};
+document.querySelectorAll("canvas[data-diag]").forEach(cv=>{
+ const draw=DIAG[cv.dataset.diag], ctx=cv.getContext("2d");
+ const bar=document.createElement("div");bar.className="dctl";
+ bar.innerHTML='<button class="dpp" aria-label="play or pause">❚❚</button><input class="dscrub" type="range" min="0" max="1000" value="0" aria-label="scrub"><span class="dph"></span>';
+ cv.closest(".dframe").after(bar);
+ const btn=bar.querySelector(".dpp"),sl=bar.querySelector(".dscrub"),ph=bar.querySelector(".dph");
+ let p=0,intent=true,inview=false,raf=null,last=null;
+ function size(){const d=Math.min(2,devicePixelRatio||1),w=cv.clientWidth,h=cv.clientHeight;cv.width=w*d;cv.height=h*d;ctx.setTransform(d,0,0,d,0,0);}
+ function render(){const w=cv.clientWidth,h=cv.clientHeight;ctx.fillStyle=C.panel;ctx.fillRect(0,0,w,h);dots(ctx,w,h);draw(ctx,w,h,p);
+   ph.textContent=(p<0.46?"① fit":"② render")+" · "+Math.round(p*100)+"%";sl.value=Math.round(p*1000);}
+ function playing(){return intent&&inview;}
+ function tick(ts){if(last==null)last=ts;const dt=ts-last;last=ts;if(playing()){p=(p+dt/9000)%1;render();}raf=requestAnimationFrame(tick);}
+ function setBtn(){btn.textContent=intent?"❚❚":"▶";}
+ size();addEventListener("resize",()=>{size();render();});
+ btn.onclick=()=>{intent=!intent;setBtn();last=null;render();};
+ sl.oninput=()=>{intent=false;setBtn();p=sl.value/1000;render();};
+ if(reduced){p=0.72;render();return;}
+ new IntersectionObserver(es=>es.forEach(e=>{inview=e.isIntersecting;last=null;}),{threshold:0.25}).observe(cv);
+ render();raf=requestAnimationFrame(tick);
+});
+</script></body></html>
