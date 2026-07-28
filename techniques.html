@@ -1,0 +1,313 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How it works — the mechanisms, animated · CVPR 2026</title>
+<style>
+ :root{
+  --bg:#0A0E12;--panel:#0D131A;--line:#1E2A33;--line2:#2A3A45;
+  --ink:#E9F1F2;--dim:#8A9AA3;--dim2:#5E7079;
+  --signal:#37E1CE;--signal-dim:#1a6b62;--amber:#E8A13A;--amber-dim:#7a5620;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} html{scroll-behavior:smooth}
+ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;
+   background-image:radial-gradient(rgba(55,225,206,.05) 1px,transparent 1px);background-size:22px 22px}
+ .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+ header{padding:60px 0 26px;border-bottom:1px solid var(--line)}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--signal)}
+ h1{font-size:clamp(28px,5vw,44px);margin:14px 0 0;letter-spacing:-.02em;line-height:1.08;text-wrap:balance;max-width:20ch}
+ header p{color:var(--dim);font-size:17px;max-width:62ch;margin:16px 0 0}
+ header p b{color:var(--ink);font-weight:600}
+ .howto{font-family:var(--mono);font-size:12px;color:var(--dim2);margin-top:14px}
+ .howto b{color:var(--signal);font-weight:500}
+ nav{position:sticky;top:0;z-index:10;background:rgba(10,14,18,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-top:26px}
+ nav .wrap{display:flex;gap:2px;overflow-x:auto;padding:10px 22px;scrollbar-width:none}
+ nav::-webkit-scrollbar{display:none}
+ nav a{font-family:var(--mono);font-size:11.5px;color:var(--dim);text-decoration:none;padding:6px 9px;border-radius:5px;white-space:nowrap;letter-spacing:.04em}
+ nav a:hover,nav a:focus{background:#16202a;color:var(--signal);outline:none}
+ nav a.home{color:var(--dim2)}
+ .tech{padding:52px 0;border-bottom:1px solid var(--line)}
+ .tech:last-of-type{border-bottom:none}
+ .head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+ .num{font-family:var(--mono);font-size:13px;color:var(--signal);letter-spacing:.1em}
+ .tname{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+ .tech h2{font-size:clamp(21px,3.3vw,29px);margin:2px 0 5px;letter-spacing:-.015em;text-wrap:balance}
+ .see{font-family:var(--mono);font-size:12.5px;color:var(--amber);margin:0 0 16px}
+ .frame{position:relative;border:1px solid var(--line2);border-radius:10px 10px 0 0;overflow:hidden;background:var(--panel)}
+ .frame::before,.frame::after{content:"";position:absolute;width:9px;height:9px;border:1.5px solid var(--signal-dim);z-index:2}
+ .frame::before{top:8px;left:8px;border-right:none;border-bottom:none}
+ .frame::after{bottom:8px;right:8px;border-left:none;border-top:none}
+ canvas{display:block;width:100%;height:320px}
+ @media(max-width:560px){canvas{height:250px}}
+ .ctl{display:flex;align-items:center;gap:12px;border:1px solid var(--line2);border-top:none;
+   border-radius:0 0 10px 10px;background:#0b1116;padding:9px 12px}
+ .pp{flex:none;width:34px;height:28px;border:1px solid var(--signal-dim);background:#0e1a1a;color:var(--signal);
+   font-family:var(--mono);font-size:12px;border-radius:5px;cursor:pointer;line-height:1}
+ .pp:hover{background:#12302c} .pp:focus{outline:2px solid var(--signal);outline-offset:1px}
+ .scrub{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:3px;
+   background:linear-gradient(90deg,var(--signal-dim),var(--line2));outline:none;cursor:pointer}
+ .scrub::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px rgba(55,225,206,.6);cursor:pointer}
+ .scrub::-moz-range-thumb{width:14px;height:14px;border:none;border-radius:50%;background:var(--signal);cursor:pointer}
+ .ph{flex:none;font-family:var(--mono);font-size:12px;color:var(--dim);min-width:150px;text-align:right;font-variant-numeric:tabular-nums}
+ @media(max-width:560px){.ph{min-width:100px;font-size:11px}}
+ .cap{color:var(--dim);font-size:15.5px;margin:18px 0 0;max-width:66ch}
+ .cap b{color:var(--ink);font-weight:600} .cap .sig{color:var(--signal)} .cap .amb{color:var(--amber)}
+ .demo{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;color:var(--dim2);margin-top:12px;border:1px solid var(--line);border-radius:20px;padding:4px 11px}
+ .demo b{color:var(--signal);font-weight:500} .demo a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line2)}
+ footer{padding:40px 0 70px;color:var(--dim2);font-family:var(--mono);font-size:12px}
+ .links{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+ .links a{font-family:var(--mono);font-size:12.5px;color:var(--signal);text-decoration:none;border:1px solid var(--signal-dim);border-radius:6px;padding:7px 12px}
+ .links a:hover{background:#0f2320}
+ @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body>
+
+<header><div class="wrap">
+ <div class="eyebrow">CVPR 2026 · how it works</div>
+ <h1>The mechanisms, animated.</h1>
+ <p>The rest of the site tells you <b>what</b> each technique does. This page shows you <b>how</b> — each idea as a working diagram, every one grounded in a model we actually <b>ran live</b>.</p>
+ <p class="howto">▸ each diagram auto-plays when it scrolls into view. <b>Grab the slider</b> to scrub through the mechanism step by step, or <b>pause</b> to hold a moment. Motion here is the lesson, not decoration.</p>
+</div></header>
+
+<nav><div class="wrap">
+ <a class="home" href="index.html">◂ site</a>
+ <a href="#bridge">00 bridge</a><a href="#diffusion">01 diffusion</a><a href="#distill">02 few-step</a>
+ <a href="#dataset">03 dataset-distill</a><a href="#depth">04 depth</a><a href="#adv">05 adversarial</a>
+ <a href="#lora">06 mixture-of-LoRA</a><a href="#reason">07 reasoning</a>
+</div></nav>
+
+<main class="wrap">
+ <section class="tech" id="bridge"><div class="head"><span class="num">00</span><span class="tname">the frame</span></div>
+  <h2>The one bridge — pixels are just numbers</h2>
+  <p class="see">▸ scrub left→right: read a patch of brightness numbers <i>into</i> a meaning; scrub back: write meaning into pixels</p>
+  <div class="frame"><canvas data-anim="bridge"></canvas></div>
+  <p class="cap">This is the whole game. A camera stores the world as a <b>grid of brightness numbers</b> — nothing in it literally says <span class="sig">“fox.”</span> Half the field <span class="sig">reads</span> those numbers into meaning (perceive); the other half <span class="amb">writes</span> meaning back into numbers (generate). Watch a patch of pixels get read into a label, and a label get written into pixels.</p></section>
+
+ <section class="tech" id="diffusion"><div class="head"><span class="num">01</span><span class="tname">generation</span></div>
+  <h2>Diffusion — an image sharpening out of static</h2>
+  <p class="see">▸ scrub the slider = move through the denoising steps; watch structure rise from noise</p>
+  <div class="frame"><canvas data-anim="diffusion"></canvas></div>
+  <p class="cap">A generator doesn’t “draw.” It starts from <span class="amb">pure static</span> and, guided by a prompt, removes a little noise at every step until an <span class="sig">image</span> is left behind. Drag the slider slowly: the same picture is <i>already there</i> at every step — each step just makes it less noisy. That’s why it’s reversible, and why fewer steps (next panel) is even possible.</p>
+  <span class="demo">grounded in demo · <b><a href="live-demos.html#generation">we generated a fox live →</a></b></span></section>
+
+ <section class="tech" id="distill"><div class="head"><span class="num">02</span><span class="tname">step-distillation</span></div>
+  <h2>Few-step generation — same destination, fewer stops</h2>
+  <p class="see">▸ scrub time: the 4-step path finishes while the 25-step path is still going</p>
+  <div class="frame"><canvas data-anim="distill"></canvas></div>
+  <p class="cap">If the image is present at every step, can you take <i>bigger</i> steps? Distillation (an <span class="sig">LCM-LoRA</span>) teaches exactly that — a few large, well-aimed steps instead of many tiny ones. Scrub to the middle: the <span class="sig">4-step</span> runner is already done; the <span class="amb">25-step</span> one is halfway. Live, that was <b>0.55s vs 3.51s — 6.4× faster</b>, same picture.</p>
+  <span class="demo">grounded in demo · <b><a href="live-demos.html#generation">0.55s vs 3.51s →</a></b></span></section>
+
+ <section class="tech" id="dataset"><div class="head"><span class="num">03</span><span class="tname">data distillation</span></div>
+  <h2>Dataset distillation — 100 images that are <i>engineered</i>, not picked</h2>
+  <p class="see">▸ scrub = training iterations: a few synthetic tiles get optimized while the accuracy climbs</p>
+  <div class="frame"><canvas data-anim="dataset"></canvas></div>
+  <p class="cap">The key misconception to kill: this is <b>not</b> choosing 100 good photos (random-100 does worse — we tested it). The 100 synthetic tiles start as noise and are <span class="sig">optimized</span>, iteration by iteration, so that a model trained on them lands where the full <span class="amb">50,000-image</span> set would. Scrub and watch the tiles sharpen and the accuracy gauge climb toward <b>~61%</b>. The real set (faint, behind) is the fixed <i>target</i>, never moved.</p>
+  <span class="demo">grounded in demo · <b><a href="scarce-data.html#live">we ran InfMatch →</a></b></span></section>
+
+ <section class="tech" id="depth"><div class="head"><span class="num">04</span><span class="tname">3D perception</span></div>
+  <h2>Monocular depth — distance painted onto every pixel</h2>
+  <p class="see">▸ scrub the scan line: on its left, the flat photo becomes a depth map (bright = near)</p>
+  <div class="frame"><canvas data-anim="depth"></canvas></div>
+  <p class="cap">One photo has <i>no</i> distance information — depth here isn’t measured, it’s <b>inferred</b> from what the network learned about the look of near vs far. Drag the scan line across: to its left the ordinary <span class="dim">photo</span> is replaced by the model’s <span class="sig">depth</span> estimate, pixel by pixel. That per-pixel depth is the raw material for 3-D and navigation.</p>
+  <span class="demo">grounded in demo · <b><a href="live-demos.html#video">depth on a live clip →</a></b></span></section>
+
+ <section class="tech" id="adv"><div class="head"><span class="num">05</span><span class="tname">robustness</span></div>
+  <h2>Adversarial — a point nudged across an invisible line</h2>
+  <p class="see">▸ scrub the perturbation: the sample barely moves, but it crosses the decision boundary</p>
+  <div class="frame"><canvas data-anim="adv"></canvas></div>
+  <p class="cap">Why can a change you can’t see flip the answer? Because the model’s <b>decision boundary</b> sits closer than you’d think. The picture barely changes — but in the model’s space the sample slides a hair’s width <span class="amb">across the line</span> from <span class="sig">“dog”</span> into <span class="amb">“wolf.”</span> Live, a <b>4/255</b> perturbation flipped ResNet-50 Samoyed → “white wolf.”</p>
+  <span class="demo">grounded in demo · <b><a href="live-demos.html#robustness">the invisible flip →</a></b></span></section>
+
+ <section class="tech" id="lora"><div class="head"><span class="num">06</span><span class="tname">modular knowledge</span></div>
+  <h2>Mixture-of-LoRA — two corrections fighting for the same weights</h2>
+  <p class="see">▸ scrub: first the two task-edits pile onto the same cells (collision), then route apart</p>
+  <div class="frame"><canvas data-anim="lora"></canvas></div>
+  <p class="cap">Freeze a giant model; steer it with a tiny correction on a few weights. But train <span class="sig">task A</span> and <span class="amb">task B</span> separately and their edits land on the <i>same</i> cells — scrub the first half and watch them collide (live, <b>73.8%</b> of each one’s parameters were exclusive to its task). Scrub the second half: give each its own cells (routing / sparsity) and they coexist.</p>
+  <span class="demo">grounded in demo · <b><a href="mixture-of-lora.html#live">LoRA “selfishness” →</a></b></span></section>
+
+ <section class="tech" id="reason"><div class="head"><span class="num">07</span><span class="tname">the frontier</span></div>
+  <h2>The reasoning bottleneck — where the error actually enters</h2>
+  <p class="see">▸ scrub the pipeline: SEE → COUNT → REASON, and watch the mistake happen at COUNT, not REASON</p>
+  <div class="frame"><canvas data-anim="reason"></canvas></div>
+  <p class="cap">“Think step by step” only helps if the model <span class="sig">sees</span> right first. Scrub through the pipeline: perception miscounts (<span class="amb">3, truth is 5</span>), then the reasoning does <span class="sig">flawless</span> arithmetic on that wrong number — and lands on a wrong answer. The error entered at <b>perception</b>, upstream of the thinking. That’s why the field trains grounding with reinforcement learning, not just prompting.</p>
+  <span class="demo">grounded in demo · <b><a href="live-demos.html#reasoning">the honest failure →</a></b></span></section>
+</main>
+
+<div class="wrap">
+ <div class="links">
+  <a href="live-demos.html">▶ the demos these are built from</a>
+  <a href="mechanisms.html">▦ static diagrams</a>
+  <a href="concepts.html">▤ the field in charts</a>
+  <a href="index.html">◂ all themes</a>
+ </div>
+ <footer>Every panel is a schematic built to teach the mechanism — not a screenshot of a paper. Diagrams are phase-driven: the slider is the step control. Static frame under reduced-motion. CVPR 2026 · diagrams CC0.</footer>
+</div>
+
+<script>
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const C={panel:"#0D131A",line:"#1E2A33",line2:"#2A3A45",dim:"#5E7079",dim2:"#8A9AA3",ink:"#E9F1F2",
+  sig:"#37E1CE",sigd:"#1a6b62",amb:"#E8A13A",ambd:"#7a5620"};
+const M="ui-monospace,monospace";
+function dots(x,w,h){x.fillStyle="rgba(55,225,206,.045)";for(let y=13;y<h;y+=21)for(let i=13;i<w;i+=21){x.beginPath();x.arc(i,y,1,0,7);x.fill();}}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath();}
+function rnd(s){s=Math.sin(s*127.1)*43758.5;return s-Math.floor(s);}   // deterministic pseudo-random
+
+const ANIM={
+ bridge(x,w,h,p){
+   const gx=w*0.055,gy=h/2,gs=Math.min(h*0.62,168),n=5,c=gs/n,top=gy-gs/2;
+   for(let i=0;i<n;i++)for(let j=0;j<n;j++){
+     const v=Math.floor(rnd(i*5+j+2)*255);
+     x.fillStyle=`rgb(${18+v*0.12},${34+v*0.34},${44+v*0.34})`;x.fillRect(gx+j*c,top+i*c,c-1.5,c-1.5);
+     x.fillStyle="rgba(233,241,242,.5)";x.font="10px "+M;x.textAlign="center";x.fillText(v,gx+j*c+c/2,top+i*c+c/2+3);}
+   x.strokeStyle=C.dim;x.lineWidth=1;x.strokeRect(gx,top,gs,gs);
+   x.fillStyle=C.dim2;x.font="11px "+M;x.textAlign="center";x.fillText("pixels · just numbers",gx+gs/2,top+gs+18);
+   const labs=[["“fox”",C.sig],["“3m away”",C.sig],["“in snow”",C.amb]];
+   const lx=w*0.74;
+   const perceive=p<0.5, pp=perceive?p/0.5:(p-0.5)/0.5;
+   labs.forEach((L,k)=>{const ly=gy-52+k*52;
+     const active=perceive?(pp>k/3):(pp<1-k/3);
+     rr(x,lx-72,ly-16,148,32,7);x.fillStyle=L[1];x.globalAlpha=active?0.22:0.06;x.fill();x.globalAlpha=1;
+     x.strokeStyle=active?L[1]:C.line2;x.lineWidth=1;x.stroke();
+     x.fillStyle=active?L[1]:C.dim;x.font="13px "+M;x.textAlign="center";x.fillText(L[0],lx,ly+4);});
+   // read/write head
+   const hx = perceive ? gx+gs + (lx-72-(gx+gs))*pp : (lx-72) - ((lx-72)-(gx+gs))*pp;
+   x.beginPath();x.arc(hx,gy,4,0,7);x.fillStyle=perceive?C.sig:C.amb;x.shadowColor=x.fillStyle;x.shadowBlur=12;x.fill();x.shadowBlur=0;
+   // highlight the patch being read/written
+   x.strokeStyle=perceive?C.sig:C.amb;x.lineWidth=1.5;x.strokeRect(gx+c*1,top+c*1,c*2,c*2);
+ },
+ diffusion(x,w,h,p){
+   const cx=w/2,cy=h/2,R=Math.min(w,h)*0.3;
+   // target: a fox mark (always drawn), then noise covers it with density (1-p)
+   x.save();x.globalAlpha=0.28+0.72*p;
+   const g=x.createRadialGradient(cx,cy+4,4,cx,cy,R);g.addColorStop(0,"rgba(55,225,206,.95)");g.addColorStop(1,"rgba(55,225,206,.08)");
+   x.fillStyle=g;x.beginPath();x.arc(cx,cy+4,R*0.62,0,7);x.fill();
+   x.fillStyle="rgba(55,225,206,.9)";
+   x.beginPath();x.moveTo(cx-R*.44,cy-R*.16);x.lineTo(cx-R*.62,cy-R*.7);x.lineTo(cx-R*.16,cy-R*.42);x.fill();
+   x.beginPath();x.moveTo(cx+R*.44,cy-R*.16);x.lineTo(cx+R*.62,cy-R*.7);x.lineTo(cx+R*.16,cy-R*.42);x.fill();
+   x.fillStyle="#06201d";x.beginPath();x.arc(cx-R*.2,cy,3,0,7);x.arc(cx+R*.2,cy,3,0,7);x.fill();
+   x.restore();
+   const density=(1-p)*(1-p);
+   for(let i=0;i<1400*density;i++){const px=cx-R*1.25+rnd(i*3+p*0)*R*2.5,py=cy-R*1.25+rnd(i*7+13)*R*2.5;
+     if((px-cx)**2/(1.3)+(py-cy)**2 < (R*1.25)**2){x.fillStyle=`rgba(232,161,58,${0.2+rnd(i)*0.4})`;x.fillRect(px,py,2.4,2.4);}}
+ },
+ distill(x,w,h,p){
+   const x0=44,x1=w-88,yA=h*0.33,yB=h*0.66;
+   [["25 steps",yA,C.amb,25,1],["4 steps",yB,C.sig,4,2]].forEach(([lbl,y,col,steps,spd])=>{
+     x.strokeStyle=C.line2;x.lineWidth=1;x.beginPath();x.moveTo(x0,y);x.lineTo(x1,y);x.stroke();
+     for(let s=0;s<=steps;s++){const sx=x0+(x1-x0)*s/steps;x.beginPath();x.arc(sx,y,2,0,7);x.fillStyle=C.dim;x.fill();}
+     const prog=Math.min(1,p*spd),px=x0+(x1-x0)*prog;
+     x.font="11px "+M;x.fillStyle=col;x.textAlign="left";x.fillText(lbl,x0,y-13);
+     x.beginPath();x.arc(px,y,5,0,7);x.fillStyle=col;x.shadowColor=col;x.shadowBlur=10;x.fill();x.shadowBlur=0;
+     if(prog>=1){x.beginPath();x.arc(x1+22,y,11,0,7);x.fillStyle=col;x.globalAlpha=.25;x.fill();x.globalAlpha=1;x.strokeStyle=col;x.stroke();x.fillStyle=col;x.textAlign="center";x.font="10px "+M;x.fillText("img",x1+22,y+3);}});
+   x.fillStyle=C.dim2;x.font="12px "+M;x.textAlign="center";x.fillText("same destination · one takes 6× fewer stops",w/2,h-13);
+ },
+ dataset(x,w,h,p){
+   for(let i=0;i<240;i++){const px=13+rnd(i*2)*(w-26),py=20+rnd(i*2+9)*(h-70);x.fillStyle="rgba(232,161,58,.16)";x.fillRect(px,py,2.2,2.2);}
+   const N=10,tw=Math.min(52,(w-120)/N),gap=(w-N*tw)/(N+1),ty=h/2-tw/2;
+   for(let k=0;k<N;k++){const tx=gap+k*(tw+gap);const proto=k%3;
+     const pc=proto===0?[55,225,206]:proto===1?[232,161,58]:[150,170,180];
+     for(let a=0;a<4;a++)for(let b=0;b<4;b++){const seed=k*17+a*4+b;
+       const noise=[rnd(seed)*255,rnd(seed+1)*255,rnd(seed+2)*255];
+       const blob=Math.exp(-((a-1.5)**2+(b-1.5)**2)/3);
+       const r=noise[0]+(pc[0]*blob+15-noise[0])*p,gg=noise[1]+(pc[1]*blob+15-noise[1])*p,bb=noise[2]+(pc[2]*blob+25-noise[2])*p;
+       x.fillStyle=`rgb(${r|0},${gg|0},${bb|0})`;x.fillRect(tx+a*tw/4,ty+b*tw/4,tw/4+0.5,tw/4+0.5);}
+     x.strokeStyle=p>0.9?C.sig:C.line2;x.lineWidth=1;x.strokeRect(tx,ty,tw,tw);}
+   // accuracy gauge
+   const acc=22+p*39,bw=w-120,bx=60,by=h-30;
+   x.strokeStyle=C.line2;x.strokeRect(bx,by,bw,8);x.fillStyle=C.sig;x.fillRect(bx,by,bw*(acc-10)/(70-10),8);
+   x.fillStyle=C.dim2;x.font="11px "+M;x.textAlign="left";x.fillText("100 synthetic tiles · optimizing",16,20);
+   x.fillStyle=C.sig;x.textAlign="right";x.fillText("test acc "+acc.toFixed(0)+"%",w-16,20);
+ },
+ depth(x,w,h,p){
+   const cols=30,rows=15,cw=w/cols,ch=h/rows,scan=p*w;
+   for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const cx=c*cw,cy=r*ch;
+     const subj=Math.exp(-(((c-cols*0.5)**2)/26+((r-rows*0.56)**2)/9));
+     const dep=Math.min(1,(r/rows)*0.5+subj*0.9);
+     if(cx<scan){const g=40+dep*205;x.fillStyle=`rgb(${18+dep*36|0},${g|0},${90+dep*120|0})`;}
+     else{const base=70+subj*40;x.fillStyle=`rgb(${base*0.7|0},${base*0.75|0},${base*0.62|0})`;}
+     x.fillRect(cx,cy,cw+1,ch+1);}
+   x.fillStyle=C.sig;x.fillRect(scan-1,0,2,h);x.shadowColor=C.sig;x.shadowBlur=12;x.fillRect(scan-1,0,2,h);x.shadowBlur=0;
+   x.font="11px "+M;x.fillStyle="rgba(233,241,242,.85)";x.textAlign="left";x.fillText("◂ depth (inferred)",14,h-14);
+   x.textAlign="right";x.fillStyle="rgba(180,190,185,.85)";x.fillText("photo ▸",w-14,h-14);
+ },
+ adv(x,w,h,p){
+   const cx=w/2,cy=h/2;
+   // feature space halves + wavy boundary
+   for(let yy=0;yy<h;yy+=4){const bx=cx+Math.sin(yy*0.03)*14;
+     x.fillStyle="rgba(55,225,206,.06)";x.fillRect(0,yy,bx,4);x.fillStyle="rgba(232,161,58,.06)";x.fillRect(bx,yy,w-bx,4);}
+   x.strokeStyle=C.dim;x.lineWidth=1.5;x.beginPath();for(let yy=0;yy<=h;yy+=4){const bx=cx+Math.sin(yy*0.03)*14;yy===0?x.moveTo(bx,yy):x.lineTo(bx,yy);}x.stroke();
+   x.fillStyle=C.sigd;x.font="12px "+M;x.textAlign="left";x.fillText("“dog” region",16,26);x.textAlign="right";x.fillStyle=C.ambd;x.fillText("“wolf” region",w-16,26);
+   // sample point moves right across boundary
+   const sx=cx-46 + p*92, sy=cy;
+   x.strokeStyle=C.line2;x.setLineDash([3,3]);x.beginPath();x.moveTo(cx-46,sy);x.lineTo(sx,sy);x.stroke();x.setLineDash([]);
+   const flipped=sx>cx+Math.sin(sy*0.03)*14;
+   x.beginPath();x.arc(sx,sy,7,0,7);x.fillStyle=flipped?C.amb:C.sig;x.shadowColor=x.fillStyle;x.shadowBlur=12;x.fill();x.shadowBlur=0;
+   x.fillStyle=flipped?C.amb:C.sig;x.font="13px "+M;x.textAlign="center";x.fillText(flipped?"→ “white wolf”":"“Samoyed”",cx,h-16);
+   x.fillStyle=C.dim2;x.font="11px "+M;x.textAlign="left";x.fillText("nudge in feature space: ε="+(p*4).toFixed(1)+"/255",16,h-16);
+ },
+ lora(x,w,h,p){
+   const n=7,gs=Math.min(h*0.62,150),c=gs/n,gx=w/2-gs/2,gy=h/2-gs/2-6;
+   for(let i=0;i<n;i++)for(let j=0;j<n;j++){x.strokeStyle=C.line2;x.lineWidth=1;x.strokeRect(gx+j*c,gy+i*c,c,c);}
+   x.fillStyle=C.dim2;x.font="11px "+M;x.textAlign="center";x.fillText("frozen weights W",w/2,gy-10);
+   const routed=p>=0.5, ph=routed?(p-0.5)/0.5:p/0.5;
+   const cellsA_m=[[3,3],[3,4],[2,3],[4,3]], cellsB_m=[[3,3],[4,4],[3,2],[4,3]];   // overlap
+   const cellsA_r=[[1,1],[1,2],[2,1],[0,2]], cellsB_r=[[5,5],[5,4],[4,5],[6,4]];   // disjoint
+   function paint(cells,col,a){cells.forEach(([i,j])=>{x.fillStyle=col;x.globalAlpha=a;x.fillRect(gx+j*c+1.5,gy+i*c+1.5,c-3,c-3);x.globalAlpha=1;});}
+   if(!routed){const flash=0.4+0.25*Math.sin(p*30);paint(cellsA_m,C.sig,0.5);paint(cellsB_m,C.amb,0.5);
+     // collision cells glow
+     [[3,3],[4,3]].forEach(([i,j])=>{x.fillStyle="#fff";x.globalAlpha=flash*0.5;x.fillRect(gx+j*c+1.5,gy+i*c+1.5,c-3,c-3);x.globalAlpha=1;});}
+   else{const lerp=(m,r)=>m.map((mc,k)=>[mc[0]+(r[k][0]-mc[0])*ph,mc[1]+(r[k][1]-mc[1])*ph]);
+     paint(lerp(cellsA_m,cellsA_r),C.sig,0.6);paint(lerp(cellsB_m,cellsB_r),C.amb,0.6);}
+   x.font="11px "+M;x.fillStyle=C.sig;x.textAlign="right";x.fillText("task A",gx-8,gy+gs/2);x.fillStyle=C.amb;x.textAlign="left";x.fillText("task B",gx+gs+8,gy+gs/2);
+   x.textAlign="center";x.font="12px "+M;x.fillStyle=routed?C.sig:C.amb;x.fillText(routed?"routed to separate weights · they coexist":"same weights · 73.8% collide",w/2,h-13);
+ },
+ reason(x,w,h,p){
+   const y=h/2-6,X=[w*0.19,w*0.5,w*0.81],labels=["SEE","COUNT","REASON"];
+   x.strokeStyle=C.line2;x.lineWidth=1;x.beginPath();x.moveTo(X[0]+54,y);x.lineTo(X[1]-54,y);x.moveTo(X[1]+54,y);x.lineTo(X[2]-54,y);x.stroke();
+   const stage=p*3;
+   labels.forEach((lb,i)=>{const on=stage>i;rr(x,X[i]-54,y-22,108,44,7);x.fillStyle=i===1?C.amb:C.sig;x.globalAlpha=on?0.14:0.04;x.fill();x.globalAlpha=1;
+     x.strokeStyle=on?(i===1?C.amb:C.sig):C.line2;x.lineWidth=1;x.stroke();x.fillStyle=on?C.ink:C.dim;x.font="12px "+M;x.textAlign="center";x.fillText(lb,X[i],y+4);});
+   x.font="11px "+M;x.textAlign="center";
+   x.fillStyle=C.dim;x.fillText("truth: 5 circles",X[0],y-34);
+   if(stage>1)  {x.fillStyle=C.amb;x.fillText("perceived: 3  ✗",X[1],y-34);}
+   if(stage>2)  {x.fillStyle=C.sig;x.fillText("3 → math: perfect",X[2],y-34);}
+   const tokx=X[0]+(X[2]-X[0])*(p);
+   x.beginPath();x.arc(tokx,y,4.5,0,7);x.fillStyle=stage>1?C.amb:C.sig;x.shadowColor=x.fillStyle;x.shadowBlur=10;x.fill();x.shadowBlur=0;
+   x.textAlign="center";x.font="12px "+M;
+   x.fillStyle=stage>2?C.amb:C.dim2;
+   x.fillText(stage>2?"wrong answer — from a wrong count, not wrong logic":"the error enters at perception, upstream of the thinking",w/2,h-14);
+ },
+};
+const CAP={
+ bridge:p=>p<0.5?"perceive · pixels → meaning":"generate · meaning → pixels",
+ diffusion:p=>"step "+String(Math.round(p*25)).padStart(2,"0")+" / 25   "+(p>.97?"· image":"· denoising"),
+ distill:p=>{const a=Math.min(4,Math.round(p*8)),b=Math.min(25,Math.round(p*25));return "4-step "+(a>=4?"✓":a+"/4")+"   25-step "+b+"/25";},
+ dataset:p=>"iter "+Math.round(p*2000)+" · acc "+(22+p*39).toFixed(0)+"%",
+ depth:p=>"scan "+Math.round(p*100)+"%  photo→depth",
+ adv:p=>"ε "+(p*4).toFixed(1)+"/255 · "+(p<0.5?"dog":"WOLF"),
+ lora:p=>p<0.5?"naive merge · colliding":"routed · coexisting",
+ reason:p=>p<0.34?"① seeing…":p<0.67?"② counting (wrong)":"③ reasoning → wrong",
+};
+
+document.querySelectorAll("canvas[data-anim]").forEach(cv=>{
+ const name=cv.dataset.anim, draw=ANIM[name], cap=CAP[name], ctx=cv.getContext("2d");
+ const bar=document.createElement("div");bar.className="ctl";
+ bar.innerHTML='<button class="pp" aria-label="play or pause">❚❚</button>'
+   +'<input class="scrub" type="range" min="0" max="1000" value="0" aria-label="scrub through the steps">'
+   +'<span class="ph"></span>';
+ cv.closest(".frame").after(bar);
+ const btn=bar.querySelector(".pp"),sl=bar.querySelector(".scrub"),ph=bar.querySelector(".ph");
+ let p=0,intent=true,inview=false,raf=null,last=null;
+ function size(){const d=Math.min(2,devicePixelRatio||1),w=cv.clientWidth,h=cv.clientHeight;cv.width=w*d;cv.height=h*d;ctx.setTransform(d,0,0,d,0,0);}
+ function render(){const w=cv.clientWidth,h=cv.clientHeight;ctx.fillStyle=C.panel;ctx.fillRect(0,0,w,h);dots(ctx,w,h);draw(ctx,w,h,p);
+   ph.textContent=cap(p);sl.value=Math.round(p*1000);}
+ function playing(){return intent&&inview;}
+ function tick(ts){if(last==null)last=ts;const dt=ts-last;last=ts;if(playing()){p=(p+dt/8000)%1;render();}raf=requestAnimationFrame(tick);}
+ function setBtn(){btn.textContent=intent?"❚❚":"▶";}
+ size();addEventListener("resize",()=>{size();render();});
+ btn.onclick=()=>{intent=!intent;setBtn();if(intent&&inview){last=null;}render();};
+ sl.oninput=()=>{intent=false;setBtn();p=sl.value/1000;render();};
+ if(reduced){p=0.72;render();return;}
+ new IntersectionObserver(es=>es.forEach(e=>{inview=e.isIntersecting;last=null;}),{threshold:0.28}).observe(cv);
+ render();raf=requestAnimationFrame(tick);
+});
+</script>
+</body></html>
