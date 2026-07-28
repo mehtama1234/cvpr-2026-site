@@ -1,0 +1,193 @@
+[
+ {
+  "id": "Wu_PhyGaP_Physically-Grounded_Gaussians_with_Polarization_Cues_CVPR_2026",
+  "file": "Wu_PhyGaP_Physically-Grounded_Gaussians_with_Polarization_.png",
+  "title": "PhyGaP: Physically-Grounded Gaussians with Polarization Cues",
+  "authors": [],
+  "theme": "3D & Gaussian Splatting",
+  "novelty": "Recent advances in 3D Gaussian Splatting (3DGS) have demonstrated great success in modeling reflective 3D ob- jects and their interaction with the environment via deferred rendering (DR).",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Wu_PhyGaP_Physically-Grounded_Gaussians_with_Polarization_Cues_CVPR_2026.html",
+  "repo": "https://github.com/Kelvar00/PhyGaP",
+  "w": 558,
+  "h": 409
+ },
+ {
+  "id": "Wu_PQDT_Pseudo-Query_Dual_Transformer_for_Robust_Point_Cloud_Restoration_CVPR_2026",
+  "file": "Wu_PQDT_Pseudo-Query_Dual_Transformer_for_Robust_Point_Clo.png",
+  "title": "PQDT: Pseudo-Query Dual Transformer for Robust Point Cloud Restoration",
+  "authors": [],
+  "theme": "3D & Gaussian Splatting",
+  "novelty": "We propose a unified 3D restoration network that directly takes point clouds as input and adaptively reconstructs high-quality geometry under di- verse degradation scenarios.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Wu_PQDT_Pseudo-Query_Dual_Transformer_for_Robust_Point_Cloud_Restoration_CVPR_2026.html",
+  "repo": "https://github.com/ins-uni-bonn/PQDT",
+  "w": 457,
+  "h": 413
+ },
+ {
+  "id": "Lu_PDD_Manifold-Prior_Diverse_Distillation_for_Medical_Anomaly_Detection_CVPR_2026",
+  "file": "Lu_PDD_Manifold-Prior_Diverse_Distillation_for_Medical_Ano.png",
+  "title": "PDD: Manifold-Prior Diverse Distillation for Medical Anomaly Detection",
+  "authors": [],
+  "theme": "Generation",
+  "novelty": "pose PDD (Manifold-Prior Diverse Distillation), a novel",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Lu_PDD_Manifold-Prior_Diverse_Distillation_for_Medical_Anomaly_Detection_CVPR_2026.html",
+  "repo": "https://github.com/OxygenLu/PDD",
+  "w": 440,
+  "h": 452
+ },
+ {
+  "id": "Feng_SO-Bench_A_Structural_Output_Evaluation_of_Multimodal_LLM_CVPR_2026",
+  "file": "Feng_SO-Bench_A_Structural_Output_Evaluation_of_Multimodal.png",
+  "title": "SO-Bench: A Structural Output Evaluation of Multimodal LLM",
+  "authors": [
+   "Di Feng",
+   "Kaixin Ma",
+   "Feng Nan",
+   "Haofeng Chen",
+   "Bohan Zhai",
+   "David Griffiths"
+  ],
+  "theme": "Vision-Language",
+  "novelty": "First comprehensive benchmark for visual structured output evaluation covering diverse JSON schemas and 4 visual domains with a three-stage human-verified pipeline and both SFT and RLVR training experiments.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Feng_SO-Bench_A_Structural_Output_Evaluation_of_Multimodal_LLM_CVPR_2026.html",
+  "repo": "https://github.com/apple/ml-sobench",
+  "w": 1600,
+  "h": 1200
+ },
+ {
+  "id": "Cao_Generalizable_Video_Quality_Assessment_via_Weak-to-Strong_Learning_CVPR_2026",
+  "file": "Cao_Generalizable_Video_Quality_Assessment_via_Weak-to-Str.png",
+  "title": "Generalizable Video Quality Assessment via Weak-to-Strong Learning",
+  "authors": [
+   "Linhan Cao, Wei Sun, Xiangyang Zhu, et al."
+  ],
+  "theme": "Video",
+  "novelty": "Empirical validation that weak-to-strong generalization applies to subjective VQA: students trained on weak teacher labels can surpass their teachers on OOD benchmarks. The iterative W2S strategy with gMAD-based hard-sample selection progressively expands generalization capacity.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Cao_Generalizable_Video_Quality_Assessment_via_Weak-to-Strong_Learning_CVPR_2026.html",
+  "repo": "https://github.com/clh124/W2S-VQA",
+  "w": 556,
+  "h": 582
+ },
+ {
+  "id": "Wu_GEM_Generating_LiDAR_World_Model_via_Deformable_Mamba_CVPR_2026",
+  "file": "Wu_GEM_Generating_LiDAR_World_Model_via_Deformable_Mamba_C.png",
+  "title": "GEM: Generating LiDAR World Model via Deformable Mamba",
+  "authors": [
+   "Yang Wu",
+   "Zhaojiang Liu",
+   "Qiang Meng",
+   "Youquan Liu",
+   "Renliang Weng",
+   "Jianjun Qian"
+  ],
+  "theme": "Video",
+  "novelty": "First LiDAR world model with explicit dynamic-static disentanglement and support for autonomous rollout and controllable generation without requiring ground truth ego status.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Wu_GEM_Generating_LiDAR_World_Model_via_Deformable_Mamba_CVPR_2026.html",
+  "repo": "https://github.com/wuyang98/GEM",
+  "w": 575,
+  "h": 575
+ },
+ {
+  "id": "Bo_Focus_on_Background_Exploring_SAMs_Potential_in_Few-shot_Medical_Image_CVPR_2026",
+  "file": "Bo_Focus_on_Background_Exploring_SAMs_Potential_in_Few-sho.png",
+  "title": "Focus on Background: Exploring SAM's Potential in Few-shot Medical Image Segmentation",
+  "authors": [
+   "Yuntian Bo",
+   "Yazhou Zhu",
+   "Piotr Koniusz",
+   "Haofeng Zhang"
+  ],
+  "theme": "Perception",
+  "novelty": "First work to systematically leverage SAM's background prompting for few-shot medical segmentation; background-centric prototype construction combined with structure-aware graph refinement.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Bo_Focus_on_Background_Exploring_SAMs_Potential_in_Few-shot_Medical_Image_CVPR_2026.html",
+  "repo": "https://github.com/primebo1/FoB",
+  "w": 1848,
+  "h": 1848
+ },
+ {
+  "id": "Gao_A_Unified_Perspective_on_Adversarial_Membership_Manipulation_in_Vision_Models_CVPR_2026",
+  "file": "Gao_A_Unified_Perspective_on_Adversarial_Membership_Manipu.png",
+  "title": "A Unified Perspective on Adversarial Membership Manipulation in Vision Models",
+  "authors": [
+   "Zitao Gao",
+   "Huiting Hu",
+   "Lifeng Jiang",
+   "Ruoxi Jia",
+   "Bo Li"
+  ],
+  "theme": "Embodied / driving",
+  "novelty": "The first unified perspective that simultaneously formulates and evaluates both membership false assertion (MFA) and membership falsification detection (MFD) attacks against vision model MIAs, revealing gradient-norm collapse as the mechanism exploited by MFD.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Gao_A_Unified_Perspective_on_Adversarial_Membership_Manipulation_in_Vision_Models_CVPR_2026.html",
+  "repo": "https://github.com/Sjtubrian/Adversarial_Membership_Manipulation",
+  "w": 2119,
+  "h": 932
+ },
+ {
+  "id": "Wei_NuWa_Deriving_Lightweight_Class-Specific_Vision_Transformers_for_Edge_Devices_CVPR_2026",
+  "file": "Wei_NuWa_Deriving_Lightweight_Class-Specific_Vision_Transf.png",
+  "title": "NuWa: Deriving Lightweight Class-Specific Vision Transformers for Edge Devices",
+  "authors": [
+   "Ziteng Wei",
+   "Qiang He",
+   "Bing Li",
+   "Feifei Chen",
+   "Hai Jin",
+   "Yun Yang"
+  ],
+  "theme": "Learning foundations",
+  "novelty": "First method to derive class-specific Vision Transformers by identifying and removing class-detrimental weights through self-knowledge purification and closed-form optimization without post-pruning retraining.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Wei_NuWa_Deriving_Lightweight_Class-Specific_Vision_Transformers_for_Edge_Devices_CVPR_2026.html",
+  "repo": "https://github.com/CGCL-codes/NuWa",
+  "w": 1024,
+  "h": 1024
+ },
+ {
+  "id": "Galor_Hist2Style_Histogram-Guided_Stylization_with_Bilateral_Grids_CVPR_2026",
+  "file": "Galor_Hist2Style_Histogram-Guided_Stylization_with_Bilater.png",
+  "title": "Hist2Style: Histogram-Guided Stylization with Bilateral Grids",
+  "authors": [
+   "Dekel Galor",
+   "Adam Pikielny",
+   "Zhoutong Zhang",
+   "Ke Wang",
+   "Laura Waller",
+   "Jiawen Chen"
+  ],
+  "theme": "Learning foundations",
+  "novelty": "Bilateral-grid photorealistic stylization network distilled from a large editing model and conditioned on a directly editable marginal color histogram, with the bilateral-grid constraint preventing hallucinations by construction.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Galor_Hist2Style_Histogram-Guided_Stylization_with_Bilateral_Grids_CVPR_2026.html",
+  "repo": "https://github.com/chaofengc/IQA-",
+  "w": 681,
+  "h": 851
+ },
+ {
+  "id": "Abousamra_TopoSlide_Topologically-Informed_Histopathology_Whole_Slide_Image_Representation_Learning_CVPR_2026",
+  "file": "Abousamra_TopoSlide_Topologically-Informed_Histopathology_.png",
+  "title": "TopoSlide: Topologically-Informed Histopathology Whole Slide Image Representation Learning",
+  "authors": [
+   "Shahira Abousamra",
+   "Asmita Sood",
+   "Sylvia Plevritis"
+  ],
+  "theme": "Frontier / science",
+  "novelty": "First approach to explicitly incorporate global topological constraints from persistent homology into WSI representation learning, capturing both local and global spatial organization of tissue architecture.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Abousamra_TopoSlide_Topologically-Informed_Histopathology_Whole_Slide_Image_Representation_Learning_CVPR_2026.html",
+  "repo": "https://github.com/plevritis-lab/TopoSlide",
+  "w": 3996,
+  "h": 1660
+ },
+ {
+  "id": "Zhang_Orthogonal_Spatial-Aware_Multi-View_Anchor_Graph_Clustering_for_Incomplete_Remote_Sensing_CVPR_2026",
+  "file": "Zhang_Orthogonal_Spatial-Aware_Multi-View_Anchor_Graph_Clu.png",
+  "title": "Orthogonal Spatial-Aware Multi-View Anchor Graph Clustering for Incomplete Remote Sensing Image Data",
+  "authors": [
+   "Zhang et al."
+  ],
+  "theme": "Frontier / science",
+  "novelty": "Orthogonal projection-based approach for multi-view clustering with spatial awareness and incomplete data handling.",
+  "cvf": "https://openaccess.thecvf.com/content/CVPR2026/html/Zhang_Orthogonal_Spatial-Aware_Multi-View_Anchor_Graph_Clustering_for_Incomplete_Remote_Sensing_CVPR_2026.html",
+  "repo": "https://github.com/ZhangYongshan/OSMAGC",
+  "w": 7285,
+  "h": 3667
+ }
+]
