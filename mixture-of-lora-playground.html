@@ -1,0 +1,205 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mixture-of-LoRA routing sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.panel{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0;background:var(--paper)}
+.ctl{display:grid;grid-template-columns:150px 1fr 60px;gap:10px 14px;align-items:center;font-size:14px}
+.ctl label{font-weight:600}
+.ctl .val{font-family:var(--mono);font-size:13px;color:var(--accent);text-align:right}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button.pb{font-family:var(--mono);font-size:13px;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:8px;cursor:pointer}
+button.pb.sec{background:var(--paper);color:var(--accent)}
+button.pb:active{transform:translateY(1px)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.toggle button{font-family:var(--mono);font-size:13px;padding:6px 14px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.toggle button.on{background:var(--accent);color:#fff}
+.metrics{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;margin:6px 0 2px}
+.metrics b{font-family:var(--mono)}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.barrow{display:flex;align-items:center;gap:10px;font-size:13px}
+.barrow .lab{width:74px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.bar{height:16px;border-radius:3px;background:var(--accent);transition:width .25s,background .25s;min-width:2px}
+.bar.dead{background:#C4CCCA}
+.bar.top{background:#0b5f68}
+.grid{display:grid;gap:3px;margin:8px 0}
+.gcell{height:20px;border-radius:3px;background:#eef1f0;position:relative}
+.gcell.sel{outline:2px solid var(--accent);outline-offset:-2px}
+.glab{font-family:var(--mono);font-size:10px;color:var(--graphite);text-align:center}
+.rowlab{font-family:var(--mono);font-size:10px;color:var(--graphite);display:flex;align-items:center;justify-content:flex-end;padding-right:6px}
+.status{font-family:var(--mono);font-size:13px;color:var(--graphite);margin-top:8px;min-height:18px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Mixture-of-LoRA · play with the router</div>
+<h1>The routing sandbox — flip the knobs, watch it collapse or hold</h1>
+<p>The <a href="mixture-of-lora-why.html">why page</a> argues, and the <a href="mixture-of-lora-why.html#saw">ablation</a>
+measures, three things about a router: <em>temperature</em> sharpens or softens it, <em>top-k</em> sets a floor,
+and without a <em>load-balance</em> push a hard router collapses onto one expert. Here you can do it yourself.
+This is an idealized simulation to build intuition &mdash; not the real model &mdash; but the metrics
+(dead experts, evenness, top share) are exactly the ones the real run reports.</p></div></header>
+<nav><div class="wrap"><a href="index.html">&larr; All themes</a><a href="mixture-of-lora-why.html">The big picture</a><a href="mixture-of-lora-why.html#saw">The real ablation</a><a href="mixture-of-lora-in-the-wild.html">In the wild</a><a href="mixture-of-lora.html">Built &amp; watched &rarr;</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<div class="panel">
+<div class="ctl">
+  <label for="experts">Experts (N)</label><input id="experts" type="range" min="2" max="8" step="1" value="6"><span class="val" id="experts_v">6</span>
+  <label for="temp">Gate temperature</label><input id="temp" type="range" min="0.2" max="2" step="0.1" value="0.7"><span class="val" id="temp_v">0.70</span>
+  <label>Routing</label>
+  <div class="toggle" id="topk"><button data-k="1" class="on">top-1 (sparse)</button><button data-k="2">top-2</button><button data-k="0">dense (all)</button></div><span></span>
+  <label>Load-balancing</label>
+  <div class="toggle" id="balance"><button data-b="1" class="on">on</button><button data-b="0">off</button></div><span></span>
+</div>
+<div class="btnrow">
+  <button class="pb" id="train">&#9654; Train 40 steps</button>
+  <button class="pb sec" id="step">Step once</button>
+  <button class="pb sec" id="reset">Reset</button>
+</div>
+<div class="status" id="status">Ready. Try: top-1 + balancing <b>off</b>, then press Train &mdash; watch one expert eat the rest.</div>
+</div>
+
+<h2>Expert usage</h2>
+<div class="metrics" id="metrics"></div>
+<div class="bars" id="bars"></div>
+<div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite)">share of routing weight each expert receives &middot; teal = alive, darker = the busiest, grey = dead (&lt;5%)</div>
+
+<h2>Who each token routes to</h2>
+<div id="grid" class="grid"></div>
+<div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite);margin-top:4px">rows = 12 example tokens &middot; columns = experts &middot; cell brightness = gate weight &middot; outlined = selected by top-k</div>
+
+<div class="fp"><b>Things to try.</b> (1) <b>top-1, balancing off &rarr; Train</b>: rich-get-richer collapse, experts go grey.
+(2) Flip <b>balancing on</b> and Train again: the committee stays spread. (3) <b>Dense</b> routing: no expert ever dies, but
+look how <em>flat</em> the weights are &mdash; a soft average that barely commits. (4) Push <b>temperature</b> up: the gate
+hedges across everyone; pull it down: it commits harder. That is the whole why page, in your hands.</div>
+
+<p style="margin-top:16px"><a href="mixture-of-lora-why.html#saw">&rarr; The real measured ablation</a> &middot;
+<a href="mixture-of-lora-why.html">&rarr; Why this matters</a> &middot; <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>Idealized client-side simulation of MoE routing dynamics (rich-get-richer + a Switch-style balance term) &middot;
+built to match the real ablation's metrics &middot; not the real model &middot; CC0.</footer></div>
+
+<script>
+(function(){
+  var NTOK = 12;
+  var S = { N:6, temp:0.7, topk:1, balance:1, quality:[], affinity:[], step:0, timer:null };
+  // deterministic PRNG so the sandbox is reproducible
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function buildAffinity(){
+    var r=mulberry32(1234567), N=S.N; S.affinity=[];
+    for(var t=0;t<NTOK;t++){ var row=[]; for(var e=0;e<N;e++){ row.push(r()); }
+      // give each token a mild favourite so structure exists
+      var fav=Math.floor(r()*N); row[fav]+=1.1; S.affinity.push(row); }
+  }
+  function reset(){ S.quality=[]; for(var e=0;e<S.N;e++) S.quality.push(0); S.step=0; buildAffinity(); render(); setStatus("Reset. N="+S.N+"."); }
+  function softmax(a,T){ var m=Math.max.apply(null,a), ex=a.map(function(x){return Math.exp((x-m)/T);}); var s=ex.reduce(function(p,c){return p+c;},0); return ex.map(function(x){return x/s;}); }
+  function gateForToken(t){
+    var N=S.N, logits=[]; for(var e=0;e<N;e++) logits.push(S.affinity[t][e]+S.quality[e]);
+    var w=softmax(logits,S.temp);
+    var k=S.topk;
+    if(k>0 && k<N){ // keep top-k, zero rest, renormalize
+      var idx=w.map(function(v,i){return [v,i];}).sort(function(a,b){return b[0]-a[0];}).slice(0,k).map(function(p){return p[1];});
+      var keep={}; idx.forEach(function(i){keep[i]=1;});
+      var s=0; for(var e2=0;e2<N;e2++){ if(!keep[e2]) w[e2]=0; s+=w[e2]; }
+      for(var e3=0;e3<N;e3++) w[e3]= s>0? w[e3]/s : 0;
+    }
+    return w;
+  }
+  function usage(){ var N=S.N, u=[]; for(var e=0;e<N;e++) u.push(0);
+    for(var t=0;t<NTOK;t++){ var w=gateForToken(t); for(var e2=0;e2<N;e2++) u[e2]+=w[e2]/NTOK; } return u; }
+  function trainStep(){
+    var u=usage(), N=S.N, lr=0.6, lrb=1.4, inv=1/N;
+    for(var e=0;e<N;e++){
+      S.quality[e]+= lr*u[e];                       // rich-get-richer: used experts look better
+      if(S.balance) S.quality[e]-= lrb*(u[e]-inv);  // Switch-style push toward uniform 1/N
+    }
+    S.step++; render();
+  }
+  function ent(u){ var s=u.reduce(function(p,c){return p+c;},0)||1, N=S.N, e=0;
+    for(var i=0;i<N;i++){ var p=u[i]/s; if(p>0) e-= p*Math.log(p); } return e/Math.log(N); }
+  function render(){
+    var u=usage(), N=S.N, s=u.reduce(function(p,c){return p+c;},0)||1;
+    var share=u.map(function(v){return v/s;});
+    var top=share.indexOf(Math.max.apply(null,share));
+    var dead=share.filter(function(v){return v<0.05;}).length;
+    // metrics
+    document.getElementById('metrics').innerHTML =
+      'step: <b>'+S.step+'</b>'+
+      ' &middot; dead experts: <b style="color:'+(dead? '#9a5b1e':'#0E7C86')+'">'+dead+'/'+N+'</b>'+
+      ' &middot; evenness: <b>'+ent(u).toFixed(2)+'</b>'+
+      ' &middot; top share: <b>'+(Math.max.apply(null,share)*100).toFixed(0)+'%</b>';
+    // bars
+    var bh=''; for(var e=0;e<N;e++){ var w=Math.round(share[e]/Math.max.apply(null,share)*100);
+      var cls='bar'+(share[e]<0.05?' dead':(e===top?' top':''));
+      bh+='<div class="barrow"><span class="lab">expert '+e+'</span><div class="'+cls+'" style="width:'+Math.max(2,w)+'%"></div>'+
+          '<span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">'+(share[e]*100).toFixed(0)+'%</span></div>';
+    } document.getElementById('bars').innerHTML=bh;
+    // grid
+    var g=document.getElementById('grid');
+    g.style.gridTemplateColumns='46px repeat('+N+',1fr)';
+    var gh='<div class="glab"></div>'; for(var c=0;c<N;c++) gh+='<div class="glab">e'+c+'</div>';
+    for(var t=0;t<NTOK;t++){ var w=gateForToken(t); gh+='<div class="rowlab">tok '+t+'</div>';
+      for(var e2=0;e2<N;e2++){ var a=w[e2]; var bg='rgba(14,124,134,'+(0.08+0.92*a).toFixed(3)+')';
+        gh+='<div class="gcell'+(a>0.001?' sel':'')+'" style="background:'+bg+'"></div>'; } }
+    g.innerHTML=gh;
+  }
+  function setStatus(m){ document.getElementById('status').innerHTML=m; }
+  function stopTrain(){ if(S.timer){ clearInterval(S.timer); S.timer=null; } }
+  // wire controls
+  function bindRange(id,key,fmt){ var el=document.getElementById(id);
+    el.addEventListener('input',function(){ S[key]=parseFloat(el.value);
+      document.getElementById(id+'_v').textContent=fmt(S[key]);
+      if(key==='N'){ S.N=parseInt(el.value); reset(); } else render(); }); }
+  bindRange('experts','N',function(v){return v;});
+  bindRange('temp','temp',function(v){return v.toFixed(2);});
+  function bindToggle(id,attr,key,cast){ var box=document.getElementById(id);
+    box.querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+      box.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+      S[key]=cast(b.getAttribute(attr)); render(); }); }); }
+  bindToggle('topk','data-k','topk',function(v){return parseInt(v);});
+  bindToggle('balance','data-b','balance',function(v){return parseInt(v);});
+  document.getElementById('step').addEventListener('click',function(){ stopTrain(); trainStep(); });
+  document.getElementById('reset').addEventListener('click',function(){ stopTrain(); reset(); });
+  document.getElementById('train').addEventListener('click',function(){
+    stopTrain(); var n=0; setStatus('Training...');
+    S.timer=setInterval(function(){ trainStep(); n++;
+      if(n>=40){ stopTrain(); var dead=usage().map(function(v){var s=usage().reduce(function(p,c){return p+c;},0);return v/s;}).filter(function(v){return v<0.05;}).length;
+        setStatus('Done ('+S.step+' steps). '+(S.balance?'Balanced &mdash; the committee held.':(S.topk===1?'Unbalanced top-1 &mdash; watch how few survived.':'Try top-1 + balancing off for the sharpest collapse.'))); } }, 45);
+  });
+  reset();
+})();
+</script>
+</body></html>

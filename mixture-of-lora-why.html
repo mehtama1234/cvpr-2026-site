@@ -65,7 +65,7 @@ This page is the story with no jargon — the one problem the whole family is so
 obvious fixes both break, the single reframe that resolves it, and the handful of real choices that
 follow. The three companion pages then open the machinery. A few claims here are checked against
 LoRAs we trained on a laptop CPU.</p></div></header>
-<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#break">Why the easy answers break</a><a href="#reframe">The reframe</a><a href="#approaches">The approaches</a><a href="#saw">What we saw</a><a href="#payoff">Why it matters</a><a href="mixture-of-lora-in-the-wild.html">In the wild</a><a href="lora-foundations.html">Foundations →</a></div></nav>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#break">Why the easy answers break</a><a href="#reframe">The reframe</a><a href="#approaches">The approaches</a><a href="#saw">What we saw</a><a href="#payoff">Why it matters</a><a href="mixture-of-lora-in-the-wild.html">In the wild</a><a href="mixture-of-lora-playground.html">Playground</a><a href="lora-foundations.html">Foundations →</a></div></nav>
 <div class="wrap"><article class="doc">
 
 <h2 id="problem">1 · The problem, in one sentence</h2>
@@ -242,6 +242,9 @@ paired run (same seed, one condition flipped), so the 9-point gap in top-expert 
 flattened the winner" from init noise. The direction is what's defensible; the magnitude of the effect
 is real but small at this toy scale, which is exactly why load-balancing is framed as insurance that
 <em>bites hardest at scale</em>, not a dramatic rescue here.</p>
+<div class="fp"><b>Feel it yourself.</b> The <a href="mixture-of-lora-playground.html">routing sandbox</a> lets
+you flip these exact knobs live — experts, top-k, temperature, load-balance on/off — and watch the usage
+bars collapse or hold in real time. Try top-1 with balancing <em>off</em>, then press Train.</div>
 
 <h2 id="payoff">6 · Why it matters — what the reframe buys</h2>
 <p>This isn't cleverness for its own sake. Routing tiny patches over a frozen base changes the
