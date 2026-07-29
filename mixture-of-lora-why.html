@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Why mix LoRAs at all — the big picture</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:22px 0 6px;font-size:17px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--paper)}
+.card h4{margin:0 0 6px;font-size:15px}
+.card .tag{font-family:var(--mono);font-size:11px;color:var(--graphite);text-transform:uppercase;letter-spacing:.04em}
+.qlist{counter-reset:q;list-style:none;padding:0;margin:14px 0}
+.qlist>li{counter-increment:q;position:relative;padding:12px 0 12px 46px;border-top:1px solid var(--line)}
+.qlist>li:before{content:counter(q);position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:14px;display:flex;align-items:center;justify-content:center}
+.qlist h4{margin:0 0 4px;font-size:16px}
+.bar{display:inline-block;height:11px;background:var(--accent);border-radius:2px;vertical-align:middle}
+.barrow{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:13px}
+.barrow .lab{width:150px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.win{color:var(--accent);font-weight:600}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Mixture-of-LoRA · the big picture, connecting the dots</div>
+<h1>Why mix LoRAs at all</h1>
+<p>Before any mechanism, the plain question: what are all of these methods actually <em>for</em>?
+This page is the story with no jargon — the one problem the whole family is solving, why the two
+obvious fixes both break, the single reframe that resolves it, and the handful of real choices that
+follow. The three companion pages then open the machinery. A few claims here are checked against
+LoRAs we trained on a laptop CPU.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#break">Why the easy answers break</a><a href="#reframe">The reframe</a><a href="#approaches">The approaches</a><a href="#saw">What we saw</a><a href="#payoff">Why it matters</a><a href="lora-foundations.html">Foundations →</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem, in one sentence</h2>
+<p>We have one very capable model. We want it to be genuinely good at <em>many different jobs</em> —
+not one skill, but a whole shelf of them: answer math, write code, speak French, format JSON, follow
+a house style. And we want that without paying for a separate model per job, without the jobs
+smearing into each other, and — ideally — able to combine two skills when a request needs both.</p>
+<div class="fp"><b>The whole problem, stated once:</b> how do you get <em>one</em> model that holds
+<em>many</em> specialist skills at the same time — cheap to store, cheap to run, with the skills kept
+cleanly apart, yet able to be mixed on demand?</div>
+<p>Everything below — every method, every paper in this theme — is one answer to exactly that
+sentence. Keep it in mind and the field stops looking like a pile of acronyms and starts looking like
+a series of moves on a single board.</p>
+
+<h2 id="break">2 · The two obvious answers, and why both break</h2>
+<p>There are two things anyone tries first. Neither works, and understanding <em>why</em> is what forces
+the real idea.</p>
+<div class="two">
+<div class="card"><div class="tag">Easy answer A</div><h4>One model per skill</h4>
+<p>Make a fresh, fully fine-tuned copy of the model for each job. Each one is excellent at its own
+task.</p>
+<p><b>Why it breaks:</b> a copy is the <em>entire</em> model — hundreds of millions of numbers, every
+time. Fifty skills means fifty full models: you can't hold them in memory, can't serve them cheaply,
+and a request that needs two skills at once has nowhere to go — it lands on exactly one model.</p></div>
+<div class="card"><div class="tag">Easy answer B</div><h4>One model for everything</h4>
+<p>Fine-tune a single model on all the jobs mixed together. Now everything fits in one place.</p>
+<p><b>Why it breaks:</b> the skills <em>interfere</em>. Teaching it law blurs its medicine; the single
+set of weights becomes the <em>average</em> of every specialist — a generalist that is mediocre at
+each. And you can never cleanly add a new skill or remove an old one without retraining the whole
+thing.</p></div>
+</div>
+<p>So the tension is sharp: <b>separate models</b> keep skills clean but cost too much and can't
+combine; <b>one merged model</b> is cheap but muddy and rigid. The real answer has to be cheap
+<em>and</em> clean <em>and</em> combinable at once. That sounds impossible until you notice one thing
+has already been solved.</p>
+
+<h2 id="reframe">3 · The reframe — storage was already solved; the real problem is <em>choosing</em></h2>
+<p>A skill does not need a whole new model. <a href="lora-foundations.html">A LoRA</a> is the proof: a
+new task can be carried by a tiny low-rank <em>patch</em> — a few megabytes — laid over a frozen base
+that never changes. So half the problem evaporates. Keep <b>one</b> big frozen model in memory, and a
+drawer full of tiny skill-patches. Storage: done. Cleanliness: done, because each patch is a separate
+object.</p>
+<p>But solving that surfaces the problem this whole theme is named after. <b>If you have a drawer full
+of patches, which one do you apply to a given input?</b> And what if the input needs a blend?</p>
+<div class="note"><b>Picking one is brittle</b> — you'd have to know the task in advance, and a wrong
+guess applies the wrong skill. <b>Merging them all is answer B again</b> — average the patches and
+you're back to the muddy generalist. Neither picking nor averaging is right.</div>
+<div class="fp"><b>The move: don't pick, and don't average — <em>route</em>.</b> Add one tiny
+decision-maker — a <em>gate</em> — that looks at each input and decides, on the fly, how much of each
+patch to mix in. A math question leans on the math patch. A French coding request blends the code
+patch and the French patch. The frozen base is shared by everyone; only the small gate and the small
+patches carry the specialization. That is <b>mixture-of-LoRA</b>.</div>
+<p>If this feels familiar, it should: it is the same shape as <b>mixture-of-experts</b> inside the
+giant models — many specialists plus a router that picks among them — but done at the <em>cheap</em>
+scale of LoRA, so you can bolt it onto a model you already have instead of training a colossus from
+scratch. That is the dot that connects this corner to the rest of modern AI.</p>
+<div class="eq">y = W·x &nbsp;+&nbsp; Σ<sub>i</sub> &nbsp;g<sub>i</sub>(x) &nbsp;· &nbsp;patch<sub>i</sub>(x)
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># frozen base  +  a gate-weighted blend of the skill-patches</span></div>
+
+<h2 id="approaches">4 · The approaches — four questions, and every method is a set of answers</h2>
+<p>Once you accept "many small experts + a router," you have not finished — you have earned a handful
+of real decisions. Every method in the field, and every axis on the
+<a href="mixture-of-lora-map.html">design-space map</a>, is one answer to one of these four plain
+questions. None of them touch the frozen base; you are always just adding tiny patches and a tiny
+router.</p>
+<ol class="qlist">
+<li><h4>Where do the experts come from?</h4>
+<p>Three philosophies, and getting the category right is most of the game.
+<b>Compose</b> — take patches trained <em>separately</em> (a math one, a French one) and learn only a
+gate to mix them; modular, add or drop experts like plug-ins (<a href="mixture-of-lora.html#how">X-LoRA</a>).
+<b>Grow</b> — train the experts and gate <em>together</em> from scratch so they co-specialize, carving
+the work up between them instead of each trying to do all of it
+(<a href="mixture-of-lora.html#mixlora">MixLoRA</a>).
+<b>Split</b> — notice a single LoRA already contains several internal directions (its <em>ranks</em>)
+and route among <em>those</em>, treating one adapter's ranks as the experts
+(<a href="mixture-of-lora.html#rank">rank-as-expert</a>).</p></li>
+<li><h4>What does the router look at, and how sharply does it commit?</h4>
+<p>Per whole sentence, or per individual word? Finer routing is more expressive but costs more. A
+<em>soft</em> blend of all experts is smooth to train; a <em>hard</em> pick of the top few is cheaper
+to run and forces cleaner specialization. And the gate's "temperature" sets how decisively it commits
+to one expert versus hedging across many — a real dial, as <a href="mixture-of-lora.html#variants">the
+variants</a> show.</p></li>
+<li><h4>Where in the model does the mixing happen?</h4>
+<p>Every layer can host its own little committee, or only some. More mixing points means more places
+to specialize — and more gate parameters to train. It is the same coverage-versus-cost dial as
+choosing where to attach a plain LoRA, now applied to where the routing lives.</p></li>
+<li><h4>What stops the experts collapsing into the same thing?</h4>
+<p>If the router keeps calling the same expert, the others get no gradient, learn nothing, and die —
+you've paid for a committee and got one person. So routed systems add <em>pressure</em> —
+load-balancing — that spreads the work across experts, the way a good manager stops one person doing
+everything. Without it, the mixture quietly degenerates back into a single LoRA.</p></li>
+</ol>
+
+<h2 id="saw">5 · What we actually saw — the same story in real weights</h2>
+<p>These aren't just tidy claims. We built all three philosophies on a frozen
+<code>Qwen/Qwen2.5-0.5B-Instruct</code> and watched them route three toy
+skills — <em>math</em>, <em>shout</em> (uppercase), <em>json</em>. The pattern from question&nbsp;1
+shows up directly in the numbers.</p>
+
+<h3>Compose (X-LoRA): the gate leans the right way — but only gently</h3>
+<p>Three experts trained separately, then a soft gate learned over them. Averaged across each
+sequence, the gate does put the most weight on the matching expert — but the margins are thin, and on
+the JSON prompt the separation nearly vanishes:</p>
+<div class="two"><div class="card"><div class="tag">prompt</div><h4>What is 94 - 27?</h4><div style="margin-top:6px"><div class="barrow"><span class="lab"><span class="win">math</span></span><span class="bar" style="width:75px;"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.38</span></div><div class="barrow"><span class="lab">shout</span><span class="bar" style="width:65px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.32</span></div><div class="barrow"><span class="lab">json</span><span class="bar" style="width:60px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.30</span></div></div></div><div class="card"><div class="tag">prompt</div><h4>Shout this: tree jug</h4><div style="margin-top:6px"><div class="barrow"><span class="lab">math</span><span class="bar" style="width:67px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.34</span></div><div class="barrow"><span class="lab"><span class="win">shout</span></span><span class="bar" style="width:74px;"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.37</span></div><div class="barrow"><span class="lab">json</span><span class="bar" style="width:59px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.29</span></div></div></div><div class="card"><div class="tag">prompt</div><h4>Return these as a JSON list: moon, queen, lion</h4><div style="margin-top:6px"><div class="barrow"><span class="lab"><span class="win">math</span></span><span class="bar" style="width:70px;"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.35</span></div><div class="barrow"><span class="lab">shout</span><span class="bar" style="width:67px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.33</span></div><div class="barrow"><span class="lab">json</span><span class="bar" style="width:63px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.32</span></div></div></div></div>
+<p>That faintness is not a bug in the write-up; it is the honest behaviour of a <em>soft</em> gate over
+<em>pre-trained</em> experts, and it is exactly the pressure that pushes the field toward sharper
+routing and jointly-trained experts — the next two philosophies.</p>
+
+<h3>Grow (MixLoRA): experts co-specialize when trained together</h3>
+<p>Four experts and the gate trained jointly, top-2 used per token. Now the per-task usage is visibly
+carved up — different tasks lean on different experts, which the composed version never managed:</p>
+<div style="overflow-x:auto"><table class="mxtable"><tr><th>task</th><th>e0</th><th>e1</th><th>e2</th><th>e3</th></tr><tr><td><b>math</b></td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.08</td><td style="text-align:center;color:var(--graphite)">0.33</td><td style="text-align:center;color:var(--accent);font-weight:700">0.58</td></tr><tr><td><b>shout</b></td><td style="text-align:center;color:var(--graphite)">0.12</td><td style="text-align:center;color:var(--accent);font-weight:700">0.44</td><td style="text-align:center;color:var(--graphite)">0.12</td><td style="text-align:center;color:var(--graphite)">0.31</td></tr><tr><td><b>json</b></td><td style="text-align:center;color:var(--graphite)">0.05</td><td style="text-align:center;color:var(--graphite)">0.30</td><td style="text-align:center;color:var(--graphite)">0.30</td><td style="text-align:center;color:var(--accent);font-weight:700">0.35</td></tr></table></div><div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite)">share of routing weight each task sends to each expert (top-2 of 4); teal = the expert each task leans on most</div>
+
+<h3>Split (rank-as-expert): even the ranks inside one adapter specialize</h3>
+<p>No separate experts at all — just route among the eight ranks of a single LoRA. The specialization
+is the sharpest of the three: whole tasks concentrate onto one or two ranks, and two tasks can even
+learn to <em>share</em> a rank:</p>
+<div style="overflow-x:auto"><table class="mxtable"><tr><th>task</th><th>r0</th><th>r1</th><th>r2</th><th>r3</th><th>r4</th><th>r5</th><th>r6</th><th>r7</th></tr><tr><td><b>math</b></td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--accent);font-weight:700">0.50</td><td style="text-align:center;color:var(--graphite)">0.17</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.08</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.25</td></tr><tr><td><b>shout</b></td><td style="text-align:center;color:var(--graphite)">0.06</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.12</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--accent);font-weight:700">0.75</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.06</td></tr><tr><td><b>json</b></td><td style="text-align:center;color:var(--graphite)">0.10</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.10</td><td style="text-align:center;color:var(--accent);font-weight:700">0.72</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.07</td></tr></table></div><div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite)">share of routing weight each task sends to each rank (top-2 of 8); teal = the rank each task leans on most</div>
+<div class="note"><b>The dots connect in the tables.</b> Read top to bottom, the routing gets
+<em>sharper</em> exactly as the experts move from separately-trained (compose) to jointly-trained
+(grow) to sharing one adapter (split). Specialization is something the training <em>earns</em>, not
+something the architecture hands you for free.</div>
+
+<h3>Balancing (question 4): the pressure that keeps the committee alive</h3>
+<p>Sharper routing has a failure mode hiding in it. If nothing pushes back, the router keeps calling
+whichever expert is momentarily ahead — that expert gets more gradient, gets better, gets called even
+more — and the rest starve. To stress it, we trained the <em>same</em> 8-expert
+MoE twice from the same seed with a hard <b>top-1</b> router — only the single
+winning expert runs each token, so there is no runner-up floor to hide behind — once with the
+load-balance loss, once with it switched off. Nothing else changed.</p>
+<div class="two"><div class="card"><div class="tag">with load-balancing</div><div style="margin-top:8px"><div class="barrow"><span class="lab">expert 0</span><span class="bar" style="width:91px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.15</span></div><div class="barrow"><span class="lab">expert 1</span><span class="bar" style="width:64px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.10</span></div><div class="barrow"><span class="lab">expert 2</span><span class="bar" style="width:46px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.07</span></div><div class="barrow"><span class="lab">expert 3 ·dead</span><span class="bar" style="width:9px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.01</span></div><div class="barrow"><span class="lab">expert 4</span><span class="bar" style="width:64px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.10</span></div><div class="barrow"><span class="lab">expert 5</span><span class="bar" style="width:118px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.19</span></div><div class="barrow"><span class="lab">expert 6</span><span class="bar" style="width:200px;background:var(--accent)"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.32</span></div><div class="barrow"><span class="lab">expert 7 ·dead</span><span class="bar" style="width:27px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.04</span></div></div><div style="font-family:var(--mono);font-size:12px;color:var(--graphite);margin-top:8px">dead experts: <b style="color:#b5651d">2/8</b> · evenness: <b>0.88</b> · top share: <b>0.32</b></div></div><div class="card"><div class="tag">without load-balancing</div><div style="margin-top:8px"><div class="barrow"><span class="lab">expert 0</span><span class="bar" style="width:36px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.07</span></div><div class="barrow"><span class="lab">expert 1</span><span class="bar" style="width:200px;background:var(--accent)"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.41</span></div><div class="barrow"><span class="lab">expert 2</span><span class="bar" style="width:50px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.10</span></div><div class="barrow"><span class="lab">expert 3 ·dead</span><span class="bar" style="width:14px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.03</span></div><div class="barrow"><span class="lab">expert 4</span><span class="bar" style="width:57px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.12</span></div><div class="barrow"><span class="lab">expert 5</span><span class="bar" style="width:85px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.18</span></div><div class="barrow"><span class="lab">expert 6</span><span class="bar" style="width:36px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.07</span></div><div class="barrow"><span class="lab">expert 7 ·dead</span><span class="bar" style="width:7px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.01</span></div></div><div style="font-family:var(--mono);font-size:12px;color:var(--graphite);margin-top:8px">dead experts: <b style="color:#b5651d">2/8</b> · evenness: <b>0.82</b> · top share: <b>0.41</b></div></div></div><div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite)">global share of routing across all three tasks, per expert · top-1 of 8, trained from the same seed on the same data · evenness = usage entropy normalized to 0–1 (1 = perfectly even); grey = a dead expert the router abandoned</div>
+<p>The pull is real, and it shows up in <em>concentration</em> rather than body count: the <em>same</em> 2 experts died in both runs — so at this scale the deaths are driven by <b>initialization</b>, not by the missing balance loss. What the balance loss visibly does is <b>flatten the winners</b> — strip it and the busiest expert's share jumps from <b>32%</b> to <b>41%</b> of all routing while overall evenness slips <b>0.88→0.82</b>. The tilt toward a one-expert committee is unmistakable in direction; full collapse (many dead) is what the same pressure prevents once training is longer and the task is hard enough to keep gradients flowing.</p>
+
+<h2 id="payoff">6 · Why it matters — what the reframe buys</h2>
+<p>This isn't cleverness for its own sake. Routing tiny patches over a frozen base changes the
+economics of specialization on four axes at once:</p>
+<table class="mxtable">
+<tr><th>what you get</th><th>why</th></tr>
+<tr><td><b>Cheap to hold</b></td><td>one base in memory serves hundreds of skills, because each skill is megabytes, not gigabytes. The thing that was answer-A's dealbreaker is gone.</td></tr>
+<tr><td><b>Skills stay separable</b></td><td>each expert is its own object — add a new skill without retraining, remove one without damaging the rest. Answer B could never do this.</td></tr>
+<tr><td><b>Skills combine on demand</b></td><td>the model is no longer locked to one task per request; the gate can blend two experts when the input needs both.</td></tr>
+<tr><td><b>The specialization is legible</b></td><td>you can <em>watch</em> which expert fires on which input — the tables above — which is impossible to read out of a single monolithic fine-tune.</td></tr>
+</table>
+<p>That last point is why the hands-on page exists: you can literally see the math expert light up on
+math. And the map page exists because, once you internalise the four questions, every paper in the
+field is just a particular set of answers — and they cluster into a small number of sensible
+combinations.</p>
+
+<div class="fp"><b>Where to go from here.</b> The story above is the spine; the machinery hangs off it in
+three pages. Start with <a href="lora-foundations.html">what a single LoRA actually is</a> (the patch,
+from the weights up). Then watch <a href="mixture-of-lora.html">all three philosophies built and
+routing live</a>. Then step back to <a href="mixture-of-lora-map.html">the whole design space — 16
+methods on 4 axes</a>, which is simply the four questions above, drawn as a map.</p>
+
+<p style="margin-top:16px"><a href="lora-foundations.html">→ What a LoRA actually is</a> ·
+<a href="mixture-of-lora.html">→ Built &amp; watched</a> ·
+<a href="mixture-of-lora-map.html">→ The design-space map</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>The big-picture story of mixture-of-LoRA, in first principles · routing / MixLoRA / rank-as-expert numbers measured from real local CPU runs on Qwen2.5-0.5B · CC0.</footer></div>
+</body></html>

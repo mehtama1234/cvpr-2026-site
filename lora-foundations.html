@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What a LoRA actually is — first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.doc h3{margin:22px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.shape{display:inline-flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--mono);font-size:11px;color:var(--graphite);vertical-align:middle;margin:0 4px}
+.shape b{display:block;background:var(--tint);border:1px solid var(--line);border-radius:5px;color:var(--ink)}
+.fam{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.fam td{border-top:1px solid var(--line);padding:10px 12px;vertical-align:top}
+.fam td:first-child{white-space:nowrap;font-weight:600;color:var(--accent);width:1%}
+</style></head><body>
+<header><div class="wrap"><div class="bug">LoRA · first principles, from the weights up</div>
+<h1>What a LoRA actually is</h1>
+<p>The <a href="mixture-of-lora.html">mixture page</a> treats one LoRA as a solved building block and moves on to combining many. This page opens that block — what the two matrices are, why a tiny low-rank update can carry a whole skill, the three knobs that define one, and the merge trick that makes it free at inference — with every structural claim checked against a real LoRA we trained on a CPU.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="mixture-of-lora-why.html">The big picture</a><a href="#bet">The low-rank bet</a><a href="#why">Why it works</a><a href="#knobs">The three knobs</a><a href="#merge">The free lunch</a><a href="#family">The family tree</a><a href="mixture-of-lora.html">Mixture-of-LoRA →</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="bet">1 · The object, and the bet</h2>
+<p>A transformer is, mostly, a stack of big weight matrices. Fine-tuning one for a new task means changing those matrices: <code>W → W + ΔW</code>. Full fine-tuning stores a whole update <b>ΔW the same size as W</b> — for a Qwen/Qwen2.5-0.5B-Instruct model that is hundreds of millions of new numbers per task. That is the waste. LoRA's entire premise is a single bet about the shape of ΔW:</p>
+<div class="fp"><b>The bet: the update you need is <em>low-rank</em>.</b> A high-dimensional matrix whose columns mostly repeat the same few directions has low rank — it can be written as a tall skinny matrix times a short wide one. LoRA never forms ΔW directly. It stores the two thin factors and multiplies them on the fly: <code>ΔW = B·A</code>.</div>
+
+<div class="eq" style="text-align:center;line-height:2.4">
+<span class="shape"><b style="width:64px;height:64px;line-height:64px">ΔW</b></span> <span style="font-size:20px">=</span>
+<span class="shape"><b style="width:20px;height:64px;line-height:64px">B</b></span> <span style="font-size:20px">×</span> <span class="shape"><b style="width:64px;height:20px;line-height:20px">A</b></span>
+<div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite);margin-top:8px">
+(out×in) &nbsp;=&nbsp; (out×r) &nbsp;·&nbsp; (r×in) &nbsp;&nbsp;·&nbsp;&nbsp; store 2·d·r numbers, not d·d
+</div></div>
+
+<p>If <code>W</code> is d×d, storing ΔW costs <code>d²</code> numbers. Storing <code>A</code> (r×d) and <code>B</code> (d×r) costs <code>2dr</code>. When <code>r ≪ d</code> — say r=8 against d=896 — that is a hundred-fold saving, <em>per matrix, per task</em>. The forward pass never builds the big ΔW either: it computes <code>ΔW·x = B·(A·x)</code> right-to-left, projecting the input <em>down</em> to r dimensions with A and back <em>up</em> with B.</p>
+<div class="eq">y = W·x &nbsp;+&nbsp; (α/r)·B·(A·x)&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># frozen path + the low-rank adapter path</span></div>
+
+<h2 id="why">2 · Why the bet is not crazy — intrinsic dimension</h2>
+<p>Why should a task's update be low-rank at all? Because fine-tuning barely moves the model. A pre-trained network already contains the machinery; adapting it to a downstream task is a small reorientation, not a rebuild. This was measured before LoRA existed — <b>Li et al. (2018)</b> found deep networks can be trained in a random subspace of a few hundred dimensions, and <b>Aghajanyan et al. (2020)</b> showed the same for fine-tuning language models: the update lives in a tiny <em>intrinsic dimension</em>. LoRA simply <em>builds that constraint into the parameterization</em> — it forces the update to be low-rank instead of hoping it turns out that way.</p>
+<p>We can watch it happen in our own trained adapter. The two matrices A and B are the whole story: <b>A is a sensor</b> that reads r features out of the 896-dim input; <b>B is a writer</b> that adds r new directions back into the output. r is the <em>width of the bottleneck</em> — the only place the skill can live.</p>
+
+<div class="fp"><b>Every number below is measured, not asserted.</b> We trained one honest LoRA
+(rank 8, α 16, on <code>q_proj</code>, <code>k_proj</code>, <code>v_proj</code>, <code>o_proj</code>) on the frozen
+<code>Qwen/Qwen2.5-0.5B-Instruct</code> — 896-dim, 24 layers — on a laptop CPU, on the
+arithmetic task. Loss fell 0.6941 → 0.0049 over 96 steps. The rest of this
+page reads the trained weights back out.</div>
+
+<h3>The parameter accounting</h3>
+<p>Full fine-tuning would train every one of the base's <b>494,032,768</b> parameters. Our LoRA
+trains <b>1,081,344</b> — that is <b>0.219%</b> of the model, a
+<b>457×</b> reduction. Same downstream skill, a rounding error of new weights.</p>
+
+<h3>The update is genuinely low-rank</h3>
+<p>Here is the spectrum of the trained update ΔW = (α/r)·B·A for one middle-layer <code>q_proj</code>
+(896×896 = 802,816 entries). By construction it can have at
+most 8 non-zero singular values — and it does:</p>
+<div style="display:flex;align-items:flex-end;gap:6px;height:120px;padding:8px 4px;border-bottom:1px solid var(--line);margin:8px 0"><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:100px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">0</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:42px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">1</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:31px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">2</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:27px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">3</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:18px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">4</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:16px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">5</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:14px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">6</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:13px;background:#0E7C86;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">7</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">8</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">9</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">10</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">11</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">12</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">13</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">14</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:20px;height:2px;background:#C4CCCA;border-radius:3px 3px 0 0"></div><div style="font-family:var(--mono);font-size:10px;color:var(--graphite)">15</div></div></div><div style="font-family:var(--mono);font-size:11px;color:var(--graphite)">singular-value index → (teal = the 8 directions the rank-8 bottleneck allows; grey ≈ 0, forced by construction)</div>
+<p>But look closer: the allowed 8 directions are <em>not</em> used equally. The
+<b>effective rank</b> (participation ratio of the singular values) is only <b>4.69</b> — the
+update concentrates its work in a handful of directions even inside its small budget. That is the
+intrinsic-dimension hypothesis, visible in the weights: the task needs far fewer knobs than the model has.</p>
+<div style="overflow-x:auto"><table class="mxtable"><tr><th>weight</th><th>nominal rank</th><th>effective rank</th><th>‖ΔW‖ / ‖W‖</th></tr><tr><td>layer 0 · <code>q_proj</code></td><td>8</td><td>5.33</td><td>0.0027</td></tr><tr><td>layer 12 · <code>q_proj</code></td><td>8</td><td>4.69</td><td>0.0092</td></tr><tr><td>layer 23 · <code>q_proj</code></td><td>8</td><td>6.34</td><td>0.0095</td></tr><tr><td>layer 12 · <code>v_proj</code></td><td>8</td><td>4.72</td><td>0.0098</td></tr></table></div>
+<p>And the update is a <em>gentle shove</em>: ‖ΔW‖ is around <b>0.9%</b> of the
+frozen weight's own norm. LoRA does not overwrite the model; it tilts it.</p>
+
+<h3>Two facts you can check in one line each</h3>
+<ul>
+<li><b>B starts at zero.</b> At init, A is random (7,168 non-zeros) but
+<b>B is all zeros</b> (true), so ΔW = B·A is <b>exactly 0</b>
+(measured ‖ΔW‖@init = 0.0e+00). Training therefore begins at the
+<em>unchanged</em> frozen model — no random shock to recover from.</li>
+<li><b>The merge is lossless.</b> We checked that <code>(W+ΔW)x</code> equals <code>Wx + (α/r)·B(Ax)</code>
+to floating-point tolerance: <b>true</b>. So you can fold ΔW back into W and pay
+zero extra latency at inference.</li>
+</ul>
+
+<h3>It actually learned the skill</h3>
+<p>Held-out arithmetic, greedy-decoded through the same model with the adapter <em>off</em> then <em>on</em>
+(a few megabytes of new weights, trained on a CPU). The base isn't wrong so much as unfocused; the LoRA
+taught it to <em>answer</em>:</p>
+<div style="overflow-x:auto"><table class="mxtable"><tr><th>prompt</th><th>target</th><th>base (adapter off)</th><th>+ LoRA (adapter on)</th></tr><tr><td>What is 98 - 45?</td><td style="text-align:center">53</td><td style="font-family:var(--mono);font-size:12px;color:var(--graphite)">The result of subtracting 45…</td><td style="text-align:center;font-family:var(--mono);color:var(--accent);font-weight:600">53</td></tr><tr><td>What is 23 - 74?</td><td style="text-align:center">-51</td><td style="font-family:var(--mono);font-size:12px;color:var(--graphite)">The result of 23 minus…</td><td style="text-align:center;font-family:var(--mono);color:var(--accent);font-weight:600">-51</td></tr><tr><td>What is 32 * 64?</td><td style="text-align:center">2048</td><td style="font-family:var(--mono);font-size:12px;color:var(--graphite)">To calculate \(32 \times…</td><td style="text-align:center;font-family:var(--mono);color:var(--accent);font-weight:600">2048</td></tr></table></div>
+
+
+<h2 id="knobs">3 · The three knobs that define a LoRA</h2>
+<p>Once you accept <code>ΔW = (α/r)·B·A</code>, a LoRA is fully specified by three choices — and each is a real decision, not a default to ignore.</p>
+<table class="mxtable">
+<tr><th>Knob</th><th>What it controls</th><th>The intuition</th></tr>
+<tr><td><b>rank r</b></td><td>the width of the bottleneck = capacity</td><td>bigger r can express more, but risks re-learning noise and costs more. The <em>effective</em> rank we measured is smaller than r anyway — a reason modest r usually suffices.</td></tr>
+<tr><td><b>α (scaling α/r)</b></td><td>how loud the adapter speaks vs the frozen path</td><td>the update is scaled by α/r so you can change r without re-tuning strength. (At high r the α/r factor over-shrinks — <a href="#family">rsLoRA</a> fixes it with α/√r.)</td></tr>
+<tr><td><b>init (A random, B=0)</b></td><td>where training starts</td><td>B=0 ⇒ ΔW=0 at step 0, so the model starts <em>exactly</em> as the frozen base and drifts away smoothly — no random-init shock. (We measured ‖ΔW‖@init = 0 above.)</td></tr>
+</table>
+<p><b>And a fourth, spatial, choice: where you attach them.</b> <code>target_modules</code> picks which matrices get an adapter. The original paper found adapting just the attention <code>q</code> and <code>v</code> projections is often enough; adapting all linear layers (including the FFN) buys a little more skill for more parameters. It is a coverage-vs-cost dial — the same tension the <a href="mixture-of-lora.html#rank">rank-as-expert</a> build pushes to its limit by routing <em>within</em> a single adapter's ranks.</p>
+
+<h2 id="merge">4 · The free lunch: merge</h2>
+<p>Because the adapter path is <em>linear</em> and parallel to the frozen path, you can add it back in:</p>
+<div class="eq">W' = W + (α/r)·B·A&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># one matrix again — the adapter has vanished into the weights</span></div>
+<p>After merging, the adapted model is <em>byte-for-byte a normal model</em> — no extra matrices, no extra FLOPs, no added latency. (We verified the merge is lossless above.) This is what separates LoRA from earlier adapter methods that <em>inserted</em> new layers and paid for them at every inference forever. The flip side: once merged, the adapter is no longer a separable object — and that separability is exactly what <a href="mixture-of-lora.html">mixture-of-LoRA</a> needs, which is why routed systems keep the adapters <em>un</em>merged and pay a little runtime to switch between them.</p>
+
+<h2 id="family">5 · The family tree — one idea, seven refinements</h2>
+<p>Every popular LoRA variant is a first-principles tweak to <em>one</em> of the pieces above — the base, the scaling, the decomposition, the init, the optimizer, the sharing, or the rank budget:</p>
+
+<table class="fam">
+<tr><td>QLoRA</td><td>Quantize the frozen base to 4-bit (NF4) and train the LoRA on top of it. The base is where all the memory is, so squeezing it — while keeping the adapter in full precision — is what lets a 65B model fine-tune on a single 48GB GPU. LoRA makes the adapter cheap; QLoRA makes the <em>base</em> cheap to hold.</td></tr>
+<tr><td>rsLoRA</td><td>Scale the update by <code>α/√r</code> instead of <code>α/r</code>. At large rank the plain <code>α/r</code> factor shrinks the effective learning signal and stalls training; the √r correction keeps gradients well-scaled, so bigger ranks actually help instead of quietly hurting.</td></tr>
+<tr><td>DoRA</td><td>Split each weight into <em>magnitude</em> and <em>direction</em>, and let LoRA adapt only the direction while a separate scalar learns the magnitude. This mirrors how full fine-tuning actually moves weights and closes most of the remaining gap to full FT — for the same parameter budget.</td></tr>
+<tr><td>PiSSA · LoftQ</td><td>Stop starting from zero. Initialize A and B from the top singular directions of W itself (PiSSA), or to pre-cancel quantization error (LoftQ). A warm, informed start converges faster and lands better than the B=0 cold start.</td></tr>
+<tr><td>LoRA+</td><td>Give A and B <em>different</em> learning rates (B much higher). Because the two matrices sit at different scales, one shared LR is a compromise; decoupling them measurably speeds convergence at no extra cost.</td></tr>
+<tr><td>VeRA · Tied-LoRA</td><td>Freeze a single pair of <em>random</em> A, B shared across all layers, and train only tiny per-layer scaling vectors. Trades a little capacity for another 10× cut in trainable parameters — useful when you serve thousands of adapters.</td></tr>
+<tr><td>AdaLoRA</td><td>Don't spend the same rank everywhere. Prune the singular directions that aren't earning their keep and reallocate that rank budget to the layers that need it — adaptive rank instead of a flat r.</td></tr>
+</table>
+
+<div class="fp"><b>And then the branch this whole site is about.</b> Every method above still trains <em>one</em> adapter. The moment you keep <em>many</em> LoRAs and add something that decides, per input, how much of each to use, you have left LoRA-the-module and entered <a href="mixture-of-lora.html"><b>mixture-of-LoRA</b></a> — the same low-rank object, now an <em>expert</em> in a routed committee. That is the next page, with three hands-on builds; and the full field is laid out on <a href="mixture-of-lora-map.html">the design-space map</a>.</div>
+
+<p style="margin-top:16px"><a href="mixture-of-lora-why.html">→ Why mix LoRAs at all (the big picture)</a> · <a href="mixture-of-lora.html">→ Mixture-of-LoRA, built and watched</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles LoRA, grounded in a real local CPU fine-tune of Qwen2.5-0.5B · every structural claim (param count, delta spectrum, B=0 init, lossless merge) measured from the trained weights · CC0.</footer></div>
+</body></html>
