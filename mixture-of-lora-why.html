@@ -65,7 +65,7 @@ This page is the story with no jargon — the one problem the whole family is so
 obvious fixes both break, the single reframe that resolves it, and the handful of real choices that
 follow. The three companion pages then open the machinery. A few claims here are checked against
 LoRAs we trained on a laptop CPU.</p></div></header>
-<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#break">Why the easy answers break</a><a href="#reframe">The reframe</a><a href="#approaches">The approaches</a><a href="#saw">What we saw</a><a href="#payoff">Why it matters</a><a href="lora-foundations.html">Foundations →</a></div></nav>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#break">Why the easy answers break</a><a href="#reframe">The reframe</a><a href="#approaches">The approaches</a><a href="#saw">What we saw</a><a href="#payoff">Why it matters</a><a href="mixture-of-lora-in-the-wild.html">In the wild</a><a href="lora-foundations.html">Foundations →</a></div></nav>
 <div class="wrap"><article class="doc">
 
 <h2 id="problem">1 · The problem, in one sentence</h2>
@@ -106,24 +106,37 @@ has already been solved.</p>
 <p>A skill does not need a whole new model. <a href="lora-foundations.html">A LoRA</a> is the proof: a
 new task can be carried by a tiny low-rank <em>patch</em> — a few megabytes — laid over a frozen base
 that never changes. So half the problem evaporates. Keep <b>one</b> big frozen model in memory, and a
-drawer full of tiny skill-patches. Storage: done. Cleanliness: done, because each patch is a separate
-object.</p>
+drawer full of tiny skill-patches. Storage: done. <b>Storage-cleanliness</b> too — each patch is a
+separate object on the shelf, so nothing bleeds while they sit there. But note the word: it is only the
+<em>storage</em> that is clean. The moment you <em>combine</em> two patches — the whole point of what
+follows — the interference from answer&nbsp;B comes straight back, because LoRA updates are not
+orthogonal and a blend of them is still a blend. Keeping skills clean <em>through combination</em> is
+the real open problem, and everything below is about winning it.</p>
 <p>But solving that surfaces the problem this whole theme is named after. <b>If you have a drawer full
 of patches, which one do you apply to a given input?</b> And what if the input needs a blend?</p>
 <div class="note"><b>Picking one is brittle</b> — you'd have to know the task in advance, and a wrong
-guess applies the wrong skill. <b>Merging them all is answer B again</b> — average the patches and
-you're back to the muddy generalist. Neither picking nor averaging is right.</div>
-<div class="fp"><b>The move: don't pick, and don't average — <em>route</em>.</b> Add one tiny
-decision-maker — a <em>gate</em> — that looks at each input and decides, on the fly, how much of each
-patch to mix in. A math question leans on the math patch. A French coding request blends the code
-patch and the French patch. The frozen base is shared by everyone; only the small gate and the small
-patches carry the specialization. That is <b>mixture-of-LoRA</b>.</div>
-<p>If this feels familiar, it should: it is the same shape as <b>mixture-of-experts</b> inside the
-giant models — many specialists plus a router that picks among them — but done at the <em>cheap</em>
-scale of LoRA, so you can bolt it onto a model you already have instead of training a colossus from
-scratch. That is the dot that connects this corner to the rest of modern AI.</p>
+guess applies the wrong skill. <b>Merging them all with one fixed recipe is answer B again</b> — a
+<em>static</em> average of the patches is back to the muddy generalist. The fix is to make the mixing
+weights depend on the input.</div>
+<div class="fp"><b>The move: make the blend depend on the input — <em>route</em>.</b> Add one tiny
+decision-maker — a <em>gate</em> — that reads each input and decides, on the fly, how much of each
+patch to mix in. A math question leans on the math patch; a French coding request blends the code and
+French patches. The frozen base is shared by everyone; only the small gate and small patches carry the
+specialization. That is <b>mixture-of-LoRA</b>.</div>
 <div class="eq">y = W·x &nbsp;+&nbsp; Σ<sub>i</sub> &nbsp;g<sub>i</sub>(x) &nbsp;· &nbsp;patch<sub>i</sub>(x)
-&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># frozen base  +  a gate-weighted blend of the skill-patches</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># frozen base  +  an input-conditioned blend of the patches</span></div>
+<p>Be honest about that formula, though: with <b>every</b> gate weight non-zero it is still an
+<em>average</em> — just one whose weights move with the input. That is <b>dense/soft</b> routing, and
+(as the real numbers below show) a soft gate barely separates the experts. The genuine break from
+averaging is to make the gate <b>sparse</b> — keep only the top one or two weights and zero the rest —
+so most experts contribute <em>nothing</em> to a given token. Three regimes, worst to best:
+<b>static average</b> (answer&nbsp;B) → <b>dense input-conditioned blend</b> (better, still an average)
+→ <b>sparse top-k</b> (a real commitment to a few experts). Keep that ladder in mind; the page keeps
+climbing it.</p>
+<p>If this feels familiar, it should: it is the same shape as <b>mixture-of-experts</b> inside the
+giant models — many specialists plus a router — but done at the <em>cheap</em> scale of LoRA, so you
+can bolt it onto a model you already have instead of training a colossus from scratch. That is the dot
+that connects this corner to the rest of modern AI.</p>
 
 <h2 id="approaches">4 · The approaches — four questions, and every method is a set of answers</h2>
 <p>Once you accept "many small experts + a router," you have not finished — you have earned a handful
@@ -133,30 +146,49 @@ questions. None of them touch the frozen base; you are always just adding tiny p
 router.</p>
 <ol class="qlist">
 <li><h4>Where do the experts come from?</h4>
-<p>Three philosophies, and getting the category right is most of the game.
+<p>For <em>routed</em> mixtures, three philosophies, and getting the category right is most of the game.
 <b>Compose</b> — take patches trained <em>separately</em> (a math one, a French one) and learn only a
 gate to mix them; modular, add or drop experts like plug-ins (<a href="mixture-of-lora.html#how">X-LoRA</a>).
 <b>Grow</b> — train the experts and gate <em>together</em> from scratch so they co-specialize, carving
 the work up between them instead of each trying to do all of it
 (<a href="mixture-of-lora.html#mixlora">MixLoRA</a>).
-<b>Split</b> — notice a single LoRA already contains several internal directions (its <em>ranks</em>)
-and route among <em>those</em>, treating one adapter's ranks as the experts
-(<a href="mixture-of-lora.html#rank">rank-as-expert</a>).</p></li>
+<b>Split</b> — make each of one LoRA's internal directions (its <em>ranks</em>) an expert and co-train
+a rank-level router, so the ranks <em>become</em> specialized (<a href="mixture-of-lora.html#rank">rank-as-expert</a>).
+A caution the split is easy to get wrong on: a plain trained LoRA's ranks are <em>not</em> pre-labelled
+experts you can just route over — the decomposition isn't unique, so the specialization has to be
+<em>trained in</em>, not read off. (That the ranks specialize at all is earned, exactly as the numbers
+below show.)</p>
+<p style="margin-top:6px;font-size:14px;color:var(--graphite)">Two families sit <em>outside</em> the
+router, and honesty demands naming them: <b>static merge</b> — fold several trained adapters into one
+frozen blend with a good conflict-resolution rule (TIES, DARE, LoRAHub) and pay <em>zero</em> runtime,
+trading away the ability to adapt per input; and <b>router-free mixtures</b> that combine experts by a
+fixed geometric rule instead of a learned gate. So "add a tiny router" below is the choice this page
+follows, not a law — merging is the real alternative that buys inference cost of nothing.</p>
 <li><h4>What does the router look at, and how sharply does it commit?</h4>
-<p>Per whole sentence, or per individual word? Finer routing is more expressive but costs more. A
-<em>soft</em> blend of all experts is smooth to train; a <em>hard</em> pick of the top few is cheaper
-to run and forces cleaner specialization. And the gate's "temperature" sets how decisively it commits
-to one expert versus hedging across many — a real dial, as <a href="mixture-of-lora.html#variants">the
-variants</a> show.</p></li>
+<p>Per whole sentence, or per individual word? <em>Sequence</em>-level routing is cheaper and steadier
+but locks in one expert mix for the whole answer — it cannot switch skills mid-generation. <em>Token</em>-level
+routing can, which is the only way to handle a compound request like "shout this, then return it as
+JSON," where the right expert changes partway through — at the cost of deciding on every token. On the
+sharpness dial: a <em>soft</em> blend of all experts is smooth to train; a <em>sparse</em> pick of the
+top few is cheaper to run and forces cleaner specialization; and the gate's "temperature" sets how
+decisively it commits versus hedges — a real knob, as <a href="mixture-of-lora.html#variants">the
+variants</a> show (dropping τ from 1.0 to 0.3 still left the top weight near 0.36 — proof that a gate
+whose logits are already close cannot be sharpened into separation after the fact).</p></li>
 <li><h4>Where in the model does the mixing happen?</h4>
 <p>Every layer can host its own little committee, or only some. More mixing points means more places
 to specialize — and more gate parameters to train. It is the same coverage-versus-cost dial as
 choosing where to attach a plain LoRA, now applied to where the routing lives.</p></li>
 <li><h4>What stops the experts collapsing into the same thing?</h4>
-<p>If the router keeps calling the same expert, the others get no gradient, learn nothing, and die —
-you've paid for a committee and got one person. So routed systems add <em>pressure</em> —
-load-balancing — that spreads the work across experts, the way a good manager stops one person doing
-everything. Without it, the mixture quietly degenerates back into a single LoRA.</p></li>
+<p>Under <em>sparse</em> routing this is a real danger: an expert the router stops selecting gets
+<em>exactly zero</em> gradient that step, so it never improves, so it keeps not being selected — a
+rich-get-richer death spiral that ends with one expert doing everything. (Under a dense soft gate every
+expert always gets <em>some</em> gradient, so this particular death is a sparse-routing problem.) Two
+defences. First, a <b>load-balance loss</b>: the standard term penalizes the product, summed over
+experts, of <em>how many tokens</em> each expert got and <em>how much gate probability</em> it got —
+pushing both toward an even 1/N split, the way a good manager stops one person doing everything. Second,
+just keeping <b>top-k with k≥2</b>: if two experts always fire, at least two can never starve — a
+structural floor against collapse, which is why our top-2 builds never fully collapse and our top-1
+ablation below is where the tilt actually shows.</p></li>
 </ol>
 
 <h2 id="saw">5 · What we actually saw — the same story in real weights</h2>
@@ -165,18 +197,24 @@ everything. Without it, the mixture quietly degenerates back into a single LoRA.
 skills — <em>math</em>, <em>shout</em> (uppercase), <em>json</em>. The pattern from question&nbsp;1
 shows up directly in the numbers.</p>
 
-<h3>Compose (X-LoRA): the gate leans the right way — but only gently</h3>
-<p>Three experts trained separately, then a soft gate learned over them. Averaged across each
-sequence, the gate does put the most weight on the matching expert — but the margins are thin, and on
-the JSON prompt the separation nearly vanishes:</p>
+<h3>Compose (X-LoRA): the soft gate barely separates — and once, picks the wrong expert</h3>
+<p>Three experts trained separately, then a soft (dense) gate learned over them. Averaged across each
+sequence, the margins are thin — and on the JSON prompt the gate doesn't just weaken, it <em>inverts</em>:
+its top weight goes to the <b>math</b> expert, not the json one:</p>
 <div class="two"><div class="card"><div class="tag">prompt</div><h4>What is 94 - 27?</h4><div style="margin-top:6px"><div class="barrow"><span class="lab"><span class="win">math</span></span><span class="bar" style="width:75px;"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.38</span></div><div class="barrow"><span class="lab">shout</span><span class="bar" style="width:65px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.32</span></div><div class="barrow"><span class="lab">json</span><span class="bar" style="width:60px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.30</span></div></div></div><div class="card"><div class="tag">prompt</div><h4>Shout this: tree jug</h4><div style="margin-top:6px"><div class="barrow"><span class="lab">math</span><span class="bar" style="width:67px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.34</span></div><div class="barrow"><span class="lab"><span class="win">shout</span></span><span class="bar" style="width:74px;"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.37</span></div><div class="barrow"><span class="lab">json</span><span class="bar" style="width:59px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.29</span></div></div></div><div class="card"><div class="tag">prompt</div><h4>Return these as a JSON list: moon, queen, lion</h4><div style="margin-top:6px"><div class="barrow"><span class="lab"><span class="win">math</span></span><span class="bar" style="width:70px;"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.35</span></div><div class="barrow"><span class="lab">shout</span><span class="bar" style="width:67px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.33</span></div><div class="barrow"><span class="lab">json</span><span class="bar" style="width:63px;opacity:.35"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.32</span></div></div></div></div>
-<p>That faintness is not a bug in the write-up; it is the honest behaviour of a <em>soft</em> gate over
-<em>pre-trained</em> experts, and it is exactly the pressure that pushes the field toward sharper
-routing and jointly-trained experts — the next two philosophies.</p>
+<p><b>Why so faint?</b> The gate is a small linear-then-softmax head trained only to lower the language
+loss — never explicitly to <em>separate</em> the experts — so nothing pushes its logits apart, and a
+softmax over near-equal logits comes out near-uniform. Worse for JSON specifically: the frozen base
+already emits clean JSON, so there was never a gradient teaching the gate to prefer the JSON adapter.
+This isn't a write-up quirk; it is the honest behaviour of a <em>dense</em> gate over <em>pre-trained</em>
+experts — a soft blend is, after all, still an average — and it is exactly the pressure that pushes the
+field toward <em>sparse</em> routing and jointly-trained experts, the next two philosophies.</p>
 
 <h3>Grow (MixLoRA): experts co-specialize when trained together</h3>
 <p>Four experts and the gate trained jointly, top-2 used per token. Now the per-task usage is visibly
-carved up — different tasks lean on different experts, which the composed version never managed:</p>
+carved up — different tasks lean on different experts, a sharpness the dense pre-trained gate above
+never reached (a fair comparison caveat: that one was soft and had only three experts — the point is
+soft-and-separate vs sparse-and-joint, not that composition is doomed):</p>
 <div style="overflow-x:auto"><table class="mxtable"><tr><th>task</th><th>e0</th><th>e1</th><th>e2</th><th>e3</th></tr><tr><td><b>math</b></td><td style="text-align:center;color:var(--graphite)">0.00</td><td style="text-align:center;color:var(--graphite)">0.08</td><td style="text-align:center;color:var(--graphite)">0.33</td><td style="text-align:center;color:var(--accent);font-weight:700">0.58</td></tr><tr><td><b>shout</b></td><td style="text-align:center;color:var(--graphite)">0.12</td><td style="text-align:center;color:var(--accent);font-weight:700">0.44</td><td style="text-align:center;color:var(--graphite)">0.12</td><td style="text-align:center;color:var(--graphite)">0.31</td></tr><tr><td><b>json</b></td><td style="text-align:center;color:var(--graphite)">0.05</td><td style="text-align:center;color:var(--graphite)">0.30</td><td style="text-align:center;color:var(--graphite)">0.30</td><td style="text-align:center;color:var(--accent);font-weight:700">0.35</td></tr></table></div><div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite)">share of routing weight each task sends to each expert (top-2 of 4); teal = the expert each task leans on most</div>
 
 <h3>Split (rank-as-expert): even the ranks inside one adapter specialize</h3>
@@ -198,6 +236,12 @@ winning expert runs each token, so there is no runner-up floor to hide behind �
 load-balance loss, once with it switched off. Nothing else changed.</p>
 <div class="two"><div class="card"><div class="tag">with load-balancing</div><div style="margin-top:8px"><div class="barrow"><span class="lab">expert 0</span><span class="bar" style="width:91px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.15</span></div><div class="barrow"><span class="lab">expert 1</span><span class="bar" style="width:64px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.10</span></div><div class="barrow"><span class="lab">expert 2</span><span class="bar" style="width:46px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.07</span></div><div class="barrow"><span class="lab">expert 3 ·dead</span><span class="bar" style="width:9px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.01</span></div><div class="barrow"><span class="lab">expert 4</span><span class="bar" style="width:64px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.10</span></div><div class="barrow"><span class="lab">expert 5</span><span class="bar" style="width:118px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.19</span></div><div class="barrow"><span class="lab">expert 6</span><span class="bar" style="width:200px;background:var(--accent)"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.32</span></div><div class="barrow"><span class="lab">expert 7 ·dead</span><span class="bar" style="width:27px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.04</span></div></div><div style="font-family:var(--mono);font-size:12px;color:var(--graphite);margin-top:8px">dead experts: <b style="color:#b5651d">2/8</b> · evenness: <b>0.88</b> · top share: <b>0.32</b></div></div><div class="card"><div class="tag">without load-balancing</div><div style="margin-top:8px"><div class="barrow"><span class="lab">expert 0</span><span class="bar" style="width:36px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.07</span></div><div class="barrow"><span class="lab">expert 1</span><span class="bar" style="width:200px;background:var(--accent)"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.41</span></div><div class="barrow"><span class="lab">expert 2</span><span class="bar" style="width:50px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.10</span></div><div class="barrow"><span class="lab">expert 3 ·dead</span><span class="bar" style="width:14px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.03</span></div><div class="barrow"><span class="lab">expert 4</span><span class="bar" style="width:57px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.12</span></div><div class="barrow"><span class="lab">expert 5</span><span class="bar" style="width:85px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.18</span></div><div class="barrow"><span class="lab">expert 6</span><span class="bar" style="width:36px;background:#7fb3b8"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.07</span></div><div class="barrow"><span class="lab">expert 7 ·dead</span><span class="bar" style="width:7px;background:#C4CCCA"></span><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.01</span></div></div><div style="font-family:var(--mono);font-size:12px;color:var(--graphite);margin-top:8px">dead experts: <b style="color:#b5651d">2/8</b> · evenness: <b>0.82</b> · top share: <b>0.41</b></div></div></div><div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite)">global share of routing across all three tasks, per expert · top-1 of 8, trained from the same seed on the same data · evenness = usage entropy normalized to 0–1 (1 = perfectly even); grey = a dead expert the router abandoned</div>
 <p>The pull is real, and it shows up in <em>concentration</em> rather than body count: the <em>same</em> 2 experts died in both runs — so at this scale the deaths are driven by <b>initialization</b>, not by the missing balance loss. What the balance loss visibly does is <b>flatten the winners</b> — strip it and the busiest expert's share jumps from <b>32%</b> to <b>41%</b> of all routing while overall evenness slips <b>0.88→0.82</b>. The tilt toward a one-expert committee is unmistakable in direction; full collapse (many dead) is what the same pressure prevents once training is longer and the task is hard enough to keep gradients flowing.</p>
+<p style="font-size:14px;color:var(--graphite)"><b>Read this honestly:</b> it is a <em>single</em>
+paired run (same seed, one condition flipped), so the 9-point gap in top-expert share is
+<em>suggestive, not statistically significant</em> — with n=1 you cannot fully separate "the loss
+flattened the winner" from init noise. The direction is what's defensible; the magnitude of the effect
+is real but small at this toy scale, which is exactly why load-balancing is framed as insurance that
+<em>bites hardest at scale</em>, not a dramatic rescue here.</p>
 
 <h2 id="payoff">6 · Why it matters — what the reframe buys</h2>
 <p>This isn't cleverness for its own sake. Routing tiny patches over a frozen base changes the
@@ -213,12 +257,27 @@ economics of specialization on four axes at once:</p>
 math. And the map page exists because, once you internalise the four questions, every paper in the
 field is just a particular set of answers — and they cluster into a small number of sensible
 combinations.</p>
+<div class="note"><b>One honest asterisk on "cheap."</b> Cheap to <em>hold</em> is unconditional — the
+patches are tiny. Cheap to <em>run</em> is not free: keeping the adapters separable means you don't get
+the merge free-lunch, so you pay something at inference. A dense soft gate runs <em>every</em> expert;
+X-LoRA (our first demo) even runs the base model twice per token to compute its gate. Only <em>sparse
+top-k</em> routing keeps run-cost near the base model's — which is the deeper reason the field pushes
+toward sparsity, beyond just cleaner specialization.</div>
+<div class="fp"><b>The one idea to keep.</b> There's a trilemma underneath all four questions —
+<b>specialization</b> (experts truly divide the labour), <b>non-interference</b> (skills don't bleed
+when combined), and <b>efficiency</b> (little extra compute or memory). You can comfortably buy any two;
+the third is what each method spends to get the other two. Static merge buys efficiency + no-runtime but
+gives up per-input specialization; a dense soft gate buys specialization + simplicity but pays full
+compute and still interferes; sparse routing chases all three and spends a load-balance loss to keep
+the experts from collapsing. Every row on the map is one way of picking which corner to sacrifice.</div>
 
 <div class="fp"><b>Where to go from here.</b> The story above is the spine; the machinery hangs off it in
-three pages. Start with <a href="lora-foundations.html">what a single LoRA actually is</a> (the patch,
+four pages. Start with <a href="lora-foundations.html">what a single LoRA actually is</a> (the patch,
 from the weights up). Then watch <a href="mixture-of-lora.html">all three philosophies built and
-routing live</a>. Then step back to <a href="mixture-of-lora-map.html">the whole design space — 16
-methods on 4 axes</a>, which is simply the four questions above, drawn as a map.</p>
+routing live</a>. Step back to <a href="mixture-of-lora-map.html">the whole design space — 16
+methods on 4 axes</a>. And to see the argument playing out in real research, read
+<a href="mixture-of-lora-in-the-wild.html">how the field actually uses this — across CVPR &amp;
+Robotics</a>, with real papers for every pattern.</p>
 
 <p style="margin-top:16px"><a href="lora-foundations.html">→ What a LoRA actually is</a> ·
 <a href="mixture-of-lora.html">→ Built &amp; watched</a> ·
