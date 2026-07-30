@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SSL collapse sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.slwrap{display:grid;grid-template-columns:320px 1fr;gap:18px;margin:16px 0}
+@media(max-width:720px){.slwrap{grid-template-columns:1fr}}
+.slpanel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper)}
+.slctl{display:grid;grid-template-columns:120px 1fr 42px;gap:10px 12px;align-items:center;font-size:13.5px}
+.slctl label{font-weight:600}
+.slctl input[type=range]{width:100%}
+.slval{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-align:right}
+.sltoggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.sltoggle button{font-family:var(--mono);font-size:12.5px;padding:5px 12px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.sltoggle button.on{background:var(--accent);color:#fff}
+.slbtnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.slbtn{font-family:var(--mono);font-size:13px;padding:8px 15px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:8px;cursor:pointer}
+.slbtn.sec{background:var(--paper);color:var(--accent)}
+.slmetrics{font-family:var(--mono);font-size:13px;margin-top:12px;color:var(--graphite)}
+.slmetrics b{color:var(--ink)}
+#sl_canvas{width:100%;max-width:460px;aspect-ratio:1;border:1px solid var(--line);border-radius:12px;background:#fbfcfc;display:block}
+.slstatus{font-family:var(--mono);font-size:12.5px;color:var(--graphite);margin-top:8px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Self-supervised learning · the collapse sandbox</div>
+<h1>Watch it collapse — and watch the negatives save it</h1>
+<p>The <a href="ssl-why.html">why page</a> says the deepest idea in self-supervised learning is
+<em>collapse</em>: if the only rule is &ldquo;make two views of a thing agree,&rdquo; the model can cheat
+by mapping <em>everything</em> to one point. Here you can trigger it. Each dot is an image (coloured by
+its hidden class). The attractive force pulls views together; the <em>negatives</em> push different images
+apart. Turn the negatives off and press Train — watch the whole cloud implode.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ssl-why.html">The big picture</a><a href="ssl-in-the-wild.html">In the wild</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="slwrap">
+  <div><div class="slpanel">
+    <div class="slctl">
+      <label>Negatives</label><div class="sltoggle" id="sl_neg"><button data-n="1" class="on">on</button><button data-n="0">off</button></div><span></span>
+      <label for="sl_rep">Push strength</label><input id="sl_rep" type="range" min="0.2" max="2.5" step="0.1" value="1.2"><span class="slval" id="sl_rep_v">1.2</span>
+    </div>
+    <div class="slbtnrow">
+      <button class="slbtn" id="sl_train">&#9654; Train</button>
+      <button class="slbtn sec" id="sl_reset">Reset</button>
+    </div>
+    <div class="slmetrics" id="sl_metrics"></div>
+    <div class="slstatus" id="sl_status">Negatives on: press Train and the cloud organizes into clusters. Then flip negatives off and Train again.</div>
+  </div></div>
+  <div><canvas id="sl_canvas" width="460" height="460"></canvas>
+  <div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite);margin-top:6px">each dot = an image (colour = its hidden class) · spread = how much the embeddings vary; spread &rarr; 0 is collapse</div>
+  </div>
+</div>
+
+<div class="fp"><b>What to notice.</b> (1) With <b>negatives on</b>, Train: the pull-together force and the
+push-apart force reach a balance, and because same-class images push each other less, the classes settle
+into <em>separated clusters</em> — structure, with no labels. (2) Flip <b>negatives off</b> and Train: now
+nothing resists the pull, so every dot slides to the same point — <b>collapse</b>, spread &rarr; 0, and the
+model has learned nothing. (3) The <b>push strength</b> is the temperature-like knob: too weak and clusters
+smear together, too strong and they scatter. One attractive force, one repulsive force — that balance is
+all of contrastive learning.</div>
+
+<p style="margin-top:14px"><a href="ssl-why.html">→ Why SSL works</a> ·
+<a href="ssl-in-the-wild.html">→ How the field uses it</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>Idealized client-side cartoon of contrastive-learning dynamics (attract views, repel negatives) · a sandbox for the collapse intuition, not a trained model · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('sl_canvas'),ctx=cv.getContext('2d'),W=460;
+  var C=6, N=90;
+  var COL=['#0E7C86','#b5651d','#3d7d55','#8c5b8c','#2f6f8f','#a8762a'];
+  var S={neg:1,rep:1.2,timer:null,pts:[]};
+  function randn(){var u=Math.random(),v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+  function reset(){S.pts=[];for(var i=0;i<N;i++){S.pts.push({x:(Math.random()*2-1)*2.4,y:(Math.random()*2-1)*2.4,c:i%C});}draw();metrics();}
+  function step(){
+    var n=S.pts.length, mx=0,my=0;
+    for(var i=0;i<n;i++){mx+=S.pts[i].x;my+=S.pts[i].y;} mx/=n;my/=n;
+    var nx=[],ny=[];
+    for(var i=0;i<n;i++){
+      var p=S.pts[i];
+      // attraction: pull toward the global mean ("make views agree") -> unchecked = collapse
+      var ax=(mx-p.x)*0.06, ay=(my-p.y)*0.06;
+      var rx=0,ry=0;
+      if(S.neg){
+        for(var j=0;j<n;j++){ if(j===i)continue; var q=S.pts[j];
+          var dx=p.x-q.x, dy=p.y-q.y, d2=dx*dx+dy*dy+0.05;
+          var w=(p.c===q.c)?0.35:1.0;                 // same class repels less -> clusters form
+          var f=S.rep*w*0.010/d2; rx+=dx*f; ry+=dy*f; }
+      }
+      nx.push(p.x+ax+rx); ny.push(p.y+ay+ry);
+    }
+    for(var i=0;i<n;i++){S.pts[i].x=Math.max(-3.2,Math.min(3.2,nx[i]));S.pts[i].y=Math.max(-3.2,Math.min(3.2,ny[i]));}
+  }
+  function spread(){var n=S.pts.length,mx=0,my=0;for(var i=0;i<n;i++){mx+=S.pts[i].x;my+=S.pts[i].y;}mx/=n;my/=n;
+    var s=0;for(var i=0;i<n;i++){var dx=S.pts[i].x-mx,dy=S.pts[i].y-my;s+=dx*dx+dy*dy;}return Math.sqrt(s/n);}
+  function metrics(){var sp=spread();document.getElementById('sl_metrics').innerHTML='embedding spread (std): <b style="color:'+(sp<0.15?'#b5651d':'#0E7C86')+'">'+sp.toFixed(2)+'</b>'+(sp<0.15?' &mdash; collapsed to a point':'');}
+  function draw(){ctx.clearRect(0,0,W,W);var sc=W/7,cx=W/2,cy=W/2;
+    for(var i=0;i<S.pts.length;i++){var p=S.pts[i];ctx.beginPath();ctx.arc(cx+p.x*sc,cy-p.y*sc,3.4,0,2*Math.PI);ctx.fillStyle=COL[p.c%6];ctx.globalAlpha=0.82;ctx.fill();ctx.globalAlpha=1;}}
+  function setStatus(m){document.getElementById('sl_status').innerHTML=m;}
+  function stop(){if(S.timer){clearInterval(S.timer);S.timer=null;}}
+  function run(){stop();var k=0;setStatus(S.neg?'Training with negatives...':'Training WITHOUT negatives...');
+    S.timer=setInterval(function(){step();draw();metrics();k++;
+      if(k>=120){stop();var sp=spread();setStatus(sp<0.15?'Collapsed. Every image mapped to one point (spread '+sp.toFixed(2)+') — it learned nothing.':'Settled into '+ 'clusters (spread '+sp.toFixed(2)+') — structure, with no labels.');}},30);}
+  document.getElementById('sl_rep').addEventListener('input',function(){S.rep=parseFloat(this.value);document.getElementById('sl_rep_v').textContent=this.value;});
+  var nb=document.getElementById('sl_neg');nb.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){nb.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');S.neg=parseInt(b.getAttribute('data-n'));});});
+  document.getElementById('sl_train').addEventListener('click',run);
+  document.getElementById('sl_reset').addEventListener('click',function(){stop();reset();setStatus('Reset. Toggle negatives and press Train.');});
+  reset();
+})();
+</script>
+</body></html>
