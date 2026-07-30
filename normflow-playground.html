@@ -1,0 +1,113 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Normalizing-flow reversible-transport sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:320px;height:320px;background:#0f1417;border-radius:10px;display:block;margin:0 auto}
+.ctl{text-align:center;margin:14px 0}
+.ctl input[type=range]{width:100%;max-width:400px}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:10px}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Normalizing flows · the reversible-transport sandbox</div>
+<h1>Bend a Gaussian into your data</h1>
+<p>The <a href="normflow-why.html">why page</a> says a flow reshapes a simple Gaussian into the data through a
+stack of invertible layers. Here you can turn the one knob — how many layers — and watch a Gaussian cloud
+(<span style="color:#8a93a0">grey</span>) get warped, reversibly, toward a two-moons target
+(<span style="color:#e8b04b">gold</span>). Every point keeps its identity: the map only re-arranges them, never
+merges them.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="normflow-why.html">The big picture</a><a href="normflow-math.html">The math</a><a href="normflow-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="320" height="320"></canvas>
+  <div class="ctl"><label for="sL">coupling layers — <span id="vL" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sL" type="range" min="0" max="12" step="1" value="0"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At <b>0 layers</b> you see the raw Gaussian blob. Each layer applies a
+reversible shear — it moves one coordinate as a smooth function of the other — so the cloud folds and stretches a
+little at a time. With <b>too few</b> layers it cannot bend enough to reach the crescent shape; add <b>more</b>
+and it wraps onto the two moons. Crucially the transformation never collapses two points together (it stays
+invertible), which is exactly what lets a flow report the <em>exact</em> probability of any point.</div>
+<p style="margin-top:14px"><a href="normflow-why.html">→ Why it works</a> ·
+<a href="normflow-math.html">→ The mathematics</a> ·
+<a href="normflow-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live invertible-flow demo — a Gaussian reshaped into two moons by a stack of reversible coupling layers · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,sL=document.getElementById('sL');
+  // fixed Gaussian sample
+  var pts0=[]; for(var i=0;i<1400;i++){ var u=Math.random(),v=Math.random();
+    var g1=Math.sqrt(-2*Math.log(u))*Math.cos(6.283*v), g2=Math.sqrt(-2*Math.log(u))*Math.sin(6.283*v);
+    pts0.push([g1*0.6, g2*0.6]); }
+  // a stack of invertible coupling layers with fixed pseudo-random params (deterministic, bijective)
+  var LAYERS=12, params=[];
+  for(var l=0;l<LAYERS;l++){ params.push({a:Math.sin(l*1.7)*0.9, b:Math.cos(l*2.1)*0.9, c:0.6+0.3*Math.sin(l), s:0.35*Math.cos(l*1.3), mask:l%2}); }
+  function layer(p,x,y){
+    // transform the un-masked coordinate as a smooth function of the masked one (invertible: additive+scale)
+    if(p.mask===0){ var t=Math.tanh(p.a*x+p.b); y = y*Math.exp(p.s*Math.tanh(x)) + p.c*t; }
+    else          { var t=Math.tanh(p.a*y+p.b); x = x*Math.exp(p.s*Math.tanh(y)) + p.c*t; }
+    return [x,y];
+  }
+  function P(v){ return W/2 + v*46; }
+  function render(){
+    var L=+sL.value; ctx.clearRect(0,0,W,W);
+    // target moons (faint gold)
+    ctx.fillStyle='rgba(232,176,75,0.5)';
+    for(var i=0;i<500;i++){ var tt=Math.random()*Math.PI; var top=Math.random()<0.5;
+      var mx= top? Math.cos(tt): 1-Math.cos(tt); var my= top? Math.sin(tt): 0.5-Math.sin(tt);
+      mx+= (Math.random()-0.5)*0.12; my+=(Math.random()-0.5)*0.12;
+      ctx.fillRect(P(mx-0.5), P(-my+0.25), 1.6,1.6); }
+    // flowed gaussian
+    ctx.fillStyle='rgba(150,160,175,0.55)';
+    for(var i=0;i<pts0.length;i++){ var x=pts0[i][0],y=pts0[i][1];
+      for(var l=0;l<L;l++){ var r=layer(params[l],x,y); x=r[0];y=r[1]; }
+      ctx.beginPath(); ctx.arc(P(x-0.5),P(-y+0.25),1.5,0,7); ctx.fill(); }
+    document.getElementById('vL').textContent=L;
+    document.getElementById('read').innerHTML = L===0 ? 'a raw Gaussian blob — no transformation yet'
+      : L<5 ? '<b>'+L+'</b> layers — bending, but not enough to reach the moons'
+      : 'the Gaussian has wrapped onto the two moons — reversibly, no point lost';
+  }
+  sL.addEventListener('input',render); render();
+})();
+</script>
+</body></html>

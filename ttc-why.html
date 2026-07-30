@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test-time compute — trading inference for accuracy, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:14px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Test-time compute · first principles · trading inference for accuracy</div>
+<h1>Test-time compute — thinking harder without retraining</h1>
+<p>A trained model has a fixed accuracy — on the first try. But you can often do better without touching a single
+weight, simply by spending more compute at inference: try the question many times and aggregate, or reason through
+it step by step. This is the idea behind the reasoning-model era — and it has a precise shape, with real limits.
+This page is the plain story of it: how sampling-and-voting and best-of-N turn extra compute into extra accuracy,
+and exactly when they stop working, on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ttc-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="ttc-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — one shot is not always enough</h2>
+<p>A model answers a hard question and gets it wrong. Retraining is expensive and may not help. Yet the model
+often <em>could</em> have gotten it right — a different sample, a bit of reasoning, would have landed the answer.
+The information is in there; a single greedy pass just does not always extract it. Can you spend a little more
+compute at inference to reliably do better, with the weights frozen?</p>
+<div class="fp"><b>The problem, stated once:</b> get more accuracy out of a fixed model at inference time, without
+retraining — by spending compute instead of changing weights.</div>
+
+<h2 id="reframe">2 · The reframe — sample many, then aggregate</h2>
+<div class="fp"><b>The idea: don&#39;t trust one answer — generate many and combine them.</b> Draw a batch of
+candidate answers (the model is stochastic, so they differ) and aggregate. Two ways. <b>Self-consistency</b>: take
+the majority vote — if the correct answer is the most likely single outcome, more samples concentrate the vote on
+it. <b>Best-of-N</b>: score each candidate with a verifier and keep the top one — you only need one correct sample
+in the batch if the verifier can recognize it. Either way, extra inference compute becomes extra accuracy. Reasoning
+step-by-step is the same trade in another form: spend intermediate tokens to reach a better final answer.</div>
+<div class="eq">self-consistency:  answer = mode{ sample_1 … sample_K }      best-of-N:  answer = argmax_i verifier(sample_i)
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># weights frozen; more samples / more steps = more accuracy — if the aggregation is sound</span></div>
+<p>It is a genuine free lunch — until it is not. The run shows both the gain and the ceiling.</p>
+
+<h2 id="run">3 · Seen on a real run — the scaling curves</h2>
+<h3>1 · Sample many, vote — self-consistency</h3>
+<p>We built a weak solver: on each question it picks the right answer only <span class="stat">42%</span>
+of the time (there is even an attractive wrong answer to trip it up). One shot gets
+<span class="stat">41%</span>. But ask it the <em>same</em> question many times and take the
+majority answer:</p>
+<div class="tworow"><svg viewBox="0 0 430 200" width="100%" style="max-width:460px"><line x1="36" y1="164.0" x2="360" y2="164.0" stroke="#e5e2dc"/><text x="4" y="167.0" font-size="9" fill="#8a857c" font-family="monospace">0%</text><line x1="36" y1="90.0" x2="360" y2="90.0" stroke="#e5e2dc"/><text x="4" y="93.0" font-size="9" fill="#8a857c" font-family="monospace">50%</text><line x1="36" y1="16.0" x2="360" y2="16.0" stroke="#e5e2dc"/><text x="4" y="19.0" font-size="9" fill="#8a857c" font-family="monospace">100%</text><polyline points="36.0,102.6 90.0,66.0 144.0,66.5 198.0,58.2 252.0,49.0 306.0,37.8 360.0,27.2" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="36.0" cy="102.6" r="2.6" fill="#0E7C86"/><circle cx="90.0" cy="66.0" r="2.6" fill="#0E7C86"/><circle cx="144.0" cy="66.5" r="2.6" fill="#0E7C86"/><circle cx="198.0" cy="58.2" r="2.6" fill="#0E7C86"/><circle cx="252.0" cy="49.0" r="2.6" fill="#0E7C86"/><circle cx="306.0" cy="37.8" r="2.6" fill="#0E7C86"/><circle cx="360.0" cy="27.2" r="2.6" fill="#0E7C86"/><text x="364" y="30.2" font-size="10" fill="#0E7C86" font-family="monospace">vote</text><text x="215" y="196" font-size="10" fill="#8a857c" font-family="monospace" text-anchor="middle">samples / compute (log scale) →</text></svg>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">Accuracy climbs from <span class="stat">41%</span>
+to <span class="stat">92%</span> at 64 samples. Why? Because the correct answer is the single most
+likely one, so across many tries it accumulates votes while the wrong answers scatter and cancel — the law of
+large numbers, turned into accuracy. Pure inference compute, no retraining.</p></div></div>
+<h3>2 · Or pick the best — best-of-N with a verifier</h3>
+<div class="tworow"><svg viewBox="0 0 430 200" width="100%" style="max-width:460px"><line x1="36" y1="164.0" x2="360" y2="164.0" stroke="#e5e2dc"/><text x="4" y="167.0" font-size="9" fill="#8a857c" font-family="monospace">0%</text><line x1="36" y1="90.0" x2="360" y2="90.0" stroke="#e5e2dc"/><text x="4" y="93.0" font-size="9" fill="#8a857c" font-family="monospace">50%</text><line x1="36" y1="16.0" x2="360" y2="16.0" stroke="#e5e2dc"/><text x="4" y="19.0" font-size="9" fill="#8a857c" font-family="monospace">100%</text><polyline points="36.0,101.2 90.0,65.1 144.0,33.9 198.0,17.8 252.0,16.0 306.0,16.0 360.0,16.0" fill="none" stroke="#2f7d5b" stroke-width="2"/><circle cx="36.0" cy="101.2" r="2.6" fill="#2f7d5b"/><circle cx="90.0" cy="65.1" r="2.6" fill="#2f7d5b"/><circle cx="144.0" cy="33.9" r="2.6" fill="#2f7d5b"/><circle cx="198.0" cy="17.8" r="2.6" fill="#2f7d5b"/><circle cx="252.0" cy="16.0" r="2.6" fill="#2f7d5b"/><circle cx="306.0" cy="16.0" r="2.6" fill="#2f7d5b"/><circle cx="360.0" cy="16.0" r="2.6" fill="#2f7d5b"/><text x="364" y="19.0" font-size="10" fill="#2f7d5b" font-family="monospace">perfect verifier</text><polyline points="36.0,102.9 90.0,70.9 144.0,48.7 198.0,32.6 252.0,23.8 306.0,20.3 360.0,18.2" fill="none" stroke="#b06a3a" stroke-width="2"/><circle cx="36.0" cy="102.9" r="2.6" fill="#b06a3a"/><circle cx="90.0" cy="70.9" r="2.6" fill="#b06a3a"/><circle cx="144.0" cy="48.7" r="2.6" fill="#b06a3a"/><circle cx="198.0" cy="32.6" r="2.6" fill="#b06a3a"/><circle cx="252.0" cy="23.8" r="2.6" fill="#b06a3a"/><circle cx="306.0" cy="20.3" r="2.6" fill="#b06a3a"/><circle cx="360.0" cy="18.2" r="2.6" fill="#b06a3a"/><text x="364" y="21.2" font-size="10" fill="#b06a3a" font-family="monospace">noisy verifier</text><text x="215" y="196" font-size="10" fill="#8a857c" font-family="monospace" text-anchor="middle">samples / compute (log scale) →</text></svg>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">Instead of voting, draw N answers and keep the one a
+<em>verifier</em> scores highest. With a <span style="color:#2f7d5b">perfect verifier</span> you only need ONE
+correct sample among N, so accuracy rockets to <span class="stat">100%</span> by N=16. But swap in a
+<span style="color:#b06a3a">noisy verifier</span> and it lags the whole way — it increasingly picks
+confident-but-wrong answers.</p></div></div>
+<div class="fp"><b>The honest lesson: compute buys accuracy only if the aggregation is sound.</b> Voting works when
+the right answer is the mode; best-of-N works when the verifier is good. A noisy verifier caps the gain (and, pushed
+harder, degrades it) — the very same failure as reward hacking in reinforcement learning. There is no free lunch in
+just thinking longer.</div>
+
+<h2 id="why">4 · Why it matters — the reasoning-model era</h2>
+<p>This single idea — spend inference compute to think harder — is the engine of the current wave of reasoning
+models, and it is spreading fast through vision: multimodal models that sample-and-vote, that lay out a visual
+chain-of-thought before answering, that draw several plans and verify. It gives a new axis to improve on — compute
+at inference, not just parameters or data — and it comes with the honest caveats you saw: diminishing returns,
+over-thinking that hurts, and a hard dependence on the quality of the vote or the verifier.</p>
+
+<div class="fp"><b>Where to go from here.</b> Turn the compute dial in the
+<a href="ttc-playground.html">scaling sandbox</a> — add samples and watch accuracy climb, then swap a perfect
+verifier for a noisy one and watch the ceiling drop. Then see <a href="ttc-in-the-wild.html">how CVPR &amp; robotics
+spend inference compute</a>, and go <a href="ttc-deep-reads.html">paper by paper</a>. The
+<a href="ttc-math.html">mathematics page</a> derives the scaling from first principles.</p>
+
+<p style="margin-top:16px"><a href="ttc-playground.html">→ The scaling sandbox</a> ·
+<a href="ttc-in-the-wild.html">→ In the wild</a> · <a href="ttc-math.html">→ The mathematics</a> ·
+<a href="ttc-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles test-time compute, grounded in a real run (self-consistency and best-of-N scaling on a synthetic task) ·
+the accuracy-vs-compute curves and the noisy-verifier ceiling are measured · CC0.</footer></div>
+</body></html>

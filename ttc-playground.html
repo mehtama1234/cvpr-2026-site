@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test-time compute scaling sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:460px;max-width:100%;height:230px;display:block;margin:0 auto;background:#fbfaf7;border:1px solid var(--line);border-radius:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:4px}
+.seg button{border:0;background:var(--paper);padding:7px 12px;font-size:12.5px;font-family:var(--mono);cursor:pointer;color:var(--graphite)}
+.seg button.on{background:var(--accent);color:#fff}
+.ctl{text-align:center;margin:14px 0}
+.ctl input[type=range]{width:100%;max-width:420px}
+.big{text-align:center;font-family:var(--mono);margin-top:8px}
+.big .n{font-size:30px;font-weight:700}
+.read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:8px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Test-time compute · the scaling sandbox</div>
+<h1>Spend compute, buy accuracy</h1>
+<p>The <a href="ttc-why.html">why page</a> showed accuracy rising as you throw more inference at a fixed model —
+but only if the aggregation is sound. Here is that whole trade as one dial and one switch, walking along the real
+measured curves. Add samples; flip between voting and a good vs a noisy verifier; watch the ceiling move.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ttc-why.html">The big picture</a><a href="ttc-math.html">The math</a><a href="ttc-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="460" height="230"></canvas>
+  <div class="ctl"><span class="seg"><button id="mVote" class="on">majority vote</button><button id="mOra">perfect verifier</button><button id="mNoi">noisy verifier</button></span></div>
+  <div class="ctl"><label style="font-size:13px;font-weight:600">samples / compute — <span id="vN" style="font-family:var(--mono);color:var(--accent)"></span></label><br>
+    <input id="sN" type="range" min="0" max="6" step="1" value="0"></div>
+  <div class="big">accuracy <span class="n" id="acc" style="color:#0E7C86"></span></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At <b>1 sample</b> every method sits at the model&#39;s weak one-shot accuracy.
+Turn the dial up and <b>voting</b> climbs steadily (the correct answer out-votes the scattered wrong ones); the
+<b>perfect verifier</b> rockets to 100% (one good sample in the batch is enough); the <b>noisy verifier</b> lags
+the whole way — it keeps selecting confident-but-wrong answers. Same compute, very different ceilings: the
+aggregation, not the raw sampling, decides how far extra thinking gets you.</div>
+<p style="margin-top:14px"><a href="ttc-why.html">→ Why it works</a> ·
+<a href="ttc-math.html">→ The mathematics</a> ·
+<a href="ttc-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live demo over the real measured scaling curves — voting vs a good vs a noisy verifier · CC0.</footer></div>
+
+<script>
+var DATA={"vote": [{"K": 1, "acc": 0.415}, {"K": 2, "acc": 0.662}, {"K": 4, "acc": 0.659}, {"K": 8, "acc": 0.715}, {"K": 16, "acc": 0.777}, {"K": 32, "acc": 0.853}, {"K": 64, "acc": 0.924}], "oracle": [{"N": 1, "acc": 0.424}, {"N": 2, "acc": 0.668}, {"N": 4, "acc": 0.879}, {"N": 8, "acc": 0.988}, {"N": 16, "acc": 1.0}, {"N": 32, "acc": 1.0}, {"N": 64, "acc": 1.0}], "noisy": [{"N": 1, "acc": 0.413}, {"N": 2, "acc": 0.629}, {"N": 4, "acc": 0.779}, {"N": 8, "acc": 0.888}, {"N": 16, "acc": 0.947}, {"N": 32, "acc": 0.971}, {"N": 64, "acc": 0.985}]};
+(function(){
+  if(!DATA){return;}
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height,sN=document.getElementById('sN');
+  var mode='vote', pad=34;
+  var series={vote:DATA.vote,oracle:DATA.oracle,noisy:DATA.noisy};
+  var col={vote:'#0E7C86',oracle:'#2f7d5b',noisy:'#b06a3a'};
+  var xs=DATA.vote.map(function(p){return p.K;});
+  function X(i){ return pad + i/(xs.length-1)*(W-pad-14); }
+  function Y(v){ return H-24-v*(H-44); }
+  function draw(){
+    var i=+sN.value; ctx.clearRect(0,0,W,H);
+    // gridlines
+    [0,0.5,1].forEach(function(v){ ctx.strokeStyle='#e5e2dc'; ctx.beginPath(); ctx.moveTo(pad,Y(v)); ctx.lineTo(W-14,Y(v)); ctx.stroke();
+      ctx.fillStyle='#8a857c'; ctx.font='9px monospace'; ctx.fillText((v*100)+'%',4,Y(v)+3); });
+    // all three curves faint, active bold
+    ['vote','oracle','noisy'].forEach(function(k){ var s=series[k], on=(k===mode);
+      ctx.strokeStyle=col[k]; ctx.globalAlpha=on?1:0.25; ctx.lineWidth=on?2.4:1.2; ctx.beginPath();
+      s.forEach(function(p,j){ var x=X(j),y=Y(p.acc); if(j===0)ctx.moveTo(x,y);else ctx.lineTo(x,y); }); ctx.stroke();
+      ctx.globalAlpha=1;
+    });
+    // marker on active curve
+    var s=series[mode], p=s[i], x=X(i), y=Y(p.acc);
+    ctx.fillStyle='#111'; ctx.beginPath(); ctx.arc(x,y,6,0,7); ctx.fill();
+    ctx.strokeStyle='#e8b04b'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,9,0,7); ctx.stroke();
+    ctx.fillStyle='#8a857c'; ctx.font='9px monospace'; ctx.textAlign='center';
+    for(var j=0;j<xs.length;j++) ctx.fillText(xs[j], X(j), H-8); ctx.textAlign='left';
+    document.getElementById('vN').textContent=xs[i];
+    document.getElementById('acc').textContent=(p.acc*100).toFixed(0)+'%';
+    document.getElementById('acc').style.color=col[mode];
+    var lbl={vote:'majority vote',oracle:'perfect verifier',noisy:'noisy verifier'}[mode];
+    var msg = i===0 ? 'one sample — the model&#39;s weak one-shot accuracy'
+      : mode==='oracle' ? 'a perfect verifier only needs one correct sample in the batch'
+      : mode==='noisy' ? '<b style="color:#b06a3a">the noisy verifier caps the gain</b> — it keeps picking confident-but-wrong answers'
+      : 'the vote concentrates on the correct answer as samples grow';
+    document.getElementById('read').innerHTML=lbl+' &middot; '+xs[i]+' samples &rarr; '+msg;
+  }
+  function set(m,btn){ mode=m; ['mVote','mOra','mNoi'].forEach(function(id){document.getElementById(id).classList.remove('on');}); btn.classList.add('on'); draw(); }
+  document.getElementById('mVote').onclick=function(){set('vote',this);};
+  document.getElementById('mOra').onclick=function(){set('oracle',this);};
+  document.getElementById('mNoi').onclick=function(){set('noisy',this);};
+  sN.addEventListener('input',draw); draw();
+})();
+</script>
+</body></html>

@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test-time compute — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Test-time compute · the mathematics · first principles, no jargon</div>
+<h1>Test-time compute — why it works, mathematically</h1>
+<p class="lead">Spend inference compute to make a fixed model more accurate without retraining</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ttc-why.html">The big picture</a><a href="ttc-in-the-wild.html">In the wild</a><a href="#subthemes">Every approach</a><a href="ttc-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>A trained model is fixed: its weights do not change. Normally it produces one answer per query. But inference time is flexible — you can run the model many times, draw multiple candidates, and pick wisely. The question: can you trade cheap compute at test time for accuracy without touching the model? When does it work, and when does it fail?</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Self-consistency (majority vote)</h3><div class="eq">The simplest aggregation: sample K answers, take the mode</div><div class="why">If the correct answer is the single most likely outcome (the highest peak in the sampling distribution), then the law of large numbers says that as K → ∞, the fraction of samples landing on that peak grows toward 1. Wrong answers scatter randomly across distractors and cancel each other out — each wrong answer gets a smaller, scattered share of votes. The right answer accumulates. Accuracy → 1 as K grows. But this ONLY works if the mode of the model's distribution IS the correct answer. If a wrong answer is more likely than the right one, the mode is wrong, majority vote amplifies the error, and accuracy does NOT improve — it may even worsen as you draw more samples of the same mistake.</div></div><div class="idea"><h3>Verify-and-rerank (best-of-N)</h3><div class="eq">Draw N samples; keep the one with highest verifier score</div><div class="why">With a PERFECT verifier — one that always identifies the correct answer — you only need ONE correct sample to be drawn somewhere in N tries. Accuracy is then 1 − (1−p)^N, where p is the probability the model's first sample is correct. This scales FAST (exponentially in N) toward 1. But with a NOISY verifier, the story breaks. A noisy verifier cannot tell right from wrong reliably; it assigns high scores to confident-but-wrong answers and low scores to uncertain-but-right ones. As N grows, you draw more samples, and the verifier increasingly selects the confident errors. Accuracy plateaus below the oracle and can even DEGRADE — the same failure mode as reward hacking in RL, where a misaligned reward function learns to game the score at the expense of the true goal.</div></div><div class="idea"><h3>Scaling law: compute vs. accuracy trade-off</h3><div class="eq">General principle: more inference samples → more accuracy, but with diminishing returns</div><div class="why">Each additional sample costs compute, but its marginal benefit shrinks. For self-consistency, once the correct answer is the clear mode, extra samples add confirmation; for verify-and-rerank, once you have drawn the best sample, adding more samples has to compete against a higher bar. The gain per sample log-decreases. Accuracy is bounded above by the oracle (the best you can do with a perfect verifier or a model whose mode is always right). The practical scaling depends on sound aggregation: a flawed vote scheme or a broken verifier DOES NOT benefit from more samples — it hits a ceiling or crashes.</div></div><div class="idea"><h3>The honest failure: over-thinking hurts</h3><div class="eq">Pathological case: when inference-time compute backfires</div><div class="why">If the model's distribution does not have the correct answer at its mode, or if the verifier is miscalibrated, spending more compute amplifies the error. Self-consistency on a model that confidently prefers the wrong answer converges to the wrong answer. A noisy verifier trained on a distribution shift learns spurious confidence signals and selects increasingly wrong samples. These are failures of the PREMISE (sound aggregation), not the method. The lesson: test-time scaling works only when the foundation is honest — the model must put mass on the right answer, and the verifier must actually measure correctness, not confidence.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Self-consistency draws multiple samples and votes by majority, riding the law of large numbers to concentrate on the mode of the distribution. Verify-and-rerank (best-of-N with a learned or heuristic verifier) selects the highest-scoring sample, exponentially fast if the verifier is sound but degrading if the verifier is noisy or miscalibrated. Visual chain-of-thought makes the reasoning process visible in images, allowing verifiers to grade intermediate steps, not just final answers — a richer signal. Adaptive reasoning routes compute to hard examples: if the model is already confident, skip verification; if uncertain, run deeper. Test-time tuning or training-free scaling refines the model on a small in-context batch at inference, tightening the distribution without retraining. The honest failure: over-thinking. A noisy verifier or a model that favors the wrong answer will amplify errors as you spend more compute — you increasingly select confident-but-wrong samples, a miniature of reward hacking.</p>
+
+<div class="fp"><b>The through-line.</b> A fixed model has a sampling distribution over answers. Inference-time compute (drawing many samples and aggregating) can amplify the signal if the true answer is likely AND the aggregation is sound. Majority vote works when the correct answer is the mode. Verify-and-rerank works when the verifier is reliable. Both scale with compute but hit a ceiling (the oracle), and both fail if the foundation is broken — a misaligned verifier or a model that favors the wrong answer. The scaling law: accuracy rises with inference compute, but with diminishing returns, bounded by the soundness of the aggregation scheme.</div>
+<p style="margin-top:16px"><a href="ttc-why.html">→ The plain-language big picture</a> ·
+<a href="ttc-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Test-time compute — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

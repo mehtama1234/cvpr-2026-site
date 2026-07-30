@@ -1,0 +1,121 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Energy-based &amp; score models — probability without a normalizer, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:14px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Energy-based &amp; score models · first principles · probability without a normalizer</div>
+<h1>Energy-based models — describing a distribution by its landscape</h1>
+<p>The most flexible way to describe a probability distribution is to say, for every point, how <em>plausible</em>
+it is — a single scalar, its energy — and declare low energy to mean high probability. The catch is that turning
+those energies into real probabilities needs an impossible sum over all of space. The beautiful discovery is that
+you never have to: you can both train the energy and draw samples from it using only its <em>gradient</em>. This
+page is the plain story of that idea — the landscape, the downhill walk that samples it, and the mixing tax — on a
+real run. It is also the parent of diffusion.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ebm-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="ebm-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — the normalizer you can't compute</h2>
+<p>Suppose you describe a distribution with any function you like: give each point x a score, and say more score =
+more probable. It is maximally expressive. But to make it a real probability you must divide by the total score
+summed over <em>every</em> possible x — an integral in a huge space that you cannot compute. Most of probabilistic
+modelling is a fight with that one intractable number.</p>
+<div class="fp"><b>The problem, stated once:</b> you can score how plausible each point is with a totally free
+function, but converting those scores into a normalized probability requires an intractable sum over all of space.</div>
+
+<h2 id="reframe">2 · The reframe — you only ever need the gradient</h2>
+<div class="fp"><b>The idea: work with the energy&#39;s slope, never its total.</b> Define p(x) ∝ exp(−E(x)) — low
+energy, high probability. Two things you actually want turn out to need only the <em>gradient</em> of E, never the
+normalizer. To SAMPLE: walk downhill in energy with a dash of noise (Langevin dynamics) and you drift to the
+likely regions. To TRAIN: push the energy <em>down</em> on real data and <em>up</em> on your own samples until they
+match (contrastive divergence) — or directly learn the <em>score</em>, the gradient of log-probability, which by
+definition has no normalizer in it. The impossible sum simply never appears.</div>
+<div class="eq">p(x) ∝ exp(−E(x))     sample:  x ← x − (ε/2)·∇E(x) + √ε·noise     score: s(x) = ∇log p = −∇E
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># everything you need is a gradient of E; the normalizer Z is never computed</span></div>
+<p>It is the most flexible model of a distribution there is — bought with a sampling process that is a random
+walk, with all the promise and pain that implies.</p>
+
+<h2 id="run">3 · Seen on a real run — landscape, walk, and mixing</h2>
+<h3>1 · The model is a landscape</h3>
+<p>We trained an energy network on three blobs of 2D data. It never outputs a normalized probability — it outputs
+an <em>energy</em>, and we read probability as low-energy = likely. Here is the learned landscape (bright = high
+probability, i.e. low energy): three wells have formed exactly where the data lives.</p>
+<div class="tworow"><div style="text-align:center"><img src="data:image/png;base64,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" width="190" style="border-radius:8px"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:4px">learned energy → probability</div></div>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">Crucially, the network was trained without ever
+computing the normalizer — it only ever needed the energy&#39;s <em>gradient</em>. Any scalar function is a valid
+energy, so this is a maximally flexible way to describe a distribution.</p></div></div>
+<h3>2 · Sampling by walking downhill — Langevin dynamics</h3>
+<div class="tworow"><svg viewBox="0 0 210 210" width="200" style="background:#0f1417;border-radius:8px"><polyline points="155.5,84.6 149.7,97.5 127.4,138.9 168.0,137.9 158.6,127.4 152.2,142.6 156.9,133.2 130.5,156.2 117.1,146.4 122.6,122.2 162.2,136.0 144.1,130.5 169.3,138.9 156.7,132.7 147.9,149.7 161.9,158.6" fill="none" stroke="rgba(232,176,75,0.55)" stroke-width="1.2"/><polyline points="109.7,57.6 109.1,52.1 109.3,42.7 127.6,74.5 104.7,66.3 98.6,55.4 92.8,56.7 114.3,59.0 98.4,53.1 103.4,50.4 106.5,33.9 97.5,44.8 104.9,66.0 113.3,51.7 106.6,51.5 103.7,29.0" fill="none" stroke="rgba(232,176,75,0.55)" stroke-width="1.2"/><polyline points="70.5,117.7 61.4,125.9 43.7,124.6 57.4,139.5 56.5,126.5 47.9,151.5 55.1,146.1 58.1,140.7 63.4,142.8 63.3,141.9 57.1,145.4 43.2,142.2 59.9,136.5 44.7,154.9 72.0,124.6 46.7,140.5" fill="none" stroke="rgba(232,176,75,0.55)" stroke-width="1.2"/><polyline points="-11.3,75.9 -25.3,81.2 -52.3,89.0 -61.3,101.2 -91.4,105.4 -91.6,99.8 -76.0,96.6 -58.9,116.2 -49.0,113.2 -36.6,94.9 -16.2,102.7 -23.7,128.2 18.9,131.3 26.6,123.4 71.0,127.8 24.3,137.6" fill="none" stroke="rgba(232,176,75,0.55)" stroke-width="1.2"/><polyline points="26.5,148.0 62.1,159.7 38.7,164.6 50.5,158.8 53.2,137.0 51.7,125.8 67.1,135.7 46.8,136.3 38.5,135.7 53.4,127.9 56.5,139.2 67.9,114.2 51.5,141.2 56.0,145.1 62.1,146.8 56.7,140.9" fill="none" stroke="rgba(232,176,75,0.55)" stroke-width="1.2"/><polyline points="36.9,109.4 52.3,126.9 59.2,128.9 57.6,127.7 46.3,146.6 52.1,139.8 49.3,131.2 37.5,170.0 50.1,160.8 29.6,139.5 27.4,127.8 51.8,149.9 51.0,171.4 42.5,181.7 49.7,191.8 54.3,199.0" fill="none" stroke="rgba(232,176,75,0.55)" stroke-width="1.2"/><circle cx="105.0" cy="47.7" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="52.5" cy="138.4" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="157.5" cy="138.4" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="155.5" cy="84.6" r="2.4" fill="#b06a3a"/><circle cx="109.7" cy="57.6" r="2.4" fill="#b06a3a"/><circle cx="70.5" cy="117.7" r="2.4" fill="#b06a3a"/><circle cx="-11.3" cy="75.9" r="2.4" fill="#b06a3a"/><circle cx="26.5" cy="148.0" r="2.4" fill="#b06a3a"/><circle cx="36.9" cy="109.4" r="2.4" fill="#b06a3a"/><circle cx="161.9" cy="158.6" r="2.6" fill="#0E7C86"/><circle cx="103.7" cy="29.0" r="2.6" fill="#0E7C86"/><circle cx="46.7" cy="140.5" r="2.6" fill="#0E7C86"/><circle cx="24.3" cy="137.6" r="2.6" fill="#0E7C86"/><circle cx="56.7" cy="140.9" r="2.6" fill="#0E7C86"/><circle cx="54.3" cy="199.0" r="2.6" fill="#0E7C86"/></svg>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">How do you draw samples with no normalizer? Start
+anywhere and walk <em>downhill</em> in energy, with a little random noise each step, and you drift toward the
+wells while the noise keeps you exploring — that is Langevin dynamics. Each <span style="color:#b06a3a">brown</span>
+dot starts scattered; the trails show it flowing to a <span style="color:#0E7C86">low-energy</span> mode (white
+rings = the true data modes). It needs only the gradient ∇E — the intractable normalizer never appears.</p></div></div>
+<h3>3 · The honest catch — mixing</h3>
+<div class="fp"><b>Sampling is a random walk, and random walks are slow to mix.</b> Our Langevin samples land near
+the modes but stay a bit <em>looser</em> than the real data (mean distance to the nearest mode
+<span class="stat">0.692</span>) — the chains do not always settle tightly, and can get stuck.
+This slow, sometimes-unreliable mixing is the standing pain of energy-based models, and exactly the problem the
+modern score-based reincarnation was built to tame.</div>
+
+<h2 id="why">4 · Why it matters — and why it became diffusion</h2>
+<p>Energy models are the most general generative idea: no architecture constraint, no invertibility, just a
+freely-shaped landscape — which makes them natural for <b>composition</b> (add two energies to satisfy two
+constraints at once) and for <b>anomaly detection</b> (a high-energy point is an outlier). Their weakness was
+always sampling: MCMC mixes slowly and unreliably. The fix reshaped modern generative AI — learn the
+<em>score</em> at many noise levels and sample by gradually denoising, and the random walk becomes stable and
+fast. That is <a href="diffusion-why.html">diffusion</a>: a score-based energy model in its most successful form.</p>
+
+<div class="fp"><b>Where to go from here.</b> Roll a marble down a learned energy in the
+<a href="ebm-playground.html">Langevin sandbox</a> — watch samples flow into the wells, then crank the noise and
+watch them wander. Then see <a href="ebm-in-the-wild.html">how CVPR &amp; robotics use energy and score</a>, and
+go <a href="ebm-deep-reads.html">paper by paper</a>. The <a href="ebm-math.html">mathematics page</a> shows why
+only the gradient is needed.</p>
+
+<p style="margin-top:16px"><a href="ebm-playground.html">→ The Langevin sandbox</a> ·
+<a href="ebm-in-the-wild.html">→ In the wild</a> · <a href="ebm-math.html">→ The mathematics</a> ·
+<a href="ebm-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles energy-based &amp; score models, grounded in a real run (an energy learned by contrastive divergence, sampled by Langevin dynamics) ·
+the energy landscape, the sampling trajectory, and the mixing tax are measured · CC0.</footer></div>
+</body></html>

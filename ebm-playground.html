@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Energy-based Langevin sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:320px;height:320px;background:#0f1417;border-radius:10px;display:block;margin:0 auto;image-rendering:pixelated}
+.ctl{text-align:center;margin:14px 0}
+.ctl input[type=range]{width:100%;max-width:400px}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 13px;font-size:12.5px;font-family:var(--mono);cursor:pointer;margin:4px}
+.read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:10px}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Energy-based models · the Langevin sandbox</div>
+<h1>Roll downhill, with a little noise</h1>
+<p>The <a href="ebm-why.html">why page</a> says you sample an energy model by walking downhill in energy plus a
+dash of noise — Langevin dynamics — needing only the gradient, never the normalizer. Here is that walk, live. The
+background is a learned energy (<span style="color:#0E7C86">bright = low energy = likely</span>); the dots are
+samples flowing through it. The one knob is the noise.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ebm-why.html">The big picture</a><a href="ebm-math.html">The math</a><a href="ebm-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="80" height="80"></canvas>
+  <div class="ctl"><button class="btn" id="reset">scatter fresh samples</button></div>
+  <div class="ctl"><label for="sN">noise (temperature) — <span id="vN" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sN" type="range" min="0" max="100" step="1" value="25"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> With <b>low noise</b> the samples slide straight into the nearest well and
+sit there — sharp, but they never leave, so they never discover the other modes (poor mixing). With <b>more
+noise</b> they jitter, climb out of wells, and hop between all three modes — better mixing, but the cloud is
+looser and blurrier. That is the fundamental Langevin tension the run measured: too cold and you get stuck, too
+hot and you smear. Taming it is exactly what the diffusion reformulation was built to do.</p>
+<p style="margin-top:14px"><a href="ebm-why.html">→ Why it works</a> ·
+<a href="ebm-math.html">→ The mathematics</a> ·
+<a href="ebm-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live Langevin-sampling demo — rolling downhill in a learned energy, and the noise that trades sharpness for mixing · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),R=cv.width,sN=document.getElementById('sN');
+  var modes=[[-0.7,0.7],[0.7,0.7],[0.0,-0.7]], sig=0.28;
+  function grad(x,y){ // gradient of E = -log sum exp(-|.-m|^2/2s^2); returns dE/dx,dE/dy and a probability
+    var gx=0,gy=0,Z=0,ws=[];
+    for(var i=0;i<modes.length;i++){ var dx=x-modes[i][0],dy=y-modes[i][1]; var w=Math.exp(-(dx*dx+dy*dy)/(2*sig*sig)); ws.push(w); Z+=w; }
+    for(var i=0;i<modes.length;i++){ var dx=x-modes[i][0],dy=y-modes[i][1]; var p=ws[i]/(Z+1e-9); gx+=p*dx/(sig*sig); gy+=p*dy/(sig*sig); }
+    return [gx,gy,Z];
+  }
+  var pts=[];
+  function scatter(){ pts=[]; for(var i=0;i<400;i++) pts.push([(Math.random()-0.5)*2.6,(Math.random()-0.5)*2.6]); }
+  scatter();
+  // precompute energy background
+  function drawBG(){
+    var img=ctx.createImageData(R,R);
+    for(var py=0;py<R;py++)for(var px=0;px<R;px++){ var x=(px/R-0.5)*3, y=-(py/R-0.5)*3;
+      var g=grad(x,y); var v=Math.min(1,g[2]); var i=(py*R+px)*4;
+      img.data[i]=15+v*10; img.data[i+1]=25+v*150; img.data[i+2]=45+v*120; img.data[i+3]=255; }
+    ctx.putImageData(img,0,0);
+  }
+  function P(v){ return (v/3+0.5)*R; }
+  function step(){
+    var eps=0.006, noise=(+sN.value)/100;
+    for(var i=0;i<pts.length;i++){ var g=grad(pts[i][0],pts[i][1]);
+      pts[i][0]+= -0.5*eps*g[0]*30 + Math.sqrt(eps)*noise*2.2*(Math.random()*2-1);
+      pts[i][1]+= -0.5*eps*g[1]*30 + Math.sqrt(eps)*noise*2.2*(Math.random()*2-1);
+      pts[i][0]=Math.max(-1.5,Math.min(1.5,pts[i][0])); pts[i][1]=Math.max(-1.5,Math.min(1.5,pts[i][1]));
+    }
+    drawBG();
+    ctx.fillStyle='rgba(255,255,255,0.85)';
+    for(var i=0;i<pts.length;i++){ ctx.fillRect(P(pts[i][0]), P(-pts[i][1]), 1.3,1.3); }
+    var n=+sN.value;
+    document.getElementById('vN').textContent=n+'%';
+    document.getElementById('read').innerHTML = n<12 ? 'nearly frozen &mdash; samples stick in the nearest well (stuck, no mixing)'
+      : n>55 ? 'hot &mdash; samples hop between modes but the cloud is loose (mixing, but blurry)'
+      : 'flowing into the wells &mdash; a working balance of sharpness and mixing';
+  }
+  setInterval(step,60);
+  document.getElementById('reset').onclick=scatter;
+  drawBG();
+})();
+</script>
+</body></html>
