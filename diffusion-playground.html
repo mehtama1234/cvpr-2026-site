@@ -1,0 +1,164 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diffusion denoising sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.dgwrap{display:grid;grid-template-columns:340px 1fr;gap:18px;margin:16px 0}
+@media(max-width:720px){.dgwrap{grid-template-columns:1fr}}
+.dgpanel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper)}
+.dgctl{display:grid;grid-template-columns:120px 1fr 42px;gap:9px 12px;align-items:center;font-size:13.5px}
+.dgctl label{font-weight:600}
+.dgctl input[type=range]{width:100%}
+.dgval{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-align:right}
+.dgtoggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.dgtoggle button{font-family:var(--mono);font-size:12px;padding:5px 10px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.dgtoggle button.on{background:var(--accent);color:#fff}
+.dgbtnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.dgbtn{font-family:var(--mono);font-size:13px;padding:8px 15px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:8px;cursor:pointer}
+.dgbtn.sec{background:var(--paper);color:var(--accent)}
+.dgmetrics{font-family:var(--mono);font-size:13px;margin-top:12px;color:var(--graphite)}
+.dgmetrics b{color:var(--ink)}
+#dg_canvas{width:100%;max-width:460px;aspect-ratio:1;border:1px solid var(--line);border-radius:12px;background:#fbfcfc;display:block}
+.dgstatus{font-family:var(--mono);font-size:12.5px;color:var(--graphite);margin-top:8px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Diffusion · the denoising sandbox</div>
+<h1>Watch noise become a picture — and watch guidance collapse it</h1>
+<p>The <a href="diffusion-why.html">why page</a> argues generation is a walk: start from static and undo
+the noising, step by step. Here you can watch it. This is an idealized simulation (an exact
+Gaussian-mixture denoiser, not the trained model) so it runs live — but it turns the same two knobs the
+<a href="diffusion-why.html#knobs">real ablation</a> measures: <em>guidance</em> and <em>steps</em>. The
+third switch reveals <em>why</em> guidance kills diversity.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="diffusion-why.html">The big picture</a><a href="diffusion-why.html#knobs">The real ablation</a><a href="diffusion-in-the-wild.html">In the wild</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="dgwrap">
+  <div>
+    <div class="dgpanel">
+    <div class="dgctl">
+      <label for="dg_guid">Guidance</label><input id="dg_guid" type="range" min="0" max="6" step="0.5" value="0"><span class="dgval" id="dg_guid_v">0.0</span>
+      <label for="dg_steps">Steps</label><input id="dg_steps" type="range" min="2" max="40" step="1" value="24"><span class="dgval" id="dg_steps_v">24</span>
+      <label>Mode density</label><div class="dgtoggle" id="dg_dens"><button data-d="1" class="on">unequal</button><button data-d="0">equal</button></div><span></span>
+    </div>
+    <div class="dgbtnrow">
+      <button class="dgbtn" id="dg_run">&#9654; Denoise</button>
+      <button class="dgbtn sec" id="dg_reset">Reset to noise</button>
+    </div>
+    <div class="dgmetrics" id="dg_metrics"></div>
+    <div class="dgstatus" id="dg_status">Press Denoise: the noise cloud walks onto the target modes. Then raise Guidance with unequal density and watch the small modes empty out.</div>
+    </div>
+  </div>
+  <div><canvas id="dg_canvas" width="460" height="460"></canvas>
+  <div style="font-family:var(--mono);font-size:11.5px;color:var(--graphite);margin-top:6px">rings = target modes (size &prop; density) &middot; dots = samples, coloured by the mode they land on &middot; grey dots are still travelling</div>
+  </div>
+</div>
+
+<div class="fp"><b>What to notice.</b> (1) With <b>few steps</b> the dots never reach the modes — most of the
+quality is in the first handful of steps, exactly the why-page's steps curve. (2) With <b>unequal</b>
+density, push <b>guidance</b> up: the sampler abandons the small modes and piles onto the big ones — that
+is <em>mode collapse</em>, the price of fidelity. (3) Flip density to <b>equal</b> and the same high
+guidance no longer collapses anything — proof that collapse needs unequal modes to feed on, the exact
+thing the real trained run taught us.</div>
+
+<p style="margin-top:14px"><a href="diffusion-why.html">→ Why diffusion works</a> ·
+<a href="diffusion-in-the-wild.html">→ How the field uses it</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>Idealized client-side 2D diffusion (exact Gaussian-mixture posterior denoiser, DDIM sampling) · a sandbox for intuition, not the trained model · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('dg_canvas'),ctx=cv.getContext('2d'),W=460;
+  var K=8, N=170, T=40, SIG=0.14, R=1.55;
+  var S={guid:0,steps:24,dens:1,timer:null};
+  // modes on a ring, unequal weights
+  var MU=[],PIu=[],PIe=[];
+  for(var k=0;k<K;k++){var a=2*Math.PI*k/K;MU.push([R*Math.cos(a),R*Math.sin(a)]);PIe.push(1/K);}
+  var wraw=[0.20,0.18,0.15,0.13,0.11,0.09,0.08,0.06];var ws=wraw.reduce(function(p,c){return p+c;},0);
+  for(var k2=0;k2<K;k2++)PIu.push(wraw[k2]/ws);
+  function PI(){return S.dens?PIu:PIe;}
+  // DDPM schedule
+  var beta=[],alpha=[],abar=[];var ab=1;
+  for(var t=0;t<T;t++){var b=1e-4+(0.02-1e-4)*t/(T-1);beta.push(b);alpha.push(1-b);ab*=(1-b);abar.push(ab);}
+  var pts=[];
+  function randn(){var u=Math.random(),v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+  function reset(){pts=[];for(var i=0;i<N;i++)pts.push([randn()*1.0,randn()*1.0,-1]);S.done=false;draw();metrics();}
+  // one analytic reverse (DDIM) step from noise-level ti to tj, guidance g
+  function denoiseTo(x,ti){
+    var a=abar[ti],sa=Math.sqrt(a),vt=(1-a)+a*SIG*SIG,pi=PI(),g=S.guid;
+    var r=[],mx=-1e9;
+    for(var k=0;k<K;k++){var dx=x[0]-sa*MU[k][0],dy=x[1]-sa*MU[k][1];
+      var logp=Math.log(Math.pow(pi[k],1+g)+1e-12)-(dx*dx+dy*dy)/(2*vt);r.push(logp);if(logp>mx)mx=logp;}
+    var s=0;for(var k2=0;k2<K;k2++){r[k2]=Math.exp(r[k2]-mx);s+=r[k2];}
+    var x0=[0,0];for(var k3=0;k3<K;k3++){x0[0]+=r[k3]/s*MU[k3][0];x0[1]+=r[k3]/s*MU[k3][1];}
+    return x0;
+  }
+  function nearestMode(p){var bi=0,bd=1e9;for(var k=0;k<K;k++){var dx=p[0]-MU[k][0],dy=p[1]-MU[k][1],d=dx*dx+dy*dy;if(d<bd){bd=d;bi=k;}}return (bd<0.35*0.35)?bi:-1;}
+  function run(){
+    if(S.timer)clearInterval(S.timer);
+    // schedule of T-indices from high noise to 0
+    var m=S.steps,seq=[];for(var i=0;i<m;i++)seq.push(Math.round((T-1)*(1-i/(m-1))));
+    var step=0;setStatus('Denoising ('+m+' steps)...');
+    S.timer=setInterval(function(){
+      var ti=seq[step];
+      for(var i=0;i<N;i++){var x=pts[i];var x0=denoiseTo(x,ti);
+        if(step<m-1){var tn=seq[step+1],an=abar[tn];var eps=[(x[0]-Math.sqrt(abar[ti])*x0[0])/Math.sqrt(1-abar[ti]),(x[1]-Math.sqrt(abar[ti])*x0[1])/Math.sqrt(1-abar[ti])];
+          x[0]=Math.sqrt(an)*x0[0]+Math.sqrt(1-an)*eps[0];x[1]=Math.sqrt(an)*x0[1]+Math.sqrt(1-an)*eps[1];}
+        else{x[0]=x0[0];x[1]=x0[1];}}
+      draw();step++;
+      if(step>=m){clearInterval(S.timer);S.timer=null;for(var j=0;j<N;j++)pts[j][2]=nearestMode(pts[j]);draw();metrics();
+        setStatus('Done. '+coveredMsg());}
+    },60);
+  }
+  function coveredMsg(){var c=covered();return c.cov+'/'+K+' modes reached'+(S.dens?'':' (equal density)')+(S.guid>=3&&S.dens&&c.cov<K?' — small modes collapsed.':(S.guid>=3&&!S.dens?' — no collapse: equal modes.':''));}
+  function covered(){var cnt=[];for(var k=0;k<K;k++)cnt.push(0);for(var i=0;i<N;i++){var m=nearestMode(pts[i]);if(m>=0)cnt[m]++;}
+    var cov=cnt.filter(function(v){return v>0;}).length,s=cnt.reduce(function(p,c){return p+c;},0)||1,e=0;
+    for(var k2=0;k2<K;k2++){var p=cnt[k2]/s;if(p>0)e-=p*Math.log(p);}return {cov:cov,ent:e/Math.log(K)};}
+  function metrics(){var c=covered();document.getElementById('dg_metrics').innerHTML='guidance <b>'+S.guid.toFixed(1)+'</b> &middot; steps <b>'+S.steps+'</b> &middot; modes reached <b style="color:'+(c.cov<K?'#b5651d':'#0E7C86')+'">'+c.cov+'/'+K+'</b> &middot; diversity <b>'+c.ent.toFixed(2)+'</b>';}
+  var COL=['#0E7C86','#b5651d','#3d7d55','#8c5b8c','#2f6f8f','#a8762a','#5b6b8c','#7a8c3d'];
+  function draw(){ctx.clearRect(0,0,W,W);var sc=W/7,cx=W/2,cy=W/2;
+    for(var k=0;k<K;k++){var r=6+PI()[k]*90;ctx.beginPath();ctx.arc(cx+MU[k][0]*sc,cy-MU[k][1]*sc,r,0,2*Math.PI);ctx.strokeStyle='#c4ccca';ctx.lineWidth=1.5;ctx.stroke();}
+    for(var i=0;i<N;i++){var p=pts[i];ctx.beginPath();ctx.arc(cx+p[0]*sc,cy-p[1]*sc,2.6,0,2*Math.PI);ctx.fillStyle=p[2]>=0?COL[p[2]%8]:'#b9c2c0';ctx.globalAlpha=p[2]>=0?0.85:0.5;ctx.fill();ctx.globalAlpha=1;}}
+  function setStatus(m){document.getElementById('dg_status').innerHTML=m;}
+  var gg=document.getElementById('dg_guid');gg.addEventListener('input',function(){S.guid=parseFloat(gg.value);document.getElementById('dg_guid_v').textContent=S.guid.toFixed(1);});
+  var st=document.getElementById('dg_steps');st.addEventListener('input',function(){S.steps=parseInt(st.value);document.getElementById('dg_steps_v').textContent=st.value;});
+  var db=document.getElementById('dg_dens');db.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){db.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');S.dens=parseInt(b.getAttribute('data-d'));reset();});});
+  document.getElementById('dg_run').addEventListener('click',run);
+  document.getElementById('dg_reset').addEventListener('click',function(){if(S.timer)clearInterval(S.timer);reset();});
+  reset();
+})();
+</script>
+</body></html>
