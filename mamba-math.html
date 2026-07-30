@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>State-space models / Mamba — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">State-space models / Mamba · the mathematics · first principles, no jargon</div>
+<h1>State-space models / Mamba — why it works, mathematically</h1>
+<p class="lead">A compressed memory of the past, updated in linear time via selectivity gates</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="mamba-why.html">The big picture</a><a href="mamba-in-the-wild.html">In the wild</a><a href="mamba-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>Transformers attend to every token, costing O(L²) memory and compute. Vision gets worse: O(L²) where L is pixels, and the cache grows with sequence length. We need a model that holds a lossy summary of history—a state—and updates it efficiently per step, even for very long contexts or streaming data.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Linear recurrence as compressed state</h3><div class="eq">The core math behind state-space models</div><div class="why">The recurrence h_t = A·h_{t-1} + B·x_t squashes all previous inputs into a fixed-size vector h_t. Because it is LINEAR, you can unroll it globally as a convolution or compute it in parallel via a scan—no step-by-step loop needed. This gives O(L) time to process all L tokens, versus O(L²) for attention. The trade-off: you compress history into h_t, so you can only remember what the state captures. But that's often enough: the state is a sufficient statistic for predicting y_t = C·h_t.</div></div><div class="idea"><h3>Selectivity: input-dependent gating</h3><div class="eq">What Mamba adds to make linear recurrence competitive with attention</div><div class="why">In a time-invariant system, A, B, C never change; the model learns one global memory strategy. Mamba makes B, C, and the step size Δ depend on the input x_t. Now the model can ask: 'for this token, what do I need to store?'—gating at linear cost. Even though the system is no longer time-invariant, the parallel scan still works (it takes only O(log L) depth on GPUs). You get attention-like selectivity—forget unimportant details, preserve key facts—without the quadratic memory bill.</div></div><div class="idea"><h3>Parallel scan for GPU speed</h3><div class="eq">How linearity unlocks hardware efficiency</div><div class="why">A loop h_t = A·h_{t-1} + B·x_t cannot be parallelized: step t waits for step t−1. But if you expand it as a global convolution (or use an associative parallel scan), you expose a tree of O(log L) depth. Each layer of the tree runs in parallel across the GPU, so all L steps compute in O(log L) wall-clock time. The trick works because matrix multiplication is associative. Non-linear models (like RNNs with tanh) break this—you're stuck with sequential step-by-step execution.</div></div><div class="idea"><h3>State is a lossy summary, not a cache</h3><div class="eq">Why state-space models scale where attention does not</div><div class="why">Transformers' KV cache grows: L keys, L values, D dimensions each. For a million-token context, that is Milli × D memory. A state-space model's hidden state is always N dimensions (N ≪ L). You discard information at every step—'state' is lossy compression—but you choose what to keep via selectivity. When selectivity is learned well, the few bits you keep are more useful than the full cache. For vision, this means one fixed-size state summarizes arbitrary image size, enabling inference on small devices.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Apply state-spaces where sequences are long or you need fixed-memory footprint: language (competitive with Transformers on downstream tasks, faster on generation), image & video (one state per image, no quadratic pixel cost), audio streams (constant memory for arbitrarily long audio), and embedded control (a policy's latent state persists across time). Hybrids: use state-spaces for efficient long-context, then apply a cheap attention head to the state for sharp reasoning on critical details. For 2D images, scanning order matters—row-major or Hilbert curves change what the state 'sees' first. Small mobile devices benefit most: state-space can run inference in place (O(1) memory) while Transformers must allocate for the full cache.</p>
+<div class="fp"><b>The through-line.</b> Linearity gives you a fast algorithm (parallel scan). Selectivity gives you the power (choose what to remember). Together: O(L) time, O(1) memory, learned memory strategy—the speed of RNNs with the expressiveness of Transformers.</div>
+<p style="margin-top:16px"><a href="mamba-why.html">→ The plain-language big picture</a> ·
+<a href="mamba-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of State-space models / Mamba — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

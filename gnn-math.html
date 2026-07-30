@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Graph neural networks — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Graph neural networks · the mathematics · first principles, no jargon</div>
+<h1>Graph neural networks — why it works, mathematically</h1>
+<p class="lead">Information diffuses by neighbor-averaging; deep networks smooth distinctions away.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="gnn-why.html">The big picture</a><a href="gnn-in-the-wild.html">In the wild</a><a href="gnn-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p><p>A node in a graph needs to know about its surroundings—its neighbors, their features, and how they connect. But how do you transform each node's representation by gathering information from a graph structure, without treating the graph as just a list? And how many steps of neighbor-averaging can you take before all nodes blur into an identical average?</p></p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Message passing as neighbor-averaging</h3><div class="eq">core mechanism</div><div class="why"><p>Each node h_v updates itself by looking at its neighbors u ∈ neighbors(v). In one layer, that's h_v^(l+1) = update(h_v, aggregate{h_u : u ∈ neighbors(v)}). The aggregate is a symmetric function—when you sum or average the neighbors' features, the order doesn't matter. That's <strong>permutation equivariance</strong>: if you relabel the nodes (shuffle them), the network produces the same answer, just with shuffled output. So a graph with nodes {A,B,C} connected in the same way as {1,2,3} will get the same internal logic—only the label changes.</p><p>Mathematically, one step of graph convolution is H' = σ(Â·H·W), where Â is the normalized adjacency matrix. Each row of Â describes one node's neighborhood (summed to 1, so it's an average). Multiply H (all node features stacked) by Â, and every node becomes the weighted average of its neighbors' features—a single smoothing step.</p></div></div><div class="idea"><h3>Over-smoothing: diffusion and the smoothness trap</h3><div class="eq">depth limitation</div><div class="why"><p>Multiplying repeatedly by Â is diffusion on the graph—the same math as heat spreading through a conductor. Each multiplication is like one tick of time: features blur toward their neighbors. After many steps (large L), every node's features converge to the top eigenvector of Â, which is often nearly constant across all nodes. You've smoothed away all the local, node-specific distinctions that made each node different.</p><p>The graph Laplacian (I - Â) acts as a low-pass filter: features aligned with the graph's structure (like a smooth signal on the nodes) survive many layers, but high-frequency details die. This is why a GNN with 100 layers doesn't work—by layer 50, all nodes have nearly the same features. You've lost the ability to distinguish them for downstream tasks.</p></div></div><div class="idea"><h3>Why shallow networks work: signal vs. noise</h3><div class="eq">practical limit</div><div class="why"><p>A shallow GNN (2–3 layers) hits the sweet spot. Layer 1 mixes each node with its immediate neighbors—useful local context. Layer 2 mixes in second-order neighbors (neighbors-of-neighbors). By layer 2–3, every node has 'seen' far enough around the graph to make good decisions. But layer 10 has smoothed everything flat.</p><p>The reason: your task (link prediction, node classification) depends on distinctions that live 1–2 hops away. More layers don't help because they're adding smoothing noise, not new signal. The graph Laplacian eigendecomposition tells you how fast each 'frequency' smooths: low frequencies survive, high frequencies vanish. Too many layers kill the high frequencies you need.</p></div></div><div class="idea"><h3>Graph structure as inductive bias</h3><div class="eq">why graphs matter</div><div class="why"><p>Treating data as a graph (rather than a flat vector or image) bakes in a strong assumption: neighbors are similar. An image treats every pixel equally; a fully-connected network treats every input dimension equally. A GNN says: this node's value depends mainly on its neighbors, neighbors-of-neighbors, etc., with distance-weighted decay. That's a much stronger prior, and for relational data (social networks, knowledge graphs, molecular bonds, scene graphs in robotics), it's often true.</p><p>Message passing makes that prior explicit: aggregate from neighbors only. No attention to distant nodes, no fully-connected overhead. For robotics scene graphs (objects and their spatial relations), a graph structure directly mirrors the physical structure—each object interacts with nearby objects, not a random subset. That alignment between graph structure and real physics makes shallow GNNs powerful.</p></div></div>
+<h2>The approaches, as variations on the math</h2>
+<p><ul><li><strong>Building the graph:</strong> Scene graph generation (extract objects and spatial/semantic relations from images or sensor data); represent a robot's world as a graph of entities and interactions.</li><li><strong>Reasoning over relations:</strong> Graph neural networks propagate information along edges—object-to-object, relation-to-relation—so downstream classifiers can reason about what interacts with what.</li><li><strong>Native graphs:</strong> Meshes (surface geometry), CAD models (part hierarchies), medical scans (voxel neighbors), and multi-agent scenarios (agent-to-agent communication) are naturally graphs; GNNs work directly on them without conversion.</li><li><strong>Relational grounding across modalities:</strong> Fuse vision, language, and sensor data via a shared graph: image regions become nodes, language mentions label them, and spatial relations form edges. Message passing aligns all modalities.</li><li><strong>Robot morphology and multi-agent:</strong> A robot's limbs and joints form a kinematic graph; multi-agent teams form a communication graph. GNNs on these graphs enable coordination and control without centralized computation.</li></ul></p>
+<div class="fp"><b>The through-line.</b> <p>Graphs are the natural home for relational reasoning in robotics and vision. Message passing harnesses the graph structure to propagate information efficiently—each node samples its neighborhood, not the whole world. But diffusion is a one-sided blade: shallow networks reach the right distances and keep distinctions alive; deep networks smooth everything to indistinguishable mush. The art is finding the depth that balances neighborhood context against over-smoothing.</p></div>
+<p style="margin-top:16px"><a href="gnn-why.html">→ The plain-language big picture</a> ·
+<a href="gnn-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Graph neural networks — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Object-centric learning — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Object-centric learning · the mathematics · first principles, no jargon</div>
+<h1>Object-centric learning — why it works, mathematically</h1>
+<p class="lead">Partition pixels into objects via competitive attention; emergence without labels.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="slots-why.html">The big picture</a><a href="slots-in-the-wild.html">In the wild</a><a href="slots-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>Images contain multiple objects that interact and occlude each other, but neural networks see only pixel grids. How do we teach a network to discover WHAT are the objects and WHERE they are without any object labels? The core challenge: binding — connecting features to the right object — requires knowing which pixels belong together without supervision.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Slot competition &amp; soft clustering</h3><div class="eq">The core insight: slots COMPETE to explain each pixel</div><div class="why">Each slot k produces a query vector. For every spatial position (pixel), we compute attention weights α_ki = exp(query_k · value_i) / Σ_j exp(query_j · value_i). This softmax ACROSS SLOTS means each pixel is assigned (softly, probabilistically) to exactly one slot — a differentiable partition. This is a soft-argmax over slots per pixel. The same competition drives k-means: in k-means, point i is assigned to argmin_k ||x_i - c_k||, center c_k moves to the mean of assigned points, and the algorithm converges to a partition. Slot attention replaces hard argmax with soft (normalized) assignment and replaces coordinate descent with learned RNN updates. Result: pixels automatically cluster by object without any object label supervision.</div></div><div class="idea"><h3>Iterative refinement via GRU</h3><div class="eq">Slots learn to specialize by competing repeatedly</div><div class="why">In k-means, centers iterate: assign points, recompute centers, repeat. Slot attention does the same: initial slots are broadcast random vectors. At each iteration, the attention mechanism assigns pixels to slots (α_ki), and a GRU updates each slot based on the pixels assigned to it (a weighted sum of visual features). The update rule is learned (not fixed like k-means); the GRU acts as a differentiable cluster center. After a few iterations (typically 3–5), slots specialize: one slot for each object. The recurrence is crucial — it allows competition to resolve: if two slots start similar, the GRU will push them apart because they compete for the same pixels, and gradients flow backward through the entire refinement process.</div></div><div class="idea"><h3>Reconstruction loss enforces object coherence</h3><div class="eq">End-to-end training binds slots to objects</div><div class="why">Train by requiring image = Σ_k (mask_k ⊙ decoded_k), where mask_k is softmax(α_k) across slots for each pixel, and decoded_k is the visual reconstruction from slot k. Minimizing reconstruction error forces each slot to encode a coherent visual object: if slot_k 'claims' a pixel via high mask_k, the decoder must produce the correct pixel value from slot_k's features, or loss increases. Crucially, the softmax mask_k forces a hard competition: if two slots try to explain the same pixel, only the winning slot (highest attention) gets high mask weight; the other wastes decoder capacity and increases loss. This drives specialization with no object labels — objects emerge purely from the need to partition pixels into reconstructible regions.</div></div><div class="idea"><h3>Too few slots reveal the binding problem</h3><div class="eq">Slot count is a bottleneck that forces objects to compress</div><div class="why">If the image has 3 objects but we provide only 2 slots, the softmax competition MUST merge two objects into one slot. The slot's decoder tries to reconstruct both, but can only output one spatial region per feature vector — reconstruction loss explodes. This forces the model to either (a) drop an object entirely, (b) temporally multiplex in the decoder (impossible for static images), or (c) use pixel-level ambiguity (soft masking across objects). The binding problem appears concretely: without separate slots, the model cannot simultaneously answer 'what' (object identity) and 'where' (spatial extent) for each object. Too many slots also fails: unused slots become noisy; they compete for random pixels and learn nothing. The model self-adjusts via bottleneck pressure — this is why slot attention works without explicit object counts.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Object discovery via slot competition spans multiple problem domains. In visual reasoning, slots represent entities in scene understanding and relational reasoning. In manipulation, slots enable per-object control: generate poses or actions per slot, then apply them to the discovered object regions. In video, slots track objects across frames (temporal slot coherence); objects persist as slot identities even under occlusion. In SLAM and embodied AI, object-centric maps replace dense voxels: each slot encodes a movable object's shape and pose, enabling long-horizon planning and manipulation. In 3D, slots can represent part-based object geometry or multiple viewpoints of the same object. The unifying theme: competitive attention + reconstruction training discovers structure without labels, and this structure enables downstream tasks like planning, control, and reasoning.</p>
+<div class="fp"><b>The through-line.</b> Binding is clustering in disguise. Competitive attention turns pixel-to-object assignment into a learnable, differentiable soft-argmax; reconstruction loss ensures each assignment is economical and coherent. Objects emerge as the minimal, reconstruction-optimal partition of the image.</div>
+<p style="margin-top:16px"><a href="slots-why.html">→ The plain-language big picture</a> ·
+<a href="slots-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Object-centric learning — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

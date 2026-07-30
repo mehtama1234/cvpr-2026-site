@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tokenizing / VQ — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Tokenizing / VQ · the mathematics · first principles, no jargon</div>
+<h1>Tokenizing / VQ — why it works, mathematically</h1>
+<p class="lead">Snap continuous perception to discrete language-model words via learned partitions.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="vq-why.html">The big picture</a><a href="vq-in-the-wild.html">In the wild</a><a href="vq-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>Neural networks live in continuous space (vectors, real numbers), but autoregressive language models eat tokens—discrete symbols. To feed continuous output (images, video, robotics embeddings, sound) into a pretrained LLM, you must convert streams of floats into sequences of integers. But snapping is not differentiable; gradients break at the quantization boundary. And if your partition is unbalanced, most codes go unused (codebook collapse), wasting capacity.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Voronoi partitions of feature space</h3><div class="eq">Core mechanism: why quantization works at all</div><div class="why">Every continuous feature z gets labeled by its nearest codebook vector e_k. This is nearest-neighbor assignment: q(z) = argmin_k ‖z − e_k‖. Geometrically, this partitions the entire feature space into Voronoi cells—each cell 'owns' one code. Every point in cell k maps to the same integer k. This is lossless in principle (you can reconstruct which cell you landed in), but lossy in practice (the cell center e_k is only an approximation of the full feature distribution inside it).</div></div><div class="idea"><h3>Straight-through estimator (STE)</h3><div class="eq">How gradients flow despite the discrete snap</div><div class="why">The argmin operation is non-differentiable: which cell you land in changes discontinuously as z moves. But you need gradients to learn the codebook. STE is a pragmatic trick: on the forward pass, snap z to q(z) (the integer index and its reconstruction e_q(z)). On the backward pass, pretend the quantizer was the identity—copy the gradient straight through as if q(z) = z. This 'pretend' gradient doesn't match physics, but it works in practice: the upstream layers learn to produce features near codebook centers, and the codebook learns to track clusters. It is a form of gradient surgery that keeps learning alive.</div></div><div class="idea"><h3>Codebook collapse and dead codes</h3><div class="eq">The partition-balancing problem</div><div class="why">If you only use L2 reconstruction loss ‖sg[z] − e‖² (sg = stop-gradient, no gradient flows to e here), the codebook vectors e_k tend to cluster where data is densest and ignore empty regions. Most codes never get assigned any feature and vanish (dead codes). Perplexity drops. The fix: commitment loss β‖z − sg[e]‖² forces features z to move toward assigned codes, and exponential-moving-average (EMA) codebook updates prevent codes from drifting away. EMA samples only codes that were actually used, so dead codes are revived by averaging in a small fraction of unused codes or by resetting them to live data points. The craft is keeping the partition balanced—each code should see roughly equal traffic.</div></div><div class="idea"><h3>Codebook as a learned compression dictionary</h3><div class="eq">Why this partition is learned, not fixed</div><div class="why">If you quantized to a fixed uniform grid, you would waste codes on empty space and run out where data clusters. Instead, learn the codebook {e_k} from data. Each training step, features vote for their nearest codes (forward pass), and codes move toward their assigned features (codebook update). Over time, codes spread out and cluster around high-density regions in feature space. This is like k-means: iteratively partition and update cluster centers. But here it is end-to-end: the quantizer is part of a larger model (e.g., a VAE or video tokenizer) so the feature distribution itself can shift as upstream layers learn. The codebook must adapt or collapse.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>1. Fighting collapse: EMA updates, dead-code resets, perplexity monitoring. 2. Better quantizers: product quantization (factorise codebook), residual VQ (hierarchical refinement), straight-through variants. 3. Tokenizers for generation: compress video to 1D token sequences (fewer tokens = faster decoding); add temporal coherence so adjacent tokens are similar. 4. Semantic tokens: use auxiliary losses (e.g., contrastive learning) to ensure tokens capture meaningful features, not just nearest neighbors. 5. Action tokenization: snap robot motion (joint angles, end-effector pose) to a learned vocabulary of 'motion primitives', making discrete planning possible.</p>
+<div class="fp"><b>The through-line.</b> A Voronoi partition of feature space maps continuous z to discrete codes. Straight-through estimators let gradients flow through the discrete snap. Balancing the partition (EMA, dead-code revival) keeps the codebook alive. The result: continuous perception becomes a stream of integers that LLMs can eat.</div>
+<p style="margin-top:16px"><a href="vq-why.html">→ The plain-language big picture</a> ·
+<a href="vq-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Tokenizing / VQ — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

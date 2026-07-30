@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test-time adaptation — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Test-time adaptation · the mathematics · first principles, no jargon</div>
+<h1>Test-time adaptation — why it works, mathematically</h1>
+<p class="lead">When the world shifts at deployment, adapt the frozen model on unlabeled test data—recalibrate statistics and sharpen confidence without ground truth.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="tta-why.html">The big picture</a><a href="tta-in-the-wild.html">In the wild</a><a href="tta-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>At deployment, the input distribution has shifted—a camera lens fogged, a road iced, a robot moved to a new building. The training data no longer matches. The model sits frozen, its batch-norm statistics locked to training conditions, its weights immutable. Yet labels are not available: no oracle tells the model which predictions are right or wrong. The challenge is: how do we adapt the model forward on the test stream itself, using ONLY the unlabeled data it encounters, without labels to anchor learning and without collapsing into confident-but-wrong solutions?</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Batch-norm recalibration</h3><div class="eq">The simple and free part of adaptation.</div><div class="why">During training, batch-norm normalizes activations using statistics (mean μ, variance σ²) computed on the training data. At test time, the input distribution has shifted: a new μ' and σ'² characterize the test batch. If we recompute batch-norm statistics on incoming test batches and re-normalize—pushing activations back to zero mean and unit variance—we undo the distribution shift without touching the learned weights. This recalibration is label-free, computationally cheap, and recovers accuracy under moderate shifts. The key: batch-norm is already an adaptive layer; we just repoint it at the new distribution.</div></div><div class="idea"><h3>Entropy minimization (TENT)</h3><div class="eq">The adaptive optimization on unlabeled test data.</div><div class="why">Without labels, we need a loss signal that steers the model toward better predictions. Entropy of the softmax output, H(softmax(f(x))) = −Σ p_i log p_i, captures prediction confidence: uniform predictions have high entropy, peaked one-hot predictions have zero entropy. The hypothesis—rooted in the cluster assumption—is that confident predictions are more likely to be correct. By minimizing entropy over the test batch, we push the model to sharpen its decisions. To avoid updating all weights (and overfitting to the test stream), we update only the batch-norm affine parameters (scale γ and shift β), which are cheap to tune. The model reorients to the new distribution without relearning deep features.</div></div><div class="idea"><h3>The collapse risk: confident ≠ correct</h3><div class="eq">The mathematical pitfall of label-free adaptation.</div><div class="why">Entropy minimization has a degenerate global minimum: if the model assigns 100% probability to a single class for all test samples, entropy drops to zero. With no labels to penalize wrong predictions, unanchored entropy minimization can drift to this confident-but-wrong solution—the model becomes VERY sure and VERY incorrect. This collapse happens because entropy alone does NOT encode correctness; it only encodes confidence. The implicit assumption—that low density separation (clusters are separated by low-density regions) holds in the test distribution—can fail: if the test distribution is entangled or adversarial, entropy becomes a path to degenerate solutions. Stability depends on how much the distribution shift violates the cluster assumption.</div></div><div class="idea"><h3>Moderate shift: entropy recovers accuracy</h3><div class="eq">When adaptation works in practice.</div><div class="why">Empirically, entropy minimization recovers substantial accuracy under MODERATE shifts—foggy cameras, different viewpoints, lighting changes—because the cluster assumption often holds locally. The shifted distribution still separates classes in roughly the same geometric way; re-normalizing and sharpening predictions aligns the model with the new data manifold. In this regime, entropy minimization is a win: the model converges to a confident AND correct solution on the test stream, without touching the frozen backbone. The model adapts on-the-fly, per batch or per sample, closing the train-test gap without retraining.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Approaches to connect: (1) Adapting on the fly—entropy minimization, batch-norm recomputation, prototype matching in embedding space—for real-time deployment streams. (2) Test-time tuning of frozen encoders—adapting prompts or adapters while keeping the backbone fixed, common in vision-language models. (3) Adapting to the moment—handling video streams or changing viewpoints by updating statistics per-frame or per-shot. (4) Domain shifts in driving—adapting to rain, snow, night; a vehicle's camera degrades over time; the road's appearance changes season to season. (5) Adapting on the robot—self-supervised losses on unlabeled robot observations, meta-learning to quickly fit to a new task or environment, learning from interaction. (6) Closing the sim-to-real gap—the simulation distribution is clean; the real world is messy; adaptation narrows the gap by re-normalizing and entropy-tuning on real rollouts. (7) Cross-modal adaptation—a text prompt shifts; an image style changes; embedding-space adaptation aligns representations without retraining.</p>
+<div class="fp"><b>The through-line.</b> Adaptation at deployment is a second act of learning: the model has learned a general function on training data, and now it must re-aim that function at the new distribution using only unlabeled test signals. Batch-norm and entropy form a dual strategy—recalibrate the normalization layer to match the new distribution's statistics (cheap, passive) and sharpen the model's confidence under the cluster assumption (active, risky). The win is real under moderate shifts; the risk is real under adversarial or entangled shifts. Robust adaptation requires anchoring confidence to correctness, either through careful design of the loss, semi-supervised signals, or a hybrid that blends unlabeled and few-label adaptation.</div>
+<p style="margin-top:16px"><a href="tta-why.html">→ The plain-language big picture</a> ·
+<a href="tta-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Test-time adaptation — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

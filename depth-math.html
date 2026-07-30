@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3D from an image — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">3D from an image · the mathematics · first principles, no jargon</div>
+<h1>3D from an image — why it works, mathematically</h1>
+<p class="lead">One image is a collapsed ray; two eyes triangulate the distance. Networks learn the hidden rule.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="depth-why.html">The big picture</a><a href="depth-in-the-wild.html">In the wild</a><a href="depth-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>A camera collapses 3D onto a 2D sensor. Every pixel collects photons along a RAY radiating from the lens—a ray, not a point. The projection x = K·[R|t]·X (camera intrinsics K, pose [R|t]) throws away depth: a small nearby object and a large distant object that line up on the sensor produce identical pixels. It is a many-to-one map. One image alone cannot recover metric depth—the scale is lost. You need a second constraint: another viewpoint, a geometry prior, or learning.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Why one image fails</h3><div class="eq">Lossy projection</div><div class="why">Each pixel is a 3D ray, not a 3D point. Imagine two objects: one small and near, one large and far. If they sit on the same ray from the camera (the ray passes through both), the sensor captures the same photons and the same pixel value. The two objects are indistinguishable from one frame. Depth can be scaled by any factor k: if X is scaled to k·X and the intrinsic focal length is scaled to k·K, the pixel x = K·[R|t]·X = (k·K)·[R|t]·(X/k) stays the same. One image gives you a direction (the ray), not a distance.</div></div><div class="idea"><h3>Two views recover scale</h3><div class="eq">Triangulation breaks the ambiguity</div><div class="why">A second viewpoint adds a second ray. The two rays intersect (in the ideal case) at a single 3D point. This is geometric triangulation. For a rectified stereo pair—two cameras with aligned image planes—a 3D point X projects to (u₁, v) in the left image and (u₂, v) in the right image (same row v, different columns u₁, u₂). The horizontal shift is the disparity d = u₁ − u₂. By similar triangles (the left camera, the point, the right camera form a triangle), depth Z = f·B / d: depth is focal length times baseline divided by disparity. Disparity is inversely proportional to depth. The second viewpoint adds the missing equation; parallax (the shift of the world as your eye moves) is the geometric signal that pins distance.</div></div><div class="idea"><h3>Monocular networks learn a prior</h3><div class="eq">One image + learned shape model</div><div class="why">A single image is ambiguous, but images of real objects are not random. Scenes have structure: tables are flat, people are roughly cylindrical, buildings have edges. A neural network trained on pairs of images and ground-truth depth learns to infer the hidden depth from these statistical regularities. It learns a shape prior—a bias toward plausible 3D scenes. The network predicts scale-invariant depth (relative depth, which ray is closer to which), not absolute metric depth. The prediction is correct up to an unknown global scale factor. To recover metric depth (the actual distance in meters), you must add one metric anchor: a known distance in the scene, a prior on object size, or a camera calibration.</div></div><div class="idea"><h3>Feed-forward reconstruction</h3><div class="eq">Images in, geometry out</div><div class="why">Multiple views can be stacked into a single forward pass: concatenate or fuse their pixels and run a regression network to output a depth map (or a full 3D shape). No need to iterate or optimize—no bundle adjustment. The network learns implicit camera geometry from data. The advantage: speed, single forward pass, suitable for real-time onboard processing (robots, AR headsets). The tradeoff: the network generalizes only as well as its training data; outside the domain (an unusual viewpoint, a new material, a scene type it has never seen), it can fail. It trades geometric rigor (explicit triangulation) for empirical learning and speed.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Monocular networks predict depth from one image by learning a shape prior from training data (fast, ambiguous scale). Stereo triangulation uses two cameras and disparity to recover metric depth directly from geometry (precise, but needs calibration and two views). Structure-from-motion and bundle adjustment process a sequence of views over time, solving for camera poses and 3D points jointly (slow, global optimization, recovers both shape and scale). Temporal multi-view fusion (video → depth) adds motion cues and self-supervision across frames. Placing a known metric object in the scene (a calibration grid, a ruler, a known-size reference) anchors the scale; onboard rangefinders (LiDAR, ToF) measure depth directly.</p>
+<div class="fp"><b>The through-line.</b> One image is a projection: rays are compressed to pixels. Two rays from different cameras intersect at a point, pinning the distance (triangulation, disparity inversely → depth). Neural networks learn to infer depth from learned shape priors. Recovering metric depth requires a second constraint—a second view, a learned prior, a known scale, or a direct sensor.</div>
+<p style="margin-top:16px"><a href="depth-why.html">→ The plain-language big picture</a> ·
+<a href="depth-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of 3D from an image — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

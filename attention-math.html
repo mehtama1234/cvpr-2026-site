@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Attention — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Attention · the mathematics · first principles, no jargon</div>
+<h1>Attention — why it works, mathematically</h1>
+<p class="lead">Soft-weighting to read what matters most</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="attention-why.html">The big picture</a><a href="attention-in-the-wild.html">In the wild</a><a href="attention-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>Vision models must integrate information across space (whole images, patches, 3D points). Convolution is local and repeating; we need a mechanism that can ask 'which parts are relevant to this query?' and blend their values. The challenge is making this selection smooth enough for gradients to flow, cost-efficient enough to scale, and flexible enough to work across modalities and sensor types.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Softmax as differentiable selection</h3><div class="eq">weights_j = exp(q · k_j / √d) / Σᵢ exp(q · k_i / √d),   output = Σⱼ weights_j · v_j</div><div class="why">Softmax converts the dot product q · k_j (a real-valued similarity) into a probability-like weight in (0,1) that sums to 1. This is a soft-argmax: if one match is much stronger, that weight dominates; if several are similar, they share the weight. Crucially, every element contributes a nonzero gradient, so learning can adjust all queries, keys, and values. The output is always a convex combination of the values, so it stays bounded and inside their geometric hull.</div></div><div class="idea"><h3>Scaling by √d stops saturation</h3><div class="eq">q · k_j / √d scales the dot product before softmax,   prevents exp(·) from hitting near-zero or near-one too early</div><div class="why">When vectors have dimension d, a random dot product q · k grows as O(√d) in magnitude. Without scaling, the exponent exp(q · k_j) becomes huge (→∞) or tiny (→0), crushing softmax into nearly-delta-function weights. Dividing by √d keeps the logits in a gentle range where softmax is roughly linear in its input, maintaining strong gradients throughout training. This is why modern attention without this scaling fails to learn.</div></div><div class="idea"><h3>Permutation equivariance via weight-sharing</h3><div class="eq">if rows of Q, K, V are permuted identically, output rows permute the same way</div><div class="why">Attention does not depend on the order of input sequences—only on which keys match which queries. If you shuffle your input tokens or spatial positions, the output shuffles the same way, but the computation itself (the match Q · Kᵀ) does not break. This is why attention is so useful for sets and sequences: the model learns relationships, not positions. Positional encodings are added back in to tell the model 'where things are,' but the core mechanism is order-agnostic.</div></div><div class="idea"><h3>O(n²) cost from pairwise similarity</h3><div class="eq">compute full matrix QKᵀ (n × n), then softmax each row, then multiply by V → cost is O(n² · d)</div><div class="why">Attention computes a similarity (dot product) between every query and every key, requiring n² comparisons. For images, n is the number of pixels or patches; for 3D point clouds, n is the point count. This quadratic wall limits attention to smaller contexts (images ~32×32 patches, not 2K×2K pixels). Linear attention, sparse patterns, and hierarchical designs break this wall by choosing which pairs to compare or using kernels that can be factored.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Beating the O(n²) wall: linear attention replaces the softmax computation with a kernel method that factors into O(n · d), trading exact soft-selection for approximate weighting. Re-routing what attention sees: sparse attention (local windows, strided patterns, learned routing) selects which keys each query can attend to, reducing n² to n · k for some small k. Positional encoding (sinusoidal, RoPE, ALiBi) re-injects order after the permutation-equivariant weighting, using rotating phases or relative-position biases so nearby patches are upweighted. Interpretability via attention weights: humans and diagnostics read the softmax weights as explanation heatmaps, showing which patches influenced which predictions (a low-bar proxy for what the model 'saw'). Cross-attention: replace K, V from a different modality or time-step, fusing sensors (image + lidar) or temporal frames (current frame attends to history). Transformer as policy: in robotics, action tokens attend to image features and proprioception, predicting the next motor command via weighted state aggregation.</p>
+<div class="fp"><b>The through-line.</b> Attention is a fundamental shift from hand-crafted geometric operations (convolution, pooling) to learned similarity. By making selection smooth and differentiable, it unlocks end-to-end learning of what to look at and how to combine it—a principle that scales from image patches to 3D points to multi-sensor fusion. The √d scaling and positional encoding are the small details that make this principle work in practice.</div>
+<p style="margin-top:16px"><a href="attention-why.html">→ The plain-language big picture</a> ·
+<a href="attention-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Attention — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

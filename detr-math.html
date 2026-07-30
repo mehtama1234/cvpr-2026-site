@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DETR / set prediction — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">DETR / set prediction · the mathematics · first principles, no jargon</div>
+<h1>DETR / set prediction — why it works, mathematically</h1>
+<p class="lead">End-to-end object detection as bipartite matching — learning N slots decoded by cross-attention, with loss that enforces one-to-one object assignment via the Hungarian algorithm, making duplicate suppression implicit and elimination of NMS explicit.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="detr-why.html">The big picture</a><a href="detr-in-the-wild.html">In the wild</a><a href="detr-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p><p>Object detection outputs SETS: variable-size, unordered collections of objects in an image. Traditional detectors (R-CNN, YOLO) predict many box proposals, then use hand-tuned post-processing (non-maximum suppression, NMS) to merge overlapping predictions into a single detection per object. This is indirect: the detector does not know that two high-confidence boxes cannot both be correct, so NMS must prune them afterward.</p><p>What if the detector KNEW it was predicting a set? Then the loss function itself could enforce the constraint: exactly one prediction per object, and each ground-truth object matched to at most one prediction. The optimal matching is a bipartite matching problem—solved exactly by the Hungarian algorithm in polynomial time.</p></p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Set prediction vs. region proposals</h3><div class="eq">core shift</div><div class="why"><p>Detect outputs a FIXED-size set of N candidate objects (N ≥ max objects in dataset). Predictions are an unordered collection; ground truth is also unordered. The only correct loss for a set is one that first assigns predictions to targets ONE-TO-ONE via the best possible matching, THEN compares each matched pair. This matching—solved by Hungarian algorithm—is what forbids two predictions from claiming the same object. NMS is not a post-hoc cleanup; it is the matching problem solved at training time.</p></div></div><div class="idea"><h3>Optimal assignment via bipartite matching</h3><div class="eq">the math that replaces NMS</div><div class="why"><p>Define cost(pred_i, gt_j) as the mismatch between prediction i and ground-truth j (e.g., classification loss + box regression loss). The OPTIMAL assignment is σ* = argmin_σ Σ_i cost(pred_i, gt_σ(i)), where σ is a permutation of ground-truth objects, and σ* is found by the Hungarian algorithm. This permutation is the ONLY correct way to pair predictions with targets; any other pairing incurs higher loss. Because the loss prefers one-to-one matching, the model learns NOT to produce duplicate high-confidence predictions. NMS was necessary when the loss did not know about the set structure; now it is solved inside the loss.</p></div></div><div class="idea"><h3>Queries as learned candidate slots</h3><div class="eq">enable decoding</div><div class="why"><p>Instead of generating region proposals (sliding windows, RPN), DETR uses N LEARNED queries—trainable vectors that remain constant across all images. Each query is decoded by cross-attention over the image features, asking 'what object does this slot attend to?' This is both learnable AND interpretable: slot i attends to the object category and position where it is useful. The fixed set of queries makes the bipartite matching well-defined: match N predictions (one per query) to up to K ground-truth objects (where K ≤ N). Padding ground truth with 'no object' makes the set sizes match.</p></div></div><div class="idea"><h3>Permutation invariance and implicit uniqueness</h3><div class="eq">why duplicates vanish</div><div class="why"><p>The bipartite matching loss is PERMUTATION-INVARIANT: reordering predictions does not change the optimal cost. Crucially, if two queries both decode to the same object (high confidence, similar box), the matching algorithm will assign them to different ground-truth objects or both to 'no object' slots, incurring loss. The loss gradient then trains the second query to either find a different object or suppress itself. Unlike NMS (binary post-processing), this is end-to-end: the model learns internally to avoid duplicates because the loss structure penalizes them. There is no separate pruning stage.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p><p><b>End-to-end training:</b> Convergence requires auxiliary losses to warm up queries; early training does not converge without per-layer matching. Solution: match predictions to targets at every decoder layer, not just the final layer, providing dense supervision.</p><p><b>Beyond boxes—set prediction for other outputs:</b> Segmentation masks and occupancy grids are also sets of localized predictions. Mask2Former and similar architectures extend set prediction to pixel-level tasks: queries decode to mask logits, the same bipartite matching supervises masks. Panoptic segmentation (stuff + things) becomes one set-prediction problem.</p><p><b>Queries as a universal interface:</b> Counting (one query per object type, sum softmax outputs), grounding (text queries match visual regions via cross-modal attention), and pose estimation (keypoint queries) all fit the same framework: learned queries decoded by cross-attention.</p><p><b>Persistent queries for temporal coherence:</b> Tracking (MOT, VOS) extends queries across frames: maintain the same query slots over time, with positional embeddings incorporating temporal offsets. The bipartite matching now includes a temporal consistency term, so queries naturally track the same object across frames. No separate tracking module needed.</p><p><b>3D and open-world extensions:</b> 3D object detection (DETR3D, PETRv2) decodes queries to 3D boxes in bird's-eye view, with matching still solved by Hungarian algorithm. Open-vocabulary and open-world detection replace hand-crafted category lists with learned embeddings (CLIP), while preserving set-prediction structure: queries match objects regardless of category.</p><p><b>On the robot—cooperative perception:</b> Multi-robot detection sharing queries: agents broadcast learned queries (not raw detections), which fuse in a common scene graph. Matching queries across agents solves cooperative localization as a multi-agent set-prediction problem. Queries become the abstraction for 'object identity' across sensors and agents.</p></p>
+<div class="fp"><b>The through-line.</b> <p>DETR unifies object detection with set prediction. The core insight is mathematical: a set has no order, so the only correct loss is one that finds the OPTIMAL one-to-one matching first, THEN penalizes mismatches. The Hungarian algorithm solves this matching exactly. Because the loss is now aware of set structure—one-to-one, permutation-invariant, no duplicates—the model learns to produce unique, non-redundant predictions WITHOUT a separate post-processing stage. Queries (learned candidate slots) enable this through cross-attention decoding, turning detection into a learned question-answering task over image features. The result is end-to-end learnable detection with NMS folded into the loss, opening the door to tracking, segmentation, multimodal grounding, and robotics—all as variants of the same set-prediction framework.</p></div>
+<p style="margin-top:16px"><a href="detr-why.html">→ The plain-language big picture</a> ·
+<a href="detr-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of DETR / set prediction — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

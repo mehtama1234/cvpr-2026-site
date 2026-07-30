@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gaussian splatting — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Gaussian splatting · the mathematics · first principles, no jargon</div>
+<h1>Gaussian splatting — why it works, mathematically</h1>
+<p class="lead">Render a scene as a sum of smooth 3D blobs, project them once, and blend—differentiable rasterization for instant photorealistic view synthesis.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="gsplat-why.html">The big picture</a><a href="gsplat-in-the-wild.html">In the wild</a><a href="gsplat-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>Traditional 3D rendering paints the scene pixel-by-pixel with a neural network (like NeRF). That's slow—you trace rays and run the network millions of times. We need instant rendering of photorealistic, view-dependent scenes without waiting for per-pixel computation.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Explicit Gaussian primitives</h3><div class="eq">Core representation</div><div class="why">Instead of a black-box per-pixel network, build the scene from an EXPLICIT set of primitives. A 3D Gaussian G_i(x) = exp(−½·(x−μ_i)ᵀ·Σ_i⁻¹·(x−μ_i)) is a soft blob centered at μ_i with spread defined by covariance Σ_i. Anisotropic Σ (full 3×3 matrix, factored as rotation·scale) lets the blob stretch and rotate to match real structure—a sphere becomes a thin pancake or needle as needed. Each Gaussian carries a colour c_i and opacity α_i. A sum of Gaussians is incredibly flexible: smooth to model details, sparse to stay efficient. And crucially: Gaussians are DIFFERENTIABLE through-and-through, so gradients flow to position, covariance, colour, opacity—you can optimize a scene by backprop.</div></div><div class="idea"><h3>Differentiable rasterization</h3><div class="eq">Rendering pipeline</div><div class="why">Project each 3D Gaussian onto the 2D image plane (perspective geometry). For each pixel, accumulate the projected Gaussians using alpha-compositing, the exact same blend formula as volume rendering: C = Σ_i c_i·α_i·∏_{j<i}(1−α_j). The product ∏_{j<i}(1−α_j) is the transmittance from blobs in front. Render the full image in ONE forward pass. Because projection and alpha-compositing are differentiable (matrix multiply, softmax-like blend), you get gradients for every Gaussian's position, shape, colour, opacity. No per-pixel network, no ray-tracing loop—just project, blend, done. Rasterization is O(num-Gaussians × image-size), not O(image-size × ray-depth × network-eval).</div></div><div class="idea"><h3>Sparse, moving blobs</h3><div class="eq">Scalability</div><div class="why">A sum of ~100k Gaussians can model an entire scene. Because you only store position/covariance/colour/opacity (tens of floats per blob), you use less memory than a dense feature grid. Since each Gaussian projects independently, you can parallelize across blobs. And because Gaussians are differentiable and have clear geometric meaning—a position, a scale, a rotation—you can optimize them from multiple views simultaneously. Want the scene to move? Animate μ_i(t), Σ_i(t), c_i(t)—add a time dimension and you get 4D Gaussian splatting for dynamic scenes.</div></div><div class="idea"><h3>From photogrammetry to motion</h3><div class="eq">Inverse rendering and animation</div><div class="why">Start with multi-view images and camera poses. Initialize Gaussians by projecting depth points, then optimize: nudge μ, Σ, c, α to match all views simultaneously. Gradients backprop through the rasterizer to update all parameters. In minutes, you fit a high-quality sparse set of blobs. To animate: add velocity to μ, quaternions to rotation, scale over time—the same differentiable rasterizer works. Or run a generative model on top to predict new Gaussians from text, inpainting, or deformation. Because the whole pipeline is differentiable, you can optimize for sharpness (L1 loss on RGB), view consistency, semantic labels, whatever you want.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Make the blobs cheaper by culling or hierarchies (only shade near-front Gaussians). Make them sharper by adaptive splitting and merging—coalesce overlapping blobs, subdivide high-frequency regions. Predict Gaussians in one shot: train a feed-forward encoder that takes a sparse 3D signal and outputs the full set of blobs (speed at test-time). Extend to 4D: add time and velocity so scenes morph and move. Conjure and animate: train a diffusion model or transformer to generate plausible Gaussians from a prompt or rough sketch. Teach semantics: each Gaussian stores a feature embedding, so the scene is also a semantic feature field. Robotics: learn the robot's scene as a live 3D Gaussian map so the robot updates, plans, and re-renders on the fly.</p>
+<div class="fp"><b>The through-line.</b> The insight: EXPLICIT smooth primitives (Gaussians) are differentiable and rasterize instantly, so you can optimize a scene from images in minutes and render photorealistically in real-time—no neural networks during render, no per-pixel computation, just project and blend.</div>
+<p style="margin-top:16px"><a href="gsplat-why.html">→ The plain-language big picture</a> ·
+<a href="gsplat-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Gaussian splatting — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Segment Anything — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Segment Anything · the mathematics · first principles, no jargon</div>
+<h1>Segment Anything — why it works, mathematically</h1>
+<p class="lead">One point, many answers—predict the most confident one.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="sam-why.html">The big picture</a><a href="sam-in-the-wild.html">In the wild</a><a href="sam-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>A single prompt (point, box, or text) is fundamentally ambiguous: a point on a shirt could mean the shirt fabric, the person wearing it, or the whole scene. The map from prompt to mask is one-to-many. Classical segmentation tries to average over possibilities or pick one arbitrarily, blurring incompatible interpretations together. Real segmentation needs to acknowledge that multiple correct masks exist at nested scales and confidence levels.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Hypothesis ensemble over averaging</h3><div class="eq">Instead of outputting a single blurry mask, predict K candidate masks with a confidence score (predicted IoU) for each. The best-scoring mask resolves the ambiguity by letting the model express uncertainty explicitly.</div><div class="why">A point lives at multiple scales: local object boundary, instance, category, scene. A single averaged mask spreads prediction probability across all these nested hypotheses, producing a muddy boundary. K independent masks let each hypothesis maintain sharp edges, and the confidence score picks the most likely one. Training learns which scale a given (image, prompt) pair asks for—the embedding captures appearance, and the prompt interpreter learns to read it. With K=3 or K=4, the model almost never fails to include the right answer.</div></div><div class="idea"><h3>Billion-scale training on diverse masks</h3><div class="eq">Training on billions of segmentation masks makes the image embedding general-purpose, so querying it with new prompts becomes cheap inference, not expensive retraining.</div><div class="why">An image embedding f(image) captures rich visual structure—edges, textures, regions, hierarchies—in a learned representation. Once f is trained on billions of (image, mask) pairs at diverse scales, it learns to separate objects, surfaces, and scenes implicitly. A new prompt (point or box) is just a lookup into that embedding—the model's decoder asks 'given this appearance, what mask does this prompt specify?' The embedding is frozen; only the prompt interpreter runs per-query. Cost scales with prompt specificity, not image complexity.</div></div><div class="idea"><h3>Point is cheap, box is richer</h3><div class="eq">A single point is maximally ambiguous, so K masks are necessary. A box partially resolves scale but still allows multiple interpretations; adding text further constrains the search. The prompt grammar trades annotation cost for mask quality.</div><div class="why">Given only a point, the model must predict K hypotheses to express that multiple valid answers exist. Given a box, the point-hypothesis ensemble can be smaller—the box already narrows scale. Given 'person', the scale is nearly fixed and K=1 suffices. This is a spectrum: sparser prompts require richer hypotheses to compensate for ambiguity. The system is elegant because the same mask-prediction head works for all three prompt types; the prompt encoder just produces higher- or lower-entropy features.</div></div><div class="idea"><h3>Masks as a reusable label factory</h3><div class="eq">Once trained, the model generates high-quality masks for any image and prompt without per-image annotation. These masks become training data for downstream tasks (object detection, instance segmentation, video tracking).</div><div class="why">Billion-scale pretraining creates a frozen embedding that generalizes. Querying it with prompts generates masks for novel images at near-zero marginal cost. These masks can label the pixels ('this pixel belongs to a shoe') so downstream models learn to recognize shoes, people, etc. The embedding captures the appearance variations that make generalization hard; the prompt interpreter learns the geometry of selection. The model doesn't overfit to specific categories because masks are purely geometric—a shoe is just a region, not a shoe-shaped classifier.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Point-and-cut: interactively refine a mask by adding prompts (point inside the object, point outside). Point once, follow it cheaply: SAM2 tracks a mask through video frames by re-embedding frames and re-running the decoder—the prompt stays fixed. Cross-domain transfer: train on diverse masks (photos, medical images, synthetic 3D renders, drawings), so the embedding learns appearance-invariant features. Which pixels do I grasp: robotics prompt—given an RGB-D image and a grasp point, output the graspable pixels (a segmentation task disguised as robot control). Mask generation: run the prompt interpreter on a dense grid of points to cover the whole image; pick non-overlapping masks via NMS to build an instance segmentation.</p>
+<div class="fp"><b>The through-line.</b> Sparse prompts under-determine segmentation, so predict multiple candidate masks with confidence scores instead of a single blurry average. Billion-scale training on geometric masks makes the image embedding reusable—new prompts are cheap queries. The same model generalizes across domains, scales, and downstream tasks because it learns to select regions, not classify categories.</div>
+<p style="margin-top:16px"><a href="sam-why.html">→ The plain-language big picture</a> ·
+<a href="sam-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Segment Anything — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>

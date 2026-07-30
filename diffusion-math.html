@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diffusion — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Diffusion · the mathematics · first principles, no jargon</div>
+<h1>Diffusion — why it works, mathematically</h1>
+<p class="lead">Turn one hard jump into many easy steps—learn to reverse the noise.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="diffusion-why.html">The big picture</a><a href="diffusion-in-the-wild.html">In the wild</a><a href="diffusion-deep-reads.html">The papers</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>Images are high-dimensional; sampling from p(x) directly is intractable. Generative models must either compress the problem or transform it. Diffusion models sidestep this by starting with pure noise (which we know how to sample) and learning to denoise incrementally. The trick: a known forward process (noising) can be reversed if we learn the score—the gradient that points back toward data.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>The Forward Corruption Chain</h3><div class="eq">x_t = √ᾱ_t·x₀ + √(1-ᾱ_t)·ε; each ε ~ N(0,I). At t=0 we have data; at t=1 we have noise. The coefficients √ᾱ_t and √(1-ᾱ_t) interpolate smoothly between them.</div><div class="why">This formula is a closed-form path through Gaussian space. It lets us jump directly to any noise level without simulating intermediate steps. The linear combination ensures the noise direction is orthogonal to the data—we corrupt without destroying the structure completely. By controlling the schedule ᾱ_t, we decide how fast corruption happens; diffusion models train faster when corruption speed matches learning dynamics.</div></div><div class="idea"><h3>Predicting the Score Means Predicting Noise</h3><div class="eq">The score ∇_x log p_t(x) tells us which direction increases probability. By Tweedie&<span class="c"># x27;s formula, it is proportional to (μ_t - x_t) / σ_t². For our process, μ_t ≈ √ᾱ_t·x₀ and σ_t² ≈ 1-ᾱ_t; rearranging gives the score ∝ (x₀ - x_t) / √(1-ᾱ_t). Since x_t = √ᾱ_t·x₀ + √(1-ᾱ_t)·ε, the score is proportional to -ε / √(1-ᾱ_t).</span></div><div class="why">We train ε_θ(x_t, t) to predict the noise ε that was added. This is equivalent to learning the score because both point in the same direction—toward cleaner images. Predicting noise is easier to optimize than predicting probabilities directly. The network sees a corrupted image and learns to identify what distortion was introduced; this is a deterministic, supervised task.</div></div><div class="idea"><h3>Reversal: Reversing Noise is Reversing Time</h3><div class="eq">In continuous time, the forward process is a stochastic differential equation (SDE) dx = f(x,t)dt + g(t)dW. Reverse time (t → 1-t) gives an SDE that flows backward: the reverse drift is f_reverse(x,t) = f(x,t) - g(t)² ∇_x log p_t(x). Sampling means integrating this SDE from t=1 to t=0.</div><div class="why">The reverse SDE is derived rigorously from probability theory: if you know the forward process and the score function, you can run it backward. Each reverse step adds a tiny Gaussian noise (controlled by g(t)) and subtracts the learned score direction. Over many steps, this noise averages to nothing and the score dominates—pulling the sample toward regions of high data probability. The discrete version is simple: x_{t-1} = x_t - (step size) · ∇_x log p_t(x) + (small noise).</div></div><div class="idea"><h3>Loss: Matching Predictions to Truth</h3><div class="eq">The training loss is E_{t,x_0,ε}[‖ε − ε_θ(x_t, t)‖²]. We randomly sample a time step t, corrupt x_0 to get x_t, and train the network to recover ε. Weighting by t can accelerate learning on high-noise regions.</div><div class="why">This loss is simple cross-entropy in noise space. The network sees many corrupted versions of the same image at different noise levels—a form of data augmentation that forces it to learn denoising across all scales. Minimizing this loss is equivalent to minimizing the reverse KL divergence between our generative distribution and the data distribution, making it theoretically grounded.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Text-to-image conditioning: inject the text embedding into the score prediction (cross-attention), so the score learns to denoise toward matching text. Lifting 2D priors to 3D: train diffusion over a 3D latent space (voxels or neural fields) and condition on multi-view images, reversing the rendering process to reconstruct 3D structure. Editing and inverse problems: freeze the network and optimize the image directly to minimize a task loss (e.g., semantic segmentation) while staying on the learned data manifold, guided by the score. Perception via diffusion: use the score or likelihood as a learned metric for image quality, useful in downstream tasks. Robot policies via diffusion: treat action sequences as objects to denoise, conditioning on observations—the score learns to correct trajectories away from collision and toward task success. Accelerating sampling: ODE solvers (fewer steps, no noise), score distillation (train a fast model to mimic the slow one), or learnable noise schedules trade quality for speed.</p>
+<div class="fp"><b>The through-line.</b> Diffusion inverts the curse of dimensionality by splitting one hard problem (sample from p(x)) into a learned sequence of easier problems (denoise at each scale). The score is the learned compass; the schedule is the map. Every approach is a variation on this core idea: condition the score, change the space, or use the score for something other than generation.</div>
+<p style="margin-top:16px"><a href="diffusion-why.html">→ The plain-language big picture</a> ·
+<a href="diffusion-deep-reads.html">→ The papers, opened up</a> ·
+<a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Diffusion — the quantity being optimized, the core relations, and why they work · part of the 27-theme first-principles collection · CC0.</footer></div>
+</body></html>
