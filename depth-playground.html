@@ -1,0 +1,177 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Parallax sandbox — where depth comes from</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:100%;max-width:640px;height:auto;display:block;margin:0 auto;background:#0f1417;border-radius:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.seg button{font-family:var(--mono);font-size:12.5px;padding:7px 14px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.ctl{margin:12px 0}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.ctl input[type=range]{width:100%;max-width:640px}
+.read{font-family:var(--mono);font-size:13px;color:var(--ink);margin-top:10px;line-height:1.7}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">3D from a flat image · the parallax sandbox</div>
+<h1>Feel where depth comes from</h1>
+<p>The <a href="depth-why.html">why page</a> made two claims with real numbers: one image can't tell you the
+<em>size</em> of the world, but two images can. Here you can move the pieces yourself. Switch between
+<em>one eye</em> and <em>two eyes</em> and watch what the camera actually sees.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="depth-why.html">The big picture</a><a href="depth-in-the-wild.html">In the wild</a><a href="depth-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="seg" id="mode"><button data-m="one" class="on">One eye — the ambiguity</button><button data-m="two">Two eyes — parallax</button></div>
+<div class="pwrap">
+  <canvas id="cv" width="640" height="360"></canvas>
+  <div class="ctl" id="ctlOne"><label for="sOne">How far away is the object — <span id="vOne" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sOne" type="range" min="0" max="100" step="1" value="20"></div>
+  <div class="ctl" id="ctlTwo" style="display:none"><label for="sTwo">Distance between the two eyes (baseline) — <span id="vTwo" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sTwo" type="range" min="4" max="60" step="1" value="34"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp" id="explainOne"><b>One eye can't tell size from distance.</b> As you drag the object farther, it
+also grows just enough to fill the same cone — and the picture the camera records (the bar on the right) never
+changes. A tiny close object and a giant far one are the same photo. That is the scale ambiguity, exactly: one
+image pins down the <em>direction</em> to everything, never the <em>distance</em>.</div>
+<div class="fp" id="explainTwo" style="display:none"><b>Two eyes turn shift into distance.</b> Each object lands
+at a slightly different spot in the left eye than the right — and the <em>near</em> one shifts far more than the
+<em>far</em> one. That shift (the disparity) is a direct ruler: <span style="font-family:var(--mono)">depth =
+focal × baseline ÷ shift</span>. Widen the baseline and every shift grows, so depth gets easier to read — which
+is why your two eyes are set apart, and why a robot wants a wide stereo rig.</div>
+<p style="margin-top:14px"><a href="depth-why.html">→ Why it works</a> ·
+<a href="depth-in-the-wild.html">→ How the field uses it</a> ·
+<a href="depth-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A geometry sandbox for monocular scale ambiguity and stereo parallax · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height, mode='one';
+  var sOne=document.getElementById('sOne'), sTwo=document.getElementById('sTwo');
+  var A='#0E7C86';
+  // world->topdown canvas (top half). x in [-1.6,1.6], z in [0.6,4.2]
+  var TDx0=20,TDy0=20,TDw=W-40,TDh=190;
+  function tx(x){return TDx0+(x+1.6)/3.2*TDw;}
+  function tz(z){return TDy0+ (1-(z-0.6)/3.6)*TDh;} // near=bottom
+  var focal=520, cx=W/2; // px on a virtual film of width W
+  function drawFilm(y,label){ ctx.fillStyle='#182026'; ctx.fillRect(20,y,W-40,34);
+    ctx.strokeStyle='#2b3a44'; ctx.strokeRect(20,y,W-40,34);
+    ctx.fillStyle='#6b7f8b'; ctx.font='11px monospace'; ctx.fillText(label,24,y-4); }
+  function clear(){ ctx.clearRect(0,0,W,H); }
+  function objColor(i){ return ['#f2c14e','#57b8c9','#e07a5f'][i]; }
+
+  function renderOne(){
+    var t=+sOne.value/100;
+    var z=1.0+t*2.8;               // distance
+    var half=0.16*z;               // half-size grows with distance -> constant angular size
+    clear();
+    // top-down
+    ctx.fillStyle='#0f1417'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#243039'; ctx.strokeRect(TDx0,TDy0,TDw,TDh);
+    ctx.fillStyle='#6b7f8b'; ctx.font='11px monospace'; ctx.fillText('top-down: camera at bottom, looking up',TDx0+4,TDy0+14);
+    // camera
+    var camx=tx(0), camy=tz(0.62);
+    ctx.fillStyle='#cbd5db'; ctx.beginPath(); ctx.moveTo(camx-8,camy+8); ctx.lineTo(camx+8,camy+8); ctx.lineTo(camx,camy-6); ctx.closePath(); ctx.fill();
+    // rays to object edges
+    ctx.strokeStyle='rgba(242,193,78,.5)'; ctx.beginPath();
+    ctx.moveTo(camx,camy-6); ctx.lineTo(tx(-half),tz(z)); ctx.moveTo(camx,camy-6); ctx.lineTo(tx(half),tz(z)); ctx.stroke();
+    // ghost at 2x depth (same angular size -> same image)
+    ctx.strokeStyle='rgba(120,140,150,.5)'; ctx.setLineDash([4,3]);
+    ctx.strokeRect(tx(-half*1.9),tz(Math.min(z*1.9,4.15))-6,(tx(half*1.9)-tx(-half*1.9)),12); ctx.setLineDash([]);
+    // the object
+    ctx.fillStyle='#f2c14e'; ctx.fillRect(tx(-half),tz(z)-7,(tx(half)-tx(-half)),14);
+    // film (single view): project edges
+    var uL=cx+focal*(-half)/z, uR=cx+focal*(half)/z;
+    drawFilm(268,'what the one camera records');
+    ctx.fillStyle='#f2c14e'; ctx.fillRect(20+ (uL/W)*(W-40),270, ((uR-uL)/W)*(W-40),30);
+    document.getElementById('vOne').textContent='distance '+z.toFixed(2)+'  ·  size '+(half*2).toFixed(2);
+    document.getElementById('read').innerHTML='object distance <b>'+z.toFixed(2)+'</b>, physical width <b>'+(half*2).toFixed(2)+'</b> &rarr; image width on film <b>'+(uR-uL).toFixed(0)+' px</b> &mdash; drag and watch: the film width <b>never changes</b>. The dashed box is a different object twice as far and twice as big: same picture.';
+  }
+
+  function renderTwo(){
+    var B=+sTwo.value/100*1.0;     // baseline in world units (0.04..0.6)
+    var objs=[{x:-0.2,z:1.3},{x:0.5,z:2.3},{x:-0.6,z:3.6}];
+    clear(); ctx.fillStyle='#0f1417'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#243039'; ctx.strokeRect(TDx0,TDy0,TDw,TDh);
+    ctx.fillStyle='#6b7f8b'; ctx.font='11px monospace'; ctx.fillText('top-down: two cameras (baseline apart), three objects',TDx0+4,TDy0+14);
+    // cameras
+    var cyw=tz(0.62);
+    [{x:-B/2,c:'#7fd0de'},{x:B/2,c:'#d8b4f0'}].forEach(function(cm){
+      var px=tx(cm.x); ctx.fillStyle=cm.c; ctx.beginPath(); ctx.moveTo(px-7,cyw+8); ctx.lineTo(px+7,cyw+8); ctx.lineTo(px,cyw-6); ctx.closePath(); ctx.fill();
+    });
+    // objects + rays from each camera
+    objs.forEach(function(o,i){
+      ctx.fillStyle=objColor(i); ctx.beginPath(); ctx.arc(tx(o.x),tz(o.z),7,0,7); ctx.fill();
+      ctx.strokeStyle='rgba(160,175,185,.28)'; ctx.beginPath();
+      ctx.moveTo(tx(-B/2),cyw-6); ctx.lineTo(tx(o.x),tz(o.z)); ctx.moveTo(tx(B/2),cyw-6); ctx.lineTo(tx(o.x),tz(o.z)); ctx.stroke();
+    });
+    // two film strips
+    drawFilm(250,'left eye'); drawFilm(298,'right eye');
+    var rows='';
+    objs.forEach(function(o,i){
+      var uL=cx+focal*(o.x+B/2)/o.z, uR=cx+focal*(o.x-B/2)/o.z;
+      var disp=uL-uR, depth=focal*B/disp;
+      function fx(u){return 20+(u/W)*(W-40);}
+      ctx.fillStyle=objColor(i); ctx.beginPath(); ctx.arc(fx(uL),265,6,0,7); ctx.fill();
+      ctx.beginPath(); ctx.arc(fx(uR),313,6,0,7); ctx.fill();
+      ctx.strokeStyle=objColor(i); ctx.setLineDash([3,3]); ctx.beginPath(); ctx.moveTo(fx(uL),265); ctx.lineTo(fx(uR),313); ctx.stroke(); ctx.setLineDash([]);
+      var nm=['near','middle','far'][i];
+      rows+='<div><span style="color:'+objColor(i)+'">■</span> '+nm+' (true '+o.z.toFixed(1)+') &rarr; shift <b>'+disp.toFixed(0)+' px</b> &rarr; depth = focal×baseline÷shift = <b>'+depth.toFixed(2)+'</b></div>';
+    });
+    document.getElementById('vTwo').textContent='baseline '+B.toFixed(2);
+    document.getElementById('read').innerHTML=rows+'<div style="margin-top:6px;color:var(--graphite)">the near object shifts most; the recovered depth matches the truth &mdash; and it is in real units.</div>';
+  }
+
+  function render(){ mode==='one'?renderOne():renderTwo(); }
+  document.querySelectorAll('#mode button').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('#mode button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    mode=b.getAttribute('data-m');
+    document.getElementById('ctlOne').style.display = mode==='one'?'block':'none';
+    document.getElementById('ctlTwo').style.display = mode==='two'?'block':'none';
+    document.getElementById('explainOne').style.display = mode==='one'?'block':'none';
+    document.getElementById('explainTwo').style.display = mode==='two'?'block':'none';
+    render();
+  });});
+  sOne.addEventListener('input',render); sTwo.addEventListener('input',render);
+  render();
+})();
+</script>
+</body></html>
