@@ -1,0 +1,133 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Knowledge distillation — a big teacher trains a small student, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:14px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Knowledge distillation · first principles · a big teacher trains a small student</div>
+<h1>Knowledge distillation — pouring a big model into a small one</h1>
+<p>The best model is often too big, too slow, or too power-hungry to actually deploy — on a phone, a camera, a
+robot. Knowledge distillation is the trick that lets a small, fast model inherit a big model&#39;s skill: instead
+of training the small one on plain labels, you train it to imitate the big one&#39;s <em>answers</em>, including
+the subtle shading of its second-guesses. This page is the plain story of that idea — what really transfers, why
+soft answers beat hard labels, and how a 64×-smaller model closes most of the gap, all on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="distill-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — the best model is too big to use</h2>
+<p>You train a large network and it is excellent. Now you have to run it somewhere real — and it is too slow, too
+large, or too hungry for the device you have. Shrinking it by just training a small network from scratch loses
+accuracy, because a small model learning from raw labels has to rediscover everything alone. And often you do not
+even have many labels. Can the small model somehow benefit from the big one&#39;s hard-won knowledge?</p>
+<div class="fp"><b>The problem, stated once:</b> get the accuracy of a big model out of a small, fast, deployable
+one — especially when true labels are scarce.</div>
+
+<h2 id="reframe">2 · The reframe — learn from the teacher's answers, not the labels</h2>
+<div class="fp"><b>The idea: don&#39;t train the small model on the labels — train it to copy the big model.</b> Run
+the big <em>teacher</em> and look at its full output: not just its top guess, but the whole distribution — how
+much it thinks a shirt looks like a t-shirt, a coat, a pullover. Train the small <em>student</em> to reproduce
+that whole distribution. Those runner-up probabilities (the <em>dark knowledge</em>) carry the teacher&#39;s sense
+of how classes relate, which a one-hot label cannot. And because the teacher can generate this signal for
+<em>any</em> image, it can label mountains of unlabelled data for the student for free.</div>
+<div class="eq">student loss = match( student(x) , teacher(x) )   over a big pile of (mostly unlabelled) x
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># copy the teacher's soft probabilities, softened by a temperature, not just its top-1 label</span></div>
+<p>It is a deceptively simple move — imitate a model instead of the ground truth — and it works startlingly well.
+The run shows how well, and what exactly is doing the work.</p>
+
+<h2 id="run">3 · Seen on a real run — a 64× smaller student catches up</h2>
+<h3>1 · A tiny student, taught by a big teacher</h3>
+<p>We trained a big, accurate teacher network (<span class="stat">92%</span> on
+FashionMNIST). Then a <em>small</em> student — <span class="stat">64×</span> fewer weights
+(26,698 vs 1,701,130) — that is only allowed <span class="stat">1,000</span>
+true labels. Trained on those labels alone it manages <span class="stat">76%</span>. But
+the teacher can label an unlimited pile of <em>unlabelled</em> images with rich soft predictions — so we let it
+soft-label <span class="stat">20,000</span> more, and trained the student to match those:</p>
+<div class="fp"><b>The same tiny student jumps from 76% to
+87% — a <span class="stat">+11 point</span> gain — without a single extra true
+label.</b> All of it came from the teacher&#39;s soft targets on data nobody labelled. That is the power of
+distillation: the teacher&#39;s knowledge, not just the labels, is what transfers.</div>
+<h3>2 · What actually transfers — the dark knowledge</h3>
+<p>Why do soft labels beat hard ones? Because a one-hot label says only <em>shirt</em>, while the teacher says
+<em>shirt, but a bit t-shirt and a little pullover</em> — and that shading of the near-misses tells the student
+how the classes relate. Here is the teacher&#39;s real soft opinion on three garments:</p>
+<div style="display:flex;flex-direction:column;gap:10px;margin:14px 0;max-width:420px"><div style="border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--paper);display:flex;gap:12px;align-items:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAADiElEQVR4nN3YPW8cVRTG8d/s7Nr7anvzZschCYQAAqIkKAgJAimooKDgA9CAREGfhq8CXUpEwYsUUQMVNIABOSSBROSFxMTY3vV6d2d2KUYXrERKgXRXWk41o9HMff733jnnuScRosSIBIz9Gy9Sp0IKZrnLlx4WpYc+/Y8R5aPJg1cFe4tXeY7XWGVMk32sUSPlcz7l+sSURsYvbgr2dzlOmVWanKRPnS4b9NhHh2N0eZ+bE1Aaf/UL9vdos8GQlC1meJPbbNPjG15nhTpHSXlnAkqjfLT8z1WBf5hD/EoTdFjkCld5gjUuc46bVKnRY4m3uLBrAqcRfwSOM6JChyopHea5yMtshxz4Bw3mqLDDaS7sSpjTiF/Es/SYIaFLiYw5bvEFORlXwSIpVfDCBJROBH+ZrQB1mwYpGSdYoc1NllngALc4wVXWmGEQVWl8/AOgwQIrZGHMnD5tZkmosMSAWRaCtJN8G1VpfPzH6VKlwZg2lbATClM0YpExVcrUw1bJeHT68R+hH8Y5zHX6lEP5yzhMypAdUg7SZcCAJ2MrjY+/TM4mVebIKZORMmImzEM7uKBN9rJBwunYSuPjNxlyjyN8QpMxQ6pUqZBRZoacHqu8wZiMWmyl8fGr7JCBnzjHFhixwHogzYJZvESdhB3mYyuNjF8Ov3lCtsvGN8ios8Y4zECJMr9QI6FMgwbdeEoj4+8NrjUNGa9MHhxg4YVmGZCHKbpFDvqMWeJKPKWR8Ysy16PN72zR4A4VEnJmqTFiSJkWTe4wpkSJA9OMP6YTStgq3bCyKRXGDOiFgwD20GGFFuuMaEVVGhl/DxlV5vmefTQZBWO/TRYMT1H6c45whZeo8vOU458JBW6RdZ5nm1HY24OQGFN2QoE4xSbb1Ghwho/jKY2M36HGIVp8xyk2qIMkeJ6cLv1gfR/lMz7kI7rcjqo0frMLDY7xI+dZZ4Y5brCfCo1QEBfZzzHepk+HfmylEznwdvmBFm3+pBI6G20ShsH9FrB1TnFxMkrj4yeUyDkbvF+PlMe4BhYpUWObHW7wChd3tbkiKo2PPw7F7ik2mSXnONfosBy6QMWpv0+fg+HF5H/R7Cry21EqXGbEJe7xTNj2Rfb7K7QCaqHPM53496e+oq1R5Txnmec3htS4wx66tFlig7t8wFeTUToR/PviCE+zRCuMnzHgOl+HA86DMT34fwM+KwdCB3EdFgAAAABJRU5ErkJggg==" width="70" style="border:1px solid var(--line);border-radius:6px;image-rendering:pixelated"/><div><div style="font-size:12.5px;margin-bottom:4px">true: <b>Shirt</b> — the teacher also sees:</div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Shirt</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:85%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.85</span></div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">T-shirt</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:11%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.11</span></div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Pullover</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:2%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.02</span></div></div></div><div style="border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--paper);display:flex;gap:12px;align-items:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAADBElEQVR4nN3Zu29cRRTH8c/du3v34Rcxiiw7DmCU4IIiIqJDCIFEQ4dc8BfwN/APUEJFScE/AC0NDQ1dRCQSCck8FClK4gTj9a53N/u+FFcTreQsQUg70vp0d+7M6Pedc+6cM3MTcywhB5do8jqXmdDn7rwxwUov6vB/bCGTJs9tTZmQ0CejR41Tqgz5ms/+ddJlxy/sE65xgwO+4C0+5Ac+5QHjmQiJoTQ6/gHrfMP37LLHKtf5/UWTLg9+efah8GbGTTaocY03+Ygmj3gD7JPxkApPmMZRGsv7N3iXQ07psUObGrcp0yDnKhhyj7/jKI2F/z5VGvxJnRF/8TZt7rDNGk1OmFDhfhyliw9+rLDGI97hF+qgQzUsRZmcHj0aNKIpjYJ/iYwjtrhMN+T6FiMSjmmTUKJCmYxhBKVR8DcYccpJyPUJU2r0GVCnTo8tUlqscxxBaRT8BgPGNHiZJ+QhuY9IKdFnzFMmYBBHaRT8KlMGbLFJi02qTJgwYEpKm/e4Tf683XOp8bskrHPES+RMGVIiZ0gFHHDIQ6pxlEbBzzghYZ8+feqkoWvh+g74mC8ZsBJHaRT8nDYZe5xRo86QnEko8HokPOYKd8LiLFzp4vGrlBiyDhp0GDEmo0saPoQr7LA7R9eS4hd+bIfavseQlFXGpOSklHnAEdcRGieLVhor+HvcZMpTakwYBbpxuAdAl/2g62LgZ+HQt0mJM1aokoZyF5NQ/R6HFDA9l/uWFL8oYsfUmdJii5xVMqbhOFyiTYtXwOictCXFf3Z7s80fod4bh+AvBS8X+/+vIfjHFwi/+ISvcp+EKgn1sDJF5VOc8jpUQi6oRFAaq+pDg99C9ZuHsC9ejUPPLjUaIS0uXOni8WvB+6/yE3ts06NJmZSULIzpsxF2xRhKF49fpk9KnVvhorvEJj36rLLGlCo/85hdDi+K94u9bocK380Z8Oxm7xYNPuDuubJ/SfFfY50NPv9vg7/iXrj3aM60Lyl+hzJn/Bha5v3IKOzbmXJo1pYH/x8YzdhDtgnjsAAAAABJRU5ErkJggg==" width="70" style="border:1px solid var(--line);border-radius:6px;image-rendering:pixelated"/><div><div style="font-size:12.5px;margin-bottom:4px">true: <b>Coat</b> — the teacher also sees:</div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Coat</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:100%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">1.00</span></div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Pullover</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:0%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.00</span></div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Shirt</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:0%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.00</span></div></div></div><div style="border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--paper);display:flex;gap:12px;align-items:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAADL0lEQVR4nN3ZT2hcVRTH8c+b/zMmaUrSEO0fqW01tQvbjWCFLroRFMVFN67cdSG4cKsLQSi0G3cuVBBxpUtBwQqldqVVFBUUTFUoNZA0SUnSNJmZzMxzMdzhpWoown0wPat5590/v++995x33pvEjjbKk1zKeE6wzrUdexV2HvT/WZRBk3/1VnmNlxhnijtMhFtNNuhxhfe5mJvSvPDPc5ZRmmzSpk6VAi02KVChQYFvOJWP0lzwz/Iu83RISajQBT1SyiBliy77+ILnc1CaC/4CVdYpMg1u0WaLB6izTJEONRJajHCI5dhKowxauut6F83A/g7v8T3z7GeN60yxxX7+osUY9fsIv8pmOBNvsEqJOpc5DX7hccZ4lXMsUuBpvo2tNP7hr9DiFgm7+ZQXSUO7t1jjSya4SYtrLDHKJ7wcW2n83X8Q9GiAfcF/BnwU4uJnprmT6XgkB6Xx8acy3jZ7w5xXwEUeYYnnuMyPrFOgG9YtrtL4+HsR4mGDaXokPMYFDoFfmeEAr3CSZVo8lIPS+PiTIKVImXXOUeIZnuAYoxzlPB9zHBTpUclBaY6xX6TEKq+DFRY4BuaZpBVa9sMExVAdxVIaH39P+NHiEqe4QZcqJW6DMgvUuM0qx1kCD/NnVKXx8cfBCHN8yLNsZGbuN+3XvRXqfBBCAHuGH38iPPVusgLalEPx37d+ZugvwqDU2dyubkjxx2lTY50Z0AlpLQ1tElJSxjPOQkibEZXGxy8Eot84vN2Z3f0CbYosgCLuC/xyyN6z4S2+j5atjBMKNMEcNwL4SGyl8fGbdECPGdr/mLN/8nthlQ4zz3R4HY6rND5+J1yXmWRj++1BCKThVLzAdU6EVBBXaS74VXCUcgjwAXUSdn/Q7SA/cYbm9sJvSPG3AuluGqwG2B5Cwk/DOqzwFLOhQS220vj4bZqM8DanqWXq2DRzDPr17Rhf8RlvhsowrtL4+A06tCmxzBH+yEybffZ1mGCRRdDlQGyl8fG/5iRNZnn03vofZI0632WcQ4p/lQatEOz3YhWq4ePwwIYUf44faIYPWSW6//U/EAldfudzdnE1ttIog/4NxDbTsGawTjIAAAAASUVORK5CYII=" width="70" style="border:1px solid var(--line);border-radius:6px;image-rendering:pixelated"/><div><div style="font-size:12.5px;margin-bottom:4px">true: <b>Pullover</b> — the teacher also sees:</div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Pullover</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:99%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.99</span></div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">T-shirt</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:1%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.01</span></div><div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;margin:2px 0"><span style="width:64px;text-align:right;color:var(--graphite)">Coat</span><div style="background:#eee;border-radius:3px;height:11px;width:120px"><div style="width:0%;background:var(--accent);height:11px;border-radius:3px"></div></div><span style="width:38px">0.00</span></div></div></div></div>
+<p>Those runner-up probabilities are the <em>dark knowledge</em>. A hard label throws them away; distillation
+hands them to the student.</p>
+<h3>3 · The softening knob — temperature</h3>
+<div class="tworow"><svg viewBox="0 0 360 150" width="100%" style="max-width:380px"><line x1="30" y1="113.2" x2="350" y2="113.2" stroke="#b9b3a8" stroke-dasharray="4 3"/><text x="350" y="109.2" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="end">scratch (hard labels) 0.76</text><polyline points="30.0,17.9 136.7,22.5 243.3,38.2 350.0,44.6" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="30.0" cy="17.9" r="3" fill="#0E7C86"/><text x="30.0" y="133.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">T=1</text><circle cx="136.7" cy="22.5" r="3" fill="#0E7C86"/><text x="136.7" y="133.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">T=2</text><circle cx="243.3" cy="38.2" r="3" fill="#0E7C86"/><text x="243.3" y="133.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">T=4</text><circle cx="350.0" cy="44.6" r="3" fill="#0E7C86"/><text x="350.0" y="133.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">T=8</text><text x="30" y="12" font-size="9" fill="#8a857c" font-family="monospace">distilled accuracy vs softening temperature</text></svg>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">You can dial how much to <em>soften</em> the
+teacher&#39;s probabilities before the student copies them. On this task the student does best near
+<span class="stat">T=1</span>; push the temperature too high and the signal washes out toward
+a flat, uninformative smear. Every setting still beats the 76% scratch baseline (dashed) —
+the teacher helps across the board.</p></div></div>
+
+<h2 id="why">4 · Why it matters — big-model quality, small-model price</h2>
+<p>Distillation is how frontier quality reaches real devices: train a giant once, then distill it into something
+small enough to ship. The same move now powers the fast-image-generation wave — a slow, many-step diffusion model
+is distilled into a student that paints in a single step — and it is how one model teaches another to stop
+hallucinating or to forget something on purpose. Whenever you see a small model punching far above its weight, a
+teacher is usually behind it.</p>
+
+<h2 id="robots">5 · The surprise — the teacher that sees what the robot can't</h2>
+<p>Robotics uses distillation with a beautiful twist. Train a teacher <em>in simulation</em>, where it can cheat —
+it knows the exact terrain, the true friction, the object&#39;s full 3D shape, the future. That
+<em>privileged</em> teacher learns a great policy. Then distill it into a student that only gets what the real
+robot can actually sense from its onboard cameras and joints. The student inherits the skill without ever needing
+the cheat sheet.</p>
+<div class="fp"><b>Same trick, the teacher knows more than the student can.</b> This privileged-teacher-to-onboard-
+student distillation is a workhorse of sim-to-real transfer — humanoid controllers, legged locomotion, dexterous
+hands — precisely because the gap being bridged is not big-to-small but <em>all-knowing-to-what-a-robot-can-feel</em>.
+The <a href="distill-in-the-wild.html">in-the-wild page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Feel the dark knowledge in the
+<a href="distill-playground.html">soft-label sandbox</a> — soften the teacher&#39;s answer and watch the extra
+signal a hard label throws away. Then see <a href="distill-in-the-wild.html">how CVPR &amp; robotics actually use
+distillation</a>. Then go <a href="distill-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="distill-playground.html">→ The soft-label sandbox</a> ·
+<a href="distill-in-the-wild.html">→ In the wild</a> ·
+<a href="distill-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles knowledge distillation, grounded in a real run (a 64×-smaller student distilled from a big teacher) ·
+the +11-point gain, the dark-knowledge distributions, and the temperature curve are measured · CC0.</footer></div>
+</body></html>

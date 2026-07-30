@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Equivariance — building the symmetries of the world into a network, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.mxtable{border-collapse:collapse;width:100%;max-width:460px;margin:12px 0;font-size:13.5px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:7px 10px;text-align:center}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11px;letter-spacing:.03em;text-transform:uppercase}
+.big{font-family:var(--mono);font-weight:700}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Equivariance · first principles · building symmetry into the network</div>
+<h1>Equivariance — teaching a network the symmetries of the world</h1>
+<p>A cat upside-down is still a cat. A wrench rotated forty degrees is the same wrench. The world is full of these
+symmetries, and a plain network is blind to them — shown a thing it learned upright, then rotated, it can be
+hopelessly lost, because it had to memorize every orientation separately. Equivariance is the idea of building
+the symmetry <em>into</em> the network, so that rotating the input simply rotates the answer — guaranteed, not
+learned. This page is the plain story of that idea, and a real run where symmetry does the work of data you never
+had to collect.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="equivariance-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — the same thing, in a new pose</h2>
+<p>Almost everything a vision system sees could appear at any position, any orientation, any scale, and it would
+mean the same thing. A plain network does not know this. Unless you show it a wrench at every angle, it may
+recognize the upright one and miss the tilted one — so you pour in more data, more augmentation, more parameters,
+all to teach it something you already knew for certain: that rotating a thing does not change what it is.</p>
+<div class="fp"><b>The problem, stated once:</b> the world has known symmetries (rotate, translate, reflect and the
+meaning is unchanged) — how do you stop a network from wastefully re-learning each one from data?</div>
+
+<h2 id="reframe">2 · The reframe — bake the symmetry in</h2>
+<div class="fp"><b>The idea: make the symmetry a property of the architecture, not a lesson from data.</b> A network
+is <em>equivariant</em> to rotation if rotating the input rotates the output in exactly the same way — the network
+and the rotation <em>commute</em>. Build that in and you get every orientation for the price of one. There are
+three ways up this mountain: <b>augment</b> (show rotated copies and hope it learns the symmetry — approximate),
+<b>canonicalize</b> (rotate every input into one standard pose first, so the model only sees one version), or
+<b>build it in</b> (design the layers so equivariance holds exactly, by construction).</div>
+<div class="eq">f( rotate(x) )  =  rotate( f(x) )      # equivariance: the network commutes with the symmetry
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># learn one orientation, get all of them for free — no extra data</span></div>
+<p>The payoff is data efficiency and guaranteed generalization. The run shows it in the starkest possible way.</p>
+
+<h2 id="run">3 · Seen on a real run — symmetry as free data</h2>
+<h3>1 · The star — train on a slice, and only symmetry generalizes</h3>
+<p>We taught a small network to read the orientation of an arrow. Then we handicapped it: it only ever saw arrows
+pointing in a <b>90° wedge</b> during training (angles 0–90°). At test time we asked about <em>every</em>
+orientation. Two versions — an ordinary network, and one with rotation symmetry built in by construction:</p>
+<div style="max-width:520px;margin:12px 0"><div style="margin:9px 0"><div style="font-size:13.5px;margin-bottom:4px">plain network</div><div style="display:flex;gap:10px;font-family:var(--mono);font-size:11.5px"><div style="flex:1"><div style="color:var(--graphite);margin-bottom:2px">seen angles (0–90°)</div><div style="background:#eee;border-radius:4px;height:15px"><div style="width:0%;background:#b06a3a;height:15px;border-radius:4px"></div></div><div style="margin-top:2px">0.03° error</div></div><div style="flex:1"><div style="color:var(--graphite);margin-bottom:2px">unseen angles (90–360°)</div><div style="background:#eee;border-radius:4px;height:15px"><div style="width:100%;background:#b06a3a;height:15px;border-radius:4px"></div></div><div style="margin-top:2px">121.85° error</div></div></div></div><div style="margin:9px 0"><div style="font-size:13.5px;margin-bottom:4px">built-in-equivariant network</div><div style="display:flex;gap:10px;font-family:var(--mono);font-size:11.5px"><div style="flex:1"><div style="color:var(--graphite);margin-bottom:2px">seen angles (0–90°)</div><div style="background:#eee;border-radius:4px;height:15px"><div style="width:0%;background:#0E7C86;height:15px;border-radius:4px"></div></div><div style="margin-top:2px">0.1° error</div></div><div style="flex:1"><div style="color:var(--graphite);margin-bottom:2px">unseen angles (90–360°)</div><div style="background:#eee;border-radius:4px;height:15px"><div style="width:0%;background:#0E7C86;height:15px;border-radius:4px"></div></div><div style="margin-top:2px">0.11° error</div></div></div></div></div>
+<div class="fp"><b>Inside the wedge both are near-perfect. Outside it, the plain network utterly collapses —
+<span class="stat">121.85°</span> average error, essentially guessing — while the built-in-equivariant
+network is still spot-on at <span class="stat">0.11°</span>.</b> It generalizes to orientations it never
+saw, because symmetry <em>fills them in for free</em>: once it knows an arrow at 30°, equivariance tells it exactly
+what one at 210° must look like. That is an inductive bias doing the work of data you never collected.</div>
+<h3>2 · The honest nuance — with enough data, a plain net fakes it</h3>
+<p>Does that mean a plain network can never be symmetric? No — and here is the honest catch. We measured
+<em>equivariance error</em>: rotate the input, and the output should rotate the same amount. Trained on
+<em>all</em> angles, even the plain network is roughly equivariant (well under a degree), because it simply saw
+every rotation:</p>
+<table class="mxtable"><tr><th style="text-align:left">rotate input by →</th><th>15°</th><th>45°</th><th>90°</th><th>135°</th><th>180°</th></tr><tr><td style="text-align:left"><b>plain</b></td><td style="color:#8a857c">0.43</td><td style="color:#8a857c">0.43</td><td style="color:#8a857c">0.32</td><td style="color:#8a857c">0.47</td><td style="color:#8a857c">0.41</td></tr><tr><td style="text-align:left"><b>augmented</b></td><td style="color:#8a857c">0.41</td><td style="color:#8a857c">0.59</td><td style="color:#8a857c">0.61</td><td style="color:#8a857c">0.68</td><td style="color:#8a857c">0.71</td></tr><tr><td style="text-align:left"><b>built-in equiv.</b></td><td style="color:#0E7C86">0.18</td><td style="color:#0E7C86">0.23</td><td style="color:#0E7C86">0.0</td><td style="color:#0E7C86">0.23</td><td style="color:#0E7C86">0.0</td></tr></table>
+<p style="font-size:14px;color:var(--graphite)">The built-in-equivariant model is exact by construction (near-zero
+at the rotations it is built around); the plain and augmented models are only <em>approximately</em> equivariant,
+and only where they had data. So the real prize is not symmetry-when-you-have-everything — it is <b>generalizing
+from far less</b>, exactly the wedge result above.</p>
+
+<h2 id="why">4 · Why it matters — the prior you don't pay for</h2>
+<p>Every symmetry you build in is training data you never have to collect and generalization you get for free —
+which is why equivariance is decisive exactly where data is scarce or exactness matters. In mainstream 2D vision,
+huge datasets and heavy augmentation often let a plain network <em>fake</em> the symmetry, so built-in equivariance
+is a smaller (though real) win. But move to <b>3D shapes, point clouds, molecules, physical fields</b> — where
+orientation is genuinely arbitrary and data is precious — and building the symmetry in stops being optional.</p>
+
+<h2 id="robots">5 · The surprise — a robot lives in SE(3)</h2>
+<p>For a robot, symmetry is not a nice-to-have — it is the native language. A gripper pose, an object&#39;s
+placement, a trajectory: these <em>are</em> rotations and translations in 3D space (mathematicians call the group
+of them SE(3)). A policy that grasps a mug on the left should grasp the same mug rotated on the right without
+relearning — that is exactly equivariance, and building it in makes robot policies dramatically more
+sample-efficient.</p>
+<div class="fp"><b>Same idea, but now the symmetry <em>is</em> the task.</b> Where 2D vision can often brute-force
+past symmetry with data, a robot cannot afford to — real trials are too costly — so SE(3)-equivariant grasping,
+Lie-group action spaces, and equivariant state estimators are a serious thread in robotics. Vision treats symmetry
+as a helpful prior; a robot treats it as the geometry of its world. The <a href="equivariance-in-the-wild.html">in-the-wild
+page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Watch equivariance as a <em>commuting square</em> in the
+<a href="equivariance-playground.html">symmetry sandbox</a> — rotate the input and see whether predicting-then-
+rotating matches rotating-then-predicting. Then see <a href="equivariance-in-the-wild.html">how CVPR &amp; robotics
+actually use symmetry</a>. Then go <a href="equivariance-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="equivariance-playground.html">→ The symmetry sandbox</a> ·
+<a href="equivariance-in-the-wild.html">→ In the wild</a> ·
+<a href="equivariance-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles equivariance, grounded in a real run (plain vs augmented vs built-in-equivariant orientation predictors) ·
+the wedge-generalization collapse (121.85° vs 0.11°) is measured · CC0.</footer></div>
+</body></html>

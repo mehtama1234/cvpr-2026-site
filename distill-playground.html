@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Distillation soft-label sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;justify-content:center}
+.bars{flex:1;min-width:260px;max-width:420px}
+.bar{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;margin:3px 0}
+.bar span.n{width:64px;text-align:right;color:var(--graphite)}
+.bar .track{background:#eee;border-radius:3px;height:13px;flex:1}
+.bar .fill{background:var(--accent);height:13px;border-radius:3px}
+.bar span.v{width:40px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:4px}
+.seg button{border:0;background:var(--paper);padding:7px 13px;font-size:12.5px;font-family:var(--mono);cursor:pointer;color:var(--graphite)}
+.seg button.on{background:var(--accent);color:#fff}
+.ctl{text-align:center;margin:14px 0}
+.ctl input[type=range]{width:100%;max-width:360px}
+.read{font-family:var(--mono);font-size:13px;color:var(--ink);text-align:center;margin-top:10px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Knowledge distillation · the soft-label sandbox</div>
+<h1>What a hard label throws away</h1>
+<p>The <a href="distill-why.html">why page</a> says the student learns more from the teacher&#39;s soft answer than
+from a plain label. Here is that soft answer, for real. A hard label would give the student a single 1 and nine
+0s. The teacher gives a whole distribution — and the temperature knob controls how much of its hidden
+&#39;dark knowledge&#39; shows through.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="distill-why.html">The big picture</a><a href="distill-in-the-wild.html">In the wild</a><a href="distill-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <div style="text-align:center;margin-bottom:10px"><span class="seg" id="pick"></span></div>
+  <div class="row">
+    <div style="text-align:center"><img id="img" width="96" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated"/><div id="truelab" style="font-family:var(--mono);font-size:11px;color:var(--graphite);margin-top:5px"></div></div>
+    <div class="bars" id="bars"></div>
+  </div>
+  <div style="text-align:center;margin-top:12px"><span class="seg"><button id="mSoft" class="on">soft label (distillation)</button><button id="mHard">hard label</button></span></div>
+  <div class="ctl"><label style="font-size:12.5px" id="tlab"></label><br><input id="sT" type="range" min="1" max="60" step="1" value="10"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> Switch to <b>hard label</b> and the student is told only the winner — every
+other class is exactly zero, as if a shirt were nothing at all like a t-shirt. Switch back to <b>soft label</b> and
+the teacher&#39;s real opinion appears: the true class still leads, but the near-misses light up. Raise the
+<b>temperature</b> and those runner-ups grow — the dark knowledge the teacher is quietly handing the student. Turn
+it too high and everything flattens toward a useless smear. Somewhere in between is where distillation lives.</div>
+<p style="margin-top:14px"><a href="distill-why.html">→ Why it works</a> ·
+<a href="distill-in-the-wild.html">→ How the field uses it</a> ·
+<a href="distill-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live soft-label demo — the dark knowledge in a teacher's distribution that a hard label discards · CC0.</footer></div>
+
+<script>
+var DATA=[{"true": "Shirt", "img": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAADiElEQVR4nN3YPW8cVRTG8d/s7Nr7anvzZschCYQAAqIkKAgJAimooKDgA9CAREGfhq8CXUpEwYsUUQMVNIABOSSBROSFxMTY3vV6d2d2KUYXrERKgXRXWk41o9HMff733jnnuScRosSIBIz9Gy9Sp0IKZrnLlx4WpYc+/Y8R5aPJg1cFe4tXeY7XWGVMk32sUSPlcz7l+sSURsYvbgr2dzlOmVWanKRPnS4b9NhHh2N0eZ+bE1Aaf/UL9vdos8GQlC1meJPbbNPjG15nhTpHSXlnAkqjfLT8z1WBf5hD/EoTdFjkCld5gjUuc46bVKnRY4m3uLBrAqcRfwSOM6JChyopHea5yMtshxz4Bw3mqLDDaS7sSpjTiF/Es/SYIaFLiYw5bvEFORlXwSIpVfDCBJROBH+ZrQB1mwYpGSdYoc1NllngALc4wVXWmGEQVWl8/AOgwQIrZGHMnD5tZkmosMSAWRaCtJN8G1VpfPzH6VKlwZg2lbATClM0YpExVcrUw1bJeHT68R+hH8Y5zHX6lEP5yzhMypAdUg7SZcCAJ2MrjY+/TM4mVebIKZORMmImzEM7uKBN9rJBwunYSuPjNxlyjyN8QpMxQ6pUqZBRZoacHqu8wZiMWmyl8fGr7JCBnzjHFhixwHogzYJZvESdhB3mYyuNjF8Ov3lCtsvGN8ios8Y4zECJMr9QI6FMgwbdeEoj4+8NrjUNGa9MHhxg4YVmGZCHKbpFDvqMWeJKPKWR8Ysy16PN72zR4A4VEnJmqTFiSJkWTe4wpkSJA9OMP6YTStgq3bCyKRXGDOiFgwD20GGFFuuMaEVVGhl/DxlV5vmefTQZBWO/TRYMT1H6c45whZeo8vOU458JBW6RdZ5nm1HY24OQGFN2QoE4xSbb1Ghwho/jKY2M36HGIVp8xyk2qIMkeJ6cLv1gfR/lMz7kI7rcjqo0frMLDY7xI+dZZ4Y5brCfCo1QEBfZzzHepk+HfmylEznwdvmBFm3+pBI6G20ShsH9FrB1TnFxMkrj4yeUyDkbvF+PlMe4BhYpUWObHW7wChd3tbkiKo2PPw7F7ik2mSXnONfosBy6QMWpv0+fg+HF5H/R7Cry21EqXGbEJe7xTNj2Rfb7K7QCaqHPM53496e+oq1R5Txnmec3htS4wx66tFlig7t8wFeTUToR/PviCE+zRCuMnzHgOl+HA86DMT34fwM+KwdCB3EdFgAAAABJRU5ErkJggg==", "top": [["Shirt", 0.851], ["T-shirt", 0.112], ["Pullover", 0.023]]}, {"true": "Coat", "img": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAADBElEQVR4nN3Zu29cRRTH8c/du3v34Rcxiiw7DmCU4IIiIqJDCIFEQ4dc8BfwN/APUEJFScE/AC0NDQ1dRCQSCck8FClK4gTj9a53N/u+FFcTreQsQUg70vp0d+7M6Pedc+6cM3MTcywhB5do8jqXmdDn7rwxwUov6vB/bCGTJs9tTZmQ0CejR41Tqgz5ms/+ddJlxy/sE65xgwO+4C0+5Ac+5QHjmQiJoTQ6/gHrfMP37LLHKtf5/UWTLg9+efah8GbGTTaocY03+Ygmj3gD7JPxkApPmMZRGsv7N3iXQ07psUObGrcp0yDnKhhyj7/jKI2F/z5VGvxJnRF/8TZt7rDNGk1OmFDhfhyliw9+rLDGI97hF+qgQzUsRZmcHj0aNKIpjYJ/iYwjtrhMN+T6FiMSjmmTUKJCmYxhBKVR8DcYccpJyPUJU2r0GVCnTo8tUlqscxxBaRT8BgPGNHiZJ+QhuY9IKdFnzFMmYBBHaRT8KlMGbLFJi02qTJgwYEpKm/e4Tf683XOp8bskrHPES+RMGVIiZ0gFHHDIQ6pxlEbBzzghYZ8+feqkoWvh+g74mC8ZsBJHaRT8nDYZe5xRo86QnEko8HokPOYKd8LiLFzp4vGrlBiyDhp0GDEmo0saPoQr7LA7R9eS4hd+bIfavseQlFXGpOSklHnAEdcRGieLVhor+HvcZMpTakwYBbpxuAdAl/2g62LgZ+HQt0mJM1aokoZyF5NQ/R6HFDA9l/uWFL8oYsfUmdJii5xVMqbhOFyiTYtXwOictCXFf3Z7s80fod4bh+AvBS8X+/+vIfjHFwi/+ISvcp+EKgn1sDJF5VOc8jpUQi6oRFAaq+pDg99C9ZuHsC9ejUPPLjUaIS0uXOni8WvB+6/yE3ts06NJmZSULIzpsxF2xRhKF49fpk9KnVvhorvEJj36rLLGlCo/85hdDi+K94u9bocK380Z8Oxm7xYNPuDuubJ/SfFfY50NPv9vg7/iXrj3aM60Lyl+hzJn/Bha5v3IKOzbmXJo1pYH/x8YzdhDtgnjsAAAAABJRU5ErkJggg==", "top": [["Coat", 0.996], ["Pullover", 0.003], ["Shirt", 0.001]]}, {"true": "Pullover", "img": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAADL0lEQVR4nN3ZT2hcVRTH8c+b/zMmaUrSEO0fqW01tQvbjWCFLroRFMVFN67cdSG4cKsLQSi0G3cuVBBxpUtBwQqldqVVFBUUTFUoNZA0SUnSNJmZzMxzMdzhpWoown0wPat5590/v++995x33pvEjjbKk1zKeE6wzrUdexV2HvT/WZRBk3/1VnmNlxhnijtMhFtNNuhxhfe5mJvSvPDPc5ZRmmzSpk6VAi02KVChQYFvOJWP0lzwz/Iu83RISajQBT1SyiBliy77+ILnc1CaC/4CVdYpMg1u0WaLB6izTJEONRJajHCI5dhKowxauut6F83A/g7v8T3z7GeN60yxxX7+osUY9fsIv8pmOBNvsEqJOpc5DX7hccZ4lXMsUuBpvo2tNP7hr9DiFgm7+ZQXSUO7t1jjSya4SYtrLDHKJ7wcW2n83X8Q9GiAfcF/BnwU4uJnprmT6XgkB6Xx8acy3jZ7w5xXwEUeYYnnuMyPrFOgG9YtrtL4+HsR4mGDaXokPMYFDoFfmeEAr3CSZVo8lIPS+PiTIKVImXXOUeIZnuAYoxzlPB9zHBTpUclBaY6xX6TEKq+DFRY4BuaZpBVa9sMExVAdxVIaH39P+NHiEqe4QZcqJW6DMgvUuM0qx1kCD/NnVKXx8cfBCHN8yLNsZGbuN+3XvRXqfBBCAHuGH38iPPVusgLalEPx37d+ZugvwqDU2dyubkjxx2lTY50Z0AlpLQ1tElJSxjPOQkibEZXGxy8Eot84vN2Z3f0CbYosgCLuC/xyyN6z4S2+j5atjBMKNMEcNwL4SGyl8fGbdECPGdr/mLN/8nthlQ4zz3R4HY6rND5+J1yXmWRj++1BCKThVLzAdU6EVBBXaS74VXCUcgjwAXUSdn/Q7SA/cYbm9sJvSPG3AuluGqwG2B5Cwk/DOqzwFLOhQS220vj4bZqM8DanqWXq2DRzDPr17Rhf8RlvhsowrtL4+A06tCmxzBH+yEybffZ1mGCRRdDlQGyl8fG/5iRNZnn03vofZI0632WcQ4p/lQatEOz3YhWq4ePwwIYUf44faIYPWSW6//U/EAldfudzdnE1ttIog/4NxDbTsGawTjIAAAAASUVORK5CYII=", "top": [["Pullover", 0.986], ["T-shirt", 0.009], ["Coat", 0.004]]}];
+(function(){
+  if(!DATA){return;}
+  var cur=0,mode='soft',T=1.0;
+  var pick=document.getElementById('pick');
+  DATA.forEach(function(e,i){ var b=document.createElement('button'); b.textContent=e.true; if(i===0)b.className='on';
+    b.onclick=function(){cur=i;[].forEach.call(pick.children,function(c){c.className='';});b.className='on';render();}; pick.appendChild(b); });
+  function soften(top,T){
+    // re-soften the (already sharp) teacher top-k by exponent 1/T, renormalize over the shown classes
+    var ps=top.map(function(t){return Math.pow(t[1],1/T);}); var s=ps.reduce(function(a,b){return a+b;},0);
+    return top.map(function(t,i){return [t[0],ps[i]/s];});
+  }
+  function render(){
+    var e=DATA[cur];
+    document.getElementById('img').src=e.img;
+    document.getElementById('truelab').textContent='true: '+e.true;
+    var dist;
+    if(mode==='hard'){ dist=e.top.map(function(t,i){return [t[0], i===0?1:0];}); }
+    else { dist=soften(e.top,T); }
+    document.getElementById('bars').innerHTML=dist.map(function(d){
+      return '<div class="bar"><span class="n">'+d[0]+'</span><div class="track"><div class="fill" style="width:'+(d[1]*100).toFixed(0)+'%"></div></div><span class="v">'+d[1].toFixed(2)+'</span></div>';
+    }).join('');
+    document.getElementById('tlab').textContent = mode==='hard' ? 'temperature (soft label only)' : 'temperature — T = '+T.toFixed(1);
+    var runner = mode==='hard' ? 0 : dist.slice(1).reduce(function(a,b){return a+b[1];},0);
+    document.getElementById('read').innerHTML = mode==='hard'
+      ? 'hard label: the student sees a single <b>1</b> and the rest <b>0</b> &mdash; no dark knowledge'
+      : 'soft label: <b>'+(runner*100).toFixed(0)+'%</b> of the teacher&#39;s belief is spread over the runner-up classes &mdash; that is the dark knowledge';
+  }
+  document.getElementById('sT').addEventListener('input',function(e){T=+e.target.value/10;render();});
+  document.getElementById('mSoft').onclick=function(){mode='soft';this.classList.add('on');document.getElementById('mHard').classList.remove('on');render();};
+  document.getElementById('mHard').onclick=function(){mode='hard';this.classList.add('on');document.getElementById('mSoft').classList.remove('on');render();};
+  render();
+})();
+</script>
+</body></html>

@@ -1,0 +1,131 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uncertainty confidence sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:320px;height:320px;background:#0f1417;border-radius:10px;display:block;margin:0 auto}
+.ctl{text-align:center;margin:14px 0}
+.ctl input[type=range]{width:100%;max-width:420px}
+.meters{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.meter{font-family:var(--mono);font-size:12px;text-align:center}
+.meter .lab{color:var(--graphite);margin-bottom:3px}
+.meter .num{font-size:20px;font-weight:700}
+.read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:12px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Uncertainty · the confidence sandbox</div>
+<h1>When many models disagree</h1>
+<p>The <a href="uncertainty-why.html">why page</a> showed that a single model&#39;s confidence stays high even on
+inputs it has never seen — a useless alarm — while the <em>disagreement</em> of an ensemble is an honest one. Here
+you can drive it. Slide the query point out of the known data and watch the single model stay smugly confident
+while the ensemble&#39;s votes scatter.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="uncertainty-why.html">The big picture</a><a href="uncertainty-in-the-wild.html">In the wild</a><a href="uncertainty-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="320" height="320"></canvas>
+  <div class="ctl"><label style="font-size:13px;font-weight:600">drag the query from known data into the unknown — <span id="vD" style="font-family:var(--mono);color:var(--accent)"></span></label><br>
+    <input id="sD" type="range" min="0" max="100" step="1" value="0"></div>
+  <div class="meters">
+    <div class="meter"><div class="lab">single model says</div><div class="num" id="mConf" style="color:#b06a3a"></div><div class="lab">confident</div></div>
+    <div class="meter"><div class="lab">ensemble agreement</div><div class="num" id="mAgree" style="color:#0E7C86"></div><div class="lab">of 7 models</div></div>
+  </div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> Inside a cluster the seven models all vote the same class and the single
+model is confident — everyone agrees, correctly. Drag outward and the single model&#39;s confidence barely
+budges (it just picks the nearest known class, sure as ever) — but the ensemble&#39;s votes split apart, because
+out where there was no training data each model guesses differently. <b>Confidence lies; disagreement tells the
+truth.</b> When agreement collapses, that is the moment to flag the input as unfamiliar.</div>
+<p style="margin-top:14px"><a href="uncertainty-why.html">→ Why it works</a> ·
+<a href="uncertainty-in-the-wild.html">→ How the field uses it</a> ·
+<a href="uncertainty-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live demo — why an ensemble's disagreement, not one model's confidence, is the honest out-of-distribution signal · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,sD=document.getElementById('sD');
+  var cols=['#0E7C86','#e8b04b','#c25b7c'];
+  // three class clusters
+  var clusters=[[0.30,0.40],[0.68,0.34],[0.50,0.70]];
+  // 7 ensemble members: each uses slightly jittered class centroids (different decision boundaries)
+  var members=[]; for(var m=0;m<7;m++){ var c=clusters.map(function(p){
+    var j=m*0.12345; return [p[0]+(Math.sin(m*3.1+p[0]*9)*0.06), p[1]+(Math.cos(m*2.3+p[1]*9)*0.06)]; }); members.push(c); }
+  function P(x){return 12+x*(W-24);}
+  function render(){
+    var d=(+sD.value)/100;
+    // query travels from cluster 0 center outward toward a corner (empty space)
+    var qx=clusters[0][0]+d*(0.93-clusters[0][0]);
+    var qy=clusters[0][1]+d*(0.08-clusters[0][1]);
+    ctx.clearRect(0,0,W,W);
+    // draw training data clouds
+    for(var ci=0;ci<3;ci++){ for(var k=0;k<40;k++){
+      var a=k*2.4, r=0.02+ (k%7)*0.012;
+      var x=clusters[ci][0]+Math.cos(a+ci)*r*(1+(k%3)), y=clusters[ci][1]+Math.sin(a*1.3+ci)*r*(1+(k%3));
+      ctx.fillStyle=cols[ci]+'55'; ctx.beginPath(); ctx.arc(P(x),P(y),2.2,0,7); ctx.fill();
+    }}
+    // ensemble votes
+    var votes=[0,0,0];
+    for(var mi=0;mi<members.length;mi++){ var best=0,bd=1e9;
+      for(var ci=0;ci<3;ci++){ var dd=Math.hypot(qx-members[mi][ci][0],qy-members[mi][ci][1]); if(dd<bd){bd=dd;best=ci;} }
+      votes[best]++;
+      // draw a small vote tick around the query
+      var ang=mi/members.length*6.28;
+      ctx.fillStyle=cols[best]; ctx.beginPath(); ctx.arc(P(qx)+Math.cos(ang)*16,P(qy)+Math.sin(ang)*16,4,0,7); ctx.fill();
+    }
+    var agree=Math.max.apply(null,votes)/members.length;
+    // single-model confidence: softmax over negative distance to the 3 TRUE centroids (always high near one)
+    var ds=clusters.map(function(c){return Math.hypot(qx-c[0],qy-c[1]);});
+    var logits=ds.map(function(x){return -x*7;}); var mx=Math.max.apply(null,logits);
+    var ex=logits.map(function(l){return Math.exp(l-mx);}); var s=ex.reduce(function(a,b){return a+b;},0);
+    var conf=Math.max.apply(null,ex)/s;
+    // query point
+    ctx.fillStyle='#fff'; ctx.strokeStyle='#111'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(P(qx),P(qy),7,0,7); ctx.fill(); ctx.stroke();
+    document.getElementById('vD').textContent=(+sD.value)+'% into the unknown';
+    document.getElementById('mConf').textContent=(conf*100).toFixed(0)+'%';
+    document.getElementById('mAgree').textContent=(agree*100).toFixed(0)+'%';
+    document.getElementById('read').innerHTML = agree>0.85
+      ? 'all models agree &mdash; a familiar input, trust it'
+      : agree>0.55 ? 'the ensemble is starting to split &mdash; getting unfamiliar'
+      : '<b style="color:#b06a3a">models disagree &mdash; flag as out-of-distribution</b> (yet one model is still '+(conf*100).toFixed(0)+'% sure)';
+  }
+  sD.addEventListener('input',render); render();
+})();
+</script>
+</body></html>

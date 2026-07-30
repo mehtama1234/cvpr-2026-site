@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uncertainty &amp; calibration — teaching a model to know when it doesn&#39;t know, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start;margin:14px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Uncertainty &amp; calibration · first principles · teaching a model to know when it doesn&#39;t know</div>
+<h1>Uncertainty — how a model learns to doubt itself</h1>
+<p>Ask a neural network almost anything and it will answer with a confident number attached — 98% sure. The
+trouble is that the number is often a lie: models are overconfident when they are wrong, and worst of all, they
+stay confident about things they have never seen. A system that cannot say <em>I don&#39;t know</em> is dangerous
+the moment it leaves the lab. This page is the plain story of fixing that — making confidence mean what it says,
+and building a real signal for the unknown, all on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="uncertainty-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — confidence you can't trust</h2>
+<p>A classifier&#39;s output looks like a probability, so it is tempting to read it as one — 90% must mean right
+nine times in ten. It does not. Networks are systematically <em>overconfident</em>, and the failure gets
+dangerous at the edges: shown something outside everything it was trained on, a model does not get uncertain — it
+confidently picks whichever of its known answers is closest, with no hint that the question was foreign. The
+number tells you what it thinks; it does not tell you whether to believe it.</p>
+<div class="fp"><b>The problem, stated once:</b> a model&#39;s confidence does not track its correctness — it is
+overconfident when wrong, and certain even about inputs it has never seen. How do you get a trustworthy sense of
+how much to believe an answer?</div>
+
+<h2 id="reframe">2 · The reframe — measure the doubt, don't assume it away</h2>
+<div class="fp"><b>The idea: treat &ldquo;how sure are you&rdquo; as its own quantity to fix and to measure.</b> Two
+moves. First, <b>calibrate</b>: adjust the confidence so that among all the times the model says 80%, it really is
+right about 80% of the time (temperature scaling is the simplest fix — one number, no retraining). Second, get a
+genuine <b>uncertainty signal</b>: don&#39;t trust one model&#39;s confidence — ask several, and treat their
+<em>disagreement</em> as the doubt. Where they agree, be confident; where they scatter, hesitate.</div>
+<div class="eq">calibrated: P(correct | model says p) ≈ p        unknown-input alarm: models disagree ⇒ uncertain
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># fix the number so it means what it says; use disagreement as a real &ldquo;I don't know&rdquo;</span></div>
+<p>Both moves are cheap, and both show up clearly on the run.</p>
+
+<h2 id="run">3 · Seen on a real run — overconfident, then honest</h2>
+<h3>1 · Confidently wrong about things it has never seen</h3>
+<p>We trained a classifier on FashionMNIST — it knows ten kinds of clothing, and it is accurate
+(<span class="stat">91%</span>). Then we showed it <em>handwritten digits</em>, which it has never
+seen in its life. A sensible system would hesitate. This one does not — it slaps a clothing label on each digit
+with near-total confidence:</p>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin:14px 0;align-items:flex-start"><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAABZElEQVR4nO3XvUodURhG4ScawcIm/kEKPZDSQhQRghgwWCRop9dwrLQRtLW3DXgHNhYhRUAUFMRCCyuJBgQPiIhCwCaKhYIWQQjOjGcGQmBvZ3Xzzbs/ZvGyi6GkpKSkpOQF8So5mqTKOTcsc8FxwaUN/+TT/sfSFP0alb8ef3OQcfiMRfYS83D0XydHVXo5pId+RnjPKV2PgTt+8RachK2f0v4T3tDPHoOPkxuO+EkrMywljsSkn8oEKxzwkcvE27j1O/hBJ5N8TQuEo59y9+syTTuXHGUEwtEv3P4QmzQxwnZGJhz9wu2P08QGu9mZWPWb+cwtC9xmx2LVn6OPNXaejYWjX+Duj/GNa8bi0c/bfhtfaGS1nruQ9HO138gOA9T4RK1ePhz9XO2/YwDM5nAXl36FdTDP93xLY9KfohtscZ9vaTT6w0wXXxqN/gdaQI2r3Euj0f/DPqNpP7ZZhKP/wnkArbw5Us7vBmgAAAAASUVORK5CYII=" width="72" style="border:1px solid #b06a3a;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:4px">&ldquo;<b style="color:#b06a3a">Sandal</b>&rdquo;<br>100% sure</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAABiUlEQVR4nO3Wv0tVYRzH8ZfRlaYgHTRocchBJAd1aI8awh9QqP+GVoaEjvYftDbYIihGgYOTiOAVWmywJkUXBa2hEAUTG+TAEe+9z7kQwXM8n+374/lw3uf75TyHQoWuqRpql19yiy6eg3eUmQmZ3vgnj/Y/TGvhz/LsSnKLR+zWNM0Bfpr9O0u00QcmeVvTNB78mxWzPQyCTfo45IhGyjygKWQaO/5dGtjkMftJ8gUdYDFkGjv+Z+7zm5+p5Ei17iuKHR87l8NXtIN1yiHTePADF9+FnjJHiQOGWQn1x4OfaZ17KYHZDOzyhb/AEzDDm2ym8eAHlr+VrzTxg4dsZTONBz8w/fnklv+QmV1e8PvpBstM1WOaA/xmJpLyBkf1mOYAf4xe8LHO0YsJv+qn7yR5NfdS/70ZFQ9++OJr5jQV/uKUErfBHUaT0hmvOc4X/sblcI49Whiq1LzPdEz4VZd/noHQ4T+cg098Aaus5QIf46nl6EyN+z3bYIFvlQ7Gg1+oUKFC11B/AV/2QNCjOo6nAAAAAElFTkSuQmCC" width="72" style="border:1px solid #b06a3a;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:4px">&ldquo;<b style="color:#b06a3a">Bag</b>&rdquo;<br>99% sure</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAAAAAA5AE8dAAABDElEQVR4nO3VvS4EURgG4Gf9FFsL21GJhC1WoiEK0SkUWp0bWPehdgNKCRoSSkrd6kSnUYhQIQobV2Dmm0gk5+x563fezJMzP5SUlIxiWk0vmOeefQ5/74z95Y7+dXSi6QXLDHmq7GTM7/HOWWUnV36XPkd1tVz5C7Q5rqulw2/26btlhiU+Kmvp8Buc/hwrPNTZZcrfAC+BZpb8LjgINNPhR9/9Vc55ZI2vunI6/OjpbzLFVcAuR36PIaexcjr80MPf4Y5XFmOj6fBDp7/HNJfh0cz4s+AtPJoZfxtchEdz4q/TaTiaE3+HcQbchEez4bfZAid8h0fT4df8+Ca55pldPsOj6fBLSkpGMz+RSCHiW00vqwAAAABJRU5ErkJggg==" width="72" style="border:1px solid #b06a3a;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:4px">&ldquo;<b style="color:#b06a3a">Sandal</b>&rdquo;<br>100% sure</div></div></div>
+<div class="fp"><b>On average it is <span class="stat">90%</span> confident on
+inputs from a world it was never trained on.</b> Raw softmax confidence is not a measure of how much to trust the
+answer — a network will happily be certain about nonsense. That is the whole problem.</div>
+<h3>2 · Fixing the number — calibration</h3>
+<div class="tworow"><div style="flex:1;min-width:240px"><div style="margin:12px 0"><div style="margin:6px 0;font-family:var(--mono);font-size:12px"><div style="margin-bottom:2px">raw network — <b style="color:#b06a3a">ECE 0.018</b></div><div style="background:#eee;border-radius:4px;height:13px;max-width:360px"><div style="width:87%;background:#b06a3a;height:13px;border-radius:4px"></div></div></div><div style="margin:6px 0;font-family:var(--mono);font-size:12px"><div style="margin-bottom:2px">temperature-scaled (T=1.323) — <b style="color:#8a6d1e">ECE 0.007</b></div><div style="background:#eee;border-radius:4px;height:13px;max-width:360px"><div style="width:35%;background:#8a6d1e;height:13px;border-radius:4px"></div></div></div><div style="margin:6px 0;font-family:var(--mono);font-size:12px"><div style="margin-bottom:2px">deep ensemble — <b style="color:#0E7C86">ECE 0.006</b></div><div style="background:#eee;border-radius:4px;height:13px;max-width:360px"><div style="width:28%;background:#0E7C86;height:13px;border-radius:4px"></div></div></div></div></div>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">First failure: even on data it <em>does</em> know,
+when the network says 90% it is right less often than that. <em>Calibration error</em> (ECE) measures the gap.
+A single free knob — <b>temperature scaling</b>, fit on held-out data — divides the logits by
+<span class="stat">T=1.323</span> and cuts the error from <span class="stat">0.018</span> to
+<span class="stat">0.007</span> without changing a single prediction. Averaging a handful of
+independently trained models (a <b>deep ensemble</b>) does better still
+(<span class="stat">0.006</span>).</p></div></div>
+<h3>3 · A real &ldquo;I don't know&rdquo; — disagreement beats confidence</h3>
+<p>Second failure: can the model flag the digits as foreign? We scored how well two signals separate the
+in-distribution clothes from the out-of-distribution digits (higher is better; 0.5 is a coin flip):</p>
+<div style="max-width:460px;margin:12px 0;font-family:var(--mono);font-size:12.5px">
+<div style="margin:6px 0">one network&#39;s confidence &rarr; <b style="color:#b06a3a">AUROC 0.60</b>
+<div style="background:#eee;border-radius:4px;height:13px"><div style="width:60%;background:#b06a3a;height:13px;border-radius:4px"></div></div></div>
+<div style="margin:6px 0">an ensemble&#39;s disagreement &rarr; <b style="color:#0E7C86">AUROC 0.79</b>
+<div style="background:#eee;border-radius:4px;height:13px"><div style="width:79%;background:#0E7C86;height:13px;border-radius:4px"></div></div></div></div>
+<div class="fp"><b>A single network&#39;s confidence is nearly useless for spotting the unknown
+(0.60 — barely above a coin flip). But when several independently trained networks
+<em>disagree</em>, that disagreement is a far better alarm (0.79).</b> The honest
+signal of &ldquo;I have never seen this&rdquo; is not one model&#39;s certainty — it is many models failing to
+agree.</div>
+
+<h2 id="why">4 · Why it matters — a number you can act on</h2>
+<p>The instant a model informs a decision — a diagnosis, a filter, a control loop — the <em>confidence</em> matters
+as much as the answer, because it tells you when to defer to a human, gather more data, or abstain. Calibrated
+uncertainty is what lets a system say &ldquo;this one I&#39;m sure of, that one send to review.&rdquo; And OOD
+detection is the immune system that catches the input nobody anticipated before it becomes a silent, confident
+mistake. It is the difference between a demo and something you can deploy.</p>
+
+<h2 id="robots">5 · The surprise — for a robot, doubt is a safety signal</h2>
+<p>In vision a miscalibrated score is a bad number. On a robot it is a bad <em>action</em>: a confidently wrong
+perception drives the gripper into the wrong place, the car into the wrong lane. So a robot uses uncertainty as a
+control input — grasp cautiously when unsure, bound the risk in a plan, and when the situation looks unfamiliar,
+slow down or ask a human rather than barrel ahead.</p>
+<div class="fp"><b>Same doubt, but now it steers the hand.</b> Uncertainty-aware grasping, risk-bounded planning, and
+knowing-when-to-ask are a serious thread in robotics precisely because the cost of confident-and-wrong is physical.
+Vision asks the model how sure it is; a robot lets that answer change what it does. The
+<a href="uncertainty-in-the-wild.html">in-the-wild page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Watch confidence miss the unknown in the
+<a href="uncertainty-playground.html">confidence sandbox</a> — turn one model&#39;s certainty against a
+disagreeing ensemble on familiar vs foreign inputs. Then see
+<a href="uncertainty-in-the-wild.html">how CVPR &amp; robotics actually handle uncertainty</a>. Then go
+<a href="uncertainty-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="uncertainty-playground.html">→ The confidence sandbox</a> ·
+<a href="uncertainty-in-the-wild.html">→ In the wild</a> ·
+<a href="uncertainty-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles uncertainty &amp; calibration, grounded in a real run (a classifier's overconfidence, temperature scaling, and ensemble OOD detection) ·
+the 90%-on-unknowns, ECE 0.018→0.007, and AUROC 0.60→0.79 are measured · CC0.</footer></div>
+</body></html>

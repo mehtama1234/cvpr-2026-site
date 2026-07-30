@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World-model planning sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:320px;height:320px;display:block;margin:0 auto;background:#0f1417;border-radius:10px}
+.ctl{margin:14px 0;text-align:center}
+.ctl label{font-weight:600;font-size:13px;margin-bottom:5px;display:block}
+.ctl input[type=range]{width:100%;max-width:420px}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 14px;font-size:13px;font-family:var(--mono);cursor:pointer;margin:0 5px}
+.read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:12px;text-align:center;line-height:1.7}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">World models · the planning-in-imagination sandbox</div>
+<h1>Plan by dreaming</h1>
+<p>The <a href="wm-why.html">why page</a> showed an agent that reaches a goal by imagining many short futures in
+its world model and taking the first step of the best one. Here it runs live. The one knob is how accurate the
+imagination is — turn up <em>model error</em> and watch the dreamed rollouts scatter and the planning fall apart,
+just as compounding drift eats a real world model.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="wm-why.html">The big picture</a><a href="wm-in-the-wild.html">In the wild</a><a href="wm-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="320" height="320"></canvas>
+  <div class="ctl"><label for="sE">Model error (imagination drift) — <span id="vE" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sE" type="range" min="0" max="100" step="1" value="0"></div>
+  <div class="ctl"><button class="btn" id="go">new goal</button><button class="btn" id="pause">pause</button></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At <b>zero model error</b> the imagined rollouts (faint teal) bundle tightly
+and the agent drives almost straight to the goal — planning in a perfect model is nearly perfect. Raise the error
+and each imagined step adds noise that <b>compounds</b> down the rollout, so the fan of dreams sprays wider, the
+best-looking dream is often a lie, and the agent wanders, overshoots, or stalls. A world model is only worth
+planning in as far as it can imagine before it drifts.</div>
+<p style="margin-top:14px"><a href="wm-why.html">→ Why it works</a> ·
+<a href="wm-in-the-wild.html">→ How the field uses it</a> ·
+<a href="wm-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live model-predictive-control demo — planning by imagining rollouts, and how model error (drift) wrecks it · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,sE=document.getElementById('sE');
+  var ACT=[[0,0],[0,-1],[0,1],[-1,0],[1,0]];
+  var agent,vel,goal,steps,reached,running=true,lastRollouts=[];
+  function reset(newGoal){
+    if(newGoal||!agent){ agent=[0.15+Math.random()*0.2,0.15+Math.random()*0.2]; goal=[0.6+Math.random()*0.3,0.6+Math.random()*0.3]; }
+    vel=[0,0]; steps=0; reached=false;
+  }
+  reset(true);
+  function step(p,v,a,noise){
+    var nv=[0.9*v[0]+ACT[a][0]*0.05+(Math.random()-0.5)*noise, 0.9*v[1]+ACT[a][1]*0.05+(Math.random()-0.5)*noise];
+    var np=[p[0]+nv[0], p[1]+nv[1]];
+    for(var k=0;k<2;k++){ if(np[k]<0.02){np[k]=0.02;nv[k]*=-0.4;} if(np[k]>0.98){np[k]=0.98;nv[k]*=-0.4;} }
+    return [np,nv];
+  }
+  function plan(){
+    var M=60,P=10, err=(+sE.value)/100*0.06;
+    var best=1e9,bestA=0; lastRollouts=[];
+    for(var m=0;m<M;m++){
+      var p=agent.slice(),v=vel.slice(),first=Math.floor(Math.random()*5),cost=0,path=[p.slice()];
+      for(var t=0;t<P;t++){ var a=t===0?first:Math.floor(Math.random()*5); var r=step(p,v,a,err); p=r[0];v=r[1];
+        cost+=Math.hypot(p[0]-goal[0],p[1]-goal[1]); path.push(p.slice()); }
+      lastRollouts.push(path);
+      if(cost<best){best=cost;bestA=first;}
+    }
+    return bestA;
+  }
+  function P(x){return 10+x*(W-20);}
+  function draw(){
+    ctx.clearRect(0,0,W,W);
+    // imagined rollouts
+    ctx.strokeStyle='rgba(14,124,134,0.16)'; ctx.lineWidth=1;
+    for(var i=0;i<lastRollouts.length;i++){ var pa=lastRollouts[i]; ctx.beginPath(); ctx.moveTo(P(pa[0][0]),P(pa[0][1]));
+      for(var t=1;t<pa.length;t++) ctx.lineTo(P(pa[t][0]),P(pa[t][1])); ctx.stroke(); }
+    // goal
+    ctx.strokeStyle='#e8b04b'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(P(goal[0]),P(goal[1]),11,0,7); ctx.stroke();
+    ctx.fillStyle='#e8b04b'; ctx.beginPath(); ctx.arc(P(goal[0]),P(goal[1]),3,0,7); ctx.fill();
+    // agent
+    ctx.fillStyle='#0E7C86'; ctx.beginPath(); ctx.arc(P(agent[0]),P(agent[1]),7,0,7); ctx.fill();
+  }
+  function tick(){
+    document.getElementById('vE').textContent=(+sE.value)+'%';
+    if(running && !reached){
+      var a=plan(); var r=step(agent,vel,a,0); agent=r[0]; vel=r[1]; steps++;
+      if(Math.hypot(agent[0]-goal[0],agent[1]-goal[1])<0.05) reached=true;
+      if(steps>120) reached=true;
+    }
+    draw();
+    document.getElementById('read').innerHTML = reached
+      ? 'reached in <b>'+steps+'</b> steps &mdash; click <b>new goal</b> to run again'
+      : 'planning by imagining <b>60</b> rollouts / step &middot; step <b>'+steps+'</b> &middot; model error <b>'+(+sE.value)+'%</b>';
+  }
+  setInterval(tick,90);
+  document.getElementById('go').onclick=function(){reset(true);reached=false;running=true;};
+  document.getElementById('pause').onclick=function(){running=!running;};
+})();
+</script>
+</body></html>

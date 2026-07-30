@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Equivariance commuting-square sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+.grid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.panel{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center;background:#fbfaf7}
+.panel h4{margin:0 0 8px;font-size:14px}
+canvas{width:220px;height:220px;background:#0f1417;border-radius:8px;display:block}
+.verdict{font-family:var(--mono);font-size:12px;margin-top:8px;font-weight:700}
+.ctl{text-align:center;margin:16px 0}
+.ctl input[type=range]{width:100%;max-width:420px}
+.key{font-family:var(--mono);font-size:11px;color:var(--graphite);text-align:center;margin-top:6px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Equivariance · the commuting-square sandbox</div>
+<h1>Does the square commute?</h1>
+<p>The <a href="equivariance-why.html">why page</a> defines equivariance as a promise: rotate the input and the
+answer rotates the same way. That is something you can <em>watch</em>. In each panel below, the
+<span style="color:#0E7C86">teal</span> arrow is the network&#39;s prediction on the rotated input; the
+<span style="color:#e8b04b">gold</span> arrow is the original prediction, rotated by the same amount. If the
+network is truly equivariant, the two must always line up. Drag the rotation and see which one keeps its
+promise.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="equivariance-why.html">The big picture</a><a href="equivariance-in-the-wild.html">In the wild</a><a href="equivariance-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <div class="grid">
+    <div class="panel"><h4>built-in-equivariant network</h4><canvas id="cvE" width="220" height="220"></canvas><div class="verdict" id="vE"></div></div>
+    <div class="panel"><h4>plain network</h4><canvas id="cvP" width="220" height="220"></canvas><div class="verdict" id="vP"></div></div>
+  </div>
+  <div class="key">grey = input direction · <span style="color:#0E7C86">teal</span> = predict(rotated input) · <span style="color:#e8b04b">gold</span> = rotate(prediction of original)</div>
+  <div class="ctl"><label style="font-size:13px;font-weight:600">rotate the input — <span id="vA" style="font-family:var(--mono);color:var(--accent)"></span></label><br>
+    <input id="sA" type="range" min="0" max="360" step="1" value="0"></div>
+</div>
+<div class="fp"><b>What to notice.</b> For the <b>equivariant</b> network the teal and gold arrows sit exactly on
+top of each other at every rotation — predict-then-rotate equals rotate-then-predict, so the square commutes and
+symmetry holds by construction. For the <b>plain</b> network they agree only near zero (where it was effectively
+trained) and split apart as you rotate away — it never truly learned the symmetry, it just memorized one region.
+That gap is precisely why the plain net in the run collapsed on unseen orientations.</div>
+<p style="margin-top:14px"><a href="equivariance-why.html">→ Why it works</a> ·
+<a href="equivariance-in-the-wild.html">→ How the field uses it</a> ·
+<a href="equivariance-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live demo of the equivariance definition — the commuting square of rotate and predict · CC0.</footer></div>
+
+<script>
+(function(){
+  var sA=document.getElementById('sA'), base=0.6; // base input direction (rad)
+  // equivariant predictor: identity (prediction = input direction) -> commutes exactly
+  function predE(theta){ return theta; }
+  // plain predictor: a smooth non-equivariant distortion (does NOT commute with rotation)
+  function predP(theta){ return theta + 0.6*Math.sin(2*theta) ; }
+  function arrow(ctx,cx,cy,ang,len,color,w){
+    var x=cx+Math.cos(ang)*len, y=cy+Math.sin(ang)*len;
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+    var a1=ang+2.6,a2=ang-2.6,h=10;
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+Math.cos(a1)*h,y+Math.sin(a1)*h); ctx.lineTo(x+Math.cos(a2)*h,y+Math.sin(a2)*h); ctx.closePath(); ctx.fill();
+  }
+  function angdiff(a,b){ var d=Math.abs(a-b)%(2*Math.PI); if(d>Math.PI)d=2*Math.PI-d; return d*180/Math.PI; }
+  function drawPanel(id,vid,pred){
+    var cv=document.getElementById(id),ctx=cv.getContext('2d'),W=cv.width,cx=W/2,cy=W/2;
+    var alpha=(+sA.value)*Math.PI/180;
+    ctx.clearRect(0,0,W,W);
+    // input (rotated) in grey
+    arrow(ctx,cx,cy,base+alpha,70,'rgba(200,196,188,0.6)',3);
+    // teal: predict on rotated input
+    var predOnRot=pred(base+alpha);
+    // gold: rotate the prediction of the original
+    var rotOfPred=pred(base)+alpha;
+    arrow(ctx,cx,cy,rotOfPred,86,'#e8b04b',3);
+    arrow(ctx,cx,cy,predOnRot,60,'#0E7C86',3);
+    var err=angdiff(predOnRot,rotOfPred);
+    document.getElementById(vid).innerHTML = err<0.5
+      ? '<span style="color:#0E7C86">✓ commutes — '+err.toFixed(1)+'° apart</span>'
+      : '<span style="color:#b06a3a">✗ broken — '+err.toFixed(0)+'° apart</span>';
+  }
+  function render(){ document.getElementById('vA').textContent=(+sA.value)+'°';
+    drawPanel('cvE','vE',predE); drawPanel('cvP','vP',predP); }
+  sA.addEventListener('input',render); render();
+})();
+</script>
+</body></html>

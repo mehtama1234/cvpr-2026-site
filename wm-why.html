@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World models — learning to dream so you can plan, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:14px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">World models · first principles · learning a simulator you can dream inside</div>
+<h1>World models — learning to dream, so you can plan</h1>
+<p>How does an agent decide what to do without trying everything for real? People imagine: we run a quick mental
+simulation of what would happen if we acted, and pick the move whose imagined outcome looks best. A world model
+gives a machine that same ability — a network that learns, from experience, to <em>simulate its world</em>:
+predict what it will see next if it takes an action. Once it has one, it can dream out futures and plan inside
+them. This page is the plain story of that idea — the simulator at its heart, the drift that limits it, and the
+planning it unlocks, all on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="wm-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — you cannot try everything for real</h2>
+<p>To act well, an agent needs to know the consequences of its actions: if I turn the wheel now, where will the
+car be in two seconds? The obvious way to find out — just try it — is hopeless when the real world is slow,
+expensive, or dangerous, and when there are countless action sequences to consider. A chess engine can look ahead
+because it has the rules of chess. A robot in the world does not come with the rules of the world.</p>
+<div class="fp"><b>The problem, stated once:</b> to plan, an agent must predict what will happen if it acts — but it
+cannot afford to find out by acting in the real world. It needs its own model of the world to try things in.</div>
+
+<h2 id="reframe">2 · The reframe — learn the simulator from experience</h2>
+<div class="fp"><b>The idea: don&#39;t hand-code the rules of the world — learn them.</b> Let the agent gather
+experience (situation, action, next situation), and train a network to predict the next situation from the
+current one and an action. Do it in a compact <em>latent</em> space: encode the observation to a small code,
+learn a transition that steps that code forward under an action, decode when you want to look. Now you have a
+simulator in the agent&#39;s head — roll it forward without touching reality (that is <em>dreaming</em>), and
+search over action sequences by imagining their outcomes (that is <em>planning</em>).</div>
+<div class="eq">z = encode(obs)      z&#39; = transition(z, action)      obs&#39; = decode(z&#39;)
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># dream: roll z forward under imagined actions · plan: pick the action sequence whose dream ends best</span></div>
+<p>It is a powerful idea — an agent that learns to simulate its own world and then thinks by imagining. It also
+has one honest weakness that the run makes you feel.</p>
+
+<h2 id="run">3 · Seen on a real run — dream, drift, and plan</h2>
+<h3>1 · It learned to imagine</h3>
+<p>We let an agent play randomly in a little box — a blob it can push up, down, left, right — and learned a world
+model from that experience: a network that encodes the frame to a small code, predicts the next code from an
+action, and decodes it back to a picture. Now feed it one real frame and let it <em>dream</em> forward with a
+chosen sequence of pushes. Top row is what really happens; bottom row is the model&#39;s dream:</p>
+<div style="display:flex;flex-direction:column;gap:10px;margin:14px 0"><div style="display:flex;gap:10px;align-items:flex-start"><div style="width:120px;font-size:13px;padding-top:22px"><b>true future</b></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAA4ElEQVR4nO3YvUoDQRQF4C+rCIKxEgUrn8C3sPGJ8xApBWtBELHypwgYo81iQNEddiHNPV87Mxy4HJadISIiIiIiIiIiIiIidm/WumcPOtjAB3xOCO4mnJ0kwTszUK4ZHMIpzOEZnmDF6IbVG3W94P2G5XO4hktYwgLuYT0uuN6o6wW3lOsMrugbdkTfsAdSrgT/aaBcG3iBG/pe3cLr9+pI9UZdL3jgn6uDY7iAE3iEO3hjdMPqjbpecMttsYMD+ivjGt7JlyvB/2sp14/dUx4gtuqNul5wRERERERExG9fuoIcSZxsb3MAAAAASUVORK5CYII=" width="66" style="border:1px solid #111;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=1</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAAx0lEQVR4nO3XMUoDYRSF0ZOYxsZKRJfhFiwt3KiLcAV2Wgi2qaxEG0GDzZBqUCFBxP871cw/MBceF+YNSZIkSZIkv2bx9ZMVHMAG3rdXO1vu5S0F/+Xg2XIt4BDO4ASeYQ0v7KFh4416vODV3OEBU6Uu4QLu4Boe4G3X4PFGPV7wbLmWcATncLW9vYHHvQSPN+rxgmfLtWH6Dt4y9eoenuBjL8HjjXq84G92rlM4Ztq01vBKO1fBP9DfYsFJkiRJkiRJkuRf+QTbuBn+tR2p6QAAAABJRU5ErkJggg==" width="66" style="border:1px solid #111;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=3</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAAuUlEQVR4nO3XO0oEQRRA0TPaDmaaGShuwH24BPdpLhi7hIkFBQUNhcFfIoOYDi1K3RN0UEFfeEm9IkmSJMm/tQC7MG0O3zafj9nCO7P9ufBfCS8mOIRj2IN7eIT1bOHxRj1eeNqHM7iAA7iEa3iC9znC4416vPC0hFM4hyNYwQ08zxYeb9Tjhac13MIVXxfkCl5o5yq8jW871wks4Q4eaOcqvI2fr8UFvNJrsXCSJEmSJEmSJEmS/IpPHHkYxwa0NfYAAAAASUVORK5CYII=" width="66" style="border:1px solid #111;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=6</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAA1klEQVR4nO3YMUrEUBAG4O/JYlCwsxY8gJWVN/JAHsvGwsbWK+iqoO4W+0hAthH2gTj/VzwyTf4wDJMQIiIiIiIiIiIiIiIi4h9pPy6XejMfQxwNu3OC/0pwW+InOJvLF3iDrxHB9VpdL3gFjuESbuAE7uGRPmaH3mH1Wl0veNXo03QFt3AOd/AMaw6/vuq1ul7wbnNt6OPzAe/wOTa4XqvrBe++uSa4gGv6InuAJ3glr8UE/15bzglO56dZ03fY94jgeq2uF9z21Y38ikhwRERERERUtgW0yRtVi0APFAAAAABJRU5ErkJggg==" width="66" style="border:1px solid #111;border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=12</div></div></div><div style="display:flex;gap:10px;align-items:flex-start"><div style="width:120px;font-size:13px;padding-top:22px"><b>imagined (dreamed)</b></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAABHElEQVR4nO3YuWrDQBQF0CPFIUuRJkUgff7/q1ykSKrE4CVLM4wKS2DJYBdzTzEYa+Rnhsvzs4iIiIiIiIiIuJhu4X09/J5RuD/j3rOk8MWsZu1eGsUR7R11e4VPiUsHN3UBf/BTl/naO+r2Ck93rq4uPdzCIxxgV191lKzN0t5Rt1d4NFxDXnq4g+e6fMMn7CmDV8KVwsdGwzXkqqdE6g1e4R029erCqb69o26v8HTn6uGBEq4XeIIvyvTVs6RpqfdeQwpfzHTnGkb2LaVfbWFNSdi+7puvvaNur/BouIZvs4cPSoaGXG3qexnoU3jC9KOI4coK7il/GXeUHnaoWxKuFD528nMuHE3wC38Rh4+6hhSOiIiIiIiIuKJ/CdMsWVxtIiMAAAAASUVORK5CYII=" width="66" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=1</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAA1ElEQVR4nO3XzQqCQBhG4aP9QS3adP83GEWLaCFmbYaxYKRgJILvPItBhsFXPl5EQZIkSZIkSZI0qfniTJuXe9571Aa3tTcw+O+Dp8vV5GUBMECq1DBLcLxRxwsulmt8mgXANu/1ADeYoWbxRh0veFnafACsIZVrB9AVjtSIN+p4wcVyLQE2AHuAA8AZ4AipV5bL4I+K5erzcoX0DjvlvepeARFHHS/4pVzj59cK0gdVB3CB1KsZxRt1vODpv8X2/WrIp8f/xhrxRh0vWJIkSZIk6YeeN4UdKuswQwsAAAAASUVORK5CYII=" width="66" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=3</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAAnUlEQVR4nO3XQQqDMBAF0G/t/U/c2u4MlgQsZlE6760kCf4wDDEmAAAAAAAMLV8tfM0Lvs17leAfDT7TXLP7KknFUtcLvvcGP7qpbW7bJy43XL1S1wvuNlevfbbj2OWDrF6p6wV3m6vtZkmSdX96zguuV+p6weM7V5tZk+QxObheqesFj0+u9uFbjmNzrvb1Sl0v2N+iYAAAAIB/8AaukxFWf334VQAAAABJRU5ErkJggg==" width="66" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=6</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAAAAAAcD2kOAAAAYElEQVR4nO3VMQqAMAwF0N/i/Y+sji5ZHCJC3ptKhn4ISZsAAAAAAAAAAAAvrKq4k+TsDd691wv+QfBRFa8Pgue1el5wOVzPc9Y3ZvNaPS8Y2qzymLT/jfP2eF4wAAD9bvh8BCrz3gRXAAAAAElFTkSuQmCC" width="66" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">h=12</div></div></div></div>
+<h3>2 · The honest catch — imagination drifts</h3>
+<div class="tworow"><svg viewBox="0 0 430 180" width="100%" style="max-width:450px"><line x1="34" y1="146.0" x2="422" y2="146.0" stroke="#e5e2dc"/><text x="2" y="149.0" font-size="9" fill="#8a857c" font-family="monospace">0.00</text><line x1="34" y1="79.1" x2="422" y2="79.1" stroke="#e5e2dc"/><text x="2" y="82.1" font-size="9" fill="#8a857c" font-family="monospace">0.23</text><line x1="34" y1="26.7" x2="422" y2="26.7" stroke="#e5e2dc"/><text x="2" y="29.7" font-size="9" fill="#8a857c" font-family="monospace">0.41</text><polyline points="66.3,141.9 98.7,129.2 131.0,113.1 195.7,81.9 292.7,47.8 422.0,26.0" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="66.3" cy="141.9" r="3" fill="#0E7C86"/><circle cx="98.7" cy="129.2" r="3" fill="#0E7C86"/><circle cx="131.0" cy="113.1" r="3" fill="#0E7C86"/><circle cx="195.7" cy="81.9" r="3" fill="#0E7C86"/><circle cx="292.7" cy="47.8" r="3" fill="#0E7C86"/><circle cx="422.0" cy="26.0" r="3" fill="#0E7C86"/><text x="215" y="174" font-size="10" fill="#8a857c" font-family="monospace" text-anchor="middle">imagination horizon (steps ahead) →</text></svg>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">One step ahead the dream is nearly perfect
+(<span class="stat">0.0142</span> error). But each imagined step feeds the model its own slightly-wrong
+output as the next input, so the error <em>compounds</em> — by <span class="stat">12</span> steps it has
+grown to <span class="stat">0.4124</span>, and the dreamed blob has wandered off the true path. This
+compounding drift is the central, unavoidable limitation of every world model, and a whole research thread exists
+to slow it down.</p></div></div>
+<h3>3 · Yet you can plan inside it — and it nearly matches reality</h3>
+<p>Here is the payoff. Give the agent a goal and let it <b>plan by imagining</b>: at each moment it dreams out
+hundreds of short action sequences in the model, keeps the first move of whichever dream ends closest to the goal,
+then replans. Compared against acting randomly, and against planning in the <em>true</em> simulator (an upper
+bound):</p>
+<div style="max-width:520px;margin:12px 0"><div style="margin:7px 0"><div style="font-size:13px;margin-bottom:3px">planning in the learned model — <b style="font-family:var(--mono);color:#0E7C86">98%</b> reach goal <span style="color:var(--graphite);font-family:var(--mono);font-size:11px">(7.5 steps)</span></div><div style="background:#eee;border-radius:5px;height:14px"><div style="width:98%;background:#0E7C86;height:14px;border-radius:5px"></div></div></div><div style="margin:7px 0"><div style="font-size:13px;margin-bottom:3px">random actions — <b style="font-family:var(--mono);color:#b9b3a8">43%</b> reach goal <span style="color:var(--graphite);font-family:var(--mono);font-size:11px">(31.7 steps)</span></div><div style="background:#eee;border-radius:5px;height:14px"><div style="width:43%;background:#b9b3a8;height:14px;border-radius:5px"></div></div></div><div style="margin:7px 0"><div style="font-size:13px;margin-bottom:3px">planning in the TRUE simulator — <b style="font-family:var(--mono);color:#9a5b1e">100%</b> reach goal <span style="color:var(--graphite);font-family:var(--mono);font-size:11px">(4.3 steps)</span></div><div style="background:#eee;border-radius:5px;height:14px"><div style="width:100%;background:#9a5b1e;height:14px;border-radius:5px"></div></div></div></div>
+<div class="fp"><b>Planning in the imperfect dream reaches the goal 98% of the time —
+almost as often as planning in the perfect simulator (100%), and far above random
+(43%).</b> The drift costs a little (a few extra steps), but a model good enough to
+imagine a few moves ahead is good enough to act well. That is the whole promise of world models: learn to dream,
+then plan in the dream instead of in the costly real world.</div>
+
+<h2 id="why">4 · Why it matters — imagination is cheap, reality is expensive</h2>
+<p>A world model turns experience into a simulator, and a simulator is <b>free to try things in</b>. That buys
+two huge wins. First, <b>sample efficiency</b>: an agent can learn a skill mostly in imagination, touching the
+real world only to keep its dream honest — priceless when real trials are slow or risky. Second, <b>unification
+with generation</b>: a modern video generator that predicts the next frame <em>is</em> a world model, so the
+same systems that dream up video are being turned into driving simulators and game engines you can steer. The
+standing tax is the drift you saw — which is why so much recent work is about keeping long dreams coherent.</p>
+
+<h2 id="robots">5 · The surprise — the robot that learns in its sleep</h2>
+<p>For a robot the world model is not a curiosity — it is how you learn at all without breaking the hardware. The
+robot gathers a little real experience, builds a world model, and then trains its policy almost entirely
+<em>inside</em> the model, dreaming millions of practice episodes it could never afford to run for real. This is
+the Dreamer lineage, and it is everywhere in 2025 robotics.</p>
+<div class="fp"><b>Same dream, higher stakes.</b> A vision model dreams to make a prettier video; a robot dreams to
+<em>practice</em> — and can even flag danger by noticing when reality diverges from what it imagined. Drift that
+is a cosmetic flaw for video is a safety question for a robot, which is why robot world models lean on privileged
+teachers and tight horizons. The <a href="wm-in-the-wild.html">in-the-wild page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Plan by imagining in the
+<a href="wm-playground.html">planning sandbox</a> — set a goal, watch the agent fan out imagined rollouts and pick
+the best, then add model error and watch planning degrade as the dream gets less trustworthy. Then see
+<a href="wm-in-the-wild.html">how CVPR &amp; robotics actually use world models</a>. Then go
+<a href="wm-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="wm-playground.html">→ The planning sandbox</a> ·
+<a href="wm-in-the-wild.html">→ In the wild</a> ·
+<a href="wm-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles world models, grounded in a real run (a latent world model of a controllable point-mass) ·
+the imagination-drift curve and the planning-vs-reality comparison are measured · CC0.</footer></div>
+</body></html>
