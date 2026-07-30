@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arrow-of-time sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:100%;max-width:480px;height:auto;display:block;margin:0 auto;background:#0f1417;border-radius:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:0 8px 12px 0}
+.seg button{font-family:var(--mono);font-size:12.5px;padding:7px 14px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:10px;line-height:1.7}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Video &amp; the arrow of time · the sandbox</div>
+<h1>Can you tell which way time is running?</h1>
+<p>The <a href="video-why.html">why page</a> showed a model can read the direction of time — but only when the
+motion is irreversible. Here you can be that model. Run a process forward, then flip it to reverse. For an
+irreversible process the reversed version looks impossible; for a reversible one, you genuinely cannot tell.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="video-why.html">The big picture</a><a href="video-in-the-wild.html">In the wild</a><a href="video-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div>
+  <span class="seg" id="mode"><button data-m="irrev" class="on">Irreversible (spreading)</button><button data-m="rev">Reversible (drifting)</button></span>
+  <span class="seg" id="dir"><button data-d="fwd" class="on">▶ Forward</button><button data-d="rev">◀ Reversed</button></span>
+</div>
+<div class="pwrap">
+  <canvas id="cv" width="480" height="320"></canvas>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp" id="exIrrev"><b>The arrow is visible.</b> Forward, the particles start bunched and <em>spread
+out</em> — the natural way things diffuse and settle. Hit <b>Reversed</b> and watch a scattered cloud
+spontaneously <em>gather to a single point</em> and speed up. That never happens in the real world, and it is
+exactly the tell a model learns to read. Irreversible motion carries a direction of time.</div>
+<div class="fp" id="exRev" style="display:none"><b>No arrow to find.</b> Now the particles just drift at constant
+speed. Forward they slide one way; reversed they slide the other — and <em>both look completely natural</em>.
+Nothing about either clip says which is the real forward. When the physics is reversible, the direction of time
+is genuinely unrecoverable — which is why the model in the run was stuck at chance here.</div>
+<p style="margin-top:14px"><a href="video-why.html">→ Why it works</a> ·
+<a href="video-in-the-wild.html">→ How the field uses it</a> ·
+<a href="video-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live demonstration of temporal (ir)reversibility and the arrow of time · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d'), W=cv.width, Hc=cv.height;
+  var mode='irrev', dir='fwd', N=90, T=64, traj=[], frame=0;
+  function mul(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function simulate(){
+    var r=mul(11); traj=[]; var p=[];
+    for(var i=0;i<N;i++){
+      if(mode==='irrev') p.push({x:0.5+(r()-0.5)*0.04, y:0.5+(r()-0.5)*0.04, vx:0, vy:0});
+      else { var a=r()*6.28; p.push({x:r(), y:r(), vx:Math.cos(a)*0.012, vy:Math.sin(a)*0.012}); }
+    }
+    for(var t=0;t<T;t++){
+      traj.push(p.map(function(o){return {x:o.x,y:o.y};}));
+      p.forEach(function(o){
+        if(mode==='irrev'){ o.x+=(r()-0.5)*0.045; o.y+=(r()-0.5)*0.045; }   // diffusion (irreversible)
+        else { o.x=(o.x+o.vx+1)%1; o.y=(o.y+o.vy+1)%1; }                     // constant drift (reversible, periodic)
+      });
+    }
+  }
+  function draw(){
+    var idx = dir==='fwd' ? frame : (T-1-frame);
+    var pts=traj[idx];
+    ctx.fillStyle='#0f1417'; ctx.fillRect(0,0,W,Hc);
+    ctx.fillStyle='#57b8c9';
+    pts.forEach(function(o){ var x=20+((o.x%1+1)%1)*(W-40), y=20+((o.y%1+1)%1)*(Hc-40);
+      ctx.beginPath(); ctx.arc(x,y,3,0,6.3); ctx.fill(); });
+    // spread readout
+    var mx=0,my=0; pts.forEach(function(o){mx+=o.x;my+=o.y;}); mx/=N; my/=N;
+    var sp=0; pts.forEach(function(o){sp+=Math.hypot(o.x-mx,o.y-my);}); sp/=N;
+    var lbl = dir==='fwd'?'forward':'reversed';
+    var msg;
+    if(mode==='irrev') msg='spread of the cloud: <b>'+(sp*100).toFixed(0)+'</b> &middot; playing <b>'+lbl+'</b> &mdash; '+
+      (dir==='rev'?'the cloud is <b>gathering</b> to a point (impossible)':'the cloud is spreading out (natural)');
+    else msg='playing <b>'+lbl+'</b> &mdash; constant drift looks identical either way (no arrow)';
+    document.getElementById('read').innerHTML=msg;
+    frame=(frame+1)%T;
+  }
+  function seg(id, attr, set){ document.querySelectorAll('#'+id+' button').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('#'+id+' button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); set(b.getAttribute(attr)); }); }); }
+  seg('mode','data-m',function(v){ mode=v; frame=0; simulate();
+    document.getElementById('exIrrev').style.display=v==='irrev'?'block':'none';
+    document.getElementById('exRev').style.display=v==='rev'?'block':'none'; });
+  seg('dir','data-d',function(v){ dir=v; frame=0; });
+  simulate();
+  (function loop(){ draw(); setTimeout(function(){requestAnimationFrame(loop);}, 90); })();
+})();
+</script>
+</body></html>

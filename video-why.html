@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Video and the arrow of time — from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.barrow{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px}
+.barrow .lab{width:150px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.bar{height:16px;border-radius:3px;background:var(--accent);min-width:2px}
+.barc{height:16px;border-radius:3px;background:var(--graphite);min-width:2px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Video · first principles · the arrow of time</div>
+<h1>Video and the arrow of time — why a video is more than a stack of frames</h1>
+<p>A photograph freezes a moment; a video is a moment <em>passing</em>. The thing that makes video its own
+problem — not just images in a row — is that time has a <b>direction</b>: the world's dynamics run forward, and
+usually cannot be run back. This page is the plain story of what that direction buys you, built on a real run
+where a model learns to tell a clip played forward from the same clip played backward — and, just as tellingly,
+learns nothing when there is no arrow to find.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#arrow">The arrow of time</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="video-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — frames in a row are not a video</h2>
+<p>The lazy way to handle video is to treat it as a bag of frames: run an image model on each and pool the
+results. It throws away the one thing video actually adds — <em>how things change</em>. Two clips can contain
+the identical set of frames and mean opposite things depending on their order (a glass shattering versus a
+glass assembling itself). To understand a video you have to model the <em>relationships across time</em>: what
+moved, in what order, and where it is heading.</p>
+<div class="fp"><b>The problem, stated once:</b> treat a video as time passing — model motion, order, and change —
+rather than as a set of independent pictures, and exploit the fact that time runs one way.</div>
+
+<h2 id="arrow">2 · The key idea — time has a direction, and it is learnable</h2>
+<p>Here is the deep fact the whole field leans on. Most real dynamics are <b>irreversible</b>: heat spreads,
+things fall and settle, motion damps out, liquids mix. Play such a process backward and it looks
+<em>wrong</em> — cream un-stirs, a splash leaps back into the cup. That wrongness is information. A model that
+learns to tell forward from backward has been forced to learn how the world actually evolves — not what a frame
+looks like, but how one moment turns into the next. And where dynamics are genuinely <b>reversible</b> (a ball
+gliding at constant speed in empty space), there is no arrow, and no model can invent one. The run makes both
+halves concrete.</p>
+
+<h2 id="run">3 · Seen on a real run — reading the arrow of time</h2>
+<div style="margin:8px 0"><div style="font-family:var(--mono);font-size:11px;color:var(--graphite);margin-bottom:4px">one clip, played forward (particles spread out)</div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABVElEQVR4nO3cwW6CQBRA0dr0W/Wb9Gu7I9iExKaFO4znrFia3DyGQeDywb+6Xq/L8f1+X45vt9ty/Hg8luPPY34WWwSICRD7qn/AzNbn/S0mICZATIDYpf4BP62vo7esr6PPzgTEBIgJEBt6H7B1L2UmJiAmQEyA2NBrQHXeP3IvYgJiAsQEiA23Box2n2fvvYgJiAkQEyA23Bowmr33IiYgJkBMAAAAgIMN92zo2js8J2onHBMgJkDsNP8HzPqcqAmICRATIHaaNWCm8/6aCYgJEBMAAAAAAAAAAHYy9PsBFd+MeyMCxASInebZ0Ipvxk1OgJgAsZfWgHd4X3eLb8ZNToCYALFf7wNmfV937cj1zATEBIgJELu8co3/iln3AXszATEBYgLEnvYBW9f4zu/7MQExAWICxJ7WgFnv7YzMBMQEiAkAAAAAAAAAAAAAAADwR9/p1zdEqLXCVgAAAABJRU5ErkJggg==" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABcElEQVR4nO3bwW6CQBRA0dL4rfpN+rN2Z1i0qRTwjvScVWtcmNw8BibM9MFq5/P51+/cbrdvP//c+sewjAAxAWKn+gcczfV6ffx9uVx+/b4JiAkQEyA2xBqw5j56NM9c9+dMQEyAmACxIdaAuaX30SNYsz6ZgJgAMQFiw60B73Ld34oJiAkQEyA21T/gneyxZ2UCYgLEBIgN9xzwLrbaszIBMQFiAsSsAX+01Z6VCYgJEBMgNtxe0JHeEXqGCYgJEBMgNvRzwDu+I7SUCYgJEBMgNvQacNTr/pwJiAkQEwAAAAAAAAAAdjLc+YARvPKMgrciYgLEBIgN/W7oCPY+o2ACYgLEBIgtXgP+2znevc8omICYADEBYqueA456jveVa5gJiAkQEyC2ag040nW/YgJiAsQEiE0/7e0caT9nZCYgJkBMgNh0v98f/8zv660Br2ECYgLEBIid7Oe0TEBMgJgAAAAAAAAAAAAAAAAAK30BY7o5vIk2fnwAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABWElEQVR4nO3bS2rDQBBFUSdkrfaarNVmFjxwcITUui3nnJExAgke1UX/LhcA/quP+gPewfV6ffnMsixP///c+2NYRwAxAcS+qhdvGTdndr/ff37fbreXz6uAmABiAohlPeDR2nFzZmu/XwXEBBATQCxbC3rXecBaKiAmgJgAYvYDVhjRt1RATAAxAcSmWAs6o73Wr1RATAAxAcSm6wFnWSPaa99CBcQEEBNAbLoe8Gi2veIRvUcFxAQQE0Bs6h4ww7g/mgqICSAmAAAAAAAAAAAYxD3hJ468o+BUREwAMQHEpj4bOoPRdxRUQEwAMQHENvWAs9zp3WL0HQUVEBNATACx3eYBs93p3eLIvqUCYgKICSC2Ww84+7hfUQExAcQEAAAAcDBnQwf6y565mXBMADEBxJwNPchve+YqICaAmABi5gEDmQecgABiAgAAAAAAAAAAAACAnXwDmco2ogE2AEoAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABVUlEQVR4nO3cwU7CQBRAUTR+K3wTfK07w0ICtZ3eqZyzMobEmpvXZtoOpxMA7+qjPoD/4Hw+P/3M7Xb79fefWx8MywgQEyD2tecfW3OuPIrr9frz8+Vyefp5ExATICZAbNdrwL2l58qjWPq/mICYADEBYrveC3qHdcBSJiAmQEyAmOcBf7TV9cwExASICRDL7gU9csS1wpr7WiYgJkBMgNh014B7R3lmsObYTEBMgJgAsenuBR1xHbCGCYgJEBMAAAAAAAAAAAaZ7r2gGez5bpK3ImICxASITb0/YAaj9yiYgJgAMQFirgFPjN6bZgJiAsQEiG12L+jd9nZtxQTEBIgJEBuyDjjKdzzMwATEBIgJEBtyDXDef50JiAkQEwAAAGBn9gcM9MpzcivhmAAxAWLeDd3Jo+fkJiAmQEyAmHXAQNYBByBATAAAAAAAAAAAAAAA2Mg3PBw0y/XfEiYAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABRklEQVR4nO3dQU7DMBRAwYI4a3um5rTsUDeojbDzYjqzYoHURE+/VhIHLhcAAODdfBz5Ydfr9envbNt2wJGM9Zfz+hx9MOwjQEyA2Ff1wff7/efn2+1WHcZwe8/LBMQEiAkQy9aA//S9/2jveZmAmAAxAWKHrgEr3ueZzQTEBIgJEMuuA36z+jMD94IWI0BMgNjp1oBHKz4zcC9oMQLEBIgdui/oFatfB+xlAmICxAQAAAAAAAAAgElOty/oDI7cm2RXREyAmACxU78fcAaz31EwATEBYgLErAFPzH43zQTEBIgJEBt2L+jd3u0axQTEBIgJEJtyHbDi33iomICYADEBYlPWAN/7rzMBMQFiAgAAABzM+wGD7X027ko4JkBMgJi9oRO98mzcBMQEiAkQswZM5P+ILUCAmAAAAAAAAAAAAAAAMMg3h8wznhEzLhkAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABO0lEQVR4nO3dQW6CQABAUdv0rHgmOW13jZu2Ehk+o++tXJgA+RkmThi8XAAAgHfzceTBlmX59zvruh5wJvt65ro+9z4ZthEgJkDsqzrw7Xb7+Xy9XqvT2N3W6zICYgLEBIhlc8Ar3ffvbb0uIyAmQEyA2KFzwCPrPK+6XvQbIyAmQEyAWPY74BEzrhdZC5qMADEBYqeeA2a579+zFjQZAWICAAAAAAAAAMAgh74rYkaj9yt4KiImQEyA2KmfDT2bEfsVjICYADEBYuaADUbsVzACYgLEBIgNWQt6t/c9PMMIiAkQEyA2/HfAjO97OJIREBMgJkBs+Bzgvv83IyAmQEwAAAAAADiIPWI72/pMlNXQmAAxAWL2Bwz0yDNRRkBMgJgAMXPAQP5HbAICxAQAAAAAAAAAAAAAgJ18A6QJMczuYfL4AAAAAElFTkSuQmCC" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABOUlEQVR4nO3dQQ6CMBRFUTWuFdYEq3VmGKkN/D4q54wcmCC5KQ0NxdsNAAC4mnv1AaZp+vqddV2rf0apPef4OPrH0EaAMAHCnj0PtizL+/M8zz0P3U3rORoBYQKECRDWdQ741+v+Vus5GgFhAoQJEFY+B7Su81xh7WjLCAgTIEyAsK73Aa1GXDuyFjQYAcIECDv1HDDKdX/LWtBgBAgTAAAAAAAAAACKlL8rYnTV+xU8FREmQJgAYad+NvRsKvYrGAFhAoQJEGYOaFCxX8EICBMgTICwkrWgq73vYQ8jIEyAMAHCyu8DRnzfQ09GQJgAYQKElc8BrvufGQFhAoQJAAAAAACd2CN2sNZnoqyGhgkQJkCY/QGFfnkmyggIEyBMgDBzQCH/IzYAAcIEAAAAAAAAAAAAAICDvAAQPDHMXJE2YwAAAABJRU5ErkJggg==" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABSUlEQVR4nO3dQWrDMBAF0LT0SD6TfSb7TD5UdqWLJqlIRl9q3luFYJDgMx4sJPtyAQAA3s1H9QDruj685jiO6mkM6zM9gXcngDABhH31HGzf9+/f27b1HLrUM31OBYQJIEwAYV17wH+679/S2udUQJgAwgQQVr4W1GrGtaPzPB9esyzLr/+rgDABhAkgrOtzQKtZ1o5+9iTPAZMRQJgAwobuASPf929pnbMKCBNAmAAAAAAAAAAAoMhw5wNGU31ewa6IMAGECSBs6L2ho6k4r6ACwgQQJoAwPaBBxXkFFRAmgDABhJWsBc34vocUFRAmgDABhJU/B8zyvocUFRAmgDABhJX3APf9+1RAmADCBAAAAAAAnTgj9mKte6KshoYJIEwAYc4HFPrLnigVECaAMAGE6QGFfEdsAgIIEwAAAAAAAAAAAAAAvMgVTKszlEJoU18AAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/></div><div style="margin:8px 0"><div style="font-family:var(--mono);font-size:11px;color:var(--graphite);margin-bottom:4px">the same clip, played backward (they gather — physically odd)</div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABSUlEQVR4nO3dQWrDMBAF0LT0SD6TfSb7TD5UdqWLJqlIRl9q3luFYJDgMx4sJPtyAQAA3s1H9QDruj685jiO6mkM6zM9gXcngDABhH31HGzf9+/f27b1HLrUM31OBYQJIEwAYV17wH+679/S2udUQJgAwgQQVr4W1GrGtaPzPB9esyzLr/+rgDABhAkgrOtzQKtZ1o5+9iTPAZMRQJgAwobuASPf929pnbMKCBNAmAAAAAAAAAAAoMhw5wNGU31ewa6IMAGECSBs6L2ho6k4r6ACwgQQJoAwPaBBxXkFFRAmgDABhJWsBc34vocUFRAmgDABhJU/B8zyvocUFRAmgDABhJX3APf9+1RAmADCBAAAAAAAnTgj9mKte6KshoYJIEwAYc4HFPrLnigVECaAMAGE6QGFfEdsAgIIEwAAAAAAAAAAAAAAvMgVTKszlEJoU18AAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABOUlEQVR4nO3dQQ6CMBRFUTWuFdYEq3VmGKkN/D4q54wcmCC5KQ0NxdsNAAC4mnv1AaZp+vqddV2rf0apPef4OPrH0EaAMAHCnj0PtizL+/M8zz0P3U3rORoBYQKECRDWdQ741+v+Vus5GgFhAoQJEFY+B7Su81xh7WjLCAgTIEyAsK73Aa1GXDuyFjQYAcIECDv1HDDKdX/LWtBgBAgTAAAAAAAAAACKlL8rYnTV+xU8FREmQJgAYad+NvRsKvYrGAFhAoQJEGYOaFCxX8EICBMgTICwkrWgq73vYQ8jIEyAMAHCyu8DRnzfQ09GQJgAYQKElc8BrvufGQFhAoQJAAAAAACd2CN2sNZnoqyGhgkQJkCY/QGFfnkmyggIEyBMgDBzQCH/IzYAAcIEAAAAAAAAAAAAAICDvAAQPDHMXJE2YwAAAABJRU5ErkJggg==" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABO0lEQVR4nO3dQW6CQABAUdv0rHgmOW13jZu2Ehk+o++tXJgA+RkmThi8XAAAgHfzceTBlmX59zvruh5wJvt65ro+9z4ZthEgJkDsqzrw7Xb7+Xy9XqvT2N3W6zICYgLEBIhlc8Ar3ffvbb0uIyAmQEyA2KFzwCPrPK+6XvQbIyAmQEyAWPY74BEzrhdZC5qMADEBYqeeA2a579+zFjQZAWICAAAAAAAAAMAgh74rYkaj9yt4KiImQEyA2KmfDT2bEfsVjICYADEBYuaADUbsVzACYgLEBIgNWQt6t/c9PMMIiAkQEyA2/HfAjO97OJIREBMgJkBs+Bzgvv83IyAmQEwAAAAAADiIPWI72/pMlNXQmAAxAWL2Bwz0yDNRRkBMgJgAMXPAQP5HbAICxAQAAAAAAAAAAAAAgJ18A6QJMczuYfL4AAAAAElFTkSuQmCC" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABRklEQVR4nO3dQU7DMBRAwYI4a3um5rTsUDeojbDzYjqzYoHURE+/VhIHLhcAAODdfBz5Ydfr9envbNt2wJGM9Zfz+hx9MOwjQEyA2Ff1wff7/efn2+1WHcZwe8/LBMQEiAkQy9aA//S9/2jveZmAmAAxAWKHrgEr3ueZzQTEBIgJEMuuA36z+jMD94IWI0BMgNjp1oBHKz4zcC9oMQLEBIgdui/oFatfB+xlAmICxAQAAAAAAAAAgElOty/oDI7cm2RXREyAmACxU78fcAaz31EwATEBYgLErAFPzH43zQTEBIgJEBt2L+jd3u0axQTEBIgJEJtyHbDi33iomICYADEBYlPWAN/7rzMBMQFiAgAAABzM+wGD7X027ko4JkBMgJi9oRO98mzcBMQEiAkQswZM5P+ILUCAmAAAAAAAAAAAAAAAMMg3h8wznhEzLhkAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABVUlEQVR4nO3cwU7CQBRAUTR+K3wTfK07w0ICtZ3eqZyzMobEmpvXZtoOpxMA7+qjPoD/4Hw+P/3M7Xb79fefWx8MywgQEyD2tecfW3OuPIrr9frz8+Vyefp5ExATICZAbNdrwL2l58qjWPq/mICYADEBYrveC3qHdcBSJiAmQEyAmOcBf7TV9cwExASICRDL7gU9csS1wpr7WiYgJkBMgNh014B7R3lmsObYTEBMgJgAsenuBR1xHbCGCYgJEBMAAAAAAAAAAAaZ7r2gGez5bpK3ImICxASITb0/YAaj9yiYgJgAMQFirgFPjN6bZgJiAsQEiG12L+jd9nZtxQTEBIgJEBuyDjjKdzzMwATEBIgJEBtyDXDef50JiAkQEwAAAGBn9gcM9MpzcivhmAAxAWLeDd3Jo+fkJiAmQEyAmHXAQNYBByBATAAAAAAAAAAAAAAA2Mg3PBw0y/XfEiYAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABWElEQVR4nO3bS2rDQBBFUSdkrfaarNVmFjxwcITUui3nnJExAgke1UX/LhcA/quP+gPewfV6ffnMsixP///c+2NYRwAxAcS+qhdvGTdndr/ff37fbreXz6uAmABiAohlPeDR2nFzZmu/XwXEBBATQCxbC3rXecBaKiAmgJgAYvYDVhjRt1RATAAxAcSmWAs6o73Wr1RATAAxAcSm6wFnWSPaa99CBcQEEBNAbLoe8Gi2veIRvUcFxAQQE0Bs6h4ww7g/mgqICSAmAAAAAAAAAAAYxD3hJ468o+BUREwAMQHEpj4bOoPRdxRUQEwAMQHENvWAs9zp3WL0HQUVEBNATACx3eYBs93p3eLIvqUCYgKICSC2Ww84+7hfUQExAcQEAAAAcDBnQwf6y565mXBMADEBxJwNPchve+YqICaAmABi5gEDmQecgABiAgAAAAAAAAAAAACAnXwDmco2ogE2AEoAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABcElEQVR4nO3bwW6CQBRA0dL4rfpN+rN2Z1i0qRTwjvScVWtcmNw8BibM9MFq5/P51+/cbrdvP//c+sewjAAxAWKn+gcczfV6ffx9uVx+/b4JiAkQEyA2xBqw5j56NM9c9+dMQEyAmACxIdaAuaX30SNYsz6ZgJgAMQFiw60B73Ld34oJiAkQEyA21T/gneyxZ2UCYgLEBIgN9xzwLrbaszIBMQFiAsSsAX+01Z6VCYgJEBMgNtxe0JHeEXqGCYgJEBMgNvRzwDu+I7SUCYgJEBMgNvQacNTr/pwJiAkQEwAAAAAAAAAAdjLc+YARvPKMgrciYgLEBIgN/W7oCPY+o2ACYgLEBIgtXgP+2znevc8omICYADEBYqueA456jveVa5gJiAkQEyC2ag040nW/YgJiAsQEiE0/7e0caT9nZCYgJkBMgNh0v98f/8zv660Br2ECYgLEBIid7Oe0TEBMgJgAAAAAAAAAAAAAAAAAK30BY7o5vIk2fnwAAAAASUVORK5CYII=" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABVElEQVR4nO3cwW6CQBRA0dr0W/Wb9Gu7I9iExKaFO4znrFia3DyGQeDywb+6Xq/L8f1+X45vt9ty/Hg8luPPY34WWwSICRD7qn/AzNbn/S0mICZATIDYpf4BP62vo7esr6PPzgTEBIgJEBt6H7B1L2UmJiAmQEyA2NBrQHXeP3IvYgJiAsQEiA23Box2n2fvvYgJiAkQEyA23Bowmr33IiYgJkBMAAAAgIMN92zo2js8J2onHBMgJkDsNP8HzPqcqAmICRATIHaaNWCm8/6aCYgJEBMAAAAAAAAAAHYy9PsBFd+MeyMCxASInebZ0Ipvxk1OgJgAsZfWgHd4X3eLb8ZNToCYALFf7wNmfV937cj1zATEBIgJELu8co3/iln3AXszATEBYgLEnvYBW9f4zu/7MQExAWICxJ7WgFnv7YzMBMQEiAkAAAAAAAAAAAAAAADwR9/p1zdEqLXCVgAAAABJRU5ErkJggg==" width="52" style="border:1px solid var(--line);border-radius:4px;image-rendering:pixelated;margin-right:3px"/></div>
+<p>We built tiny clips of moving particles and trained a small classifier to answer one question: is this clip
+playing <em>forward</em> or <em>backward</em>? We ran it twice, on two kinds of motion:</p>
+<div class="barrow"><span class="lab">irreversible motion</span><div class="bar" style="width:100%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--accent)">100% — reads the arrow</span></div><div class="barrow"><span class="lab">reversible motion</span><div class="barc" style="width:48%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">48% — chance, no arrow</span></div><div class="barrow"><span class="lab">chance</span><div class="barc" style="width:50%;opacity:0.4"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">50%</span></div>
+<p>On <b>irreversible</b> motion — particles that spread out and slow down, the way real things settle — the
+classifier tells forward from backward essentially perfectly (<span class="stat">100%</span>): played
+backward, the particles would gather and speed up, which never happens, and the model learns to spot it. On
+<b>reversible</b> motion — particles drifting at constant speed — it is stuck at
+<span class="stat">48%</span>, pure chance. Run that backward and it looks like perfectly ordinary
+forward motion in the other direction; there is simply <em>no arrow to find</em>.</p>
+<div class="fp"><b>The honest result:</b> a model can read the direction of time — but only when the dynamics are
+irreversible. Time's arrow is not in the pixels; it is in the <em>physics</em>. That single fact is what makes
+temporal self-supervision work (and what its failure case looks like).</div>
+<h3>Time is also deeply redundant</h3>
+<p>The flip side of motion is how much of a video <em>doesn't</em> change. Predicting the next frame by simply
+<b>copying the last one</b> already scores <span class="stat">23</span> dB — far better
+than a blank guess (<span class="stat">19</span> dB). Most of a frame is just the
+previous frame; the hard, interesting part is the little that moved. That is why efficient video models spend
+their compute only where time is dense — on the change, not the redundancy.</p>
+
+
+<h2 id="why">4 · Why it matters — memory, prediction, and free labels</h2>
+<p>Taking time seriously reshapes the whole field. <b>Understanding</b> a video means knowing when and in what
+order things happened, not guessing from one lucky frame. <b>Long video</b> forces a bounded memory of the
+past, because an hour is far too many frames to hold at once. <b>Efficiency</b> comes from the redundancy above
+— spend compute only where the video changes. And the arrow itself is <b>free supervision</b>: hide the future
+and predict it, shuffle the frames and re-order them, reconstruct a masked future from the past — no labels
+needed, just the direction of time.</p>
+
+<h2 id="robots">5 · The surprise — a robot bets on the future</h2>
+<p>In vision, temporal modeling mostly looks <em>backward</em>: describe, caption, or ground a video that
+already happened. A robot cannot afford to look backward. It models time to guess what happens <b>next</b> —
+where the pedestrian will be, what the scene will look like after this action, what the human is about to do —
+so it can move <em>before</em> it is too late.</p>
+<div class="fp"><b>Vision remembers time; robotics bets on it.</b> The arrow runs forward straight into a plan: the
+prediction is not the deliverable, it is the input the controller commits to. And being wrong is not a lower
+score — it is a collision, a dropped handover, a botched grasp. The
+<a href="video-in-the-wild.html">in-the-wild page</a> lays out both sides.</div>
+
+<div class="fp"><b>Where to go from here.</b> Feel the arrow yourself in the
+<a href="video-playground.html">arrow-of-time sandbox</a> — run an irreversible process forward and back and
+watch the reversed version look impossible, then switch to reversible motion where both look fine. Then see
+<a href="video-in-the-wild.html">how CVPR &amp; robotics actually model time</a>. Then go
+<a href="video-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="video-playground.html">→ The arrow-of-time sandbox</a> ·
+<a href="video-in-the-wild.html">→ In the wild</a> ·
+<a href="video-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles video, grounded in a real Colab-GPU run (a forward-vs-backward classifier on moving particles) ·
+the irreversible-vs-reversible arrow-of-time gap and the temporal-redundancy numbers are measured · CC0.</footer></div>
+</body></html>
