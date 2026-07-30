@@ -1,0 +1,170 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Why attention — letting tokens choose, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;align-items:start}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.barrow{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
+.barrow .lab{width:74px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.bar{height:15px;border-radius:3px;background:var(--accent);min-width:2px}
+.bar.alt{background:#b5651d}
+.hm{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:8px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Attention · first principles · letting tokens choose</div>
+<h1>Why attention — letting each token choose what to look at</h1>
+<p>Attention is the engine under almost everything modern AI does — the Transformer it powers is the
+default backbone of vision, language, and, increasingly, robotics. This page is the plain-language story:
+the one problem it solves, the single idea that solves it, a real run where you can <em>see</em> attention
+doing its deepest trick, the measured reason it needs depth, its one real weakness, and the surprise that
+the same mechanism now drives robots.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it took over</a><a href="#cost">The one weakness</a><a href="#robots">The surprise</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — how does a token get the <em>right</em> context?</h2>
+<p>A model reads a sequence — words, or the little patches an image is cut into. No token means much on
+its own; each one needs information from <em>other</em> tokens to make sense. The word &ldquo;it&rdquo;
+needs whatever noun it refers to; an image patch of an ear needs the patches that make it a <em>cat</em>.
+The hard part is: <b>which</b> other tokens, and <b>where are they?</b></p>
+<div class="fp"><b>The problem, stated once:</b> every token needs to pull in exactly the other tokens that
+are relevant to it — which could be anywhere in the sequence, at a distance that changes every time.</div>
+<p>The older tools each fall short. A <b>convolution</b> only looks at fixed nearby neighbours, so it
+misses long-range links (the noun ten words back). A plain <b>fully-connected layer</b> wires fixed
+positions together, so it can't handle a sequence whose length or arrangement varies. What you want is a
+layer where <em>the connections themselves depend on the content</em> — where each token decides, on the
+fly, who to listen to.</p>
+
+<h2 id="reframe">2 · The reframe — a content-based lookup each token runs for itself</h2>
+<div class="fp"><b>The idea: let every token ask a question, and let every token answer.</b> Each token
+emits a <em>query</em> (&ldquo;what am I looking for?&rdquo;) and also offers a <em>key</em> (&ldquo;here
+is what I am&rdquo;). A token's query is compared against every key; the better the match, the more that
+token contributes. The result is a weighted average of everyone's <em>values</em> — and the weights are
+computed fresh from the content. That is attention: a soft, learned dictionary lookup each token runs for
+itself.</div>
+<div class="eq">attention(Q,K,V) = softmax( Q·Kᵀ / √d ) · V
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># match every query to every key → weights → weighted average of values</span></div>
+<p>Three things fall out for free. It connects <b>any token to any token</b> regardless of distance, so
+long-range links are as easy as short ones. It works for <b>any length</b> and doesn't care about the
+raw ordering (position is added separately), so it is far more flexible than a fixed-wiring layer. And you
+can run <b>several lookups in parallel</b> — the &ldquo;heads&rdquo; of multi-head attention — each free to
+track a different kind of relationship. Stack these layers and something remarkable happens: they start to
+<em>compose</em> into little algorithms. The clearest one you can actually watch is next.</p>
+
+<h2 id="run">3 · Seen on a real run — the induction circuit</h2>
+
+<div class="fp"><b>Every number below is measured.</b> We trained tiny transformers to continue a
+per-sequence random pattern (a walk <code>s[i+1] = g(s[i])</code> where the rule <code>g</code> is fresh
+each sequence, so it can only be read from context, never memorized). Predicting the next token means
+finding where the current token appeared before and copying what came next — pure <b>induction</b>. On
+Colab GPU; the numbers are the model's, not ours.</div>
+<div class="two">
+<div><div class="hm"><svg viewBox="0 0 300 300" width="100%" style="max-width:300px;display:block;margin:0 auto"><rect width="300" height="300" fill="#fbfcfc"/><rect x="0.0" y="0.0" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="7.69" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.991"/><rect x="0.0" y="15.38" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.998"/><rect x="0.0" y="23.08" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.977"/><rect x="0.0" y="30.77" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.995"/><rect x="0.0" y="38.46" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.992"/><rect x="0.0" y="46.15" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.999"/><rect x="0.0" y="53.85" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.996"/><rect x="0.0" y="61.54" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.998"/><rect x="0.0" y="69.23" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.999"/><rect x="0.0" y="76.92" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="84.62" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.999"/><rect x="0.0" y="92.31" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.999"/><rect x="0.0" y="100.0" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="107.69" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="115.38" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.998"/><rect x="0.0" y="123.08" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="130.77" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="138.46" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="0.0" y="146.15" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.999"/><rect x="7.69" y="153.85" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.999"/><rect x="15.38" y="161.54" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="23.08" y="169.23" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="30.77" y="176.92" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="38.46" y="184.62" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="46.15" y="192.31" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="53.85" y="200.0" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="61.54" y="207.69" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="69.23" y="215.38" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="76.92" y="223.08" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="84.62" y="230.77" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="92.31" y="238.46" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="100.0" y="246.15" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="0.993"/><rect x="107.69" y="253.85" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="115.38" y="261.54" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="123.08" y="269.23" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="130.77" y="276.92" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="138.46" y="284.62" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/><rect x="146.15" y="292.31" width="8.19" height="8.19" fill="#0E7C86" fill-opacity="1.0"/></svg></div><div style="font-family:var(--mono);font-size:11px;color:var(--graphite);margin-top:6px">
+the real attention map of the trained <b>induction head</b> (rows = query token, columns = what it looks
+at; causal, so only the lower triangle exists). The bright <b>staircase</b> is the head copying from
+earlier in this sequence; the bright <b>left column</b> is an &ldquo;attention sink&rdquo; — a rest
+position it parks on when there is nothing to copy yet.</div></div>
+<div>
+<p style="font-size:14.5px">Read one bright cell: a query token that has appeared before looks straight
+back to the position <em>right after</em> its earlier occurrence — the token it should copy next — with
+attention weight <b>1.00</b>. The staircase sits at a steady offset here only because
+this particular sequence's pattern happens to repeat with a fixed period. But that period is <em>different
+every sequence</em> and written nowhere in the weights — so the model had to <em>find</em> it by matching
+content. That is exactly what attention is, and exactly why one layer (which can only key off fixed
+positions) cannot do it.</p>
+<p style="font-size:14.5px">The two bars below are the ablation — the phase change is in the layers.</p>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--graphite);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">accuracy vs #layers (heads=2)</div><div class="barrow"><span class="lab">1 layer</span><div class="bar" style="width:55%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.552</span></div><div class="barrow"><span class="lab">2 layer</span><div class="bar" style="width:100%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">1.000</span></div><div class="barrow"><span class="lab">3 layer</span><div class="bar" style="width:100%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">1.000</span></div></div>
+<div style="height:10px"></div>
+<div><div style="font-family:var(--mono);font-size:11px;color:var(--graphite);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">accuracy vs #heads (layers=2)</div><div class="barrow"><span class="lab">1 head</span><div class="bar alt" style="width:100%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">0.999</span></div><div class="barrow"><span class="lab">2 head</span><div class="bar alt" style="width:100%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">1.000</span></div><div class="barrow"><span class="lab">4 head</span><div class="bar alt" style="width:100%"></div><span style="font-family:var(--mono);font-size:12px;color:var(--graphite)">1.000</span></div></div>
+</div>
+</div>
+<h3>The phase change is in the depth</h3>
+<p>With <b>one</b> attention layer the model tops out at <b>0.55</b> — it can match tokens by content <em>or</em> copy by position, but it cannot do the two-step move induction needs. Add a <b>second</b> layer and accuracy jumps to <b>1.00</b>: the two layers compose into the induction circuit — a first head stamps each position with the token before it, and a second head's query matches the current token and reads the token that followed it last time. That leap from 0.55 to 1.00 is a real <b>phase change</b>: the ability appears only once the depth is there to build the circuit.</p>
+<p>And a clean negative result: at two layers, going from <b>1</b> head to <b>4</b> barely moves accuracy (1.00 → 1.00). For this task it is <em>depth</em> (layers that compose) that unlocks the skill, not <em>width</em> (more heads in parallel). Extra heads buy capacity and robustness in real models, but they are not what makes induction possible.</p>
+
+
+<h2 id="why">4 · Why attention took over</h2>
+<p>The Transformer — attention stacked into a backbone — is now the near-universal substrate of computer
+vision; by our count it underlies at least a quarter to a third of CVPR 2026, and the true share is higher
+because most papers take it as unstated infrastructure. Three properties explain the takeover:</p>
+<table class="mxtable">
+<tr><th>property</th><th>why it matters</th></tr>
+<tr><td><b>Content-based, any-to-any routing</b></td><td>a token can reach the exact other token it needs, however far away — the long-range links a convolution can't make.</td></tr>
+<tr><td><b>Order-flexible, any length</b></td><td>the same layer handles a short caption or an hour of video; it doesn't hard-wire positions, so it scales across shapes and sizes.</td></tr>
+<tr><td><b>Layers compose into circuits</b></td><td>as the run showed, stacked attention builds algorithms like induction — which is the root of <em>in-context learning</em>, the ability to pick up a new pattern from the prompt with no weight changes.</td></tr>
+</table>
+
+<h2 id="cost">5 · The one real weakness — the quadratic cost</h2>
+<p>There is a catch, and it is the single most-fought problem in the field. If every token compares itself
+to every other token, the work grows with the <em>square</em> of the sequence length. Double the tokens and
+you quadruple the cost — and a 4K image or a long video has a <em>lot</em> of tokens (in some video models
+three-quarters of all compute is attention). So a huge share of research is spent taming it, in two ways:
+<b>fewer tokens</b> (merge or prune the unimportant ones) and <b>cheaper math</b> (linear or sparse
+attention, and state-space models like Mamba — which turn out to be a low-rank approximation of the same
+weighted-average idea). It is the central tradeoff of the whole architecture: attention's power is that
+everything can see everything, and its cost is exactly the same thing.</p>
+
+<h2 id="robots">6 · The surprise — the same attention now drives robots</h2>
+<p>Attention did not stay in vision and language. The <em>same</em> mechanism is now a backbone of robotics,
+in three distinct jobs. As a <b>sensor-fusion</b> operator: cross-attention is how a robot aligns and merges
+camera, LiDAR, radar, touch, and language, each living in a different frame — queries from one modality
+attending over another. As a way to reason about <b>other agents</b>: attention over the cars and pedestrians
+in a scene decides which ones matter to your next move. And as a <b>policy</b> itself: decision- and
+action-transformers treat a history of observations and actions as tokens and predict the next action, the
+GPT recipe pointed at control.</p>
+<div class="fp"><b>Same mechanism, different job.</b> The lookup that lets the word &ldquo;it&rdquo; find its
+noun is the same lookup that lets a robot fuse a LiDAR return with a camera pixel, or attend to the
+pedestrian about to step out. Learn attention once and you have the shared language of modern vision,
+language, and control. The <a href="attention-in-the-wild.html">in-the-wild page</a> lays out all of it with
+real papers.</p>
+
+<div class="fp"><b>Where to go from here.</b> Play with a live attention lookup in the
+<a href="attention-playground.html">attention sandbox</a> — type a sequence and watch each token choose what
+to look at. Then read <a href="attention-in-the-wild.html">how the field actually uses attention</a> across
+vision and robotics — from the quadratic-cost fight to robot control.</p>
+
+<p style="margin-top:16px"><a href="attention-playground.html">→ The attention sandbox</a> ·
+<a href="attention-in-the-wild.html">→ In the wild</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles attention, grounded in a real Colab-GPU run (tiny transformers on the induction task) · the layer phase-change and the induction-head attention map are measured, not asserted · CC0.</footer></div>
+</body></html>
