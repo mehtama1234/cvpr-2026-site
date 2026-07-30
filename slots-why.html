@@ -1,0 +1,131 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Object-centric learning — one slot per object, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.mxtable{border-collapse:collapse;max-width:460px;width:100%;margin:12px 0;font-size:13.5px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:7px 10px;text-align:center;font-family:var(--mono)}
+.mxtable th{background:var(--tint);font-size:11px;text-transform:uppercase}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Object-centric learning · first principles · one slot per object</div>
+<h1>Object-centric learning — giving every object its own slot</h1>
+<p>Look at a table with a cup, a book, and a phone on it. You do not see one undifferentiated blur — you see three
+separate things you could pick up one at a time. A normal vision network does the opposite: it squashes the whole
+scene into a single feature vector where the objects are hopelessly entangled. Object-centric learning is the idea
+of giving each object its <em>own</em> slot of representation, discovered without labels. This page is the plain
+story of that idea — the competition between slots at its heart — on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="slots-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — a scene is not one thing</h2>
+<p>A scene is made of separate objects, but a standard encoder collapses it into a single feature vector — one blob
+in which the cup and the book and the phone are blended together with no boundaries. That entangled representation
+is fine for a single global label, but it cannot say <em>this</em> object versus <em>that</em> one, cannot count,
+cannot let you move or reason about one thing while leaving the rest alone. Neuroscientists call keeping the
+features of each object together, and apart from the others, the <em>binding problem</em>.</p>
+<div class="fp"><b>The problem, stated once:</b> a scene contains several objects, but a normal network mashes them
+into one entangled representation — how do you give each object its own, separable identity, with no labels
+telling you where they are?</div>
+
+<h2 id="reframe">2 · The reframe — let slots compete for the scene</h2>
+<div class="fp"><b>The idea: keep a few &ldquo;slots&rdquo; and make them compete to explain the image.</b> A slot is a
+vector meant to stand for one object. Start with a handful of them, and run a few rounds of attention in which
+<em>each pixel is claimed by the slot that explains it best</em> — the slots compete, and each ends up owning a
+different part of the scene. Train the whole thing to reconstruct the image from its slots, and with nothing but
+that reconstruction pressure, the slots specialise: one per object. It is clustering the scene into objects, done
+differentiably inside the network.</div>
+<div class="eq">for a few rounds:  each pixel → the slot that best explains it ;  each slot ← the pixels it won
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># slots compete to explain the image; reconstruct from them, and each latches onto one object</span></div>
+<p>The number of slots you allow turns out to matter a lot — the run shows what happens when there are enough, and
+when there are too few.</p>
+
+<h2 id="run">3 · Seen on a real run — slots that claim objects</h2>
+<h3>1 · Watch the slots divide up the scene</h3>
+<p>We built little scenes of coloured shapes and trained a <em>slot-attention</em> autoencoder to rebuild each one
+as a sum of 4 slots — with no labels, only the instruction to reconstruct. Here is what one slot each
+learned to claim (brighter = this slot is responsible for these pixels):</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin:14px 0"><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAABiElEQVR4nO3awUkDQRiA0SheTQOWEcsQ27AMsQyrsQFThg3EBrzFBV0hkM03Me+dlhzCwMe/w87uagUAAAAAAAAAAADAf3FVL+AvH5vN/vpuuw1XspzregGXToCYALFsD5je34/lHPcJExATICZA7KR7wBL3/Tnnsh+YgJgAMQFii+8Bp7zvzxl5PzABMQFiAsRu6gWcwuZ5t7/evqzDlfxkAmICxASICRATICZATIDYImdBI5z/zBntXMgExASICRC7iPcBjw9vv/4+wrmQCYgJEBMgdhHvA6ZGuO9PmYCYADEBYgLEBIgJEBMgNvscsHs//hnO59PR/3LW3PnPaExATICYALGTngXdvn5fL7EfjHzuP8cExASICRCbfSe8xHPAoab7xPR7npG/9z+UCYgJEBMgNvQesL4f6zvOJZiAmAAxAWICxASICRATICZATICYADEBYgLEBIgJEBMgJkBMgJgAMQFiAsQEiAkQEyAmQEyAmAAxAWICxASICRATAAAAAAAAYGFfXbEsXpM5G0gAAAAASUVORK5CYII=" width="96" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:4px">the scene</div></div><div style="align-self:center;font-size:22px;color:var(--graphite)">→</div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAAAAADmVT4XAAAEK0lEQVR4nO3bTY8bRRAG4Mdr79r7mSXJhhA2EIT4igJCcIITFyQkxAnlyIm/xg/gFyAuHCNOnEGIAwpBQSRSQna95lDd02PHm90YpJlDl9TqGU+7/bre6qrqjxnMdCdfY63D36cCwOB5bOC/2Mtg4f4B9vRAAxXAKF/cxncYYwu72En1lkA6xBPB3xHWsZHqISa4gP1UXsQ1wXXu9xpO0jN6oIEKYESM728xFeM18z1o3Y8Ej2up/Sxd5zYjwfE+DnA1tdkVtjFJ3x+mH56munMNVACNH8h+fk2M6/V0fyz4OknPNgWfeezn7w6FDVxIZTe1HQpfkX3KKJU93NMDDVQAjR+gxOyZ4D7XJ+nzqYgFjwS/e4LXsWI3m0p8gMf4J/WRfQZcV22gJwBGFG6yj5+mMhPcZRvJ90eC16nwCZfE2M8x/5KI9wfYVnxG5n+Am/hRDzRQATSxINsAZdzPWtdaz3L5W4kd23gBFwX/h8IWxkpOMGr182aqO9dABdDQMlTytOwPFqUdM05EnHiAuyIXvC64PxT5/76wj4nwD+uKz/ko9dW5BiqAxgbaSGYLtYVnM8HjVMSEv/C7sIGh8AnbgvcN8/PHHA+qH+gNgLZ7brjN18+S/HwqcsS7+E3E+fbcYhn/A5E/0AMNVACNDbRzgPNK2w4e4k8RH7bE/CDPF4bKWkKWjVR3roEK4Kn1gcXrs2Rmfj4xFnnAjrIm1J4TLtada6ACmLOBVfYDst/fxWXB/USM89P4p/idzjVQASz1A+eVNWXcH+KGmBvmNeXT+G//XucaqABWtoGBsj58A5/iE7wr8r3FHPA06VwDFcBKNtDeR9rGx/hK+IIN8+P/WX3QAw1UAKOzmxRp85b3Bg7xJV5tdXYW/9R5QY8AzK0VL5O2P8/jfyL2iy7jc+H/n4d/yp5j5xqoAJo9o7Mkx/9NsQ78Bt7BF+mz8/bT7o8eaKACODMW5LXDnC8MRe7/vljzP3S++H+adK6BCmBuz+h4SYM2t3kfMa8FXVTOCawqnWugAmhsYCz2f5bJYKHk80Q7Vv8HdX2gNwDmbGCZP1/kfkPhf1vJ7VaVzjVQATQ2cAX3za8Zt7nPa4J74ozIFeW88SpS/UBvADQ28BZ+Uc6PtvP2fA50R+SAN8VZgYnV88FqA70B0NjAh7gj8sLHwudPRc43Fv7/AB+ktldTm1X/Qd0z6g2AxgY+E+dApvhVjPmHiv/fx8t4D2+Ls4Mjq88Jj1LduQYqgOZds/v4WYzte6k+FuN/q1W2zZ8LYDU7+Am39EADFUBjA4/wh+D+iXIOeD3Va62ymAOsYgO3hB10roEKoHnH5DZ+SB/OlD2BA7wk9odfw+t4RcSGbBs5Z1j39Jmxxf3IGb4X/NMDDVQAg2/Evu//9Q56fleR8n7Ks84pd66BCuBfhmujQSdTm4UAAAAASUVORK5CYII=" width="72" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">slot 1</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAAAAADmVT4XAAAEiUlEQVR4nO2bz44bRRDGf2N715tkQxY2YYEIhBAg5YCQECckDrnlnjMPwYNw4RV4CS6IN4iEAIUIUISAaP8Isutlx+s/4+HwVfW0vV7Aa6TpQ5fUmvFMd/tz1dfV1V3tghblIdBpEwAZAFC09cVbwFckoIEMIHDgPvAJsAP0gVPgCHgOnANdoAdcA27afQVMgZn1MQH+AgbW/g/g0O4nwBDYt7pfWz+tayAD6PnNm8j2HWTzfeAx8BtwBmwAt4DXgDvAtj3rWycdZOcC8WIavetan+f2vIP44O1alQwgcOAYOEB2PAGeAj8Az4DS6mwCLyG+vAPsAS8gv+7cGVj7U2Tnyvo8Qz6isjJCPGpdAxlAL74pkB1Pkc38OgJqezdENj4A3gJeB3YRPyqrM7Y2U+QrNmh+aW3lAPGpdQ1kAIEDd5AtZ2i89u35zEqNODJGHBjRxAyvojhiw56fIH9wRjPmK5q4AeBn4B4JaCADCBy4i3x7gXz3EZrH66hyHZUSjfMSxX63gRvWvkQcKK3uGPmHKurnF7u2roEMIHDgZTSWh2iOv4E44AuHZVw4R3wpUTzhbSrrx+eQCvFgEvXzLZkDiQAIHPBx3LeyFb1ctH98XyMfP0Wc8Lhiimw+i97Pova/kjmQCIDAgT209jumWSPWC5Uv48KMxt6+3qtp7B7HFC5ndm1dAxlA4MAu8gO30D7QGPnzRR4sE/cF7hd8/qiYjyHivpwzrWsgAwgc2Ebjf8fuSytxLF+w3DfEz+O4r47ul0lFAhrIAAIHfP6/CbxI478X5Z8SDMtihcukIPuBRAAEDmyimH4LxYd7wHW0xltc27sss/G/jf1YfN+4VckAAgd8HdhFfuBD4BGKCY6RvS4b26vYPW4zJgENZABzHAAhuga8BzxAa/wnyB/E67tFu69if68/IgENZAC9ZQ8L5As+Qmv+PvAT4oHn/jz3A6vbn6ht6xrIAC5wwMd4B+UQPkbrxm8QD54Bf6Kcwoj5vb9VZIZikNY1kAEs5YDne0HrhHsoL7SPcsrfAz+i3N/JGl+ec8dJAAgciOd1398fI79foDXCXZqcgOeWB2t8+XUS0EAGEDhQ2QfngJ8Ti+f9Dlo77vD/nAPLc0ESAAIHRsgm8b5+gRB66UZXzwNdJRZw8f5alQxgjgPbNPHgBvOcGFu9jj3zs0JX5YDvN7augQwgcOAI+XjQ+Nyk4YN/9rMhHgeswwHIe8WJAAgceAK8gcanlx4Xc78nKPd/iHzBOn4gcyAJAIEDj4AP0JjvozFfoLE+tM+HiCuP0R7BOvFAhybeaFUygMCBL1GuqIvOCg/Q2m2IfP9ztD/0HdobOOXiuZBVvzhzIAkAgQNPgS+Qf9+1a5fGB/i1tHd+PuSq8go5X5AIgMCBIYoLx8znBSY0ewSL54XWkU9RbNG6BjKAwIHPgbfR2Pf/CZRo3j9CceDv6L9n+2guiPeSJvy3+KAA3kV7TQMS0EAGULwPfIbOlnsc6GfD/FyonwuH+T0j9wsTmv8XxedNPO6Dxn90rf4W+VxxIgD+BtbCeIkzoYikAAAAAElFTkSuQmCC" width="72" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">slot 2</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAAAAADmVT4XAAADYElEQVR4nO2by47bMAxFT5xMmkEHXbdAl7PqD3TV//+WtqtippPHOEkX1I1oRZlHXEBekIBhOZbjC/KKlER6RkP5AXQtARAAgEWrF8+BLRPQQACYqXEHfAKe0vUSWGG2OgB74JgemLsHdU/nvbt+du1jOg7p2W9AzwQ0EAAWvtEBH4Bb4HM65sBfzJ7qt8DseMDs2Kf7vfttDfwBHoAdmRuSu/R7cw0EgBMHeswmfbr+CfzC7L/G7Ndh/uEjZsNbjCNgY/ySaPwf3bXiQHMNBIATB47YWNZ43mB2Ey8UB9bAIzbGPQ+69Gc3qZ+uF2Qf4uUZizXNNRAABnNCcUCx/kieB+iAHPt3WOxYpvOKzJVt6jNzh5cNwYGJABj4gZ5sN/1W+nCJuLHHeHMg+3b5+h1DDnnZkv1FUwkAJw5ojuftVbYp2mX/GTlu7MhxpMaDR4IDEwEwiAWlnWr2L/uD2bjHxrbWflov+LWhl3U6N9dAADhxoGYnLvxWE8UEjW3vI2r/sSf8wEQAXOTAJdvVRH3FA3Gg3B/y4ucPTSUAvOoHXhI/19f80e8T6rj0v8GBSQAYrAvGysG1yzVFKdpzbq6BAFDlQLmWr9mx1kdrC12/xKsZeX+6qQSAAQdkR8jr/NraoLQ/RZ+3+pQlE9BAALgYCxSr/dzOSzkXuCaWBAcmAaBaPyA/fZOuyxwwlfN7RZxqroEAUOWA8j3KBUDe8/GHn/+/V5SPaq6BADDggHI7c3INySq11bHH6kwe0nk74uWPTEADAeDMD8gHLBnywHdckvOGmxEvf2ICGggAZxyQH1gUh+rHjvy/db32FJtKABjkDf25rBVQnNCesPJEY0S1SU0lAAzWhrKz6kG37p72czSX01ph7P5icw0EgLNYoJrQDbm+bEOOB2AcUJ3QGA5EvmASAM44IF+/I3Ogw+zvOaB6wzESHJgEgLN9Qp//g+FcQPvHqju8JtcoUcxproEAUPUDkMd4OdbLuoBrxeclmkoAqNaS+fm/v1drXysrbB+yuQYCwNk+oWRsPuA1+Z7OzTUQAE4c+IJ9W+bzAGrr2JJrxi/Vi7yFM1+Ae+w7puYaCACze+Ar8Bv7hszHA+UPl+QcYvn9aZfurdJZewinF7h+XXr2BqsrjpzRJAD8Ay4+McP4+u/aAAAAAElFTkSuQmCC" width="72" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">slot 3</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAAAAADmVT4XAAADHElEQVR4nO3aTY9URRQG4Kd7PmBGHSG0SgCDMVEhYUH4EfwKfplr1yYm7ly4MCwwsjCBGGIURVQc+RpAxplppl2cqjs9MjDdzaKG5LxJ5d6uuX37nXPeOnXqVPU0xBvotyQgCaDX8sf7DoAFkkCngUv4AY/wEFtjD/QwLH1DPMOo/L1eZ0VzCySB+XpzDr8Ifx8SzI7gOAbC96u4Wa6PsSn0sF3eMYsemlsgCXQaGOAUFkvnMZwp7R2hjTX8jKv4Dj/hAf4VGhmNtUnR3AJJoNPANubwlhj/J/AxPih9PaGT4/gI5/GN0MJtERc2hBaYXAfNLZAEOg2silxguXxeFHn7EhYE04XSlnEU7+I9XMGPuId/RN6QGnhtCHQauI37IhdYEnP9XGk1fx8JDcyV66LQwwCXcQ1/2MkVJtFBcwskgU4Df4o4sIInIq6P7KwLaqt9/fLsh0ILIzH+N4T/6/phPzS3QBLoNPAXngofbgk/1ny/+r/ej8bu+zgp1hWruCPWluvl+/vFguYWSAKdBu6KGF5jwLZgt1cRqfb1ywvexGmcxQ38ZvL/rLkFkkCngUdi7K6JtV7NC/Zj2BO5wdtiLbEyJYHmFkgCnQbWxfhfE7FgubQXxYKK8ZhQ84INu2uJL0NzCySBTgO15vdE1H3Ga/nj8//451oP2hLzyH3T+Z8DYIEk0GlgKHKADZEb3BFr/RXP7+1U/9bnH+J33Cr3Q6mB14jArjrhSPjvAb4VtcAlUTdctHtOqM8+xa/4Cl/juphPtk2G5hZIAp0GxuP7Or7Hl8L3Z4UO5u2eHzbF3HEZn4k60zQ1Qg6ABZLA/F6dz/C3GNdwEZ+I3P+wqBPW3O8WPi/X4XNv2h/NLZAEXpjy1z3kgYgDF4QOTok9pDmRL3yBT8WcMAuaWyAJvPQcUU/4+pCoAw3wvp06wLrIA26a/SxJcwskgYnOktVacd0rOlzaSOwVbr4CgeYWSAJTnyesewSV+TTrwL3Q3AJJYOYzpf+vF82K5hZIAolEIpFIJBKJRCKRSCQSvQWvXuub6YfFvnTzCkkS+A+v6LLItznYIwAAAABJRU5ErkJggg==" width="72" style="border:1px solid var(--accent);border-radius:6px;image-rendering:pixelated"/><div style="font-family:var(--mono);font-size:10px;color:var(--graphite);margin-top:3px">slot 4</div></div></div>
+<p>Nobody told it what an object is; the slots <em>competed</em> to explain the image and carved it into regions
+on their own. That is object-centric structure emerging from a plain reconstruction loss.</p>
+<h3>2 · Enough slots separate; too few merge</h3>
+<div class="mxtable-wrap"><table class="mxtable">
+<tr><th>slots</th><th>objects bound to their own slot</th><th>reconstruction error</th></tr>
+<tr><td><b>4 (enough)</b></td><td style="color:#0E7C86;font-weight:700">53%</td><td>0.0167</td></tr>
+<tr><td><b>2 (too few)</b></td><td style="color:#b06a3a;font-weight:700">21%</td><td>0.0276</td></tr>
+</table></div>
+<div class="fp"><b>With enough slots, an object gets its own distinct slot about
+<span class="stat">2.6×</span> as often as when there are too few
+(53% vs 21%), and the picture reconstructs better too.</b> Starve the
+model of slots and two objects are forced to share one — they <em>merge</em> into a single muddled
+representation. The honest caveat: binding here is only partial (a small model, briefly trained), so the slots are
+not surgically clean — but the direction is unmistakable, and it is exactly why object-centric models give each
+object room of its own.</div>
+
+<h2 id="why">4 · Why it matters — structure you can reason and act with</h2>
+<p>Once a scene is a set of separate objects instead of one blob, a world of things becomes possible: counting,
+composing (put <em>this</em> object <em>there</em>), reasoning about relations between objects, editing one
+without disturbing the rest, and generalising to new combinations you never trained on. Object-centric
+representations are a bet that the right unit of vision is the object — the same unit our own perception, and our
+language, are built around — and much of the work is about making the binding crisp and stable enough to rely on.</p>
+
+<h2 id="robots">5 · The surprise — a robot acts on objects, one at a time</h2>
+<p>A robot does not manipulate a feature blob — it grasps a specific mug, moves a specific block. So an
+object-centric representation, with one entity per thing, is the natural interface for manipulation: a policy can
+attend to the object it is acting on, and a map can be a list of named objects the robot tracks and reasons about,
+rather than an undifferentiated cloud of points.</p>
+<div class="fp"><b>Same slots, now they are things to act on.</b> Object-centric manipulation policies and object-level
+SLAM are a real thread in robotics, because the robot&#39;s job is defined per-object — pick this, avoid that. A
+vision model separates objects to reason about them; a robot separates them to act on them one at a time. The
+<a href="slots-in-the-wild.html">in-the-wild page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Watch slots compete for a scene in the
+<a href="slots-playground.html">binding sandbox</a> — give it too few slots and objects merge into one; give it
+enough and each claims its own. Then see <a href="slots-in-the-wild.html">how CVPR &amp; robotics actually use
+object-centric learning</a>. Then go <a href="slots-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="slots-playground.html">→ The binding sandbox</a> ·
+<a href="slots-in-the-wild.html">→ In the wild</a> ·
+<a href="slots-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles object-centric learning, grounded in a real run (a slot-attention autoencoder on synthetic scenes) ·
+the per-slot masks and the enough-vs-too-few binding gap are measured · CC0.</footer></div>
+</body></html>

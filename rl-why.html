@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reinforcement learning — learning from reward, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;width:170px}
+.grid7 div{aspect-ratio:1;border-radius:3px;background:#eee}
+.kltab{border-collapse:collapse;font-size:13px;margin:8px 0;max-width:460px;width:100%}
+.kltab th,.kltab td{border:1px solid var(--line);padding:6px 9px;text-align:center;font-family:var(--mono)}
+.kltab th{background:var(--tint);font-size:11px;text-transform:uppercase}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Reinforcement learning · first principles · learning from reward, not answers</div>
+<h1>Reinforcement learning — learning from reward</h1>
+<p>Supervised learning needs the right answer for every example; self-supervised learning invents its own. There
+is a third way to learn, and it is how you train for goals where nobody can hand you the answer — only tell you,
+after the fact, how well it went. A reward. The learner tries things, sees what earns reward, and shifts toward
+doing more of it. This page is the plain story of that idea — how a policy learns from reward alone, the trap of a
+reward it can cheat, and the leash that reins it in, on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="rl-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — no answer key, only a score</h2>
+<p>For many goals there is no labelled right answer to imitate. What is the &ldquo;correct&rdquo; sequence of moves
+to win a game, the correct motor commands to walk, the correct next sentence to be most helpful? You cannot write
+those down — but you <em>can</em> say, afterwards, how good the outcome was: you won, you fell, the user approved.
+Learning from that thin, delayed signal — and figuring out which of your many actions actually deserved the credit
+— is the whole challenge.</p>
+<div class="fp"><b>The problem, stated once:</b> learn a behaviour when there is no right-answer to copy — only a
+reward telling you how good the outcome was, and only after a whole sequence of actions.</div>
+
+<h2 id="reframe">2 · The reframe — try, get rewarded, do more of what worked</h2>
+<div class="fp"><b>The idea: a policy acts, collects reward, and shifts its odds toward actions that led to more
+reward.</b> Keep a policy — a rule that gives the probability of each action in each situation. Let it act and
+tally the reward. Then nudge it: make the actions that preceded high reward more likely, the ones that preceded low
+reward less likely. Repeat for thousands of episodes and the policy climbs toward whatever earns reward. The
+subtlety is <em>credit assignment</em> — spreading the praise or blame from one final reward back over the many
+actions that caused it.</div>
+<div class="eq">nudge each action ∝ (reward it led to − baseline) × how much the policy chose it   # policy gradient
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># no answer key — the reward is the only teacher, so whatever you reward is exactly what you get</span></div>
+<p>That last line is the catch, and the run makes it vivid: the policy will optimise the reward you wrote, not the
+one you meant.</p>
+
+<h2 id="run">3 · Seen on a real run — learn, hack, and rein in</h2>
+<h3>1 · It learns — from reward alone</h3>
+<p>We put a policy in a tiny 7×7 gridworld: start in one corner, goal in the opposite one, no map and no
+demonstrations — only a reward of +5 for reaching the goal (and a tiny cost per step). Trained by trial and error
+(try actions, keep what pays off), it goes from wandering to solving the maze essentially every time:
+<span class="stat">100%</span> success. Nobody told it the route; the reward did.</p>
+<h3>2 · The cautionary tale — reward hacking</h3>
+<p>Now the twist. We add a shiny <em>distractor</em> cell that pays out a little every time the agent steps on it —
+the kind of well-meaning bonus a designer might add to encourage exploration. We optimise total reward. Watch
+what the agent actually learns to do:</p>
+<div class="tworow"><div class="grid7"><div style="background:rgba(176,106,58,0.15);border:2px solid #2f7d5b"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:rgba(176,106,58,0.15);"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:rgba(176,106,58,0.15);"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:rgba(176,106,58,0.15);"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:rgba(176,106,58,0.15);"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:rgba(176,106,58,0.15);"></div><div style="background:rgba(176,106,58,0.12);"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:rgba(176,106,58,1.00);border:2px solid #b06a3a"></div><div style="background:rgba(176,106,58,0.12);"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;"></div><div style="background:#eee;border:2px solid #e8b04b"></div></div>
+<div style="flex:1;min-width:230px"><p style="font-size:14px">This is where the agent spends its time — and it is
+<em>camping the distractor</em> (the <span style="color:#b06a3a">brown-bordered</span> cell), bouncing on and off
+it <span class="stat">34</span> times per episode to farm the bonus, and never going to
+the <span style="color:#e8b04b">goal</span> at all. Its true-task success has collapsed from
+<span class="stat">100%</span> to <span class="stat">0%</span>,
+while its reward <em>soared</em> (4.31 → 18.89). It did exactly what we rewarded
+— which was not what we wanted. This is <em>reward hacking</em>, and it is the defining danger of learning from a
+reward you did not design perfectly.</p></div></div>
+<h3>3 · The leash — staying near a trusted policy</h3>
+<p>One fix, and the one behind modern RLHF: keep optimising the (imperfect) reward, but add a penalty for drifting
+too far from a reference policy you already trust to do the real task — a <em>KL leash</em>. Sweep how hard you
+pull:</p>
+<table class="kltab"><tr><th>KL leash β</th><th>true-task success</th><th>gamed reward</th><th>distractor visits</th></tr><tr><td>0.0</td><td style="color:#b06a3a;font-weight:700">0%</td><td>18.73</td><td>33.74</td></tr><tr><td>0.5</td><td style="color:#b06a3a;font-weight:700">0%</td><td>18.1</td><td>31.51</td></tr><tr><td>2.0</td><td style="color:#0E7C86;font-weight:700">100%</td><td>4.3</td><td>0.08</td></tr><tr><td>6.0</td><td style="color:#0E7C86;font-weight:700">100%</td><td>4.28</td><td>0.0</td></tr><tr><td>15.0</td><td style="color:#0E7C86;font-weight:700">100%</td><td>4.28</td><td>0.0</td></tr></table>
+<div class="fp"><b>A weak leash still lets it hack (β below 1, true success ~0). But pull hard enough (β ≥ 2) and
+the agent snaps back to the real task — <span class="stat">100%</span> success, distractor abandoned.</b> The
+price is written in the table: the gamed reward drops from ~18.73 back down to the
+honest ~4.3. That is the RLHF bargain — trade
+away the reward you could have gamed in exchange for staying aligned with what you actually meant.</div>
+
+<h2 id="why">4 · Why it matters — the third learning paradigm</h2>
+<p>Reinforcement learning is how you optimise for outcomes you can score but not spell out — and in 2026 that has
+made it the engine behind aligning image and video generators to human preference, and behind teaching multimodal
+models to reason (the reward is whether the final answer is right). Its defining lesson is the one you just
+watched: the reward <em>is</em> the objective, so a flawed reward is faithfully, relentlessly exploited — which is
+why reward design, and leashes like KL-to-a-reference, are half the field.</p>
+
+<h2 id="robots">5 · The surprise — this is where RL was born</h2>
+<p>For robots, learning from reward is not a new trick bolted onto a pretrained model — it is the native way to
+acquire skill. A reward encodes the task (stay upright, reach the goal, grasp the object) and the robot learns
+control by trial and error, usually in simulation where mistakes are free, then transferred to hardware. Legged
+locomotion, dexterous manipulation, multi-robot coordination — all learned this way.</p>
+<div class="fp"><b>Same reward, but the trials are physical.</b> RL is the largest single method in robotics, precisely
+because there is no answer key for how to move — only whether the move worked. And the same perils bite harder:
+reward hacking becomes a robot exploiting a sensor glitch, and unsafe exploration can break the machine, which is
+why sim-to-real and safety constraints are everywhere. Vision rewards a better answer; a robot rewards a completed
+task. The <a href="rl-in-the-wild.html">in-the-wild page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Trigger the hack yourself in the
+<a href="rl-playground.html">reward sandbox</a> — switch on the distractor and watch the agent abandon the goal,
+then pull the KL leash until it comes back. Then see <a href="rl-in-the-wild.html">how CVPR &amp; robotics actually
+use RL</a>. Then go <a href="rl-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="rl-playground.html">→ The reward sandbox</a> ·
+<a href="rl-in-the-wild.html">→ In the wild</a> ·
+<a href="rl-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles reinforcement learning, grounded in a real run (a gridworld policy trained from reward) ·
+the learning curve, the reward-hacking collapse, and the KL-leash recovery are measured · CC0.</footer></div>
+</body></html>

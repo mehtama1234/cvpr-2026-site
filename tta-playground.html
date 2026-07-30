@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test-time adaptation sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:440px;max-width:100%;height:220px;display:block;margin:0 auto;background:#fbfaf7;border:1px solid var(--line);border-radius:10px}
+.ctl{text-align:center;margin:16px 0}
+.ctl input[type=range]{width:100%;max-width:440px}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.big{text-align:center;font-family:var(--mono);margin-top:10px}
+.big .n{font-size:30px;font-weight:700}
+.read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:8px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Test-time adaptation · the adaptation-strength sandbox</div>
+<h1>How hard should it adapt?</h1>
+<p>The <a href="tta-why.html">why page</a> showed adaptation recover accuracy for free — then wreck it if pushed
+too far. Here is that whole trade-off as one dial, walking along the real measured curve. Turn it up from off, and
+watch accuracy climb off the collapsed floor, crest, and then fall off a cliff.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="tta-why.html">The big picture</a><a href="tta-in-the-wild.html">In the wild</a><a href="tta-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="440" height="220"></canvas>
+  <div class="ctl"><label for="sS">adaptation strength — <span id="vS" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sS" type="range" min="0" max="100" step="1" value="0"></div>
+  <div class="big">accuracy <span class="n" id="acc" style="color:#0E7C86"></span></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At <b>zero</b> you sit at the shifted accuracy — the model frozen while the
+world moved. A <b>little</b> adaptation (recalibrate, a few steps) is the sweet spot, recovering a big share of the
+gap toward the clean line with no labels. But keep turning and every extra step makes the model more confident on
+data it cannot check, until it <b>drifts off a cliff</b> below where it began. Powerful and unstable in the same
+motion — the craft is stopping at the crest.</div>
+<p style="margin-top:14px"><a href="tta-why.html">→ Why it works</a> ·
+<a href="tta-in-the-wild.html">→ How the field uses it</a> ·
+<a href="tta-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live demo over the real measured adaptation sweep — the recovery, the crest, and the over-adaptation cliff · CC0.</footer></div>
+
+<script>
+var DATA={"pts": [["off", 0.1885], ["BN recal", 0.4662], ["1 steps", 0.4738], ["3 steps", 0.488], ["10 steps", 0.3666], ["30 steps", 0.3439], ["80 steps", 0.3472]], "clean": 0.9172, "shift": 0.1885, "bn": 0.4662};
+(function(){
+  if(!DATA){return;}
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,Hc=cv.height,sS=document.getElementById('sS');
+  var pts=DATA.pts, n=pts.length, pad=30;
+  function X(i){return pad+i/(n-1)*(W-pad-12);}
+  function Y(v){return Hc-24-v*(Hc-46);}
+  function accAt(frac){ // interpolate along the ladder
+    var x=frac*(n-1), i=Math.floor(x), t=x-i;
+    if(i>=n-1) return pts[n-1][1];
+    return pts[i][1]*(1-t)+pts[i+1][1]*t;
+  }
+  function draw(){
+    var frac=(+sS.value)/100, a=accAt(frac);
+    ctx.clearRect(0,0,W,Hc);
+    // reference lines
+    [['clean',DATA.clean,'#2f7d5b'],['shift (off)',DATA.shift,'#b06a3a']].forEach(function(r){
+      ctx.strokeStyle=r[2]; ctx.setLineDash([4,3]); ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(pad,Y(r[1])); ctx.lineTo(W-12,Y(r[1])); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle=r[2]; ctx.font='9px monospace'; ctx.fillText(r[0]+' '+(r[1]*100).toFixed(0)+'%', pad+2, Y(r[1])-3);
+    });
+    // the sweep curve
+    ctx.strokeStyle='#0E7C86'; ctx.lineWidth=2; ctx.beginPath();
+    for(var i=0;i<n;i++){ var x=X(i),y=Y(pts[i][1]); if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); }
+    ctx.stroke();
+    for(var i=0;i<n;i++){ ctx.fillStyle='#0E7C86'; ctx.beginPath(); ctx.arc(X(i),Y(pts[i][1]),2.5,0,7); ctx.fill(); }
+    // current marker
+    var cx=pad+frac*(W-pad-12), cy=Y(a);
+    ctx.fillStyle='#111'; ctx.beginPath(); ctx.arc(cx,cy,6,0,7); ctx.fill();
+    ctx.strokeStyle='#e8b04b'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx,cy,9,0,7); ctx.stroke();
+    document.getElementById('vS').textContent=(+sS.value)+'%';
+    document.getElementById('acc').textContent=(a*100).toFixed(0)+'%';
+    var peak=Math.max.apply(null,pts.map(function(p){return p[1];}));
+    var msg;
+    if(frac<0.12) msg='off — the model frozen while the world shifted';
+    else if(a>=peak-0.01) msg='the sweet spot — big recovery, no labels';
+    else if(frac>0.6) msg='<b style="color:#b06a3a">over-adapted — drifting off the cliff</b>';
+    else msg='climbing off the floor';
+    document.getElementById('read').innerHTML=msg;
+  }
+  sS.addEventListener('input',draw); draw();
+})();
+</script>
+</body></html>

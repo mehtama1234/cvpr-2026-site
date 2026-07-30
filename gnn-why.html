@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Graph neural networks — learning on connections, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:14px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Graph neural networks · first principles · learning on connections, not just things</div>
+<h1>Graph neural networks — when the answer is in the connections</h1>
+<p>Some data is not a grid of pixels or a string of words — it is a web of <em>relationships</em>: molecules are
+atoms bonded together, a scene is objects with relations, a road network is intersections joined by streets. For
+these, what a thing <em>is</em> depends on what it is connected to. A graph neural network is built for exactly
+that: each node figures itself out by listening to its neighbours, over and over. This page is the plain story of
+that idea — the message passing at its heart, and the honest limit on how far you can push it — on a real run.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="gnn-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — a thing defined by its neighbours</h2>
+<p>Hand a normal network a node and it sees only that node&#39;s own features. But in relational data the meaning
+lives in the structure: a person&#39;s community is revealed by their friends, an atom&#39;s role by its bonds, a
+paper&#39;s field by its citations. Flatten the graph into independent rows and you throw away the very thing that
+carries the signal — the edges. Worse, a graph has no natural order, so a model must give the same answer no
+matter how you happen to number the nodes.</p>
+<div class="fp"><b>The problem, stated once:</b> for data that is a graph of related entities, a node&#39;s meaning comes
+from its connections — how do you learn on the structure itself, and stay indifferent to how the nodes are
+labelled?</div>
+
+<h2 id="reframe">2 · The reframe — let every node hear its neighbours</h2>
+<div class="fp"><b>The idea: each node updates itself by mixing in messages from its neighbours, and repeats.</b>
+One round of <em>message passing</em>: every node gathers its neighbours&#39; feature vectors, averages them in,
+and transforms the result. After one round a node knows about its immediate neighbours; after two, about
+neighbours-of-neighbours; and so on, information spreading outward along the edges. Because the update only ever
+sums over neighbours, relabelling the nodes changes nothing — it is <em>permutation-invariant</em> by
+construction, the graph-shaped cousin of a convolution.</p></div>
+<div class="eq">h_v ← update( h_v ,  aggregate{ h_u : u is a neighbour of v } )      # repeat L times
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># each node mixes in its neighbours; after L rounds it has heard from L hops away</span></div>
+<p>It is a simple, powerful move — and it comes with one built-in danger the run makes vivid.</p>
+
+<h2 id="run">3 · Seen on a real run — connections carry the signal</h2>
+<h3>1 · Structure beats features</h3>
+<p>We built a graph of 160 nodes in 4 communities (dense links inside a community,
+sparse across). Here is the catch: each node&#39;s own feature vector is <em>pure noise</em> — there is nothing
+in a node alone that says which community it belongs to. The only signal is <b>who it connects to</b>. We asked
+two models to classify the nodes:</p>
+<div class="tworow"><div style="flex:1;min-width:220px">
+<div style="font-family:var(--mono);font-size:13px;margin:6px 0">plain MLP (node alone) &rarr; <b style="color:#b06a3a">19%</b>
+<div style="background:#eee;border-radius:4px;height:15px;max-width:260px"><div style="width:19%;background:#b06a3a;height:15px;border-radius:4px"></div></div>
+<span style="color:var(--graphite)">(chance is 25%)</span></div>
+<div style="font-family:var(--mono);font-size:13px;margin:10px 0">GNN (message passing) &rarr; <b style="color:#0E7C86">96%</b>
+<div style="background:#eee;border-radius:4px;height:15px;max-width:260px"><div style="width:96%;background:#0E7C86;height:15px;border-radius:4px"></div></div></div>
+</div>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">The MLP is stuck at chance
+(<span class="stat">19%</span>) — with noise for features and no view of the edges, it
+literally cannot tell the communities apart. The GNN, by letting each node mix in its neighbours, reads the
+community straight off the graph and reaches <span class="stat">96%</span>. The information
+was never in the nodes; it was in the <em>connections</em>.</p></div></div>
+<h3>2 · The honest catch — over-smoothing</h3>
+<div class="tworow"><svg viewBox="0 0 460 200" width="100%" style="max-width:470px"><line x1="36" y1="164.0" x2="450" y2="164.0" stroke="#e5e2dc"/><text x="4" y="167.0" font-size="9" fill="#8a857c" font-family="monospace">0.0</text><line x1="36" y1="90.0" x2="450" y2="90.0" stroke="#e5e2dc"/><text x="4" y="93.0" font-size="9" fill="#8a857c" font-family="monospace">0.5</text><line x1="36" y1="16.0" x2="450" y2="16.0" stroke="#e5e2dc"/><text x="4" y="19.0" font-size="9" fill="#8a857c" font-family="monospace">1.0</text><polyline points="36.0,51.2 139.5,25.2 243.0,36.3 346.5,141.8 450.0,138.1" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="36.0" cy="51.2" r="3" fill="#0E7C86"/><text x="36.0" y="178.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">1</text><circle cx="139.5" cy="25.2" r="3" fill="#0E7C86"/><text x="139.5" y="178.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">2</text><circle cx="243.0" cy="36.3" r="3" fill="#0E7C86"/><text x="243.0" y="178.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">4</text><circle cx="346.5" cy="141.8" r="3" fill="#0E7C86"/><text x="346.5" y="178.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">8</text><circle cx="450.0" cy="138.1" r="3" fill="#0E7C86"/><text x="450.0" y="178.0" font-size="9" fill="#8a857c" font-family="monospace" text-anchor="middle">16</text><polyline points="36.0,54.3 139.5,54.6 243.0,69.0 346.5,16.3 450.0,16.3" fill="none" stroke="#b06a3a" stroke-width="2" stroke-dasharray="4 3"/><text x="448" y="132.1" font-size="9.5" fill="#0E7C86" font-family="monospace" text-anchor="end">accuracy</text><text x="448" y="10.3" font-size="9.5" fill="#b06a3a" font-family="monospace" text-anchor="end">node similarity</text><text x="230" y="196" font-size="10" fill="#8a857c" font-family="monospace" text-anchor="middle">message-passing layers →</text></svg>
+<div style="flex:1;min-width:220px"><p style="font-size:14px">More message passing should mean more context — up to
+a point. Accuracy climbs to <span class="stat">94%</span> at 2 layers, then
+<em>collapses</em> to <span class="stat">18%</span> by 16. Why? Because every
+round averages each node with its neighbours, and after too many rounds <em>every</em> node has averaged with
+everyone — the features all converge to the same blur. The dashed line is how similar the node features have
+become: it shoots up to <span class="stat">0.998</span> (nearly identical). This is
+<em>over-smoothing</em>, and it is the central limit on how deep a plain GNN can go.</p></div></div>
+
+<h2 id="why">4 · Why it matters — the model for relational worlds</h2>
+<p>Whenever the data is genuinely a graph, a GNN is the natural fit: predicting a molecule&#39;s properties from
+its bonds, reasoning over a scene graph of objects and relations, learning on meshes and CAD, forecasting traffic
+on a road network, recommending across a social graph. The message-passing template bends to all of them — the
+only thing that changes is what the nodes and edges mean. Its standing limit is the over-smoothing you saw, which
+is why much GNN research is about going deeper without collapsing.</p>
+
+<h2 id="robots">5 · The surprise — the robot is a graph</h2>
+<p>A robot&#39;s body <em>is</em> a graph — joints connected by links — so a GNN whose structure matches the
+robot&#39;s morphology is a natural controller, and it transfers across robots that share the pattern. Zoom out
+and a fleet of robots is a graph too (agents joined by who-can-see-whom), and the scene a robot works in becomes a
+graph of objects and relations it builds, updates, and plans over.</p>
+<div class="fp"><b>Same message passing, but the graph is physical.</b> Morphology-aware GNN controllers, multi-agent
+coordination over interaction graphs, and 3D scene graphs a robot maintains during a task are a real thread in
+robotics — because the robot and its world are <em>literally</em> nodes and edges. Vision reasons over a graph it
+extracts; a robot acts over a graph it inhabits. The <a href="gnn-in-the-wild.html">in-the-wild page</a> lays out
+both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Watch messages spread — and blur — in the
+<a href="gnn-playground.html">message-passing sandbox</a>: add rounds and see a node&#39;s information reach the
+whole community, then over-smooth into a uniform grey. Then see <a href="gnn-in-the-wild.html">how CVPR &amp;
+robotics actually use graphs</a>. Then go <a href="gnn-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="gnn-playground.html">→ The message-passing sandbox</a> ·
+<a href="gnn-in-the-wild.html">→ In the wild</a> ·
+<a href="gnn-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles graph neural networks, grounded in a real run (node classification on a synthetic community graph) ·
+the structure-beats-features gap (19% vs 96%) and the over-smoothing collapse are measured · CC0.</footer></div>
+</body></html>

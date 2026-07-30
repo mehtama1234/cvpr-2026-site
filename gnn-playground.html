@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GNN message-passing sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:340px;height:300px;background:#0f1417;border-radius:10px;display:block;margin:0 auto}
+.ctl{text-align:center;margin:14px 0}
+.ctl input[type=range]{width:100%;max-width:420px}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 13px;font-size:12.5px;font-family:var(--mono);cursor:pointer;margin:4px}
+.read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:10px;line-height:1.7}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Graph neural networks · the message-passing sandbox</div>
+<h1>Watch a message spread — then blur</h1>
+<p>The <a href="gnn-why.html">why page</a> says a GNN works by each node repeatedly averaging in its neighbours.
+Here is that process, live. Drop a signal on one node, then add rounds of message passing: watch it flow out along
+the edges to fill its community — and then, if you go too far, watch every node melt into the same grey. That
+melt is over-smoothing.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="gnn-why.html">The big picture</a><a href="gnn-in-the-wild.html">In the wild</a><a href="gnn-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="340" height="300"></canvas>
+  <div class="ctl" style="margin-top:12px"><button class="btn" id="seed">drop a signal on a random node</button></div>
+  <div class="ctl"><label for="sR">message-passing rounds — <span id="vR" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sR" type="range" min="0" max="20" step="1" value="0"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At <b>0 rounds</b> only the seeded node glows — a plain net that reads each
+node alone sees just this. Add a few rounds and the signal spreads along edges to light up its whole
+<em>community</em>, but barely crosses to the other one: that neighbourhood-shaped information is exactly what
+lets a GNN tell the communities apart. Keep going and the two communities bleed together until every node is the
+same dim grey — <b>over-smoothing</b>, where more depth destroys the very distinctions it was meant to find.</div>
+<p style="margin-top:14px"><a href="gnn-why.html">→ Why it works</a> ·
+<a href="gnn-in-the-wild.html">→ How the field uses it</a> ·
+<a href="gnn-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live message-passing demo — information spreading over a graph, and the over-smoothing collapse · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,Hc=cv.height,sR=document.getElementById('sR');
+  // two communities of nodes with positions
+  var A=[],pos=[],comm=[],Nn=0;
+  function build(){
+    pos=[];comm=[];A=[];
+    var centers=[[0.30,0.5],[0.72,0.5]];
+    for(var c=0;c<2;c++) for(var i=0;i<9;i++){ var a=i/9*6.28;
+      pos.push([centers[c][0]+Math.cos(a)*(0.12+0.05*((i%3))), centers[c][1]+Math.sin(a)*(0.16+0.04*(i%2))]); comm.push(c); }
+    Nn=pos.length; for(var k=0;k<Nn;k++) A.push(new Array(Nn).fill(0));
+    function edge(i,j){A[i][j]=A[j][i]=1;}
+    for(var i=0;i<Nn;i++)for(var j=i+1;j<Nn;j++){
+      var d=Math.hypot(pos[i][0]-pos[j][0],pos[i][1]-pos[j][1]);
+      var same=comm[i]===comm[j];
+      if(same && d<0.22 && Math.random()<0.7) edge(i,j);
+      if(!same && Math.random()<0.03) edge(i,j);   // a few bridges
+    }
+    for(var i=0;i<Nn;i++) A[i][i]=1;
+  }
+  build();
+  var seed=0, val0=new Array(Nn).fill(0); val0[0]=1;
+  function propagate(rounds){
+    var v=val0.slice();
+    for(var r=0;r<rounds;r++){ var nv=new Array(Nn).fill(0);
+      for(var i=0;i<Nn;i++){ var s=0,d=0; for(var j=0;j<Nn;j++) if(A[i][j]){s+=v[j];d++;} nv[i]=s/Math.max(d,1); }
+      v=nv;
+    }
+    return v;
+  }
+  function P(x,y){return [12+x*(W-24), 12+y*(Hc-24)];}
+  function render(){
+    var R=+sR.value; var v=propagate(R);
+    var mx=Math.max.apply(null,v)||1;
+    ctx.clearRect(0,0,W,Hc);
+    // edges
+    ctx.strokeStyle='rgba(255,255,255,0.10)'; ctx.lineWidth=1;
+    for(var i=0;i<Nn;i++)for(var j=i+1;j<Nn;j++) if(A[i][j]){ var a=P(pos[i][0],pos[i][1]),b=P(pos[j][0],pos[j][1]);
+      ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke(); }
+    // nodes colored by value (teal intensity)
+    for(var i=0;i<Nn;i++){ var p=P(pos[i][0],pos[i][1]); var t=v[i]/mx;
+      var col='rgba('+Math.round(20+t*0)+','+Math.round(60+t*130)+','+Math.round(70+t*100)+','+(0.35+0.65*t)+')';
+      ctx.fillStyle=col; ctx.beginPath(); ctx.arc(p[0],p[1],9,0,7); ctx.fill();
+      if(i===seed){ ctx.strokeStyle='#e8b04b'; ctx.lineWidth=2.5; ctx.stroke(); }
+    }
+    document.getElementById('vR').textContent=R;
+    // spread stats: how concentrated is the signal
+    var ownComm=comm[seed], inSum=0,outSum=0;
+    for(var i=0;i<Nn;i++){ if(comm[i]===ownComm) inSum+=v[i]; else outSum+=v[i]; }
+    var spread=outSum/(inSum+outSum+1e-9);
+    document.getElementById('read').innerHTML = R===0
+      ? 'only the seeded node knows anything &mdash; this is what a node-alone model sees'
+      : spread<0.18 ? 'signal has filled its <b>community</b> but barely crossed over &mdash; the neighbourhood tells the communities apart'
+      : '<b style="color:#b06a3a">over-smoothing</b>: the two communities have bled together &mdash; every node is becoming the same';
+  }
+  document.getElementById('seed').onclick=function(){ seed=Math.floor(Math.random()*Nn); val0=new Array(Nn).fill(0); val0[seed]=1; render(); };
+  sR.addEventListener('input',render); render();
+})();
+</script>
+</body></html>
