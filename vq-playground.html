@@ -1,0 +1,162 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Codebook sandbox — vector quantization &amp; collapse</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:100%;max-width:600px;height:auto;display:block;margin:0 auto;background:#0f1417;border-radius:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:0 0 12px}
+.seg button{font-family:var(--mono);font-size:12.5px;padding:7px 14px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.ctl{margin:12px 0}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.ctl input[type=range]{width:100%;max-width:600px}
+.read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:10px;line-height:1.7}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Tokenizing the visual world · the codebook sandbox</div>
+<h1>Snap it to the nearest word</h1>
+<p>The <a href="vq-why.html">why page</a> turns an image into tokens by snapping each patch to the nearest word
+in a codebook. Here is that snapping, live and in two dimensions. Each dot is an encoded patch; each ring is a
+word in the codebook; every dot takes the colour of its nearest word. Change the vocabulary size, and flip
+between a codebook that lets words die and one that revives them.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="vq-why.html">The big picture</a><a href="vq-in-the-wild.html">In the wild</a><a href="vq-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="seg" id="mode"><button data-m="naive" class="on">Naive codebook</button><button data-m="revive">Revive dead words</button></div>
+<div class="pwrap">
+  <canvas id="cv" width="600" height="380"></canvas>
+  <div class="ctl"><label for="sK">Vocabulary size (number of words) — <span id="vK" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sK" type="range" min="4" max="48" step="1" value="24"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp" id="exNaive"><b>The collapse, in miniature.</b> A naive codebook starts its words bunched together,
+so the words on the edge grab everything and the ones buried inside <b>never win a single patch</b> — they go
+grey and dead. You are paying for a big vocabulary and speaking in a fraction of it, and the far clusters get
+crudely quantized. This is exactly what happens to a VQ-VAE's dictionary on real images.</div>
+<div class="fp" id="exRevive" style="display:none"><b>Reviving the dead words.</b> Now every word that wins no
+patches is picked up and dropped back into the thick of the data. Run it and the vocabulary spreads to cover
+every cluster — <b>almost no dead words</b>, and the average snapping error drops. Same trick the real
+tokenizers use (EMA updates plus dead-code reset) to keep the dictionary alive.</div>
+<p style="margin-top:14px"><a href="vq-why.html">→ Why it works</a> ·
+<a href="vq-in-the-wild.html">→ How the field uses it</a> ·
+<a href="vq-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A geometry sandbox for vector quantization and codebook collapse · CC0.</footer></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d'), W=cv.width, Hc=cv.height;
+  var sK=document.getElementById('sK'); var mode='naive';
+  // seeded RNG for a fixed data cloud
+  function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var rnd=mulberry(7);
+  // data: 4 gaussian blobs in the corners (structured, like real patch embeddings)
+  var pts=[]; var centers=[[0.24,0.28],[0.76,0.26],[0.72,0.74],[0.26,0.72]];
+  for(var b=0;b<4;b++){ for(var i=0;i<70;i++){
+    var a=rnd()*6.283, r=Math.abs((rnd()+rnd()+rnd()-1.5))*0.10;
+    pts.push([centers[b][0]+Math.cos(a)*r, centers[b][1]+Math.sin(a)*r]);
+  }}
+  var PAL=[]; for(var i=0;i<64;i++){ var h=i*137.5%360; PAL.push('hsl('+h+',62%,60%)'); }
+  function px(x){return 30+x*(W-60);} function py(y){return 20+y*(Hc-40);}
+
+  function computeCodebook(K){
+    var rc=mulberry(99);
+    var cb=[];
+    if(mode==='naive'){ // words bunched in one small region -> many never win
+      for(var i=0;i<K;i++) cb.push([0.44+rc()*0.14, 0.44+rc()*0.14]);
+    } else { // spread across the space
+      for(var i=0;i<K;i++) cb.push([0.1+rc()*0.8, 0.1+rc()*0.8]);
+    }
+    var assign=new Array(pts.length).fill(0);
+    var ITER=(mode==='naive')?8:16;
+    for(var it=0; it<ITER; it++){
+      // assign
+      for(var p=0;p<pts.length;p++){ var bd=1e9,bi=0;
+        for(var c=0;c<K;c++){ var dx=pts[p][0]-cb[c][0],dy=pts[p][1]-cb[c][1],d=dx*dx+dy*dy; if(d<bd){bd=d;bi=c;} }
+        assign[p]=bi; }
+      // update means; handle empties
+      var sx=new Array(K).fill(0), sy=new Array(K).fill(0), n=new Array(K).fill(0);
+      for(var p=0;p<pts.length;p++){ sx[assign[p]]+=pts[p][0]; sy[assign[p]]+=pts[p][1]; n[assign[p]]++; }
+      for(var c=0;c<K;c++){
+        if(n[c]>0){ cb[c]=[sx[c]/n[c], sy[c]/n[c]]; }
+        else if(mode==='revive'){ var rp=pts[(Math.floor(rc()*pts.length))]; cb[c]=[rp[0],rp[1]]; } // revive dead word
+        // naive: leave dead word where it is (stays dead)
+      }
+    }
+    return {cb:cb, assign:assign};
+  }
+
+  function render(){
+    var K=+sK.value; var R=computeCodebook(K); var cb=R.cb, assign=R.assign;
+    // usage + error
+    var n=new Array(K).fill(0), err=0;
+    for(var p=0;p<pts.length;p++){ n[assign[p]]++; var c=cb[assign[p]]; err+=Math.hypot(pts[p][0]-c[0],pts[p][1]-c[1]); }
+    var used=0; for(var c=0;c<K;c++) if(n[c]>0) used++;
+    err/=pts.length;
+    // draw
+    ctx.fillStyle='#0f1417'; ctx.fillRect(0,0,W,Hc);
+    for(var p=0;p<pts.length;p++){ ctx.fillStyle=PAL[assign[p]%64]; ctx.globalAlpha=0.85;
+      ctx.beginPath(); ctx.arc(px(pts[p][0]),py(pts[p][1]),3.2,0,6.283); ctx.fill(); }
+    ctx.globalAlpha=1;
+    for(var c=0;c<K;c++){
+      var alive=n[c]>0;
+      ctx.strokeStyle=alive?PAL[c%64]:'#4a5560'; ctx.lineWidth=alive?2.5:1.5;
+      ctx.fillStyle=alive?'rgba(255,255,255,.12)':'rgba(120,135,145,.08)';
+      ctx.beginPath(); ctx.arc(px(cb[c][0]),py(cb[c][1]),alive?7:5,0,6.283); ctx.fill(); ctx.stroke();
+      if(!alive){ ctx.strokeStyle='#6b7f8b'; ctx.beginPath(); // small x on dead words
+        ctx.moveTo(px(cb[c][0])-3,py(cb[c][1])-3); ctx.lineTo(px(cb[c][0])+3,py(cb[c][1])+3);
+        ctx.moveTo(px(cb[c][0])+3,py(cb[c][1])-3); ctx.lineTo(px(cb[c][0])-3,py(cb[c][1])+3); ctx.stroke(); }
+    }
+    document.getElementById('vK').textContent=K+' words';
+    var dead=K-used;
+    document.getElementById('read').innerHTML='words actually used: <b>'+used+' / '+K+'</b>'+
+      (dead>0?' &middot; <span style="color:#9aa7b0">'+dead+' dead (grey ✕)</span>':' &middot; all alive')+
+      ' &middot; effective vocabulary spreads across '+used+' words &middot; average snapping error <b>'+err.toFixed(3)+'</b>';
+  }
+  document.querySelectorAll('#mode button').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('#mode button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    mode=b.getAttribute('data-m');
+    document.getElementById('exNaive').style.display = mode==='naive'?'block':'none';
+    document.getElementById('exRevive').style.display = mode==='revive'?'block':'none';
+    render();
+  });});
+  sK.addEventListener('input',render); render();
+})();
+</script>
+</body></html>

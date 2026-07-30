@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tokenizing the visual world — pixels into words, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.imrow{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;margin:14px 0}
+.arrow{align-self:center;font-size:20px;color:var(--graphite)}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.hist{display:flex;align-items:flex-end;gap:1px;height:70px;margin:8px 0;max-width:520px}
+.hist span{flex:1;background:var(--accent);min-height:1px;border-radius:1px 1px 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:12px 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.barrow{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
+.barrow .lab{width:64px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.bar{height:15px;border-radius:3px;background:var(--accent);min-width:2px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Tokenizing the visual world · first principles · pixels into words</div>
+<h1>Tokenizing the visual world — turning an image into a vocabulary of words</h1>
+<p>The models that write text and, increasingly, <em>make</em> images and video are next-token predictors:
+they think in a finite alphabet of discrete symbols. An image is the opposite — a smooth grid of continuous
+pixels with no symbols anywhere. This page is the plain story of the bridge between them: how you compress a
+picture into a small grid of <em>visual words</em> drawn from a learned dictionary, watch it rebuilt on a real
+run, meet the one failure that haunts every such model — a dictionary that quietly goes dead — and see why the
+very same trick lets a robot describe what it <em>does</em>.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#collapse">The collapse</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="vq-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — words are discrete, pictures are not</h2>
+<p>A language model works because text is already made of discrete pieces: a fixed vocabulary of tokens, and
+the model just predicts the next one. That single fact — a finite alphabet — is what makes generation,
+in-context learning, and the whole transformer toolkit work. An image has no alphabet. It is a grid of
+continuous colour values, and there are infinitely many of them. If you want to bring the transformer's
+machinery to vision — to <em>generate</em> an image the way a model generates a sentence — you first need to
+invent an alphabet for pictures.</p>
+<div class="fp"><b>The problem, stated once:</b> turn a continuous image into a short sequence of discrete symbols
+from a fixed vocabulary — losing as little as possible — so a picture can be read and written one token at a
+time, like a sentence.</div>
+
+<h2 id="reframe">2 · The reframe — snap each patch to the nearest word in a codebook</h2>
+<div class="fp"><b>The idea: keep a dictionary of a few thousand little vectors — a codebook — and describe every
+patch of the image by the closest one.</b> An encoder squashes each patch of the image to a vector. Then comes
+the one move that makes everything discrete: instead of keeping that vector, you <em>snap</em> it to the nearest
+entry in the codebook and record just that entry's <em>index</em>. The image becomes a small grid of integers —
+its tokens. A decoder reads the grid back and paints the picture again. The encoder, decoder, and the codebook
+itself are all learned together, end to end.</div>
+<div class="eq">patch → encode → <b>snap to nearest codebook vector</b> → its index (a token)
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># a 256×256 image becomes, say, a 16×16 grid of integers — a sentence of 256 visual words</span></div>
+<p>Snapping is not differentiable — you can't take the gradient of "pick the nearest" — so training uses a
+small trick (the straight-through estimator) to pass the gradient past the snap as if it weren't there, plus a
+term that pulls each encoded patch toward the word it chose. Hold onto that pull: it is exactly where things go
+wrong.</p>
+
+<h2 id="run">3 · Seen on a real run — an image, its tokens, and back</h2>
+<p>We trained this whole setup — encoder, codebook, decoder — on a real dataset of little images. Here is one
+image turned into its grid of visual words (each colour is a different word) and rebuilt from them alone:</p>
+<div class="note">Below, left to right in each panel: the <b>image</b>, its <b>token map</b> (every coloured cell is one word from the codebook), and the picture <b>rebuilt</b> from just those integer tokens.</div>
+
+<h2 id="collapse">4 · The failure that haunts every tokenizer — the dictionary goes dead</h2>
+<p>Here is the honest, measured heart of it. Give the model a dictionary of 512
+words and train it the naive way, and something quietly breaks: a handful of words get used for almost
+everything, and the vast majority are <b>never used at all</b>. You paid for a big vocabulary and the model
+speaks in a dozen words. Worse, the rebuild is <em>worse</em> for it. The standard fixes fight back — gently
+updating the words toward what actually lands on them, and <em>reviving</em> any word that has gone unused by
+resetting it into the thick of the data:</p>
+<div class="two">
+<div class="card"><h3 style="margin-top:0">Naive tokenizer</h3>
+<div class="imrow" style="margin:6px 0"><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAIAAABJgmMcAAAESElEQVR4nO2cOS9tURiGDcc8x0xiKBBEVGKKTuhFo6XxA/wJrT8iUdD4BRqikmgIIsQ8z273em6y1zVk3ctN3qd6nOy9zz6flfd8a61NWpoxxhhjjDHGGGOMMcYYY4wxxhhjjDHG/DzSv/sG/gWZmZnyl5cX+evra+LxOTk58vv7e3lLS4t8c3Mz8dyML9+lScQFjYwLGpnUd9/An0hPT0905mB9fb28v79fvrS0JL++vv7U+zI3ydjYmHx2djbxGI/QyLigkXFBI/OjM5QwN8nQ0JC8t7dXXldXJ5+bm/vUe1VVVclHR0fll5eX757rERoZFzQyLmhkfnSGcg7+9PQk7+npkbe3t8sPDg7knHfPz8/LT05O5Hl5efLt7W15eXm5vLi4WL67u/vuPXuERsYFjYwLGpkfl6EZGW+/Y+ZmQUGBfHx8XM55d25urryoqEjOdQBen693dnbKd3Z25Kenp/JU6v1yeYRGxgWNjAsamWgZyjziXg0zi6/T2W8+Pz8nXn96elrOfvPu7k7e2NgoZ57y+ND+EtdMHx4e5OxDudfETOe5HqGRcUEj44JG5tMZGsrK0B53aB3zI7k5MTEhr6mpka+ursrZG5aWlsqPj4/lnL9XVFTI2avyfgi/A/Lz8+VcK1hbW3s7PvEq5su4oJFxQSPz6QwNZSWzhs585Lmh3JycnJS3trbKOb/meiUzneube3t7cmYlM/3m5kbOvjX0PUG41+QM/Yu4oJFxQSMTzFDmIGGmhJ43CvWehPvmfGaIOchnMAsLC+WcUzNPOQfnfbJ/JMxxrqvydc7T+bkGBwcTr+kRGhkXNDIuaGRSoTn1R3Iw1KNVVlbKm5qa5G1tbfLa2lo5s+/i4kLOuTnXJbOysuTMU94z10Z5/NnZmfzx8THxXH5/3N7eylkrPufE/SiP0Mi4oJFxQSOTCs2pq6ur5cwj7qXQ2T82NzfL2QMys66uruTMrJKSksRrco+e1+R8nL1kdna2fH9/P/H6vA7339nzlpWVydmTcn2WvbBHaGRc0Mi4oJH5bS4/PDws51yb+cUeM9TD8nj2a8wmZhDXBNhXMteYs7wO74EZx4w+Pz+X8/n5EHxf9qfMdN4nP69HaGRc0Mi4oJFJjYyM6IepqSn5xsaGnH0cM5G5xvk4c435yHPZJzKnQs91Mr94POfpzGX20R0dHYnvG1rzZRazV+VzVMzow8PDt2smXtF8GRc0Mi5oZFIrKyv6oa+vT97V1SUP7Z+E+k0+S0RnP8gsY1ZyXsz1U2YZ10a5Jtvd3S1fX1+Xb21tydlrs5cMre3yM3Kvn+u2zH2P0Mi4oJFxQSPzof/bxLkz/yadGTcwMCDnfJ95x/XT0PND7DGZv+yLl5eX5YuLi3L2iSEWFhbkDQ0N8qOjIzm/D+jMU669zszMyD1CI+OCRsYFNcYYY4wxxhhjjDHGGGOMMcYYY8x/wy8M+ZcUwrqQzgAAAABJRU5ErkJggg==" width="112" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">image</div></div><div class="arrow">→</div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAIAAABJgmMcAAAB70lEQVR4nO3dvyvEYQDHccddSTKwKKUz2GzEQMpmMVmMbELqFgOLUQlJZPU/+BP8GsQkZeBEKYpBkSQmi+1Tbym9X/PnW0/vnunp6gpdJ3M14tT+9QH+G4PCDAozKMygMIPCDAozKMygMIPCDAozKMygMIPCDAor/vUBfhqqvEf7xu6naP+49xLtmwcaor03FGZQmEFhBoUZFGZQmEFhBoUZFGZQmEFhBoUZFGZQmEFhv/4emr5v3vY0Rfu17oloP326Ge1vT6O5N5RmUJhBYQaFGRRmUJhBYQaFGRRmUJhBYQaFGRRmUJhBYcX0vbLzoTXa3w2fR/urj0q0H12divalmbZo37ITzb2hNIPCDAozKMygMIPCDAozKMygMIPCDAozKMygMIPCDAorVjtfow8eB/ei/dlz9nvMhcJItN9dno/2RzeX0f5luRztvaEwg8IMCjMozKAwg8IMCjMozKAwg8IMCjMozKAwg8IMCisczvZFHyyOt0f7joOLaH/8Vor2G9d10X5rbD3a39evRHtvKMygMIPCDAozKMygMIPCDAozKMygMIPCDAozKMygMIPCCun/y5eqn9G+d+k62qf2t8vRvn+y+ivn+OYNhRkUZlCYQWEGhRkUZlCYQWEGhRkUZlCYQWEGhRkUZlDYFw8ROK7ITgU1AAAAAElFTkSuQmCC" width="112" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">its tokens</div></div><div class="arrow">→</div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAIAAABJgmMcAAAEWElEQVR4nO2cyUolWRRFbZ59LzbYoWKHoCKIMxFEHIl+gT/gL/hBOnPoFzhSRBAc6kBRUVTs+yZHtV3Cu2RV1slKLfYaLSRexH2HYMe5ca8vNzc3N+cv3t/fc8y/I+9PD+D/hgsajAtqjDHGGGOMMcYYY4wxxhhjjDHGmG9D7s8P+dpwb1Ymk5E/Pz+HXysv72NfCPeB0b1zJBgXNBgXNJhvmaHMyv7+fvnIyIh8ZWVFfnJy8svXqqiokA8PD8vX19flDw8Pct+hwbigwbigwWR+fsjXo7u7Wz4zMyPv6OiQ9/X1yZeXl+X7+/vyu7s7eX5+vry8vFw+Nzcnr66ulm9sbMjZC/sODcYFDcYFDebbZGhBQYF8ampK3tTUJGc/2NjYKF9YWJAzQ2tra+WdnZ3yvb09+dvbm/z29jbreJjFvkODcUGDcUGD+dIZyv6OPWZJSYn84uJCzkw8Pz+XHx4eyquqquSPj4/y7e1t+evrq/zl5UVeVlYmr6mpkV9dXcl9hwbjggbjggbz5TKUuVlZWSkfHR2V39zcyJ+enuTFxcVZP8v3p3TmI997sp/lMals9Vz+N+KCBuOCBvMlMpQZxCybnJyUt7a2yrk+XlpaKi8qKpIz4wjn5qk8vb+/lxcWFsqZ3TwP8R0ajAsajAsazB/LUOZgS0uLfGJiQs53lEdHR3L2m1znYfYxl7lexL7103o6xsO/p+bvXV1d8uPj44/z5JhQXNBgXNBgfkuGpvZsMhPb2trkXGdnH8rzsN8k3JvJ47nmkzqe2fppXQh5yvPw/GNjY/K1tbWPz2a9qvllXNBgXNBgwjKUWVlXVycfHByUDw0Nydkzsu87PT2Vc37NuTNzjXvpOe9mPtJ5zlR/yrzmMXxXwOcB16l8hwbjggbjggaTSfWMhNmUms9yjxF7Pe615LW4T4g5yPxi3qX6Qa6tc/xcu2ePyfOw3+Scnd+X42eecu8U1698hwbjggbjggaT4bvF9vZ2+cDAgDyVX8xN7h/i+jX7SuYRr8u8Yx6l+krC/pR+eXmZ9TzseTn+VJ4yl/ls4PiJ79BgXNBgXNBgMtx3OT8/L2febW1tybkXkvNxZg3XeQjn+Fzj5hyZ82L2jxwnc5Y9LMfGc3I8zFlmIp8TPJ7PDF4r9Q7Bd2gwLmgwLmgwGfaJOzs78vHxcTn/n/Ls7EzO3pB72pmP7O+am5vlnIOzb+UcObXHnpnFdwLX19dyvhNgLjP7mKccQypn+czg3n6e03doMC5oMC5oMJ9+cyS1Dt7T0yPn73owE9kb9vb2yhsaGrKek3NqXpf5tbu7m/XvS0tL8s3NTTmfB+yLp6en5bOzs3LmMrO+vr5ezneyBwcH8tXVVfni4uLHeXJMKC5oMC5oMH/rd5tSey0//eYbMojvN/lZ9o+Ec3bOwdnrca7NHvafwnESfq/U901dl8f4Dg3GBQ3GBTXGGGOMMcYYY4wxxhhjjDHmP+YHdzxrpQliy3YAAAAASUVORK5CYII=" width="112" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">rebuilt</div></div></div>
+<div style="font-family:var(--mono);font-size:11px;color:var(--graphite)">how often each word is used (top 64, tallest first)</div><div class="hist"><span style="height:100%"></span><span style="height:21%"></span><span style="height:15%"></span><span style="height:12%"></span><span style="height:11%"></span><span style="height:11%"></span><span style="height:10%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:7%"></span><span style="height:7%"></span><span style="height:7%"></span><span style="height:7%"></span><span style="height:7%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:6%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:5%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:4%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span><span style="height:3%"></span></div>
+<div style="font-family:var(--mono);font-size:13px;margin-top:8px">words actually used: <span class="stat">150 / 512</span> &middot; effective vocabulary: <span class="stat">80.9</span> &middot; rebuild quality: <span class="stat">21.8 dB</span></div>
+<div style="font-size:13px;color:var(--graphite);margin-top:6px">A few words hog everything; the rest of the dictionary is <b>dead</b> — the colour map uses only a handful of hues, and the rebuild is worse despite paying for 512 words.</div></div>
+<div class="card"><h3 style="margin-top:0">With the standard fixes</h3>
+<div class="imrow" style="margin:6px 0"><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAIAAABJgmMcAAAESElEQVR4nO2cOS9tURiGDcc8x0xiKBBEVGKKTuhFo6XxA/wJrT8iUdD4BRqikmgIIsQ8z273em6y1zVk3ctN3qd6nOy9zz6flfd8a61NWpoxxhhjjDHGGGOMMcYYY4wxxhhjjDHG/DzSv/sG/gWZmZnyl5cX+evra+LxOTk58vv7e3lLS4t8c3Mz8dyML9+lScQFjYwLGpnUd9/An0hPT0905mB9fb28v79fvrS0JL++vv7U+zI3ydjYmHx2djbxGI/QyLigkXFBI/OjM5QwN8nQ0JC8t7dXXldXJ5+bm/vUe1VVVclHR0fll5eX757rERoZFzQyLmhkfnSGcg7+9PQk7+npkbe3t8sPDg7knHfPz8/LT05O5Hl5efLt7W15eXm5vLi4WL67u/vuPXuERsYFjYwLGpkfl6EZGW+/Y+ZmQUGBfHx8XM55d25urryoqEjOdQBen693dnbKd3Z25Kenp/JU6v1yeYRGxgWNjAsamWgZyjziXg0zi6/T2W8+Pz8nXn96elrOfvPu7k7e2NgoZ57y+ND+EtdMHx4e5OxDudfETOe5HqGRcUEj44JG5tMZGsrK0B53aB3zI7k5MTEhr6mpka+ursrZG5aWlsqPj4/lnL9XVFTI2avyfgi/A/Lz8+VcK1hbW3s7PvEq5su4oJFxQSPz6QwNZSWzhs585Lmh3JycnJS3trbKOb/meiUzneube3t7cmYlM/3m5kbOvjX0PUG41+QM/Yu4oJFxQSMTzFDmIGGmhJ43CvWehPvmfGaIOchnMAsLC+WcUzNPOQfnfbJ/JMxxrqvydc7T+bkGBwcTr+kRGhkXNDIuaGRSoTn1R3Iw1KNVVlbKm5qa5G1tbfLa2lo5s+/i4kLOuTnXJbOysuTMU94z10Z5/NnZmfzx8THxXH5/3N7eylkrPufE/SiP0Mi4oJFxQSOTCs2pq6ur5cwj7qXQ2T82NzfL2QMys66uruTMrJKSksRrco+e1+R8nL1kdna2fH9/P/H6vA7339nzlpWVydmTcn2WvbBHaGRc0Mi4oJH5bS4/PDws51yb+cUeM9TD8nj2a8wmZhDXBNhXMteYs7wO74EZx4w+Pz+X8/n5EHxf9qfMdN4nP69HaGRc0Mi4oJFJjYyM6IepqSn5xsaGnH0cM5G5xvk4c435yHPZJzKnQs91Mr94POfpzGX20R0dHYnvG1rzZRazV+VzVMzow8PDt2smXtF8GRc0Mi5oZFIrKyv6oa+vT97V1SUP7Z+E+k0+S0RnP8gsY1ZyXsz1U2YZ10a5Jtvd3S1fX1+Xb21tydlrs5cMre3yM3Kvn+u2zH2P0Mi4oJFxQSPzof/bxLkz/yadGTcwMCDnfJ95x/XT0PND7DGZv+yLl5eX5YuLi3L2iSEWFhbkDQ0N8qOjIzm/D+jMU669zszMyD1CI+OCRsYFNcYYY4wxxhhjjDHGGGOMMcYYY8x/wy8M+ZcUwrqQzgAAAABJRU5ErkJggg==" width="112" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">image</div></div><div class="arrow">→</div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAIAAABJgmMcAAACI0lEQVR4nO3asUvUcRyHcS8OccwUCVxFtEI3iYgMxElQFxEbg6ilwVQSl6KlMZHQU0RB15Y20UVMaAiJKAgCwZRwUcEbIgi5hvwH3vDcID6v+f2BHw/f6bjCw5nVmsST1l/R/qIr/WiO9leq9B2XlkFhBoUZFGZQmEFhBoUZFGZQmEFhBoUZFGZQmEFhBoUVb/QeRQdvSyNV+pT/enpXov3f6e/RfrejNtq/aLwb7X2hMIPCDAozKMygMIPCDAozKMygMIPCDAozKMygMIPCDAorpgfX18aj/Vb3n2g/+WEg2s/Mb0f7rmcvo/3gdlO094XCDAozKMygMIPCDAozKMygMIPCDAozKMygMIPCDAozKKww9bQUHXz59jnat1XK0f6gIZrX3B+eiPZHHUvRvvKqK9r7QmEGhRkUZlCYQWEGhRkUZlCYQWEGhRkUZlCYQWEGhRkUVmzZ74wOhvuz/2OO1T+O9suro9F+6Pd8tG9/fy/aP/i5H+19oTCDwgwKMyjMoDCDwgwKMyjMoDCDwgwKMyjMoDCDwgwKK849+hQdPK9cjfa3jzei/UL5VrQ/a7wZ7fsaPkb71yd3or0vFGZQmEFhBoUZFGZQmEFhBoUZFGZQmEFhBoUZFGZQmEFhha/re9FBXfmwOl9ybufaTrSffbMY7ftHst9b322eRntfKMygMIPCDAozKMygMIPCDAozKMygMIPCDAozKMygMIPC/gHPw0KD+0gvNQAAAABJRU5ErkJggg==" width="112" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">its tokens</div></div><div class="arrow">→</div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAIAAABJgmMcAAAET0lEQVR4nO2dSS8lYRSGXa55nmOOmY2IDStE/APWfoi/JhJbC1thQYiFeZ7nXvXrkVT1oE936877rJ5I3aq6J5XX+YYik5ubm/OVl5eXHPPzZDIZee43jjMfwAUNxgU1xhhjjDHGGGOMMcYYY4wx5g+T+f4hJgmuxb++vsq96hmMCxqMCxrMf5WhabkWRWlpaeK1rq+v5X5Cg3FBg3FBg8n+7Rv4VZqbm+VNTU3y9fV1+dXV1YfPn5+fL5+bm5MvLCzINzY25H5Cg3FBg3FBg/knM7S8vFw+Ozsr7+zslK+ursoXFxflOzs78ufn58Tzl5SUyCcnJ+XM6IODg8TP+gkNxgUNxgUN5p/JUI6d29ra5HV1dXLmWk9Pj3x4eFjObGUmFhQUyB8fH+VFRUVy9rN8v4v4CQ3GBQ3GBQ3mU2coc7OyslLO3jCbffsK1dXVcmbcxcWFvL+/X85+9ubmRn5yciK/vb1NPJ7Xury8fLtu2pcxH8MFDcYFDebTZShzs7i4WD49PS2vr6+X39/fyzk2r6mpSTwP+0rOdfIY5vXDw0PiZ9P+zoCf0GBc0GBc0GA+XYZWVVXJJyYm5CMjI/LDw0N5WVmZnDnIOU1mJX9OKioq5FzTZ5/LazU2Nsq3trbkfkKDcUGDcUGD+WsZyn6TuTkzMyPnGtHd3V3ieQoLC+Wc08zLy0s8Pq2v5M95LWYor9Xb2ytfXl6W+wkNxgUNxgUN5rdkKPORWcYekONxrq1zDH5+fi5PG6en9aGcx2S2Eu7r5Hwo85Swn+3r65O/G+MnftJ8GBc0GBc0mB/K0LRMJMwXzie2tLTIBwcH5e3t7XL2oZubm3L2fYSZlTbuZuZyzpSkrcUTfl/Oe3Z1dcm5995PaDAuaDAuaDBZ5iMzhfnF/pHr0RxrDwwMyJk1zBeenznIPUk8njQ0NMjZb3JtJ22t6ejoKPG7MGf5Wd5P2vHcF8XfGX5Cg3FBg3FBg8mmjU+Hhobk+/v7cvZlzI7T01M5M5Tjce4NYkZz/pH7PZmP7DeZZewf097vTFuX533ydwnzmvfJ+YG0dSo/ocG4oMG4oMFkObc4Pj4uHx0dla+trcn39vbkHIMzm87OzuTMKc5dcv6ROcXzMK/pzFlmNLOMc53MO/rT01Oip2U350npztDfiAsajAsaTJbj67S9O3zPh/0a+0f2htx7xP3t/CyzmGNt5jLfhWfOMk8538r3lzjW5r4lnoc5zn42rT/lXnpmK3PZT2gwLmgwLmgwmXf/Tw39V2trq5z7eGpra+Xd3d3ysbExOdeL2FcyZ9n3bW9vy9ljHh8fy3d3d+UrKyvypaUlOTOd1+3o6JBPTU3JmdHMWc6Nsia8T/a58/Pzb8fnmFBc0GBc0GDC/vYd18Q5/8g+lxnKY/geOjOdx/M8zK+0fUg/S9r77+RH9gD4CQ3GBQ3GBTXGGGOMMcYYY4wxxhhjjDHmD/MFnktPI+QaqV0AAAAASUVORK5CYII=" width="112" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">rebuilt</div></div></div>
+<div style="font-family:var(--mono);font-size:11px;color:var(--graphite)">how often each word is used (top 64, tallest first)</div><div class="hist"><span style="height:100%"></span><span style="height:76%"></span><span style="height:54%"></span><span style="height:47%"></span><span style="height:34%"></span><span style="height:28%"></span><span style="height:23%"></span><span style="height:23%"></span><span style="height:23%"></span><span style="height:22%"></span><span style="height:21%"></span><span style="height:20%"></span><span style="height:19%"></span><span style="height:19%"></span><span style="height:19%"></span><span style="height:18%"></span><span style="height:18%"></span><span style="height:17%"></span><span style="height:17%"></span><span style="height:17%"></span><span style="height:15%"></span><span style="height:15%"></span><span style="height:14%"></span><span style="height:14%"></span><span style="height:14%"></span><span style="height:13%"></span><span style="height:13%"></span><span style="height:12%"></span><span style="height:12%"></span><span style="height:12%"></span><span style="height:12%"></span><span style="height:12%"></span><span style="height:12%"></span><span style="height:11%"></span><span style="height:11%"></span><span style="height:11%"></span><span style="height:11%"></span><span style="height:10%"></span><span style="height:10%"></span><span style="height:10%"></span><span style="height:10%"></span><span style="height:10%"></span><span style="height:10%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:9%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:7%"></span><span style="height:7%"></span></div>
+<div style="font-family:var(--mono);font-size:13px;margin-top:8px">words actually used: <span class="stat">512 / 512</span> &middot; effective vocabulary: <span class="stat">302.6</span> &middot; rebuild quality: <span class="stat">22.24 dB</span></div>
+<div style="font-size:13px;color:var(--graphite);margin-top:6px">Reviving unused words (EMA updates + resetting dead entries) spreads the load — many more hues in the token map, a bigger effective vocabulary, and a sharper rebuild at the same cost.</div></div>
+</div>
+<div class="fp"><b>Codebook collapse is the field's signature enemy.</b> Almost every advance in visual tokenizers —
+lookup-free quantization, rotation tricks, better commitment losses, dictionary reinitialization — is, at
+bottom, a different way of keeping the vocabulary <em>alive and used</em>. A dead dictionary is wasted capacity
+and a blurry generator.</div>
+
+<h3>More words — but only if you keep them alive</h3>
+<p>So just make the dictionary enormous? Here is the honest result, growing the vocabulary size K for both a
+naive tokenizer and one that revives its dead words. Watch the two columns diverge:</p>
+<table class="mxtable"><tr><th>vocabulary size</th><th>naive · quality</th><th>naive · waste</th><th>fixed · quality</th><th>fixed · waste</th></tr><tr><td><b>K = 16</b></td><td>19.7 dB</td><td>0% dead (16 live)</td><td>19.8 dB</td><td>0% dead (16 live)</td></tr><tr><td><b>K = 64</b></td><td>21.0 dB</td><td>11% dead (57 live)</td><td>21.2 dB</td><td>0% dead (64 live)</td></tr><tr><td><b>K = 256</b></td><td>22.1 dB</td><td>32% dead (175 live)</td><td>22.2 dB</td><td>0% dead (256 live)</td></tr><tr><td><b>K = 1024</b></td><td>21.8 dB</td><td>84% dead (164 live)</td><td>22.9 dB</td><td>0% dead (1024 live)</td></tr></table>
+<p>They track each other at small K, where every word is needed. But as K grows the <b>naive</b> tokenizer leaves more and more of the dictionary dead — and its quality stalls, then actually <em>drops</em> at the largest size, because it is drowning in words it never learned to use. The <b>revived</b> tokenizer keeps every word alive and its quality keeps climbing. A bigger alphabet is not just wasted but <em>harmful</em> unless you win the collapse fight — the vocabulary is only as large as the part you actually speak.</p>
+
+<h2 id="why">5 · Why it matters — this is the on-ramp to generating images like text</h2>
+<p>Once an image is a sequence of tokens, every tool built for language applies to vision. You can train a
+plain next-token predictor to <em>write</em> an image one visual word at a time; you can compress video by
+tokenizing time as well as space; you can put images and text in a <em>single</em> vocabulary so one model both
+reads and draws. In every one of these, the tokenizer is the floor on quality: the generator can never
+reproduce detail its vocabulary threw away.</p>
+<table class="mxtable">
+<tr><th>because the image is now tokens…</th><th>you get</th></tr>
+<tr><td><b>a next-token predictor over visual words</b></td><td>autoregressive image generation — a GPT that writes pictures one token at a time (and its newer next-scale variants)</td></tr>
+<tr><td><b>tokens over space <em>and</em> time</b></td><td>video generation and compression — the same alphabet extended to motion</td></tr>
+<tr><td><b>one shared vocabulary for pixels and text</b></td><td>unified multimodal models that both understand and generate, with no separate image pathway</td></tr>
+</table>
+
+<h2 id="robots">6 · The surprise — a robot tokenizes what it <em>does</em></h2>
+<p>The trick is not really about images. It is about turning anything continuous into words. In robotics the
+continuous thing is <b>action</b> — the exact stream of motor commands — and the same quantizer snaps chunks of
+motion to a codebook of <em>skill words</em>. Now a policy can predict its next move the way a language model
+predicts its next token, and a library of reusable skills becomes a vocabulary you can compose.</p>
+<div class="fp"><b>Same trick, different alphabet.</b> In vision, tokenizing turns pixels into words so a model can
+<em>generate a picture</em>. In robotics, it turns motor commands into words so a model can <em>generate an
+action</em> — the discrete action heads and skill libraries behind many of the <a href="vla-why.html">vision-language-action</a>
+policies. The <a href="vq-in-the-wild.html">in-the-wild page</a> lays out both sides.</div>
+
+<div class="fp"><b>Where to go from here.</b> Build the quantizer yourself in the
+<a href="vq-playground.html">codebook sandbox</a> — scatter points, drop a codebook, and watch every point snap
+to its nearest word; shrink the codebook and watch words die. Then see
+<a href="vq-in-the-wild.html">how CVPR &amp; robotics actually tokenize</a> — from lookup-free quantizers to
+action codebooks. Then go <a href="vq-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="vq-playground.html">→ The codebook sandbox</a> ·
+<a href="vq-in-the-wild.html">→ In the wild</a> ·
+<a href="vq-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles visual tokenization, grounded in a real Colab-GPU run (a VQ-VAE on little images) ·
+the codebook-collapse gap and the quality-vs-vocabulary curve are measured · CC0.</footer></div>
+</body></html>
