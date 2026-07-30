@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mamba cost sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:100%;max-width:600px;height:auto;display:block;margin:0 auto;background:#0f1417;border-radius:10px}
+.ctl{margin:14px 0}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.ctl input[type=range]{width:100%;max-width:600px}
+.read{font-family:var(--mono);font-size:13px;color:var(--ink);margin-top:10px;line-height:1.8}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">State-space models · the cost sandbox</div>
+<h1>Watch attention's bill explode</h1>
+<p>The <a href="mamba-why.html">why page</a> says attention costs grow with the <em>square</em> of the sequence
+length, while a state-space model grows in a straight line. Here you can watch it. Slide the length up and see
+attention's compute and memory rocket away while the SSM barely moves.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="mamba-why.html">The big picture</a><a href="mamba-in-the-wild.html">In the wild</a><a href="mamba-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <canvas id="cv" width="600" height="300"></canvas>
+  <div class="ctl"><label for="sL">Sequence length — <span id="vL" style="font-family:var(--mono);color:var(--accent)"></span> (frames, patches, or points)</label>
+    <input id="sL" type="range" min="6" max="140" step="1" value="40"></div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At short lengths the two bars are close — attention's extra power is cheap.
+But because attention compares every token to every other, its work and memory grow as length <em>squared</em>:
+double the length and its cost quadruples. The state-space model takes one step per token with a fixed-size
+memory, so it grows in a straight line and its memory never changes at all. Push the slider right and the gap
+becomes a chasm — which is exactly why, for a long video or a huge image, you reach for the linear-time
+model.</div>
+<p style="margin-top:14px"><a href="mamba-why.html">→ Why it works</a> ·
+<a href="mamba-in-the-wild.html">→ How the field uses it</a> ·
+<a href="mamba-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>A live comparison of quadratic attention vs linear-time state-space cost and memory · CC0.</footer></div>
+
+<script>
+var DATA = {"N": 8, "Dm": 64};
+(function(){
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d'), W=cv.width, Hc=cv.height;
+  var sL=document.getElementById('sL'); var N=DATA.N, Dm=DATA.Dm;
+  function fmt(n){ if(n>=1e9)return (n/1e9).toFixed(1)+'B'; if(n>=1e6)return (n/1e6).toFixed(1)+'M'; if(n>=1e3)return (n/1e3).toFixed(1)+'k'; return n.toFixed(0); }
+  function render(){
+    var L=+sL.value*8;                     // map slider to a length
+    var attnC=L*L, ssmC=L*N, attnM=L*L, ssmM=Dm*N;
+    // reference max at slider max for a stable y-scale (quadratic)
+    var Lmax=140*8, refC=Lmax*Lmax;
+    ctx.fillStyle='#0f1417'; ctx.fillRect(0,0,W,Hc);
+    function group(x0,label,aVal,sVal,ref){
+      var base=Hc-46, maxh=Hc-90, bw=64;
+      var ah=Math.min(maxh, Math.sqrt(aVal/ref)*maxh);   // sqrt scale so quadratic still shows range
+      var sh=Math.min(maxh, Math.sqrt(sVal/ref)*maxh);
+      ctx.fillStyle='#3a6ea5'; ctx.fillRect(x0, base-ah, bw, ah);
+      ctx.fillStyle='#0E7C86'; ctx.fillRect(x0+bw+18, base-sh, bw, sh);
+      ctx.fillStyle='#9aa7b0'; ctx.font='11px monospace'; ctx.textAlign='center';
+      ctx.fillText('attention', x0+bw/2, base+16); ctx.fillText('SSM', x0+bw+18+bw/2, base+16);
+      ctx.fillStyle='#6b7f8b'; ctx.fillText(fmt(aVal), x0+bw/2, base-ah-6); ctx.fillText(fmt(sVal), x0+bw+18+bw/2, base-sh-6);
+      ctx.fillStyle='#cbd5db'; ctx.font='12px monospace'; ctx.fillText(label, x0+bw+9, 22);
+      ctx.textAlign='left';
+    }
+    group(70, 'compute', attnC, ssmC, refC);
+    group(380, 'memory', attnM, ssmM, refC);
+    document.getElementById('vL').textContent=L.toLocaleString();
+    document.getElementById('read').innerHTML=
+      'length <b>'+L.toLocaleString()+'</b> &rarr; attention: <b style="color:#3a6ea5">'+fmt(attnC)+'</b> comparisons, <b style="color:#3a6ea5">'+fmt(attnM)+'</b> memory'+
+      '<br>state-space model: <b>'+fmt(ssmC)+'</b> steps, <b>'+ssmM+'</b> memory (constant) &mdash; attention costs <b>'+Math.round(attnC/ssmC)+'x</b> more compute here';
+  }
+  sL.addEventListener('input',render); render();
+})();
+</script>
+</body></html>

@@ -1,0 +1,116 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoE routing sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+canvas{width:100%;max-width:560px;height:auto;display:block;margin:0 auto;background:#0f1417;border-radius:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.seg button{font-family:var(--mono);font-size:12.5px;padding:7px 15px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:10px;line-height:1.7}
+.read b{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--line);border-radius:14px;background:var(--paper);cursor:pointer}
+.chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Mixture-of-experts · the routing sandbox</div>
+<h1>Route the inputs, watch the experts live or die</h1>
+<p>The <a href="moe-why.html">why page</a> trains an 8-expert model twice — with and without a load-balancing
+nudge. Here are the real results. Flip load balancing on and off and watch the router either spread the work or
+collapse onto a couple of experts, leaving the rest dead. Then click a class to see which expert it routes to.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="moe-why.html">The big picture</a><a href="moe-in-the-wild.html">In the wild</a><a href="moe-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="seg" id="mode"><button data-m="nb" class="on">No load balancing</button><button data-m="bl">Load balancing on</button></div>
+<div class="pwrap">
+  <canvas id="cv" width="560" height="240"></canvas>
+  <div class="read" id="read"></div>
+  <div style="font-size:12px;color:var(--graphite);margin-top:8px">Route a class of image (see which expert it wakes):</div>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="fp"><b>What to notice.</b> With <b>no load balancing</b>, the bars are lopsided — a couple of experts
+tower while several sit at zero, <em>dead</em> (orange). You bought eight experts and the model speaks through a
+few. Turn <b>load balancing on</b> and the dead experts revive; the work spreads and the effective number of
+experts climbs. Click a class and watch its input wake a specific expert — that specialization is the whole
+point: a big model whose parts each own a slice of the problem, woken only when needed.</div>
+<p style="margin-top:14px"><a href="moe-why.html">→ Why it works</a> ·
+<a href="moe-in-the-wild.html">→ How the field uses it</a> ·
+<a href="moe-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>Real 8-expert MoE routing from a Colab-GPU run · load-balanced vs collapsed usage · CC0.</footer></div>
+
+<script>
+var DATA = {"nb": {"acc": 0.888, "used": 1, "perplexity": 1.0, "usage": [0, 0, 0, 0, 0, 0, 2000, 0], "class_expert": [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]]}, "bl": {"acc": 0.877, "used": 8, "perplexity": 7.35, "usage": [80, 378, 273, 231, 192, 232, 196, 418], "class_expert": [[0.0, 0.055, 0.53, 0.015, 0.09, 0.0, 0.01, 0.3], [0.0, 0.502, 0.0, 0.0, 0.005, 0.0, 0.227, 0.266], [0.005, 0.079, 0.313, 0.196, 0.07, 0.028, 0.257, 0.051], [0.0, 0.137, 0.047, 0.047, 0.021, 0.132, 0.016, 0.6], [0.0, 0.105, 0.091, 0.219, 0.082, 0.005, 0.237, 0.26], [0.046, 0.544, 0.0, 0.01, 0.246, 0.092, 0.0, 0.062], [0.0, 0.041, 0.269, 0.162, 0.284, 0.03, 0.056, 0.157], [0.08, 0.275, 0.0, 0.0, 0.15, 0.24, 0.0, 0.255], [0.0, 0.129, 0.093, 0.49, 0.005, 0.005, 0.139, 0.139], [0.287, 0.027, 0.0, 0.0, 0.005, 0.676, 0.0, 0.005]]}, "classes": ["t-shirt", "trouser", "pullover", "dress", "coat", "sandal", "shirt", "sneaker", "bag", "boot"], "E": 8};
+(function(){
+  if(!DATA){return;}
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d'), W=cv.width, Hc=cv.height;
+  var mode='nb', query=-1, E=DATA.E;
+  function cur(){ return mode==='nb'?DATA.nb:DATA.bl; }
+  function render(){
+    var d=cur(), usage=d.usage, mx=Math.max.apply(null,usage)||1;
+    ctx.fillStyle='#0f1417'; ctx.fillRect(0,0,W,Hc);
+    var bw=(W-60)/E, base=Hc-40;
+    for(var e=0;e<E;e++){
+      var h=Math.max(2, usage[e]/mx*(Hc-70));
+      var dead=usage[e]===0;
+      var hi = query>=0 && argmaxExpert(query)===e;
+      ctx.fillStyle = dead ? '#c9542e' : (hi ? '#7fe0ea' : '#0E7C86');
+      ctx.fillRect(30+e*bw+4, base-h, bw-8, h);
+      ctx.fillStyle='#6b7f8b'; ctx.font='11px monospace';
+      ctx.fillText('E'+e, 30+e*bw+bw/2-8, base+16);
+      if(dead){ ctx.fillStyle='#c9542e'; ctx.fillText('dead', 30+e*bw+bw/2-13, base-h-6); }
+    }
+    var used=usage.filter(function(u){return u>0;}).length;
+    var r='<b>'+(mode==='nb'?'no balancing':'balancing on')+'</b> &rarr; experts used <b>'+used+' / '+E+
+      '</b> &middot; effective experts <b>'+d.perplexity+'</b> &middot; accuracy '+d.acc;
+    if(query>=0) r='class <b>'+DATA.classes[query]+'</b> routes mostly to <b>expert E'+argmaxExpert(query)+'</b> (highlighted)';
+    document.getElementById('read').innerHTML=r;
+  }
+  function argmaxExpert(cls){ var row=cur().class_expert[cls], b=0; for(var e=1;e<E;e++) if(row[e]>row[b]) b=e; return b; }
+  document.querySelectorAll('#mode button').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('#mode button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    mode=b.getAttribute('data-m'); render(); }); });
+  var chips=document.getElementById('chips');
+  DATA.classes.forEach(function(c,i){ var b=document.createElement('span'); b.className='chip'; b.textContent=c;
+    b.addEventListener('click',function(){ query=(query===i?-1:i);
+      chips.querySelectorAll('.chip').forEach(function(x,j){x.classList.toggle('on', j===query);}); render(); });
+    chips.appendChild(b); });
+  render();
+})();
+</script>
+</body></html>

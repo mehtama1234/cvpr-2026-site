@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>State-space models / Mamba — linear-time sequences, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.barrow{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px}
+.barrow .lab{width:150px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.bar{height:16px;border-radius:3px;min-width:2px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:7px 10px;text-align:right;vertical-align:top;font-family:var(--mono);font-size:12px}
+.mxtable td:first-child,.mxtable th:first-child{text-align:left}
+.mxtable th{background:var(--tint);font-size:11px;letter-spacing:.03em;text-transform:uppercase}
+</style></head><body>
+<header><div class="wrap"><div class="bug">State-space models · first principles · read in order, remember a little</div>
+<h1>State-space models — linear-time sequence modeling, and why Mamba needed selectivity</h1>
+<p>Attention made transformers powerful by letting every token look at every other — but that same move is a
+wall: its cost grows with the <em>square</em> of the input, so long videos, huge images, and dense point clouds
+become unaffordable. State-space models (the Mamba family) offer a different bargain: read the input in order,
+carrying a small running memory, at linear cost. This page is the plain story of that trade, built on a real
+run — including the one ingredient, <em>selectivity</em>, without which the cheap model is useless.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="mamba-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — attention compares everyone to everyone</h2>
+<p>The engine inside a transformer is attention: to process a sequence, every token is compared against every
+other token, so the model can pull in whatever context it needs from anywhere. It is wonderfully flexible — and
+its bill grows with the <em>square</em> of the length. Double the resolution or the video length and the cost
+roughly quadruples. For a small photo that is fine; for a 40-minute video, a gigapixel slide, or a dense point
+cloud, it is the wall you hit.</p>
+<div class="fp"><b>The problem, stated once:</b> model long sequences and big inputs with a global view, but
+without attention's quadratic blow-up in time and memory as the input grows.</div>
+
+<h2 id="reframe">2 · The reframe — read in order, carry a small memory</h2>
+<div class="fp"><b>The idea: don't compare everything to everything — read the input once, left to right, keeping a
+small running summary.</b> Like reading a sentence, a state-space model steps through the sequence one token at a
+time, updating a fixed-size <em>state</em> that carries what it has seen so far. One step per token means the
+cost grows in proportion to the length, not its square — and because the memory is a fixed-size state, it never
+grows. Linear time, constant memory.</div>
+<div class="eq">state_t = update(state_(t-1), token_t)      output_t = read(state_t)
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># one step per token, a fixed-size running memory — a selective scan</span></div>
+<p>But a plain running memory has a fatal weakness: if the update rule is fixed, it cannot decide <em>what</em>
+to keep — it blurs everything it reads into one summary. Mamba's breakthrough was to make the update
+<b>depend on the input</b> (<em>selectivity</em>), so the scan can hold onto the tokens that matter and let the
+rest wash past. The run shows both the selectivity and the cost.</p>
+
+<h2 id="run">3 · Seen on a real run — selectivity, and the cost gap</h2>
+<h3>1 · Selectivity is what makes the linear model work</h3>
+<p>We set a <em>selective-copy</em> task: a few content tokens are scattered among blanks, and the model must
+reproduce just the content, in order — it has to <em>choose</em> what to remember and skip the rest. Three
+models, same size:</p>
+<div class="barrow"><span class="lab">selective SSM (Mamba)</span><div class="bar" style="width:90%;background:#0E7C86"></div><span style="font-family:var(--mono);font-size:12px;color:#0E7C86">90%</span></div><div class="barrow"><span class="lab">attention</span><div class="bar" style="width:76%;background:#3a6ea5"></div><span style="font-family:var(--mono);font-size:12px;color:#3a6ea5">76%</span></div><div class="barrow"><span class="lab">plain (non-selective) SSM</span><div class="bar" style="width:41%;background:#c0653a"></div><span style="font-family:var(--mono);font-size:12px;color:#c0653a">41%</span></div>
+<p>The <b>selective SSM</b> nails it (<span class="stat">90%</span>), and so does <b>attention</b>
+(<span class="stat">76%</span>) — both can pick out content by what it <em>is</em>. But a
+<b>plain, non-selective SSM</b> — one whose memory update is fixed and cannot depend on the input — is stuck at
+<span class="stat">41%</span>. It reads in order at linear cost, but with no way to decide what
+matters, it drowns in the blanks.</p>
+<div class="fp"><b>That is Mamba's key idea:</b> make the running memory's update <em>input-dependent</em>, so a
+linear-time scan can still selectively remember the important tokens and forget the rest. Without selectivity,
+cheap is useless; with it, you get attention-like ability at a fraction of the cost.</div>
+<h3>2 · And the cost is the whole point — linear, not quadratic</h3>
+<p>Here is why anyone bothers. Attention builds a full table comparing every token to every other, so both its
+work and its memory grow with the <em>square</em> of the length. The SSM just takes one step per token with a
+fixed-size state. The counts, as the sequence grows:</p>
+<div style="overflow-x:auto"><table class="mxtable">
+<tr><th>length</th><th>attention comparisons</th><th>SSM steps</th><th>attention memory</th><th>SSM memory</th></tr>
+<tr><td><b>64</b></td><td>4,096</td><td>512</td><td>4,096</td><td>512</td></tr><tr><td><b>128</b></td><td>16,384</td><td>1,024</td><td>16,384</td><td>512</td></tr><tr><td><b>256</b></td><td>65,536</td><td>2,048</td><td>65,536</td><td>512</td></tr><tr><td><b>512</b></td><td>262,144</td><td>4,096</td><td>262,144</td><td>512</td></tr><tr><td><b>1,024</b></td><td>1,048,576</td><td>8,192</td><td>1,048,576</td><td>512</td></tr><tr><td><b>2,048</b></td><td>4,194,304</td><td>16,384</td><td>4,194,304</td><td>512</td></tr><tr><td><b>4,096</b></td><td>16,777,216</td><td>32,768</td><td>16,777,216</td><td>512</td></tr>
+</table></div>
+<p>At length <b>4,096</b>, attention makes <span class="stat">16,777,216</span>
+comparisons and must hold a table that big in memory; the SSM takes just <span class="stat">32,768</span>
+steps and its memory <em>never grows</em> — a constant <span class="stat">512</span>. Double the
+length and attention's cost quadruples while the SSM's merely doubles. That gap is the wall Mamba was built to
+get around.</p>
+
+<h2 id="why">4 · Why it matters — the drop-in for anything long or big</h2>
+<p>Linear time and constant memory make state-space models the natural choice wherever attention chokes: hour-
+long video, high-resolution medical scans and satellite tiles, dense point clouds, and streaming sensor data.
+They show up less as a headline and more as a quiet <em>efficiency engine</em> swapped in wherever the input is
+long. The one recurring puzzle: an image is 2D and a point cloud is an unordered blob, but a scan needs a 1D
+order — so much of the craft is designing a <em>scan path</em> (diagonal, Hilbert-curve, snake, content-aware)
+that flattens the input without tearing apart what was neighboring.</p>
+
+<h2 id="robots">5 · The surprise — a memory that can run forever</h2>
+<p>In vision, Mamba is picked to make a big <em>fixed</em> input cheaper. A robot wants something subtler. It
+runs <em>continuously</em> — it never stops receiving observations — and attention's memory grows with every new
+timestep, an unbounded cache for an unbounded stream. That is exactly wrong for a device that must run for hours
+on a small onboard computer.</p>
+<div class="fp"><b>A fixed-size state fits a loop that never ends.</b> Mamba's constant running memory is the right
+shape for real-time, memory-bounded, onboard control: remember a long history at a flat, small, predictable
+cost. Vision reaches for the linear-time <em>compute</em> win; a robot reaches for the constant-size
+<em>memory</em> that lets the loop run forever. The <a href="mamba-in-the-wild.html">in-the-wild page</a> lays
+out both sides.</div>
+
+<div class="fp"><b>Where to go from here.</b> Slide the sequence length in the
+<a href="mamba-playground.html">cost sandbox</a> and watch attention's bill explode while the state-space model
+grows in a gentle line. Then see <a href="mamba-in-the-wild.html">how CVPR &amp; robotics actually use
+Mamba</a>. Then go <a href="mamba-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="mamba-playground.html">→ The cost sandbox</a> ·
+<a href="mamba-in-the-wild.html">→ In the wild</a> ·
+<a href="mamba-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles state-space models, grounded in a real Colab-GPU run (a selective SSM vs a plain SSM vs attention on selective-copy) ·
+the selectivity gap and the linear-vs-quadratic cost are measured · CC0.</footer></div>
+</body></html>

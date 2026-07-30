@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mixture-of-experts — capacity without cost, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:12px 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper)}
+.ebars{display:flex;align-items:flex-end;gap:4px;height:90px;margin:8px 0}
+.ebars .e{flex:1;background:var(--accent);border-radius:2px 2px 0 0;min-height:2px;position:relative}
+.ebars .e.dead{background:#c9542e}
+.grid{display:grid;grid-template-columns:auto repeat(8,1fr);gap:2px;font-family:var(--mono);font-size:9px;margin-top:10px}
+.grid .h{color:var(--graphite);text-align:center}
+.grid .rl{color:var(--graphite);padding-right:4px;text-align:right;white-space:nowrap}
+.cell{height:15px;border-radius:2px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Mixture-of-experts · first principles · many specialists, one router</div>
+<h1>Mixture-of-experts — the capacity of a giant at the cost of a small model</h1>
+<p>The biggest models — the ones behind the best language and multimodal systems — are mostly not one dense
+network. They are a crowd of smaller <em>experts</em> with a tiny <em>router</em> that wakes only a few of them
+for each input. This page is the plain story of why that trick works, built on a real run where you can watch
+the experts specialize — and watch the one failure that haunts every mixture-of-experts: a router that lets
+most of its experts quietly die.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="moe-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — a dense model spends everything on everything</h2>
+<p>A normal neural network runs its <em>entire</em> self on every input. To make it know more, you make it
+bigger — but then every input, however simple, pays for all those extra parameters. You want a model that holds
+a huge amount of specialized knowledge yet only spends a little of it on any one input. A dense network cannot
+do both: capacity and cost rise together.</p>
+<div class="fp"><b>The problem, stated once:</b> grow a model's knowledge without growing what it costs to run on
+each input — hold a lot, but spend only a little per example.</div>
+
+<h2 id="reframe">2 · The reframe — many experts, a router, a few woken per input</h2>
+<div class="fp"><b>The idea: replace one big layer with many small expert layers and a router that picks a few.</b>
+Instead of one fat feed-forward block, keep a set of smaller ones — the <em>experts</em>. Add a tiny
+<em>router</em> that looks at each input and picks the top one or two experts to handle it; the rest stay
+asleep. The model now holds the combined knowledge of <em>all</em> the experts, but any single input only wakes
+a couple, so the compute per input barely moves. Capacity goes up; cost stays flat.</div>
+<div class="eq">output = router picks top-k experts, then blends only those
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># 8 experts held, 1-2 woken per input — a big brain on a small bill</span></div>
+<p>It only pays off if two things hold: the experts must actually <em>specialize</em> (otherwise you have eight
+copies of the same thing), and the router must <em>use all of them</em> (otherwise you paid for eight and speak
+through two). The run shows both — and shows what happens when the second one fails.</p>
+
+<h2 id="run">3 · Seen on a real run — specialization, and collapse</h2>
+<h3>1 · Left alone, the router collapses</h3>
+<p>We trained the same 8-expert model twice — once with nothing keeping the router honest, once with a small
+<em>load-balancing</em> nudge. Here is how often each expert got used:</p>
+<div class="two">
+<div class="card"><h3 style="margin-top:0">No load balancing</h3><div class="ebars"><div class="e dead" style="height:2%"></div><div class="e dead" style="height:2%"></div><div class="e dead" style="height:2%"></div><div class="e dead" style="height:2%"></div><div class="e dead" style="height:2%"></div><div class="e dead" style="height:2%"></div><div class="e" style="height:100%"></div><div class="e dead" style="height:2%"></div></div><div style="font-family:var(--mono);font-size:11px;color:var(--graphite)">8 experts &middot; dead dead dead dead dead dead dead </div><div style="font-size:13px;color:var(--graphite);margin-top:6px">Only <b>1/8</b> experts get used — the rest are <b>dead</b> (orange). A rich-get-richer collapse: the router keeps feeding its early favourites. Effective experts: <b>1.0</b>.</div></div>
+<div class="card"><h3 style="margin-top:0">With load balancing</h3><div class="ebars"><div class="e" style="height:19%"></div><div class="e" style="height:90%"></div><div class="e" style="height:65%"></div><div class="e" style="height:55%"></div><div class="e" style="height:46%"></div><div class="e" style="height:56%"></div><div class="e" style="height:47%"></div><div class="e" style="height:100%"></div></div><div style="font-family:var(--mono);font-size:11px;color:var(--graphite)">8 experts &middot; </div><div style="font-size:13px;color:var(--graphite);margin-top:6px">A gentle push to spread the load revives the dead experts — all <b>8/8</b> are used and the effective count rises to <b>7.35</b>. The capacity you paid for is finally doing work.</div></div>
+</div>
+<div class="fp"><b>Expert collapse is MoE's signature failure</b> — the exact mirror of codebook collapse in a
+tokenizer. Buy eight experts, and without care the model quietly speaks through two. Much of MoE research is,
+at bottom, different ways of keeping every expert alive and used.</div>
+<h3>2 · When it works, experts specialize</h3>
+<p>The point of many experts is that they <em>divide the labour</em>. With balancing on, look at which expert
+each class of image gets routed to — it is structured, not random (darker = more of that class goes to that
+expert):</p>
+<div class="grid"><div class="h"></div><div class="h">E0</div><div class="h">E1</div><div class="h">E2</div><div class="h">E3</div><div class="h">E4</div><div class="h">E5</div><div class="h">E6</div><div class="h">E7</div><div class="rl">t-shirt</div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.06)"></div><div class="cell" style="background:rgba(14,124,134,0.58)"></div><div class="cell" style="background:rgba(14,124,134,0.02)"></div><div class="cell" style="background:rgba(14,124,134,0.10)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.33)"></div><div class="rl">trouser</div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.55)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.25)"></div><div class="cell" style="background:rgba(14,124,134,0.29)"></div><div class="rl">pullover</div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.09)"></div><div class="cell" style="background:rgba(14,124,134,0.34)"></div><div class="cell" style="background:rgba(14,124,134,0.22)"></div><div class="cell" style="background:rgba(14,124,134,0.08)"></div><div class="cell" style="background:rgba(14,124,134,0.03)"></div><div class="cell" style="background:rgba(14,124,134,0.28)"></div><div class="cell" style="background:rgba(14,124,134,0.06)"></div><div class="rl">dress</div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.15)"></div><div class="cell" style="background:rgba(14,124,134,0.05)"></div><div class="cell" style="background:rgba(14,124,134,0.05)"></div><div class="cell" style="background:rgba(14,124,134,0.02)"></div><div class="cell" style="background:rgba(14,124,134,0.15)"></div><div class="cell" style="background:rgba(14,124,134,0.02)"></div><div class="cell" style="background:rgba(14,124,134,0.66)"></div><div class="rl">coat</div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.12)"></div><div class="cell" style="background:rgba(14,124,134,0.10)"></div><div class="cell" style="background:rgba(14,124,134,0.24)"></div><div class="cell" style="background:rgba(14,124,134,0.09)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.26)"></div><div class="cell" style="background:rgba(14,124,134,0.29)"></div><div class="rl">sandal</div><div class="cell" style="background:rgba(14,124,134,0.05)"></div><div class="cell" style="background:rgba(14,124,134,0.60)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.27)"></div><div class="cell" style="background:rgba(14,124,134,0.10)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.07)"></div><div class="rl">shirt</div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.05)"></div><div class="cell" style="background:rgba(14,124,134,0.30)"></div><div class="cell" style="background:rgba(14,124,134,0.18)"></div><div class="cell" style="background:rgba(14,124,134,0.31)"></div><div class="cell" style="background:rgba(14,124,134,0.03)"></div><div class="cell" style="background:rgba(14,124,134,0.06)"></div><div class="cell" style="background:rgba(14,124,134,0.17)"></div><div class="rl">sneaker</div><div class="cell" style="background:rgba(14,124,134,0.09)"></div><div class="cell" style="background:rgba(14,124,134,0.30)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.17)"></div><div class="cell" style="background:rgba(14,124,134,0.26)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.28)"></div><div class="rl">bag</div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.14)"></div><div class="cell" style="background:rgba(14,124,134,0.10)"></div><div class="cell" style="background:rgba(14,124,134,0.54)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.15)"></div><div class="cell" style="background:rgba(14,124,134,0.15)"></div><div class="rl">boot</div><div class="cell" style="background:rgba(14,124,134,0.32)"></div><div class="cell" style="background:rgba(14,124,134,0.03)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div><div class="cell" style="background:rgba(14,124,134,0.74)"></div><div class="cell" style="background:rgba(14,124,134,0.00)"></div><div class="cell" style="background:rgba(14,124,134,0.01)"></div></div>
+<p style="font-size:13.5px;color:var(--graphite);margin-top:8px">Each class lights up a specific expert or two:
+the router has learned to send shirts to one specialist, shoes to another. That is the whole idea — a big model
+whose parts each become good at a slice of the problem, woken only when needed.</p>
+
+<h2 id="why">4 · Why it matters — the engine under the biggest models</h2>
+<p>Mixture-of-experts is how modern frontier models get enormous without getting enormously expensive to run —
+route each token to a few experts and the bill stays flat while the knowledge grows. In vision it has become
+something subtler than a scaling trick: a way to hand different <em>experts</em> different jobs — one modality,
+one degradation type, one task — so a single unified model stops fighting itself. The recurring enemy it is
+deployed against is interference between sub-problems that a shared network would blur together.</p>
+
+<h2 id="robots">5 · The surprise — one body, many jobs that fight</h2>
+<p>In vision, MoE buys cheap capacity. In robotics it solves a different problem: one robot has to walk on
+stairs <em>and</em> gravel, pick <em>and</em> pour, merge <em>and</em> park — jobs that actively <b>fight each
+other</b> when crammed into one dense network, because the gradient that improves one un-trains another.</p>
+<div class="fp"><b>Experts as peacekeepers.</b> Give each skill, terrain, or scenario its own expert and route to
+the right one, and they stop cannibalizing each other. The win is not a cheaper benchmark — it is a robot that
+can <em>switch</em> skills at all, instead of face-planting when the ground changes. Vision uses MoE to grow the
+brain without growing the bill; robotics uses it to keep a body's many jobs from destroying each other. The
+<a href="moe-in-the-wild.html">in-the-wild page</a> lays out both sides.</div>
+
+<div class="fp"><b>Where to go from here.</b> Route the inputs yourself in the
+<a href="moe-playground.html">routing sandbox</a> — turn load balancing on and off and watch the experts revive
+or die. Then see <a href="moe-in-the-wild.html">how CVPR &amp; robotics actually use MoE</a>. Then go
+<a href="moe-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="moe-playground.html">→ The routing sandbox</a> ·
+<a href="moe-in-the-wild.html">→ In the wild</a> ·
+<a href="moe-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mixture-of-experts, grounded in a real Colab-GPU run (an 8-expert MoE on FashionMNIST) ·
+the load-balance collapse and the class-to-expert specialization are measured · CC0.</footer></div>
+</body></html>

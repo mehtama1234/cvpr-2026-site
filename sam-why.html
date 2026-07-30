@@ -1,0 +1,137 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Segment Anything — point at anything, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+.imrow{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;margin:14px 0}
+.arrow{align-self:center;font-size:20px;color:var(--graphite)}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Segment Anything · first principles · point at anything, cut it out</div>
+<h1>Segment Anything — cutting out any object you point at</h1>
+<p>For years, a segmentation model was a specialist: it knew a fixed list of things — car, road, person — and
+was blind to everything else. Segment Anything replaced that with one general skill: you point at something and
+it cuts out its exact shape, even a kind of object it never saw a label for. This page is the plain story of
+that shift, built on a real run — including the deep little problem at its heart, that a single click can mean
+several things at once, and the neat trick that answers it.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="sam-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — a fixed list of things is a cage</h2>
+<p>Classic segmentation learns to label every pixel with a class from a fixed list. Train it on cars and roads
+and it will never help you with a coral, a surgical tool, or a part it was not told about — it cannot even
+represent the request. Every new kind of object means new labeled masks and retraining. What you actually want
+is to <em>point</em> at a thing — any thing — and get its exact shape back, no matter whether the model has a
+name for it.</p>
+<div class="fp"><b>The problem, stated once:</b> cut out the precise shape of whatever a user indicates — by a
+click, a box, a scribble — including objects never seen in training, without naming them or retraining.</div>
+
+<h2 id="reframe">2 · The reframe — a promptable, class-agnostic cutter</h2>
+<div class="fp"><b>The idea: don't classify pixels; answer a prompt.</b> Feed the model an image <em>and</em> a
+prompt — a point, a box — and train it to output the mask of the object the prompt indicates. Because it is
+trained on a huge variety of masks and keyed on the prompt rather than on a class label, it learns the general
+skill of <em>cutting out the thing you pointed at</em>, and that skill transfers to objects it never saw. It
+does not tell you <em>what</em> the object is; it isolates its shape, and something else can name it.</div>
+<div class="eq">image + prompt (a point)  →  the mask of the object under the prompt
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># class-agnostic: no fixed label list; the prompt, not a category, says what to cut</span></div>
+<p>But a single point is <em>ambiguous</em>. Click on a shirt pocket and you might mean the pocket, the shirt,
+or the whole person. A model that returns exactly one mask has to gamble on which. The run shows the fix.</p>
+
+<h2 id="run">3 · Seen on a real run — one click, three answers</h2>
+<p>We trained a small promptable segmenter on synthetic scenes of nested shapes and prompted it with a single
+point. Two things came out — it cuts out shapes it was never specifically shown, and it handles the ambiguity
+of a click by offering several masks:</p>
+<div class="imrow"><div style="text-align:center"><img src="data:image/png;base64,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" width="120" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">the scene + one click (red)</div></div><div class="arrow">→</div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAABgklEQVR4nO3dy03DQBRA0QHRBNAGddAGNdEGddAGpA02LCIhhPH1J1bOWUeWF1dPTzNKMgYAAAAAAAAAAAAAAAAAAAAAAAAAwP5u9n6BMca4f/9Y/Jmnp8fFn8lPt3u/AMcmIBIBkWy6A62x6/yX3WhZJhCJgEgERLL6DnQJe89v7EOdCUQiIBIBkVz1DnTOPjSPCUQiIBIBkdyt8dCj7D10JhCJgEgERLLKOdDRdyBnQtOZQCQCIhEQySrnQMXny/Ofn3l4fdvgTZjCBCIREImASAREIiASAZEIiERAJAIiERCJgEgu7i7MPdexmEAkAiIREImASAREIiASAZEIiERAJAIiERDJxd2F7cX34ecxgUgERCIgEr8T/c0ONI8JRCIgEgGRXPU5kL2nM4FIBEQiIBL/G09iApEIiERAJJvuQFOUPcl+sz0TiERAJAICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgDNf0lchJo0cAPAAAAAASUVORK5CYII=" width="120" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">mask 1</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAABmUlEQVR4nO3cwW3CQBRAQYhoIqEN6qANaqKN1JE2iNvgwMWXKKAHGOOZs23t4elrpdV6tQIAAAAAAAAAAN7F+l4f+vw53etTszDstlMv4SV8TL0A5k1AJAIiSXugpe17/rLk/ZAJRCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkWxufcF/ERkzgUgERCIgkpv3QI/2e9j/+8zX8fsJK+EaJhCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBETycmdhzrnmxQQiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBI1uVl9+Qvht126iVMxgQiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiCTdCxtb2h2xJd8FGzOBSAREIiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIArnQG7PhLyTh5AkgAAAABJRU5ErkJggg==" width="120" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">mask 2</div></div><div style="text-align:center"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAAtElEQVR4nO3Suw3AIABDQchK7D8CM5E+TRJZ4iPd1S5cvFIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgn7r6wNNo7XVTe5/whC+u1Qc4m4CICIiIgIgIiIiAiAiIiICICIiIgIgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICt3RQWAxiGyVX1AAAAAElFTkSuQmCC" width="120" style="border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;display:block"/><div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);margin-top:5px">mask 3</div></div></div>
+<p>One click (the red dot) sits inside <em>nested</em> shapes — a small square inside a circle inside a
+rectangle — so it is genuinely ambiguous: the model cannot know whether you meant the little part, the middle
+object, or the whole thing. So, like the real Segment Anything, it returns <b>three</b> masks. Look at them:
+they are not three tries at the same answer — they are the three <em>interpretations</em>, one per level.</p>
+<h3>The three masks specialize; together they cover what you meant</h3>
+<p>We measured this on hundreds of clicks. When the click is ambiguous, the three masks <em>together</em> cover
+the right interpretation almost perfectly (best-of-three IoU <span class="stat">0.99</span>) —
+but any single one of the heads is a <em>specialist</em>: it is sharp only when its own granularity happens to
+match, and off otherwise. Head one alone, for instance, scores <span class="stat">0.23</span>
+on clicks where its scale is the wrong answer. The heads have divided the labour of ambiguity.</p>
+<table class="mxtable">
+<tr><th></th><th>ambiguous click (nested)</th><th>plain click (one shape)</th></tr>
+<tr><td><b>best of the three masks</b></td><td><span class="stat">0.99</span> — covers the interpretation you meant</td><td><span class="stat">0.99</span></td></tr>
+<tr><td><b>any single head alone</b></td><td>0.94 (only when its scale fits)</td><td>0.23 (wrong when its scale does not)</td></tr>
+</table>
+<div class="fp"><b>This is why a promptable segmenter offers several masks.</b> A single output can only ever hand you
+<em>one</em> of the things a click might mean — so the moment the answer is ambiguous, it has to guess which
+level you wanted. Emitting a small set of masks, each locked to a different granularity (part / whole / scene),
+lets you — or a downstream model — pick the one you meant. Ambiguity is not a bug to suppress; it is answered
+by <em>covering</em> it.</div>
+
+<h2 id="why">4 · Why it matters — vision's reusable brick</h2>
+<p>A click-in / mask-out foundation model turned out to be something nearly every other vision task snaps onto.
+The dominant recipe of the year is to <em>freeze</em> the segmenter, bolt on a light adapter or a smarter
+prompt, and carry it into a new domain or into video — and, just as often, to harvest its class-agnostic masks
+as <b>free supervision</b>: clean object boundaries for depth, isolated objects for 3D reconstruction,
+auto-labeled data for training other models. Point-at-anything became a component you build with.</p>
+
+<h2 id="robots">5 · The surprise — in a robot, the mask is a handle</h2>
+<p>In vision, the mask is the answer — a cutout you compare to a ground-truth mask and score. In robotics it is
+never the answer; it is a <b>handle</b>. The robot cuts an object out so it can <em>do</em> something to it:
+close a gripper on exactly those pixels, keep a camera locked on it while an arm swings, drop it into a map, or
+flag it as an obstacle with no name.</p>
+<div class="fp"><b>A good mask is a successful grasp.</b> The quality of a segment in a robot is not an overlap
+number — it is whether the robot could act on it. A bad mask is not a lower score; it is a dropped object, a
+lost target, a collision. That is exactly why robots reach for promptable, open-world segmentation: they have
+to act on things no benchmark ever labeled. The <a href="sam-in-the-wild.html">in-the-wild page</a> lays out
+both sides.</div>
+
+<div class="fp"><b>Where to go from here.</b> Click around a scene yourself in the
+<a href="sam-playground.html">ambiguity sandbox</a> — a point in the middle of nested shapes is genuinely
+ambiguous, and you can cycle through the part / whole / scene it might mean. Then see
+<a href="sam-in-the-wild.html">how CVPR &amp; robotics actually use Segment Anything</a>. Then go
+<a href="sam-deep-reads.html">paper by paper</a>, each opened up.</p>
+
+<p style="margin-top:16px"><a href="sam-playground.html">→ The ambiguity sandbox</a> ·
+<a href="sam-in-the-wild.html">→ In the wild</a> ·
+<a href="sam-deep-reads.html">→ The papers, opened up</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles promptable segmentation, grounded in a real Colab-GPU run (a small promptable segmenter on nested shapes) ·
+the three-mask specialization and the ambiguous-vs-plain coverage are measured · CC0.</footer></div>
+</body></html>
