@@ -1,0 +1,130 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VLA action sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.vwrap{display:grid;grid-template-columns:1fr 300px;gap:22px;margin:16px 0;align-items:start}
+@media(max-width:720px){.vwrap{grid-template-columns:1fr}}
+.vpanel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper)}
+#v_canvas{width:100%;max-width:320px;aspect-ratio:1;border:1px solid var(--line);border-radius:12px;background:#fbfcfc;display:block;margin:0 auto}
+.vrow{margin-bottom:12px}
+.vrow label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.vseg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex-wrap:wrap}
+.vseg button{font-family:var(--mono);font-size:12px;padding:6px 11px;border:none;background:var(--paper);color:var(--graphite);cursor:pointer}
+.vseg button.on{background:var(--accent);color:#fff}
+.vbtnrow{display:flex;gap:8px;margin-top:8px}
+.vbtn{font-family:var(--mono);font-size:13px;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:8px;cursor:pointer}
+.vbtn.sec{background:var(--paper);color:var(--accent)}
+.vstatus{font-family:var(--mono);font-size:13px;color:var(--graphite);margin-top:12px;min-height:20px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Vision-language-action · the action sandbox</div>
+<h1>Drive the policy — and watch the naive one crash</h1>
+<p>The <a href="vla-why.html">why page</a> says a policy trained by plain regression averages its options
+and drives into the obstacle, while a generative policy commits to a side and gets there. These are the
+<em>real</em> rollouts of the two policies we trained. Pick a target, choose the action head, and press
+Drive — run the generative head a few times to see it take different routes.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="vla-why.html">The big picture</a><a href="vla-in-the-wild.html">In the wild</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="vwrap">
+  <div><canvas id="v_canvas" width="320" height="320"></canvas></div>
+  <div class="vpanel">
+    <div class="vrow"><label>Instruction: reach the…</label><div class="vseg" id="v_goal"></div></div>
+    <div class="vrow"><label>Action head</label><div class="vseg" id="v_head"><button data-h="gen" class="on">generative (sample)</button><button data-h="reg">regression (average)</button></div></div>
+    <div class="vbtnrow"><button class="vbtn" id="v_drive">&#9654; Drive</button><button class="vbtn sec" id="v_reset">Reset</button></div>
+    <div class="vstatus" id="v_status">Pick a target and press Drive.</div>
+  </div>
+</div>
+
+<div class="fp"><b>What to notice.</b> With the <b>regression</b> head, every Drive ends the same way — a curve
+straight into the obstacle, because the policy learned the <em>average</em> of the left and right
+demonstrations, and that average points at the wall. With the <b>generative</b> head, each Drive commits to
+one side and reaches the target — and pressing Drive again may take the <em>other</em> side, because it
+samples from the two good options instead of averaging them. That single difference — sample, don't average —
+is why modern vision-language-action models put a diffusion or token head on top, never a plain regressor.</div>
+
+<p style="margin-top:14px"><a href="vla-why.html">→ Why VLAs work</a> ·
+<a href="vla-in-the-wild.html">→ How the field builds them</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>Real rollouts of a toy language-conditioned policy (regression vs generative action head) from a FashionMNIST-scale run · CC0.</footer></div>
+
+<script>
+var DATA = {"colors": ["red", "blue", "green"], "targets": [[1.8, 2.0], [-1.8, 2.0], [0.0, 2.7]], "start": [0.0, -2.6], "obstacle": [0.0, 0.0], "obs_radius": 0.8, "success_radius": 0.4, "examples": [{"color": "red", "target": [1.8, 2.0], "reg": {"success": false, "traj": [[0.0, -2.6], [0.018, -2.446], [0.048, -2.294], [0.097, -2.142], [0.171, -1.993], [0.252, -1.844], [0.327, -1.695], [0.394, -1.544], [0.452, -1.393], [0.499, -1.237], [0.534, -1.076], [0.558, -0.912], [0.576, -0.746], [0.589, -0.578], [0.602, -0.41], [0.615, -0.244], [0.632, -0.078], [0.653, 0.087], [0.681, 0.251], [0.719, 0.412], [0.765, 0.569], [0.819, 0.723], [0.883, 0.874], [0.961, 1.022], [1.047, 1.166], [1.139, 1.307], [1.241, 1.446], [1.362, 1.581], [1.489, 1.706], [1.614, 1.817]]}, "gen": [{"success": false, "traj": [[0.0, -2.6], [0.127, -2.473], [0.255, -2.345], [0.382, -2.218], [0.509, -2.091], [0.636, -1.964], [0.764, -1.836], [0.891, -1.709], [0.96, -1.543], [1.029, -1.376], [1.098, -1.21], [1.166, -1.044], [1.235, -0.878], [1.304, -0.711], [1.373, -0.545], [1.442, -0.379], [1.511, -0.212], [1.58, -0.046], [1.649, 0.12], [1.718, 0.287], [1.786, 0.453], [1.855, 0.619], [1.924, 0.785], [1.993, 0.952], [2.062, 1.118], [2.131, 1.284], [2.2, 1.451], [2.269, 1.617], [2.337, 1.783], [2.406, 1.95], [2.475, 2.116], [2.544, 2.282], [2.613, 2.448], [2.682, 2.615], [2.751, 2.781], [2.82, 2.947], [2.889, 3.114], [2.82, 3.28], [2.751, 3.446], [2.682, 3.613], [2.613, 3.779], [2.544, 3.945], [2.475, 4.111], [2.406, 4.278], [2.337, 4.444], [2.269, 4.61], [2.2, 4.777], [2.131, 4.943], [2.062, 5.109], [1.993, 5.275], [1.924, 5.442], [1.855, 5.608], [1.786, 5.774], [1.718, 5.941], [1.649, 6.107], [1.58, 6.273], [1.511, 6.44], [1.442, 6.606], [1.373, 6.772], [1.304, 6.938], [1.235, 7.105], [1.166, 7.271], [1.235, 7.437], [1.166, 7.604], [1.098, 7.77], [1.166, 7.936], [1.235, 8.103], [1.304, 8.269], [1.235, 8.435], [1.166, 8.601], [1.235, 8.768]]}, {"success": false, "traj": [[0.0, -2.6], [0.127, -2.473], [0.255, -2.345], [0.382, -2.218], [0.509, -2.091], [0.636, -1.964], [0.705, -1.797], [0.833, -1.67], [0.96, -1.543], [1.029, -1.376], [1.098, -1.21], [1.166, -1.044], [1.235, -0.878], [1.304, -0.711], [1.373, -0.545], [1.442, -0.379], [1.511, -0.212], [1.58, -0.046], [1.649, 0.12], [1.718, 0.287], [1.786, 0.453], [1.855, 0.619], [1.924, 0.785], [1.993, 0.952], [2.062, 1.118], [2.131, 1.284], [2.2, 1.451], [2.269, 1.617], [2.337, 1.783], [2.406, 1.95], [2.475, 2.116], [2.544, 2.282], [2.613, 2.448], [2.682, 2.615], [2.751, 2.781], [2.82, 2.947], [2.751, 3.114], [2.682, 3.28], [2.613, 3.446], [2.544, 3.613], [2.475, 3.779], [2.406, 3.945], [2.337, 4.111], [2.269, 4.278], [2.2, 4.444], [2.131, 4.61], [2.062, 4.777], [1.993, 4.943], [1.924, 5.109], [1.855, 5.275], [1.786, 5.442], [1.718, 5.608], [1.649, 5.774], [1.58, 5.941], [1.511, 6.107], [1.442, 6.273], [1.373, 6.44], [1.304, 6.606], [1.235, 6.772], [1.166, 6.938], [1.235, 7.105], [1.166, 7.271], [1.098, 7.437], [1.029, 7.604], [1.098, 7.77], [1.166, 7.936], [1.235, 8.103], [1.166, 8.269], [1.098, 8.435], [1.166, 8.601], [1.235, 8.768]]}, {"success": true, "traj": [[0.0, -2.6], [-0.069, -2.434], [-0.138, -2.267], [-0.207, -2.101], [-0.276, -1.935], [-0.344, -1.769], [-0.413, -1.602], [-0.482, -1.436], [-0.551, -1.27], [-0.62, -1.103], [-0.689, -0.937], [-0.758, -0.771], [-0.827, -0.604], [-0.895, -0.438], [-0.895, -0.258], [-0.895, -0.078], [-0.895, 0.102], [-0.895, 0.282], [-0.895, 0.462], [-0.895, 0.642], [-0.729, 0.711], [-0.563, 0.78], [-0.397, 0.849], [-0.23, 0.917], [-0.064, 0.986], [0.102, 1.055], [0.269, 1.124], [0.435, 1.193], [0.601, 1.262], [0.768, 1.331], [0.934, 1.4], [1.1, 1.468], [1.266, 1.537], [1.433, 1.606], [1.599, 1.675]]}]}, {"color": "blue", "target": [-1.8, 2.0], "reg": {"success": false, "traj": [[0.0, -2.6], [-0.004, -2.448], [-0.011, -2.297], [-0.024, -2.147], [-0.041, -1.997], [-0.06, -1.848], [-0.075, -1.698], [-0.086, -1.547], [-0.089, -1.395], [-0.084, -1.241], [-0.073, -1.083], [-0.064, -0.923], [-0.058, -0.758], [-0.055, -0.59], [-0.056, -0.418], [-0.059, -0.243], [-0.067, -0.065], [-0.085, 0.114], [-0.111, 0.291], [-0.15, 0.459], [-0.202, 0.615], [-0.274, 0.761], [-0.367, 0.896], [-0.474, 1.018], [-0.585, 1.135], [-0.703, 1.249], [-0.824, 1.357], [-0.947, 1.465], [-1.076, 1.567], [-1.218, 1.662], [-1.367, 1.753], [-1.52, 1.842]]}, "gen": [{"success": true, "traj": [[0.0, -2.6], [0.069, -2.434], [0.138, -2.267], [0.207, -2.101], [0.276, -1.935], [0.344, -1.769], [0.413, -1.602], [0.482, -1.436], [0.551, -1.27], [0.62, -1.103], [0.689, -0.937], [0.758, -0.771], [0.827, -0.604], [0.895, -0.438], [0.964, -0.272], [0.964, -0.092], [0.964, 0.088], [0.964, 0.268], [0.964, 0.448], [0.964, 0.628], [0.964, 0.808], [0.798, 0.877], [0.632, 0.946], [0.465, 1.015], [0.299, 1.084], [0.133, 1.153], [-0.033, 1.221], [-0.2, 1.29], [-0.366, 1.359], [-0.532, 1.428], [-0.699, 1.497], [-0.865, 1.566], [-1.031, 1.635], [-1.198, 1.704], [-1.364, 1.773], [-1.53, 1.841]]}, {"success": true, "traj": [[0.0, -2.6], [0.069, -2.434], [0.138, -2.267], [0.207, -2.101], [0.276, -1.935], [0.344, -1.769], [0.413, -1.602], [0.482, -1.436], [0.551, -1.27], [0.62, -1.103], [0.689, -0.937], [0.758, -0.771], [0.827, -0.604], [0.895, -0.438], [0.895, -0.258], [0.895, -0.078], [0.895, 0.102], [0.895, 0.282], [0.895, 0.462], [0.895, 0.642], [0.729, 0.711], [0.563, 0.78], [0.397, 0.849], [0.23, 0.917], [0.064, 0.986], [-0.102, 1.055], [-0.269, 1.124], [-0.435, 1.193], [-0.601, 1.262], [-0.768, 1.331], [-0.934, 1.4], [-1.1, 1.468], [-1.266, 1.537], [-1.433, 1.606], [-1.599, 1.675]]}, {"success": false, "traj": [[0.0, -2.6], [-0.127, -2.473], [-0.255, -2.345], [-0.382, -2.218], [-0.509, -2.091], [-0.636, -1.964], [-0.764, -1.836], [-0.891, -1.709], [-1.018, -1.582], [-1.087, -1.415], [-1.156, -1.249], [-1.225, -1.083], [-1.294, -0.917], [-1.363, -0.75], [-1.432, -0.584], [-1.5, -0.418], [-1.569, -0.251], [-1.638, -0.085], [-1.707, 0.081], [-1.776, 0.248], [-1.845, 0.414], [-1.914, 0.58], [-1.983, 0.746], [-2.051, 0.913], [-2.12, 1.079], [-2.189, 1.245], [-2.258, 1.412], [-2.327, 1.578], [-2.396, 1.744], [-2.465, 1.91], [-2.534, 2.077], [-2.603, 2.243], [-2.671, 2.409], [-2.74, 2.576], [-2.809, 2.742], [-2.878, 2.908], [-2.947, 3.075], [-3.016, 3.241], [-3.085, 3.407], [-3.154, 3.573], [-3.222, 3.74], [-3.291, 3.906], [-3.222, 4.072], [-3.154, 4.239], [-3.085, 4.405], [-3.016, 4.571], [-2.947, 4.738], [-2.878, 4.904], [-2.809, 5.07], [-2.74, 5.236], [-2.671, 5.403], [-2.603, 5.569], [-2.534, 5.735], [-2.465, 5.902], [-2.396, 6.068], [-2.327, 6.234], [-2.258, 6.401], [-2.189, 6.567], [-2.12, 6.733], [-2.051, 6.899], [-1.983, 7.066], [-1.914, 7.232], [-1.845, 7.398], [-1.776, 7.565], [-1.707, 7.731], [-1.638, 7.897], [-1.569, 8.064], [-1.5, 8.23], [-1.432, 8.396], [-1.363, 8.562], [-1.294, 8.729]]}]}, {"color": "green", "target": [0.0, 2.7], "reg": {"success": false, "traj": [[0.0, -2.6], [0.009, -2.449], [0.023, -2.297], [0.046, -2.145], [0.088, -1.992], [0.146, -1.837], [0.204, -1.682], [0.262, -1.527], [0.319, -1.37], [0.377, -1.211], [0.433, -1.053], [0.486, -0.892], [0.534, -0.73], [0.58, -0.569], [0.623, -0.41], [0.663, -0.251], [0.699, -0.092], [0.73, 0.068], [0.755, 0.228], [0.762, 0.391], [0.751, 0.552], [0.722, 0.711], [0.683, 0.869], [0.637, 1.027], [0.586, 1.187], [0.531, 1.348], [0.474, 1.507], [0.41, 1.666], [0.345, 1.822], [0.281, 1.98], [0.218, 2.139], [0.158, 2.3], [0.1, 2.458]]}, "gen": [{"success": true, "traj": [[0.0, -2.6], [-0.069, -2.434], [-0.138, -2.267], [-0.207, -2.101], [-0.276, -1.935], [-0.344, -1.769], [-0.413, -1.602], [-0.482, -1.436], [-0.551, -1.27], [-0.62, -1.103], [-0.689, -0.937], [-0.758, -0.771], [-0.827, -0.604], [-0.895, -0.438], [-0.964, -0.272], [-1.033, -0.106], [-1.102, 0.061], [-1.033, 0.227], [-0.964, 0.393], [-0.895, 0.56], [-0.827, 0.726], [-0.758, 0.892], [-0.689, 1.059], [-0.62, 1.225], [-0.551, 1.391], [-0.482, 1.557], [-0.413, 1.724], [-0.344, 1.89], [-0.276, 2.056], [-0.207, 2.223], [-0.138, 2.389]]}, {"success": true, "traj": [[0.0, -2.6], [0.069, -2.434], [0.138, -2.267], [0.207, -2.101], [0.276, -1.935], [0.344, -1.769], [0.413, -1.602], [0.482, -1.436], [0.551, -1.27], [0.62, -1.103], [0.689, -0.937], [0.758, -0.771], [0.827, -0.604], [0.895, -0.438], [0.964, -0.272], [1.033, -0.106], [1.102, 0.061], [1.171, 0.227], [1.102, 0.393], [1.033, 0.56], [0.964, 0.726], [0.895, 0.892], [0.827, 1.059], [0.758, 1.225], [0.689, 1.391], [0.62, 1.557], [0.551, 1.724], [0.482, 1.89], [0.413, 2.056], [0.344, 2.223], [0.276, 2.389], [0.207, 2.555]]}, {"success": true, "traj": [[0.0, -2.6], [0.069, -2.434], [0.138, -2.267], [0.207, -2.101], [0.276, -1.935], [0.344, -1.769], [0.413, -1.602], [0.482, -1.436], [0.551, -1.27], [0.62, -1.103], [0.689, -0.937], [0.758, -0.771], [0.827, -0.604], [0.895, -0.438], [0.964, -0.272], [1.033, -0.106], [1.102, 0.061], [1.033, 0.227], [0.964, 0.393], [0.895, 0.56], [0.827, 0.726], [0.758, 0.892], [0.689, 1.059], [0.62, 1.225], [0.551, 1.391], [0.482, 1.557], [0.413, 1.724], [0.344, 1.89], [0.276, 2.056], [0.207, 2.223], [0.138, 2.389]]}]}]};
+(function(){
+  if(!DATA){return;}
+  var cv=document.getElementById('v_canvas'),ctx=cv.getContext('2d'),W=320;
+  var TCOL={red:'#b5651d',blue:'#2f6f8f',green:'#3d7d55'};
+  var S={goal:2,head:'gen',traj:null,anim:null,step:0,gi:0};
+  var lo=-3.2,hi=3.2;
+  function sx(x){return (x-lo)/(hi-lo)*W;} function sy(y){return (hi-y)/(hi-lo)*W;}
+  // goal buttons
+  var gb=document.getElementById('v_goal');
+  DATA.colors.forEach(function(c,i){var b=document.createElement('button');b.textContent=c;if(i===2)b.className='on';
+    b.style.color=TCOL[c];b.addEventListener('click',function(){S.goal=i;gb.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');reset();});gb.appendChild(b);});
+  var hb=document.getElementById('v_head');hb.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){hb.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');S.head=b.getAttribute('data-h');reset();});});
+  function drawBase(){ctx.clearRect(0,0,W,W);
+    var O=DATA.obstacle,R=DATA.obs_radius;
+    ctx.beginPath();ctx.arc(sx(O[0]),sy(O[1]),R/(hi-lo)*W,0,7);ctx.fillStyle='#e6d3c4';ctx.fill();ctx.strokeStyle='#b5651d';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='#9a5b1e';ctx.font='10px monospace';ctx.textAlign='center';ctx.fillText('obstacle',sx(O[0]),sy(O[1])+3);
+    DATA.targets.forEach(function(t,i){ctx.beginPath();ctx.arc(sx(t[0]),sy(t[1]),8,0,7);ctx.globalAlpha=(i===S.goal)?1:0.3;ctx.fillStyle=TCOL[DATA.colors[i]];ctx.fill();ctx.globalAlpha=1;});
+    var st=DATA.start;ctx.beginPath();ctx.arc(sx(st[0]),sy(st[1]),4,0,7);ctx.fillStyle='#333';ctx.fill();}
+  function pickTraj(){var ex=DATA.examples[S.goal];
+    if(S.head==='reg')return {traj:ex.reg.traj,success:ex.reg.success};
+    var g=ex.gen[S.gi%ex.gen.length];S.gi++;return {traj:g.traj,success:g.success};}
+  function reset(){if(S.anim){cancelAnimationFrame(S.anim);S.anim=null;}drawBase();document.getElementById('v_status').innerHTML='Pick a target and press Drive.';}
+  function drive(){if(S.anim)cancelAnimationFrame(S.anim);
+    var r=pickTraj();var tr=r.traj;var k=0;var col=(S.head==='reg')?'#b5651d':'#0E7C86';
+    document.getElementById('v_status').innerHTML='Driving ('+(S.head==='reg'?'regression':'generative')+')...';
+    function frame(){drawBase();
+      ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.globalAlpha=0.9;
+      for(var i=0;i<=k && i<tr.length;i++){var p=tr[i];if(i===0)ctx.moveTo(sx(p[0]),sy(p[1]));else ctx.lineTo(sx(p[0]),sy(p[1]));}
+      ctx.stroke();ctx.globalAlpha=1;
+      var cp=tr[Math.min(k,tr.length-1)];ctx.beginPath();ctx.arc(sx(cp[0]),sy(cp[1]),5,0,7);ctx.fillStyle=col;ctx.fill();
+      k++;
+      if(k<tr.length){S.anim=requestAnimationFrame(frame);}
+      else{S.anim=null;document.getElementById('v_status').innerHTML=r.success
+        ?'<span style="color:#0E7C86">&#10003; reached the '+DATA.colors[S.goal]+' target</span>'
+        :'<span style="color:#b5651d">&#10007; drove into the obstacle</span>';}
+    }
+    frame();}
+  document.getElementById('v_drive').addEventListener('click',drive);
+  document.getElementById('v_reset').addEventListener('click',reset);
+  reset();
+})();
+</script>
+</body></html>

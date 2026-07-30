@@ -1,0 +1,147 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Why vision-language-action — perception into a plan, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:30px 0 8px;font-size:21px}
+.doc h3{margin:20px 0 6px;font-size:17px}
+.mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+.mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.wcard{border:1px solid var(--line);border-radius:10px;background:#fbfcfc;padding:8px}
+.wcard .cap{font-family:var(--mono);font-size:11.5px;color:var(--graphite);text-align:center;margin-top:4px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Vision-language-action · first principles · seeing and hearing into doing</div>
+<h1>Why vision-language-action — turning perception into a plan of action</h1>
+<p>A vision-language-action model is the endpoint of everything else on this site: it takes what a robot
+<em>sees</em> and what it is <em>told</em>, and produces what it <em>does</em>. This page is the plain
+story — why acting is a harder target than labelling, the one idea that makes learned control work
+(don't average your options — commit to one), a real run where you can watch a naive policy drive itself
+into a wall, how real VLAs are built, and how the vision world is bringing all this to cars.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#build">How real VLAs work</a><a href="#cvpr">The vision angle</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2 id="problem">1 · The problem — labelling is not the point; acting is</h2>
+<p>Most of machine vision ends at a label: this is a cat, that pixel is three metres away. A robot cannot
+stop there. It has to <em>do</em> something — pick up the mug, turn left at the door, hand over the tool —
+and it is usually told what to do in ordinary language. So the real task is a mapping of a different kind:
+from <em>what I see</em> and <em>what I was told</em> to <em>what I do next</em>. That is a
+vision-language-action model.</p>
+<div class="fp"><b>The problem, stated once:</b> turn a picture and an instruction into an <em>action</em> —
+one that has to be committed in the physical world, where a wrong move is a wrong move, and where, awkwardly,
+there is usually more than one right answer.</div>
+<p>That last clause is the whole difficulty. A label has one correct value. An action often has many: to get
+around an obstacle you can go left or right, and both are fine. This is where the naive approach quietly
+breaks.</p>
+
+<h2 id="reframe">2 · The reframe — don't average your options; sample one</h2>
+<p>The obvious way to learn control is to copy demonstrations: collect examples of an expert doing the task
+and train the policy, by least-squares, to output the expert's action. It sounds right and it fails in a
+specific, teachable way. If half the demonstrations go left around an obstacle and half go right,
+least-squares fits the <em>average</em> — and the average of &ldquo;go left&rdquo; and &ldquo;go right&rdquo;
+is &ldquo;go straight,&rdquo; directly into the thing you were avoiding.</p>
+<div class="fp"><b>The fix: predict a <em>distribution</em> over actions, then draw one sample.</b> Instead of
+emitting a single averaged action, the policy represents the whole set of good actions — a bump over
+&ldquo;left&rdquo; and a bump over &ldquo;right&rdquo; — and samples one, committing to a coherent choice.
+This is exactly why modern VLAs put a <em>generative</em> head on top (a diffusion policy, or a tokenized
+action predicted like words), never a plain regressor. Averaging is the enemy; sampling is the cure.</p>
+<div class="eq">action ~ p( action | what I see, what I was told )
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--graphite)"># sample a coherent action from the distribution — don't average the modes</span></div>
+
+<h2 id="run">3 · Seen on a real run</h2>
+
+<div class="fp"><b>Every number below is measured.</b> A 2D world: an agent (black dot) must reach the
+target named by the instruction, but an <b>obstacle</b> sits in the way. The expert demonstrations go
+around it on a <em>random</em> side — so for the same situation, both &ldquo;left&rdquo; and
+&ldquo;right&rdquo; are correct. We train two policies on the same demos and watch them drive to the
+<b style="color:#3d7d55">green</b> target.</div>
+<div class="two">
+<div class="wcard"><svg viewBox="0 0 280 280" width="100%" style="max-width:280px;display:block;margin:0 auto"><rect width="280" height="280" fill="#fbfcfc"/><circle cx="140.0" cy="140.0" r="35.0" fill="#e6d3c4" stroke="#b5651d" stroke-width="1.5"/><text x="140.0" y="144.0" font-size="10" font-family="monospace" fill="#9a5b1e" text-anchor="middle">obstacle</text><circle cx="218.8" cy="52.5" r="8" fill="#b5651d" fill-opacity="0.35"/><circle cx="61.2" cy="52.5" r="8" fill="#2f6f8f" fill-opacity="0.35"/><circle cx="140.0" cy="21.9" r="8" fill="#3d7d55" fill-opacity="1"/><circle cx="140.0" cy="253.8" r="4" fill="#333"/><polyline points="140.0,253.8 140.4,247.1 141.0,240.5 142.0,233.8 143.9,227.2 146.4,220.4 148.9,213.6 151.5,206.8 154.0,199.9 156.5,193.0 158.9,186.1 161.3,179.0 163.4,171.9 165.4,164.9 167.3,157.9 169.0,151.0 170.6,144.0 171.9,137.0 173.0,130.0 173.3,122.9 172.9,115.9 171.6,108.9 169.9,102.0 167.9,95.1 165.6,88.1 163.2,81.0 160.7,74.1 157.9,67.1 155.1,60.3 152.3,53.4 149.5,46.4 146.9,39.4 144.4,32.5" fill="none" stroke="#b5651d" stroke-width="3" stroke-opacity="0.85"/></svg><div class="cap">regression policy — averages left &amp; right into &ldquo;straight&rdquo; &middot; drives into the obstacle</div></div>
+<div class="wcard"><svg viewBox="0 0 280 280" width="100%" style="max-width:280px;display:block;margin:0 auto"><rect width="280" height="280" fill="#fbfcfc"/><circle cx="140.0" cy="140.0" r="35.0" fill="#e6d3c4" stroke="#b5651d" stroke-width="1.5"/><text x="140.0" y="144.0" font-size="10" font-family="monospace" fill="#9a5b1e" text-anchor="middle">obstacle</text><circle cx="218.8" cy="52.5" r="8" fill="#b5651d" fill-opacity="0.35"/><circle cx="61.2" cy="52.5" r="8" fill="#2f6f8f" fill-opacity="0.35"/><circle cx="140.0" cy="21.9" r="8" fill="#3d7d55" fill-opacity="1"/><circle cx="140.0" cy="253.8" r="4" fill="#333"/><polyline points="140.0,253.8 137.0,246.5 134.0,239.2 130.9,231.9 127.9,224.7 125.0,217.4 121.9,210.1 118.9,202.8 115.9,195.6 112.9,188.3 109.9,181.0 106.8,173.7 103.8,166.4 100.8,159.2 97.8,151.9 94.8,144.6 91.8,137.3 94.8,130.1 97.8,122.8 100.8,115.5 103.8,108.2 106.8,101.0 109.9,93.7 112.9,86.4 115.9,79.1 118.9,71.9 121.9,64.6 125.0,57.3 127.9,50.1 130.9,42.7 134.0,35.5" fill="none" stroke="#0E7C86" stroke-width="2" stroke-opacity="0.85"/><polyline points="140.0,253.8 143.0,246.5 146.0,239.2 149.1,231.9 152.1,224.7 155.0,217.4 158.1,210.1 161.1,202.8 164.1,195.6 167.1,188.3 170.1,181.0 173.2,173.7 176.2,166.4 179.2,159.2 182.2,151.9 185.2,144.6 188.2,137.3 191.2,130.1 188.2,122.8 185.2,115.5 182.2,108.2 179.2,101.0 176.2,93.7 173.2,86.4 170.1,79.1 167.1,71.9 164.1,64.6 161.1,57.3 158.1,50.1 155.0,42.7 152.1,35.5 149.1,28.2" fill="none" stroke="#0E7C86" stroke-width="2" stroke-opacity="0.85"/><polyline points="140.0,253.8 143.0,246.5 146.0,239.2 149.1,231.9 152.1,224.7 155.0,217.4 158.1,210.1 161.1,202.8 164.1,195.6 167.1,188.3 170.1,181.0 173.2,173.7 176.2,166.4 179.2,159.2 182.2,151.9 185.2,144.6 188.2,137.3 185.2,130.1 182.2,122.8 179.2,115.5 176.2,108.2 173.2,101.0 170.1,93.7 167.1,86.4 164.1,79.1 161.1,71.9 158.1,64.6 155.0,57.3 152.1,50.1 149.1,42.7 146.0,35.5" fill="none" stroke="#0E7C86" stroke-width="2" stroke-opacity="0.85"/></svg><div class="cap">generative policy — 3 samples, each commits to a side &middot; reaches the target</div></div>
+</div>
+<p>The numbers are stark. Trained to imitate the very same demonstrations, the <b>regression</b> policy
+succeeds <b>0%</b> of the time; the <b>generative</b> policy succeeds
+<b>72%</b>. The regression policy isn't undertrained — it learned <em>exactly</em>
+the average of the demonstrations, and the average of two good detours is the one move that fails.</p>
+<h3>Does it actually read the instruction?</h3>
+<p>Easy to fake: a policy could ignore the words and just head somewhere. So we scramble the language —
+tell it &ldquo;red&rdquo; but score it on reaching blue. Success collapses from
+<b>72%</b> to <b>16%</b> (about chance across three
+targets). The drop <em>is</em> the proof: the policy genuinely grounds the instruction to a choice of
+action, rather than steering by habit.</p>
+
+
+<h2 id="build">4 · How real vision-language-action models are built</h2>
+<p>Scale up the toy and you have the real thing. A modern VLA is three parts. A <b>backbone</b> — usually a
+pretrained vision-language model — turns the camera image and the instruction into a shared understanding;
+because these backbones are huge, they are often adapted to a robot cheaply with the same low-rank
+<a href="mixture-of-lora-why.html">LoRA adapters</a> from the first theme on this site. A <b>generative
+action head</b> — a <a href="diffusion-why.html">diffusion</a> policy or an autoregressive action tokenizer —
+turns that understanding into a committed action, and typically emits a short <em>chunk</em> of future
+actions at once to stay smooth and fight compounding error. And a mountain of <b>demonstration data</b>,
+increasingly pooled across many robot bodies, so one policy generalizes. Seeing (perception), language
+(the instruction), and action (a generative controller) — three of this site's themes stacked into one
+system.</p>
+
+<h2 id="cvpr">5 · The surprise — the vision world is bringing VLA to the road</h2>
+<p>Vision-language-action is robotics-native, but it did not stay there. The clearest crossover is
+<b>self-driving</b>: end-to-end driving is a VLA in disguise — perceive the scene, and output a driving
+action or trajectory — and the vision community brings things robotics often lacks: enormous driving
+datasets, powerful perception backbones, and <a href="diffusion-why.html">world models</a> that imagine
+the future to plan against it. What it more often lacks is the other half — real hardware, closed-loop
+control, and the messy multimodality of physical action.</p>
+<div class="fp"><b>Two halves of one problem.</b> Robotics has the bodies and the closed loop; vision has
+the perception and the scale. Vision-language-action is where they meet — and it is the natural capstone,
+because it needs every other idea on this site at once: a backbone that sees, a way to read language, a
+generative head to act, adapters to specialize, and robustness so the action can be trusted. The
+<a href="vla-in-the-wild.html">in-the-wild page</a> lays out both sides.</p>
+
+<div class="fp"><b>Where to go from here.</b> Drive the toy VLA yourself in the
+<a href="vla-playground.html">action sandbox</a> — pick an instruction, switch the action head between
+regression and generative, and watch the regressor steer into the wall while the generative policy goes
+around. Then read <a href="vla-in-the-wild.html">how the field actually builds VLAs</a> across robotics and
+vision — the action head, grounding, the backbone, and driving.</p>
+
+<p style="margin-top:16px"><a href="vla-playground.html">→ The action sandbox</a> ·
+<a href="vla-in-the-wild.html">→ In the wild</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles vision-language-action, grounded in a real Colab-GPU run (a toy 2D language-conditioned policy) · the regression-vs-generative gap (0% vs 72%) and the grounding collapse are measured · CC0.</footer></div>
+</body></html>
