@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Autoregressive temperature sandbox</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.doc h2{margin:26px 0 8px;font-size:20px}
+.pwrap{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper);margin:16px 0}
+.imgs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;min-height:120px;align-items:center}
+.imgs img{border:1px solid var(--line);border-radius:8px;image-rendering:pixelated;width:110px}
+.ctl{margin:16px 0}
+.ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
+.ctl input[type=range]{width:100%;max-width:520px}
+.meter{max-width:520px;height:20px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(90deg,#cfe3e6,#e6c9a8);position:relative;margin:12px auto 0}
+.meter .real{position:absolute;top:-4px;width:2px;height:28px;background:#111}
+.meter .now{position:absolute;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translateX(-50%);border:2px solid #fff}
+.read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:12px;text-align:center;line-height:1.7}
+.read b{color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Autoregressive generation · the temperature sandbox</div>
+<h1>Turn the boldness dial</h1>
+<p>The <a href="ar-why.html">why page</a> trains a tiny GPT to write little images pixel by pixel. Here are its
+real samples. The one knob at generation time is <em>temperature</em> — how boldly the model picks each next
+pixel. Slide it and watch the same model swing from a bland, repetitive average, through recognizable garments,
+to pure noise.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="ar-why.html">The big picture</a><a href="ar-in-the-wild.html">In the wild</a><a href="ar-deep-reads.html">The papers</a></div></nav>
+<div class="wrap"><article class="doc">
+<div class="pwrap">
+  <div class="imgs" id="imgs"></div>
+  <div class="ctl"><label for="sT">Temperature — <span id="vT" style="font-family:var(--mono);color:var(--accent)"></span></label>
+    <input id="sT" type="range" min="0" max="3" step="1" value="2"></div>
+  <div class="meter" id="meter"><div class="real" id="realmark" title="real images"></div><div class="now" id="nowmark"></div></div>
+  <div style="font-family:var(--mono);font-size:10.5px;color:var(--graphite);text-align:center;margin-top:4px">detail &mdash; low (bland) &rarr; high (noisy) &middot; the black line is real images</div>
+  <div class="read" id="read"></div>
+</div>
+<div class="fp"><b>What to notice.</b> At <b>low temperature</b> the model plays it safe and its samples collapse
+toward a bland, repetitive average — very little detail. At <b>high temperature</b> it gets reckless and the
+picture dissolves toward noise — more detail than a real image, but the wrong kind. The sweet spot sits near the
+black line, where the samples have about as much structure as real garments. Boldness buys variety and costs
+coherence; there is no free setting.</div>
+<p style="margin-top:14px"><a href="ar-why.html">→ Why it works</a> ·
+<a href="ar-in-the-wild.html">→ How the field uses it</a> ·
+<a href="ar-deep-reads.html">→ The papers</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>Real pixel-GPT samples from a Colab-GPU run, at four sampling temperatures · CC0.</footer></div>
+
+<script>
+var DATA = {"temps": [{"temp": 0.5, "sharpness": 0.047, "samples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABs0lEQVR4nO3c3W2DMBRA4abqKLALDAO7IIaBXWCYvPtGPdYtP2l0vkdUAjqyYtk0PL4u1HVdcWQcRzxr27biyDzPxZF93/9yY7/4PulzP4aBgIGAgYCBwM95H900TXGk73v8m9wnO4vdxkDAQMBAwEDgkTstziPDMBRH2rbFs2pmn5qz4nptWZbiyLqueK3IEQQMBAwEDAQMBJKz2DRNxZG4zrpXnOni7mXNHOoIAgYCBgIGAgYCVTuKcTUU11nvJt5zbiXoCAIGAgYCBgIGAsnnYrnnWfeKq8WaPUZHEDAQMBAwEDAQSK7F/qPc+tERBAwEDAQMBAwEDAQMBAwEDAQMBAwEqtZi7/8ULKfmSZkjCBgIGAgYCBgIHLajGL//r9yHrLl67n4cQcBAwEDAQMBA4LC1WPzF1pWz2HlXdwQBAwEDAQMBA4ET391xr6PWho4gYCBgIGAgYCDwYhb7jP9IPGp15ggCBgIGAgYCBgIGAgYCBgIGAgYCBgLJHcW4X3fe+3hr1Fw9d4eOIGAgYCBgIGAg8GIWi9/28c26UdzBu3Jei1ePfAPVKQwEDAQMBAwEnqB3X/CcOCsBAAAAAElFTkSuQmCC", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAAvklEQVR4nO3YQQ6CMABEUfAs7f2XXIbDuDVWM9i0CvG9JYlAfppMcFkAAAAAAAAAADiv9bePL6V0/Grf9+Fv8s7ta0+6KIECgQKBAoGCiSvWLlTfZtVan65s2zbkfdo1bK84QYFAgUCBQIFAQeeK9e3RqDvP+xazYh8TKBAoECgQKFjn7dH5Hfk6c4ICgQKBAoECgYK/XrEjnKBAoECgQKBAoODFP4p27ZETFAgUCBQIFAgEAAAAAAAAAMCF3QFMlhaHcLgyhwAAAABJRU5ErkJggg==", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABfUlEQVR4nO3cQWrDQAxA0bbkKPZd7BPbd7EPk320+GLQqDH8tzQlLh+ByMTJ70+jZVnwSsZ5nhX/Tspf250eykDAQMBAwEDg1XmzuLPu+8Yr27YNvE4VJwgYCBgIGAgYCLRusSizfeLfuMW+iIGAgYCBgIHAxC02dlr4bZwgYCBgIGAgYCDwgC2WeS82792ZEwQMBAwEDAQMBFpPFOed+83jBAEDAQMBAwEDgYlbbF3XjyudzxZWcYKAgYCBgIGAgUDZFsuc8s079/NE8d8YCBgIGAgYCEzcYk88P4ycIGAgYCBgIGAgULbF4vlhRtXui3fPfBMtwwkCBgIGAgYCBgKtzyju+952rypOEDAQMBAwEDAQGNxiY78l1fkNsqp3eU4QMBAwEDAQMBAwEDAQMBAwEDAQMBBofdL+uq55t5vECQIGAgYCBgIGAq3feh57AmTMcRwlr+MEAQMBAwEDAQOBwS0WP2OKWyPzy1FVqp5IjJwgYCBgIGAgYCDwBjOBTL3CYXZrAAAAAElFTkSuQmCC"]}, {"temp": 0.8, "sharpness": 0.064, "samples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAAyUlEQVR4nO3YQYqDQBBA0WTIUfQu3n/tYWafXvweSXQS3luKSPNpKMrbDQAAAAAAAACA/+t+9QGutCzL05N935+e/Jx1mE8lUBAoCBQECo9XfWicCO8zzprRq87jBgWBgkBBoCBQOLiLbduW74yzZmb3uZZd7M8ECgIFgYJA4eAUu3Yenbn3uUFBoCBQECgIFKb+KI5T48wpNjOzZva+Y9ygIFAQKAgUBAqPmQk1Wtc13/mO7cwNCgIFgYJAQSAAAAAAAAAAAD7YL4VVHkOWDBIPAAAAAElFTkSuQmCC", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAA9klEQVR4nO3ZUQqCQBSGUYuWootxfS7GxehievcG/yRjRZzzOGDJx8Dl4jAAAAAAAAAAAPC7bt9+gaNxHOPJvu/xpJf7Rb/7NwQKBAoECgQKPjrF6jya5zmeVNu2HU6WZTmctMy1+j6VGxQIFAgUCBQIFHSbYi07VMuEOrdVtexr555ygwKBAoECgQKBglvLPlLVp6Zpik+1TLFqXdf4772YYm8TKBAoECgQKHjUyXLdjDjn3OzrxQ0KBAoECgQKBApe7GIte9Ynt6Gqfhe7jhsUCBQIFAgUCBQ0fRf7te2sRa93doMCgQKBAoECgQAAAAAAAIDhCVDoKx0POguOAAAAAElFTkSuQmCC", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAA7klEQVR4nO3ZwWnDQBCGUTu4FKkXqT4Vo2KkYnLITWP4J4nkxPDecRHs8rEwrH27AQAAAAAAAADwf93/+gBHwzDEb/Z9f8FJvny8bKc3JVAgUCBQIFBw4RSr86iujOMYv6kza1mWX5/u+V6VGxQIFAgUCBQIFJw2xaZpOqzM83xYqTPrLNu2xW86u6/relhxgwKBAoECgQKBgidT7Kw31HUzq6PzzqpMsW8TKBAoECgQKHh03lAdZ82sn02f67hBgUCBQIFAgUDBvfPyqjpvsY76n1fnt8Hr1PO4QYFAgUCBQIFAAAAAAAAAAAC8sU9mXyGmGAgOuwAAAABJRU5ErkJggg=="]}, {"temp": 1.0, "sharpness": 0.084, "samples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABRElEQVR4nO3c0YnDMBQAwctxpbj/ilzMFaCPFUYydpgpQAmL4CHF8efnRsdxLFnnPM8l68z4ve2TXkqgIFAQKAgUPvuWXjWzZuyba3ZQECgIFAQKAoWLU2zfhJqZRzOfvmqu2UFBoCBQECgIFP5WLTROlmtzZGZCXZuh176PHRQECgIFgYJA4XFnsX1MsS0ECgIFgYJAYdlZbLTqdDaz8siN4k0ECgIFgYJA4XE3ik9jBwWBgkBBoCBQ2HgW22ecj/tuOO2gIFAQKAgUBAoCBYGCQEGgIFAQKEydxd74LMfo2p2nHRQECgIFgYJAQaAgUBAoCBQECgKFqSftv+MsNnIWW0CgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQOGV/3q+kx0UBAoCBYGCQGHZO+2f9tuZd3fcRKAgUBAoCBT+AZzsLp+dmZVxAAAAAElFTkSuQmCC", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABvUlEQVR4nO3b4WmEQBBA4SSkFO1Fi9FmLEZ78YrJfwfylsmsHuF9PyXxjsfCsLr3+XGjZVkuV4ZhwP8ax/FyZV3Xy5XX6/WXL/aLr073/TcMBAwEDAQMBL7v/LA4s+Z5LrmPU+wxBgIGAgYCBgIdp9g0TZcrcVeVE2dfnGJVc80VBAwEDAQMBAwEOk6xqpnVcud+uzNXEDAQMBAwEDAQ6DjFck8LoziP4syKc+04jpJPdwUBAwEDAQMBA4GyKRYnS8vJjdydc3+T4woCBgIGAgYCBgK3nu5ose/75UrVni7HFQQMBAwEDAQMBDruxVrEmZV7n9XvTZkrCBgIGAgYCBgIPLwXi1Ps3biCgIGAgYCBgIFA2RTLnUisOknoe7HHGAgYCBgIGAjc+kQx9/yw5YxiP64gYCBgIGAgYCCQnGItZ92jeE5j27bLlTizzvPET2/5hr4X68JAwEDAQMBA4OHTHblZEydmnHRVvyBzBQEDAQMBAwEDgbc7aR/l9lBVTx1dQcBAwEDAQMBAoGyK3fn2Ku68+nEFAQMBAwEDAQOBsinW8vYqt6tq+R10/PSqM/yuIGAgYCBgIGAg8AME1mKXalSGtwAAAABJRU5ErkJggg==", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABy0lEQVR4nO3c0W3CMBRG4VJ1lLBLGAZ2IQxDdgnD8O7/4VxZNkjV+R6tEqojS1dO0p5+BlmWpVm5XC7NynEczcrr9eq48vl8blaez2fHlSt+h1zlHzMQMBAwEDAQOI260P1+b1Zyis2TM+t2u+HPVLiDgIGAgYCBgIHAX9/HKievT8rfJ1ecYlMYCBgIGAgYCBgIGAgYCBgIGAgYCAw7i6U8+1Q+VVG5cp4N933v+C53EDAQMBAwEDAQ6JxiFflkatu2ZqVvruWVr9drx3Uq3EHAQMBAwEDAQKBzilXeEkz5jmKqzLXKM688i/U9KXMHAQMBAwEDAQOBYXcUc671zaOK/K553EHAQMBAwEDAQOCjdxRHPRfL+4ePx2PIlZM7CBgIGAgYCBgITJxi31W5e1nhDgIGAgYCBgIGAhOn2KiTV5985uXfi01hIGAgYCBgIDDs7Y7vqkzMdV2blcq79+4gYCBgIGAgYCBQmmKVGZF38PKtxco7IZU7gXmqqnwqv8spNoCBgIGAgYCBwLA7ijlZ5r1xkeb9Ryx3EDAQMBAwEDAQKE2xnFB5zqr8vdg8faezCncQMBAwEDAQMBAwEDAQMBAwEDAQMBB4AxRdaxsjJYXuAAAAAElFTkSuQmCC"]}, {"temp": 1.3, "sharpness": 0.11, "samples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABrElEQVR4nO3cwW2EMBBA0SRKKdALFAPFQDHQCxSTu+fwZ1nsRdF/RytBqy9LIwO731/VDMNQrMzzXKwcx4HX6fu+WFmWpVjZ9/3FT5f1U+m6/4aBgIGAgYCBwG+9S4/jWKx0XYcrGXGuOcU+xkDAQMBAwEDAQMBAwEDAQMBAwECg4lksOs+zWMmcxeJ/teQOAgYCBgIGAgYCFadYnD5xJd51jK7ddbyLOwgYCBgIGAgYCFScYvHNjfg8K/5NZtJl3gm5izsIGAgYCBgIGAg0vaOYOXll7h/6dseDGAgYCBgIGAg0nWJRvFuYmXQtuYOAgYCBgIGAgUDFKRZPTJ99wnWNOwgYCBgIGAgYCDzuHcXM07SW3EHAQMBAwEDAQKDiFLvrG81xrsW7jtu2FSt3vZ/vDgIGAgYCBgIGAk3ftL92qsrMtXrcQcBAwEDAQMBAoOkvUEWZE5PfF3s0AwEDAQMBA4Gmz8We/0sdkTsIGAgYCBgIGAjcNsWuTajMt56naXrng73JHQQMBAwEDAQMBCqexeIbF3HSZebauq73frCXuIOAgYCBgIGAgcAfJ2Fcm+NzGP4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAB7klEQVR4nO2c0W3CQBAFQ5RSTC9QDC4GioFecDH8+0WaZXXGkTLzefLZ1mjF0533OHz9MU6n02rkfD7jrNvthtcsy9J4n+/GnH+FggAFAQoCFAT87Pv4SmYdj8fVyP1+xzv3MiuxggAFAQoCFAQoCDjs+/hpmlYjlfTpzephBQEKAhQEKAhQEPDRtVimz6g82i7XrCBAQYCCAAUBCgJ2TrFR99lu19EKAhQEKAhQEKAgYMMUq2TN8/ls3DnTJ7+m5Ug+yxQbgIIABQEKAhQEfDTFKt2GlWuSzMfK+zweD5xlBQEKAhQEKAhQEDAsxXqZVVmvVWYluaNY2WNMrCBAQYCCAAUBCgKGpVhlTy+p7ChmZmUe5d5g5ZpKT4gVBCgIUBCgIEBBQLPTPs95zfOMs3qdhJl0lYSqZFZlj9EKAhQEKAhQEKAgoLkW6/Wx56xMqEpXRuV71iisIEBBgIIABQEKAkoplmuW6/WK11SSLjMrZ1X+XWo7rCBAQYCCAAUBCgJ2/geqZLuT0T2sIEBBgIIABQEKApop1ju/POp0WI/KXmViBQEKAhQEKAhQEPDR82KVPo3L5bLdK63Irn57FN9GQYCCAAUBCgJ+6VGs7Onl73+udHqnupL8LtZbnWVfZWKKvY2CAAUBCgIUBLwAGtmV8RNASZYAAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAByklEQVR4nO3cUW6CQBRG4dK4FN0LLEYXg4uRvchifOc2OX8nU9DmfI+kAjmZeDMVHb4OdT6f8ciyLHvdzg++D7z2RzAQMBAwEDAQGI69fDLFqj3nmisIGAgYCBgIGAicjr6BrcvlsjnyeDzwVXX2reva5X5cQcBAwEDAQMBA4O2mWC/JXEv+xhUEDAQMBAwEDATe7j+Kvc5T59E0TXie+/2+OeIKAgYCBgIGAgYCH7kXqzPrdrvhq57PZ8OZXUHAQMBAwEDAQODtpljyf79EMrOSz85cQcBAwEDAQMBA4OAplsyRZK4lR+pTIsmkcwUBAwEDAQMBA4Fdp1jbrqrtVXX2tR1xBQEDAQMBAwEDgT+cYm3fBUvUp/ETdS/mM4odGAgYCBgIGAh0e0axbWYlu6F6nuRpw6rtflxBwEDAQMBAwEAg2osl7//X63VzpO592vZQ9er1efhxHBvOk3zD2hUEDAQMBAwEDAROyft/3fvU9//6pER9+r3+TT1znSPJb3ckknt2L/ZrBgIGAgYCBgJDr0+v2vZZdY60/UZincXJ5J3nGa/uCgIGAgYCBgIGArt+LpZ8Ctbr6gm/L9aBgYCBgIGAgSRJ+rdeFYp+tdEIcCsAAAAASUVORK5CYII="]}], "real": 0.08};
+(function(){
+  if(!DATA){return;}
+  var sT=document.getElementById('sT'), T=DATA.temps;
+  var allSharp = T.map(function(t){return t.sharpness;}).concat([DATA.real]);
+  var lo=Math.min.apply(null,allSharp)*0.8, hi=Math.max.apply(null,allSharp)*1.1;
+  function pct(s){ return Math.max(0,Math.min(100,(s-lo)/(hi-lo)*100)); }
+  document.getElementById('realmark').style.left = pct(DATA.real)+'%';
+  function render(){
+    var i=+sT.value, t=T[i];
+    document.getElementById('imgs').innerHTML = t.samples.map(function(u){return '<img src="'+u+'"/>';}).join('');
+    document.getElementById('vT').textContent = t.temp.toFixed(1);
+    document.getElementById('nowmark').style.left = pct(t.sharpness)+'%';
+    var verdict = t.sharpness < DATA.real*0.85 ? 'too smooth &mdash; a bland, repetitive average'
+                : t.sharpness > DATA.real*1.15 ? 'too noisy &mdash; dissolving past real detail'
+                : 'about right &mdash; roughly the detail of a real image';
+    document.getElementById('read').innerHTML='temperature <b>'+t.temp.toFixed(1)+'</b> &rarr; detail <b>'+t.sharpness.toFixed(3)+
+      '</b> (real &asymp; '+DATA.real.toFixed(3)+') &mdash; '+verdict;
+  }
+  sT.addEventListener('input',render); render();
+})();
+</script>
+</body></html>
