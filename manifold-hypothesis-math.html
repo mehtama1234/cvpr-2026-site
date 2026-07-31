@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The manifold hypothesis — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+</style></head><body>
+<header><div class="wrap"><div class="bug">The manifold hypothesis · the mathematics · first principles, no jargon</div>
+<h1>The manifold hypothesis — why it works, mathematically</h1>
+<p class="lead">Images look high-dimensional because the sensor has many pixels. The worlds that produce real images move on far fewer knobs.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+<h2>The problem, as a quantity</h2>
+<p>A megapixel image is a point in a million-dimensional box. Almost every point in that box is meaningless static. Real images occupy a tiny, curved subset because the physical world is not free to choose each pixel independently: objects have shape, lighting is smooth, cameras project 3D to 2D, materials obey constraints, and motion is continuous. The mathematical problem is to learn on that thin subset without pretending the whole pixel box is equally real.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Ambient dimension is not intrinsic dimension</h3><div class="eq">x ∈ ℝ^D,   x = f(u),   u ∈ ℝ^d,   d ≪ D</div><div class="why">The image has <code>D</code> coordinates because the sensor has <code>D</code> pixels, but the scene may be controlled by far fewer latent coordinates <code>u</code>: pose, identity, lighting, camera, deformation. The map <code>f</code> bends those few coordinates into pixel space. This is why learning from finite data is not hopeless. If the data truly filled <code>ℝ^D</code>, samples would be astronomically sparse. But if it lies near a <code>d</code>-dimensional surface, nearby examples can teach the local tangent directions. <b>Same primitive elsewhere:</b> this is Low rank and compression again — not in weights this time, but in the data itself.</div></div><div class="idea"><h3>Local linearity makes a curved world learnable</h3><div class="eq">f(u+δ) ≈ f(u) + J_f(u)·δ</div><div class="why">A curved surface can be hard globally and simple locally. Around one image, small changes in pose or light move pixels along tangent directions given by the Jacobian <code>J_f</code>. That local linearity is the crack gradient descent exploits: models do not need a single flat chart for all images; they can stitch many local approximations together. The universe permits this because physical changes are usually continuous. A small camera move should not teleport the image to an unrelated point.</div></div><div class="idea"><h3>Off-manifold points are not neutral</h3><div class="eq">dist(x, M) large ⇒ model behavior unconstrained by data</div><div class="why">Training data constrains the model near the manifold <code>M</code>. Far away, the loss has barely spoken. That is why tiny adversarial moves can matter: in high dimension, a small pixel-norm step can point in a direction that leaves the natural image surface even if it looks invisible to us. The model is then being asked a question the data never answered. <b>The enemy it exposes:</b> this is the Underdetermination primitive with a geometric face — the input alone does not specify behavior away from the surface of real images.</div></div><div class="idea"><h3>Generative models learn the surface by learning its score</h3><div class="eq">score(x) = ∇_x log p_data(x) points back toward high-density image regions</div><div class="why">A density is highest near the manifold and drops away from it. Its gradient points toward more likely images. Diffusion and score models use exactly that vector field: start from noise and repeatedly move toward higher data density. From the manifold view, generation is not painting pixels from nothing; it is following a learned compass back to the thin set where real images live.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Manifold methods choose different ways to represent the thin set. Autoencoders learn an explicit low-dimensional coordinate <code>z</code>. Contrastive learning shapes nearby views to sit close on the surface. Diffusion learns the score that points back to high-density regions. Geometry-heavy methods impose a stronger prior: the manifold is generated by 3D projection, differentiable rendering, or smooth motion. The shared move is always the same: learn the degrees of freedom that actually vary, not the ambient pixel box.</p>
+<h2>A worked numeric example</h2><p>The toy run at <code>analysis/manifold/toy_manifold.json</code> sampled <code>1200</code> points in ambient dimension <code>30</code> from a true two-dimensional surface. The maximum-likelihood intrinsic-dimension estimate was <code>2.26</code> on average, and PCA needed only <code>3</code> components for <code>99%</code> variance. The lesson is not that all vision data is linear. It is sharper: even when the measurement is high-dimensional, the moving causes can be much smaller.</p>
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 3 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Latent coordinates</div><div class="eq">encoder: x → z,   decoder: z → x̂,   dim(z)≪dim(x)</div><div class="why">The encoder searches for the small coordinate system that still reconstructs the image.</div><div class="pps"><div class="pp"><span class="ppt">Toy manifold run</span> — <span class="ppn">A 30D observation cloud generated by two latent coordinates was recovered as roughly 2D.</span></div></div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>Tangent directions</div><div class="eq">local changes span columns of J_f(u)</div><div class="why">Small semantic moves become local linear directions even when the full surface is curved.</div><div class="pps"><div class="pp"><span class="ppt">Connection to equivariance</span> — <span class="ppn">Known transformations trace structured directions along the data surface instead of arbitrary pixel moves.</span></div></div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Scores back to data</div><div class="eq">x_{t+1}=x_t+η∇log p_data(x_t)+noise</div><div class="why">The score field points samples back toward high-density image regions near the manifold.</div><div class="pps"><div class="pp"><span class="ppt">Connection to diffusion</span> — <span class="ppn">Denoising follows a vector field that pulls corrupted samples back toward the natural-image surface.</span></div></div></div>
+<div class="fp"><b>The through-line.</b> The manifold hypothesis is the geometric reason modern vision can generalize: the sensor is high-dimensional, but reality is constrained. Models work when they discover the low-dimensional, locally smooth surface of possible images and fail when queried off it. This connects representation learning, adversarial fragility, diffusion, 3D reconstruction, and compression as one statement about where data actually lives.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of The manifold hypothesis — the quantity being optimized, the core relations, and why they work · part of the 35-theme first-principles collection · CC0.</footer></div>
+</body></html>
