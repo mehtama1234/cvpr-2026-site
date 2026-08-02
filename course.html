@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Computer Vision From First Principles</title>
+<style>
+:root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;--accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}.wrap{max-width:900px;margin:0 auto;padding:0 26px}a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid #0e7c8650}a:hover{border-bottom-color:var(--accent)}header{background:var(--ink);color:#E7ECED;padding:46px 0 40px;border-bottom:1px solid #000}.bug,.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-lite);font-weight:700}h1,h2,h3{margin:0;line-height:1.12;letter-spacing:0;text-wrap:balance}h1{font-size:clamp(38px,7vw,70px);margin-top:13px;color:#F8FAFA;letter-spacing:-.03em}.lede{margin-top:16px;color:#AEBABD;font-size:18px;max-width:70ch}
+nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}.navwrap{display:flex;gap:6px;padding-top:9px;padding-bottom:9px;overflow:auto}nav a{white-space:nowrap;font-family:var(--mono);font-size:12px;color:#AEBABD;border:0;padding:6px 10px;border-radius:999px;background:#1b262c}nav a:hover{color:#fff}
+.intro,.path,.part{background:var(--panel);border:1px solid var(--line);border-radius:12px}.intro{border-left:3px solid var(--accent);padding:18px 20px;margin:24px 0 18px}.intro p{margin:0 0 12px;color:#23302C}.intro p:last-child{margin-bottom:0}.path{padding:15px 18px;margin:18px 0 24px}.path b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);margin-bottom:8px}.path a{display:inline-block;margin:4px 12px 4px 0}.part{border-left:3px solid var(--accent);padding:23px 24px;margin:18px 0}.part .kicker{color:var(--accent)}h2{font-size:clamp(25px,4vw,36px);margin-top:7px}.summary{font-size:18px;color:#23302C;margin:9px 0 16px}.essay p{font-size:16px;color:#23302C;margin:0 0 13px}.uses{border-top:1px solid var(--line);padding-top:13px;margin-top:15px}.uses h3{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);margin-bottom:8px}.uses ul{margin:0;padding-left:20px}.uses li{color:#23302C;margin:5px 0}footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:28px 0 60px;border-top:1px solid var(--line);margin-top:24px}@media(max-width:640px){.wrap{padding:0 18px}.part{padding:20px}}
+</style></head><body>
+<header><div class="wrap"><div class="bug">CVPR 2026 course spine</div><h1>Computer Vision From First Principles</h1><p class="lede">A plain-language course spine for the standalone CVPR 2026 site.</p></div></header>
+<nav><div class="wrap navwrap"><a href="#s1">1. Start</a><a href="#s2">2. Seeing</a><a href="#s3">3. Topology</a><a href="#s4">4. 3D</a><a href="#s5">5. Time</a><a href="#s6">6. Language</a><a href="#s7">7. Generation</a><a href="#s8">8. Action</a><a href="#s9">9. Trust</a><a href="#s10">10. Fields</a></div></nav>
+<main class="wrap">
+  <div class="intro"><p>Computer vision starts with a hard fact: a camera turns a rich moving world into a flat grid of numbers.</p><p>The field asks how to get meaning back from that grid, and sometimes how to run the bridge backward: make images, video, 3D scenes, or actions from meaning.</p><p>This page explains the big ideas in everyday words, including topology and why the same ideas matter in robotics, medicine, search, hardware, science, and design.</p></div>
+  <div class="path"><b>Read next</b><a href="index.html">All themes</a><a href="hub.html">The one machine</a><a href="math.html">The mathematics</a><a href="through-line.html">Through-line</a><a href="search.html">Search papers</a></div>
+  
+<section class="part" id="s1">
+  <div class="kicker">Start</div>
+  <h2>1. The Whole Field Is A Bridge Between Pixels And Meaning</h2>
+  <p class="summary">Pixels are measurements; meaning is what people or machines need to know or do.</p>
+  <div class="essay"><p>A photo does not directly say object, depth, motion, danger, face, tumor, road, or action. It gives color values at locations. The rest has to be inferred.</p><p>One direction of the field reads meaning from pixels: recognition, detection, segmentation, depth, tracking, captioning, and visual question answering.</p><p>The other direction writes pixels from meaning: image generation, video generation, editing, view synthesis, 3D reconstruction, and simulation.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Medical imaging reads evidence from scans.</li><li>Search systems find images and videos by meaning.</li><li>Robots use vision to decide what action is safe.</li></ul></div>
+</section>
+
+<section class="part" id="s2">
+  <div class="kicker">Seeing</div>
+  <h2>2. Recognition Is Naming And Locating What Matters</h2>
+  <p class="summary">Before a system can reason about a scene, it must know which things are present and where they are.</p>
+  <div class="essay"><p>Detection draws boxes. Segmentation draws outlines. Recognition names what is seen. OCR reads text. These tasks sound basic, but almost every later system depends on them.</p><p>The hard part is variation. A chair can have many shapes. A car can be far away, partly hidden, wet, dark, or seen from above. A good vision system must learn the stable idea across changing appearances.</p><p>Open-vocabulary vision adds language. The system should find not only a fixed list of categories, but anything a person can name clearly enough.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Retail uses detection and recognition for inventory and checkout.</li><li>Accessibility tools name objects, text, and layout for people.</li><li>Scientific imaging locates cells, defects, materials, or events.</li></ul></div>
+</section>
+
+<section class="part" id="s3">
+  <div class="kicker">Topology</div>
+  <h2>3. Topology Means Which Parts Of The Scene Are Connected</h2>
+  <p class="summary">In vision, topology is about connected regions, holes, boundaries, surfaces, paths, parts, and object relationships.</p>
+  <div class="essay"><p>In everyday words, topology asks what touches, wraps, contains, separates, or connects. Is this region one object or two? Does a road connect to that lane? Is there a hole in the shape? Does a handle loop around empty space?</p><p>Topology matters because pixels can look similar while structure differs. A ring and a disk can have similar color, but one has a hole. A drivable road and a blocked road can share texture, but one connects to the path and the other does not.</p><p>3D vision uses topology when it decides which surfaces belong together and which spaces are reachable. Segmentation uses topology when it keeps object masks connected. Scene graphs use topology when they store relationships like on, inside, behind, touching, and connected to.</p><p>Many failures are topology failures: a model cuts a person into parts, merges two objects, misses a thin connection, invents a bridge in a scene, or ignores that a robot cannot pass through a blocked opening.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Robotics needs connected free space and object handles for action.</li><li>Medical imaging needs organ boundaries, vessels, and connected tissue structures.</li><li>Map and driving systems need lane connectivity and blocked paths.</li><li>Document vision needs table cells, reading order, and layout relationships.</li></ul></div>
+</section>
+
+<section class="part" id="s4">
+  <div class="kicker">3D</div>
+  <h2>4. A Flat Image Hides Depth</h2>
+  <p class="summary">Recovering 3D means rebuilding distance, surface, shape, and camera position from limited views.</p>
+  <div class="essay"><p>A camera flattens the world. Two points that are far apart in depth can land next to each other in the image. A single image can match many possible 3D worlds.</p><p>3D methods use clues: two camera views, object size, shadows, motion, learned priors, or differentiable rendering. The goal is to recover enough shape to inspect, navigate, edit, or render from a new view.</p><p>NeRF and Gaussian splatting store scenes in ways that can be rendered from new camera positions. Depth and reconstruction methods estimate where surfaces are in space.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>AR needs virtual objects to line up with real surfaces.</li><li>Autonomous driving needs distances and free space.</li><li>Product design and inspection need 3D shape from images or scans.</li></ul></div>
+</section>
+
+<section class="part" id="s5">
+  <div class="kicker">Time</div>
+  <h2>5. Video Adds Motion And Cause</h2>
+  <p class="summary">A video is not just many images; the order carries meaning.</p>
+  <div class="essay"><p>A single frame may show a ball in the air. A video shows whether it is rising, falling, thrown, dropped, or about to hit something.</p><p>Video understanding tracks identity through time, reads action, notices cause, and predicts what may happen next. Video generation must keep objects, camera motion, and physics consistent across frames.</p><p>Long video is expensive because there are many frames and many repeated details. The field keeps searching for compact ways to remember only what matters.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Sports and medicine use motion analysis.</li><li>Safety systems detect risky actions over time.</li><li>Video search needs event understanding, not only frame labels.</li></ul></div>
+</section>
+
+<section class="part" id="s6">
+  <div class="kicker">Language</div>
+  <h2>6. Vision And Language Meet At Meaning</h2>
+  <p class="summary">People ask for visual work in words, so machines need a shared space for images and language.</p>
+  <div class="essay"><p>A label is too small for many tasks. People ask questions, point to regions, request edits, compare charts, describe goals, and give instructions.</p><p>Vision-language models connect images with words so a system can answer, describe, retrieve, reason, and act from a visual scene.</p><p>The risk is that the language part can overpower the image. A model may answer from common sense rather than what is actually visible. Good systems must stay grounded in the pixels.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Document and chart understanding combine layout, text, and image evidence.</li><li>Robots need language instructions grounded in objects and places.</li><li>Creative tools use language to guide image and video edits.</li></ul></div>
+</section>
+
+<section class="part" id="s7">
+  <div class="kicker">Generation</div>
+  <h2>7. Generation Writes Pixels From Meaning</h2>
+  <p class="summary">A generator makes images, video, 3D scenes, or edits from text, sketches, layouts, or examples.</p>
+  <div class="essay"><p>Generation is the reverse bridge. Instead of asking what an image means, it starts with meaning and produces pixels that fit.</p><p>Diffusion and flow methods make generation into a path: start with noise and move step by step toward a valid image or video. The path must preserve identity, layout, motion, and prompt details.</p><p>The hard part is control. A user often wants to change one thing without changing everything else.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Design tools create and edit visual assets.</li><li>Simulation creates training scenes for robots and vehicles.</li><li>Media tools restore, extend, or transform images and video.</li></ul></div>
+</section>
+
+<section class="part" id="s8">
+  <div class="kicker">Action</div>
+  <h2>8. Vision Matters Most When It Guides Action</h2>
+  <p class="summary">For robots and cars, a vision mistake can become a physical mistake.</p>
+  <div class="essay"><p>Embodied vision closes the loop: see the scene, understand the goal, predict what will happen, choose an action, and check the result.</p><p>This makes vision stricter. It is not enough to produce a plausible label. The system must know what space is reachable, which object can be touched, what will move, and what is unsafe.</p><p>Vision-language-action models combine visual input, language goals, and motor outputs. They connect CVPR directly to robotics.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Self-driving systems turn visual evidence into steering and braking.</li><li>Warehouse robots use vision to pick, place, and avoid people.</li><li>Assistive robots need visual grounding before acting near humans.</li></ul></div>
+</section>
+
+<section class="part" id="s9">
+  <div class="kicker">Trust</div>
+  <h2>9. Vision Systems Need Boundaries And Checks</h2>
+  <p class="summary">A system that sees or generates can also be fooled, biased, or misused.</p>
+  <div class="essay"><p>Vision models can fail under weather, lighting, camera changes, rare objects, adversarial edits, or generated fakes.</p><p>Generated media creates new duties: provenance, watermarking, fake detection, consent, and the ability to remove private identity or style.</p><p>Trust is not one score. It means knowing when the system is uncertain, what evidence it used, and where it should not be used without human review.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>News and legal evidence need media provenance.</li><li>Medical systems need uncertainty and review paths.</li><li>Public safety systems need bias, failure, and rare-case checks.</li></ul></div>
+</section>
+
+<section class="part" id="s10">
+  <div class="kicker">Fields</div>
+  <h2>10. Why Computer Vision Matters Across Fields</h2>
+  <p class="summary">Any field with images, motion, geometry, or visual evidence needs vision.</p>
+  <div class="essay"><p>Robotics needs vision to act. Medicine needs vision to read scans and microscopes. Search needs vision to index images and videos. Hardware matters because vision models can be large, slow, and expensive.</p><p>Topology connects vision to other fields. In robotics it is reachable space. In machine learning it is connected regions in representation space. In speech it is connected time segments and speakers. In vision it is the shape and relationship of things seen.</p><p>CVPR matters because it shows how raw measurement becomes meaning, and how meaning becomes visual or physical action.</p></div>
+  <div class="uses"><h3>Where this shows up</h3><ul><li>Science gains tools for measuring cells, materials, weather, and space.</li><li>Manufacturing gains visual inspection and 3D reconstruction.</li><li>Education and accessibility gain systems that can explain visual material.</li></ul></div>
+</section>
+  <footer>Part of the standalone CVPR 2026 first-principles site. Continue to <a href="index.html">all themes</a>, <a href="hub.html">the one machine</a>, or <a href="math.html">the mathematics</a>.</footer>
+</main></body></html>
