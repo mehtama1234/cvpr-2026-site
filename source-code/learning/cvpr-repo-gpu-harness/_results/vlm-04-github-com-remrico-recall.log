@@ -1,0 +1,7 @@
+jobId=vlm-04-github-com-remrico-recall
+repo=https://github.com/RemRico/Recall
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

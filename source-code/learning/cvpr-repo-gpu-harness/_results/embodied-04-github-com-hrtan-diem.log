@@ -1,0 +1,7 @@
+jobId=embodied-04-github-com-hrtan-diem
+repo=https://github.com/hrtan/DIEM
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

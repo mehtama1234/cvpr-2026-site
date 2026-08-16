@@ -1,0 +1,207 @@
+{
+  "summary": {
+    "demo": "cvpr-3d-temporal-rollback-stress-lab",
+    "status": "ready",
+    "stressRows": 6,
+    "systems": 2,
+    "watch": 3,
+    "rehearse": 3,
+    "block": 0,
+    "rollbackMisses": 0,
+    "maxRisk": 74.4,
+    "minEvidence": 44.8,
+    "rehearsalStatus": "release",
+    "scenarioStatus": "ready",
+    "fullStackStatus": "valid",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "stressRows": [
+    {
+      "id": "geometry-occlusion",
+      "title": "3D geometry occlusion",
+      "system": "3d",
+      "targetPage": "cvpr-3d-edit-provenance-room.html",
+      "sourceRow": "thin-structure/dense-novel-view/scene-rewrite",
+      "baseline": {
+        "readiness": 74.3,
+        "risk": 43.3,
+        "evidence": 79.2
+      },
+      "shifts": {
+        "readiness": -9,
+        "risk": 14,
+        "evidence": -10
+      },
+      "stressed": {
+        "readiness": 65.3,
+        "risk": 57.3,
+        "evidence": 69.2
+      },
+      "rollback": {
+        "elapsedMinutes": 27,
+        "targetMinutes": 28,
+        "minutesOverTarget": 0,
+        "status": "pass"
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "watch"
+    },
+    {
+      "id": "splat-edit-leakage",
+      "title": "Splat edit leakage",
+      "system": "3d",
+      "targetPage": "cvpr-3d-edit-provenance-room.html",
+      "sourceRow": "thin-structure/dense-novel-view/scene-rewrite",
+      "baseline": {
+        "readiness": 74.3,
+        "risk": 43.3,
+        "evidence": 79.2
+      },
+      "shifts": {
+        "readiness": -11,
+        "risk": 18,
+        "evidence": -12
+      },
+      "stressed": {
+        "readiness": 63.3,
+        "risk": 61.3,
+        "evidence": 67.2
+      },
+      "rollback": {
+        "elapsedMinutes": 27,
+        "targetMinutes": 28,
+        "minutesOverTarget": 0,
+        "status": "pass"
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "watch"
+    },
+    {
+      "id": "camera-jump",
+      "title": "Camera jump after semantic edit",
+      "system": "3d",
+      "targetPage": "cvpr-3d-edit-provenance-room.html",
+      "sourceRow": "thin-structure/dense-novel-view/scene-rewrite",
+      "baseline": {
+        "readiness": 74.3,
+        "risk": 43.3,
+        "evidence": 79.2
+      },
+      "shifts": {
+        "readiness": -13,
+        "risk": 20,
+        "evidence": -13
+      },
+      "stressed": {
+        "readiness": 61.3,
+        "risk": 63.3,
+        "evidence": 66.2
+      },
+      "rollback": {
+        "elapsedMinutes": 27,
+        "targetMinutes": 28,
+        "minutesOverTarget": 0,
+        "status": "pass"
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "watch"
+    },
+    {
+      "id": "identity-switch",
+      "title": "Temporal identity switch",
+      "system": "temporal",
+      "targetPage": "cvpr-temporal-counterfactual-lab.html",
+      "sourceRow": "long-rollout-drift/long-horizon-fork",
+      "baseline": {
+        "readiness": 64.6,
+        "risk": 52.4,
+        "evidence": 59.8
+      },
+      "shifts": {
+        "readiness": -12,
+        "risk": 18,
+        "evidence": -14
+      },
+      "stressed": {
+        "readiness": 52.6,
+        "risk": 70.4,
+        "evidence": 45.8
+      },
+      "rollback": {
+        "elapsedMinutes": 27,
+        "targetMinutes": 28,
+        "minutesOverTarget": 0,
+        "status": "pass"
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "rehearse"
+    },
+    {
+      "id": "frame-drop",
+      "title": "Dropped frames near contact",
+      "system": "temporal",
+      "targetPage": "cvpr-temporal-counterfactual-lab.html",
+      "sourceRow": "long-rollout-drift/long-horizon-fork",
+      "baseline": {
+        "readiness": 64.6,
+        "risk": 52.4,
+        "evidence": 59.8
+      },
+      "shifts": {
+        "readiness": -10,
+        "risk": 16,
+        "evidence": -11
+      },
+      "stressed": {
+        "readiness": 54.6,
+        "risk": 68.4,
+        "evidence": 48.8
+      },
+      "rollback": {
+        "elapsedMinutes": 27,
+        "targetMinutes": 28,
+        "minutesOverTarget": 0,
+        "status": "pass"
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "rehearse"
+    },
+    {
+      "id": "long-horizon-drift",
+      "title": "Long-horizon drift rollback",
+      "system": "temporal",
+      "targetPage": "cvpr-temporal-counterfactual-lab.html",
+      "sourceRow": "long-rollout-drift/long-horizon-fork",
+      "baseline": {
+        "readiness": 64.6,
+        "risk": 52.4,
+        "evidence": 59.8
+      },
+      "shifts": {
+        "readiness": -14,
+        "risk": 22,
+        "evidence": -15
+      },
+      "stressed": {
+        "readiness": 50.6,
+        "risk": 74.4,
+        "evidence": 44.8
+      },
+      "rollback": {
+        "elapsedMinutes": 27,
+        "targetMinutes": 28,
+        "minutesOverTarget": 0,
+        "status": "pass"
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "rehearse"
+    }
+  ],
+  "sources": {
+    "room": "analysis/cvpr_3d_edit_provenance_room/registry.json",
+    "temporal": "analysis/cvpr_temporal_counterfactual_lab/registry.json",
+    "rehearsal": "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
+    "scenarioPack": "analysis/cvpr_scenario_expansion_pack/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

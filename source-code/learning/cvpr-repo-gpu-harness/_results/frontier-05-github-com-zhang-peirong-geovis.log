@@ -1,0 +1,7 @@
+jobId=frontier-05-github-com-zhang-peirong-geovis
+repo=https://github.com/Zhang-Peirong/GeoVis
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

@@ -1,0 +1,7 @@
+jobId=video-02-github-com-deepfakes-face
+repo=https://github.com/deepfakes/face-
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

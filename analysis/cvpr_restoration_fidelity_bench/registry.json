@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "bench": "cvpr-restoration-fidelity-bench",
+    "sourceSystem": "restoration-reliability-stack",
+    "sourceStages": [
+      "degradation-diagnosis",
+      "fidelity-gate",
+      "downstream-validation"
+    ],
+    "cases": 4,
+    "release": 4,
+    "review": 0,
+    "block": 0,
+    "avgReadiness": 78.8,
+    "minDownstreamUtility": 80.9,
+    "maxFabricatedDetailRisk": 29.4,
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-real"
+    ],
+    "gpuBacked": true,
+    "cachedRealCases": 4,
+    "colabWorker": "cvpr-colab-gpu-worker",
+    "playbookSource": "06-image-restoration-noisy-restoration",
+    "status": "interactive"
+  },
+  "stageEvidence": {
+    "diagnosis": 94,
+    "fidelity": 94,
+    "downstream": 94,
+    "evidenceDepth": 94
+  },
+  "records": [
+    {
+      "id": "mild-noise",
+      "title": "Mild sensor noise",
+      "system": "restoration-reliability-stack",
+      "cluster": "Image restoration",
+      "sourceStages": [
+        "degradation-diagnosis",
+        "fidelity-gate",
+        "downstream-validation"
+      ],
+      "controls": {
+        "blur": 18,
+        "noise": 24,
+        "compression": 18,
+        "lowLight": 20,
+        "hallucinationPenalty": 36
+      },
+      "metrics": {
+        "degradationLoad": 21.6,
+        "diagnosisConfidence": 83.8,
+        "fidelityScore": 82.2,
+        "artifactRisk": 24.7,
+        "downstreamUtility": 85.3,
+        "fabricatedDetailRisk": 25.8,
+        "readiness": 82.0
+      },
+      "cachedGpuMetrics": {
+        "readiness": 82.0,
+        "downstreamUtility": 85.3,
+        "fabricatedDetailRisk": 25.8,
+        "fidelityScore": 82.2
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench"
+      }
+    },
+    {
+      "id": "compressed-low-light",
+      "title": "Compressed low-light image",
+      "system": "restoration-reliability-stack",
+      "cluster": "Image restoration",
+      "sourceStages": [
+        "degradation-diagnosis",
+        "fidelity-gate",
+        "downstream-validation"
+      ],
+      "controls": {
+        "blur": 32,
+        "noise": 38,
+        "compression": 54,
+        "lowLight": 64,
+        "hallucinationPenalty": 16
+      },
+      "metrics": {
+        "degradationLoad": 43.6,
+        "diagnosisConfidence": 75.7,
+        "fidelityScore": 80.3,
+        "artifactRisk": 37.4,
+        "downstreamUtility": 80.9,
+        "fabricatedDetailRisk": 29.4,
+        "readiness": 77.7
+      },
+      "cachedGpuMetrics": {
+        "readiness": 77.7,
+        "downstreamUtility": 80.9,
+        "fabricatedDetailRisk": 29.4,
+        "fidelityScore": 80.3
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench"
+      }
+    },
+    {
+      "id": "motion-blur-task",
+      "title": "Motion blur task frame",
+      "system": "restoration-reliability-stack",
+      "cluster": "Image restoration",
+      "sourceStages": [
+        "degradation-diagnosis",
+        "fidelity-gate",
+        "downstream-validation"
+      ],
+      "controls": {
+        "blur": 64,
+        "noise": 36,
+        "compression": 38,
+        "lowLight": 36,
+        "hallucinationPenalty": 16
+      },
+      "metrics": {
+        "degradationLoad": 41.2,
+        "diagnosisConfidence": 74.2,
+        "fidelityScore": 79.0,
+        "artifactRisk": 30.4,
+        "downstreamUtility": 81.5,
+        "fabricatedDetailRisk": 26.5,
+        "readiness": 77.7
+      },
+      "cachedGpuMetrics": {
+        "readiness": 77.7,
+        "downstreamUtility": 81.5,
+        "fabricatedDetailRisk": 26.5,
+        "fidelityScore": 79.0
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench"
+      }
+    },
+    {
+      "id": "over-restored-detail",
+      "title": "Over-restored fine detail",
+      "system": "restoration-reliability-stack",
+      "cluster": "Image restoration",
+      "sourceStages": [
+        "degradation-diagnosis",
+        "fidelity-gate",
+        "downstream-validation"
+      ],
+      "controls": {
+        "blur": 48,
+        "noise": 54,
+        "compression": 38,
+        "lowLight": 56,
+        "hallucinationPenalty": 18
+      },
+      "metrics": {
+        "degradationLoad": 45.9,
+        "diagnosisConfidence": 75.2,
+        "fidelityScore": 80.1,
+        "artifactRisk": 35.1,
+        "downstreamUtility": 81.2,
+        "fabricatedDetailRisk": 28.6,
+        "readiness": 77.8
+      },
+      "cachedGpuMetrics": {
+        "readiness": 77.8,
+        "downstreamUtility": 81.2,
+        "fabricatedDetailRisk": 28.6,
+        "fidelityScore": 80.1
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench"
+      }
+    }
+  ]
+}

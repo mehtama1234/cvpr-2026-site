@@ -1,0 +1,18 @@
+{
+  "system": "vlm-grounded-reasoning",
+  "systemTitle": "VLM grounded reasoning",
+  "stage": "tool-verified-answer",
+  "stageTitle": "Verify with visual tools",
+  "theme": "Teaching machines to see and talk at once",
+  "themeSlug": "vlm",
+  "cluster": "Vision-language reasoning",
+  "clusterSlug": "vlm_reasoning",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "route hard questions through detectors, OCR, or geometry",
+  "reusableRule": "VLM grounded reasoning stage 'Verify with visual tools' should route hard questions through detectors, OCR, or geometry using measured CVPR evidence, not only paper novelty."
+}

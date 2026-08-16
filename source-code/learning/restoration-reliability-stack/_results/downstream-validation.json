@@ -1,0 +1,18 @@
+{
+  "system": "restoration-reliability-stack",
+  "systemTitle": "Restoration reliability stack",
+  "stage": "downstream-validation",
+  "stageTitle": "Validate downstream utility",
+  "theme": "Making pixels from meaning",
+  "themeSlug": "generation",
+  "cluster": "Image restoration",
+  "clusterSlug": "restoration",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "prove restored images improve the target task, not just aesthetics",
+  "reusableRule": "Restoration reliability stack stage 'Validate downstream utility' should prove restored images improve the target task, not just aesthetics using measured CVPR evidence, not only paper novelty."
+}

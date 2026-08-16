@@ -1,0 +1,18 @@
+{
+  "system": "restoration-reliability-stack",
+  "systemTitle": "Restoration reliability stack",
+  "stage": "degradation-diagnosis",
+  "stageTitle": "Diagnose degradation",
+  "theme": "Making pixels from meaning",
+  "themeSlug": "generation",
+  "cluster": "Image restoration",
+  "clusterSlug": "restoration",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "separate blur, noise, compression, low light, and sensor artifacts",
+  "reusableRule": "Restoration reliability stack stage 'Diagnose degradation' should separate blur, noise, compression, low light, and sensor artifacts using measured CVPR evidence, not only paper novelty."
+}

@@ -1,0 +1,351 @@
+{
+  "summary": {
+    "demo": "cvpr-generation-control-repo-studio",
+    "status": "ready",
+    "theme": "Making pixels from meaning",
+    "sourceForge": "cvpr-paper-repo-demo-forge.html",
+    "systems": [
+      "controllable-generation-studio",
+      "restoration-reliability-stack"
+    ],
+    "repoPapers": 5,
+    "cases": 5,
+    "release": 0,
+    "review": 0,
+    "block": 5,
+    "maxPrimaryRisk": 78.1,
+    "maxEvidenceRisk": 74.4,
+    "minReadiness": 33.1,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "sourceBlueprint": {
+    "id": "paper-repo-04-generation-control",
+    "theme": "generation",
+    "title": "Generation Control Repo Studio",
+    "query": [
+      "diffusion",
+      "poster",
+      "deraining",
+      "super-resolution",
+      "one-step",
+      "vae"
+    ],
+    "systems": [
+      "controllable-generation-studio",
+      "restoration-reliability-stack"
+    ],
+    "demoSurface": "cvpr-generation-control-repo-studio.html",
+    "mechanic": "Compare code-backed generation papers on prompt control, restoration fidelity, one-step synthesis, and artifact containment.",
+    "themeName": "Making pixels from meaning",
+    "themeRepoCount": 151,
+    "repoPapers": 5,
+    "seedPapers": [
+      {
+        "title": "GDPO-SR: Group Direct Preference Optimization for One-Step Generative Image Super-Resolution",
+        "repo": "https://github.com/Joyies/GDPO",
+        "tags": [
+          "super-resolution",
+          "image-restoration",
+          "reinforcement-learning",
+          "diffusion",
+          "dpo",
+          "grpo"
+        ],
+        "problem": "GDPO-SR is about one-step image super-resolution that still preserves fine local texture. The everyday problem is enlarging a low-resolution image while making smooth regions clean and textured regions sharp."
+      },
+      {
+        "title": "Bridging Fidelity-Reality with Controllable One-Step Diffusion for Image Super-Resolution",
+        "repo": "https://github.com/Chanson94/CODSR",
+        "tags": [
+          "image super-resolution",
+          "diffusion models",
+          "one-step inference",
+          "low-level vision",
+          "text-guided generation",
+          "fidelity-perceptual tradeoff"
+        ],
+        "problem": "CODSR is about one-step super-resolution that looks realistic without losing faithfulness to the low-quality input. The everyday problem is that generative priors can invent detail, but pure fidelity can leave images blurry."
+      },
+      {
+        "title": "Resolving Endpoint Underfitting in Diffusion Bridges via Noise Alignment",
+        "repo": "https://github.com/gyr02/NADB",
+        "tags": [
+          "diffusion",
+          "image-restoration",
+          "diffusion-bridge",
+          "stochastic-interpolant",
+          "super-resolution",
+          "deblurring"
+        ],
+        "problem": "This diffusion-bridge paper is about fixing weak performance near the clean endpoint of an image-restoration path. The everyday problem is that a model can learn most of the journey from degraded to clean but still miss the final sharp correction at the target"
+      },
+      {
+        "title": "Low-Rank Residual Diffusion Models",
+        "repo": "https://github.com/JF-Tan/LRDM",
+        "tags": [
+          "diffusion-models",
+          "image-restoration",
+          "low-rank",
+          "deraining",
+          "deblurring",
+          "deshading"
+        ],
+        "problem": "This paper is about restoration when the damaged image is already close to the desired image. The everyday problem is that standard diffusion wastes effort generating everything, even though only a small correction may be needed."
+      },
+      {
+        "title": "Residual Diffusion Bridge Model for Image Restoration",
+        "repo": "https://github.com/MiliLab/RDBM",
+        "tags": [
+          "diffusion-models",
+          "image-restoration",
+          "universal-restoration",
+          "stochastic-differential-equations",
+          "residual-learning",
+          "adaptive-processing"
+        ],
+        "problem": "This paper is about restoring damaged images without disturbing clean regions. The everyday problem is that a restoration model should repair degradation locally rather than repaint the entire image."
+      }
+    ],
+    "priority": "covered",
+    "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+    "command": "python3 scripts/validate_cvpr_full_stack.py",
+    "status": "ready"
+  },
+  "demoRows": [
+    {
+      "id": "cvpr-generation-control-repo-studio-1",
+      "title": "GDPO-SR",
+      "paperTitle": "GDPO-SR: Group Direct Preference Optimization for One-Step Generative Image Super-Resolution",
+      "repo": "https://github.com/Joyies/GDPO",
+      "tags": [
+        "super-resolution",
+        "image-restoration",
+        "reinforcement-learning",
+        "diffusion",
+        "dpo",
+        "grpo"
+      ],
+      "paperProblem": "GDPO-SR is about one-step image super-resolution that still preserves fine local texture. The everyday problem is enlarging a low-resolution image while making smooth regions clean and textured regions sharp.",
+      "labels": [
+        "fidelity demand",
+        "realism pressure",
+        "artifact risk",
+        "one-step budget",
+        "endpoint error",
+        "local edit need"
+      ],
+      "dims": [
+        84,
+        72,
+        58,
+        96,
+        46,
+        62
+      ],
+      "metrics": {
+        "dims": [
+          84,
+          72,
+          58,
+          96,
+          46,
+          62
+        ],
+        "primaryRisk": 72.1,
+        "evidenceRisk": 70.4,
+        "runtimeRisk": 66.3,
+        "readiness": 37.0
+      },
+      "decision": "block",
+      "operatorAction": "one-step SR must sharpen texture without inventing structure"
+    },
+    {
+      "id": "cvpr-generation-control-repo-studio-2",
+      "title": "Bridging Fidelity-Reality with Controllable One-Step Diffusion for I",
+      "paperTitle": "Bridging Fidelity-Reality with Controllable One-Step Diffusion for Image Super-Resolution",
+      "repo": "https://github.com/Chanson94/CODSR",
+      "tags": [
+        "image super-resolution",
+        "diffusion models",
+        "one-step inference",
+        "low-level vision",
+        "text-guided generation",
+        "fidelity-perceptual tradeoff"
+      ],
+      "paperProblem": "CODSR is about one-step super-resolution that looks realistic without losing faithfulness to the low-quality input. The everyday problem is that generative priors can invent detail, but pure fidelity can leave images blurry.",
+      "labels": [
+        "fidelity demand",
+        "realism pressure",
+        "artifact risk",
+        "one-step budget",
+        "endpoint error",
+        "local edit need"
+      ],
+      "dims": [
+        92,
+        88,
+        66,
+        96,
+        42,
+        54
+      ],
+      "metrics": {
+        "dims": [
+          92,
+          88,
+          66,
+          96,
+          42,
+          54
+        ],
+        "primaryRisk": 78.1,
+        "evidenceRisk": 72.1,
+        "runtimeRisk": 67.8,
+        "readiness": 33.9
+      },
+      "decision": "block",
+      "operatorAction": "controllable SR must balance fidelity against perceptual realism"
+    },
+    {
+      "id": "cvpr-generation-control-repo-studio-3",
+      "title": "Resolving Endpoint Underfitting in Diffusion Bridges via Noise Align",
+      "paperTitle": "Resolving Endpoint Underfitting in Diffusion Bridges via Noise Alignment",
+      "repo": "https://github.com/gyr02/NADB",
+      "tags": [
+        "diffusion",
+        "image-restoration",
+        "diffusion-bridge",
+        "stochastic-interpolant",
+        "super-resolution",
+        "deblurring"
+      ],
+      "paperProblem": "This diffusion-bridge paper is about fixing weak performance near the clean endpoint of an image-restoration path. The everyday problem is that a model can learn most of the journey from degraded to clean but still miss the final sharp correction at the target",
+      "labels": [
+        "fidelity demand",
+        "realism pressure",
+        "artifact risk",
+        "one-step budget",
+        "endpoint error",
+        "local edit need"
+      ],
+      "dims": [
+        76,
+        62,
+        54,
+        40,
+        94,
+        70
+      ],
+      "metrics": {
+        "dims": [
+          76,
+          62,
+          54,
+          40,
+          94,
+          70
+        ],
+        "primaryRisk": 65.8,
+        "evidenceRisk": 66.3,
+        "runtimeRisk": 69.2,
+        "readiness": 39.8
+      },
+      "decision": "block",
+      "operatorAction": "diffusion bridges need a clean endpoint correction"
+    },
+    {
+      "id": "cvpr-generation-control-repo-studio-4",
+      "title": "Low-Rank Residual Diffusion Models",
+      "paperTitle": "Low-Rank Residual Diffusion Models",
+      "repo": "https://github.com/JF-Tan/LRDM",
+      "tags": [
+        "diffusion-models",
+        "image-restoration",
+        "low-rank",
+        "deraining",
+        "deblurring",
+        "deshading"
+      ],
+      "paperProblem": "This paper is about restoration when the damaged image is already close to the desired image. The everyday problem is that standard diffusion wastes effort generating everything, even though only a small correction may be needed.",
+      "labels": [
+        "fidelity demand",
+        "realism pressure",
+        "artifact risk",
+        "one-step budget",
+        "endpoint error",
+        "local edit need"
+      ],
+      "dims": [
+        70,
+        58,
+        64,
+        72,
+        58,
+        94
+      ],
+      "metrics": {
+        "dims": [
+          70,
+          58,
+          64,
+          72,
+          58,
+          94
+        ],
+        "primaryRisk": 67.7,
+        "evidenceRisk": 70.1,
+        "runtimeRisk": 68.0,
+        "readiness": 38.3
+      },
+      "decision": "block",
+      "operatorAction": "low-rank residual diffusion should repair only the residual"
+    },
+    {
+      "id": "cvpr-generation-control-repo-studio-5",
+      "title": "Residual Diffusion Bridge Model for Image Restoration",
+      "paperTitle": "Residual Diffusion Bridge Model for Image Restoration",
+      "repo": "https://github.com/MiliLab/RDBM",
+      "tags": [
+        "diffusion-models",
+        "image-restoration",
+        "universal-restoration",
+        "stochastic-differential-equations",
+        "residual-learning",
+        "adaptive-processing"
+      ],
+      "paperProblem": "This paper is about restoring damaged images without disturbing clean regions. The everyday problem is that a restoration model should repair degradation locally rather than repaint the entire image.",
+      "labels": [
+        "fidelity demand",
+        "realism pressure",
+        "artifact risk",
+        "one-step budget",
+        "endpoint error",
+        "local edit need"
+      ],
+      "dims": [
+        82,
+        60,
+        70,
+        58,
+        82,
+        96
+      ],
+      "metrics": {
+        "dims": [
+          82,
+          60,
+          70,
+          58,
+          82,
+          96
+        ],
+        "primaryRisk": 73.5,
+        "evidenceRisk": 74.4,
+        "runtimeRisk": 75.5,
+        "readiness": 33.1
+      },
+      "decision": "block",
+      "operatorAction": "universal restoration must avoid repainting already-clean regions"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+jobId=learning-01-github-com-eit-nlp-embedlens
+repo=https://github.com/EIT-NLP/EmbedLens
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

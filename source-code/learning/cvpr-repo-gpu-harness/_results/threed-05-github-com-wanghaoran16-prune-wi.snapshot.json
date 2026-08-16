@@ -1,0 +1,10 @@
+{
+  "jobId": "threed-05-github-com-wanghaoran16-prune-wi",
+  "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

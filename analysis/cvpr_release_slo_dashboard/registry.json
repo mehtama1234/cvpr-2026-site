@@ -1,0 +1,114 @@
+{
+  "summary": {
+    "dashboard": "cvpr-release-slo-dashboard",
+    "status": "release",
+    "slos": 10,
+    "passingSlos": 10,
+    "criticalFailures": 0,
+    "readinessFloor": 68.1,
+    "avgReadiness": 78.22,
+    "benchAcceptanceRate": 100.0,
+    "releaseGate": "release",
+    "fullStackStatus": "valid",
+    "packageTests": 148
+  },
+  "sloRows": [
+    {
+      "id": "theme-system-coverage",
+      "label": "Every theme and production system covered",
+      "actual": 11,
+      "target": 11,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_production_release_brief/registry.json"
+    },
+    {
+      "id": "demo-evidence-coverage",
+      "label": "Every stage demo has runtime evidence",
+      "actual": 0,
+      "target": 0,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_demo_evidence_cockpit/registry.json"
+    },
+    {
+      "id": "bench-release-acceptance",
+      "label": "All readiness bench cases are release",
+      "actual": 44,
+      "target": 44,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_mission_control/registry.json"
+    },
+    {
+      "id": "arena-release-acceptance",
+      "label": "All arena pairings are release",
+      "actual": 328,
+      "target": 328,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_production_release_brief/registry.json"
+    },
+    {
+      "id": "pro-plus-result-validity",
+      "label": "All cached Pro+ results validate",
+      "actual": 40,
+      "target": 40,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json"
+    },
+    {
+      "id": "readiness-floor",
+      "label": "Replay readiness floor stays above release minimum",
+      "actual": 68.1,
+      "target": 68.0,
+      "direction": "gte",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json"
+    },
+    {
+      "id": "provenance-clean",
+      "label": "No Pro+ provenance issues",
+      "actual": 0,
+      "target": 0,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json"
+    },
+    {
+      "id": "import-clean",
+      "label": "No Colab import issues",
+      "actual": 0,
+      "target": 0,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_production_release_brief/registry.json"
+    },
+    {
+      "id": "package-tests",
+      "label": "Package test suite includes the production stack",
+      "actual": 148,
+      "target": 44,
+      "direction": "gte",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json"
+    },
+    {
+      "id": "full-stack-valid",
+      "label": "Full-stack validator is valid",
+      "actual": 1,
+      "target": 1,
+      "direction": "eq",
+      "severity": "critical",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json"
+    }
+  ],
+  "sources": {
+    "replay": "analysis/cvpr_colab_result_replay/registry.json",
+    "cockpit": "analysis/cvpr_demo_evidence_cockpit/registry.json",
+    "mission": "analysis/cvpr_mission_control/registry.json",
+    "releaseBrief": "analysis/cvpr_production_release_brief/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

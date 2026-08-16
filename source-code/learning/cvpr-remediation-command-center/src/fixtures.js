@@ -1,0 +1,104 @@
+export const surfaceRows = [
+  {
+    "surface": "cvpr-remediation-audit-ledger.html",
+    "label": "Audit ledger",
+    "actual": "complete",
+    "expected": "complete",
+    "metric": "7/7 stages",
+    "evidence": "analysis/cvpr_remediation_audit_ledger/registry.json",
+    "command": "python3 scripts/verify_cvpr_remediation_audit_ledger.py"
+  },
+  {
+    "surface": "cvpr-gauntlet-remediation-sprint.html",
+    "label": "Action sprint",
+    "actual": "release",
+    "expected": "release",
+    "metric": "29 actions",
+    "evidence": "analysis/cvpr_gauntlet_remediation_sprint/registry.json",
+    "command": "python3 scripts/verify_cvpr_gauntlet_remediation_sprint.py"
+  },
+  {
+    "surface": "cvpr-remediation-retest-harness.html",
+    "label": "Retest harness",
+    "actual": "release",
+    "expected": "release",
+    "metric": "14 cleared blocks",
+    "evidence": "analysis/cvpr_remediation_retest_harness/registry.json",
+    "command": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "surface": "cvpr-remediation-promotion-board.html",
+    "label": "Promotion board",
+    "actual": "release",
+    "expected": "release",
+    "metric": "12 promote / 17 monitor",
+    "evidence": "analysis/cvpr_remediation_promotion_board/registry.json",
+    "command": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "surface": "cvpr-remediation-canary-monitor.html",
+    "label": "Canary monitor",
+    "actual": "watching",
+    "expected": "watching",
+    "metric": "12 clean / 17 watch",
+    "evidence": "analysis/cvpr_remediation_canary_monitor/registry.json",
+    "command": "python3 scripts/verify_cvpr_remediation_canary_monitor.py"
+  },
+  {
+    "surface": "cvpr-remediation-rollback-drillbook.html",
+    "label": "Rollback drillbook",
+    "actual": "ready",
+    "expected": "ready",
+    "metric": "12 drills",
+    "evidence": "analysis/cvpr_remediation_rollback_drillbook/registry.json",
+    "command": "python3 scripts/verify_cvpr_remediation_rollback_drillbook.py"
+  },
+  {
+    "surface": "cvpr-remediation-rollback-rehearsal-lab.html",
+    "label": "Rollback rehearsal lab",
+    "actual": "release",
+    "expected": "release",
+    "metric": "12 passing rehearsals",
+    "evidence": "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
+    "command": "python3 scripts/verify_cvpr_remediation_rollback_rehearsal_lab.py"
+  }
+];
+export const ledgerSummary = {
+  "demo": "cvpr-remediation-audit-ledger",
+  "status": "complete",
+  "stages": 7,
+  "readyStages": 7,
+  "gauntletRows": 32,
+  "gauntletBlocks": 14,
+  "actionableRows": 29,
+  "clearedBlocks": 14,
+  "postBlock": 0,
+  "promote": 12,
+  "monitor": 17,
+  "canaryRollback": 0,
+  "rollbackDrills": 12,
+  "rehearsals": 12,
+  "rehearsalMisses": 0,
+  "themes": 8,
+  "incidents": 4,
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};
+export const summary = {
+  "demo": "cvpr-remediation-command-center",
+  "status": "operator-ready",
+  "surfaces": 7,
+  "readySurfaces": 7,
+  "gauntletBlocks": 14,
+  "actionableRows": 29,
+  "clearedBlocks": 14,
+  "postBlock": 0,
+  "promote": 12,
+  "monitor": 17,
+  "canaryRollback": 0,
+  "rollbackDrills": 12,
+  "rehearsalMisses": 0,
+  "ledgerStatus": "complete",
+  "themes": 8,
+  "incidents": 4,
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

@@ -1,0 +1,96 @@
+{
+  "summary": {
+    "validator": "validate_cvpr_colab_results",
+    "runtimePlane": "google-colab-pro-plus",
+    "expectedMode": "cached-real",
+    "jobs": 10,
+    "expectedResults": 40,
+    "actualResults": 40,
+    "validJobs": 10,
+    "issues": 0,
+    "status": "valid"
+  },
+  "jobs": [
+    {
+      "jobId": "open-vocab-grounding",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_long_tail_grounding_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_restoration_fidelity_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_adversarial_provenance_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "temporal-rollout",
+      "bench": "cvpr-temporal-rollout-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_temporal_rollout_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "clinical-shift",
+      "bench": "cvpr-clinical-shift-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_clinical_shift_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "compute-serving",
+      "bench": "cvpr-compute-serving-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_compute_serving_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "constraint-generation",
+      "bench": "cvpr-constraint-generation-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_constraint_generation_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "driving-safety",
+      "bench": "cvpr-driving-safety-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_driving_safety_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "metric-geometry",
+      "bench": "cvpr-metric-geometry-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_metric_geometry_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_gaussian_splatting_bench/registry.json",
+      "ready": true
+    }
+  ],
+  "issues": []
+}

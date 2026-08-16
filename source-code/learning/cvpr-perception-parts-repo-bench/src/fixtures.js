@@ -1,0 +1,292 @@
+export const papers = [
+  {
+    "title": "Focus on Background: Exploring SAM's Potential in Few-shot Medical Image Segmentation",
+    "repo": "https://github.com/primebo1/FoB",
+    "tags": [
+      "few-shot segmentation",
+      "medical imaging",
+      "SAM",
+      "background prompting",
+      "GCN",
+      "graph neural network"
+    ],
+    "problem": "This few-shot medical segmentation work is about using background cues, not only foreground prompts. The everyday problem is that two medical structures may look similar, and the surrounding tissue can be the clue that separates the target from lookalikes."
+  },
+  {
+    "title": "Denoise and Align: Towards Source-Free UDA for Robust Panoramic Semantic Segmentation",
+    "repo": "https://github.com/ZZZPhaethon/DAPASS",
+    "tags": [
+      "panoramic-segmentation",
+      "domain-adaptation",
+      "semantic-segmentation",
+      "source-free",
+      "equirectangular-projection",
+      "autonomous-driving"
+    ],
+    "problem": "DAPASS is about adapting a segmentation model to panoramic 360-degree images without source training data. The everyday problem is that panoramic projection distorts scale and shape, while noisy pseudo-labels can lock the adapted model into wrong classes."
+  },
+  {
+    "title": "TF-SSD: A Strong Pipeline via Synergic Mask Filter for Training-free Co-Salient Object Detection",
+    "repo": "https://github.com/hzz-yy/TF-SSD",
+    "tags": [
+      "co-salient-object-detection",
+      "training-free",
+      "zero-shot",
+      "SAM",
+      "DINO",
+      "segmentation"
+    ],
+    "problem": "TF-SSD is about detecting common salient objects across image groups without labeled training. The everyday problem is that zero-shot mask proposals are noisy, and the system must find which masks point to the same meaningful object across images."
+  },
+  {
+    "title": "TAPE: Task-Adaptive Prototype Evolution in Audio-Language Models for Fully Few-Shot Class-Incremental Audio Classification",
+    "repo": "https://github.com/YvoGao/TAPE",
+    "tags": [
+      "audio classification",
+      "few-shot learning",
+      "class-incremental learning",
+      "continual learning",
+      "CLAP",
+      "audio-language model"
+    ],
+    "problem": "TAPE is about learning new audio classes from a few examples without forgetting old ones. The everyday problem is that a new sound category may have only a handful of clips, and the original training audio may no longer be available."
+  },
+  {
+    "title": "EReCu: Pseudo-label Evolution Fusion and Refinement with Multi-Cue Learning for Unsupervised Camouflage Detection",
+    "repo": "https://github.com/JSLiam94/EReCu",
+    "tags": [
+      "camouflaged-object-detection",
+      "unsupervised",
+      "pseudo-labels",
+      "teacher-student",
+      "segmentation",
+      "detail-preservation"
+    ],
+    "problem": "EReCu is about finding camouflaged objects without clean labels. The everyday problem is that the object is designed by nature or texture to look like its background, so noisy pseudo-labels can either spill past the boundary or erase fine detail."
+  }
+];
+export const cases = [
+  {
+    "id": "medical-background-prompt",
+    "title": "Medical background prompt",
+    "paperIndex": 0,
+    "boundaryDetail": 74,
+    "labelNoise": 28,
+    "domainDistortion": 38,
+    "backgroundReliance": 92,
+    "fewShotPressure": 86,
+    "openVocabAmbiguity": 24,
+    "operatorAction": "require background-ablation proof before trusting foreground masks"
+  },
+  {
+    "id": "panoramic-source-free-uda",
+    "title": "Panoramic source-free UDA",
+    "paperIndex": 1,
+    "boundaryDetail": 56,
+    "labelNoise": 76,
+    "domainDistortion": 94,
+    "backgroundReliance": 48,
+    "fewShotPressure": 38,
+    "openVocabAmbiguity": 34,
+    "operatorAction": "gate panoramic adaptation on distortion-aware pseudo-label cleanup"
+  },
+  {
+    "id": "training-free-cosaliency",
+    "title": "Training-free co-saliency",
+    "paperIndex": 2,
+    "boundaryDetail": 52,
+    "labelNoise": 70,
+    "domainDistortion": 28,
+    "backgroundReliance": 62,
+    "fewShotPressure": 72,
+    "openVocabAmbiguity": 58,
+    "operatorAction": "compare common-object masks across image groups before release"
+  },
+  {
+    "id": "few-shot-incremental-audio",
+    "title": "Few-shot incremental audio",
+    "paperIndex": 3,
+    "boundaryDetail": 26,
+    "labelNoise": 48,
+    "domainDistortion": 36,
+    "backgroundReliance": 22,
+    "fewShotPressure": 96,
+    "openVocabAmbiguity": 72,
+    "operatorAction": "treat prototype drift as localization failure in label space"
+  },
+  {
+    "id": "camouflage-pseudo-labels",
+    "title": "Camouflage pseudo-labels",
+    "paperIndex": 4,
+    "boundaryDetail": 96,
+    "labelNoise": 82,
+    "domainDistortion": 44,
+    "backgroundReliance": 88,
+    "fewShotPressure": 54,
+    "openVocabAmbiguity": 46,
+    "operatorAction": "hold if pseudo-label evolution erases thin object boundaries"
+  }
+];
+export const benchRows = [
+  {
+    "id": "medical-background-prompt",
+    "title": "Medical background prompt",
+    "paperTitle": "Focus on Background: Exploring SAM's Potential in Few-shot Medical Image Segmentation",
+    "repo": "https://github.com/primebo1/FoB",
+    "tags": [
+      "few-shot segmentation",
+      "medical imaging",
+      "SAM",
+      "background prompting",
+      "GCN",
+      "graph neural network"
+    ],
+    "paperProblem": "This few-shot medical segmentation work is about using background cues, not only foreground prompts. The everyday problem is that two medical structures may look similar, and the surrounding tissue can be the clue that separates the target from lookalikes.",
+    "metrics": {
+      "boundaryDetail": 74,
+      "labelNoise": 28,
+      "domainDistortion": 38,
+      "backgroundReliance": 92,
+      "fewShotPressure": 86,
+      "openVocabAmbiguity": 24,
+      "localizationRisk": 50.6,
+      "adaptationRisk": 49.4,
+      "evidenceNeed": 67.4,
+      "readiness": 51.1
+    },
+    "decision": "review",
+    "operatorAction": "require background-ablation proof before trusting foreground masks"
+  },
+  {
+    "id": "panoramic-source-free-uda",
+    "title": "Panoramic source-free UDA",
+    "paperTitle": "Denoise and Align: Towards Source-Free UDA for Robust Panoramic Semantic Segmentation",
+    "repo": "https://github.com/ZZZPhaethon/DAPASS",
+    "tags": [
+      "panoramic-segmentation",
+      "domain-adaptation",
+      "semantic-segmentation",
+      "source-free",
+      "equirectangular-projection",
+      "autonomous-driving"
+    ],
+    "paperProblem": "DAPASS is about adapting a segmentation model to panoramic 360-degree images without source training data. The everyday problem is that panoramic projection distorts scale and shape, while noisy pseudo-labels can lock the adapted model into wrong classes.",
+    "metrics": {
+      "boundaryDetail": 56,
+      "labelNoise": 76,
+      "domainDistortion": 94,
+      "backgroundReliance": 48,
+      "fewShotPressure": 38,
+      "openVocabAmbiguity": 34,
+      "localizationRisk": 62.8,
+      "adaptationRisk": 64.0,
+      "evidenceNeed": 51.9,
+      "readiness": 45.5
+    },
+    "decision": "review",
+    "operatorAction": "gate panoramic adaptation on distortion-aware pseudo-label cleanup"
+  },
+  {
+    "id": "training-free-cosaliency",
+    "title": "Training-free co-saliency",
+    "paperTitle": "TF-SSD: A Strong Pipeline via Synergic Mask Filter for Training-free Co-Salient Object Detection",
+    "repo": "https://github.com/hzz-yy/TF-SSD",
+    "tags": [
+      "co-salient-object-detection",
+      "training-free",
+      "zero-shot",
+      "SAM",
+      "DINO",
+      "segmentation"
+    ],
+    "paperProblem": "TF-SSD is about detecting common salient objects across image groups without labeled training. The everyday problem is that zero-shot mask proposals are noisy, and the system must find which masks point to the same meaningful object across images.",
+    "metrics": {
+      "boundaryDetail": 52,
+      "labelNoise": 70,
+      "domainDistortion": 28,
+      "backgroundReliance": 62,
+      "fewShotPressure": 72,
+      "openVocabAmbiguity": 58,
+      "localizationRisk": 53.8,
+      "adaptationRisk": 56.2,
+      "evidenceNeed": 62.2,
+      "readiness": 49.0
+    },
+    "decision": "review",
+    "operatorAction": "compare common-object masks across image groups before release"
+  },
+  {
+    "id": "few-shot-incremental-audio",
+    "title": "Few-shot incremental audio",
+    "paperTitle": "TAPE: Task-Adaptive Prototype Evolution in Audio-Language Models for Fully Few-Shot Class-Incremental Audio Classification",
+    "repo": "https://github.com/YvoGao/TAPE",
+    "tags": [
+      "audio classification",
+      "few-shot learning",
+      "class-incremental learning",
+      "continual learning",
+      "CLAP",
+      "audio-language model"
+    ],
+    "paperProblem": "TAPE is about learning new audio classes from a few examples without forgetting old ones. The everyday problem is that a new sound category may have only a handful of clips, and the original training audio may no longer be available.",
+    "metrics": {
+      "boundaryDetail": 26,
+      "labelNoise": 48,
+      "domainDistortion": 36,
+      "backgroundReliance": 22,
+      "fewShotPressure": 96,
+      "openVocabAmbiguity": 72,
+      "localizationRisk": 40.5,
+      "adaptationRisk": 56.0,
+      "evidenceNeed": 47.6,
+      "readiness": 57.4
+    },
+    "decision": "review",
+    "operatorAction": "treat prototype drift as localization failure in label space"
+  },
+  {
+    "id": "camouflage-pseudo-labels",
+    "title": "Camouflage pseudo-labels",
+    "paperTitle": "EReCu: Pseudo-label Evolution Fusion and Refinement with Multi-Cue Learning for Unsupervised Camouflage Detection",
+    "repo": "https://github.com/JSLiam94/EReCu",
+    "tags": [
+      "camouflaged-object-detection",
+      "unsupervised",
+      "pseudo-labels",
+      "teacher-student",
+      "segmentation",
+      "detail-preservation"
+    ],
+    "paperProblem": "EReCu is about finding camouflaged objects without clean labels. The everyday problem is that the object is designed by nature or texture to look like its background, so noisy pseudo-labels can either spill past the boundary or erase fine detail.",
+    "metrics": {
+      "boundaryDetail": 96,
+      "labelNoise": 82,
+      "domainDistortion": 44,
+      "backgroundReliance": 88,
+      "fewShotPressure": 54,
+      "openVocabAmbiguity": 46,
+      "localizationRisk": 72.2,
+      "adaptationRisk": 60.8,
+      "evidenceNeed": 78.2,
+      "readiness": 37.1
+    },
+    "decision": "block",
+    "operatorAction": "hold if pseudo-label evolution erases thin object boundaries"
+  }
+];
+export const summary = {
+  "demo": "cvpr-perception-parts-repo-bench",
+  "status": "ready",
+  "theme": "Naming and locating what's in the picture",
+  "sourceForge": "cvpr-paper-repo-demo-forge.html",
+  "system": "open-vocab-visual-search",
+  "repoPapers": 5,
+  "cases": 5,
+  "release": 0,
+  "review": 4,
+  "block": 1,
+  "maxLocalizationRisk": 72.2,
+  "maxAdaptationRisk": 64.0,
+  "minReadiness": 37.1,
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

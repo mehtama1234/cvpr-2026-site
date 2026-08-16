@@ -1,0 +1,267 @@
+{
+  "summary": {
+    "scoreboard": "cvpr-subtheme-release-scoreboard",
+    "status": "scoreboard-ready",
+    "sourceScenarioLab": "analysis/cvpr_subtheme_scenario_lab/registry.json",
+    "themes": 8,
+    "readyThemes": 8,
+    "sourceLanes": 212,
+    "topPaperRepos": 40,
+    "scenarios": 636,
+    "readyScenarios": 636,
+    "evidenceProbes": 212,
+    "failureProbes": 212,
+    "releaseProbes": 212,
+    "riskFamilies": 3,
+    "repoLaneLinks": 237,
+    "demoPageLinks": 222,
+    "deepViewerLanes": 46,
+    "artifacts": 711,
+    "controls": 1185,
+    "holds": 0,
+    "validator": "scripts/verify_cvpr_subtheme_release_scoreboard.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "themeRows": [
+    {
+      "theme": "embodied",
+      "status": "release-ready",
+      "lanes": 26,
+      "scenarios": 78,
+      "readyScenarios": 78,
+      "evidenceProbes": 26,
+      "failureProbes": 26,
+      "releaseProbes": 26,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 26,
+        "silent-regression": 26,
+        "release-drift": 26
+      },
+      "demoPages": [
+        "cvpr-embodied-control-repo-drill.html",
+        "cvpr-embodied-safe-driving-drl-deep-viewer.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "DIEM",
+      "representativeDemo": "cvpr-embodied-control-repo-drill.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote embodied subtheme scenario pack"
+    },
+    {
+      "theme": "frontier",
+      "status": "release-ready",
+      "lanes": 26,
+      "scenarios": 78,
+      "readyScenarios": 78,
+      "evidenceProbes": 26,
+      "failureProbes": 26,
+      "releaseProbes": 26,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 26,
+        "silent-regression": 26,
+        "release-drift": 26
+      },
+      "demoPages": [
+        "cvpr-frontier-mos-deep-viewer.html",
+        "cvpr-frontier-sensor-fusion-bench.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "GeoVis",
+      "representativeDemo": "cvpr-frontier-mos-deep-viewer.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote frontier subtheme scenario pack"
+    },
+    {
+      "theme": "generation",
+      "status": "release-ready",
+      "lanes": 23,
+      "scenarios": 69,
+      "readyScenarios": 69,
+      "evidenceProbes": 23,
+      "failureProbes": 23,
+      "releaseProbes": 23,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 23,
+        "silent-regression": 23,
+        "release-drift": 23
+      },
+      "demoPages": [
+        "cvpr-generation-control-repo-studio.html",
+        "cvpr-generation-gdpo-deep-viewer.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "CODSR",
+      "representativeDemo": "cvpr-generation-control-repo-studio.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote generation subtheme scenario pack"
+    },
+    {
+      "theme": "learning",
+      "status": "release-ready",
+      "lanes": 25,
+      "scenarios": 75,
+      "readyScenarios": 75,
+      "evidenceProbes": 25,
+      "failureProbes": 25,
+      "releaseProbes": 25,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 25,
+        "silent-regression": 25,
+        "release-drift": 25
+      },
+      "demoPages": [
+        "cvpr-efficient-learning-repo-governor.html",
+        "cvpr-learning-embedlens-deep-viewer.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "BPFedCTTA",
+      "representativeDemo": "cvpr-efficient-learning-repo-governor.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote learning subtheme scenario pack"
+    },
+    {
+      "theme": "perceive",
+      "status": "release-ready",
+      "lanes": 28,
+      "scenarios": 84,
+      "readyScenarios": 84,
+      "evidenceProbes": 28,
+      "failureProbes": 28,
+      "releaseProbes": 28,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 28,
+        "silent-regression": 28,
+        "release-drift": 28
+      },
+      "demoPages": [
+        "cvpr-perception-fob-deep-viewer.html",
+        "cvpr-perception-parts-repo-bench.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "DAPASS",
+      "representativeDemo": "cvpr-perception-fob-deep-viewer.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote perceive subtheme scenario pack"
+    },
+    {
+      "theme": "threed",
+      "status": "release-ready",
+      "lanes": 27,
+      "scenarios": 81,
+      "readyScenarios": 81,
+      "evidenceProbes": 27,
+      "failureProbes": 27,
+      "releaseProbes": 27,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 27,
+        "silent-regression": 27,
+        "release-drift": 27
+      },
+      "demoPages": [
+        "cvpr-3d-world-repo-arena.html",
+        "cvpr-threed-insightface-deep-viewer.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "Flow4DGS-SLAM",
+      "representativeDemo": "cvpr-3d-world-repo-arena.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote threed subtheme scenario pack"
+    },
+    {
+      "theme": "video",
+      "status": "release-ready",
+      "lanes": 28,
+      "scenarios": 84,
+      "readyScenarios": 84,
+      "evidenceProbes": 28,
+      "failureProbes": 28,
+      "releaseProbes": 28,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 28,
+        "silent-regression": 28,
+        "release-drift": 28
+      },
+      "demoPages": [
+        "cvpr-video-flux-deep-viewer.html",
+        "cvpr-video-temporal-repo-lab.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "AdaSpot",
+      "representativeDemo": "cvpr-video-flux-deep-viewer.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote video subtheme scenario pack"
+    },
+    {
+      "theme": "vlm",
+      "status": "release-ready",
+      "lanes": 29,
+      "scenarios": 87,
+      "readyScenarios": 87,
+      "evidenceProbes": 29,
+      "failureProbes": 29,
+      "releaseProbes": 29,
+      "riskFamilies": 3,
+      "risks": [
+        "release-drift",
+        "silent-regression",
+        "unsupported-evidence"
+      ],
+      "riskCounts": {
+        "unsupported-evidence": 29,
+        "silent-regression": 29,
+        "release-drift": 29
+      },
+      "demoPages": [
+        "cvpr-grounded-vlm-repo-court.html",
+        "cvpr-vlm-fedafd-deep-viewer.html"
+      ],
+      "repoCount": 5,
+      "representativeRepo": "FedAFD",
+      "representativeDemo": "cvpr-grounded-vlm-repo-court.html",
+      "releaseCommand": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py && python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
+      "promotionAction": "promote vlm subtheme scenario pack"
+    }
+  ]
+}

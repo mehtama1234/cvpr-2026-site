@@ -1,0 +1,10 @@
+{
+  "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+  "repo": "https://github.com/Zhang-Peirong/GeoVis",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

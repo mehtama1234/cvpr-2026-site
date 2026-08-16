@@ -1,0 +1,137 @@
+{
+  "summary": {
+    "lab": "cvpr-interactive-rollback-rehearsal-lab",
+    "status": "rehearsal-ready",
+    "sourceDrillbook": "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+    "rehearsals": 6,
+    "clearRehearsals": 6,
+    "blockedRehearsals": 0,
+    "armedDrills": 6,
+    "driftChecks": 18,
+    "blockedChecks": 0,
+    "healthBlocked": 0,
+    "triageRetest": 0,
+    "demos": 40,
+    "scenarioCases": 120,
+    "promoteDecisions": 40,
+    "holds": 0,
+    "validator": "scripts/verify_cvpr_interactive_rollback_rehearsal_lab.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "rehearsalRows": [
+    {
+      "rehearsalId": "interactive-rehearsal-01",
+      "drillId": "interactive-rollback-01",
+      "category": "command-vs-health",
+      "trigger": "count-drift",
+      "owner": "interactive-release-operator",
+      "drillStatus": "armed",
+      "action": "Rebuild command center, health monitor, and drift sentinel, then rerun full-stack validation.",
+      "recoveryCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "durationMin": 4,
+      "budgetMin": 12,
+      "expectedHold": 0,
+      "evidence": [
+        "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+        "analysis/cvpr_interactive_drift_sentinel/registry.json",
+        "analysis/cvpr_full_stack_validation/registry.json"
+      ],
+      "status": "clear"
+    },
+    {
+      "rehearsalId": "interactive-rehearsal-02",
+      "drillId": "interactive-rollback-02",
+      "category": "command-vs-release",
+      "trigger": "release-drift",
+      "owner": "interactive-release-operator",
+      "drillStatus": "armed",
+      "action": "Rebuild release pack from command center evidence and reseal drift sentinel.",
+      "recoveryCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "durationMin": 5,
+      "budgetMin": 12,
+      "expectedHold": 0,
+      "evidence": [
+        "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+        "analysis/cvpr_interactive_drift_sentinel/registry.json",
+        "analysis/cvpr_full_stack_validation/registry.json"
+      ],
+      "status": "clear"
+    },
+    {
+      "rehearsalId": "interactive-rehearsal-03",
+      "drillId": "interactive-rollback-03",
+      "category": "release-vs-ledger",
+      "trigger": "audit-drift",
+      "owner": "interactive-release-operator",
+      "drillStatus": "armed",
+      "action": "Rebuild audit ledger fingerprints and reseal release pack references.",
+      "recoveryCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "durationMin": 6,
+      "budgetMin": 12,
+      "expectedHold": 0,
+      "evidence": [
+        "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+        "analysis/cvpr_interactive_drift_sentinel/registry.json",
+        "analysis/cvpr_full_stack_validation/registry.json"
+      ],
+      "status": "clear"
+    },
+    {
+      "rehearsalId": "interactive-rehearsal-04",
+      "drillId": "interactive-rollback-04",
+      "category": "health-monitor",
+      "trigger": "probe-block",
+      "owner": "interactive-release-operator",
+      "drillStatus": "armed",
+      "action": "Rebuild the failed surface, rerun health monitor, and keep release on hold until probes clear.",
+      "recoveryCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "durationMin": 7,
+      "budgetMin": 12,
+      "expectedHold": 0,
+      "evidence": [
+        "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+        "analysis/cvpr_interactive_drift_sentinel/registry.json",
+        "analysis/cvpr_full_stack_validation/registry.json"
+      ],
+      "status": "clear"
+    },
+    {
+      "rehearsalId": "interactive-rehearsal-05",
+      "drillId": "interactive-rollback-05",
+      "category": "triage-board",
+      "trigger": "decision-regression",
+      "owner": "interactive-release-operator",
+      "drillStatus": "armed",
+      "action": "Move affected demos to retest, rerun scenario runner, then regenerate triage.",
+      "recoveryCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "durationMin": 8,
+      "budgetMin": 12,
+      "expectedHold": 0,
+      "evidence": [
+        "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+        "analysis/cvpr_interactive_drift_sentinel/registry.json",
+        "analysis/cvpr_full_stack_validation/registry.json"
+      ],
+      "status": "clear"
+    },
+    {
+      "rehearsalId": "interactive-rehearsal-06",
+      "drillId": "interactive-rollback-06",
+      "category": "full-stack",
+      "trigger": "validation-regression",
+      "owner": "interactive-release-operator",
+      "drillStatus": "armed",
+      "action": "Run full-stack validator, inspect failing step, and block promotion until status returns valid.",
+      "recoveryCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "durationMin": 9,
+      "budgetMin": 12,
+      "expectedHold": 0,
+      "evidence": [
+        "analysis/cvpr_interactive_rollback_drillbook/registry.json",
+        "analysis/cvpr_interactive_drift_sentinel/registry.json",
+        "analysis/cvpr_full_stack_validation/registry.json"
+      ],
+      "status": "clear"
+    }
+  ]
+}

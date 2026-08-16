@@ -1,0 +1,10 @@
+{
+  "jobId": "vlm-03-github-com-oamyjin-graphvlm",
+  "repo": "https://github.com/oamyjin/GraphVLM",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

@@ -1,0 +1,7 @@
+jobId=embodied-01-github-com-szu-ai-safe-driving-d
+repo=https://github.com/szu-ai/safe-driving-drl
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

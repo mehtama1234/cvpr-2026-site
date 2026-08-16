@@ -1,0 +1,10 @@
+{
+  "jobId": "perception-01-github-com-primebo1-fob",
+  "repo": "https://github.com/primebo1/FoB",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "promoted-results-json",
+  "status": "rehydrated"
+}

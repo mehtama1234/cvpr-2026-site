@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import { cockpitInput, demoRows, summary, systemRows } from "../src/fixtures.js";
+import { cockpitGate, evidenceLabel, summarizeCockpit } from "../src/core.js";
+
+const derived = summarizeCockpit({ ...cockpitInput, demoRows });
+assert.equal(derived.status, "ready");
+assert.equal(cockpitGate(summary), "ready");
+assert.equal(summary.systems, 11);
+assert.equal(summary.stageDemos, 33);
+assert.equal(summary.flagshipDemos, 8);
+assert.equal(summary.totalDemos, 41);
+assert.equal(summary.proPlusJobs, 10);
+assert.equal(summary.expectedLiveResults, 40);
+assert.equal(summary.benchRelease, 44);
+assert.equal(summary.missingDemoEvidence, 0);
+assert.equal(summary.releaseGate, "release");
+assert.equal(systemRows.length, 11);
+assert.equal(demoRows.length, 33);
+assert.equal(demoRows.filter((row) => row.runtimeEvidence === "colab-pro-plus").length, 30);
+assert.equal(demoRows.filter((row) => row.runtimeEvidence === "cached-system-evidence").length, 3);
+assert.equal(evidenceLabel(demoRows[0]), "GPU-backed demo evidence");
+console.log("ok cvpr-demo-evidence-cockpit:", summary.totalDemos, "demos,", summary.expectedLiveResults, "expected live results");

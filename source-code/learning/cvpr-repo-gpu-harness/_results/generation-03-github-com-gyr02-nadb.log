@@ -1,0 +1,7 @@
+jobId=generation-03-github-com-gyr02-nadb
+repo=https://github.com/gyr02/NADB
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

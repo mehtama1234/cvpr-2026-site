@@ -1,0 +1,7 @@
+jobId=vlm-05-github-com-uuuuzyc-see-it-say-it
+repo=https://github.com/uuuuZYC/See-It-Say-It-Sorted
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

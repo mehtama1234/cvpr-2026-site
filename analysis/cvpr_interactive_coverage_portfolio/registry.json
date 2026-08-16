@@ -1,0 +1,820 @@
+{
+  "summary": {
+    "portfolio": "cvpr-interactive-coverage-portfolio",
+    "status": "coverage-ready",
+    "waves": 5,
+    "totalDemos": 40,
+    "themes": 8,
+    "localArtifacts": 120,
+    "controls": 200,
+    "runtimeControllers": 40,
+    "promoteInteractive": 40,
+    "holdInteractive": 0,
+    "duplicateJobs": 0,
+    "sourceRegistries": 5,
+    "validator": "scripts/verify_cvpr_interactive_coverage_portfolio.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "portfolioRows": [
+    {
+      "wave": "first",
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "theme": "frontier",
+      "repo": "MOS",
+      "page": "cvpr-frontier-mos-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "threed-01-github-com-deepinsight-insightfa",
+      "theme": "threed",
+      "repo": "insightface",
+      "page": "cvpr-threed-insightface-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-01-github-com-deepinsight-insightfa",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "video-01-github-com-black-forest-labs-flu",
+      "theme": "video",
+      "repo": "flux",
+      "page": "cvpr-video-flux-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-01-github-com-black-forest-labs-flu",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "generation-01-github-com-joyies-gdpo",
+      "theme": "generation",
+      "repo": "GDPO",
+      "page": "cvpr-generation-gdpo-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-01-github-com-joyies-gdpo",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "vlm-01-github-com-chao2433-fedafd",
+      "theme": "vlm",
+      "repo": "FedAFD",
+      "page": "cvpr-vlm-fedafd-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-01-github-com-chao2433-fedafd",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "perception-01-github-com-primebo1-fob",
+      "theme": "perception",
+      "repo": "FoB",
+      "page": "cvpr-perception-fob-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-01-github-com-primebo1-fob",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+      "theme": "embodied",
+      "repo": "safe-driving-drl",
+      "page": "cvpr-embodied-safe-driving-drl-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-01-github-com-szu-ai-safe-driving-d",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "first",
+      "jobId": "learning-01-github-com-eit-nlp-embedlens",
+      "theme": "learning",
+      "repo": "EmbedLens",
+      "page": "cvpr-learning-embedlens-deep-viewer.html",
+      "wavePage": "cvpr-interactive-demo-workbench.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-01-github-com-eit-nlp-embedlens",
+      "sourceRegistry": "analysis/cvpr_interactive_demo_workbench/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "frontier-02-github-com-earth-insights-segear",
+      "theme": "frontier",
+      "repo": "SegEarth-R2",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-02-github-com-earth-insights-segear",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "threed-02-github-com-myniuuu-mad-avatar",
+      "theme": "threed",
+      "repo": "MAD-Avatar",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-02-github-com-myniuuu-mad-avatar",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "video-02-github-com-deepfakes-face",
+      "theme": "video",
+      "repo": "face-",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-02-github-com-deepfakes-face",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "generation-02-github-com-chanson94-codsr",
+      "theme": "generation",
+      "repo": "CODSR",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-02-github-com-chanson94-codsr",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "vlm-02-github-com-dige945-ppa-cvpr26",
+      "theme": "vlm",
+      "repo": "PPA_CVPR26",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-02-github-com-dige945-ppa-cvpr26",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "perception-02-github-com-zzzphaethon-dapass",
+      "theme": "perception",
+      "repo": "DAPASS",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-02-github-com-zzzphaethon-dapass",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "embodied-02-github-com-bofusun-srcp",
+      "theme": "embodied",
+      "repo": "SRCP",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-02-github-com-bofusun-srcp",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "second",
+      "jobId": "learning-02-github-com-cgcl-codes-nuwa",
+      "theme": "learning",
+      "repo": "NuWa",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "wavePage": "cvpr-interactive-second-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-02-github-com-cgcl-codes-nuwa",
+      "sourceRegistry": "analysis/cvpr_interactive_second_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "frontier-03-github-com-fahadshamshad-raven",
+      "theme": "frontier",
+      "repo": "raven-",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-03-github-com-fahadshamshad-raven",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "threed-03-github-com-akumar005-l2dgs",
+      "theme": "threed",
+      "repo": "L2DGS",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-03-github-com-akumar005-l2dgs",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "video-03-github-com-modelscope-diffsynth",
+      "theme": "video",
+      "repo": "DiffSynth-",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-03-github-com-modelscope-diffsynth",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "generation-03-github-com-gyr02-nadb",
+      "theme": "generation",
+      "repo": "NADB",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-03-github-com-gyr02-nadb",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "vlm-03-github-com-oamyjin-graphvlm",
+      "theme": "vlm",
+      "repo": "GraphVLM",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-03-github-com-oamyjin-graphvlm",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "perception-03-github-com-hzz-yy-tf-ssd",
+      "theme": "perception",
+      "repo": "TF-SSD",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-03-github-com-hzz-yy-tf-ssd",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "embodied-03-github-com-codeshop715-energyact",
+      "theme": "embodied",
+      "repo": "EnergyAction",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-03-github-com-codeshop715-energyact",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "third",
+      "jobId": "learning-03-github-com-evi-group-scu-fozo",
+      "theme": "learning",
+      "repo": "FOZO",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "wavePage": "cvpr-interactive-third-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-03-github-com-evi-group-scu-fozo",
+      "sourceRegistry": "analysis/cvpr_interactive_third_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "frontier-04-github-com-jimmyxichen-mm-ovseg",
+      "theme": "frontier",
+      "repo": "MM-OVSeg",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-04-github-com-jimmyxichen-mm-ovseg",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "threed-04-github-com-wangys16-flow4dgs-sla",
+      "theme": "threed",
+      "repo": "Flow4DGS-SLAM",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-04-github-com-wangys16-flow4dgs-sla",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "video-04-github-com-arturxe2-adaspot",
+      "theme": "video",
+      "repo": "AdaSpot",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-04-github-com-arturxe2-adaspot",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "generation-04-github-com-jf-tan-lrdm",
+      "theme": "generation",
+      "repo": "LRDM",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-04-github-com-jf-tan-lrdm",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "vlm-04-github-com-remrico-recall",
+      "theme": "vlm",
+      "repo": "Recall",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-04-github-com-remrico-recall",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "perception-04-github-com-yvogao-tape",
+      "theme": "perception",
+      "repo": "TAPE",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-04-github-com-yvogao-tape",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "embodied-04-github-com-hrtan-diem",
+      "theme": "embodied",
+      "repo": "DIEM",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-04-github-com-hrtan-diem",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fourth",
+      "jobId": "learning-04-github-com-savadikarc-cheem",
+      "theme": "learning",
+      "repo": "cheem",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "wavePage": "cvpr-interactive-fourth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-04-github-com-savadikarc-cheem",
+      "sourceRegistry": "analysis/cvpr_interactive_fourth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+      "theme": "frontier",
+      "repo": "GeoVis",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-05-github-com-zhang-peirong-geovis",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "threed-05-github-com-wanghaoran16-prune-wi",
+      "theme": "threed",
+      "repo": "Prune-Wisely-",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-05-github-com-wanghaoran16-prune-wi",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "video-05-github-com-dmirlab-group-hal",
+      "theme": "video",
+      "repo": "HAL",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-05-github-com-dmirlab-group-hal",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "generation-05-github-com-mililab-rdbm",
+      "theme": "generation",
+      "repo": "RDBM",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-05-github-com-mililab-rdbm",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "vlm-05-github-com-uuuuzyc-see-it-say-it",
+      "theme": "vlm",
+      "repo": "See-It-Say-It-Sorted",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-05-github-com-uuuuzyc-see-it-say-it",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "perception-05-github-com-jsliam94-erecu",
+      "theme": "perception",
+      "repo": "EReCu",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-05-github-com-jsliam94-erecu",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "embodied-05-github-com-jiutian-vl-hiconagent",
+      "theme": "embodied",
+      "repo": "HiconAgent",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-05-github-com-jiutian-vl-hiconagent",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    },
+    {
+      "wave": "fifth",
+      "jobId": "learning-05-github-com-liwenwang919-bpfedctt",
+      "theme": "learning",
+      "repo": "BPFedCTTA",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "wavePage": "cvpr-interactive-fifth-wave.html",
+      "status": "interactive-ready",
+      "controls": 5,
+      "localArtifacts": 3,
+      "artifactPaths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.snapshot.json"
+      ],
+      "runtimeController": true,
+      "releaseAction": "promote-interactive-demo",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-05-github-com-liwenwang919-bpfedctt",
+      "sourceRegistry": "analysis/cvpr_interactive_fifth_wave/registry.json"
+    }
+  ]
+}

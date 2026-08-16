@@ -1,0 +1,10 @@
+{
+  "jobId": "embodied-02-github-com-bofusun-srcp",
+  "repo": "https://github.com/bofusun/SRCP",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

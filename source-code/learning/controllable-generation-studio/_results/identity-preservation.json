@@ -1,0 +1,18 @@
+{
+  "system": "controllable-generation-studio",
+  "systemTitle": "Controllable generation studio",
+  "stage": "identity-preservation",
+  "stageTitle": "Preserve identity",
+  "theme": "Making pixels from meaning",
+  "themeSlug": "generation",
+  "cluster": "Controllable generation",
+  "clusterSlug": "controllable_gen",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "measure what stayed fixed after an edit",
+  "reusableRule": "Controllable generation studio stage 'Preserve identity' should measure what stayed fixed after an edit using measured CVPR evidence, not only paper novelty."
+}

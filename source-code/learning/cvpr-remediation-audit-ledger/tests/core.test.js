@@ -1,0 +1,20 @@
+import assert from "node:assert/strict";
+import { ledgerRows, summary } from "../src/fixtures.js";
+import { ledgerGate, ledgerReady, summarizeLedger } from "../src/core.js";
+
+const derived = summarizeLedger(ledgerRows);
+assert.equal(derived.stages, 7);
+assert.equal(derived.readyStages, 7);
+assert.equal(ledgerRows.filter(ledgerReady).length, 7);
+assert.equal(summary.stages, 7);
+assert.equal(summary.readyStages, 7);
+assert.equal(summary.gauntletBlocks, 14);
+assert.equal(summary.actionableRows, 29);
+assert.equal(summary.clearedBlocks, 14);
+assert.equal(summary.promote, 12);
+assert.equal(summary.canaryRollback, 0);
+assert.equal(summary.rollbackDrills, 12);
+assert.equal(summary.rehearsalMisses, 0);
+assert.equal(ledgerGate(summary), "complete");
+assert.equal(summary.status, "complete");
+console.log("ok cvpr-remediation-audit-ledger:", summary.readyStages, "stages ready");

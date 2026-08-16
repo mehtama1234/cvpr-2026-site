@@ -1,0 +1,18 @@
+{
+  "system": "gaussian-splatting-platform",
+  "systemTitle": "Gaussian Splatting platform",
+  "stage": "semantic-splats",
+  "stageTitle": "Attach semantic labels",
+  "theme": "Recovering the 3D world from flat pictures",
+  "themeSlug": "threed",
+  "cluster": "Gaussian Splatting",
+  "clusterSlug": "gaussian_splatting",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "make splats searchable and editable by meaning",
+  "reusableRule": "Gaussian Splatting platform stage 'Attach semantic labels' should make splats searchable and editable by meaning using measured CVPR evidence, not only paper novelty."
+}

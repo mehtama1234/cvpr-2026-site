@@ -1,0 +1,1174 @@
+export const demos = [
+  {
+    "id": "adaptive-serving",
+    "title": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "summary": {
+      "demo": "cvpr-adaptive-serving-stress-lab",
+      "status": "release",
+      "backlogGoal": "Adaptive serving stress lab",
+      "backlogTasksCovered": 3,
+      "theme": "Learning more from less, and not breaking",
+      "system": "efficient-vision-serving",
+      "bench": "cvpr-compute-serving-bench",
+      "cases": 4,
+      "profiles": 3,
+      "stressRows": 12,
+      "release": 12,
+      "review": 0,
+      "block": 0,
+      "gpuBackedCases": 4,
+      "minRetainedEvidence": 76.3,
+      "maxRisk": 30.4,
+      "avgReadiness": 73.8,
+      "proPlusJob": "compute-serving",
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "constraint-edit",
+    "title": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "summary": {
+      "demo": "cvpr-constraint-edit-tournament",
+      "status": "release",
+      "backlogGoal": "Constraint edit tournament",
+      "backlogTasksCovered": 3,
+      "theme": "Making pixels from meaning",
+      "systems": [
+        "controllable-generation-studio",
+        "restoration-reliability-stack"
+      ],
+      "benches": [
+        "cvpr-constraint-generation-bench",
+        "cvpr-restoration-fidelity-bench"
+      ],
+      "generationCases": 4,
+      "restorationCases": 4,
+      "policies": 3,
+      "matches": 48,
+      "release": 9,
+      "review": 39,
+      "block": 0,
+      "gpuBackedCases": 8,
+      "minConstraintScore": 79.1,
+      "maxJointRisk": 37.4,
+      "avgTournamentScore": 77.8,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "open-vocab",
+    "title": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "summary": {
+      "demo": "cvpr-open-vocab-failure-hunt",
+      "status": "release",
+      "backlogGoal": "Open-vocabulary failure hunt",
+      "backlogTasksCovered": 3,
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab-visual-search",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "cases": 4,
+      "probes": 4,
+      "probeRows": 16,
+      "clear": 10,
+      "watch": 6,
+      "hunt": 0,
+      "gpuBackedCases": 4,
+      "minLocalizedEvidence": 81.6,
+      "maxUnsupportedRisk": 35.6,
+      "avgReadiness": 80.3,
+      "proPlusJob": "open-vocab-grounding",
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "3d-edit-provenance",
+    "title": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "summary": {
+      "demo": "cvpr-3d-edit-provenance-room",
+      "status": "release",
+      "backlogGoal": "3D edit provenance room",
+      "backlogTasksCovered": 3,
+      "theme": "Recovering the 3D world from flat pictures",
+      "systems": [
+        "metric-3d-reconstruction",
+        "gaussian-splatting-platform"
+      ],
+      "benches": [
+        "cvpr-metric-geometry-bench",
+        "cvpr-gaussian-splatting-bench"
+      ],
+      "geometryCases": 4,
+      "splatCases": 4,
+      "edits": 3,
+      "roomRows": 48,
+      "release": 32,
+      "review": 12,
+      "block": 4,
+      "cachedSystemEvidenceCases": 8,
+      "evidenceJobs": [
+        "metric-geometry",
+        "gaussian-splatting"
+      ],
+      "minProvenanceContinuity": 76.1,
+      "maxRoomRisk": 43.3,
+      "avgReadiness": 77.8,
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "temporal-counterfactual",
+    "title": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "summary": {
+      "demo": "cvpr-temporal-counterfactual-lab",
+      "status": "release",
+      "backlogGoal": "Temporal counterfactual lab",
+      "backlogTasksCovered": 3,
+      "theme": "Seeing and making things that move",
+      "system": "video-world-model",
+      "bench": "cvpr-temporal-rollout-bench",
+      "cases": 4,
+      "forks": 4,
+      "counterfactualRows": 16,
+      "stable": 8,
+      "watch": 8,
+      "break": 0,
+      "gpuBackedCases": 4,
+      "maxDrift": 52.4,
+      "minIdentityStability": 59.8,
+      "avgReadiness": 71.4,
+      "proPlusJob": "temporal-rollout",
+      "replayRows": 1,
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "grounded-answer",
+    "title": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "summary": {
+      "demo": "cvpr-grounded-answer-courtroom",
+      "status": "release",
+      "backlogGoal": "Grounded answer courtroom",
+      "backlogTasksCovered": 3,
+      "theme": "Teaching machines to see and talk at once",
+      "system": "vlm-grounded-reasoning",
+      "bench": "cvpr-vlm-answer-verification-bench",
+      "cases": 4,
+      "probes": 4,
+      "courtroomRows": 16,
+      "admit": 12,
+      "crossExamine": 4,
+      "sustainObjection": 0,
+      "cachedSystemEvidenceCases": 4,
+      "maxUnsupportedClaimRisk": 48.6,
+      "minVisualCitation": 61.9,
+      "avgReadiness": 75.2,
+      "evidenceKey": "vlm-grounded-reasoning",
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "provenance-red-team",
+    "title": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "summary": {
+      "demo": "cvpr-provenance-red-team-arena",
+      "status": "release",
+      "backlogGoal": "Provenance red-team arena",
+      "backlogTasksCovered": 3,
+      "theme": "The frontier - new senses and new duties",
+      "systems": [
+        "adversarial-provenance-gate",
+        "medical-vision-validation"
+      ],
+      "benches": [
+        "cvpr-adversarial-provenance-bench",
+        "cvpr-clinical-shift-bench"
+      ],
+      "cases": 4,
+      "attacks": 4,
+      "arenaRows": 16,
+      "release": 6,
+      "review": 10,
+      "block": 0,
+      "gpuBackedCases": 8,
+      "clinicalResidualRisk": 33.5,
+      "minEvidence": 78.8,
+      "maxDeploymentRisk": 50.7,
+      "avgReadiness": 73.3,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  },
+  {
+    "id": "safety-deployment",
+    "title": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "summary": {
+      "demo": "cvpr-safety-deployment-simulator",
+      "status": "release",
+      "backlogGoal": "Safety deployment simulator",
+      "backlogTasksCovered": 3,
+      "theme": "Using vision to act in the world",
+      "systems": [
+        "driving-vla-release-gate",
+        "medical-vision-validation"
+      ],
+      "benches": [
+        "cvpr-driving-safety-bench",
+        "cvpr-clinical-shift-bench"
+      ],
+      "cases": 4,
+      "contexts": 4,
+      "deploymentRows": 16,
+      "release": 4,
+      "review": 12,
+      "block": 0,
+      "gpuBackedCases": 8,
+      "clinicalResidualRisk": 33.5,
+      "stageEvidence": 56.2,
+      "minSceneGrounding": 57.5,
+      "maxDeploymentRisk": 52.2,
+      "avgDeploymentReadiness": 56.1,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  }
+];
+export const incidents = [
+  {
+    "id": "launch-audit",
+    "title": "Launch audit",
+    "readinessShift": 0,
+    "riskShift": 0,
+    "evidenceShift": 0,
+    "proPlusPenalty": 0
+  },
+  {
+    "id": "gpu-brownout",
+    "title": "GPU brownout",
+    "readinessShift": -10,
+    "riskShift": 8,
+    "evidenceShift": -5,
+    "proPlusPenalty": 4
+  },
+  {
+    "id": "adversarial-content",
+    "title": "Adversarial content",
+    "readinessShift": -8,
+    "riskShift": 18,
+    "evidenceShift": -8,
+    "proPlusPenalty": 0
+  },
+  {
+    "id": "compound-launch",
+    "title": "Compound launch",
+    "readinessShift": -18,
+    "riskShift": 25,
+    "evidenceShift": -15,
+    "proPlusPenalty": 5
+  }
+];
+export const gauntletRows = [
+  {
+    "id": "adaptive-serving/launch-audit",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "resilience": 72.9
+    },
+    "decision": "release"
+  },
+  {
+    "id": "adaptive-serving/gpu-brownout",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 59.8,
+      "risk": 42.4,
+      "evidence": 69.3,
+      "resilience": 61.1
+    },
+    "decision": "review"
+  },
+  {
+    "id": "adaptive-serving/adversarial-content",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 65.8,
+      "risk": 48.4,
+      "evidence": 68.3,
+      "resilience": 61.5
+    },
+    "decision": "review"
+  },
+  {
+    "id": "adaptive-serving/compound-launch",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 50.8,
+      "risk": 60.4,
+      "evidence": 59.3,
+      "resilience": 48.9
+    },
+    "decision": "block"
+  },
+  {
+    "id": "constraint-edit/launch-audit",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "resilience": 72.9
+    },
+    "decision": "release"
+  },
+  {
+    "id": "constraint-edit/gpu-brownout",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 63.8,
+      "risk": 49.4,
+      "evidence": 72.1,
+      "resilience": 61.1
+    },
+    "decision": "review"
+  },
+  {
+    "id": "constraint-edit/adversarial-content",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 69.8,
+      "risk": 55.4,
+      "evidence": 71.1,
+      "resilience": 61.5
+    },
+    "decision": "review"
+  },
+  {
+    "id": "constraint-edit/compound-launch",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 54.8,
+      "risk": 67.4,
+      "evidence": 62.1,
+      "resilience": 48.9
+    },
+    "decision": "block"
+  },
+  {
+    "id": "open-vocab/launch-audit",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "resilience": 75.2
+    },
+    "decision": "release"
+  },
+  {
+    "id": "open-vocab/gpu-brownout",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 66.3,
+      "risk": 47.6,
+      "evidence": 74.6,
+      "resilience": 63.4
+    },
+    "decision": "review"
+  },
+  {
+    "id": "open-vocab/adversarial-content",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 72.3,
+      "risk": 53.6,
+      "evidence": 73.6,
+      "resilience": 63.8
+    },
+    "decision": "review"
+  },
+  {
+    "id": "open-vocab/compound-launch",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 57.3,
+      "risk": 65.6,
+      "evidence": 64.6,
+      "resilience": 51.1
+    },
+    "decision": "block"
+  },
+  {
+    "id": "3d-edit-provenance/launch-audit",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "resilience": 70.3
+    },
+    "decision": "review"
+  },
+  {
+    "id": "3d-edit-provenance/gpu-brownout",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 65.8,
+      "risk": 53.3,
+      "evidence": 70.1,
+      "resilience": 60.3
+    },
+    "decision": "review"
+  },
+  {
+    "id": "3d-edit-provenance/adversarial-content",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 69.8,
+      "risk": 61.3,
+      "evidence": 68.1,
+      "resilience": 58.9
+    },
+    "decision": "review"
+  },
+  {
+    "id": "3d-edit-provenance/compound-launch",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 57.8,
+      "risk": 70.3,
+      "evidence": 60.1,
+      "resilience": 48.8
+    },
+    "decision": "block"
+  },
+  {
+    "id": "temporal-counterfactual/launch-audit",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "resilience": 60.8
+    },
+    "decision": "review"
+  },
+  {
+    "id": "temporal-counterfactual/gpu-brownout",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 57.4,
+      "risk": 64.4,
+      "evidence": 52.8,
+      "resilience": 49.0
+    },
+    "decision": "block"
+  },
+  {
+    "id": "temporal-counterfactual/adversarial-content",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 63.4,
+      "risk": 70.4,
+      "evidence": 51.8,
+      "resilience": 49.4
+    },
+    "decision": "block"
+  },
+  {
+    "id": "temporal-counterfactual/compound-launch",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 48.4,
+      "risk": 82.4,
+      "evidence": 42.8,
+      "resilience": 36.7
+    },
+    "decision": "block"
+  },
+  {
+    "id": "grounded-answer/launch-audit",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "resilience": 64.2
+    },
+    "decision": "review"
+  },
+  {
+    "id": "grounded-answer/gpu-brownout",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 63.2,
+      "risk": 58.6,
+      "evidence": 55.9,
+      "resilience": 54.2
+    },
+    "decision": "review"
+  },
+  {
+    "id": "grounded-answer/adversarial-content",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 67.2,
+      "risk": 66.6,
+      "evidence": 53.9,
+      "resilience": 52.8
+    },
+    "decision": "block"
+  },
+  {
+    "id": "grounded-answer/compound-launch",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 55.2,
+      "risk": 75.6,
+      "evidence": 45.9,
+      "resilience": 42.7
+    },
+    "decision": "block"
+  },
+  {
+    "id": "provenance-red-team/launch-audit",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 73.3,
+      "risk": 50.7,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 73.3,
+      "risk": 50.7,
+      "evidence": 78.8,
+      "resilience": 66.3
+    },
+    "decision": "review"
+  },
+  {
+    "id": "provenance-red-team/gpu-brownout",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 73.3,
+      "risk": 50.7,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 59.3,
+      "risk": 62.7,
+      "evidence": 71.8,
+      "resilience": 54.6
+    },
+    "decision": "review"
+  },
+  {
+    "id": "provenance-red-team/adversarial-content",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 73.3,
+      "risk": 50.7,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 65.3,
+      "risk": 68.7,
+      "evidence": 70.8,
+      "resilience": 54.9
+    },
+    "decision": "block"
+  },
+  {
+    "id": "provenance-red-team/compound-launch",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 73.3,
+      "risk": 50.7,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 50.3,
+      "risk": 80.7,
+      "evidence": 61.8,
+      "resilience": 42.3
+    },
+    "decision": "block"
+  },
+  {
+    "id": "safety-deployment/launch-audit",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "signals": {
+      "readiness": 56.1,
+      "risk": 52.2,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 56.1,
+      "risk": 52.2,
+      "evidence": 57.5,
+      "resilience": 53.6
+    },
+    "decision": "review"
+  },
+  {
+    "id": "safety-deployment/gpu-brownout",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "signals": {
+      "readiness": 56.1,
+      "risk": 52.2,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 42.1,
+      "risk": 64.2,
+      "evidence": 50.5,
+      "resilience": 41.8
+    },
+    "decision": "block"
+  },
+  {
+    "id": "safety-deployment/adversarial-content",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "adversarial-content",
+    "incidentTitle": "Adversarial content",
+    "signals": {
+      "readiness": 56.1,
+      "risk": 52.2,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 48.1,
+      "risk": 70.2,
+      "evidence": 49.5,
+      "resilience": 42.2
+    },
+    "decision": "block"
+  },
+  {
+    "id": "safety-deployment/compound-launch",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "signals": {
+      "readiness": 56.1,
+      "risk": 52.2,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 33.1,
+      "risk": 82.2,
+      "evidence": 40.5,
+      "resilience": 29.5
+    },
+    "decision": "block"
+  }
+];
+export const summary = {
+  "demo": "cvpr-cross-theme-incident-gauntlet",
+  "status": "release",
+  "round": "second-round-cross-theme",
+  "demos": 8,
+  "themes": 8,
+  "incidents": 4,
+  "gauntletRows": 32,
+  "sourceRelease": 8,
+  "release": 3,
+  "review": 15,
+  "block": 14,
+  "gpuBackedOrCachedCases": 48,
+  "minEvidence": 40.5,
+  "maxRisk": 82.4,
+  "avgResilience": 55.5,
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

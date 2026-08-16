@@ -1,0 +1,18 @@
+{
+  "system": "medical-vision-validation",
+  "systemTitle": "Medical vision validation",
+  "stage": "domain-shift",
+  "stageTitle": "Measure domain shift",
+  "theme": "The frontier - new senses and new duties",
+  "themeSlug": "emerging",
+  "cluster": "Vision for science and medicine",
+  "clusterSlug": "medical",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "test scanners, sites, staining, and patient mix separately",
+  "reusableRule": "Medical vision validation stage 'Measure domain shift' should test scanners, sites, staining, and patient mix separately using measured CVPR evidence, not only paper novelty."
+}

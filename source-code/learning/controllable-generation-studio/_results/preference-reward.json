@@ -1,0 +1,18 @@
+{
+  "system": "controllable-generation-studio",
+  "systemTitle": "Controllable generation studio",
+  "stage": "preference-reward",
+  "stageTitle": "Optimize preference reward",
+  "theme": "Making pixels from meaning",
+  "themeSlug": "generation",
+  "cluster": "Controllable generation",
+  "clusterSlug": "controllable_gen",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "use reward only when it improves grounded constraints",
+  "reusableRule": "Controllable generation studio stage 'Optimize preference reward' should use reward only when it improves grounded constraints using measured CVPR evidence, not only paper novelty."
+}

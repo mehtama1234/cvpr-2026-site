@@ -1,0 +1,7 @@
+jobId=perception-01-github-com-primebo1-fob
+repo=https://github.com/primebo1/FoB
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

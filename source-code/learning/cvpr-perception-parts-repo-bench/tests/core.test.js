@@ -1,0 +1,23 @@
+import assert from "node:assert/strict";
+import { benchRows, cases, papers, summary } from "../src/fixtures.js";
+import { benchDecision, evaluateCase, scoreBench, summarizeBench } from "../src/core.js";
+
+assert.equal(papers.length, 5);
+assert.equal(cases.length, 5);
+assert.equal(benchRows.length, 5);
+assert.ok(papers.every((paper) => paper.repo.startsWith("http")));
+const camo = cases.find((row) => row.id === "camouflage-pseudo-labels");
+const camoScore = scoreBench(camo);
+assert.ok(camoScore.localizationRisk > 70);
+assert.match(benchDecision(camoScore), /^(release|review|block)$/);
+const easier = scoreBench(camo, { boundaryDetail: 30, labelNoise: 20, domainDistortion: 20, backgroundReliance: 25, fewShotPressure: 20, openVocabAmbiguity: 20 });
+assert.ok(easier.readiness > camoScore.readiness);
+const medical = evaluateCase(cases[0], papers[0]);
+assert.match(medical.paperTitle, /Focus on Background/);
+const derived = summarizeBench(benchRows);
+assert.equal(derived.repoBackedRows, 5);
+assert.equal(summary.demo, "cvpr-perception-parts-repo-bench");
+assert.equal(summary.theme, "Naming and locating what's in the picture");
+assert.ok(summary.review + summary.block >= 4);
+assert.equal(summary.status, "ready");
+console.log("ok cvpr-perception-parts-repo-bench:", summary.cases, "cases");

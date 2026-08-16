@@ -1,0 +1,18 @@
+{
+  "system": "metric-3d-reconstruction",
+  "systemTitle": "Metric 3D reconstruction pipeline",
+  "stage": "camera-geometry",
+  "stageTitle": "Recover camera geometry",
+  "theme": "Recovering the 3D world from flat pictures",
+  "themeSlug": "threed",
+  "cluster": "3D reconstruction and novel views",
+  "clusterSlug": "recon_nvs",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "reject reconstructions with weak pose evidence",
+  "reusableRule": "Metric 3D reconstruction pipeline stage 'Recover camera geometry' should reject reconstructions with weak pose evidence using measured CVPR evidence, not only paper novelty."
+}

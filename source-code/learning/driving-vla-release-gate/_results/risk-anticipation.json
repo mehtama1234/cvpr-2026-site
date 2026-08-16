@@ -1,0 +1,18 @@
+{
+  "system": "driving-vla-release-gate",
+  "systemTitle": "Driving VLA release gate",
+  "stage": "risk-anticipation",
+  "stageTitle": "Anticipate risk",
+  "theme": "Using vision to act in the world",
+  "themeSlug": "embodied",
+  "cluster": "Driving and vision-language-action",
+  "clusterSlug": "driving_vla",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "score future collision and rule-violation risk",
+  "reusableRule": "Driving VLA release gate stage 'Anticipate risk' should score future collision and rule-violation risk using measured CVPR evidence, not only paper novelty."
+}

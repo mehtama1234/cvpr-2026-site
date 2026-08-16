@@ -1,0 +1,696 @@
+export const deltaInput = {
+  "summary": {
+    "delta": "cvpr-colab-promotion-delta",
+    "status": "release",
+    "cases": 40,
+    "jobs": 10,
+    "missing": 0,
+    "modeMismatches": 0,
+    "regressions": 0,
+    "maxReadinessDrop": 0.0,
+    "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+    "promotedArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
+    "promotionStatus": "valid"
+  },
+  "rows": [
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "adaptive-attack",
+      "readinessBefore": 80.8,
+      "readinessAfter": 80.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "attackCoverage": 0.0,
+        "evidence": 0.0,
+        "leakageRisk": 0.0,
+        "provenanceConfidence": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "clean-camera",
+      "readinessBefore": 79.7,
+      "readinessAfter": 79.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "attackCoverage": 0.0,
+        "evidence": 0.0,
+        "leakageRisk": 0.0,
+        "provenanceConfidence": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "edited-social-post",
+      "readinessBefore": 79.8,
+      "readinessAfter": 79.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "attackCoverage": 0.0,
+        "evidence": 0.0,
+        "leakageRisk": 0.0,
+        "provenanceConfidence": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "synthetic-watermarked",
+      "readinessBefore": 79.9,
+      "readinessAfter": 79.9,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "attackCoverage": 0.0,
+        "evidence": 0.0,
+        "leakageRisk": 0.0,
+        "provenanceConfidence": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "clinical-shift",
+      "caseId": "external-hospital",
+      "readinessBefore": 77.1,
+      "readinessAfter": 77.1,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "calibration": 0.0,
+        "clinicalEvidence": 0.0,
+        "domainEvidence": 0.0,
+        "readiness": 0.0,
+        "residualRisk": 0.0,
+        "shiftLoad": 0.0,
+        "triageRate": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "clinical-shift",
+      "caseId": "new-scanner",
+      "readinessBefore": 80.5,
+      "readinessAfter": 80.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "calibration": 0.0,
+        "clinicalEvidence": 0.0,
+        "domainEvidence": 0.0,
+        "readiness": 0.0,
+        "residualRisk": 0.0,
+        "shiftLoad": 0.0,
+        "triageRate": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "clinical-shift",
+      "caseId": "noisy-rare-cohort",
+      "readinessBefore": 72.5,
+      "readinessAfter": 72.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "calibration": 0.0,
+        "clinicalEvidence": 0.0,
+        "domainEvidence": 0.0,
+        "readiness": 0.0,
+        "residualRisk": 0.0,
+        "shiftLoad": 0.0,
+        "triageRate": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "clinical-shift",
+      "caseId": "same-site-clean",
+      "readinessBefore": 88.5,
+      "readinessAfter": 88.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "calibration": 0.0,
+        "clinicalEvidence": 0.0,
+        "domainEvidence": 0.0,
+        "readiness": 0.0,
+        "residualRisk": 0.0,
+        "shiftLoad": 0.0,
+        "triageRate": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "compute-serving",
+      "caseId": "desktop-batch",
+      "readinessBefore": 76.6,
+      "readinessAfter": 76.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "costSaving": 0.0,
+        "escalationRate": 0.0,
+        "latency": 0.0,
+        "qualityFloor": 0.0,
+        "readiness": 0.0,
+        "retainedEvidence": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "compute-serving",
+      "caseId": "edge-camera",
+      "readinessBefore": 73.5,
+      "readinessAfter": 73.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "costSaving": 0.0,
+        "escalationRate": 0.0,
+        "latency": 0.0,
+        "qualityFloor": 0.0,
+        "readiness": 0.0,
+        "retainedEvidence": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "compute-serving",
+      "caseId": "fleet-peak-load",
+      "readinessBefore": 74.6,
+      "readinessAfter": 74.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "costSaving": 0.0,
+        "escalationRate": 0.0,
+        "latency": 0.0,
+        "qualityFloor": 0.0,
+        "readiness": 0.0,
+        "retainedEvidence": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "compute-serving",
+      "caseId": "mobile-live",
+      "readinessBefore": 74.6,
+      "readinessAfter": 74.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "costSaving": 0.0,
+        "escalationRate": 0.0,
+        "latency": 0.0,
+        "qualityFloor": 0.0,
+        "readiness": 0.0,
+        "retainedEvidence": 0.0,
+        "risk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "constraint-generation",
+      "caseId": "layout-rewrite",
+      "readinessBefore": 77.5,
+      "readinessAfter": 77.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "constraintSatisfaction": 0.0,
+        "editLocality": 0.0,
+        "editPressure": 0.0,
+        "identityDamage": 0.0,
+        "identityPreservation": 0.0,
+        "provenanceRisk": 0.0,
+        "readiness": 0.0,
+        "rewardAlignment": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "constraint-generation",
+      "caseId": "light-layout-edit",
+      "readinessBefore": 84.9,
+      "readinessAfter": 84.9,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "constraintSatisfaction": 0.0,
+        "editLocality": 0.0,
+        "editPressure": 0.0,
+        "identityDamage": 0.0,
+        "identityPreservation": 0.0,
+        "provenanceRisk": 0.0,
+        "readiness": 0.0,
+        "rewardAlignment": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "constraint-generation",
+      "caseId": "prompt-attack-edit",
+      "readinessBefore": 77.6,
+      "readinessAfter": 77.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "constraintSatisfaction": 0.0,
+        "editLocality": 0.0,
+        "editPressure": 0.0,
+        "identityDamage": 0.0,
+        "identityPreservation": 0.0,
+        "provenanceRisk": 0.0,
+        "readiness": 0.0,
+        "rewardAlignment": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "constraint-generation",
+      "caseId": "style-with-locks",
+      "readinessBefore": 77.4,
+      "readinessAfter": 77.4,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "constraintSatisfaction": 0.0,
+        "editLocality": 0.0,
+        "editPressure": 0.0,
+        "identityDamage": 0.0,
+        "identityPreservation": 0.0,
+        "provenanceRisk": 0.0,
+        "readiness": 0.0,
+        "rewardAlignment": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "construction-zone",
+      "readinessBefore": 68.2,
+      "readinessAfter": 68.2,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "abstention": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0,
+        "ruleViolation": 0.0,
+        "sceneGrounding": 0.0,
+        "timeToCollision": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "highway-merge",
+      "readinessBefore": 68.2,
+      "readinessAfter": 68.2,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "abstention": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0,
+        "ruleViolation": 0.0,
+        "sceneGrounding": 0.0,
+        "timeToCollision": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "night-crosswalk",
+      "readinessBefore": 68.2,
+      "readinessAfter": 68.2,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "abstention": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0,
+        "ruleViolation": 0.0,
+        "sceneGrounding": 0.0,
+        "timeToCollision": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "urban-cut-in",
+      "readinessBefore": 68.1,
+      "readinessAfter": 68.1,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "abstention": 0.0,
+        "readiness": 0.0,
+        "risk": 0.0,
+        "ruleViolation": 0.0,
+        "sceneGrounding": 0.0,
+        "timeToCollision": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "dense-novel-view",
+      "readinessBefore": 85.6,
+      "readinessAfter": 85.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "editLeakageRisk": 0.0,
+        "provenanceTrace": 0.0,
+        "readiness": 0.0,
+        "renderFidelity": 0.0,
+        "semanticAttachment": 0.0,
+        "viewInstability": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "provenance-transfer",
+      "readinessBefore": 80.5,
+      "readinessAfter": 80.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "editLeakageRisk": 0.0,
+        "provenanceTrace": 0.0,
+        "readiness": 0.0,
+        "renderFidelity": 0.0,
+        "semanticAttachment": 0.0,
+        "viewInstability": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "semantic-edit",
+      "readinessBefore": 82.2,
+      "readinessAfter": 82.2,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "editLeakageRisk": 0.0,
+        "provenanceTrace": 0.0,
+        "readiness": 0.0,
+        "renderFidelity": 0.0,
+        "semanticAttachment": 0.0,
+        "viewInstability": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "sparse-capture",
+      "readinessBefore": 77.7,
+      "readinessAfter": 77.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "editLeakageRisk": 0.0,
+        "provenanceTrace": 0.0,
+        "readiness": 0.0,
+        "renderFidelity": 0.0,
+        "semanticAttachment": 0.0,
+        "viewInstability": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "low-texture-indoor",
+      "readinessBefore": 72.0,
+      "readinessAfter": 72.0,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "metricEvidence": 0.0,
+        "poseEvidence": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "topologyRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "scale-transfer",
+      "readinessBefore": 78.7,
+      "readinessAfter": 78.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "metricEvidence": 0.0,
+        "poseEvidence": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "topologyRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "thin-structure",
+      "readinessBefore": 75.5,
+      "readinessAfter": 75.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "metricEvidence": 0.0,
+        "poseEvidence": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "topologyRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "wide-baseline",
+      "readinessBefore": 85.8,
+      "readinessAfter": 85.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "metricEvidence": 0.0,
+        "poseEvidence": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "topologyRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "common-clean",
+      "readinessBefore": 84.7,
+      "readinessAfter": 84.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "localizedEvidence": 0.0,
+        "readiness": 0.0,
+        "unsupportedRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "rare-distractors",
+      "readinessBefore": 83.8,
+      "readinessAfter": 83.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "localizedEvidence": 0.0,
+        "readiness": 0.0,
+        "unsupportedRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "rare-visible",
+      "readinessBefore": 83.9,
+      "readinessAfter": 83.9,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "localizedEvidence": 0.0,
+        "readiness": 0.0,
+        "unsupportedRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "unsupported-query",
+      "readinessBefore": 83.8,
+      "readinessAfter": 83.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "localizedEvidence": 0.0,
+        "readiness": 0.0,
+        "unsupportedRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "compressed-low-light",
+      "readinessBefore": 77.7,
+      "readinessAfter": 77.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "downstreamUtility": 0.0,
+        "fabricatedDetailRisk": 0.0,
+        "fidelityScore": 0.0,
+        "readiness": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "mild-noise",
+      "readinessBefore": 82.0,
+      "readinessAfter": 82.0,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "downstreamUtility": 0.0,
+        "fabricatedDetailRisk": 0.0,
+        "fidelityScore": 0.0,
+        "readiness": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "motion-blur-task",
+      "readinessBefore": 77.7,
+      "readinessAfter": 77.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "downstreamUtility": 0.0,
+        "fabricatedDetailRisk": 0.0,
+        "fidelityScore": 0.0,
+        "readiness": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "over-restored-detail",
+      "readinessBefore": 77.8,
+      "readinessAfter": 77.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "downstreamUtility": 0.0,
+        "fabricatedDetailRisk": 0.0,
+        "fidelityScore": 0.0,
+        "readiness": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "temporal-rollout",
+      "caseId": "contact-heavy",
+      "readinessBefore": 76.2,
+      "readinessAfter": 76.2,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "contactConsistency": 0.0,
+        "drift": 0.0,
+        "identityStability": 0.0,
+        "memoryLoad": 0.0,
+        "readiness": 0.0,
+        "rolloutPlausibility": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "temporal-rollout",
+      "caseId": "crowded-memory",
+      "readinessBefore": 75.9,
+      "readinessAfter": 75.9,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "contactConsistency": 0.0,
+        "drift": 0.0,
+        "identityStability": 0.0,
+        "memoryLoad": 0.0,
+        "readiness": 0.0,
+        "rolloutPlausibility": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "temporal-rollout",
+      "caseId": "long-rollout-drift",
+      "readinessBefore": 75.9,
+      "readinessAfter": 75.9,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "contactConsistency": 0.0,
+        "drift": 0.0,
+        "identityStability": 0.0,
+        "memoryLoad": 0.0,
+        "readiness": 0.0,
+        "rolloutPlausibility": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "temporal-rollout",
+      "caseId": "short-stable",
+      "readinessBefore": 83.3,
+      "readinessAfter": 83.3,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "contactConsistency": 0.0,
+        "drift": 0.0,
+        "identityStability": 0.0,
+        "memoryLoad": 0.0,
+        "readiness": 0.0,
+        "rolloutPlausibility": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    }
+  ],
+  "missing": [],
+  "modeMismatches": [],
+  "regressions": []
+};

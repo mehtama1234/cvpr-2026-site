@@ -1,0 +1,248 @@
+{
+  "summary": {
+    "monitor": "cvpr-interactive-health-monitor",
+    "status": "monitor-ready",
+    "surfaces": 6,
+    "probes": 32,
+    "passingProbes": 32,
+    "blockedProbes": 0,
+    "fullStackStatus": "valid",
+    "fullStackSteps": 267,
+    "packageTests": 148,
+    "demos": 40,
+    "artifacts": 120,
+    "controls": 200,
+    "scenarioCases": 120,
+    "promoteDecisions": 40,
+    "auditEvents": 5,
+    "holds": 0,
+    "validator": "scripts/verify_cvpr_interactive_health_monitor.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "monitorProbes": [
+    {
+      "surface": "coverage",
+      "probe": "ready-status",
+      "observed": "coverage-ready",
+      "expected": "coverage-ready",
+      "status": "pass"
+    },
+    {
+      "surface": "coverage",
+      "probe": "page-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "coverage",
+      "probe": "registry-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "coverage",
+      "probe": "validator-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "coverage",
+      "probe": "rows-positive",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "console",
+      "probe": "ready-status",
+      "observed": "console-ready",
+      "expected": "console-ready",
+      "status": "pass"
+    },
+    {
+      "surface": "console",
+      "probe": "page-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "console",
+      "probe": "registry-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "console",
+      "probe": "validator-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "console",
+      "probe": "rows-positive",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "scenario-runner",
+      "probe": "ready-status",
+      "observed": "runner-ready",
+      "expected": "runner-ready",
+      "status": "pass"
+    },
+    {
+      "surface": "scenario-runner",
+      "probe": "page-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "scenario-runner",
+      "probe": "registry-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "scenario-runner",
+      "probe": "validator-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "scenario-runner",
+      "probe": "rows-positive",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "triage-board",
+      "probe": "ready-status",
+      "observed": "triage-ready",
+      "expected": "triage-ready",
+      "status": "pass"
+    },
+    {
+      "surface": "triage-board",
+      "probe": "page-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "triage-board",
+      "probe": "registry-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "triage-board",
+      "probe": "validator-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "triage-board",
+      "probe": "rows-positive",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "release-pack",
+      "probe": "ready-status",
+      "observed": "release-pack-ready",
+      "expected": "release-pack-ready",
+      "status": "pass"
+    },
+    {
+      "surface": "release-pack",
+      "probe": "page-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "release-pack",
+      "probe": "registry-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "release-pack",
+      "probe": "validator-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "release-pack",
+      "probe": "rows-positive",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "audit-ledger",
+      "probe": "ready-status",
+      "observed": "ledger-ready",
+      "expected": "ledger-ready",
+      "status": "pass"
+    },
+    {
+      "surface": "audit-ledger",
+      "probe": "page-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "audit-ledger",
+      "probe": "registry-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "audit-ledger",
+      "probe": "validator-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "audit-ledger",
+      "probe": "rows-positive",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "full-stack",
+      "probe": "report-present",
+      "observed": true,
+      "expected": true,
+      "status": "pass"
+    },
+    {
+      "surface": "full-stack",
+      "probe": "import-issues",
+      "observed": 0,
+      "expected": 0,
+      "status": "pass"
+    }
+  ]
+}

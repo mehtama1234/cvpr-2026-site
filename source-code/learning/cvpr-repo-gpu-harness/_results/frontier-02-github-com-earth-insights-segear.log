@@ -1,0 +1,7 @@
+jobId=frontier-02-github-com-earth-insights-segear
+repo=https://github.com/earth-insights/SegEarth-R2
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

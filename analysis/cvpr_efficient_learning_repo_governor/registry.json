@@ -1,0 +1,322 @@
+{
+  "summary": {
+    "demo": "cvpr-efficient-learning-repo-governor",
+    "status": "ready",
+    "theme": "Learning more from less, and not breaking",
+    "sourceForge": "cvpr-paper-repo-demo-forge.html",
+    "system": "efficient-vision-serving",
+    "repoPapers": 5,
+    "cases": 5,
+    "promote": 0,
+    "canary": 2,
+    "hold": 3,
+    "maxAccuracyRisk": 46.8,
+    "maxAdaptationRisk": 70.9,
+    "minReadiness": 38.7,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "sourceBlueprint": {
+    "id": "paper-repo-08-efficient-learning",
+    "theme": "learning",
+    "title": "Efficient Learning Repo Governor",
+    "query": [
+      "token",
+      "pruning",
+      "continual",
+      "few-shot",
+      "compression",
+      "adaptation"
+    ],
+    "systems": [
+      "efficient-vision-serving"
+    ],
+    "demoSurface": "cvpr-efficient-learning-repo-governor.html",
+    "mechanic": "Convert code-backed token compression, pruning, continual, and adaptation papers into cost/readiness tradeoff demos.",
+    "themeName": "Learning more from less, and not breaking",
+    "themeRepoCount": 45,
+    "repoPapers": 5,
+    "seedPapers": [
+      {
+        "title": "What Do Visual Tokens Really Encode: Uncovering Sparsity and Redundancy",
+        "repo": "https://github.com/EIT-NLP/EmbedLens",
+        "tags": [
+          "vision-transformers",
+          "token-analysis",
+          "model-compression",
+          "network-pruning",
+          "interpretability"
+        ],
+        "problem": "What Do Visual Tokens Really Encode is about finding which image patches in a transformer actually carry useful information. The everyday problem is that a model may spend equal effort on sky, wall, object edge, and repeated texture even though many tokens say"
+      },
+      {
+        "title": "NuWa: Deriving Lightweight Class-Specific Vision Transformers for Edge Devices",
+        "repo": "https://github.com/CGCL-codes/NuWa",
+        "tags": [
+          "vision transformer",
+          "model compression",
+          "pruning",
+          "edge devices",
+          "structured pruning",
+          "knowledge distillation"
+        ],
+        "problem": "NuWa is about shrinking vision transformers for edge devices. The everyday problem is that an edge camera may only need a few object classes, so carrying a full general model wastes memory and power."
+      },
+      {
+        "title": "FOZO: Forward-Only Zeroth-Order Prompt Optimization for Test-Time Adaptation",
+        "repo": "https://github.com/eVI-group-SCU/FOZO",
+        "tags": [
+          "test-time-adaptation",
+          "domain-adaptation",
+          "zeroth-order-optimization",
+          "prompt-tuning",
+          "vision-transformer",
+          "forward-only-learning"
+        ],
+        "problem": "FOZO is about adapting a model at test time on devices that cannot afford backpropagation. The everyday problem is that the model faces a shifted environment, but computing full gradients is too expensive in memory and time."
+      },
+      {
+        "title": "CHEEM: Continual Learning by Reuse, New, Adapt and Skip \u2013 A Hierarchical Exploration-Exploitation Approach",
+        "repo": "https://github.com/savadikarc/cheem",
+        "tags": [
+          "continual-learning",
+          "class-incremental",
+          "neural-architecture-search",
+          "vision-transformers",
+          "dynamic-architecture",
+          "task-adaptation"
+        ],
+        "problem": "CHEEM is about deciding how a continual learner should change its architecture for each new task. The everyday problem is that some tasks should reuse old knowledge, some need new capacity, some need adaptation, and some parts should be skipped."
+      },
+      {
+        "title": "Towards Stable Federated Continual Test-Time Adaptation in Wild World",
+        "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+        "tags": [
+          "federated-learning",
+          "test-time-adaptation",
+          "continual-learning",
+          "bayesian-inference",
+          "domain-adaptation",
+          "uncertainty-quantification"
+        ],
+        "problem": "This paper is about adapting federated models to changing unlabeled client data. The everyday problem is that each client sees shifts at different times, and noisy test-time updates can destabilize the shared model."
+      }
+    ],
+    "priority": "undercovered",
+    "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+    "command": "python3 scripts/validate_cvpr_full_stack.py",
+    "status": "ready"
+  },
+  "cases": [
+    {
+      "id": "token-redundancy-audit",
+      "title": "Token redundancy audit",
+      "paperIndex": 0,
+      "tokenBudget": 42,
+      "pruneRatio": 62,
+      "edgeMemory": 58,
+      "domainShift": 18,
+      "clientDrift": 12,
+      "adaptBudget": 20,
+      "operatorAction": "keep sparse tokens only when saliency coverage remains above release floor"
+    },
+    {
+      "id": "class-specific-edge-vit",
+      "title": "Class-specific edge ViT",
+      "paperIndex": 1,
+      "tokenBudget": 36,
+      "pruneRatio": 74,
+      "edgeMemory": 86,
+      "domainShift": 22,
+      "clientDrift": 18,
+      "adaptBudget": 24,
+      "operatorAction": "ship class-specific pruning only with per-class recall canaries"
+    },
+    {
+      "id": "forward-only-tta",
+      "title": "Forward-only TTA",
+      "paperIndex": 2,
+      "tokenBudget": 54,
+      "pruneRatio": 38,
+      "edgeMemory": 62,
+      "domainShift": 78,
+      "clientDrift": 34,
+      "adaptBudget": 30,
+      "operatorAction": "prefer forward-only prompts when backprop memory would break edge runtime"
+    },
+    {
+      "id": "continual-architecture-router",
+      "title": "Continual architecture router",
+      "paperIndex": 3,
+      "tokenBudget": 60,
+      "pruneRatio": 34,
+      "edgeMemory": 48,
+      "domainShift": 55,
+      "clientDrift": 82,
+      "adaptBudget": 52,
+      "operatorAction": "split reuse, adapt, new, and skip paths before granting continual updates"
+    },
+    {
+      "id": "federated-wild-tta",
+      "title": "Federated wild TTA",
+      "paperIndex": 4,
+      "tokenBudget": 50,
+      "pruneRatio": 28,
+      "edgeMemory": 55,
+      "domainShift": 72,
+      "clientDrift": 92,
+      "adaptBudget": 44,
+      "operatorAction": "gate client updates by uncertainty and rollback noisy adaptation rounds"
+    }
+  ],
+  "governorRows": [
+    {
+      "id": "token-redundancy-audit",
+      "title": "Token redundancy audit",
+      "paperTitle": "What Do Visual Tokens Really Encode: Uncovering Sparsity and Redundancy",
+      "repo": "https://github.com/EIT-NLP/EmbedLens",
+      "tags": [
+        "vision-transformers",
+        "token-analysis",
+        "model-compression",
+        "network-pruning",
+        "interpretability"
+      ],
+      "paperProblem": "What Do Visual Tokens Really Encode is about finding which image patches in a transformer actually carry useful information. The everyday problem is that a model may spend equal effort on sky, wall, object edge, and repeated texture even though many tokens say",
+      "metrics": {
+        "tokenBudget": 42,
+        "pruneRatio": 62,
+        "edgeMemory": 58,
+        "domainShift": 18,
+        "clientDrift": 12,
+        "adaptBudget": 20,
+        "latencyGain": 59.8,
+        "accuracyRisk": 40.0,
+        "adaptationRisk": 33.8,
+        "servingCost": 70.7,
+        "readiness": 56.6
+      },
+      "decision": "canary",
+      "operatorAction": "keep sparse tokens only when saliency coverage remains above release floor"
+    },
+    {
+      "id": "class-specific-edge-vit",
+      "title": "Class-specific edge ViT",
+      "paperTitle": "NuWa: Deriving Lightweight Class-Specific Vision Transformers for Edge Devices",
+      "repo": "https://github.com/CGCL-codes/NuWa",
+      "tags": [
+        "vision transformer",
+        "model compression",
+        "pruning",
+        "edge devices",
+        "structured pruning",
+        "knowledge distillation"
+      ],
+      "paperProblem": "NuWa is about shrinking vision transformers for edge devices. The everyday problem is that an edge camera may only need a few object classes, so carrying a full general model wastes memory and power.",
+      "metrics": {
+        "tokenBudget": 36,
+        "pruneRatio": 74,
+        "edgeMemory": 86,
+        "domainShift": 22,
+        "clientDrift": 18,
+        "adaptBudget": 24,
+        "latencyGain": 73.7,
+        "accuracyRisk": 46.8,
+        "adaptationRisk": 39.3,
+        "servingCost": 67.5,
+        "readiness": 56.8
+      },
+      "decision": "canary",
+      "operatorAction": "ship class-specific pruning only with per-class recall canaries"
+    },
+    {
+      "id": "forward-only-tta",
+      "title": "Forward-only TTA",
+      "paperTitle": "FOZO: Forward-Only Zeroth-Order Prompt Optimization for Test-Time Adaptation",
+      "repo": "https://github.com/eVI-group-SCU/FOZO",
+      "tags": [
+        "test-time-adaptation",
+        "domain-adaptation",
+        "zeroth-order-optimization",
+        "prompt-tuning",
+        "vision-transformer",
+        "forward-only-learning"
+      ],
+      "paperProblem": "FOZO is about adapting a model at test time on devices that cannot afford backpropagation. The everyday problem is that the model faces a shifted environment, but computing full gradients is too expensive in memory and time.",
+      "metrics": {
+        "tokenBudget": 54,
+        "pruneRatio": 38,
+        "edgeMemory": 62,
+        "domainShift": 78,
+        "clientDrift": 34,
+        "adaptBudget": 30,
+        "latencyGain": 46.3,
+        "accuracyRisk": 40.9,
+        "adaptationRisk": 55.8,
+        "servingCost": 84.3,
+        "readiness": 45.2
+      },
+      "decision": "hold",
+      "operatorAction": "prefer forward-only prompts when backprop memory would break edge runtime"
+    },
+    {
+      "id": "continual-architecture-router",
+      "title": "Continual architecture router",
+      "paperTitle": "CHEEM: Continual Learning by Reuse, New, Adapt and Skip \u2013 A Hierarchical Exploration-Exploitation Approach",
+      "repo": "https://github.com/savadikarc/cheem",
+      "tags": [
+        "continual-learning",
+        "class-incremental",
+        "neural-architecture-search",
+        "vision-transformers",
+        "dynamic-architecture",
+        "task-adaptation"
+      ],
+      "paperProblem": "CHEEM is about deciding how a continual learner should change its architecture for each new task. The everyday problem is that some tasks should reuse old knowledge, some need new capacity, some need adaptation, and some parts should be skipped.",
+      "metrics": {
+        "tokenBudget": 60,
+        "pruneRatio": 34,
+        "edgeMemory": 48,
+        "domainShift": 55,
+        "clientDrift": 82,
+        "adaptBudget": 52,
+        "latencyGain": 39.3,
+        "accuracyRisk": 37.3,
+        "adaptationRisk": 60.9,
+        "servingCost": 88.0,
+        "readiness": 42.8
+      },
+      "decision": "hold",
+      "operatorAction": "split reuse, adapt, new, and skip paths before granting continual updates"
+    },
+    {
+      "id": "federated-wild-tta",
+      "title": "Federated wild TTA",
+      "paperTitle": "Towards Stable Federated Continual Test-Time Adaptation in Wild World",
+      "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+      "tags": [
+        "federated-learning",
+        "test-time-adaptation",
+        "continual-learning",
+        "bayesian-inference",
+        "domain-adaptation",
+        "uncertainty-quantification"
+      ],
+      "paperProblem": "This paper is about adapting federated models to changing unlabeled client data. The everyday problem is that each client sees shifts at different times, and noisy test-time updates can destabilize the shared model.",
+      "metrics": {
+        "tokenBudget": 50,
+        "pruneRatio": 28,
+        "edgeMemory": 55,
+        "domainShift": 72,
+        "clientDrift": 92,
+        "adaptBudget": 44,
+        "latencyGain": 41.5,
+        "accuracyRisk": 43.1,
+        "adaptationRisk": 70.9,
+        "servingCost": 88.6,
+        "readiness": 38.7
+      },
+      "decision": "hold",
+      "operatorAction": "gate client updates by uncertainty and rollback noisy adaptation rounds"
+    }
+  ]
+}

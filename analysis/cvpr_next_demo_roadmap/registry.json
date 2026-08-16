@@ -1,0 +1,234 @@
+{
+  "summary": {
+    "roadmap": "cvpr-next-demo-roadmap",
+    "status": "ready",
+    "goals": 8,
+    "themes": 8,
+    "linkedSystems": 11,
+    "proPlusGoals": 7,
+    "cachedEvidenceGoals": 1,
+    "missingEvidence": 0,
+    "operatorStatus": "operator-ready",
+    "packageTests": 148
+  },
+  "roadmapGoals": [
+    {
+      "id": "roadmap-01",
+      "theme": "Learning more from less, and not breaking",
+      "title": "Adaptive serving stress lab",
+      "objective": "Add a live budget-control demo that sweeps latency, token pruning, and escalation thresholds.",
+      "systems": [
+        "efficient-vision-serving"
+      ],
+      "benches": [
+        "cvpr-compute-serving-bench"
+      ],
+      "evidencePages": [
+        "cvpr-compute-serving-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 3,
+      "benchCases": 4,
+      "readinessFloor": 73.5,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-02",
+      "theme": "Making pixels from meaning",
+      "title": "Constraint edit tournament",
+      "objective": "Compare identity, layout, and preference controls across adversarial edit prompts.",
+      "systems": [
+        "controllable-generation-studio",
+        "restoration-reliability-stack"
+      ],
+      "benches": [
+        "cvpr-constraint-generation-bench",
+        "cvpr-restoration-fidelity-bench"
+      ],
+      "evidencePages": [
+        "cvpr-constraint-generation-bench.html",
+        "cvpr-restoration-fidelity-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 6,
+      "benchCases": 8,
+      "readinessFloor": 77.4,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-03",
+      "theme": "Naming and locating what's in the picture",
+      "title": "Open-vocabulary failure hunt",
+      "objective": "Add long-tail query packs that expose ambiguity, distractors, and missing evidence.",
+      "systems": [
+        "open-vocab-visual-search"
+      ],
+      "benches": [
+        "cvpr-long-tail-grounding-bench"
+      ],
+      "evidencePages": [
+        "cvpr-long-tail-grounding-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 3,
+      "benchCases": 4,
+      "readinessFloor": 83.8,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-04",
+      "theme": "Recovering the 3D world from flat pictures",
+      "title": "3D edit provenance room",
+      "objective": "Link metric geometry and splat evidence in one inspectable scene-level demo.",
+      "systems": [
+        "gaussian-splatting-platform",
+        "metric-3d-reconstruction"
+      ],
+      "benches": [
+        "cvpr-gaussian-splatting-bench",
+        "cvpr-metric-geometry-bench"
+      ],
+      "evidencePages": [
+        "cvpr-gaussian-splatting-bench.html",
+        "cvpr-metric-geometry-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "gaussian-splatting",
+        "metric-geometry"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 6,
+      "benchCases": 8,
+      "readinessFloor": 72.0,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-05",
+      "theme": "Seeing and making things that move",
+      "title": "Temporal counterfactual lab",
+      "objective": "Add rollout forks that show how drift, identity switches, and contact errors compound.",
+      "systems": [
+        "video-world-model"
+      ],
+      "benches": [
+        "cvpr-temporal-rollout-bench"
+      ],
+      "evidencePages": [
+        "cvpr-temporal-rollout-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 3,
+      "benchCases": 4,
+      "readinessFloor": 75.9,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-06",
+      "theme": "Teaching machines to see and talk at once",
+      "title": "Grounded answer courtroom",
+      "objective": "Upgrade cached-system VLM evidence into an adjudication demo with citations and contradiction probes.",
+      "systems": [
+        "vlm-grounded-reasoning"
+      ],
+      "benches": [
+        "cvpr-vlm-answer-verification-bench"
+      ],
+      "evidencePages": [
+        "cvpr-vlm-answer-verification-bench.html"
+      ],
+      "runtimeEvidence": "cached-system-evidence",
+      "proPlusJobs": [],
+      "cachedEvidenceSystems": [
+        "vlm-grounded-reasoning"
+      ],
+      "stageDemos": 3,
+      "benchCases": 4,
+      "readinessFloor": 0,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-07",
+      "theme": "The frontier - new senses and new duties",
+      "title": "Provenance red-team arena",
+      "objective": "Add watermark, perturbation, and unlearning attacks as replayable release drills.",
+      "systems": [
+        "adversarial-provenance-gate",
+        "medical-vision-validation"
+      ],
+      "benches": [
+        "cvpr-adversarial-provenance-bench",
+        "cvpr-clinical-shift-bench"
+      ],
+      "evidencePages": [
+        "cvpr-adversarial-provenance-bench.html",
+        "cvpr-clinical-shift-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 6,
+      "benchCases": 8,
+      "readinessFloor": 72.5,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "roadmap-08",
+      "theme": "Using vision to act in the world",
+      "title": "Safety deployment simulator",
+      "objective": "Stress clinical shift and driving safety gates under site, weather, and hazard changes.",
+      "systems": [
+        "driving-vla-release-gate"
+      ],
+      "benches": [
+        "cvpr-driving-safety-bench"
+      ],
+      "evidencePages": [
+        "cvpr-driving-safety-bench.html"
+      ],
+      "runtimeEvidence": "colab-pro-plus",
+      "proPlusJobs": [
+        "driving-safety"
+      ],
+      "cachedEvidenceSystems": [],
+      "stageDemos": 3,
+      "benchCases": 4,
+      "readinessFloor": 68.1,
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    }
+  ],
+  "sources": {
+    "portfolio": "analysis/cvpr_theme_portfolio_map/registry.json",
+    "cockpit": "analysis/cvpr_demo_evidence_cockpit/registry.json",
+    "replay": "analysis/cvpr_colab_result_replay/registry.json",
+    "commandCenter": "analysis/cvpr_release_command_center/registry.json"
+  }
+}

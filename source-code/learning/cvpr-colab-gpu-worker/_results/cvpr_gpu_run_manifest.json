@@ -1,0 +1,227 @@
+{
+  "runtimePlane": "google-colab-pro-plus",
+  "controlPlane": "local-static-cvpr-site",
+  "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+  "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+  "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+  "jobs": [
+    {
+      "jobId": "open-vocab-grounding",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "page": "cvpr-long-tail-grounding-bench.html",
+      "priority": 1,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "siglip-base-patch16-224",
+        "grounding-dino-tiny",
+        "sam-vit-b"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_long_tail_grounding_bench/registry.json",
+      "resultFilter": {
+        "jobId": "open-vocab-grounding",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "page": "cvpr-restoration-fidelity-bench.html",
+      "priority": 2,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "swinir-lightweight",
+        "real-esrgan-x2"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_restoration_fidelity_bench/registry.json",
+      "resultFilter": {
+        "jobId": "restoration-fidelity",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "page": "cvpr-adversarial-provenance-bench.html",
+      "priority": 3,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "watermark-detector",
+        "clip-perturbation-probe"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_adversarial_provenance_bench/registry.json",
+      "resultFilter": {
+        "jobId": "adversarial-provenance",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "temporal-rollout",
+      "bench": "cvpr-temporal-rollout-bench",
+      "page": "cvpr-temporal-rollout-bench.html",
+      "priority": 4,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "video-feature-tracker",
+        "raft-lite",
+        "world-rollout-probe"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_temporal_rollout_bench/registry.json",
+      "resultFilter": {
+        "jobId": "temporal-rollout",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "clinical-shift",
+      "bench": "cvpr-clinical-shift-bench",
+      "page": "cvpr-clinical-shift-bench.html",
+      "priority": 5,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "dicom-embedding-shift-probe",
+        "temperature-calibration-head",
+        "uncertainty-triage-head"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_clinical_shift_bench/registry.json",
+      "resultFilter": {
+        "jobId": "clinical-shift",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "compute-serving",
+      "bench": "cvpr-compute-serving-bench",
+      "page": "cvpr-compute-serving-bench.html",
+      "priority": 6,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "quantized-vision-encoder",
+        "student-router",
+        "latency-profiler"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_compute_serving_bench/registry.json",
+      "resultFilter": {
+        "jobId": "compute-serving",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "constraint-generation",
+      "bench": "cvpr-constraint-generation-bench",
+      "page": "cvpr-constraint-generation-bench.html",
+      "priority": 7,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "layout-controlnet",
+        "identity-embedding-lock",
+        "preference-reward-probe"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_constraint_generation_bench/registry.json",
+      "resultFilter": {
+        "jobId": "constraint-generation",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "driving-safety",
+      "bench": "cvpr-driving-safety-bench",
+      "page": "cvpr-driving-safety-bench.html",
+      "priority": 8,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "vla-scene-grounder",
+        "ttc-risk-head",
+        "safety-rule-monitor"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_driving_safety_bench/registry.json",
+      "resultFilter": {
+        "jobId": "driving-safety",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "metric-geometry",
+      "bench": "cvpr-metric-geometry-bench",
+      "page": "cvpr-metric-geometry-bench.html",
+      "priority": 9,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "torch-pose-bundle-adjuster",
+        "metric-scale-probe",
+        "surface-consistency-head"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_metric_geometry_bench/registry.json",
+      "resultFilter": {
+        "jobId": "metric-geometry",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "page": "cvpr-gaussian-splatting-bench.html",
+      "priority": 10,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "torch-splat-renderer",
+        "semantic-splat-attach",
+        "provenance-trace-head"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_gaussian_splatting_bench/registry.json",
+      "resultFilter": {
+        "jobId": "gaussian-splatting",
+        "mode": "cached-real"
+      }
+    }
+  ]
+}

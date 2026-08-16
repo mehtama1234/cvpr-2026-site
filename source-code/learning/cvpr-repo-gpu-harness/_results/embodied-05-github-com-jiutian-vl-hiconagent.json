@@ -1,0 +1,20 @@
+{
+  "jobId": "embodied-05-github-com-jiutian-vl-hiconagent",
+  "repo": "https://github.com/JiuTian-VL/HiconAgent",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 61,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fifth-wave-embodied-HiconAgent",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

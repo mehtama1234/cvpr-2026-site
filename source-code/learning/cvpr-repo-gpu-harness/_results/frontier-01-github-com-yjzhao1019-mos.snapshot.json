@@ -1,0 +1,10 @@
+{
+  "jobId": "frontier-01-github-com-yjzhao1019-mos",
+  "repo": "https://github.com/yjzhao1019/MOS",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "promoted-results-json",
+  "status": "rehydrated"
+}

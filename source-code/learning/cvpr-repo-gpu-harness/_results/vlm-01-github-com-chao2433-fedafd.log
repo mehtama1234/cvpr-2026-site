@@ -1,0 +1,7 @@
+jobId=vlm-01-github-com-chao2433-fedafd
+repo=https://github.com/Chao2433/FedAFD
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

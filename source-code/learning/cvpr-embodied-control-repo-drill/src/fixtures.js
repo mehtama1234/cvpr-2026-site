@@ -1,0 +1,294 @@
+export const papers = [
+  {
+    "title": "Reliable Policy Transfer for Safety-Aware End-to-End Driving with Deep Reinforcement Learning",
+    "repo": "https://github.com/szu-ai/safe-driving-drl",
+    "tags": [
+      "autonomous driving",
+      "reinforcement learning",
+      "policy transfer",
+      "uncertainty estimation",
+      "CARLA",
+      "SAC"
+    ],
+    "problem": "This driving work is about transferring a reinforcement-learned policy safely across towns and weather. The everyday problem is that a car policy can behave well in one simulator setting but become brittle when uncertainty, road layout, or traffic interactions"
+  },
+  {
+    "title": "Saliency-Guided Representation with Consistency Policy Learning for Visual Unsupervised Reinforcement Learning",
+    "repo": "https://github.com/bofusun/SRCP",
+    "tags": [
+      "unsupervised-reinforcement-learning",
+      "visual-control",
+      "skill-learning",
+      "representation-learning",
+      "zero-shot-generalization",
+      "consistency-models"
+    ],
+    "problem": "This paper is about unsupervised reinforcement learning from vision. The everyday problem is that an agent must learn useful behavior without rewards, so it needs to focus on visually important parts of the scene."
+  },
+  {
+    "title": "EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models",
+    "repo": "https://github.com/codeshop715/EnergyAction",
+    "tags": [
+      "robotics",
+      "manipulation",
+      "energy-based models",
+      "policy transfer",
+      "bimanual control",
+      "compositional learning"
+    ],
+    "problem": "EnergyAction is about composing one-hand actions into two-hand actions. The everyday problem is that two hands must coordinate, not just duplicate independent motions."
+  },
+  {
+    "title": "Dynamic Important Example Mining for Reinforcement Finetuning",
+    "repo": "https://github.com/hrtan/DIEM",
+    "tags": [
+      "reinforcement-learning",
+      "fine-tuning",
+      "data-selection",
+      "curriculum-learning",
+      "policy-optimization",
+      "sample-importance"
+    ],
+    "problem": "The paper is about choosing which training examples matter right now. The everyday problem is that a lesson that was useful yesterday may be too easy or misleading after the learner changes."
+  },
+  {
+    "title": "HiconAgent: History Context-aware Policy Optimization for GUI Agents",
+    "repo": "https://github.com/JiuTian-VL/HiconAgent",
+    "tags": [
+      "gui-agents",
+      "policy-optimization",
+      "history-awareness",
+      "task-automation",
+      "reinforcement-learning"
+    ],
+    "problem": "HiconAgent is about GUI agents that remember what they already did. The everyday problem is that a screen action only makes sense in the context of previous clicks, fields, dialogs, and state changes."
+  }
+];
+export const scenarios = [
+  {
+    "id": "town-transfer-rain",
+    "title": "Town transfer in rain",
+    "paperIndex": 0,
+    "domainShift": 90,
+    "occlusion": 72,
+    "latency": 46,
+    "memoryLoss": 26,
+    "coordinationLoad": 34,
+    "rewardSparsity": 44,
+    "operatorAction": "route to uncertainty-aware shadow driving before release"
+  },
+  {
+    "id": "visual-skill-zero-shot",
+    "title": "Zero-shot visual skill",
+    "paperIndex": 1,
+    "domainShift": 78,
+    "occlusion": 88,
+    "latency": 50,
+    "memoryLoss": 40,
+    "coordinationLoad": 20,
+    "rewardSparsity": 95,
+    "operatorAction": "stress saliency maps against distractors before promotion"
+  },
+  {
+    "id": "bimanual-handover",
+    "title": "Bimanual handover",
+    "paperIndex": 2,
+    "domainShift": 58,
+    "occlusion": 52,
+    "latency": 68,
+    "memoryLoss": 38,
+    "coordinationLoad": 96,
+    "rewardSparsity": 58,
+    "operatorAction": "hold release until two-arm energy agreement is stable"
+  },
+  {
+    "id": "curriculum-drift",
+    "title": "Curriculum drift",
+    "paperIndex": 3,
+    "domainShift": 68,
+    "occlusion": 32,
+    "latency": 26,
+    "memoryLoss": 58,
+    "coordinationLoad": 18,
+    "rewardSparsity": 98,
+    "operatorAction": "re-mine examples after every policy checkpoint"
+  },
+  {
+    "id": "gui-history-trap",
+    "title": "GUI history trap",
+    "paperIndex": 4,
+    "domainShift": 36,
+    "occlusion": 22,
+    "latency": 44,
+    "memoryLoss": 98,
+    "coordinationLoad": 30,
+    "rewardSparsity": 70,
+    "operatorAction": "require history-state replay before accepting action"
+  }
+];
+export const drillRows = [
+  {
+    "id": "town-transfer-rain",
+    "title": "Town transfer in rain",
+    "paperTitle": "Reliable Policy Transfer for Safety-Aware End-to-End Driving with Deep Reinforcement Learning",
+    "repo": "https://github.com/szu-ai/safe-driving-drl",
+    "tags": [
+      "autonomous driving",
+      "reinforcement learning",
+      "policy transfer",
+      "uncertainty estimation",
+      "CARLA",
+      "SAC"
+    ],
+    "paperProblem": "This driving work is about transferring a reinforcement-learned policy safely across towns and weather. The everyday problem is that a car policy can behave well in one simulator setting but become brittle when uncertainty, road layout, or traffic interactions",
+    "metrics": {
+      "domainShift": 90,
+      "occlusion": 72,
+      "latency": 46,
+      "memoryLoss": 26,
+      "coordinationLoad": 34,
+      "rewardSparsity": 44,
+      "perceptionStress": 70.2,
+      "actionStress": 45.8,
+      "transferRisk": 60.5,
+      "monitorNeed": 48.5,
+      "readiness": 57.4
+    },
+    "decision": "shadow",
+    "operatorAction": "route to uncertainty-aware shadow driving before release"
+  },
+  {
+    "id": "visual-skill-zero-shot",
+    "title": "Zero-shot visual skill",
+    "paperTitle": "Saliency-Guided Representation with Consistency Policy Learning for Visual Unsupervised Reinforcement Learning",
+    "repo": "https://github.com/bofusun/SRCP",
+    "tags": [
+      "unsupervised-reinforcement-learning",
+      "visual-control",
+      "skill-learning",
+      "representation-learning",
+      "zero-shot-generalization",
+      "consistency-models"
+    ],
+    "paperProblem": "This paper is about unsupervised reinforcement learning from vision. The everyday problem is that an agent must learn useful behavior without rewards, so it needs to focus on visually important parts of the scene.",
+    "metrics": {
+      "domainShift": 78,
+      "occlusion": 88,
+      "latency": 50,
+      "memoryLoss": 40,
+      "coordinationLoad": 20,
+      "rewardSparsity": 95,
+      "perceptionStress": 75.8,
+      "actionStress": 49.8,
+      "transferRisk": 66.4,
+      "monitorNeed": 61.8,
+      "readiness": 50.8
+    },
+    "decision": "shadow",
+    "operatorAction": "stress saliency maps against distractors before promotion"
+  },
+  {
+    "id": "bimanual-handover",
+    "title": "Bimanual handover",
+    "paperTitle": "EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models",
+    "repo": "https://github.com/codeshop715/EnergyAction",
+    "tags": [
+      "robotics",
+      "manipulation",
+      "energy-based models",
+      "policy transfer",
+      "bimanual control",
+      "compositional learning"
+    ],
+    "paperProblem": "EnergyAction is about composing one-hand actions into two-hand actions. The everyday problem is that two hands must coordinate, not just duplicate independent motions.",
+    "metrics": {
+      "domainShift": 58,
+      "occlusion": 52,
+      "latency": 68,
+      "memoryLoss": 38,
+      "coordinationLoad": 96,
+      "rewardSparsity": 58,
+      "perceptionStress": 51.6,
+      "actionStress": 76.6,
+      "transferRisk": 58.8,
+      "monitorNeed": 57.1,
+      "readiness": 54.2
+    },
+    "decision": "shadow",
+    "operatorAction": "hold release until two-arm energy agreement is stable"
+  },
+  {
+    "id": "curriculum-drift",
+    "title": "Curriculum drift",
+    "paperTitle": "Dynamic Important Example Mining for Reinforcement Finetuning",
+    "repo": "https://github.com/hrtan/DIEM",
+    "tags": [
+      "reinforcement-learning",
+      "fine-tuning",
+      "data-selection",
+      "curriculum-learning",
+      "policy-optimization",
+      "sample-importance"
+    ],
+    "paperProblem": "The paper is about choosing which training examples matter right now. The everyday problem is that a lesson that was useful yesterday may be too easy or misleading after the learner changes.",
+    "metrics": {
+      "domainShift": 68,
+      "occlusion": 32,
+      "latency": 26,
+      "memoryLoss": 58,
+      "coordinationLoad": 18,
+      "rewardSparsity": 98,
+      "perceptionStress": 49.6,
+      "actionStress": 42.1,
+      "transferRisk": 54.2,
+      "monitorNeed": 54.1,
+      "readiness": 58.8
+    },
+    "decision": "shadow",
+    "operatorAction": "re-mine examples after every policy checkpoint"
+  },
+  {
+    "id": "gui-history-trap",
+    "title": "GUI history trap",
+    "paperTitle": "HiconAgent: History Context-aware Policy Optimization for GUI Agents",
+    "repo": "https://github.com/JiuTian-VL/HiconAgent",
+    "tags": [
+      "gui-agents",
+      "policy-optimization",
+      "history-awareness",
+      "task-automation",
+      "reinforcement-learning"
+    ],
+    "paperProblem": "HiconAgent is about GUI agents that remember what they already did. The everyday problem is that a screen action only makes sense in the context of previous clicks, fields, dialogs, and state changes.",
+    "metrics": {
+      "domainShift": 36,
+      "occlusion": 22,
+      "latency": 44,
+      "memoryLoss": 98,
+      "coordinationLoad": 30,
+      "rewardSparsity": 70,
+      "perceptionStress": 40.7,
+      "actionStress": 42.4,
+      "transferRisk": 48.1,
+      "monitorNeed": 58.1,
+      "readiness": 60.6
+    },
+    "decision": "shadow",
+    "operatorAction": "require history-state replay before accepting action"
+  }
+];
+export const summary = {
+  "demo": "cvpr-embodied-control-repo-drill",
+  "status": "ready",
+  "theme": "Using vision to act in the world",
+  "sourceForge": "cvpr-paper-repo-demo-forge.html",
+  "system": "driving-vla-release-gate",
+  "repoPapers": 5,
+  "scenarios": 5,
+  "promote": 0,
+  "shadow": 5,
+  "hold": 0,
+  "maxTransferRisk": 66.4,
+  "minReadiness": 50.8,
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

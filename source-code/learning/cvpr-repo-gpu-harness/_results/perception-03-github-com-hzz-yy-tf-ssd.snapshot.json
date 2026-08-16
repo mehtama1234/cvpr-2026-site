@@ -1,0 +1,10 @@
+{
+  "jobId": "perception-03-github-com-hzz-yy-tf-ssd",
+  "repo": "https://github.com/hzz-yy/TF-SSD",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import { validationInput } from "../src/fixtures.js";
+import { gateStatus, summarizeValidationCenter } from "../src/core.js";
+
+const summary = summarizeValidationCenter(validationInput);
+assert.equal(gateStatus(validationInput.fullStack, validationInput.promotionDelta), "release");
+assert.equal(summary.status, "release");
+assert.equal(summary.fullStackStatus, "valid");
+assert.equal(summary.workerJobs, 10);
+assert.equal(summary.promotedRunners, 10);
+assert.equal(summary.cachedResults, 40);
+assert.equal(summary.importIssues, 0);
+assert.equal(summary.promotionDeltaStatus, "release");
+assert.equal(summary.promotionRegressions, 0);
+assert.equal(summary.maxReadinessDrop, 0);
+assert.equal(summary.validImportJobs, 10);
+assert.ok(summary.packageTests >= 26);
+assert.equal(summary.implementedBenches, 11);
+assert.equal(summary.benchCases, 44);
+assert.equal(summary.slowest.length, 5);
+console.log("ok cvpr-validation-center:", summary.status, summary.steps, "steps");

@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "plan": "cvpr-remediation-sprint-plan",
+    "status": "ready",
+    "sourceBlockTasks": 0,
+    "boardCriticalTasks": 0,
+    "boardHighTasks": 0,
+    "boardFocusedTasks": 0,
+    "sprints": 3,
+    "tasks": 0,
+    "assignedTasks": 0,
+    "criticalTasks": 0,
+    "highTasks": 0,
+    "focusedTasks": 0,
+    "acceptanceChecks": 0,
+    "families": 0,
+    "systems": 0,
+    "operationsStatus": "ready",
+    "packageTests": 148
+  },
+  "sprints": [
+    {
+      "slug": "critical-containment",
+      "index": 1,
+      "title": "Critical containment",
+      "goal": "Fix the highest-severity block cases first so unsafe demos cannot appear release-ready.",
+      "tasks": [],
+      "exitCriteria": [
+        "all task acceptance checks are satisfied",
+        "affected bench verifier passes",
+        "cvpr-remediation-board and cvpr-colab-operations-dashboard rebuild cleanly",
+        "python3 scripts/validate_cvpr_full_stack.py returns valid"
+      ]
+    },
+    {
+      "slug": "evidence-repair",
+      "index": 2,
+      "title": "High-risk evidence repair",
+      "goal": "Repair remaining high-priority evidence, drift, risk, and fidelity gaps across bench families.",
+      "tasks": [],
+      "exitCriteria": [
+        "all task acceptance checks are satisfied",
+        "affected bench verifier passes",
+        "cvpr-remediation-board and cvpr-colab-operations-dashboard rebuild cleanly",
+        "python3 scripts/validate_cvpr_full_stack.py returns valid"
+      ]
+    },
+    {
+      "slug": "release-polish",
+      "index": 3,
+      "title": "Focused release polish",
+      "goal": "Finish the lower-severity block cases and keep release gates reproducible.",
+      "tasks": [],
+      "exitCriteria": [
+        "all task acceptance checks are satisfied",
+        "affected bench verifier passes",
+        "cvpr-remediation-board and cvpr-colab-operations-dashboard rebuild cleanly",
+        "python3 scripts/validate_cvpr_full_stack.py returns valid"
+      ]
+    }
+  ],
+  "sourceRegistries": {
+    "board": "analysis/cvpr_remediation_board/registry.json",
+    "failureAtlas": "analysis/cvpr_failure_atlas/registry.json",
+    "playbook": "analysis/cvpr_demo_playbook/registry.json",
+    "operations": "analysis/cvpr_colab_operations_dashboard/registry.json"
+  }
+}

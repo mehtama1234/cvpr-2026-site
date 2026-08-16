@@ -1,0 +1,154 @@
+{
+  "summary": {
+    "audit": "cvpr-interactive-full-stack-result-audit",
+    "status": "result-audit-ready",
+    "sourceCommandAudit": "analysis/cvpr_interactive_validator_command_audit/registry.json",
+    "sourceFullStack": "analysis/cvpr_full_stack_validation/registry.json",
+    "targets": 13,
+    "readyTargets": 13,
+    "missingTargets": 0,
+    "executedCommands": 26,
+    "fullStackStatus": "valid",
+    "fullStackSteps": 285,
+    "fullStackPackageTests": 148,
+    "commandAuditTargets": 13,
+    "demos": 40,
+    "scenarioCases": 120,
+    "promoteDecisions": 40,
+    "holds": 0,
+    "validator": "scripts/verify_cvpr_interactive_full_stack_result_audit.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "resultRows": [
+    {
+      "target": "coverage",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_coverage_portfolio.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_coverage_portfolio.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "console",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_console.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_console.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "scenario-runner",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_scenario_runner.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_scenario_runner.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "triage-board",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_triage_board.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_triage_board.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "release-pack",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_release_pack.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_release_pack.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "audit-ledger",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_audit_ledger.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_audit_ledger.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "command-center",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_command_center.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_command_center.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "health-monitor",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_health_monitor.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_health_monitor.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "drift-sentinel",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_drift_sentinel.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_drift_sentinel.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "rollback-drillbook",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_rollback_drillbook.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_rollback_drillbook.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "rollback-rehearsal",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_rollback_rehearsal_lab.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_rollback_rehearsal_lab.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "navigation-manifest-audit",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_navigation_manifest_audit.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_navigation_manifest_audit.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    },
+    {
+      "target": "package-integrity-audit",
+      "builderCommand": "python3 scripts/build_cvpr_interactive_package_integrity_audit.py",
+      "verifierCommand": "python3 scripts/verify_cvpr_interactive_package_integrity_audit.py",
+      "builderSeen": true,
+      "verifierSeen": true,
+      "builderReturnCode": 0,
+      "verifierReturnCode": 0,
+      "status": "result-ready"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import { bundleInput } from "../src/fixtures.js";
+import { bundleGate, summarizeBundle } from "../src/core.js";
+
+const summary = summarizeBundle(bundleInput);
+assert.equal(bundleGate(summary), "release");
+assert.equal(summary.runtimePlane, "google-colab-pro-plus");
+assert.equal(summary.workerJobs, 10);
+assert.equal(summary.promotedRunners, 10);
+assert.equal(summary.runnerRows, 10);
+assert.equal(summary.cachedResults, 40);
+assert.equal(summary.importIssues, 0);
+assert.equal(summary.fullStackStatus, "valid");
+assert.equal(summary.validationGate, "release");
+assert.equal(summary.liveIntakeStatus, "valid");
+assert.equal(summary.liveIntakeResults, 40);
+assert.equal(summary.liveIntakePromoted, false);
+assert.equal(summary.promotionDeltaStatus, "release");
+assert.equal(summary.promotionRegressions, 0);
+assert.equal(summary.maxReadinessDrop, 0);
+assert.ok(summary.packageTests >= 27);
+console.log("ok cvpr-colab-release-bundle:", summary.promotedRunners, "runners");

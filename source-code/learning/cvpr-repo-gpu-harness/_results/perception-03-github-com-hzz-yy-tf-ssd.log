@@ -1,0 +1,7 @@
+jobId=perception-03-github-com-hzz-yy-tf-ssd
+repo=https://github.com/hzz-yy/TF-SSD
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

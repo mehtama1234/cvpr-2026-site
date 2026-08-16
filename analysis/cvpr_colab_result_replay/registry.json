@@ -1,0 +1,388 @@
+{
+  "summary": {
+    "replay": "cvpr-colab-result-replay",
+    "status": "ready",
+    "runtimePlane": "google-colab-pro-plus",
+    "jobs": 10,
+    "replayRows": 10,
+    "results": 40,
+    "validResults": 40,
+    "stageDemosCovered": 30,
+    "cachedSystemEvidenceDemos": 3,
+    "minReadiness": 68.1,
+    "avgReadiness": 78.22,
+    "provenanceIssues": 0,
+    "releaseGate": "release",
+    "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+    "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+    "fullStackValidator": "scripts/validate_cvpr_full_stack.py"
+  },
+  "replayRows": [
+    {
+      "jobId": "open-vocab-grounding",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "benchPage": "cvpr-long-tail-grounding-bench.html",
+      "system": "open-vocab-visual-search",
+      "theme": "Naming and locating what's in the picture",
+      "runner": "run_open_vocab_grounding_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "common-clean",
+        "rare-distractors",
+        "rare-visible",
+        "unsupported-query"
+      ],
+      "minReadiness": 83.8,
+      "avgReadiness": 84.05,
+      "maxReadiness": 84.7,
+      "inputFields": [
+        "asset",
+        "controls",
+        "textQuery"
+      ],
+      "outputFields": [
+        "boxes",
+        "localizedEvidence",
+        "regionScores"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job open-vocab-grounding --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "benchPage": "cvpr-restoration-fidelity-bench.html",
+      "system": "restoration-reliability-stack",
+      "theme": "Making pixels from meaning",
+      "runner": "run_restoration_fidelity_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "compressed-low-light",
+        "mild-noise",
+        "motion-blur-task",
+        "over-restored-detail"
+      ],
+      "minReadiness": 77.7,
+      "avgReadiness": 78.8,
+      "maxReadiness": 82.0,
+      "inputFields": [
+        "asset",
+        "degradationControls"
+      ],
+      "outputFields": [
+        "artifactMap",
+        "downstreamScore",
+        "fidelityScore",
+        "restoredImage"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job restoration-fidelity --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "benchPage": "cvpr-adversarial-provenance-bench.html",
+      "system": "adversarial-provenance-gate",
+      "theme": "The frontier - new senses and new duties",
+      "runner": "run_adversarial_provenance_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "adaptive-attack",
+        "clean-camera",
+        "edited-social-post",
+        "synthetic-watermarked"
+      ],
+      "minReadiness": 79.7,
+      "avgReadiness": 80.05,
+      "maxReadiness": 80.8,
+      "inputFields": [
+        "asset",
+        "attackControls"
+      ],
+      "outputFields": [
+        "attackHeatmap",
+        "evidence",
+        "leakageRisk",
+        "provenanceConfidence"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job adversarial-provenance --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "temporal-rollout",
+      "wave": "wave-2-temporal-clinical-serving",
+      "bench": "cvpr-temporal-rollout-bench",
+      "benchPage": "cvpr-temporal-rollout-bench.html",
+      "system": "video-world-model",
+      "theme": "Seeing and making things that move",
+      "runner": "run_temporal_rollout_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "contact-heavy",
+        "crowded-memory",
+        "long-rollout-drift",
+        "short-stable"
+      ],
+      "minReadiness": 75.9,
+      "avgReadiness": 77.83,
+      "maxReadiness": 83.3,
+      "inputFields": [
+        "asset",
+        "trackingControls"
+      ],
+      "outputFields": [
+        "contactEvents",
+        "driftCurve",
+        "identityTracks",
+        "rolloutPlausibility"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job temporal-rollout --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "clinical-shift",
+      "wave": "wave-2-temporal-clinical-serving",
+      "bench": "cvpr-clinical-shift-bench",
+      "benchPage": "cvpr-clinical-shift-bench.html",
+      "system": "medical-vision-validation",
+      "theme": "The frontier - new senses and new duties",
+      "runner": "run_clinical_shift_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "external-hospital",
+        "new-scanner",
+        "noisy-rare-cohort",
+        "same-site-clean"
+      ],
+      "minReadiness": 72.5,
+      "avgReadiness": 79.65,
+      "maxReadiness": 88.5,
+      "inputFields": [
+        "asset",
+        "clinicalControls"
+      ],
+      "outputFields": [
+        "calibrationCurve",
+        "clinicalEvidence",
+        "domainEmbeddings",
+        "triageScores"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job clinical-shift --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "compute-serving",
+      "wave": "wave-2-temporal-clinical-serving",
+      "bench": "cvpr-compute-serving-bench",
+      "benchPage": "cvpr-compute-serving-bench.html",
+      "system": "efficient-vision-serving",
+      "theme": "Learning more from less, and not breaking",
+      "runner": "run_compute_serving_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "desktop-batch",
+        "edge-camera",
+        "fleet-peak-load",
+        "mobile-live"
+      ],
+      "minReadiness": 73.5,
+      "avgReadiness": 74.82,
+      "maxReadiness": 76.6,
+      "inputFields": [
+        "asset",
+        "servingControls"
+      ],
+      "outputFields": [
+        "latencyProfile",
+        "qualityFloor",
+        "retainedEvidence",
+        "routingTrace"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job compute-serving --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "constraint-generation",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-constraint-generation-bench",
+      "benchPage": "cvpr-constraint-generation-bench.html",
+      "system": "controllable-generation-studio",
+      "theme": "Making pixels from meaning",
+      "runner": "run_constraint_generation_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "layout-rewrite",
+        "light-layout-edit",
+        "prompt-attack-edit",
+        "style-with-locks"
+      ],
+      "minReadiness": 77.4,
+      "avgReadiness": 79.35,
+      "maxReadiness": 84.9,
+      "inputFields": [
+        "asset",
+        "generationControls"
+      ],
+      "outputFields": [
+        "editedImage",
+        "identityEmbeddingDelta",
+        "layoutMask",
+        "rewardTrace"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job constraint-generation --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "driving-safety",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-driving-safety-bench",
+      "benchPage": "cvpr-driving-safety-bench.html",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "runner": "run_driving_safety_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "construction-zone",
+        "highway-merge",
+        "night-crosswalk",
+        "urban-cut-in"
+      ],
+      "minReadiness": 68.1,
+      "avgReadiness": 68.17,
+      "maxReadiness": 68.2,
+      "inputFields": [
+        "asset",
+        "safetyControls"
+      ],
+      "outputFields": [
+        "riskTrace",
+        "ruleViolations",
+        "sceneGroundingMap",
+        "timeToCollision"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job driving-safety --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "metric-geometry",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-metric-geometry-bench",
+      "benchPage": "cvpr-metric-geometry-bench.html",
+      "system": "metric-3d-reconstruction",
+      "theme": "Recovering the 3D world from flat pictures",
+      "runner": "run_metric_geometry_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "low-texture-indoor",
+        "scale-transfer",
+        "thin-structure",
+        "wide-baseline"
+      ],
+      "minReadiness": 72.0,
+      "avgReadiness": 78.0,
+      "maxReadiness": 85.8,
+      "inputFields": [
+        "asset",
+        "geometryControls"
+      ],
+      "outputFields": [
+        "poseGraph",
+        "scaleTrace",
+        "surfaceResidualMap",
+        "topologyWarnings"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job metric-geometry --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "benchPage": "cvpr-gaussian-splatting-bench.html",
+      "system": "gaussian-splatting-platform",
+      "theme": "Recovering the 3D world from flat pictures",
+      "runner": "run_gaussian_splatting_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 3,
+      "caseIds": [
+        "dense-novel-view",
+        "provenance-transfer",
+        "semantic-edit",
+        "sparse-capture"
+      ],
+      "minReadiness": 77.7,
+      "avgReadiness": 81.5,
+      "maxReadiness": 85.6,
+      "inputFields": [
+        "asset",
+        "splatControls"
+      ],
+      "outputFields": [
+        "editLeakageReport",
+        "novelViewRenders",
+        "provenanceTrace",
+        "semanticSplatMap"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting --promote",
+      "status": "ready"
+    }
+  ],
+  "sources": {
+    "worker": "analysis/cvpr_colab_gpu_worker/registry.json",
+    "planner": "analysis/cvpr_colab_execution_planner/registry.json",
+    "cockpit": "analysis/cvpr_demo_evidence_cockpit/registry.json",
+    "releaseBrief": "analysis/cvpr_production_release_brief/registry.json"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "jobId": "perception-01-github-com-primebo1-fob",
+  "repo": "https://github.com/primebo1/FoB",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 51,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "viewer-perception-fob",
+  "rehydratedFrom": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+  "status": "rehydrated"
+}

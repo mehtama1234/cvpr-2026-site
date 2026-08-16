@@ -1,0 +1,18 @@
+{
+  "system": "open-vocab-visual-search",
+  "systemTitle": "Open-vocabulary visual search",
+  "stage": "long-tail-retrieval",
+  "stageTitle": "Retrieve long-tail objects",
+  "theme": "Naming and locating what's in the picture",
+  "themeSlug": "perceive",
+  "cluster": "Open-vocabulary vision",
+  "clusterSlug": "open_vocab",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "rank rare concepts without collapsing to frequent labels",
+  "reusableRule": "Open-vocabulary visual search stage 'Retrieve long-tail objects' should rank rare concepts without collapsing to frequent labels using measured CVPR evidence, not only paper novelty."
+}

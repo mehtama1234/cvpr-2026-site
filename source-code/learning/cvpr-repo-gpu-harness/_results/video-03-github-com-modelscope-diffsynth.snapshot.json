@@ -1,0 +1,10 @@
+{
+  "jobId": "video-03-github-com-modelscope-diffsynth",
+  "repo": "https://github.com/modelscope/DiffSynth-",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

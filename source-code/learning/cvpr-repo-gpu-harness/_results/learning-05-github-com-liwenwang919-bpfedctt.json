@@ -1,0 +1,20 @@
+{
+  "jobId": "learning-05-github-com-liwenwang919-bpfedctt",
+  "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 39,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fifth-wave-learning-BPFedCTTA",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

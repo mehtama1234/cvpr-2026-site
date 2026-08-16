@@ -1,0 +1,108 @@
+{
+  "stage": "release-board",
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "id": "open-vocab-visual-search",
+      "title": "Open-vocabulary visual search",
+      "domain": "Open-vocabulary vision",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 2,
+      "id": "vlm-grounded-reasoning",
+      "title": "VLM grounded reasoning",
+      "domain": "Vision-language reasoning",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 3,
+      "id": "efficient-vision-serving",
+      "title": "Efficient vision serving",
+      "domain": "Efficient vision",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 4,
+      "id": "metric-3d-reconstruction",
+      "title": "Metric 3D reconstruction pipeline",
+      "domain": "3D reconstruction and novel views",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 5,
+      "id": "gaussian-splatting-platform",
+      "title": "Gaussian Splatting platform",
+      "domain": "Gaussian Splatting",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 6,
+      "id": "video-world-model",
+      "title": "Video world model",
+      "domain": "Video generation and world models",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 7,
+      "id": "controllable-generation-studio",
+      "title": "Controllable generation studio",
+      "domain": "Controllable generation",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 8,
+      "id": "restoration-reliability-stack",
+      "title": "Restoration reliability stack",
+      "domain": "Image restoration",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 9,
+      "id": "medical-vision-validation",
+      "title": "Medical vision validation",
+      "domain": "Vision for science and medicine",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 10,
+      "id": "driving-vla-release-gate",
+      "title": "Driving VLA release gate",
+      "domain": "Driving and vision-language-action",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    },
+    {
+      "rank": 11,
+      "id": "adversarial-provenance-gate",
+      "title": "Adversarial provenance gate",
+      "domain": "Adversarial robustness",
+      "score": 78.0,
+      "decision": "ready with constraints",
+      "topRisk": "highest residual risk"
+    }
+  ],
+  "readyOrConstrained": 11,
+  "needsMoreEvidence": 0,
+  "blocked": 0,
+  "reusableRule": "Ship the release board, not just the ranking: every candidate needs a score, a deployment decision, and the risk that would block real use."
+}

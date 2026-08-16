@@ -1,0 +1,18 @@
+{
+  "system": "adversarial-provenance-gate",
+  "systemTitle": "Adversarial provenance gate",
+  "stage": "attack-surface",
+  "stageTitle": "Map attack surface",
+  "theme": "The frontier - new senses and new duties",
+  "themeSlug": "emerging",
+  "cluster": "Adversarial robustness",
+  "clusterSlug": "adversarial",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "test corruptions, prompts, generated media, and sensor shifts",
+  "reusableRule": "Adversarial provenance gate stage 'Map attack surface' should test corruptions, prompts, generated media, and sensor shifts using measured CVPR evidence, not only paper novelty."
+}

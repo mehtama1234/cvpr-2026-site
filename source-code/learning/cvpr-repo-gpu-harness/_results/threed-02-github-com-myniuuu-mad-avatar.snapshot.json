@@ -1,0 +1,10 @@
+{
+  "jobId": "threed-02-github-com-myniuuu-mad-avatar",
+  "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

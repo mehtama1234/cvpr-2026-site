@@ -1,0 +1,7 @@
+jobId=embodied-02-github-com-bofusun-srcp
+repo=https://github.com/bofusun/SRCP
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

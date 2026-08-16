@@ -1,0 +1,10 @@
+{
+  "jobId": "frontier-04-github-com-jimmyxichen-mm-ovseg",
+  "repo": "https://github.com/Jimmyxichen/MM-OVSeg",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

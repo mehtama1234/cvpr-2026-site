@@ -1,0 +1,20 @@
+{
+  "jobId": "video-04-github-com-arturxe2-adaspot",
+  "repo": "https://github.com/arturxe2/AdaSpot",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 51,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fourth-wave-video-AdaSpot",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

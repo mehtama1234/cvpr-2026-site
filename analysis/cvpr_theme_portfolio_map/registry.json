@@ -1,0 +1,245 @@
+{
+  "summary": {
+    "portfolio": "cvpr-theme-portfolio-map",
+    "status": "release",
+    "themes": 8,
+    "systems": 11,
+    "stages": 33,
+    "demos": 41,
+    "benchRelease": 44,
+    "missingDemoEvidence": 0,
+    "proPlusSystems": 10,
+    "cachedEvidenceSystems": 1,
+    "operatorStatus": "operator-ready"
+  },
+  "themeRows": [
+    {
+      "theme": "Learning more from less, and not breaking",
+      "systems": 1,
+      "stages": 3,
+      "stageDemos": 3,
+      "benchCases": 4,
+      "benchRelease": 4,
+      "proPlusSystems": 1,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    },
+    {
+      "theme": "Making pixels from meaning",
+      "systems": 2,
+      "stages": 6,
+      "stageDemos": 6,
+      "benchCases": 8,
+      "benchRelease": 8,
+      "proPlusSystems": 2,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    },
+    {
+      "theme": "Naming and locating what's in the picture",
+      "systems": 1,
+      "stages": 3,
+      "stageDemos": 3,
+      "benchCases": 4,
+      "benchRelease": 4,
+      "proPlusSystems": 1,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    },
+    {
+      "theme": "Recovering the 3D world from flat pictures",
+      "systems": 2,
+      "stages": 6,
+      "stageDemos": 6,
+      "benchCases": 8,
+      "benchRelease": 8,
+      "proPlusSystems": 2,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    },
+    {
+      "theme": "Seeing and making things that move",
+      "systems": 1,
+      "stages": 3,
+      "stageDemos": 3,
+      "benchCases": 4,
+      "benchRelease": 4,
+      "proPlusSystems": 1,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    },
+    {
+      "theme": "Teaching machines to see and talk at once",
+      "systems": 1,
+      "stages": 3,
+      "stageDemos": 3,
+      "benchCases": 4,
+      "benchRelease": 4,
+      "proPlusSystems": 0,
+      "cachedEvidenceSystems": 1,
+      "status": "release"
+    },
+    {
+      "theme": "The frontier - new senses and new duties",
+      "systems": 2,
+      "stages": 6,
+      "stageDemos": 6,
+      "benchCases": 8,
+      "benchRelease": 8,
+      "proPlusSystems": 2,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    },
+    {
+      "theme": "Using vision to act in the world",
+      "systems": 1,
+      "stages": 3,
+      "stageDemos": 3,
+      "benchCases": 4,
+      "benchRelease": 4,
+      "proPlusSystems": 1,
+      "cachedEvidenceSystems": 0,
+      "status": "release"
+    }
+  ],
+  "systemRows": [
+    {
+      "theme": "Learning more from less, and not breaking",
+      "system": "efficient-vision-serving",
+      "bench": "cvpr-compute-serving-bench",
+      "benchPage": "cvpr-compute-serving-bench.html",
+      "inspectPage": "efficient-vision-serving.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "compute-serving",
+      "wave": "wave-2-temporal-clinical-serving",
+      "status": "ready"
+    },
+    {
+      "theme": "Making pixels from meaning",
+      "system": "controllable-generation-studio",
+      "bench": "cvpr-constraint-generation-bench",
+      "benchPage": "cvpr-constraint-generation-bench.html",
+      "inspectPage": "controllable-generation-studio.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "constraint-generation",
+      "wave": "wave-3-generation-driving-3d",
+      "status": "ready"
+    },
+    {
+      "theme": "Making pixels from meaning",
+      "system": "restoration-reliability-stack",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "benchPage": "cvpr-restoration-fidelity-bench.html",
+      "inspectPage": "restoration-reliability-stack.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "restoration-fidelity",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "status": "ready"
+    },
+    {
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab-visual-search",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "benchPage": "cvpr-long-tail-grounding-bench.html",
+      "inspectPage": "open-vocab-visual-search.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "open-vocab-grounding",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "status": "ready"
+    },
+    {
+      "theme": "Recovering the 3D world from flat pictures",
+      "system": "gaussian-splatting-platform",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "benchPage": "cvpr-gaussian-splatting-bench.html",
+      "inspectPage": "gaussian-splatting-platform.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "gaussian-splatting",
+      "wave": "wave-3-generation-driving-3d",
+      "status": "ready"
+    },
+    {
+      "theme": "Recovering the 3D world from flat pictures",
+      "system": "metric-3d-reconstruction",
+      "bench": "cvpr-metric-geometry-bench",
+      "benchPage": "cvpr-metric-geometry-bench.html",
+      "inspectPage": "metric-3d-reconstruction.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "metric-geometry",
+      "wave": "wave-3-generation-driving-3d",
+      "status": "ready"
+    },
+    {
+      "theme": "Seeing and making things that move",
+      "system": "video-world-model",
+      "bench": "cvpr-temporal-rollout-bench",
+      "benchPage": "cvpr-temporal-rollout-bench.html",
+      "inspectPage": "video-world-model.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "temporal-rollout",
+      "wave": "wave-2-temporal-clinical-serving",
+      "status": "ready"
+    },
+    {
+      "theme": "Teaching machines to see and talk at once",
+      "system": "vlm-grounded-reasoning",
+      "bench": "cvpr-vlm-answer-verification-bench",
+      "benchPage": "cvpr-vlm-answer-verification-bench.html",
+      "inspectPage": "vlm-grounded-reasoning.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "cached-system-evidence",
+      "colabJobId": "",
+      "wave": "cached-system-evidence",
+      "status": "ready"
+    },
+    {
+      "theme": "The frontier - new senses and new duties",
+      "system": "adversarial-provenance-gate",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "benchPage": "cvpr-adversarial-provenance-bench.html",
+      "inspectPage": "adversarial-provenance-gate.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "adversarial-provenance",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "status": "ready"
+    },
+    {
+      "theme": "The frontier - new senses and new duties",
+      "system": "medical-vision-validation",
+      "bench": "cvpr-clinical-shift-bench",
+      "benchPage": "cvpr-clinical-shift-bench.html",
+      "inspectPage": "medical-vision-validation.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "clinical-shift",
+      "wave": "wave-2-temporal-clinical-serving",
+      "status": "ready"
+    },
+    {
+      "theme": "Using vision to act in the world",
+      "system": "driving-vla-release-gate",
+      "bench": "cvpr-driving-safety-bench",
+      "benchPage": "cvpr-driving-safety-bench.html",
+      "inspectPage": "driving-vla-release-gate.html",
+      "stageDemos": 3,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "driving-safety",
+      "wave": "wave-3-generation-driving-3d",
+      "status": "ready"
+    }
+  ],
+  "sources": {
+    "systems": "analysis/cvpr_systems/registry.json",
+    "themeMatrix": "analysis/cvpr_theme_release_matrix/registry.json",
+    "cockpit": "analysis/cvpr_demo_evidence_cockpit/registry.json",
+    "commandCenter": "analysis/cvpr_release_command_center/registry.json"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "summary": {
+    "demo": "cvpr-second-round-demo-roadmap",
+    "status": "ready",
+    "goals": 6,
+    "readyGoals": 6,
+    "themes": 6,
+    "systems": 11,
+    "proPlusGoals": 3,
+    "sourceGate": "release",
+    "closeoutStatus": "sealed",
+    "operatorStatus": "operator-ready",
+    "fullStackStatus": "valid",
+    "packageTests": 148,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "roadmapGoals": [
+    {
+      "id": "round2-01",
+      "title": "Live Pro+ evidence refresh",
+      "theme": "Learning more from less, and not breaking",
+      "objective": "Refresh the promoted compute, temporal, driving, grounding, and provenance payloads and compare them against cached results.",
+      "systems": [
+        "efficient-vision-serving",
+        "video-world-model",
+        "driving-vla-release-gate"
+      ],
+      "targetSurface": "cvpr-colab-result-replay.html",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "runtime": "colab-pro-plus",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "acceptance": "builder, verifier, package test, index link, and full-stack validation all pass",
+      "status": "ready"
+    },
+    {
+      "id": "round2-02",
+      "title": "Visual QA and interaction sweep",
+      "theme": "Making pixels from meaning",
+      "objective": "Run screenshot and interaction checks across the new gauntlet, remediation, and release surfaces.",
+      "systems": [
+        "controllable-generation-studio",
+        "restoration-reliability-stack"
+      ],
+      "targetSurface": "index.html",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json",
+      "runtime": "local-browser",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "acceptance": "builder, verifier, package test, index link, and full-stack validation all pass",
+      "status": "ready"
+    },
+    {
+      "id": "round2-03",
+      "title": "Scenario expansion pack",
+      "theme": "Naming and locating what's in the picture",
+      "objective": "Add a new set of rare-object, adversarial-text, and unsupported-query incidents to the cross-theme gauntlet.",
+      "systems": [
+        "open-vocab-visual-search",
+        "vlm-grounded-reasoning"
+      ],
+      "targetSurface": "cvpr-cross-theme-incident-gauntlet.html",
+      "evidence": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json",
+      "runtime": "colab-pro-plus",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "acceptance": "builder, verifier, package test, index link, and full-stack validation all pass",
+      "status": "ready"
+    },
+    {
+      "id": "round2-04",
+      "title": "3D and temporal rollback stress",
+      "theme": "Recovering the 3D world from flat pictures",
+      "objective": "Stress geometry, splat, and temporal rows under rollback rehearsal timing and provenance continuity checks.",
+      "systems": [
+        "metric-3d-reconstruction",
+        "gaussian-splatting-platform",
+        "video-world-model"
+      ],
+      "targetSurface": "cvpr-remediation-rollback-rehearsal-lab.html",
+      "evidence": "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
+      "runtime": "cached-system-evidence",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "acceptance": "builder, verifier, package test, index link, and full-stack validation all pass",
+      "status": "ready"
+    },
+    {
+      "id": "round2-05",
+      "title": "Clinical and safety escalation playbook",
+      "theme": "Using vision to act in the world",
+      "objective": "Add escalation drills that connect clinical shift, driving safety, and canary rollback policy into one operator path.",
+      "systems": [
+        "medical-vision-validation",
+        "driving-vla-release-gate"
+      ],
+      "targetSurface": "cvpr-remediation-canary-monitor.html",
+      "evidence": "analysis/cvpr_remediation_canary_monitor/registry.json",
+      "runtime": "colab-pro-plus",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "acceptance": "builder, verifier, package test, index link, and full-stack validation all pass",
+      "status": "ready"
+    },
+    {
+      "id": "round2-06",
+      "title": "Closeout manifest reseal",
+      "theme": "The frontier - new senses and new duties",
+      "objective": "Seal the remediation closeout pack into release manifest and change-control evidence.",
+      "systems": [
+        "adversarial-provenance-gate"
+      ],
+      "targetSurface": "cvpr-remediation-closeout-pack.html",
+      "evidence": "analysis/cvpr_remediation_closeout_pack/registry.json",
+      "runtime": "local-validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "acceptance": "builder, verifier, package test, index link, and full-stack validation all pass",
+      "status": "ready"
+    }
+  ],
+  "sources": {
+    "brief": "analysis/cvpr_remediation_release_brief/registry.json",
+    "closeout": "analysis/cvpr_remediation_closeout_pack/registry.json",
+    "command": "analysis/cvpr_remediation_command_center/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

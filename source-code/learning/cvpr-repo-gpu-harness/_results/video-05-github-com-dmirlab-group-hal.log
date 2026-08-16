@@ -1,0 +1,7 @@
+jobId=video-05-github-com-dmirlab-group-hal
+repo=https://github.com/DMIRLAB-Group/HAL
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

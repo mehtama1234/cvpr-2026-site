@@ -1,0 +1,244 @@
+{
+  "summary": {
+    "manifest": "cvpr-release-manifest",
+    "status": "sealed",
+    "artifacts": 13,
+    "missingArtifacts": 0,
+    "launchStatus": "launch-ready",
+    "releaseGate": "release",
+    "sloStatus": "release",
+    "drillbookStatus": "ready",
+    "fullStackStatus": "valid",
+    "packageTests": 148,
+    "commands": 286,
+    "steps": 89
+  },
+  "artifacts": [
+    {
+      "label": "launch-readiness-pack-page",
+      "path": "cvpr-launch-readiness-pack.html",
+      "exists": true,
+      "sizeBytes": 6576,
+      "sha256": "8fd07ff3a201f5869af1865eec4d7ba038c74c5f480ab3e721f0e09fc46409c2"
+    },
+    {
+      "label": "launch-readiness-pack-registry",
+      "path": "analysis/cvpr_launch_readiness_pack/registry.json",
+      "exists": true,
+      "sizeBytes": 3479,
+      "sha256": "126ed721634a91979ba276f144fb7b6a33df0b57daea2ea784cbc539a8813ae5",
+      "summaryKeys": [
+        "arenaPairings",
+        "arenaRelease",
+        "avgReadiness",
+        "benchCases",
+        "benchRelease",
+        "cachedResults",
+        "criticalFailures",
+        "demos",
+        "drillbookStatus",
+        "fullStackStatus",
+        "importIssues",
+        "liveIntakeResults",
+        "operationsStatus",
+        "pack",
+        "packageTests",
+        "readinessFloor",
+        "releaseGate",
+        "sloStatus",
+        "stages",
+        "status",
+        "systems",
+        "validationGate",
+        "workerJobs"
+      ]
+    },
+    {
+      "label": "production-release-brief-page",
+      "path": "cvpr-production-release-brief.html",
+      "exists": true,
+      "sizeBytes": 5758,
+      "sha256": "bc1810aa97d5272f68c30a668d6a474ef112107d7c2da8ecbf95dd7eb5ff0e7a"
+    },
+    {
+      "label": "production-release-brief-registry",
+      "path": "analysis/cvpr_production_release_brief/registry.json",
+      "exists": true,
+      "sizeBytes": 2607,
+      "sha256": "7edbc38f38c045615dbbadeea13b6e5e0bea834a859393709f2c62559feed7ba",
+      "summaryKeys": [
+        "arenaBlock",
+        "arenaPairings",
+        "arenaRelease",
+        "arenaReview",
+        "benchAcceptanceRate",
+        "benchBlock",
+        "benchCases",
+        "benchRelease",
+        "benchReview",
+        "brief",
+        "cachedResults",
+        "coverage",
+        "demos",
+        "evidenceArtifacts",
+        "failureSeverity",
+        "fullStackStatus",
+        "gate",
+        "importIssues",
+        "liveIntakeResults",
+        "openThemes",
+        "packageTests",
+        "posture",
+        "stages",
+        "status",
+        "systems",
+        "themes",
+        "workerJobs"
+      ]
+    },
+    {
+      "label": "release-slo-dashboard-page",
+      "path": "cvpr-release-slo-dashboard.html",
+      "exists": true,
+      "sizeBytes": 6092,
+      "sha256": "8882852b10810e86dd387de15a5ff0fced81f921a90dae5e9ded155fe7727ff3"
+    },
+    {
+      "label": "release-slo-dashboard-registry",
+      "path": "analysis/cvpr_release_slo_dashboard/registry.json",
+      "exists": true,
+      "sizeBytes": 3382,
+      "sha256": "d8b9149b77f00625b79dc64208030584ae77741c9e667e83fa89e2585a784613",
+      "summaryKeys": [
+        "avgReadiness",
+        "benchAcceptanceRate",
+        "criticalFailures",
+        "dashboard",
+        "fullStackStatus",
+        "packageTests",
+        "passingSlos",
+        "readinessFloor",
+        "releaseGate",
+        "slos",
+        "status"
+      ]
+    },
+    {
+      "label": "release-regression-drillbook-page",
+      "path": "cvpr-release-regression-drillbook.html",
+      "exists": true,
+      "sizeBytes": 9327,
+      "sha256": "960f7f77dca561cc95d7410e93217d5d69e11017ce7f115eea5adec184f93264"
+    },
+    {
+      "label": "release-regression-drillbook-registry",
+      "path": "analysis/cvpr_release_regression_drillbook/registry.json",
+      "exists": true,
+      "sizeBytes": 8195,
+      "sha256": "7476304780c159a395454ef94021dda6433a697837a31be25d64f4c25b44aae0",
+      "summaryKeys": [
+        "activeCriticalFailures",
+        "drillbook",
+        "drills",
+        "fullStackValidator",
+        "operationsStatus",
+        "passingSlos",
+        "readyDrills",
+        "remediationStatus",
+        "status",
+        "validationGate"
+      ]
+    },
+    {
+      "label": "colab-result-replay-registry",
+      "path": "analysis/cvpr_colab_result_replay/registry.json",
+      "exists": true,
+      "sizeBytes": 11602,
+      "sha256": "1ba4f0c7267642338a382c33fc98ac2a034b8ac99461c68e5b59f4ced560ccb7",
+      "summaryKeys": [
+        "avgReadiness",
+        "cachedSystemEvidenceDemos",
+        "fullStackValidator",
+        "jobs",
+        "liveExportArtifact",
+        "minReadiness",
+        "notebook",
+        "provenanceIssues",
+        "releaseGate",
+        "replay",
+        "replayRows",
+        "results",
+        "runtimePlane",
+        "stageDemosCovered",
+        "status",
+        "validResults"
+      ]
+    },
+    {
+      "label": "demo-evidence-cockpit-registry",
+      "path": "analysis/cvpr_demo_evidence_cockpit/registry.json",
+      "exists": true,
+      "sizeBytes": 31535,
+      "sha256": "fe3ae3efc4a3e78bd9f4b9de0a7e746ae04a358c4b9dddbdd82410f7f03b7189",
+      "summaryKeys": [
+        "benchCases",
+        "benchRelease",
+        "cachedResults",
+        "cockpit",
+        "expectedLiveResults",
+        "flagshipDemos",
+        "fullStackStatus",
+        "gpuBackedStageDemos",
+        "missingDemoEvidence",
+        "proPlusJobs",
+        "proPlusWaves",
+        "releaseGate",
+        "stageDemos",
+        "status",
+        "systemEvidenceStageDemos",
+        "systems",
+        "totalDemos"
+      ]
+    },
+    {
+      "label": "full-stack-validation-registry",
+      "path": "analysis/cvpr_full_stack_validation/registry.json",
+      "exists": true,
+      "sizeBytes": 24186,
+      "sha256": "28fd7c39b0c77d91b8701bcbedc9041002774e1b73475a6748fb0be7afb9c5d9",
+      "summaryKeys": [
+        "cachedResults",
+        "commands",
+        "durationSec",
+        "importIssues",
+        "packageTests",
+        "promotedRunners",
+        "status",
+        "steps",
+        "validator",
+        "workerJobs"
+      ]
+    },
+    {
+      "label": "full-stack-validator",
+      "path": "scripts/validate_cvpr_full_stack.py",
+      "exists": true,
+      "sizeBytes": 25641,
+      "sha256": "5a45960199a00cee8c5ed63365c84b705cb115d6ec640ee18cecf491d474c998"
+    },
+    {
+      "label": "site-index",
+      "path": "index.html",
+      "exists": true,
+      "sizeBytes": 28955,
+      "sha256": "e22e9ce90187c645371e9781f3fc956b09cebf4acf671a0a3621f8da18bb56c3"
+    }
+  ],
+  "sources": {
+    "launch": "analysis/cvpr_launch_readiness_pack/registry.json",
+    "brief": "analysis/cvpr_production_release_brief/registry.json",
+    "slos": "analysis/cvpr_release_slo_dashboard/registry.json",
+    "drills": "analysis/cvpr_release_regression_drillbook/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

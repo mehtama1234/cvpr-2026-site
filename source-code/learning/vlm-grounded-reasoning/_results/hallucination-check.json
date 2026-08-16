@@ -1,0 +1,18 @@
+{
+  "system": "vlm-grounded-reasoning",
+  "systemTitle": "VLM grounded reasoning",
+  "stage": "hallucination-check",
+  "stageTitle": "Check hallucinated claims",
+  "theme": "Teaching machines to see and talk at once",
+  "themeSlug": "vlm",
+  "cluster": "Vision-language reasoning",
+  "clusterSlug": "vlm_reasoning",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "down-rank unsupported objects, counts, and relations",
+  "reusableRule": "VLM grounded reasoning stage 'Check hallucinated claims' should down-rank unsupported objects, counts, and relations using measured CVPR evidence, not only paper novelty."
+}

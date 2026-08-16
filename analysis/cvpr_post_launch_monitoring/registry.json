@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "dashboard": "cvpr-post-launch-monitoring",
+    "status": "watching",
+    "monitors": 9,
+    "passingMonitors": 9,
+    "alerts": 0,
+    "releaseGate": "release",
+    "fullStackStatus": "valid",
+    "readinessFloor": 68.1,
+    "avgReadiness": 78.22,
+    "manifestStatus": "sealed",
+    "changeControlStatus": "controlled",
+    "packageTests": 148
+  },
+  "monitorRows": [
+    {
+      "id": "critical-slo-alerts",
+      "signal": "Critical SLO failures",
+      "actual": 0,
+      "target": 0,
+      "direction": "eq",
+      "cadence": "after every rebuild",
+      "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py"
+    },
+    {
+      "id": "pro-plus-result-validity",
+      "signal": "Valid Colab Pro+ replay results",
+      "actual": 40,
+      "target": 40,
+      "direction": "eq",
+      "cadence": "after every live export",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_colab_result_replay.py && python3 scripts/verify_cvpr_colab_result_replay.py"
+    },
+    {
+      "id": "readiness-floor",
+      "signal": "Replay readiness floor",
+      "actual": 68.1,
+      "target": 68.0,
+      "direction": "gte",
+      "cadence": "after every live export",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py"
+    },
+    {
+      "id": "provenance-clean",
+      "signal": "Pro+ provenance issues",
+      "actual": 0,
+      "target": 0,
+      "direction": "eq",
+      "cadence": "after every live export",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "responseCommand": "python3 scripts/validate_cvpr_colab_results.py"
+    },
+    {
+      "id": "manifest-sealed",
+      "signal": "Release manifest sealed",
+      "actual": 1,
+      "target": 1,
+      "direction": "eq",
+      "cadence": "after every controlled change",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py"
+    },
+    {
+      "id": "change-control-ready",
+      "signal": "Controlled release artifacts",
+      "actual": 13,
+      "target": 13,
+      "direction": "eq",
+      "cadence": "after every manifest reseal",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_release_change_control.py && python3 scripts/verify_cvpr_release_change_control.py"
+    },
+    {
+      "id": "dependency-graph-ready",
+      "signal": "Release dependency graph ready",
+      "actual": 1,
+      "target": 1,
+      "direction": "eq",
+      "cadence": "after dependency or command edits",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_release_dependency_graph.py && python3 scripts/verify_cvpr_release_dependency_graph.py"
+    },
+    {
+      "id": "launch-ready",
+      "signal": "Launch readiness pack ready",
+      "actual": 1,
+      "target": 1,
+      "direction": "eq",
+      "cadence": "before operator handoff",
+      "evidence": "analysis/cvpr_launch_readiness_pack/registry.json",
+      "responseCommand": "python3 scripts/build_cvpr_launch_readiness_pack.py && python3 scripts/verify_cvpr_launch_readiness_pack.py"
+    },
+    {
+      "id": "full-stack-valid",
+      "signal": "Full-stack validation valid",
+      "actual": 1,
+      "target": 1,
+      "direction": "eq",
+      "cadence": "before and after every launch change",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json",
+      "responseCommand": "python3 scripts/validate_cvpr_full_stack.py"
+    }
+  ],
+  "sources": {
+    "slos": "analysis/cvpr_release_slo_dashboard/registry.json",
+    "replay": "analysis/cvpr_colab_result_replay/registry.json",
+    "manifest": "analysis/cvpr_release_manifest/registry.json",
+    "changeControl": "analysis/cvpr_release_change_control/registry.json",
+    "dependencyGraph": "analysis/cvpr_release_dependency_graph/registry.json",
+    "launch": "analysis/cvpr_launch_readiness_pack/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

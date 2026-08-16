@@ -1,0 +1,20 @@
+{
+  "jobId": "learning-01-github-com-eit-nlp-embedlens",
+  "repo": "https://github.com/EIT-NLP/EmbedLens",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 57,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "viewer-learning-embedlens",
+  "rehydratedFrom": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+  "status": "rehydrated"
+}

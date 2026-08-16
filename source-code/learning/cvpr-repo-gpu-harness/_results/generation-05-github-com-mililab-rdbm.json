@@ -1,0 +1,20 @@
+{
+  "jobId": "generation-05-github-com-mililab-rdbm",
+  "repo": "https://github.com/MiliLab/RDBM",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 33,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fifth-wave-generation-RDBM",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

@@ -1,0 +1,20 @@
+{
+  "jobId": "frontier-03-github-com-fahadshamshad-raven",
+  "repo": "https://github.com/fahadshamshad/raven-",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 44,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "third-wave-frontier-raven-",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

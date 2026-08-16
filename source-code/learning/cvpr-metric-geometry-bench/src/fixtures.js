@@ -1,0 +1,190 @@
+export const stageEvidence = {
+  "camera": 94,
+  "scale": 94,
+  "surface": 94,
+  "evidenceDepth": 94
+};
+export const scenarios = [
+  {
+    "id": "wide-baseline",
+    "title": "Wide-baseline camera recovery",
+    "baseline": 82,
+    "textureSparsity": 18,
+    "scaleAmbiguity": 24,
+    "surfaceComplexity": 42
+  },
+  {
+    "id": "scale-transfer",
+    "title": "Metric scale transfer",
+    "baseline": 66,
+    "textureSparsity": 28,
+    "scaleAmbiguity": 44,
+    "surfaceComplexity": 46
+  },
+  {
+    "id": "thin-structure",
+    "title": "Thin structure surface check",
+    "baseline": 58,
+    "textureSparsity": 34,
+    "scaleAmbiguity": 32,
+    "surfaceComplexity": 72
+  },
+  {
+    "id": "low-texture-indoor",
+    "title": "Low-texture indoor room",
+    "baseline": 54,
+    "textureSparsity": 58,
+    "scaleAmbiguity": 48,
+    "surfaceComplexity": 50
+  }
+];
+export const records = [
+  {
+    "id": "wide-baseline",
+    "title": "Wide-baseline camera recovery",
+    "system": "metric-3d-reconstruction",
+    "cluster": "3D reconstruction and novel views",
+    "sourceStages": [
+      "camera-geometry",
+      "metric-scale",
+      "surface-consistency"
+    ],
+    "controls": {
+      "baseline": 82,
+      "textureSparsity": 18,
+      "scaleAmbiguity": 24,
+      "surfaceComplexity": 42
+    },
+    "metrics": {
+      "poseEvidence": 87.0,
+      "metricEvidence": 86.9,
+      "surfaceConsistency": 83.1,
+      "scaleDrift": 10.1,
+      "topologyRisk": 13.9,
+      "readiness": 85.8
+    },
+    "decision": "release",
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-system-evidence"
+    ],
+    "preferredRuntime": "cached-system-evidence",
+    "evidenceArtifacts": [
+      "source-code/learning/metric-3d-reconstruction/_results/camera-geometry.json",
+      "source-code/learning/metric-3d-reconstruction/_results/metric-scale.json",
+      "source-code/learning/metric-3d-reconstruction/_results/surface-consistency.json"
+    ]
+  },
+  {
+    "id": "scale-transfer",
+    "title": "Metric scale transfer",
+    "system": "metric-3d-reconstruction",
+    "cluster": "3D reconstruction and novel views",
+    "sourceStages": [
+      "camera-geometry",
+      "metric-scale",
+      "surface-consistency"
+    ],
+    "controls": {
+      "baseline": 66,
+      "textureSparsity": 28,
+      "scaleAmbiguity": 44,
+      "surfaceComplexity": 46
+    },
+    "metrics": {
+      "poseEvidence": 79.2,
+      "metricEvidence": 78.8,
+      "surfaceConsistency": 78.4,
+      "scaleDrift": 21.5,
+      "topologyRisk": 21.0,
+      "readiness": 78.7
+    },
+    "decision": "release",
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-system-evidence"
+    ],
+    "preferredRuntime": "cached-system-evidence",
+    "evidenceArtifacts": [
+      "source-code/learning/metric-3d-reconstruction/_results/camera-geometry.json",
+      "source-code/learning/metric-3d-reconstruction/_results/metric-scale.json",
+      "source-code/learning/metric-3d-reconstruction/_results/surface-consistency.json"
+    ]
+  },
+  {
+    "id": "thin-structure",
+    "title": "Thin structure surface check",
+    "system": "metric-3d-reconstruction",
+    "cluster": "3D reconstruction and novel views",
+    "sourceStages": [
+      "camera-geometry",
+      "metric-scale",
+      "surface-consistency"
+    ],
+    "controls": {
+      "baseline": 58,
+      "textureSparsity": 34,
+      "scaleAmbiguity": 32,
+      "surfaceComplexity": 72
+    },
+    "metrics": {
+      "poseEvidence": 76.8,
+      "metricEvidence": 80.4,
+      "surfaceConsistency": 72.5,
+      "scaleDrift": 22.7,
+      "topologyRisk": 30.0,
+      "readiness": 75.5
+    },
+    "decision": "release",
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-system-evidence"
+    ],
+    "preferredRuntime": "cached-system-evidence",
+    "evidenceArtifacts": [
+      "source-code/learning/metric-3d-reconstruction/_results/camera-geometry.json",
+      "source-code/learning/metric-3d-reconstruction/_results/metric-scale.json",
+      "source-code/learning/metric-3d-reconstruction/_results/surface-consistency.json"
+    ]
+  },
+  {
+    "id": "low-texture-indoor",
+    "title": "Low-texture indoor room",
+    "system": "metric-3d-reconstruction",
+    "cluster": "3D reconstruction and novel views",
+    "sourceStages": [
+      "camera-geometry",
+      "metric-scale",
+      "surface-consistency"
+    ],
+    "controls": {
+      "baseline": 54,
+      "textureSparsity": 58,
+      "scaleAmbiguity": 48,
+      "surfaceComplexity": 50
+    },
+    "metrics": {
+      "poseEvidence": 70.1,
+      "metricEvidence": 74.7,
+      "surfaceConsistency": 72.2,
+      "scaleDrift": 29.9,
+      "topologyRisk": 30.0,
+      "readiness": 72.0
+    },
+    "decision": "release",
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-system-evidence"
+    ],
+    "preferredRuntime": "cached-system-evidence",
+    "evidenceArtifacts": [
+      "source-code/learning/metric-3d-reconstruction/_results/camera-geometry.json",
+      "source-code/learning/metric-3d-reconstruction/_results/metric-scale.json",
+      "source-code/learning/metric-3d-reconstruction/_results/surface-consistency.json"
+    ]
+  }
+];

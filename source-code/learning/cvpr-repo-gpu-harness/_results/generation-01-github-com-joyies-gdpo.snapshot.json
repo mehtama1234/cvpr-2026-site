@@ -1,0 +1,10 @@
+{
+  "jobId": "generation-01-github-com-joyies-gdpo",
+  "repo": "https://github.com/Joyies/GDPO",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "promoted-results-json",
+  "status": "rehydrated"
+}

@@ -1,0 +1,7 @@
+jobId=video-01-github-com-black-forest-labs-flu
+repo=https://github.com/black-forest-labs/flux
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

@@ -1,0 +1,18 @@
+{
+  "system": "metric-3d-reconstruction",
+  "systemTitle": "Metric 3D reconstruction pipeline",
+  "stage": "metric-scale",
+  "stageTitle": "Recover metric scale",
+  "theme": "Recovering the 3D world from flat pictures",
+  "themeSlug": "threed",
+  "cluster": "3D reconstruction and novel views",
+  "clusterSlug": "recon_nvs",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "pin shape to meters before downstream use",
+  "reusableRule": "Metric 3D reconstruction pipeline stage 'Recover metric scale' should pin shape to meters before downstream use using measured CVPR evidence, not only paper novelty."
+}

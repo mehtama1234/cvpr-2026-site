@@ -1,0 +1,18 @@
+{
+  "system": "adversarial-provenance-gate",
+  "systemTitle": "Adversarial provenance gate",
+  "stage": "provenance-detection",
+  "stageTitle": "Detect provenance",
+  "theme": "The frontier - new senses and new duties",
+  "themeSlug": "emerging",
+  "cluster": "Adversarial robustness",
+  "clusterSlug": "adversarial",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "separate real, edited, generated, and watermarked media",
+  "reusableRule": "Adversarial provenance gate stage 'Detect provenance' should separate real, edited, generated, and watermarked media using measured CVPR evidence, not only paper novelty."
+}

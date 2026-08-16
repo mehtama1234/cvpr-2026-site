@@ -1,0 +1,10 @@
+{
+  "jobId": "threed-03-github-com-akumar005-l2dgs",
+  "repo": "https://github.com/akumar005/L2DGS",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

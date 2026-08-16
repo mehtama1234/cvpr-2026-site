@@ -1,0 +1,300 @@
+{
+  "summary": {
+    "planner": "cvpr-colab-execution-planner",
+    "status": "ready",
+    "runtimePlane": "google-colab-pro-plus",
+    "jobs": 10,
+    "waves": 3,
+    "expectedResults": 40,
+    "cachedResults": 40,
+    "colabCoveredBenches": 10,
+    "systemEvidenceCoveredBenches": 1,
+    "missingRuntimeEvidence": 0,
+    "releaseStatus": "release",
+    "operationsStatus": "ready",
+    "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+    "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
+    "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+    "intakeGate": "scripts/stage_cvpr_live_colab_export.py",
+    "fullStackValidator": "scripts/validate_cvpr_full_stack.py"
+  },
+  "waves": [
+    {
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "jobs": 3,
+      "expectedResults": 12,
+      "cachedResults": 12,
+      "gpuClasses": [
+        "T4/L4/A100"
+      ],
+      "status": "ready"
+    },
+    {
+      "wave": "wave-2-temporal-clinical-serving",
+      "jobs": 3,
+      "expectedResults": 12,
+      "cachedResults": 12,
+      "gpuClasses": [
+        "L4/A100",
+        "T4/L4/A100"
+      ],
+      "status": "ready"
+    },
+    {
+      "wave": "wave-3-generation-driving-3d",
+      "jobs": 4,
+      "expectedResults": 16,
+      "cachedResults": 16,
+      "gpuClasses": [
+        "L4/A100"
+      ],
+      "status": "ready"
+    }
+  ],
+  "planRows": [
+    {
+      "jobId": "open-vocab-grounding",
+      "title": "Open-vocabulary grounding GPU run",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "priority": 1,
+      "bench": "cvpr-long-tail-grounding-bench",
+      "benchPage": "cvpr-long-tail-grounding-bench.html",
+      "system": "open-vocab-visual-search",
+      "theme": "Naming and locating what's in the picture",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "siglip-base-patch16-224",
+        "grounding-dino-tiny",
+        "sam-vit-b"
+      ],
+      "runner": "run_open_vocab_grounding_batch",
+      "execution": "transformers-grounding-dino-siglip",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('open-vocab-grounding', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job open-vocab-grounding",
+      "status": "ready"
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "title": "Restoration fidelity GPU run",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "priority": 2,
+      "bench": "cvpr-restoration-fidelity-bench",
+      "benchPage": "cvpr-restoration-fidelity-bench.html",
+      "system": "restoration-reliability-stack",
+      "theme": "Making pixels from meaning",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "swinir-lightweight",
+        "real-esrgan-x2"
+      ],
+      "runner": "run_restoration_fidelity_batch",
+      "execution": "transformers-swin2sr-restoration",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('restoration-fidelity', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job restoration-fidelity",
+      "status": "ready"
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "title": "Adversarial provenance GPU run",
+      "wave": "wave-1-grounding-fidelity-provenance",
+      "priority": 3,
+      "bench": "cvpr-adversarial-provenance-bench",
+      "benchPage": "cvpr-adversarial-provenance-bench.html",
+      "system": "adversarial-provenance-gate",
+      "theme": "The frontier - new senses and new duties",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "watermark-detector",
+        "clip-perturbation-probe"
+      ],
+      "runner": "run_adversarial_provenance_batch",
+      "execution": "transformers-clip-provenance-probe",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('adversarial-provenance', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job adversarial-provenance",
+      "status": "ready"
+    },
+    {
+      "jobId": "temporal-rollout",
+      "title": "Temporal rollout GPU run",
+      "wave": "wave-2-temporal-clinical-serving",
+      "priority": 4,
+      "bench": "cvpr-temporal-rollout-bench",
+      "benchPage": "cvpr-temporal-rollout-bench.html",
+      "system": "video-world-model",
+      "theme": "Seeing and making things that move",
+      "gpuClass": "L4/A100",
+      "models": [
+        "video-feature-tracker",
+        "raft-lite",
+        "world-rollout-probe"
+      ],
+      "runner": "run_temporal_rollout_batch",
+      "execution": "torchvision-raft-temporal-flow",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('temporal-rollout', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job temporal-rollout",
+      "status": "ready"
+    },
+    {
+      "jobId": "clinical-shift",
+      "title": "Clinical shift validation GPU run",
+      "wave": "wave-2-temporal-clinical-serving",
+      "priority": 5,
+      "bench": "cvpr-clinical-shift-bench",
+      "benchPage": "cvpr-clinical-shift-bench.html",
+      "system": "medical-vision-validation",
+      "theme": "The frontier - new senses and new duties",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "dicom-embedding-shift-probe",
+        "temperature-calibration-head",
+        "uncertainty-triage-head"
+      ],
+      "runner": "run_clinical_shift_batch",
+      "execution": "torch-clinical-shift-embedding-probe",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('clinical-shift', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job clinical-shift",
+      "status": "ready"
+    },
+    {
+      "jobId": "compute-serving",
+      "title": "Compute constrained serving GPU run",
+      "wave": "wave-2-temporal-clinical-serving",
+      "priority": 6,
+      "bench": "cvpr-compute-serving-bench",
+      "benchPage": "cvpr-compute-serving-bench.html",
+      "system": "efficient-vision-serving",
+      "theme": "Learning more from less, and not breaking",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "quantized-vision-encoder",
+        "student-router",
+        "latency-profiler"
+      ],
+      "runner": "run_compute_serving_batch",
+      "execution": "torch-serving-latency-profiler",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('compute-serving', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job compute-serving",
+      "status": "ready"
+    },
+    {
+      "jobId": "constraint-generation",
+      "title": "Constraint preserving generation GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 7,
+      "bench": "cvpr-constraint-generation-bench",
+      "benchPage": "cvpr-constraint-generation-bench.html",
+      "system": "controllable-generation-studio",
+      "theme": "Making pixels from meaning",
+      "gpuClass": "L4/A100",
+      "models": [
+        "layout-controlnet",
+        "identity-embedding-lock",
+        "preference-reward-probe"
+      ],
+      "runner": "run_constraint_generation_batch",
+      "execution": "torch-layout-identity-reward-probe",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('constraint-generation', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job constraint-generation",
+      "status": "ready"
+    },
+    {
+      "jobId": "driving-safety",
+      "title": "Driving safety closed-loop GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 8,
+      "bench": "cvpr-driving-safety-bench",
+      "benchPage": "cvpr-driving-safety-bench.html",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "gpuClass": "L4/A100",
+      "models": [
+        "vla-scene-grounder",
+        "ttc-risk-head",
+        "safety-rule-monitor"
+      ],
+      "runner": "run_driving_safety_batch",
+      "execution": "torch-driving-scene-risk-probe",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('driving-safety', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job driving-safety",
+      "status": "ready"
+    },
+    {
+      "jobId": "metric-geometry",
+      "title": "Metric geometry GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 9,
+      "bench": "cvpr-metric-geometry-bench",
+      "benchPage": "cvpr-metric-geometry-bench.html",
+      "system": "metric-3d-reconstruction",
+      "theme": "Recovering the 3D world from flat pictures",
+      "gpuClass": "L4/A100",
+      "models": [
+        "torch-pose-bundle-adjuster",
+        "metric-scale-probe",
+        "surface-consistency-head"
+      ],
+      "runner": "run_metric_geometry_batch",
+      "execution": "torch-metric-geometry-probe",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('metric-geometry', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job metric-geometry",
+      "status": "ready"
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "title": "Gaussian Splatting GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 10,
+      "bench": "cvpr-gaussian-splatting-bench",
+      "benchPage": "cvpr-gaussian-splatting-bench.html",
+      "system": "gaussian-splatting-platform",
+      "theme": "Recovering the 3D world from flat pictures",
+      "gpuClass": "L4/A100",
+      "models": [
+        "torch-splat-renderer",
+        "semantic-splat-attach",
+        "provenance-trace-head"
+      ],
+      "runner": "run_gaussian_splatting_batch",
+      "execution": "torch-gaussian-splatting-render-probe",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('gaussian-splatting', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting",
+      "status": "ready"
+    }
+  ],
+  "sources": {
+    "worker": "analysis/cvpr_colab_gpu_worker/registry.json",
+    "coverage": "analysis/cvpr_production_coverage_audit/registry.json",
+    "releaseBundle": "analysis/cvpr_colab_release_bundle/registry.json",
+    "operations": "analysis/cvpr_colab_operations_dashboard/registry.json"
+  }
+}

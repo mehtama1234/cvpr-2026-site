@@ -1,0 +1,27 @@
+import assert from "node:assert/strict";
+import { operationsInput } from "../src/fixtures.js";
+import { operationsGate, summarizeOperations } from "../src/core.js";
+
+const summary = summarizeOperations(operationsInput);
+assert.equal(operationsGate(summary), "ready");
+assert.equal(summary.jobs, 10);
+assert.equal(summary.runners, 10);
+assert.equal(summary.cachedResults, 40);
+assert.equal(summary.liveIntakeResults, 40);
+assert.equal(summary.promotionResults, 40);
+assert.equal(summary.deltaStatus, "release");
+assert.equal(summary.deltaRegressions, 0);
+assert.equal(summary.maxReadinessDrop, 0);
+assert.equal(summary.importIssues, 0);
+assert.equal(summary.releaseStatus, "release");
+assert.equal(summary.ledgerStatus, "release");
+assert.equal(summary.receiptStatus, "ready");
+assert.equal(summary.receiptArtifacts, 7);
+assert.equal(summary.themeMatrixStatus, "release");
+assert.equal(summary.coveredThemes, 8);
+assert.equal(summary.remediationStatus, "ready");
+assert.equal(summary.blockTasks, summary.sourceBlockTasks);
+assert.equal(summary.sprintPlanStatus, "ready");
+assert.equal(summary.sprintTasks, summary.blockTasks);
+assert.equal(summary.validationGate, "release");
+console.log("ok cvpr-colab-operations-dashboard:", summary.jobs, "jobs");

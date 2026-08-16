@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import { cases, demoRows, papers, summary } from "../src/fixtures.js";
+import { evaluateCase, repoDecision, scoreRepoDemo, summarizeRows } from "../src/core.js";
+
+assert.equal(papers.length, 5);
+assert.equal(cases.length, 5);
+assert.equal(demoRows.length, 5);
+assert.ok(papers.every((paper) => paper.repo.startsWith("http")));
+const first = scoreRepoDemo(cases[0]);
+assert.ok(first.primaryRisk >= 40);
+assert.match(repoDecision(first), /^(release|review|block)$/);
+const safer = scoreRepoDemo(cases[0], { d0: 15, d1: 15, d2: 15, d3: 15, d4: 15, d5: 15 });
+assert.ok(safer.readiness > first.readiness);
+const evaluated = evaluateCase(cases[0], papers[0]);
+assert.equal(evaluated.repo, papers[0].repo);
+const derived = summarizeRows(demoRows);
+assert.equal(derived.repoBackedRows, 5);
+assert.equal(summary.repoPapers, 5);
+assert.equal(summary.cases, 5);
+assert.ok(summary.review + summary.block >= 4);
+assert.equal(summary.status, "ready");
+console.log("ok", summary.demo + ":", summary.cases, "cases");

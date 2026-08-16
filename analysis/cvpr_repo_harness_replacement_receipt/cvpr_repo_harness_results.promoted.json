@@ -1,0 +1,1562 @@
+[
+  {
+    "jobId": "frontier-01-github-com-yjzhao1019-mos",
+    "mode": "live-colab",
+    "repo": "https://github.com/yjzhao1019/MOS",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 46,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json"
+    },
+    "page": "cvpr-frontier-sensor-fusion-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "frontier-02-github-com-earth-insights-segear",
+    "mode": "live-colab",
+    "repo": "https://github.com/earth-insights/SegEarth-R2",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 47,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.snapshot.json"
+    },
+    "page": "cvpr-frontier-sensor-fusion-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "frontier-03-github-com-fahadshamshad-raven",
+    "mode": "live-colab",
+    "repo": "https://github.com/fahadshamshad/raven-",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 44,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.snapshot.json"
+    },
+    "page": "cvpr-frontier-sensor-fusion-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "frontier-04-github-com-jimmyxichen-mm-ovseg",
+    "mode": "live-colab",
+    "repo": "https://github.com/Jimmyxichen/MM-OVSeg",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 31,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.snapshot.json"
+    },
+    "page": "cvpr-frontier-sensor-fusion-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+    "mode": "live-colab",
+    "repo": "https://github.com/Zhang-Peirong/GeoVis",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 45,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.snapshot.json"
+    },
+    "page": "cvpr-frontier-sensor-fusion-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "threed-01-github-com-deepinsight-insightfa",
+    "mode": "live-colab",
+    "repo": "https://github.com/deepinsight/insightface",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 51,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.snapshot.json"
+    },
+    "page": "cvpr-3d-world-repo-arena.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "threed-02-github-com-myniuuu-mad-avatar",
+    "mode": "live-colab",
+    "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 41,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.snapshot.json"
+    },
+    "page": "cvpr-3d-world-repo-arena.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "threed-03-github-com-akumar005-l2dgs",
+    "mode": "live-colab",
+    "repo": "https://github.com/akumar005/L2DGS",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 34,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.snapshot.json"
+    },
+    "page": "cvpr-3d-world-repo-arena.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "threed-04-github-com-wangys16-flow4dgs-sla",
+    "mode": "live-colab",
+    "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 35,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.snapshot.json"
+    },
+    "page": "cvpr-3d-world-repo-arena.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "threed-05-github-com-wanghaoran16-prune-wi",
+    "mode": "live-colab",
+    "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 48,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.snapshot.json"
+    },
+    "page": "cvpr-3d-world-repo-arena.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "video-01-github-com-black-forest-labs-flu",
+    "mode": "live-colab",
+    "repo": "https://github.com/black-forest-labs/flux",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 47,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.snapshot.json"
+    },
+    "page": "cvpr-video-temporal-repo-lab.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "video-02-github-com-deepfakes-face",
+    "mode": "live-colab",
+    "repo": "https://github.com/deepfakes/face-",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 46,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.snapshot.json"
+    },
+    "page": "cvpr-video-temporal-repo-lab.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "video-03-github-com-modelscope-diffsynth",
+    "mode": "live-colab",
+    "repo": "https://github.com/modelscope/DiffSynth-",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 36,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.snapshot.json"
+    },
+    "page": "cvpr-video-temporal-repo-lab.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "video-04-github-com-arturxe2-adaspot",
+    "mode": "live-colab",
+    "repo": "https://github.com/arturxe2/AdaSpot",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 51,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.snapshot.json"
+    },
+    "page": "cvpr-video-temporal-repo-lab.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "video-05-github-com-dmirlab-group-hal",
+    "mode": "live-colab",
+    "repo": "https://github.com/DMIRLAB-Group/HAL",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 42,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.snapshot.json"
+    },
+    "page": "cvpr-video-temporal-repo-lab.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "generation-01-github-com-joyies-gdpo",
+    "mode": "live-colab",
+    "repo": "https://github.com/Joyies/GDPO",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 37,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.snapshot.json"
+    },
+    "page": "cvpr-generation-control-repo-studio.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "generation-02-github-com-chanson94-codsr",
+    "mode": "live-colab",
+    "repo": "https://github.com/Chanson94/CODSR",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 34,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.snapshot.json"
+    },
+    "page": "cvpr-generation-control-repo-studio.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "generation-03-github-com-gyr02-nadb",
+    "mode": "live-colab",
+    "repo": "https://github.com/gyr02/NADB",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 40,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.snapshot.json"
+    },
+    "page": "cvpr-generation-control-repo-studio.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "generation-04-github-com-jf-tan-lrdm",
+    "mode": "live-colab",
+    "repo": "https://github.com/JF-Tan/LRDM",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 38,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.snapshot.json"
+    },
+    "page": "cvpr-generation-control-repo-studio.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "generation-05-github-com-mililab-rdbm",
+    "mode": "live-colab",
+    "repo": "https://github.com/MiliLab/RDBM",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 33,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.snapshot.json"
+    },
+    "page": "cvpr-generation-control-repo-studio.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "vlm-01-github-com-chao2433-fedafd",
+    "mode": "live-colab",
+    "repo": "https://github.com/Chao2433/FedAFD",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 46,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.snapshot.json"
+    },
+    "page": "cvpr-grounded-vlm-repo-court.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "vlm-02-github-com-dige945-ppa-cvpr26",
+    "mode": "live-colab",
+    "repo": "https://github.com/Dige945/PPA_CVPR26",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 48,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.snapshot.json"
+    },
+    "page": "cvpr-grounded-vlm-repo-court.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "vlm-03-github-com-oamyjin-graphvlm",
+    "mode": "live-colab",
+    "repo": "https://github.com/oamyjin/GraphVLM",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 43,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.snapshot.json"
+    },
+    "page": "cvpr-grounded-vlm-repo-court.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "vlm-04-github-com-remrico-recall",
+    "mode": "live-colab",
+    "repo": "https://github.com/RemRico/Recall",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 34,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.snapshot.json"
+    },
+    "page": "cvpr-grounded-vlm-repo-court.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "vlm-05-github-com-uuuuzyc-see-it-say-it",
+    "mode": "live-colab",
+    "repo": "https://github.com/uuuuZYC/See-It-Say-It-Sorted",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 46,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.snapshot.json"
+    },
+    "page": "cvpr-grounded-vlm-repo-court.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "perception-01-github-com-primebo1-fob",
+    "mode": "live-colab",
+    "repo": "https://github.com/primebo1/FoB",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 51,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.snapshot.json"
+    },
+    "page": "cvpr-perception-parts-repo-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "perception-02-github-com-zzzphaethon-dapass",
+    "mode": "live-colab",
+    "repo": "https://github.com/ZZZPhaethon/DAPASS",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 46,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.snapshot.json"
+    },
+    "page": "cvpr-perception-parts-repo-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "perception-03-github-com-hzz-yy-tf-ssd",
+    "mode": "live-colab",
+    "repo": "https://github.com/hzz-yy/TF-SSD",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 49,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.snapshot.json"
+    },
+    "page": "cvpr-perception-parts-repo-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "perception-04-github-com-yvogao-tape",
+    "mode": "live-colab",
+    "repo": "https://github.com/YvoGao/TAPE",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 57,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.snapshot.json"
+    },
+    "page": "cvpr-perception-parts-repo-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "perception-05-github-com-jsliam94-erecu",
+    "mode": "live-colab",
+    "repo": "https://github.com/JSLiam94/EReCu",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 37,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.snapshot.json"
+    },
+    "page": "cvpr-perception-parts-repo-bench.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+    "mode": "live-colab",
+    "repo": "https://github.com/szu-ai/safe-driving-drl",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 57,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.snapshot.json"
+    },
+    "page": "cvpr-embodied-control-repo-drill.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "embodied-02-github-com-bofusun-srcp",
+    "mode": "live-colab",
+    "repo": "https://github.com/bofusun/SRCP",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 51,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.snapshot.json"
+    },
+    "page": "cvpr-embodied-control-repo-drill.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "embodied-03-github-com-codeshop715-energyact",
+    "mode": "live-colab",
+    "repo": "https://github.com/codeshop715/EnergyAction",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 54,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.snapshot.json"
+    },
+    "page": "cvpr-embodied-control-repo-drill.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "embodied-04-github-com-hrtan-diem",
+    "mode": "live-colab",
+    "repo": "https://github.com/hrtan/DIEM",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 59,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.snapshot.json"
+    },
+    "page": "cvpr-embodied-control-repo-drill.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "embodied-05-github-com-jiutian-vl-hiconagent",
+    "mode": "live-colab",
+    "repo": "https://github.com/JiuTian-VL/HiconAgent",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 61,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.snapshot.json"
+    },
+    "page": "cvpr-embodied-control-repo-drill.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "learning-01-github-com-eit-nlp-embedlens",
+    "mode": "live-colab",
+    "repo": "https://github.com/EIT-NLP/EmbedLens",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 57,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.snapshot.json"
+    },
+    "page": "cvpr-efficient-learning-repo-governor.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "learning-02-github-com-cgcl-codes-nuwa",
+    "mode": "live-colab",
+    "repo": "https://github.com/CGCL-codes/NuWa",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 57,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.snapshot.json"
+    },
+    "page": "cvpr-efficient-learning-repo-governor.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "learning-03-github-com-evi-group-scu-fozo",
+    "mode": "live-colab",
+    "repo": "https://github.com/eVI-group-SCU/FOZO",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 45,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.snapshot.json"
+    },
+    "page": "cvpr-efficient-learning-repo-governor.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "learning-04-github-com-savadikarc-cheem",
+    "mode": "live-colab",
+    "repo": "https://github.com/savadikarc/cheem",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 43,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.snapshot.json"
+    },
+    "page": "cvpr-efficient-learning-repo-governor.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  },
+  {
+    "jobId": "learning-05-github-com-liwenwang919-bpfedctt",
+    "mode": "live-colab",
+    "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+    "commitSha": "replace-with-live-commit",
+    "createdAt": "replace-with-live-timestamp",
+    "environment": {
+      "python": "3.11",
+      "torch": "replace-with-live-version",
+      "cuda": "replace-with-live-version"
+    },
+    "metrics": {
+      "readiness": 39,
+      "smokePassed": true,
+      "runtimeSeconds": 0.0,
+      "filesScanned": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "A100",
+      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+      "source": "live-export-template"
+    },
+    "artifacts": {
+      "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.json",
+      "log": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.log",
+      "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.snapshot.json"
+    },
+    "page": "cvpr-efficient-learning-repo-governor.html",
+    "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.json",
+    "promotion": {
+      "receipt": "cvpr-repo-harness-replacement-receipt",
+      "promotedFrom": "cached-harness-contract",
+      "promotedTo": "live-colab",
+      "promotionDecision": "promote",
+      "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+      "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+    }
+  }
+]

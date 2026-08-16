@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "board": "cvpr-remediation-board",
+    "status": "ready",
+    "sourceBlockTasks": 0,
+    "blockTasks": 0,
+    "criticalTasks": 0,
+    "highTasks": 0,
+    "focusedTasks": 0,
+    "unownedTasks": 0,
+    "controlledTasks": 0,
+    "families": 0,
+    "systems": 0,
+    "playbookPlays": 8,
+    "coveredThemes": 8,
+    "receiptStatus": "ready",
+    "receiptArtifacts": 7,
+    "maxSeverity": 0
+  },
+  "tasks": [],
+  "sourceRegistries": {
+    "failureAtlas": "analysis/cvpr_failure_atlas/registry.json",
+    "playbook": "analysis/cvpr_demo_playbook/registry.json",
+    "mission": "analysis/cvpr_mission_control/registry.json",
+    "themeMatrix": "analysis/cvpr_theme_release_matrix/registry.json",
+    "receipt": "analysis/cvpr_colab_run_receipt/registry.json"
+  }
+}

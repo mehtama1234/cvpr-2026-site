@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "matrix": "cvpr-theme-release-matrix",
+    "status": "release",
+    "themes": 8,
+    "systems": 11,
+    "stages": 33,
+    "demos": 41,
+    "coveredThemes": 8,
+    "openThemes": 0,
+    "clustersCovered": 11,
+    "benchSystems": 11,
+    "benchCases": 44,
+    "benchBlocks": 0,
+    "receiptStatus": "ready",
+    "receiptArtifacts": 7,
+    "validationGate": "release",
+    "packageTests": 148
+  },
+  "themeRows": [
+    {
+      "theme": "The frontier - new senses and new duties",
+      "systems": 2,
+      "systemSlugs": [
+        "adversarial-provenance-gate",
+        "medical-vision-validation"
+      ],
+      "stages": 6,
+      "stageDemos": 6,
+      "flagshipDemos": 0,
+      "benches": 2,
+      "benchCases": 8,
+      "benchBlocks": 0,
+      "pages": [
+        "adversarial-provenance-gate.html",
+        "medical-vision-validation.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Recovering the 3D world from flat pictures",
+      "systems": 2,
+      "systemSlugs": [
+        "gaussian-splatting-platform",
+        "metric-3d-reconstruction"
+      ],
+      "stages": 6,
+      "stageDemos": 6,
+      "flagshipDemos": 0,
+      "benches": 2,
+      "benchCases": 8,
+      "benchBlocks": 0,
+      "pages": [
+        "gaussian-splatting-platform.html",
+        "metric-3d-reconstruction.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Seeing and making things that move",
+      "systems": 1,
+      "systemSlugs": [
+        "video-world-model"
+      ],
+      "stages": 3,
+      "stageDemos": 3,
+      "flagshipDemos": 0,
+      "benches": 1,
+      "benchCases": 4,
+      "benchBlocks": 0,
+      "pages": [
+        "video-world-model.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Making pixels from meaning",
+      "systems": 2,
+      "systemSlugs": [
+        "controllable-generation-studio",
+        "restoration-reliability-stack"
+      ],
+      "stages": 6,
+      "stageDemos": 6,
+      "flagshipDemos": 0,
+      "benches": 2,
+      "benchCases": 8,
+      "benchBlocks": 0,
+      "pages": [
+        "controllable-generation-studio.html",
+        "restoration-reliability-stack.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Teaching machines to see and talk at once",
+      "systems": 1,
+      "systemSlugs": [
+        "vlm-grounded-reasoning"
+      ],
+      "stages": 3,
+      "stageDemos": 3,
+      "flagshipDemos": 0,
+      "benches": 1,
+      "benchCases": 4,
+      "benchBlocks": 0,
+      "pages": [
+        "vlm-grounded-reasoning.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Naming and locating what's in the picture",
+      "systems": 1,
+      "systemSlugs": [
+        "open-vocab-visual-search"
+      ],
+      "stages": 3,
+      "stageDemos": 3,
+      "flagshipDemos": 0,
+      "benches": 1,
+      "benchCases": 4,
+      "benchBlocks": 0,
+      "pages": [
+        "open-vocab-visual-search.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Using vision to act in the world",
+      "systems": 1,
+      "systemSlugs": [
+        "driving-vla-release-gate"
+      ],
+      "stages": 3,
+      "stageDemos": 3,
+      "flagshipDemos": 0,
+      "benches": 1,
+      "benchCases": 4,
+      "benchBlocks": 0,
+      "pages": [
+        "driving-vla-release-gate.html"
+      ],
+      "status": "covered"
+    },
+    {
+      "theme": "Learning more from less, and not breaking",
+      "systems": 1,
+      "systemSlugs": [
+        "efficient-vision-serving"
+      ],
+      "stages": 3,
+      "stageDemos": 3,
+      "flagshipDemos": 0,
+      "benches": 1,
+      "benchCases": 4,
+      "benchBlocks": 0,
+      "pages": [
+        "efficient-vision-serving.html"
+      ],
+      "status": "covered"
+    }
+  ],
+  "sourceRegistries": {
+    "systems": "analysis/cvpr_systems/registry.json",
+    "demos": "analysis/cvpr_demos/registry.json",
+    "mission": "analysis/cvpr_mission_control/registry.json",
+    "receipt": "analysis/cvpr_colab_run_receipt/registry.json",
+    "validation": "analysis/cvpr_validation_center/registry.json"
+  }
+}

@@ -1,0 +1,753 @@
+{
+  "summary": {
+    "demo": "cvpr-paper-repo-demo-forge",
+    "status": "ready",
+    "paperCorpus": 4031,
+    "repoCorpus": 1000,
+    "blueprints": 8,
+    "readyBlueprints": 8,
+    "themes": 8,
+    "repoPapers": 40,
+    "undercoveredThemes": 4,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "blueprintRows": [
+    {
+      "id": "paper-repo-01-frontier-sensors",
+      "theme": "emerging",
+      "title": "Frontier Sensor Fusion Bench",
+      "query": [
+        "radar",
+        "event",
+        "remote",
+        "sar",
+        "geospatial",
+        "watermark"
+      ],
+      "systems": [
+        "adversarial-provenance-gate",
+        "medical-vision-validation"
+      ],
+      "demoSurface": "cvpr-frontier-sensor-fusion-bench.html",
+      "mechanic": "Compare non-RGB evidence streams, provenance robustness, and failure routing for radar, SAR, event, and geospatial papers.",
+      "themeName": "The frontier - new senses and new duties",
+      "themeRepoCount": 133,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "MOS: Mitigating Optical-SAR Modality Gap for Cross-Modal Ship Re-Identification",
+          "repo": "https://github.com/yjzhao1019/MOS",
+          "tags": [
+            "cross-modal retrieval",
+            "re-identification",
+            "domain adaptation",
+            "remote sensing",
+            "multimodal learning"
+          ],
+          "problem": "MOS is about matching ships across optical and SAR imagery. The everyday problem is that optical cameras and radar see the same ship through very different measurement physics."
+        },
+        {
+          "title": "SegEarth-R2: Towards Comprehensive Language-guided Segmentation for Remote Sensing Images",
+          "repo": "https://github.com/earth-insights/SegEarth-R2",
+          "tags": [
+            "language-guided-segmentation",
+            "remote-sensing",
+            "multimodal-learning",
+            "geospatial-reasoning",
+            "spatial-grounding",
+            "hierarchical-granularity"
+          ],
+          "problem": "SegEarth-R2 is about turning complex language instructions into pixel regions in satellite and aerial images. The everyday problem is that a request may mention several targets, parts of objects, nested categories, or implicit geography, not just a single simp"
+        },
+        {
+          "title": "RAVEN: Erasing Invisible Watermarks via Novel View Synthesis",
+          "repo": "https://github.com/fahadshamshad/raven-",
+          "tags": [
+            "watermark-removal",
+            "view-synthesis",
+            "security",
+            "diffusion-models",
+            "adversarial-attack",
+            "image-authentication"
+          ],
+          "problem": "This RAVEN paper is about erasing invisible watermarks. The everyday problem is that watermark signals can survive in images even when they are not visible to people."
+        },
+        {
+          "title": "MM-OVSeg: Multimodal Optical\u2013SAR Fusion for Open-Vocabulary Segmentation in Remote Sensing",
+          "repo": "https://github.com/Jimmyxichen/MM-OVSeg",
+          "tags": [
+            "open-vocabulary-segmentation",
+            "remote-sensing",
+            "optical-sar-fusion",
+            "multimodal",
+            "adverse-weather",
+            "earth-observation"
+          ],
+          "problem": "MM-OVSeg is about open-vocabulary segmentation in remote sensing using optical and SAR data. The everyday problem is that clouds or haze can hide optical imagery, while SAR sees different physical structure."
+        },
+        {
+          "title": "GeoViS: Geospatially Rewarded Visual Search for Remote Sensing",
+          "repo": "https://github.com/Zhang-Peirong/GeoVis",
+          "tags": [
+            "depth",
+            "generation",
+            "geo-localization",
+            "multimodal",
+            "remote-sensing",
+            "transformer"
+          ],
+          "problem": "GeoViS is about grounding language queries in huge remote-sensing images. The everyday problem is that a target may be tiny inside a kilometer-scale scene, and the query may depend on roads, rivers, relative positions, or distant context."
+        }
+      ],
+      "priority": "undercovered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-02-3d-world-repos",
+      "theme": "threed",
+      "title": "3D World Repo Arena",
+      "query": [
+        "4d",
+        "gaussian",
+        "lidar",
+        "mesh",
+        "avatar",
+        "reconstruction"
+      ],
+      "systems": [
+        "metric-3d-reconstruction",
+        "gaussian-splatting-platform"
+      ],
+      "demoSurface": "cvpr-3d-world-repo-arena.html",
+      "mechanic": "Turn top 3D reconstruction, 4D driving, LiDAR world, and Gaussian repo papers into reproducible geometry/readiness cards.",
+      "themeName": "Recovering the 3D world from flat pictures",
+      "themeRepoCount": 203,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "Feed-Forward One-Shot Animatable Textured Mesh Avatar Reconstruction",
+          "repo": "https://github.com/deepinsight/insightface",
+          "tags": [
+            "avatar",
+            "3d-reconstruction",
+            "mesh",
+            "texture-synthesis",
+            "feed-forward",
+            "human-face"
+          ],
+          "problem": "This paper is about creating an animatable textured head avatar from one image in a single forward pass. The everyday problem is recovering face shape, hair/head regions, and texture without minutes of per-person optimization."
+        },
+        {
+          "title": "Motion-Aware Animatable Gaussian Avatars Deblurring",
+          "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+          "tags": [
+            "avatar reconstruction",
+            "video deblurring",
+            "3D gaussian splatting",
+            "human motion",
+            "multi-view geometry",
+            "blur formation"
+          ],
+          "problem": "Motion-Aware Gaussian Avatars Deblurring is about building sharp animatable avatars from blurry videos. The everyday problem is that fast human movement smears frames, and 2D deblurring can disagree across camera views."
+        },
+        {
+          "title": "L2DGS: Low-Light Dynamic Gaussian Splatting",
+          "repo": "https://github.com/akumar005/L2DGS",
+          "tags": [
+            "low-light-imaging",
+            "dynamic-scene-reconstruction",
+            "gaussian-splatting",
+            "illumination-handling",
+            "4d-reconstruction",
+            "scene-decomposition"
+          ],
+          "problem": "L2DGS is about reconstructing a well-lit dynamic scene from low-light video. The everyday problem is that darkness, motion, shadows, occlusion, and exposure changes all hide the same underlying moving geometry."
+        },
+        {
+          "title": "Flow4DGS-SLAM: Optical Flow-Guided 4D Gaussian Splatting SLAM",
+          "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+          "tags": [
+            "SLAM",
+            "3d-gaussian-splatting",
+            "4d-reconstruction",
+            "optical-flow",
+            "dynamic-scenes",
+            "motion-estimation"
+          ],
+          "problem": "Flow4DGS-SLAM is about mapping dynamic scenes while tracking camera motion. The everyday problem is that moving objects confuse a map unless the system separates camera movement from scene movement."
+        },
+        {
+          "title": "Prune Wisely, Reconstruct Sharply: Compact 3D Gaussian Splatting via Adaptive Pruning and Difference-of-Gaussian Primitives",
+          "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+          "tags": [
+            "3d-reconstruction",
+            "gaussian-splatting",
+            "novel-view-synthesis",
+            "model-compression",
+            "pruning",
+            "rendering"
+          ],
+          "problem": "This paper is about making 3D Gaussian Splatting smaller without losing sharp rendering. The everyday problem is that many Gaussians are redundant, but pruning the wrong ones removes real detail."
+        }
+      ],
+      "priority": "covered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-03-video-temporal",
+      "theme": "video",
+      "title": "Video Temporal Repo Lab",
+      "query": [
+        "video",
+        "tracking",
+        "action",
+        "temporal",
+        "cardiac",
+        "diffusion"
+      ],
+      "systems": [
+        "video-world-model"
+      ],
+      "demoSurface": "cvpr-video-temporal-repo-lab.html",
+      "mechanic": "Stress video repo papers for long-horizon drift, action localization, hallucination, and tracking recovery.",
+      "themeName": "Seeing and making things that move",
+      "themeRepoCount": 164,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "PAM: A Pose-Appearance-Motion Engine for Sim-to-Real HOI Video Generation",
+          "repo": "https://github.com/black-forest-labs/flux",
+          "tags": [
+            "video-generation",
+            "hand-object-interaction",
+            "sim-to-real",
+            "diffusion",
+            "controllable-generation",
+            "embodied-AI"
+          ],
+          "problem": "PAM is about generating realistic hand-object interaction videos from simulator-accessible inputs. The everyday problem is turning initial and target hand-object poses into a photorealistic video without having a real first frame."
+        },
+        {
+          "title": "Preserving Source Video Realism: High-Fidelity Face Swapping for Cinematic Quality",
+          "repo": "https://github.com/deepfakes/face-",
+          "tags": [
+            "face swapping",
+            "video editing",
+            "video generation",
+            "diffusion models",
+            "video synthesis",
+            "face manipulation"
+          ],
+          "problem": "This paper is about cinematic-quality face swapping. The everyday problem is that swapping identity can break lighting, expression, skin detail, or camera realism from the source video."
+        },
+        {
+          "title": "Back to the Feature: Explaining Video Classifiers with Video Counterfactual Explanations",
+          "repo": "https://github.com/modelscope/DiffSynth-",
+          "tags": [
+            "diffusion",
+            "video-generation",
+            "explainability",
+            "counterfactual",
+            "video-classification",
+            "interpretability"
+          ],
+          "problem": "This paper is about explaining video classifiers with counterfactual videos. The everyday problem is that to explain why a model saw running instead of walking, the changed video must still look smooth and physically believable."
+        },
+        {
+          "title": "AdaSpot: Spend Resolution Where It Matters for Precise Event Spotting",
+          "repo": "https://github.com/arturxe2/AdaSpot",
+          "tags": [
+            "event spotting",
+            "temporal action detection",
+            "spatial attention",
+            "video efficiency",
+            "dynamic computation",
+            "precise localization"
+          ],
+          "problem": "AdaSpot is about finding the exact moment of an event in video while spending high resolution only where it helps. The everyday problem is that a decisive action may happen in a small region, while most of the frame is irrelevant background."
+        },
+        {
+          "title": "Hierarchical Action Learning for Weakly-Supervised Action Segmentation",
+          "repo": "https://github.com/DMIRLAB-Group/HAL",
+          "tags": [
+            "action segmentation",
+            "weakly-supervised",
+            "hierarchical learning",
+            "causal models",
+            "temporal modeling",
+            "identifiability"
+          ],
+          "problem": "Hierarchical Action Learning is about segmenting actions in video from only ordered transcripts, not timestamps. The everyday problem is that the model knows the action order but must infer where each action starts and ends."
+        }
+      ],
+      "priority": "covered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-04-generation-control",
+      "theme": "generation",
+      "title": "Generation Control Repo Studio",
+      "query": [
+        "diffusion",
+        "poster",
+        "deraining",
+        "super-resolution",
+        "one-step",
+        "vae"
+      ],
+      "systems": [
+        "controllable-generation-studio",
+        "restoration-reliability-stack"
+      ],
+      "demoSurface": "cvpr-generation-control-repo-studio.html",
+      "mechanic": "Compare code-backed generation papers on prompt control, restoration fidelity, one-step synthesis, and artifact containment.",
+      "themeName": "Making pixels from meaning",
+      "themeRepoCount": 151,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "GDPO-SR: Group Direct Preference Optimization for One-Step Generative Image Super-Resolution",
+          "repo": "https://github.com/Joyies/GDPO",
+          "tags": [
+            "super-resolution",
+            "image-restoration",
+            "reinforcement-learning",
+            "diffusion",
+            "dpo",
+            "grpo"
+          ],
+          "problem": "GDPO-SR is about one-step image super-resolution that still preserves fine local texture. The everyday problem is enlarging a low-resolution image while making smooth regions clean and textured regions sharp."
+        },
+        {
+          "title": "Bridging Fidelity-Reality with Controllable One-Step Diffusion for Image Super-Resolution",
+          "repo": "https://github.com/Chanson94/CODSR",
+          "tags": [
+            "image super-resolution",
+            "diffusion models",
+            "one-step inference",
+            "low-level vision",
+            "text-guided generation",
+            "fidelity-perceptual tradeoff"
+          ],
+          "problem": "CODSR is about one-step super-resolution that looks realistic without losing faithfulness to the low-quality input. The everyday problem is that generative priors can invent detail, but pure fidelity can leave images blurry."
+        },
+        {
+          "title": "Resolving Endpoint Underfitting in Diffusion Bridges via Noise Alignment",
+          "repo": "https://github.com/gyr02/NADB",
+          "tags": [
+            "diffusion",
+            "image-restoration",
+            "diffusion-bridge",
+            "stochastic-interpolant",
+            "super-resolution",
+            "deblurring"
+          ],
+          "problem": "This diffusion-bridge paper is about fixing weak performance near the clean endpoint of an image-restoration path. The everyday problem is that a model can learn most of the journey from degraded to clean but still miss the final sharp correction at the target"
+        },
+        {
+          "title": "Low-Rank Residual Diffusion Models",
+          "repo": "https://github.com/JF-Tan/LRDM",
+          "tags": [
+            "diffusion-models",
+            "image-restoration",
+            "low-rank",
+            "deraining",
+            "deblurring",
+            "deshading"
+          ],
+          "problem": "This paper is about restoration when the damaged image is already close to the desired image. The everyday problem is that standard diffusion wastes effort generating everything, even though only a small correction may be needed."
+        },
+        {
+          "title": "Residual Diffusion Bridge Model for Image Restoration",
+          "repo": "https://github.com/MiliLab/RDBM",
+          "tags": [
+            "diffusion-models",
+            "image-restoration",
+            "universal-restoration",
+            "stochastic-differential-equations",
+            "residual-learning",
+            "adaptive-processing"
+          ],
+          "problem": "This paper is about restoring damaged images without disturbing clean regions. The everyday problem is that a restoration model should repair degradation locally rather than repaint the entire image."
+        }
+      ],
+      "priority": "covered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-05-grounded-vlm",
+      "theme": "vlm",
+      "title": "Grounded VLM Repo Court",
+      "query": [
+        "caption",
+        "reasoning",
+        "grounded",
+        "preference",
+        "privacy",
+        "alignment"
+      ],
+      "systems": [
+        "vlm-grounded-reasoning"
+      ],
+      "demoSurface": "cvpr-grounded-vlm-repo-court.html",
+      "mechanic": "Use VLM repo papers to adjudicate caption correctness, grounded sorting, evidence anchoring, privacy, and fairness claims.",
+      "themeName": "Teaching machines to see and talk at once",
+      "themeRepoCount": 196,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "FedAFD: Multimodal Federated Learning via Adversarial Fusion and Distillation",
+          "repo": "https://github.com/Chao2433/FedAFD",
+          "tags": [
+            "federated-learning",
+            "multimodal",
+            "privacy-preserving",
+            "knowledge-distillation",
+            "adversarial-learning",
+            "feature-fusion"
+          ],
+          "problem": "FedAFD is about federated learning across clients with different modalities, tasks, and model shapes. The everyday problem is letting participants collaborate when their local evidence and architectures do not match."
+        },
+        {
+          "title": "Towards Cross-Modal Preservation, Consistency and Alignment for Privacy-Preserving Visible-Infrared Person Re-Identification",
+          "repo": "https://github.com/Dige945/PPA_CVPR26",
+          "tags": [
+            "person-re-identification",
+            "privacy-preservation",
+            "cross-modal-matching",
+            "visible-infrared",
+            "anonymization",
+            "keypoint-preservation"
+          ],
+          "problem": "This privacy-preserving visible-infrared person re-identification work is about recognizing the same person across day and night cameras while hiding private appearance details. The everyday problem is that anonymization can erase the very body structure neede"
+        },
+        {
+          "title": "GraphVLM: Benchmarking Vision Language Models for Multimodal Graph Learning",
+          "repo": "https://github.com/oamyjin/GraphVLM",
+          "tags": [
+            "vision-language-models",
+            "graph-learning",
+            "multimodal",
+            "graph-neural-networks",
+            "benchmark",
+            "graph-reasoning"
+          ],
+          "problem": "GraphVLM is about testing how vision-language models handle graph-structured multimodal data. The everyday problem is reasoning about nodes and links when each entity may also have images and text."
+        },
+        {
+          "title": "ReCALL: Recalibrating Capability Degradation for MLLM-based Composed Image Retrieval",
+          "repo": "https://github.com/RemRico/Recall",
+          "tags": [
+            "composed image retrieval",
+            "multimodal reasoning",
+            "vision-language models",
+            "contrastive learning",
+            "capability preservation",
+            "cross-modal alignment"
+          ],
+          "problem": "ReCALL is about preserving multimodal reasoning when adapting an MLLM to composed image retrieval. The everyday problem is that compressing a reasoning model into one retrieval embedding can erase fine relations like red bag on the left but with a different st"
+        },
+        {
+          "title": "See It, Say It, Sorted: An Iterative Training-Free Framework for Visually-Grounded Multimodal Reasoning in LVLMs",
+          "repo": "https://github.com/uuuuZYC/See-It-Say-It-Sorted",
+          "tags": [
+            "chain-of-thought",
+            "hallucination mitigation",
+            "visual grounding",
+            "LVLMs",
+            "reasoning",
+            "test-time inference"
+          ],
+          "problem": "See It Say It Sorted is about improving multimodal answers without new training. The everyday problem is that a model may generate fluent but weakly grounded reasoning unless it repeatedly checks visible evidence."
+        }
+      ],
+      "priority": "covered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-06-perception-parts",
+      "theme": "perceive",
+      "title": "Perception Parts Repo Bench",
+      "query": [
+        "segmentation",
+        "open-vocabulary",
+        "collaborative",
+        "panoramic",
+        "scene graph",
+        "few-shot"
+      ],
+      "systems": [
+        "open-vocab-visual-search"
+      ],
+      "demoSurface": "cvpr-perception-parts-repo-bench.html",
+      "mechanic": "Turn repo-backed segmentation, scene graph, collaborative perception, and few-shot recognition papers into part/localization tests.",
+      "themeName": "Naming and locating what's in the picture",
+      "themeRepoCount": 89,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "Focus on Background: Exploring SAM's Potential in Few-shot Medical Image Segmentation",
+          "repo": "https://github.com/primebo1/FoB",
+          "tags": [
+            "few-shot segmentation",
+            "medical imaging",
+            "SAM",
+            "background prompting",
+            "GCN",
+            "graph neural network"
+          ],
+          "problem": "This few-shot medical segmentation work is about using background cues, not only foreground prompts. The everyday problem is that two medical structures may look similar, and the surrounding tissue can be the clue that separates the target from lookalikes."
+        },
+        {
+          "title": "Denoise and Align: Towards Source-Free UDA for Robust Panoramic Semantic Segmentation",
+          "repo": "https://github.com/ZZZPhaethon/DAPASS",
+          "tags": [
+            "panoramic-segmentation",
+            "domain-adaptation",
+            "semantic-segmentation",
+            "source-free",
+            "equirectangular-projection",
+            "autonomous-driving"
+          ],
+          "problem": "DAPASS is about adapting a segmentation model to panoramic 360-degree images without source training data. The everyday problem is that panoramic projection distorts scale and shape, while noisy pseudo-labels can lock the adapted model into wrong classes."
+        },
+        {
+          "title": "TF-SSD: A Strong Pipeline via Synergic Mask Filter for Training-free Co-Salient Object Detection",
+          "repo": "https://github.com/hzz-yy/TF-SSD",
+          "tags": [
+            "co-salient-object-detection",
+            "training-free",
+            "zero-shot",
+            "SAM",
+            "DINO",
+            "segmentation"
+          ],
+          "problem": "TF-SSD is about detecting common salient objects across image groups without labeled training. The everyday problem is that zero-shot mask proposals are noisy, and the system must find which masks point to the same meaningful object across images."
+        },
+        {
+          "title": "TAPE: Task-Adaptive Prototype Evolution in Audio-Language Models for Fully Few-Shot Class-Incremental Audio Classification",
+          "repo": "https://github.com/YvoGao/TAPE",
+          "tags": [
+            "audio classification",
+            "few-shot learning",
+            "class-incremental learning",
+            "continual learning",
+            "CLAP",
+            "audio-language model"
+          ],
+          "problem": "TAPE is about learning new audio classes from a few examples without forgetting old ones. The everyday problem is that a new sound category may have only a handful of clips, and the original training audio may no longer be available."
+        },
+        {
+          "title": "EReCu: Pseudo-label Evolution Fusion and Refinement with Multi-Cue Learning for Unsupervised Camouflage Detection",
+          "repo": "https://github.com/JSLiam94/EReCu",
+          "tags": [
+            "camouflaged-object-detection",
+            "unsupervised",
+            "pseudo-labels",
+            "teacher-student",
+            "segmentation",
+            "detail-preservation"
+          ],
+          "problem": "EReCu is about finding camouflaged objects without clean labels. The everyday problem is that the object is designed by nature or texture to look like its background, so noisy pseudo-labels can either spill past the boundary or erase fine detail."
+        }
+      ],
+      "priority": "undercovered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-07-embodied-control",
+      "theme": "embodied",
+      "title": "Embodied Control Repo Drill",
+      "query": [
+        "driving",
+        "gui",
+        "robot",
+        "policy",
+        "manipulation",
+        "reinforcement"
+      ],
+      "systems": [
+        "driving-vla-release-gate"
+      ],
+      "demoSurface": "cvpr-embodied-control-repo-drill.html",
+      "mechanic": "Cover the underrepresented embodied theme with code-backed driving, GUI-agent, and manipulation policy drills.",
+      "themeName": "Using vision to act in the world",
+      "themeRepoCount": 19,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "Reliable Policy Transfer for Safety-Aware End-to-End Driving with Deep Reinforcement Learning",
+          "repo": "https://github.com/szu-ai/safe-driving-drl",
+          "tags": [
+            "autonomous driving",
+            "reinforcement learning",
+            "policy transfer",
+            "uncertainty estimation",
+            "CARLA",
+            "SAC"
+          ],
+          "problem": "This driving work is about transferring a reinforcement-learned policy safely across towns and weather. The everyday problem is that a car policy can behave well in one simulator setting but become brittle when uncertainty, road layout, or traffic interactions"
+        },
+        {
+          "title": "Saliency-Guided Representation with Consistency Policy Learning for Visual Unsupervised Reinforcement Learning",
+          "repo": "https://github.com/bofusun/SRCP",
+          "tags": [
+            "unsupervised-reinforcement-learning",
+            "visual-control",
+            "skill-learning",
+            "representation-learning",
+            "zero-shot-generalization",
+            "consistency-models"
+          ],
+          "problem": "This paper is about unsupervised reinforcement learning from vision. The everyday problem is that an agent must learn useful behavior without rewards, so it needs to focus on visually important parts of the scene."
+        },
+        {
+          "title": "EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models",
+          "repo": "https://github.com/codeshop715/EnergyAction",
+          "tags": [
+            "robotics",
+            "manipulation",
+            "energy-based models",
+            "policy transfer",
+            "bimanual control",
+            "compositional learning"
+          ],
+          "problem": "EnergyAction is about composing one-hand actions into two-hand actions. The everyday problem is that two hands must coordinate, not just duplicate independent motions."
+        },
+        {
+          "title": "Dynamic Important Example Mining for Reinforcement Finetuning",
+          "repo": "https://github.com/hrtan/DIEM",
+          "tags": [
+            "reinforcement-learning",
+            "fine-tuning",
+            "data-selection",
+            "curriculum-learning",
+            "policy-optimization",
+            "sample-importance"
+          ],
+          "problem": "The paper is about choosing which training examples matter right now. The everyday problem is that a lesson that was useful yesterday may be too easy or misleading after the learner changes."
+        },
+        {
+          "title": "HiconAgent: History Context-aware Policy Optimization for GUI Agents",
+          "repo": "https://github.com/JiuTian-VL/HiconAgent",
+          "tags": [
+            "gui-agents",
+            "policy-optimization",
+            "history-awareness",
+            "task-automation",
+            "reinforcement-learning"
+          ],
+          "problem": "HiconAgent is about GUI agents that remember what they already did. The everyday problem is that a screen action only makes sense in the context of previous clicks, fields, dialogs, and state changes."
+        }
+      ],
+      "priority": "undercovered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    },
+    {
+      "id": "paper-repo-08-efficient-learning",
+      "theme": "learning",
+      "title": "Efficient Learning Repo Governor",
+      "query": [
+        "token",
+        "pruning",
+        "continual",
+        "few-shot",
+        "compression",
+        "adaptation"
+      ],
+      "systems": [
+        "efficient-vision-serving"
+      ],
+      "demoSurface": "cvpr-efficient-learning-repo-governor.html",
+      "mechanic": "Convert code-backed token compression, pruning, continual, and adaptation papers into cost/readiness tradeoff demos.",
+      "themeName": "Learning more from less, and not breaking",
+      "themeRepoCount": 45,
+      "repoPapers": 5,
+      "seedPapers": [
+        {
+          "title": "What Do Visual Tokens Really Encode: Uncovering Sparsity and Redundancy",
+          "repo": "https://github.com/EIT-NLP/EmbedLens",
+          "tags": [
+            "vision-transformers",
+            "token-analysis",
+            "model-compression",
+            "network-pruning",
+            "interpretability"
+          ],
+          "problem": "What Do Visual Tokens Really Encode is about finding which image patches in a transformer actually carry useful information. The everyday problem is that a model may spend equal effort on sky, wall, object edge, and repeated texture even though many tokens say"
+        },
+        {
+          "title": "NuWa: Deriving Lightweight Class-Specific Vision Transformers for Edge Devices",
+          "repo": "https://github.com/CGCL-codes/NuWa",
+          "tags": [
+            "vision transformer",
+            "model compression",
+            "pruning",
+            "edge devices",
+            "structured pruning",
+            "knowledge distillation"
+          ],
+          "problem": "NuWa is about shrinking vision transformers for edge devices. The everyday problem is that an edge camera may only need a few object classes, so carrying a full general model wastes memory and power."
+        },
+        {
+          "title": "FOZO: Forward-Only Zeroth-Order Prompt Optimization for Test-Time Adaptation",
+          "repo": "https://github.com/eVI-group-SCU/FOZO",
+          "tags": [
+            "test-time-adaptation",
+            "domain-adaptation",
+            "zeroth-order-optimization",
+            "prompt-tuning",
+            "vision-transformer",
+            "forward-only-learning"
+          ],
+          "problem": "FOZO is about adapting a model at test time on devices that cannot afford backpropagation. The everyday problem is that the model faces a shifted environment, but computing full gradients is too expensive in memory and time."
+        },
+        {
+          "title": "CHEEM: Continual Learning by Reuse, New, Adapt and Skip \u2013 A Hierarchical Exploration-Exploitation Approach",
+          "repo": "https://github.com/savadikarc/cheem",
+          "tags": [
+            "continual-learning",
+            "class-incremental",
+            "neural-architecture-search",
+            "vision-transformers",
+            "dynamic-architecture",
+            "task-adaptation"
+          ],
+          "problem": "CHEEM is about deciding how a continual learner should change its architecture for each new task. The everyday problem is that some tasks should reuse old knowledge, some need new capacity, some need adaptation, and some parts should be skipped."
+        },
+        {
+          "title": "Towards Stable Federated Continual Test-Time Adaptation in Wild World",
+          "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+          "tags": [
+            "federated-learning",
+            "test-time-adaptation",
+            "continual-learning",
+            "bayesian-inference",
+            "domain-adaptation",
+            "uncertainty-quantification"
+          ],
+          "problem": "This paper is about adapting federated models to changing unlabeled client data. The everyday problem is that each client sees shifts at different times, and noisy test-time updates can destabilize the shared model."
+        }
+      ],
+      "priority": "undercovered",
+      "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "ready"
+    }
+  ],
+  "source": "search.html"
+}

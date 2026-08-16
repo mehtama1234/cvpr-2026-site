@@ -1,0 +1,7 @@
+jobId=perception-05-github-com-jsliam94-erecu
+repo=https://github.com/JSLiam94/EReCu
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

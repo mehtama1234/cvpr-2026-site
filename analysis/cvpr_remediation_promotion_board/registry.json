@@ -1,0 +1,1708 @@
+{
+  "summary": {
+    "demo": "cvpr-remediation-promotion-board",
+    "status": "release",
+    "sourceDemo": "cvpr-remediation-retest-harness",
+    "rows": 29,
+    "sourceRetests": 29,
+    "promote": 12,
+    "monitor": 17,
+    "hold": 0,
+    "clearedBlocks": 14,
+    "promotedRelease": 12,
+    "themes": 8,
+    "incidents": 4,
+    "maxPromotedRisk": 41.6,
+    "minPromotedEvidence": 63.9,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "promotionRows": [
+    {
+      "id": "adaptive-serving/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "adaptive-serving/gpu-brownout/review-hardening/retest",
+      "demoId": "adaptive-serving",
+      "demoTitle": "Adaptive Serving Stress Lab",
+      "theme": "Learning more from less, and not breaking",
+      "page": "cvpr-adaptive-serving-stress-lab.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 73.8,
+        "risk": 30.4,
+        "evidence": 81.3,
+        "resilience": 74.0
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "adaptive-serving/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "adaptive-serving/adversarial-content/review-hardening/retest",
+      "demoId": "adaptive-serving",
+      "demoTitle": "Adaptive Serving Stress Lab",
+      "theme": "Learning more from less, and not breaking",
+      "page": "cvpr-adaptive-serving-stress-lab.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 79.8,
+        "risk": 36.4,
+        "evidence": 80.3,
+        "resilience": 74.4
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "adaptive-serving/compound-launch/review-hardening/retest/promotion",
+      "retestId": "adaptive-serving/compound-launch/review-hardening/retest",
+      "demoId": "adaptive-serving",
+      "demoTitle": "Adaptive Serving Stress Lab",
+      "theme": "Learning more from less, and not breaking",
+      "page": "cvpr-adaptive-serving-stress-lab.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 72.8,
+        "risk": 40.4,
+        "evidence": 75.3,
+        "resilience": 68.9
+      },
+      "clearedBlock": true,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "constraint-edit/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "constraint-edit/gpu-brownout/review-hardening/retest",
+      "demoId": "constraint-edit",
+      "demoTitle": "Constraint Edit Tournament",
+      "theme": "Making pixels from meaning",
+      "page": "cvpr-constraint-edit-tournament.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 77.8,
+        "risk": 37.4,
+        "evidence": 84.1,
+        "resilience": 74.0
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "constraint-edit/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "constraint-edit/adversarial-content/review-hardening/retest",
+      "demoId": "constraint-edit",
+      "demoTitle": "Constraint Edit Tournament",
+      "theme": "Making pixels from meaning",
+      "page": "cvpr-constraint-edit-tournament.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 83.8,
+        "risk": 43.4,
+        "evidence": 83.1,
+        "resilience": 74.4
+      },
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "constraint-edit/compound-launch/review-hardening/retest/promotion",
+      "retestId": "constraint-edit/compound-launch/review-hardening/retest",
+      "demoId": "constraint-edit",
+      "demoTitle": "Constraint Edit Tournament",
+      "theme": "Making pixels from meaning",
+      "page": "cvpr-constraint-edit-tournament.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 76.8,
+        "risk": 47.4,
+        "evidence": 78.1,
+        "resilience": 68.9
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "open-vocab/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "open-vocab/gpu-brownout/review-hardening/retest",
+      "demoId": "open-vocab",
+      "demoTitle": "Open-Vocabulary Failure Hunt",
+      "theme": "Naming and locating what's in the picture",
+      "page": "cvpr-open-vocab-failure-hunt.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 80.3,
+        "risk": 35.6,
+        "evidence": 86.6,
+        "resilience": 76.3
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "open-vocab/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "open-vocab/adversarial-content/review-hardening/retest",
+      "demoId": "open-vocab",
+      "demoTitle": "Open-Vocabulary Failure Hunt",
+      "theme": "Naming and locating what's in the picture",
+      "page": "cvpr-open-vocab-failure-hunt.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 86.3,
+        "risk": 41.6,
+        "evidence": 85.6,
+        "resilience": 76.7
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "open-vocab/compound-launch/review-hardening/retest/promotion",
+      "retestId": "open-vocab/compound-launch/review-hardening/retest",
+      "demoId": "open-vocab",
+      "demoTitle": "Open-Vocabulary Failure Hunt",
+      "theme": "Naming and locating what's in the picture",
+      "page": "cvpr-open-vocab-failure-hunt.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 79.3,
+        "risk": 45.6,
+        "evidence": 80.6,
+        "resilience": 71.1
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "3d-edit-provenance/launch-audit/review-hardening/retest/promotion",
+      "retestId": "3d-edit-provenance/launch-audit/review-hardening/retest",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 91.8,
+        "risk": 31.3,
+        "evidence": 88.1,
+        "resilience": 83.1
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "3d-edit-provenance/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "3d-edit-provenance/gpu-brownout/review-hardening/retest",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 79.8,
+        "risk": 41.3,
+        "evidence": 82.1,
+        "resilience": 73.1
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "3d-edit-provenance/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "3d-edit-provenance/adversarial-content/review-hardening/retest",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 83.8,
+        "risk": 49.3,
+        "evidence": 80.1,
+        "resilience": 71.7
+      },
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "3d-edit-provenance/compound-launch/review-hardening/retest/promotion",
+      "retestId": "3d-edit-provenance/compound-launch/review-hardening/retest",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 79.8,
+        "risk": 50.3,
+        "evidence": 76.1,
+        "resilience": 68.8
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "temporal-counterfactual/launch-audit/review-hardening/retest/promotion",
+      "retestId": "temporal-counterfactual/launch-audit/review-hardening/retest",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 85.4,
+        "risk": 40.4,
+        "evidence": 71.8,
+        "resilience": 73.6
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "temporal-counterfactual/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "temporal-counterfactual/gpu-brownout/review-hardening/retest",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 79.4,
+        "risk": 44.4,
+        "evidence": 68.8,
+        "resilience": 69.0
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "temporal-counterfactual/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "temporal-counterfactual/adversarial-content/review-hardening/retest",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 85.4,
+        "risk": 50.4,
+        "evidence": 67.8,
+        "resilience": 69.4
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "temporal-counterfactual/compound-launch/risk-containment/retest/promotion",
+      "retestId": "temporal-counterfactual/compound-launch/risk-containment/retest",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 80.4,
+        "risk": 46.4,
+        "evidence": 60.8,
+        "resilience": 67.0
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "grounded-answer/launch-audit/review-hardening/retest/promotion",
+      "retestId": "grounded-answer/launch-audit/review-hardening/retest",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 89.2,
+        "risk": 36.6,
+        "evidence": 73.9,
+        "resilience": 77.1
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "grounded-answer/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "grounded-answer/gpu-brownout/review-hardening/retest",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 77.2,
+        "risk": 46.6,
+        "evidence": 67.9,
+        "resilience": 67.1
+      },
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "grounded-answer/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "grounded-answer/adversarial-content/review-hardening/retest",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 89.2,
+        "risk": 46.6,
+        "evidence": 69.9,
+        "resilience": 72.8
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "grounded-answer/compound-launch/risk-containment/retest/promotion",
+      "retestId": "grounded-answer/compound-launch/risk-containment/retest",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "beforeDecision": "block",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 87.2,
+        "risk": 39.6,
+        "evidence": 63.9,
+        "resilience": 73.0
+      },
+      "clearedBlock": true,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "provenance-red-team/launch-audit/review-hardening/retest/promotion",
+      "retestId": "provenance-red-team/launch-audit/review-hardening/retest",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "release",
+      "after": {
+        "readiness": 87.3,
+        "risk": 38.7,
+        "evidence": 90.8,
+        "resilience": 79.2
+      },
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "promotion": "promote",
+      "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "provenance-red-team/gpu-brownout/review-hardening/retest/promotion",
+      "retestId": "provenance-red-team/gpu-brownout/review-hardening/retest",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 73.3,
+        "risk": 50.7,
+        "evidence": 83.8,
+        "resilience": 67.5
+      },
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "provenance-red-team/adversarial-content/review-hardening/retest/promotion",
+      "retestId": "provenance-red-team/adversarial-content/review-hardening/retest",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 87.3,
+        "risk": 48.7,
+        "evidence": 86.8,
+        "resilience": 75.0
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "provenance-red-team/compound-launch/risk-containment/retest/promotion",
+      "retestId": "provenance-red-team/compound-launch/risk-containment/retest",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 82.3,
+        "risk": 44.7,
+        "evidence": 79.8,
+        "resilience": 72.6
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "safety-deployment/launch-audit/review-hardening/retest/promotion",
+      "retestId": "safety-deployment/launch-audit/review-hardening/retest",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "beforeDecision": "review",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 70.1,
+        "risk": 40.2,
+        "evidence": 69.5,
+        "resilience": 66.5
+      },
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "safety-deployment/gpu-brownout/readiness-recovery/retest/promotion",
+      "retestId": "safety-deployment/gpu-brownout/readiness-recovery/retest",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 70.1,
+        "risk": 52.2,
+        "evidence": 64.5,
+        "resilience": 61.3
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "safety-deployment/adversarial-content/evidence-repair/retest/promotion",
+      "retestId": "safety-deployment/adversarial-content/evidence-repair/retest",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 64.1,
+        "risk": 56.2,
+        "evidence": 73.5,
+        "resilience": 59.3
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "safety-deployment/compound-launch/risk-containment/retest/promotion",
+      "retestId": "safety-deployment/compound-launch/risk-containment/retest",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "beforeDecision": "block",
+      "afterDecision": "review",
+      "after": {
+        "readiness": 65.1,
+        "risk": 46.2,
+        "evidence": 58.5,
+        "resilience": 59.8
+      },
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "promotion": "monitor",
+      "reason": "block cleared or review improved, but still requires launch monitoring",
+      "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    }
+  ],
+  "retestRows": [
+    {
+      "id": "adaptive-serving/gpu-brownout/review-hardening/retest",
+      "actionId": "adaptive-serving/gpu-brownout/review-hardening",
+      "demoId": "adaptive-serving",
+      "demoTitle": "Adaptive Serving Stress Lab",
+      "theme": "Learning more from less, and not breaking",
+      "page": "cvpr-adaptive-serving-stress-lab.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 59.8,
+        "risk": 42.4,
+        "evidence": 69.3,
+        "resilience": 61.1
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 73.8,
+        "risk": 30.4,
+        "evidence": 81.3,
+        "resilience": 74.0
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest adaptive-serving/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "adaptive-serving/adversarial-content/review-hardening/retest",
+      "actionId": "adaptive-serving/adversarial-content/review-hardening",
+      "demoId": "adaptive-serving",
+      "demoTitle": "Adaptive Serving Stress Lab",
+      "theme": "Learning more from less, and not breaking",
+      "page": "cvpr-adaptive-serving-stress-lab.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 65.8,
+        "risk": 48.4,
+        "evidence": 68.3,
+        "resilience": 61.5
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 79.8,
+        "risk": 36.4,
+        "evidence": 80.3,
+        "resilience": 74.4
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest adaptive-serving/adversarial-content after review-hardening"
+    },
+    {
+      "id": "adaptive-serving/compound-launch/review-hardening/retest",
+      "actionId": "adaptive-serving/compound-launch/review-hardening",
+      "demoId": "adaptive-serving",
+      "demoTitle": "Adaptive Serving Stress Lab",
+      "theme": "Learning more from less, and not breaking",
+      "page": "cvpr-adaptive-serving-stress-lab.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 50.8,
+        "risk": 60.4,
+        "evidence": 59.3,
+        "resilience": 48.9
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 72.8,
+        "risk": 40.4,
+        "evidence": 75.3,
+        "resilience": 68.9
+      },
+      "afterDecision": "release",
+      "clearedBlock": true,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest adaptive-serving/compound-launch after review-hardening"
+    },
+    {
+      "id": "constraint-edit/gpu-brownout/review-hardening/retest",
+      "actionId": "constraint-edit/gpu-brownout/review-hardening",
+      "demoId": "constraint-edit",
+      "demoTitle": "Constraint Edit Tournament",
+      "theme": "Making pixels from meaning",
+      "page": "cvpr-constraint-edit-tournament.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 63.8,
+        "risk": 49.4,
+        "evidence": 72.1,
+        "resilience": 61.1
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 77.8,
+        "risk": 37.4,
+        "evidence": 84.1,
+        "resilience": 74.0
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest constraint-edit/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "constraint-edit/adversarial-content/review-hardening/retest",
+      "actionId": "constraint-edit/adversarial-content/review-hardening",
+      "demoId": "constraint-edit",
+      "demoTitle": "Constraint Edit Tournament",
+      "theme": "Making pixels from meaning",
+      "page": "cvpr-constraint-edit-tournament.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 69.8,
+        "risk": 55.4,
+        "evidence": 71.1,
+        "resilience": 61.5
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 83.8,
+        "risk": 43.4,
+        "evidence": 83.1,
+        "resilience": 74.4
+      },
+      "afterDecision": "review",
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest constraint-edit/adversarial-content after review-hardening"
+    },
+    {
+      "id": "constraint-edit/compound-launch/review-hardening/retest",
+      "actionId": "constraint-edit/compound-launch/review-hardening",
+      "demoId": "constraint-edit",
+      "demoTitle": "Constraint Edit Tournament",
+      "theme": "Making pixels from meaning",
+      "page": "cvpr-constraint-edit-tournament.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 54.8,
+        "risk": 67.4,
+        "evidence": 62.1,
+        "resilience": 48.9
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 76.8,
+        "risk": 47.4,
+        "evidence": 78.1,
+        "resilience": 68.9
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest constraint-edit/compound-launch after review-hardening"
+    },
+    {
+      "id": "open-vocab/gpu-brownout/review-hardening/retest",
+      "actionId": "open-vocab/gpu-brownout/review-hardening",
+      "demoId": "open-vocab",
+      "demoTitle": "Open-Vocabulary Failure Hunt",
+      "theme": "Naming and locating what's in the picture",
+      "page": "cvpr-open-vocab-failure-hunt.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 66.3,
+        "risk": 47.6,
+        "evidence": 74.6,
+        "resilience": 63.4
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 80.3,
+        "risk": 35.6,
+        "evidence": 86.6,
+        "resilience": 76.3
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest open-vocab/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "open-vocab/adversarial-content/review-hardening/retest",
+      "actionId": "open-vocab/adversarial-content/review-hardening",
+      "demoId": "open-vocab",
+      "demoTitle": "Open-Vocabulary Failure Hunt",
+      "theme": "Naming and locating what's in the picture",
+      "page": "cvpr-open-vocab-failure-hunt.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 72.3,
+        "risk": 53.6,
+        "evidence": 73.6,
+        "resilience": 63.8
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 86.3,
+        "risk": 41.6,
+        "evidence": 85.6,
+        "resilience": 76.7
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest open-vocab/adversarial-content after review-hardening"
+    },
+    {
+      "id": "open-vocab/compound-launch/review-hardening/retest",
+      "actionId": "open-vocab/compound-launch/review-hardening",
+      "demoId": "open-vocab",
+      "demoTitle": "Open-Vocabulary Failure Hunt",
+      "theme": "Naming and locating what's in the picture",
+      "page": "cvpr-open-vocab-failure-hunt.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 57.3,
+        "risk": 65.6,
+        "evidence": 64.6,
+        "resilience": 51.1
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 79.3,
+        "risk": 45.6,
+        "evidence": 80.6,
+        "resilience": 71.1
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest open-vocab/compound-launch after review-hardening"
+    },
+    {
+      "id": "3d-edit-provenance/launch-audit/review-hardening/retest",
+      "actionId": "3d-edit-provenance/launch-audit/review-hardening",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 77.8,
+        "risk": 43.3,
+        "evidence": 76.1,
+        "resilience": 70.3
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 91.8,
+        "risk": 31.3,
+        "evidence": 88.1,
+        "resilience": 83.1
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest 3d-edit-provenance/launch-audit after review-hardening"
+    },
+    {
+      "id": "3d-edit-provenance/gpu-brownout/review-hardening/retest",
+      "actionId": "3d-edit-provenance/gpu-brownout/review-hardening",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 65.8,
+        "risk": 53.3,
+        "evidence": 70.1,
+        "resilience": 60.3
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 79.8,
+        "risk": 41.3,
+        "evidence": 82.1,
+        "resilience": 73.1
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest 3d-edit-provenance/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "3d-edit-provenance/adversarial-content/review-hardening/retest",
+      "actionId": "3d-edit-provenance/adversarial-content/review-hardening",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 69.8,
+        "risk": 61.3,
+        "evidence": 68.1,
+        "resilience": 58.9
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 83.8,
+        "risk": 49.3,
+        "evidence": 80.1,
+        "resilience": 71.7
+      },
+      "afterDecision": "review",
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest 3d-edit-provenance/adversarial-content after review-hardening"
+    },
+    {
+      "id": "3d-edit-provenance/compound-launch/review-hardening/retest",
+      "actionId": "3d-edit-provenance/compound-launch/review-hardening",
+      "demoId": "3d-edit-provenance",
+      "demoTitle": "3D Edit Provenance Room",
+      "theme": "Recovering the 3D world from flat pictures",
+      "page": "cvpr-3d-edit-provenance-room.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 57.8,
+        "risk": 70.3,
+        "evidence": 60.1,
+        "resilience": 48.8
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 79.8,
+        "risk": 50.3,
+        "evidence": 76.1,
+        "resilience": 68.8
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest 3d-edit-provenance/compound-launch after review-hardening"
+    },
+    {
+      "id": "temporal-counterfactual/launch-audit/review-hardening/retest",
+      "actionId": "temporal-counterfactual/launch-audit/review-hardening",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 71.4,
+        "risk": 52.4,
+        "evidence": 59.8,
+        "resilience": 60.8
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 85.4,
+        "risk": 40.4,
+        "evidence": 71.8,
+        "resilience": 73.6
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest temporal-counterfactual/launch-audit after review-hardening"
+    },
+    {
+      "id": "temporal-counterfactual/gpu-brownout/review-hardening/retest",
+      "actionId": "temporal-counterfactual/gpu-brownout/review-hardening",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 57.4,
+        "risk": 64.4,
+        "evidence": 52.8,
+        "resilience": 49.0
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 79.4,
+        "risk": 44.4,
+        "evidence": 68.8,
+        "resilience": 69.0
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest temporal-counterfactual/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "temporal-counterfactual/adversarial-content/review-hardening/retest",
+      "actionId": "temporal-counterfactual/adversarial-content/review-hardening",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 63.4,
+        "risk": 70.4,
+        "evidence": 51.8,
+        "resilience": 49.4
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 85.4,
+        "risk": 50.4,
+        "evidence": 67.8,
+        "resilience": 69.4
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest temporal-counterfactual/adversarial-content after review-hardening"
+    },
+    {
+      "id": "temporal-counterfactual/compound-launch/risk-containment/retest",
+      "actionId": "temporal-counterfactual/compound-launch/risk-containment",
+      "demoId": "temporal-counterfactual",
+      "demoTitle": "Temporal Counterfactual Lab",
+      "theme": "Seeing and making things that move",
+      "page": "cvpr-temporal-counterfactual-lab.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "family": "risk-containment",
+      "before": {
+        "readiness": 48.4,
+        "risk": 82.4,
+        "evidence": 42.8,
+        "resilience": 36.7
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 32,
+        "risk": -36,
+        "evidence": 18
+      },
+      "after": {
+        "readiness": 80.4,
+        "risk": 46.4,
+        "evidence": 60.8,
+        "resilience": 67.0
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest temporal-counterfactual/compound-launch after risk-containment"
+    },
+    {
+      "id": "grounded-answer/launch-audit/review-hardening/retest",
+      "actionId": "grounded-answer/launch-audit/review-hardening",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 75.2,
+        "risk": 48.6,
+        "evidence": 61.9,
+        "resilience": 64.2
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 89.2,
+        "risk": 36.6,
+        "evidence": 73.9,
+        "resilience": 77.1
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest grounded-answer/launch-audit after review-hardening"
+    },
+    {
+      "id": "grounded-answer/gpu-brownout/review-hardening/retest",
+      "actionId": "grounded-answer/gpu-brownout/review-hardening",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 63.2,
+        "risk": 58.6,
+        "evidence": 55.9,
+        "resilience": 54.2
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 77.2,
+        "risk": 46.6,
+        "evidence": 67.9,
+        "resilience": 67.1
+      },
+      "afterDecision": "review",
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest grounded-answer/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "grounded-answer/adversarial-content/review-hardening/retest",
+      "actionId": "grounded-answer/adversarial-content/review-hardening",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 67.2,
+        "risk": 66.6,
+        "evidence": 53.9,
+        "resilience": 52.8
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 89.2,
+        "risk": 46.6,
+        "evidence": 69.9,
+        "resilience": 72.8
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest grounded-answer/adversarial-content after review-hardening"
+    },
+    {
+      "id": "grounded-answer/compound-launch/risk-containment/retest",
+      "actionId": "grounded-answer/compound-launch/risk-containment",
+      "demoId": "grounded-answer",
+      "demoTitle": "Grounded Answer Courtroom",
+      "theme": "Teaching machines to see and talk at once",
+      "page": "cvpr-grounded-answer-courtroom.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "family": "risk-containment",
+      "before": {
+        "readiness": 55.2,
+        "risk": 75.6,
+        "evidence": 45.9,
+        "resilience": 42.7
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 32,
+        "risk": -36,
+        "evidence": 18
+      },
+      "after": {
+        "readiness": 87.2,
+        "risk": 39.6,
+        "evidence": 63.9,
+        "resilience": 73.0
+      },
+      "afterDecision": "release",
+      "clearedBlock": true,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest grounded-answer/compound-launch after risk-containment"
+    },
+    {
+      "id": "provenance-red-team/launch-audit/review-hardening/retest",
+      "actionId": "provenance-red-team/launch-audit/review-hardening",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 73.3,
+        "risk": 50.7,
+        "evidence": 78.8,
+        "resilience": 66.3
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 87.3,
+        "risk": 38.7,
+        "evidence": 90.8,
+        "resilience": 79.2
+      },
+      "afterDecision": "release",
+      "clearedBlock": false,
+      "promotedRelease": true,
+      "acceptanceCheck": "retest provenance-red-team/launch-audit after review-hardening"
+    },
+    {
+      "id": "provenance-red-team/gpu-brownout/review-hardening/retest",
+      "actionId": "provenance-red-team/gpu-brownout/review-hardening",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 59.3,
+        "risk": 62.7,
+        "evidence": 71.8,
+        "resilience": 54.6
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 73.3,
+        "risk": 50.7,
+        "evidence": 83.8,
+        "resilience": 67.5
+      },
+      "afterDecision": "review",
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest provenance-red-team/gpu-brownout after review-hardening"
+    },
+    {
+      "id": "provenance-red-team/adversarial-content/review-hardening/retest",
+      "actionId": "provenance-red-team/adversarial-content/review-hardening",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 65.3,
+        "risk": 68.7,
+        "evidence": 70.8,
+        "resilience": 54.9
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 22,
+        "risk": -20,
+        "evidence": 16
+      },
+      "after": {
+        "readiness": 87.3,
+        "risk": 48.7,
+        "evidence": 86.8,
+        "resilience": 75.0
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest provenance-red-team/adversarial-content after review-hardening"
+    },
+    {
+      "id": "provenance-red-team/compound-launch/risk-containment/retest",
+      "actionId": "provenance-red-team/compound-launch/risk-containment",
+      "demoId": "provenance-red-team",
+      "demoTitle": "Provenance Red-Team Arena",
+      "theme": "The frontier - new senses and new duties",
+      "page": "cvpr-provenance-red-team-arena.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "family": "risk-containment",
+      "before": {
+        "readiness": 50.3,
+        "risk": 80.7,
+        "evidence": 61.8,
+        "resilience": 42.3
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 32,
+        "risk": -36,
+        "evidence": 18
+      },
+      "after": {
+        "readiness": 82.3,
+        "risk": 44.7,
+        "evidence": 79.8,
+        "resilience": 72.6
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest provenance-red-team/compound-launch after risk-containment"
+    },
+    {
+      "id": "safety-deployment/launch-audit/review-hardening/retest",
+      "actionId": "safety-deployment/launch-audit/review-hardening",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "launch-audit",
+      "incidentTitle": "Launch audit",
+      "priority": "focused",
+      "family": "review-hardening",
+      "before": {
+        "readiness": 56.1,
+        "risk": 52.2,
+        "evidence": 57.5,
+        "resilience": 53.6
+      },
+      "beforeDecision": "review",
+      "effect": {
+        "readiness": 14,
+        "risk": -12,
+        "evidence": 12
+      },
+      "after": {
+        "readiness": 70.1,
+        "risk": 40.2,
+        "evidence": 69.5,
+        "resilience": 66.5
+      },
+      "afterDecision": "review",
+      "clearedBlock": false,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest safety-deployment/launch-audit after review-hardening"
+    },
+    {
+      "id": "safety-deployment/gpu-brownout/readiness-recovery/retest",
+      "actionId": "safety-deployment/gpu-brownout/readiness-recovery",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "gpu-brownout",
+      "incidentTitle": "GPU brownout",
+      "priority": "high",
+      "family": "readiness-recovery",
+      "before": {
+        "readiness": 42.1,
+        "risk": 64.2,
+        "evidence": 50.5,
+        "resilience": 41.8
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 28,
+        "risk": -12,
+        "evidence": 14
+      },
+      "after": {
+        "readiness": 70.1,
+        "risk": 52.2,
+        "evidence": 64.5,
+        "resilience": 61.3
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest safety-deployment/gpu-brownout after readiness-recovery"
+    },
+    {
+      "id": "safety-deployment/adversarial-content/evidence-repair/retest",
+      "actionId": "safety-deployment/adversarial-content/evidence-repair",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "adversarial-content",
+      "incidentTitle": "Adversarial content",
+      "priority": "high",
+      "family": "evidence-repair",
+      "before": {
+        "readiness": 48.1,
+        "risk": 70.2,
+        "evidence": 49.5,
+        "resilience": 42.2
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 16,
+        "risk": -14,
+        "evidence": 24
+      },
+      "after": {
+        "readiness": 64.1,
+        "risk": 56.2,
+        "evidence": 73.5,
+        "resilience": 59.3
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest safety-deployment/adversarial-content after evidence-repair"
+    },
+    {
+      "id": "safety-deployment/compound-launch/risk-containment/retest",
+      "actionId": "safety-deployment/compound-launch/risk-containment",
+      "demoId": "safety-deployment",
+      "demoTitle": "Safety Deployment Simulator",
+      "theme": "Using vision to act in the world",
+      "page": "cvpr-safety-deployment-simulator.html",
+      "incidentId": "compound-launch",
+      "incidentTitle": "Compound launch",
+      "priority": "critical",
+      "family": "risk-containment",
+      "before": {
+        "readiness": 33.1,
+        "risk": 82.2,
+        "evidence": 40.5,
+        "resilience": 29.5
+      },
+      "beforeDecision": "block",
+      "effect": {
+        "readiness": 32,
+        "risk": -36,
+        "evidence": 18
+      },
+      "after": {
+        "readiness": 65.1,
+        "risk": 46.2,
+        "evidence": 58.5,
+        "resilience": 59.8
+      },
+      "afterDecision": "review",
+      "clearedBlock": true,
+      "promotedRelease": false,
+      "acceptanceCheck": "retest safety-deployment/compound-launch after risk-containment"
+    }
+  ],
+  "sources": {
+    "retest": "analysis/cvpr_remediation_retest_harness/registry.json"
+  }
+}

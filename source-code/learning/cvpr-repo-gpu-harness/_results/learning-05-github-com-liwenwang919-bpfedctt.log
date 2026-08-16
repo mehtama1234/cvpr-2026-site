@@ -1,0 +1,7 @@
+jobId=learning-05-github-com-liwenwang919-bpfedctt
+repo=https://github.com/LiwenWang919/BPFedCTTA
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

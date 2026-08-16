@@ -1,0 +1,10 @@
+{
+  "jobId": "perception-05-github-com-jsliam94-erecu",
+  "repo": "https://github.com/JSLiam94/EReCu",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

@@ -1,0 +1,18 @@
+{
+  "system": "driving-vla-release-gate",
+  "systemTitle": "Driving VLA release gate",
+  "stage": "action-release",
+  "stageTitle": "Gate action release",
+  "theme": "Using vision to act in the world",
+  "themeSlug": "embodied",
+  "cluster": "Driving and vision-language-action",
+  "clusterSlug": "driving_vla",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "execute only actions that pass perception and dynamics checks",
+  "reusableRule": "Driving VLA release gate stage 'Gate action release' should execute only actions that pass perception and dynamics checks using measured CVPR evidence, not only paper novelty."
+}

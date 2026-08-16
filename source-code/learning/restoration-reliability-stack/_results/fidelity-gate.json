@@ -1,0 +1,18 @@
+{
+  "system": "restoration-reliability-stack",
+  "systemTitle": "Restoration reliability stack",
+  "stage": "fidelity-gate",
+  "stageTitle": "Gate restoration fidelity",
+  "theme": "Making pixels from meaning",
+  "themeSlug": "generation",
+  "cluster": "Image restoration",
+  "clusterSlug": "restoration",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "restore visible evidence without fabricating task-critical details",
+  "reusableRule": "Restoration reliability stack stage 'Gate restoration fidelity' should restore visible evidence without fabricating task-critical details using measured CVPR evidence, not only paper novelty."
+}

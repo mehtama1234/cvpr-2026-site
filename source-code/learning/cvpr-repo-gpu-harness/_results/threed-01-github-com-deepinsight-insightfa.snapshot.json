@@ -1,0 +1,10 @@
+{
+  "jobId": "threed-01-github-com-deepinsight-insightfa",
+  "repo": "https://github.com/deepinsight/insightface",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "promoted-results-json",
+  "status": "rehydrated"
+}

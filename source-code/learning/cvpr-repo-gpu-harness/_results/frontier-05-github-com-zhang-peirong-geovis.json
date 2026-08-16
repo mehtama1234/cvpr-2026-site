@@ -1,0 +1,20 @@
+{
+  "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+  "repo": "https://github.com/Zhang-Peirong/GeoVis",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 45,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fifth-wave-frontier-GeoVis",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

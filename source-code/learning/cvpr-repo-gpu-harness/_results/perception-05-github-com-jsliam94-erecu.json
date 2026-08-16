@@ -1,0 +1,20 @@
+{
+  "jobId": "perception-05-github-com-jsliam94-erecu",
+  "repo": "https://github.com/JSLiam94/EReCu",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 37,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fifth-wave-perception-EReCu",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

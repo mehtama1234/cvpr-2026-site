@@ -1,0 +1,10 @@
+{
+  "jobId": "video-05-github-com-dmirlab-group-hal",
+  "repo": "https://github.com/DMIRLAB-Group/HAL",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

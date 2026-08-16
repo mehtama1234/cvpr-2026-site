@@ -1,0 +1,18 @@
+{
+  "system": "open-vocab-visual-search",
+  "systemTitle": "Open-vocabulary visual search",
+  "stage": "text-query-grounding",
+  "stageTitle": "Ground text queries in visible regions",
+  "theme": "Naming and locating what's in the picture",
+  "themeSlug": "perceive",
+  "cluster": "Open-vocabulary vision",
+  "clusterSlug": "open_vocab",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "reject answers without localized evidence",
+  "reusableRule": "Open-vocabulary visual search stage 'Ground text queries in visible regions' should reject answers without localized evidence using measured CVPR evidence, not only paper novelty."
+}

@@ -1,0 +1,10 @@
+{
+  "jobId": "threed-04-github-com-wangys16-flow4dgs-sla",
+  "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

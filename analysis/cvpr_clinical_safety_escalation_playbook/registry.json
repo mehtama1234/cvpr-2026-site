@@ -1,0 +1,163 @@
+{
+  "summary": {
+    "demo": "cvpr-clinical-safety-escalation-playbook",
+    "status": "ready",
+    "rows": 8,
+    "systems": 2,
+    "releaseWatch": 2,
+    "humanReview": 5,
+    "safetyHold": 1,
+    "rollbackRehearsal": 0,
+    "maxSafetyRisk": 74.5,
+    "minEvidence": 72.5,
+    "canaryRollback": 0,
+    "rollbackStressStatus": "ready",
+    "fullStackStatus": "valid",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "escalationRows": [
+    {
+      "id": "clinical/same-site-clean",
+      "system": "medical-vision-validation",
+      "theme": "Using vision to act in the world",
+      "title": "Same-site clean validation",
+      "targetPage": "cvpr-clinical-shift-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 88.5,
+        "safetyRisk": 22.2,
+        "evidence": 87.9,
+        "rollbackRisk": 17.7
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "release-watch",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+    },
+    {
+      "id": "clinical/new-scanner",
+      "system": "medical-vision-validation",
+      "theme": "Using vision to act in the world",
+      "title": "New scanner protocol",
+      "targetPage": "cvpr-clinical-shift-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 80.5,
+        "safetyRisk": 47.3,
+        "evidence": 80.3,
+        "rollbackRisk": 24.0
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "release-watch",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+    },
+    {
+      "id": "clinical/external-hospital",
+      "system": "medical-vision-validation",
+      "theme": "Using vision to act in the world",
+      "title": "External hospital cohort",
+      "targetPage": "cvpr-clinical-shift-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 77.1,
+        "safetyRisk": 58.7,
+        "evidence": 76.9,
+        "rollbackRisk": 26.8
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "human-review",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "clinical/noisy-rare-cohort",
+      "system": "medical-vision-validation",
+      "theme": "Using vision to act in the world",
+      "title": "Noisy rare cohort",
+      "targetPage": "cvpr-clinical-shift-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 72.5,
+        "safetyRisk": 74.5,
+        "evidence": 72.5,
+        "rollbackRisk": 30.8
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "safety-hold",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_canary_monitor.py"
+    },
+    {
+      "id": "driving/urban-cut-in",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "title": "Urban cut-in",
+      "targetPage": "cvpr-driving-safety-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 68.1,
+        "safetyRisk": 53.6,
+        "evidence": 81.9,
+        "rollbackRisk": 27.2
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "human-review",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "driving/night-crosswalk",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "title": "Night crosswalk",
+      "targetPage": "cvpr-driving-safety-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 68.2,
+        "safetyRisk": 49.2,
+        "evidence": 80.3,
+        "rollbackRisk": 25.9
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "human-review",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "driving/highway-merge",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "title": "Highway merge",
+      "targetPage": "cvpr-driving-safety-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 68.2,
+        "safetyRisk": 58.1,
+        "evidence": 83.6,
+        "rollbackRisk": 28.4
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "human-review",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    },
+    {
+      "id": "driving/construction-zone",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "title": "Construction zone",
+      "targetPage": "cvpr-driving-safety-bench.html",
+      "sourceDecision": "release",
+      "escalation": {
+        "readiness": 68.2,
+        "safetyRisk": 49.2,
+        "evidence": 79.4,
+        "rollbackRisk": 25.9
+      },
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "human-review",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    }
+  ],
+  "sources": {
+    "clinical": "analysis/cvpr_clinical_shift_bench/registry.json",
+    "driving": "analysis/cvpr_driving_safety_bench/registry.json",
+    "canary": "analysis/cvpr_remediation_canary_monitor/registry.json",
+    "rollbackStress": "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

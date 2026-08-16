@@ -1,0 +1,170 @@
+{
+  "summary": {
+    "demo": "cvpr-regression-injection-arena",
+    "status": "ready",
+    "injections": 6,
+    "detected": 6,
+    "routed": 6,
+    "recoverable": 6,
+    "critical": 2,
+    "high": 2,
+    "medium": 2,
+    "closeoutStatus": "sealed",
+    "fullStackStatus": "valid",
+    "packageTests": 148,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "injectionRows": [
+    {
+      "id": "missing-colab-result",
+      "title": "Missing Colab result payload",
+      "layer": "replay",
+      "ownerSurface": "cvpr-colab-result-replay.html",
+      "detectCommand": "python3 scripts/verify_cvpr_colab_result_replay.py",
+      "recoverCommand": "python3 scripts/build_cvpr_colab_result_replay.py && python3 scripts/verify_cvpr_colab_result_replay.py",
+      "expectedSignal": "validResults falls below results",
+      "severity": "high",
+      "baselineStatus": "ready",
+      "baselineEvidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "detected": true,
+      "routed": true,
+      "recoveryPath": [
+        "detect",
+        "route-owner",
+        "freeze-promotion",
+        "run-recovery-command",
+        "full-stack-reseal"
+      ],
+      "verifyCommand": "python3 scripts/verify_cvpr_colab_result_replay.py",
+      "resealCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "recoverable"
+    },
+    {
+      "id": "provenance-gap",
+      "title": "Provenance runtime gap",
+      "layer": "replay",
+      "ownerSurface": "cvpr-colab-result-replay.html",
+      "detectCommand": "python3 scripts/verify_cvpr_colab_result_replay.py",
+      "recoverCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job adversarial-provenance --promote",
+      "expectedSignal": "provenanceIssues becomes nonzero",
+      "severity": "high",
+      "baselineStatus": "ready",
+      "baselineEvidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "detected": true,
+      "routed": true,
+      "recoveryPath": [
+        "detect",
+        "route-owner",
+        "freeze-promotion",
+        "run-recovery-command",
+        "full-stack-reseal"
+      ],
+      "verifyCommand": "python3 scripts/verify_cvpr_colab_result_replay.py",
+      "resealCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "recoverable"
+    },
+    {
+      "id": "broken-local-link",
+      "title": "Broken critical page link",
+      "layer": "visualQa",
+      "ownerSurface": "cvpr-visual-qa-sweep-dashboard.html",
+      "detectCommand": "python3 scripts/verify_cvpr_visual_qa_sweep_dashboard.py",
+      "recoverCommand": "python3 scripts/build_cvpr_visual_qa_sweep_dashboard.py && python3 scripts/verify_cvpr_visual_qa_sweep_dashboard.py",
+      "expectedSignal": "brokenLocalLinks becomes nonzero",
+      "severity": "medium",
+      "baselineStatus": "ready",
+      "baselineEvidence": "analysis/cvpr_visual_qa_sweep_dashboard/registry.json",
+      "detected": true,
+      "routed": true,
+      "recoveryPath": [
+        "detect",
+        "route-owner",
+        "run-recovery-command",
+        "full-stack-reseal"
+      ],
+      "verifyCommand": "python3 scripts/verify_cvpr_visual_qa_sweep_dashboard.py",
+      "resealCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "recoverable"
+    },
+    {
+      "id": "scenario-risk-spike",
+      "title": "Scenario risk spike",
+      "layer": "scenario",
+      "ownerSurface": "cvpr-scenario-expansion-pack.html",
+      "detectCommand": "python3 scripts/verify_cvpr_scenario_expansion_pack.py",
+      "recoverCommand": "python3 scripts/build_cvpr_scenario_expansion_pack.py && python3 scripts/verify_cvpr_scenario_expansion_pack.py",
+      "expectedSignal": "scenario decision routes to block",
+      "severity": "medium",
+      "baselineStatus": "ready",
+      "baselineEvidence": "analysis/cvpr_scenario_expansion_pack/registry.json",
+      "detected": true,
+      "routed": true,
+      "recoveryPath": [
+        "detect",
+        "route-owner",
+        "run-recovery-command",
+        "full-stack-reseal"
+      ],
+      "verifyCommand": "python3 scripts/verify_cvpr_scenario_expansion_pack.py",
+      "resealCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "recoverable"
+    },
+    {
+      "id": "rollback-time-breach",
+      "title": "Rollback rehearsal exceeds target",
+      "layer": "rollbackStress",
+      "ownerSurface": "cvpr-3d-temporal-rollback-stress-lab.html",
+      "detectCommand": "python3 scripts/verify_cvpr_3d_temporal_rollback_stress_lab.py",
+      "recoverCommand": "python3 scripts/verify_cvpr_remediation_rollback_rehearsal_lab.py",
+      "expectedSignal": "rollbackMisses becomes nonzero",
+      "severity": "critical",
+      "baselineStatus": "ready",
+      "baselineEvidence": "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
+      "detected": true,
+      "routed": true,
+      "recoveryPath": [
+        "detect",
+        "route-owner",
+        "freeze-promotion",
+        "run-recovery-command",
+        "full-stack-reseal"
+      ],
+      "verifyCommand": "python3 scripts/verify_cvpr_3d_temporal_rollback_stress_lab.py",
+      "resealCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "recoverable"
+    },
+    {
+      "id": "safety-escalation-breach",
+      "title": "Clinical or driving safety breach",
+      "layer": "clinicalSafety",
+      "ownerSurface": "cvpr-clinical-safety-escalation-playbook.html",
+      "detectCommand": "python3 scripts/verify_cvpr_clinical_safety_escalation_playbook.py",
+      "recoverCommand": "python3 scripts/verify_cvpr_remediation_canary_monitor.py",
+      "expectedSignal": "row routes to rollback-rehearsal",
+      "severity": "critical",
+      "baselineStatus": "ready",
+      "baselineEvidence": "analysis/cvpr_clinical_safety_escalation_playbook/registry.json",
+      "detected": true,
+      "routed": true,
+      "recoveryPath": [
+        "detect",
+        "route-owner",
+        "freeze-promotion",
+        "run-recovery-command",
+        "full-stack-reseal"
+      ],
+      "verifyCommand": "python3 scripts/verify_cvpr_clinical_safety_escalation_playbook.py",
+      "resealCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "recoverable"
+    }
+  ],
+  "sources": {
+    "closeout": "analysis/cvpr_second_round_closeout_reseal/registry.json",
+    "replay": "analysis/cvpr_colab_result_replay/registry.json",
+    "visualQa": "analysis/cvpr_visual_qa_sweep_dashboard/registry.json",
+    "scenario": "analysis/cvpr_scenario_expansion_pack/registry.json",
+    "rollbackStress": "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
+    "clinicalSafety": "analysis/cvpr_clinical_safety_escalation_playbook/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

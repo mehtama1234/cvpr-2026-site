@@ -1,0 +1,20 @@
+{
+  "jobId": "vlm-05-github-com-uuuuzyc-see-it-say-it",
+  "repo": "https://github.com/uuuuZYC/See-It-Say-It-Sorted",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 46,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fifth-wave-vlm-See-It-Say-It-Sorted",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

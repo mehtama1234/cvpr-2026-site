@@ -1,0 +1,652 @@
+export const workbenchRows = [
+  {
+    "demoId": "interactive-frontier-mos",
+    "jobId": "frontier-01-github-com-yjzhao1019-mos",
+    "theme": "frontier",
+    "repo": "MOS",
+    "page": "cvpr-frontier-mos-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "optical/SAR pair, event burst, or geospatial tile with degraded RGB evidence"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for MOS showing cross-modal readiness card with artifact link, smoke result, failure probe, and replay command."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "sensor mismatch, occlusion, and provenance loss"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos"
+      }
+    ],
+    "inputFixture": {
+      "label": "optical/SAR pair, event burst, or geospatial tile with degraded RGB evidence",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "cross-modal readiness card with artifact link, smoke result, failure probe, and replay command",
+      "cached": "Cached viewer output for MOS showing cross-modal readiness card with artifact link, smoke result, failure probe, and replay command.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "sensor mismatch, occlusion, and provenance loss",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-frontier-mos",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-threed-insightface",
+    "jobId": "threed-01-github-com-deepinsight-insightfa",
+    "theme": "threed",
+    "repo": "insightface",
+    "page": "cvpr-threed-insightface-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "multi-view image set, avatar frame, LiDAR fragment, or 4D scene snippet"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for insightface showing geometry readiness card with snapshot artifact, runtime gate, and rollback target."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "pose drift, missing views, geometry collapse, and identity leakage"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-01-github-com-deepinsight-insightfa"
+      }
+    ],
+    "inputFixture": {
+      "label": "multi-view image set, avatar frame, LiDAR fragment, or 4D scene snippet",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "geometry readiness card with snapshot artifact, runtime gate, and rollback target",
+      "cached": "Cached viewer output for insightface showing geometry readiness card with snapshot artifact, runtime gate, and rollback target.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "pose drift, missing views, geometry collapse, and identity leakage",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-threed-insightface",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-01-github-com-deepinsight-insightfa",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-video-flux",
+    "jobId": "video-01-github-com-black-forest-labs-flu",
+    "theme": "video",
+    "repo": "flux",
+    "page": "cvpr-video-flux-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "short clip, frame sequence, or prompt-conditioned motion seed"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for flux showing temporal output contract with artifact replay, drift probe, and review threshold."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "long-horizon drift, identity swap, hallucinated motion, and dropped objects"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-01-github-com-black-forest-labs-flu"
+      }
+    ],
+    "inputFixture": {
+      "label": "short clip, frame sequence, or prompt-conditioned motion seed",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "temporal output contract with artifact replay, drift probe, and review threshold",
+      "cached": "Cached viewer output for flux showing temporal output contract with artifact replay, drift probe, and review threshold.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "long-horizon drift, identity swap, hallucinated motion, and dropped objects",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-video-flux",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-01-github-com-black-forest-labs-flu",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-generation-gdpo",
+    "jobId": "generation-01-github-com-joyies-gdpo",
+    "theme": "generation",
+    "repo": "GDPO",
+    "page": "cvpr-generation-gdpo-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "prompt, degraded image, restoration target, or preference-control request"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for GDPO showing generation comparison panel with constraint status, artifact trace, and promotion decision."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "prompt leakage, over-smoothing, restoration hallucination, and reward gaming"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-01-github-com-joyies-gdpo"
+      }
+    ],
+    "inputFixture": {
+      "label": "prompt, degraded image, restoration target, or preference-control request",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "generation comparison panel with constraint status, artifact trace, and promotion decision",
+      "cached": "Cached viewer output for GDPO showing generation comparison panel with constraint status, artifact trace, and promotion decision.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "prompt leakage, over-smoothing, restoration hallucination, and reward gaming",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-generation-gdpo",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-01-github-com-joyies-gdpo",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-vlm-fedafd",
+    "jobId": "vlm-01-github-com-chao2433-fedafd",
+    "theme": "vlm",
+    "repo": "FedAFD",
+    "page": "cvpr-vlm-fedafd-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "image plus question, retrieval context, graph prompt, or privacy-sensitive visual evidence"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for FedAFD showing answer/evidence verdict with source artifact, grounding notes, and escalation gate."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "ungrounded answer, private attribute leak, graph shortcut, and retrieval mismatch"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-01-github-com-chao2433-fedafd"
+      }
+    ],
+    "inputFixture": {
+      "label": "image plus question, retrieval context, graph prompt, or privacy-sensitive visual evidence",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "answer/evidence verdict with source artifact, grounding notes, and escalation gate",
+      "cached": "Cached viewer output for FedAFD showing answer/evidence verdict with source artifact, grounding notes, and escalation gate.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "ungrounded answer, private attribute leak, graph shortcut, and retrieval mismatch",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-vlm-fedafd",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-01-github-com-chao2433-fedafd",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-perception-fob",
+    "jobId": "perception-01-github-com-primebo1-fob",
+    "theme": "perception",
+    "repo": "FoB",
+    "page": "cvpr-perception-fob-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "open-vocabulary scene, panoramic frame, camouflaged object, or few-shot support set"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for FoB showing mask/detection readiness panel with artifact-backed smoke result and failure tag."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "small object miss, class synonym drift, pseudo-label collapse, and occlusion"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-01-github-com-primebo1-fob"
+      }
+    ],
+    "inputFixture": {
+      "label": "open-vocabulary scene, panoramic frame, camouflaged object, or few-shot support set",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "mask/detection readiness panel with artifact-backed smoke result and failure tag",
+      "cached": "Cached viewer output for FoB showing mask/detection readiness panel with artifact-backed smoke result and failure tag.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "small object miss, class synonym drift, pseudo-label collapse, and occlusion",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-perception-fob",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-01-github-com-primebo1-fob",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-embodied-safe-driving-drl",
+    "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+    "theme": "embodied",
+    "repo": "safe-driving-drl",
+    "page": "cvpr-embodied-safe-driving-drl-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "driving scene, GUI task, manipulation state, or visual RL observation"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for safe-driving-drl showing policy readiness card with action trace, artifact evidence, and safety review path."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "unsafe action, reward shortcut, recovery failure, and scene distribution shift"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-01-github-com-szu-ai-safe-driving-d"
+      }
+    ],
+    "inputFixture": {
+      "label": "driving scene, GUI task, manipulation state, or visual RL observation",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "policy readiness card with action trace, artifact evidence, and safety review path",
+      "cached": "Cached viewer output for safe-driving-drl showing policy readiness card with action trace, artifact evidence, and safety review path.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "unsafe action, reward shortcut, recovery failure, and scene distribution shift",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-embodied-safe-driving-drl",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-01-github-com-szu-ai-safe-driving-d",
+    "releaseAction": "promote-interactive-demo"
+  },
+  {
+    "demoId": "interactive-learning-embedlens",
+    "jobId": "learning-01-github-com-eit-nlp-embedlens",
+    "theme": "learning",
+    "repo": "EmbedLens",
+    "page": "cvpr-learning-embedlens-deep-viewer.html",
+    "mode": "interactive-cached",
+    "selectedPanel": "output",
+    "controls": [
+      {
+        "id": "input",
+        "label": "Input",
+        "state": "selectable",
+        "value": "few-shot batch, continual stream, pruning target, or token budget"
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "state": "selected",
+        "value": "Cached viewer output for EmbedLens showing cost/quality tradeoff card with promoted artifact, runtime gate, and rollback path."
+      },
+      {
+        "id": "failure",
+        "label": "Failure Probe",
+        "state": "available",
+        "value": "quality cliff, adaptation drift, memory blow-up, and stale calibration"
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "state": "local-backed",
+        "value": "3 local artifacts"
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "state": "available",
+        "value": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-01-github-com-eit-nlp-embedlens"
+      }
+    ],
+    "inputFixture": {
+      "label": "few-shot batch, continual stream, pruning target, or token budget",
+      "status": "loaded"
+    },
+    "outputFixture": {
+      "label": "cost/quality tradeoff card with promoted artifact, runtime gate, and rollback path",
+      "cached": "Cached viewer output for EmbedLens showing cost/quality tradeoff card with promoted artifact, runtime gate, and rollback path.",
+      "status": "render-ready"
+    },
+    "artifactDiff": {
+      "status": "local-backed",
+      "localArtifacts": 3,
+      "paths": [
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.log",
+        "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.snapshot.json"
+      ]
+    },
+    "failureProbe": {
+      "label": "quality cliff, adaptation drift, memory blow-up, and stale calibration",
+      "verdict": "probe-ready",
+      "operatorAction": "compare cached output against failure probe before release"
+    },
+    "runtimeState": {
+      "activeDemo": "interactive-learning-embedlens",
+      "activePanel": "output",
+      "availablePanels": [
+        "input",
+        "output",
+        "failure",
+        "artifacts",
+        "replay"
+      ],
+      "panelTarget": "workbench-panel",
+      "artifactTarget": "workbench-artifacts"
+    },
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-01-github-com-eit-nlp-embedlens",
+    "releaseAction": "promote-interactive-demo"
+  }
+];
+export const summary = {
+  "workbench": "cvpr-interactive-demo-workbench",
+  "status": "workbench-ready",
+  "sourcePortfolio": "analysis/cvpr_deep_viewer_portfolio/registry.json",
+  "sourceRehydration": "analysis/cvpr_artifact_rehydration_queue/registry.json",
+  "portfolioStatus": "portfolio-ready",
+  "rehydrationStatus": "rehydrated",
+  "demos": 8,
+  "readyInteractions": 8,
+  "themes": 8,
+  "controls": 40,
+  "localArtifacts": 24,
+  "runtimeControllers": 8,
+  "promoteInteractive": 8,
+  "holdInteractive": 0,
+  "validator": "scripts/verify_cvpr_interactive_demo_workbench.py",
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

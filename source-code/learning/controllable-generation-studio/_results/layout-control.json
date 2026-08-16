@@ -1,0 +1,18 @@
+{
+  "system": "controllable-generation-studio",
+  "systemTitle": "Controllable generation studio",
+  "stage": "layout-control",
+  "stageTitle": "Control layout",
+  "theme": "Making pixels from meaning",
+  "themeSlug": "generation",
+  "cluster": "Controllable generation",
+  "clusterSlug": "controllable_gen",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "bind generated regions to explicit user constraints",
+  "reusableRule": "Controllable generation studio stage 'Control layout' should bind generated regions to explicit user constraints using measured CVPR evidence, not only paper novelty."
+}

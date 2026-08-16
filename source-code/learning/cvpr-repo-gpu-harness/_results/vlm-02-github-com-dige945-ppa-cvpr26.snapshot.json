@@ -1,0 +1,10 @@
+{
+  "jobId": "vlm-02-github-com-dige945-ppa-cvpr26",
+  "repo": "https://github.com/Dige945/PPA_CVPR26",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

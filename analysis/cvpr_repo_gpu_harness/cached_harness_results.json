@@ -1,0 +1,644 @@
+{
+  "results": [
+    {
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/yjzhao1019/MOS",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+      "metrics": {
+        "readiness": 46,
+        "harnessScore": 64
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "0dbcfb44a08ef732",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "frontier-02-github-com-earth-insights-segear",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/earth-insights/SegEarth-R2",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-02-github-com-earth-insights-segear.json",
+      "metrics": {
+        "readiness": 47,
+        "harnessScore": 65
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "99a31ab9c644bfd9",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "frontier-03-github-com-fahadshamshad-raven",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/fahadshamshad/raven-",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-03-github-com-fahadshamshad-raven.json",
+      "metrics": {
+        "readiness": 44,
+        "harnessScore": 62
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "2af08778c902137f",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "frontier-04-github-com-jimmyxichen-mm-ovseg",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/Jimmyxichen/MM-OVSeg",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-04-github-com-jimmyxichen-mm-ovseg.json",
+      "metrics": {
+        "readiness": 31,
+        "harnessScore": 49
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "42375c56ac3113c4",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/Zhang-Peirong/GeoVis",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-05-github-com-zhang-peirong-geovis.json",
+      "metrics": {
+        "readiness": 45,
+        "harnessScore": 63
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "913d710118cecd09",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "threed-01-github-com-deepinsight-insightfa",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/deepinsight/insightface",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+      "metrics": {
+        "readiness": 51,
+        "harnessScore": 69
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "686b2241bea4b2af",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "threed-02-github-com-myniuuu-mad-avatar",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-02-github-com-myniuuu-mad-avatar.json",
+      "metrics": {
+        "readiness": 41,
+        "harnessScore": 59
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "f20f8a4e611da416",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "threed-03-github-com-akumar005-l2dgs",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/akumar005/L2DGS",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-03-github-com-akumar005-l2dgs.json",
+      "metrics": {
+        "readiness": 34,
+        "harnessScore": 52
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "f194050b8dbacb18",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "threed-04-github-com-wangys16-flow4dgs-sla",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-04-github-com-wangys16-flow4dgs-sla.json",
+      "metrics": {
+        "readiness": 35,
+        "harnessScore": 53
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "1e030c8db460949b",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "threed-05-github-com-wanghaoran16-prune-wi",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-05-github-com-wanghaoran16-prune-wi.json",
+      "metrics": {
+        "readiness": 48,
+        "harnessScore": 66
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "9611c210471a35fb",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "video-01-github-com-black-forest-labs-flu",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/black-forest-labs/flux",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+      "metrics": {
+        "readiness": 47,
+        "harnessScore": 65
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "8b09cb2024e15079",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "video-02-github-com-deepfakes-face",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/deepfakes/face-",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-02-github-com-deepfakes-face.json",
+      "metrics": {
+        "readiness": 46,
+        "harnessScore": 64
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "ae576f1822c7be24",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "video-03-github-com-modelscope-diffsynth",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/modelscope/DiffSynth-",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-03-github-com-modelscope-diffsynth.json",
+      "metrics": {
+        "readiness": 36,
+        "harnessScore": 54
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "e338a2cb1ceac5c0",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "video-04-github-com-arturxe2-adaspot",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/arturxe2/AdaSpot",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-04-github-com-arturxe2-adaspot.json",
+      "metrics": {
+        "readiness": 51,
+        "harnessScore": 69
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "fcdf7157ec2e6316",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "video-05-github-com-dmirlab-group-hal",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/DMIRLAB-Group/HAL",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-05-github-com-dmirlab-group-hal.json",
+      "metrics": {
+        "readiness": 42,
+        "harnessScore": 60
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "291bf8d2ef437b8b",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "generation-01-github-com-joyies-gdpo",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/Joyies/GDPO",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+      "metrics": {
+        "readiness": 37,
+        "harnessScore": 55
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "b7d96c6fe3a37d3f",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "generation-02-github-com-chanson94-codsr",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/Chanson94/CODSR",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-02-github-com-chanson94-codsr.json",
+      "metrics": {
+        "readiness": 34,
+        "harnessScore": 52
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "c37fe4a32d4ee854",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "generation-03-github-com-gyr02-nadb",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/gyr02/NADB",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-03-github-com-gyr02-nadb.json",
+      "metrics": {
+        "readiness": 40,
+        "harnessScore": 58
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "d3f091a694961771",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "generation-04-github-com-jf-tan-lrdm",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/JF-Tan/LRDM",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-04-github-com-jf-tan-lrdm.json",
+      "metrics": {
+        "readiness": 38,
+        "harnessScore": 56
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "6bbcfca0570706de",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "generation-05-github-com-mililab-rdbm",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/MiliLab/RDBM",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-05-github-com-mililab-rdbm.json",
+      "metrics": {
+        "readiness": 33,
+        "harnessScore": 51
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "d1ee2bcb2db8b68a",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "vlm-01-github-com-chao2433-fedafd",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/Chao2433/FedAFD",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+      "metrics": {
+        "readiness": 46,
+        "harnessScore": 64
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "17772d384bb1cfaa",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "vlm-02-github-com-dige945-ppa-cvpr26",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/Dige945/PPA_CVPR26",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-02-github-com-dige945-ppa-cvpr26.json",
+      "metrics": {
+        "readiness": 48,
+        "harnessScore": 66
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "5edc90bef2e9eac9",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "vlm-03-github-com-oamyjin-graphvlm",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/oamyjin/GraphVLM",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.json",
+      "metrics": {
+        "readiness": 43,
+        "harnessScore": 61
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "70fde01aa47bf8ea",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "vlm-04-github-com-remrico-recall",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/RemRico/Recall",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-04-github-com-remrico-recall.json",
+      "metrics": {
+        "readiness": 34,
+        "harnessScore": 52
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "90d5581fa6fa349e",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "vlm-05-github-com-uuuuzyc-see-it-say-it",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/uuuuZYC/See-It-Say-It-Sorted",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-05-github-com-uuuuzyc-see-it-say-it.json",
+      "metrics": {
+        "readiness": 46,
+        "harnessScore": 64
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "a8036b29ddff66d7",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "perception-01-github-com-primebo1-fob",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/primebo1/FoB",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+      "metrics": {
+        "readiness": 51,
+        "harnessScore": 69
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "6e5e6643c6601179",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "perception-02-github-com-zzzphaethon-dapass",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/ZZZPhaethon/DAPASS",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-02-github-com-zzzphaethon-dapass.json",
+      "metrics": {
+        "readiness": 46,
+        "harnessScore": 64
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "7897fdec992c7361",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "perception-03-github-com-hzz-yy-tf-ssd",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/hzz-yy/TF-SSD",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-03-github-com-hzz-yy-tf-ssd.json",
+      "metrics": {
+        "readiness": 49,
+        "harnessScore": 67
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "1a77f20218b7f2b3",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "perception-04-github-com-yvogao-tape",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/YvoGao/TAPE",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-04-github-com-yvogao-tape.json",
+      "metrics": {
+        "readiness": 57,
+        "harnessScore": 75
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "6ce39ef8b0153cc0",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "perception-05-github-com-jsliam94-erecu",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/JSLiam94/EReCu",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-05-github-com-jsliam94-erecu.json",
+      "metrics": {
+        "readiness": 37,
+        "harnessScore": 55
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "47f98d4dd8198f4b",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/szu-ai/safe-driving-drl",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+      "metrics": {
+        "readiness": 57,
+        "harnessScore": 75
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "9e25d16d20de3e83",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "embodied-02-github-com-bofusun-srcp",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/bofusun/SRCP",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-02-github-com-bofusun-srcp.json",
+      "metrics": {
+        "readiness": 51,
+        "harnessScore": 69
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "fb484d9008eb89c3",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "embodied-03-github-com-codeshop715-energyact",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/codeshop715/EnergyAction",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-03-github-com-codeshop715-energyact.json",
+      "metrics": {
+        "readiness": 54,
+        "harnessScore": 72
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "6638ec8edf93cde0",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "embodied-04-github-com-hrtan-diem",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/hrtan/DIEM",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-04-github-com-hrtan-diem.json",
+      "metrics": {
+        "readiness": 59,
+        "harnessScore": 77
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "d691e77fd6b024fb",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "embodied-05-github-com-jiutian-vl-hiconagent",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/JiuTian-VL/HiconAgent",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-05-github-com-jiutian-vl-hiconagent.json",
+      "metrics": {
+        "readiness": 61,
+        "harnessScore": 79
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "6828974e7df71b49",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "learning-01-github-com-eit-nlp-embedlens",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/EIT-NLP/EmbedLens",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+      "metrics": {
+        "readiness": 57,
+        "harnessScore": 75
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "0c62c5eabdd9b6da",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "learning-02-github-com-cgcl-codes-nuwa",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/CGCL-codes/NuWa",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-02-github-com-cgcl-codes-nuwa.json",
+      "metrics": {
+        "readiness": 57,
+        "harnessScore": 75
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "483ff30f0349c6a6",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "learning-03-github-com-evi-group-scu-fozo",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/eVI-group-SCU/FOZO",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-03-github-com-evi-group-scu-fozo.json",
+      "metrics": {
+        "readiness": 45,
+        "harnessScore": 63
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "c5833b9741e5d6ff",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "learning-04-github-com-savadikarc-cheem",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/savadikarc/cheem",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-04-github-com-savadikarc-cheem.json",
+      "metrics": {
+        "readiness": 43,
+        "harnessScore": 61
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "ab78482f29d4622b",
+        "replaceWithLiveExport": true
+      }
+    },
+    {
+      "jobId": "learning-05-github-com-liwenwang919-bpfedctt",
+      "mode": "cached-harness-contract",
+      "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-05-github-com-liwenwang919-bpfedctt.json",
+      "metrics": {
+        "readiness": 39,
+        "harnessScore": 57
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "fingerprint": "42a198e083e1e8c8",
+        "replaceWithLiveExport": true
+      }
+    }
+  ]
+}

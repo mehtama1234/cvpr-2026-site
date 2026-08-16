@@ -1,0 +1,20 @@
+{
+  "jobId": "frontier-02-github-com-earth-insights-segear",
+  "repo": "https://github.com/earth-insights/SegEarth-R2",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 47,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "second-wave-frontier-SegEarth-R2",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

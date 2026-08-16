@@ -1,0 +1,20 @@
+{
+  "jobId": "learning-03-github-com-evi-group-scu-fozo",
+  "repo": "https://github.com/eVI-group-SCU/FOZO",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 45,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "third-wave-learning-FOZO",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

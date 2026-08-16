@@ -1,0 +1,7 @@
+jobId=perception-04-github-com-yvogao-tape
+repo=https://github.com/YvoGao/TAPE
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

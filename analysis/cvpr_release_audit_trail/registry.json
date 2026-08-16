@@ -1,0 +1,547 @@
+{
+  "summary": {
+    "audit": "cvpr-release-audit-trail",
+    "status": "complete",
+    "events": 58,
+    "readyEvents": 58,
+    "launchEvents": 8,
+    "manifestEvents": 13,
+    "changeEvents": 13,
+    "dependencyEvents": 15,
+    "monitorEvents": 9,
+    "fullStackStatus": "valid",
+    "packageTests": 148
+  },
+  "events": [
+    {
+      "id": "evt-001",
+      "group": "launch",
+      "name": "Release brief",
+      "surface": "cvpr-production-release-brief.html",
+      "evidence": "analysis/cvpr_production_release_brief/registry.json",
+      "command": "python3 scripts/build_cvpr_production_release_brief.py && python3 scripts/verify_cvpr_production_release_brief.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-002",
+      "group": "launch",
+      "name": "SLO gate",
+      "surface": "cvpr-release-slo-dashboard.html",
+      "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
+      "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-003",
+      "group": "launch",
+      "name": "Regression drills",
+      "surface": "cvpr-release-regression-drillbook.html",
+      "evidence": "analysis/cvpr_release_regression_drillbook/registry.json",
+      "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-004",
+      "group": "launch",
+      "name": "Colab operations",
+      "surface": "cvpr-colab-operations-dashboard.html",
+      "evidence": "analysis/cvpr_colab_operations_dashboard/registry.json",
+      "command": "python3 scripts/build_cvpr_colab_operations_dashboard.py && python3 scripts/verify_cvpr_colab_operations_dashboard.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-005",
+      "group": "launch",
+      "name": "Validation center",
+      "surface": "cvpr-validation-center.html",
+      "evidence": "analysis/cvpr_validation_center/registry.json",
+      "command": "python3 scripts/build_cvpr_validation_center.py && python3 scripts/verify_cvpr_validation_center.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-006",
+      "group": "launch",
+      "name": "Colab import",
+      "surface": "cvpr-colab-release-bundle.html",
+      "evidence": "analysis/cvpr_colab_gpu_worker/import_validation.json",
+      "command": "python3 scripts/validate_cvpr_colab_results.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-007",
+      "group": "launch",
+      "name": "Full stack",
+      "surface": "cvpr-validation-center.html",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-008",
+      "group": "launch",
+      "name": "Operator handoff",
+      "surface": "index.html",
+      "evidence": "index.html",
+      "command": "Open index.html and inspect the Production CVPR stack",
+      "status": "pass"
+    },
+    {
+      "id": "evt-009",
+      "group": "manifest",
+      "name": "launch-readiness-pack-page",
+      "surface": "cvpr-launch-readiness-pack.html",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-010",
+      "group": "manifest",
+      "name": "launch-readiness-pack-registry",
+      "surface": "analysis/cvpr_launch_readiness_pack/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-011",
+      "group": "manifest",
+      "name": "production-release-brief-page",
+      "surface": "cvpr-production-release-brief.html",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-012",
+      "group": "manifest",
+      "name": "production-release-brief-registry",
+      "surface": "analysis/cvpr_production_release_brief/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-013",
+      "group": "manifest",
+      "name": "release-slo-dashboard-page",
+      "surface": "cvpr-release-slo-dashboard.html",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-014",
+      "group": "manifest",
+      "name": "release-slo-dashboard-registry",
+      "surface": "analysis/cvpr_release_slo_dashboard/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-015",
+      "group": "manifest",
+      "name": "release-regression-drillbook-page",
+      "surface": "cvpr-release-regression-drillbook.html",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-016",
+      "group": "manifest",
+      "name": "release-regression-drillbook-registry",
+      "surface": "analysis/cvpr_release_regression_drillbook/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-017",
+      "group": "manifest",
+      "name": "colab-result-replay-registry",
+      "surface": "analysis/cvpr_colab_result_replay/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-018",
+      "group": "manifest",
+      "name": "demo-evidence-cockpit-registry",
+      "surface": "analysis/cvpr_demo_evidence_cockpit/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-019",
+      "group": "manifest",
+      "name": "full-stack-validation-registry",
+      "surface": "analysis/cvpr_full_stack_validation/registry.json",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-020",
+      "group": "manifest",
+      "name": "full-stack-validator",
+      "surface": "scripts/validate_cvpr_full_stack.py",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-021",
+      "group": "manifest",
+      "name": "site-index",
+      "surface": "index.html",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-022",
+      "group": "change-control",
+      "name": "launch-readiness-pack-page",
+      "surface": "cvpr-launch-readiness-pack.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_launch_readiness_pack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-023",
+      "group": "change-control",
+      "name": "launch-readiness-pack-registry",
+      "surface": "cvpr-launch-readiness-pack.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_launch_readiness_pack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-024",
+      "group": "change-control",
+      "name": "production-release-brief-page",
+      "surface": "cvpr-production-release-brief.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_production_release_brief.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-025",
+      "group": "change-control",
+      "name": "production-release-brief-registry",
+      "surface": "cvpr-production-release-brief.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_production_release_brief.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-026",
+      "group": "change-control",
+      "name": "release-slo-dashboard-page",
+      "surface": "cvpr-release-slo-dashboard.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_release_slo_dashboard.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-027",
+      "group": "change-control",
+      "name": "release-slo-dashboard-registry",
+      "surface": "cvpr-release-slo-dashboard.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_release_slo_dashboard.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-028",
+      "group": "change-control",
+      "name": "release-regression-drillbook-page",
+      "surface": "cvpr-release-regression-drillbook.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_release_regression_drillbook.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-029",
+      "group": "change-control",
+      "name": "release-regression-drillbook-registry",
+      "surface": "cvpr-release-regression-drillbook.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_release_regression_drillbook.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-030",
+      "group": "change-control",
+      "name": "colab-result-replay-registry",
+      "surface": "cvpr-colab-result-replay.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_colab_result_replay.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-031",
+      "group": "change-control",
+      "name": "demo-evidence-cockpit-registry",
+      "surface": "cvpr-demo-evidence-cockpit.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-032",
+      "group": "change-control",
+      "name": "full-stack-validation-registry",
+      "surface": "cvpr-validation-center.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-033",
+      "group": "change-control",
+      "name": "full-stack-validator",
+      "surface": "cvpr-validation-center.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-034",
+      "group": "change-control",
+      "name": "site-index",
+      "surface": "index.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-035",
+      "group": "dependency",
+      "name": "systems-lab",
+      "surface": "cvpr-systems-lab.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_systems_lab.py && python3 scripts/verify_cvpr_systems_lab.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-036",
+      "group": "dependency",
+      "name": "demo-lab",
+      "surface": "cvpr-demo-lab.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_demo_lab.py && python3 scripts/verify_cvpr_demo_lab.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-037",
+      "group": "dependency",
+      "name": "arena-playbook",
+      "surface": "cvpr-demo-arena.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_demo_arena.py && python3 scripts/verify_cvpr_demo_arena.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-038",
+      "group": "dependency",
+      "name": "readiness-benches",
+      "surface": "cvpr-mission-control.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_mission_control.py && python3 scripts/verify_cvpr_mission_control.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-039",
+      "group": "dependency",
+      "name": "colab-worker",
+      "surface": "cvpr-colab-gpu-worker.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_colab_gpu_worker.py && python3 scripts/verify_cvpr_colab_gpu_worker.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-040",
+      "group": "dependency",
+      "name": "colab-release",
+      "surface": "cvpr-colab-release-bundle.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_colab_release_bundle.py && python3 scripts/verify_cvpr_colab_release_bundle.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-041",
+      "group": "dependency",
+      "name": "coverage-audit",
+      "surface": "cvpr-production-coverage-audit.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_production_coverage_audit.py && python3 scripts/verify_cvpr_production_coverage_audit.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-042",
+      "group": "dependency",
+      "name": "demo-evidence",
+      "surface": "cvpr-demo-evidence-cockpit.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py && python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-043",
+      "group": "dependency",
+      "name": "result-replay",
+      "surface": "cvpr-colab-result-replay.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_colab_result_replay.py && python3 scripts/verify_cvpr_colab_result_replay.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-044",
+      "group": "dependency",
+      "name": "slo-dashboard",
+      "surface": "cvpr-release-slo-dashboard.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-045",
+      "group": "dependency",
+      "name": "regression-drillbook",
+      "surface": "cvpr-release-regression-drillbook.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-046",
+      "group": "dependency",
+      "name": "launch-pack",
+      "surface": "cvpr-launch-readiness-pack.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_launch_readiness_pack.py && python3 scripts/verify_cvpr_launch_readiness_pack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-047",
+      "group": "dependency",
+      "name": "release-manifest",
+      "surface": "cvpr-release-manifest.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-048",
+      "group": "dependency",
+      "name": "change-control",
+      "surface": "cvpr-release-change-control.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_release_change_control.py && python3 scripts/verify_cvpr_release_change_control.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-049",
+      "group": "dependency",
+      "name": "full-stack-validation",
+      "surface": "cvpr-validation-center.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-050",
+      "group": "monitoring",
+      "name": "critical-slo-alerts",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
+      "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-051",
+      "group": "monitoring",
+      "name": "pro-plus-result-validity",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "command": "python3 scripts/build_cvpr_colab_result_replay.py && python3 scripts/verify_cvpr_colab_result_replay.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-052",
+      "group": "monitoring",
+      "name": "readiness-floor",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-053",
+      "group": "monitoring",
+      "name": "provenance-clean",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "command": "python3 scripts/validate_cvpr_colab_results.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-054",
+      "group": "monitoring",
+      "name": "manifest-sealed",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_release_manifest/registry.json",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-055",
+      "group": "monitoring",
+      "name": "change-control-ready",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_release_change_control/registry.json",
+      "command": "python3 scripts/build_cvpr_release_change_control.py && python3 scripts/verify_cvpr_release_change_control.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-056",
+      "group": "monitoring",
+      "name": "dependency-graph-ready",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
+      "command": "python3 scripts/build_cvpr_release_dependency_graph.py && python3 scripts/verify_cvpr_release_dependency_graph.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-057",
+      "group": "monitoring",
+      "name": "launch-ready",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_launch_readiness_pack/registry.json",
+      "command": "python3 scripts/build_cvpr_launch_readiness_pack.py && python3 scripts/verify_cvpr_launch_readiness_pack.py",
+      "status": "pass"
+    },
+    {
+      "id": "evt-058",
+      "group": "monitoring",
+      "name": "full-stack-valid",
+      "surface": "cvpr-post-launch-monitoring.html",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "pass"
+    }
+  ],
+  "sources": {
+    "launch": "analysis/cvpr_launch_readiness_pack/registry.json",
+    "manifest": "analysis/cvpr_release_manifest/registry.json",
+    "changeControl": "analysis/cvpr_release_change_control/registry.json",
+    "dependencyGraph": "analysis/cvpr_release_dependency_graph/registry.json",
+    "monitoring": "analysis/cvpr_post_launch_monitoring/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

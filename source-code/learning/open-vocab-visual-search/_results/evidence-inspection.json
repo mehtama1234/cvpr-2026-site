@@ -1,0 +1,18 @@
+{
+  "system": "open-vocab-visual-search",
+  "systemTitle": "Open-vocabulary visual search",
+  "stage": "evidence-inspection",
+  "stageTitle": "Expose search evidence",
+  "theme": "Naming and locating what's in the picture",
+  "themeSlug": "perceive",
+  "cluster": "Open-vocabulary vision",
+  "clusterSlug": "open_vocab",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "show regions, uncertainty, and failure modes before trust",
+  "reusableRule": "Open-vocabulary visual search stage 'Expose search evidence' should show regions, uncertainty, and failure modes before trust using measured CVPR evidence, not only paper novelty."
+}

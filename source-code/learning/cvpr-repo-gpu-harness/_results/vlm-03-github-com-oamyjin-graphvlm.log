@@ -1,0 +1,7 @@
+jobId=vlm-03-github-com-oamyjin-graphvlm
+repo=https://github.com/oamyjin/GraphVLM
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

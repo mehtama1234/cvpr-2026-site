@@ -1,0 +1,177 @@
+{
+  "summary": {
+    "graph": "cvpr-release-dependency-graph",
+    "status": "ready",
+    "nodes": 15,
+    "edges": 19,
+    "rootNodes": 1,
+    "terminalNodes": 1,
+    "phases": 8,
+    "changeControlStatus": "controlled",
+    "manifestStatus": "sealed",
+    "launchStatus": "launch-ready",
+    "fullStackStatus": "valid",
+    "packageTests": 148
+  },
+  "nodes": [
+    {
+      "id": "systems-lab",
+      "phase": "Foundations",
+      "surface": "cvpr-systems-lab.html",
+      "command": "python3 scripts/build_cvpr_systems_lab.py && python3 scripts/verify_cvpr_systems_lab.py",
+      "dependsOn": [],
+      "status": "ready"
+    },
+    {
+      "id": "demo-lab",
+      "phase": "Foundations",
+      "surface": "cvpr-demo-lab.html",
+      "command": "python3 scripts/build_cvpr_demo_lab.py && python3 scripts/verify_cvpr_demo_lab.py",
+      "dependsOn": [
+        "systems-lab"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "arena-playbook",
+      "phase": "Scenario pressure",
+      "surface": "cvpr-demo-arena.html",
+      "command": "python3 scripts/build_cvpr_demo_arena.py && python3 scripts/verify_cvpr_demo_arena.py",
+      "dependsOn": [
+        "demo-lab"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "readiness-benches",
+      "phase": "Bench gates",
+      "surface": "cvpr-mission-control.html",
+      "command": "python3 scripts/build_cvpr_mission_control.py && python3 scripts/verify_cvpr_mission_control.py",
+      "dependsOn": [
+        "systems-lab",
+        "demo-lab",
+        "arena-playbook"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "colab-worker",
+      "phase": "Colab Pro+",
+      "surface": "cvpr-colab-gpu-worker.html",
+      "command": "python3 scripts/build_cvpr_colab_gpu_worker.py && python3 scripts/verify_cvpr_colab_gpu_worker.py",
+      "dependsOn": [
+        "readiness-benches"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "colab-release",
+      "phase": "Colab Pro+",
+      "surface": "cvpr-colab-release-bundle.html",
+      "command": "python3 scripts/build_cvpr_colab_release_bundle.py && python3 scripts/verify_cvpr_colab_release_bundle.py",
+      "dependsOn": [
+        "colab-worker"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "coverage-audit",
+      "phase": "Release evidence",
+      "surface": "cvpr-production-coverage-audit.html",
+      "command": "python3 scripts/build_cvpr_production_coverage_audit.py && python3 scripts/verify_cvpr_production_coverage_audit.py",
+      "dependsOn": [
+        "readiness-benches",
+        "colab-release"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "demo-evidence",
+      "phase": "Release evidence",
+      "surface": "cvpr-demo-evidence-cockpit.html",
+      "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py && python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
+      "dependsOn": [
+        "coverage-audit"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "result-replay",
+      "phase": "Release evidence",
+      "surface": "cvpr-colab-result-replay.html",
+      "command": "python3 scripts/build_cvpr_colab_result_replay.py && python3 scripts/verify_cvpr_colab_result_replay.py",
+      "dependsOn": [
+        "demo-evidence",
+        "colab-release"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "slo-dashboard",
+      "phase": "Release gates",
+      "surface": "cvpr-release-slo-dashboard.html",
+      "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
+      "dependsOn": [
+        "result-replay"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "regression-drillbook",
+      "phase": "Release gates",
+      "surface": "cvpr-release-regression-drillbook.html",
+      "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
+      "dependsOn": [
+        "slo-dashboard"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "launch-pack",
+      "phase": "Launch",
+      "surface": "cvpr-launch-readiness-pack.html",
+      "command": "python3 scripts/build_cvpr_launch_readiness_pack.py && python3 scripts/verify_cvpr_launch_readiness_pack.py",
+      "dependsOn": [
+        "regression-drillbook",
+        "colab-release"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "release-manifest",
+      "phase": "Launch",
+      "surface": "cvpr-release-manifest.html",
+      "command": "python3 scripts/build_cvpr_release_manifest.py && python3 scripts/verify_cvpr_release_manifest.py",
+      "dependsOn": [
+        "launch-pack"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "change-control",
+      "phase": "Launch",
+      "surface": "cvpr-release-change-control.html",
+      "command": "python3 scripts/build_cvpr_release_change_control.py && python3 scripts/verify_cvpr_release_change_control.py",
+      "dependsOn": [
+        "release-manifest"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "full-stack-validation",
+      "phase": "Validation",
+      "surface": "cvpr-validation-center.html",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "dependsOn": [
+        "change-control"
+      ],
+      "status": "ready"
+    }
+  ],
+  "sources": {
+    "changeControl": "analysis/cvpr_release_change_control/registry.json",
+    "manifest": "analysis/cvpr_release_manifest/registry.json",
+    "launch": "analysis/cvpr_launch_readiness_pack/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

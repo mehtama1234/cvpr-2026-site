@@ -1,0 +1,20 @@
+{
+  "jobId": "threed-03-github-com-akumar005-l2dgs",
+  "repo": "https://github.com/akumar005/L2DGS",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 34,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "third-wave-threed-L2DGS",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

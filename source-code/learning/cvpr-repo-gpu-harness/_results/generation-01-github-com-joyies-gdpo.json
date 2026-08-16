@@ -1,0 +1,20 @@
+{
+  "jobId": "generation-01-github-com-joyies-gdpo",
+  "repo": "https://github.com/Joyies/GDPO",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 37,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "viewer-generation-gdpo",
+  "rehydratedFrom": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+  "status": "rehydrated"
+}

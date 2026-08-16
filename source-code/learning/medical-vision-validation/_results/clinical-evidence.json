@@ -1,0 +1,18 @@
+{
+  "system": "medical-vision-validation",
+  "systemTitle": "Medical vision validation",
+  "stage": "clinical-evidence",
+  "stageTitle": "Build clinical evidence",
+  "theme": "The frontier - new senses and new duties",
+  "themeSlug": "emerging",
+  "cluster": "Vision for science and medicine",
+  "clusterSlug": "medical",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "require task-specific validation before deployment",
+  "reusableRule": "Medical vision validation stage 'Build clinical evidence' should require task-specific validation before deployment using measured CVPR evidence, not only paper novelty."
+}

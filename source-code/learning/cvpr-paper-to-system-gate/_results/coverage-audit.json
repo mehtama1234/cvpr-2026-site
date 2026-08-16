@@ -1,0 +1,45 @@
+{
+  "stage": "coverage-audit",
+  "themeCounts": {
+    "emerging": 0,
+    "threed": 0,
+    "video": 0,
+    "generation": 0,
+    "vlm": 0,
+    "perceive": 0,
+    "embodied": 0,
+    "learning": 0
+  },
+  "clusterCounts": {
+    "vlm_reasoning": 0,
+    "efficient": 0,
+    "recon_nvs": 0,
+    "open_vocab": 0,
+    "restoration": 0,
+    "gaussian_splatting": 0,
+    "medical": 0,
+    "video_world": 0,
+    "controllable_gen": 0,
+    "driving_vla": 0,
+    "adversarial": 0
+  },
+  "themeCount": 8,
+  "clusterCount": 11,
+  "totalThemePapers": 0,
+  "totalClusterAssignments": 0,
+  "requiredPageCoverage": 1.0,
+  "missingRequiredPages": [],
+  "systemsRegistryPresent": true,
+  "systemsRegistrySummary": {
+    "systems": 11,
+    "stages": 33,
+    "themesCovered": 8,
+    "totalThemes": 8,
+    "clustersCovered": 11,
+    "totalClusters": 11,
+    "openClusters": [],
+    "complete": 33,
+    "incomplete": 0
+  },
+  "reusableRule": "Before turning a CVPR idea into a system, prove the site has theme evidence, cluster evidence, math context, searchability, and an audit trail."
+}

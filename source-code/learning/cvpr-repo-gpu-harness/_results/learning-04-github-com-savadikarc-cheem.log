@@ -1,0 +1,7 @@
+jobId=learning-04-github-com-savadikarc-cheem
+repo=https://github.com/savadikarc/cheem
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

@@ -1,0 +1,20 @@
+{
+  "jobId": "vlm-03-github-com-oamyjin-graphvlm",
+  "repo": "https://github.com/oamyjin/GraphVLM",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 43,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "third-wave-vlm-GraphVLM",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

@@ -1,0 +1,20 @@
+{
+  "jobId": "generation-04-github-com-jf-tan-lrdm",
+  "repo": "https://github.com/JF-Tan/LRDM",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 38,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fourth-wave-generation-LRDM",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

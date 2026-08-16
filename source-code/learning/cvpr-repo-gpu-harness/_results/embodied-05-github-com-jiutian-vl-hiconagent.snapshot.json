@@ -1,0 +1,10 @@
+{
+  "jobId": "embodied-05-github-com-jiutian-vl-hiconagent",
+  "repo": "https://github.com/JiuTian-VL/HiconAgent",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

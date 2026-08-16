@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "receipt": "cvpr-repo-harness-first-batch-receipt",
+    "status": "ready",
+    "batchStart": 0,
+    "batchLimit": 5,
+    "batchJobs": 5,
+    "theme": "frontier",
+    "repos": 5,
+    "runtimePlane": "google-colab-pro-plus",
+    "worker": "cvpr-repo-harness-worker",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "runner": "source-code/learning/cvpr-repo-gpu-harness/tools/run_repo_harness_worker.py",
+    "incomingArtifact": "source-code/learning/cvpr-repo-gpu-harness/_incoming/cvpr_repo_harness_live.json",
+    "intakeStatus": "valid",
+    "validator": "scripts/validate_cvpr_repo_harness_results.py",
+    "runCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/run_repo_harness_worker.py --start 0 --limit 5",
+    "dryRunCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/run_repo_harness_worker.py --start 0 --limit 5 --dry-run",
+    "validationCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results source-code/learning/cvpr-repo-gpu-harness/_incoming/cvpr_repo_harness_live.json",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "firstBatch": [
+    {
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "theme": "frontier",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/yjzhao1019/MOS",
+      "cloneCommand": "git clone --depth 1 https://github.com/yjzhao1019/MOS repos/github-com-yjzhao1019-mos",
+      "smokeCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/repo_smoke.py --repo repos/github-com-yjzhao1019-mos --job frontier-01-github-com-yjzhao1019-mos",
+      "expectedArtifacts": [
+        "smokeJson",
+        "log",
+        "repoSnapshot"
+      ]
+    },
+    {
+      "jobId": "frontier-02-github-com-earth-insights-segear",
+      "theme": "frontier",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/earth-insights/SegEarth-R2",
+      "cloneCommand": "git clone --depth 1 https://github.com/earth-insights/SegEarth-R2 repos/github-com-earth-insights-segearth-r2",
+      "smokeCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/repo_smoke.py --repo repos/github-com-earth-insights-segearth-r2 --job frontier-02-github-com-earth-insights-segear",
+      "expectedArtifacts": [
+        "smokeJson",
+        "log",
+        "repoSnapshot"
+      ]
+    },
+    {
+      "jobId": "frontier-03-github-com-fahadshamshad-raven",
+      "theme": "frontier",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/fahadshamshad/raven-",
+      "cloneCommand": "git clone --depth 1 https://github.com/fahadshamshad/raven- repos/github-com-fahadshamshad-raven",
+      "smokeCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/repo_smoke.py --repo repos/github-com-fahadshamshad-raven --job frontier-03-github-com-fahadshamshad-raven",
+      "expectedArtifacts": [
+        "smokeJson",
+        "log",
+        "repoSnapshot"
+      ]
+    },
+    {
+      "jobId": "frontier-04-github-com-jimmyxichen-mm-ovseg",
+      "theme": "frontier",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/Jimmyxichen/MM-OVSeg",
+      "cloneCommand": "git clone --depth 1 https://github.com/Jimmyxichen/MM-OVSeg repos/github-com-jimmyxichen-mm-ovseg",
+      "smokeCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/repo_smoke.py --repo repos/github-com-jimmyxichen-mm-ovseg --job frontier-04-github-com-jimmyxichen-mm-ovseg",
+      "expectedArtifacts": [
+        "smokeJson",
+        "log",
+        "repoSnapshot"
+      ]
+    },
+    {
+      "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+      "theme": "frontier",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/Zhang-Peirong/GeoVis",
+      "cloneCommand": "git clone --depth 1 https://github.com/Zhang-Peirong/GeoVis repos/github-com-zhang-peirong-geovis",
+      "smokeCommand": "python3 source-code/learning/cvpr-repo-gpu-harness/tools/repo_smoke.py --repo repos/github-com-zhang-peirong-geovis --job frontier-05-github-com-zhang-peirong-geovis",
+      "expectedArtifacts": [
+        "smokeJson",
+        "log",
+        "repoSnapshot"
+      ]
+    }
+  ]
+}

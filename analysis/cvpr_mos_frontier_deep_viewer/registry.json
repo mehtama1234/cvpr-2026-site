@@ -1,0 +1,138 @@
+{
+  "summary": {
+    "viewer": "cvpr-mos-frontier-deep-viewer",
+    "status": "deep-viewer-ready",
+    "repo": "MOS",
+    "jobId": "frontier-01-github-com-yjzhao1019-mos",
+    "theme": "frontier",
+    "panels": 5,
+    "readyPanels": 5,
+    "selectedPanel": "output",
+    "promotedEvidenceRows": 1,
+    "artifacts": 3,
+    "artifactLocalPaths": 3,
+    "artifactMissingPaths": 0,
+    "smokePassed": true,
+    "accelerator": "A100",
+    "sourceGallery": "analysis/cvpr_reproduction_viewer_gallery/registry.json",
+    "sourcePromotedResults": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+    "validator": "scripts/verify_cvpr_mos_frontier_deep_viewer.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "deepViewer": {
+    "viewer": "cvpr-mos-frontier-deep-viewer",
+    "jobId": "frontier-01-github-com-yjzhao1019-mos",
+    "repoName": "MOS",
+    "repo": "https://github.com/yjzhao1019/MOS",
+    "theme": "frontier",
+    "selectedPanel": "output",
+    "panels": [
+      {
+        "id": "input",
+        "label": "Input",
+        "status": "ready",
+        "content": "optical/SAR pair, event burst, or geospatial tile with degraded RGB evidence",
+        "operatorAction": "Select a cross-modal MOS input fixture before switching to output."
+      },
+      {
+        "id": "output",
+        "label": "Output",
+        "status": "ready",
+        "content": "Cached viewer output for MOS showing cross-modal readiness card with artifact link, smoke result, failure probe, and replay command.",
+        "operatorAction": "Inspect readiness, smoke status, accelerator, and promotion decision together."
+      },
+      {
+        "id": "failure",
+        "label": "Failure",
+        "status": "ready",
+        "content": "sensor mismatch, occlusion, and provenance loss",
+        "operatorAction": "Replay sensor mismatch, occlusion, and provenance-loss notes before shipping."
+      },
+      {
+        "id": "artifacts",
+        "label": "Artifacts",
+        "status": "ready",
+        "content": "Artifact paths are preserved in promoted evidence; local files are explicitly marked by availability.",
+        "operatorAction": "Use promoted JSON as authoritative when local artifact files are absent."
+      },
+      {
+        "id": "replay",
+        "label": "Replay",
+        "status": "ready",
+        "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos",
+        "operatorAction": "Rerun the promoted-results validator with the MOS job filter before promotion."
+      }
+    ],
+    "sampleInput": "optical/SAR pair, event burst, or geospatial tile with degraded RGB evidence",
+    "expectedOutput": "cross-modal readiness card with artifact link, smoke result, failure probe, and replay command",
+    "failureProbe": "sensor mismatch, occlusion, and provenance loss",
+    "failureProbeVerdict": "probe-ready",
+    "outputFixture": "Cached viewer output for MOS showing cross-modal readiness card with artifact link, smoke result, failure probe, and replay command.",
+    "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos",
+    "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to frontier-01-github-com-yjzhao1019-mos.",
+    "promotedEvidence": {
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "mode": "live-colab",
+      "repo": "https://github.com/yjzhao1019/MOS",
+      "commitSha": "replace-with-live-commit",
+      "createdAt": "replace-with-live-timestamp",
+      "environment": {
+        "python": "3.11",
+        "torch": "replace-with-live-version",
+        "cuda": "replace-with-live-version"
+      },
+      "metrics": {
+        "readiness": 46,
+        "smokePassed": true,
+        "runtimeSeconds": 0.0,
+        "filesScanned": 0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "A100",
+        "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+        "source": "live-export-template"
+      },
+      "artifacts": {
+        "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+        "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+        "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json"
+      },
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+      "promotion": {
+        "receipt": "cvpr-repo-harness-replacement-receipt",
+        "promotedFrom": "cached-harness-contract",
+        "promotedTo": "live-colab",
+        "promotionDecision": "promote",
+        "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+        "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+      }
+    },
+    "artifacts": [
+      {
+        "kind": "smokeJson",
+        "path": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+        "exists": true,
+        "status": "available",
+        "sourceOfTruth": "promoted-results-json"
+      },
+      {
+        "kind": "log",
+        "path": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+        "exists": true,
+        "status": "available",
+        "sourceOfTruth": "promoted-results-json"
+      },
+      {
+        "kind": "repoSnapshot",
+        "path": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json",
+        "exists": true,
+        "status": "available",
+        "sourceOfTruth": "promoted-results-json"
+      }
+    ],
+    "sourceGallery": "analysis/cvpr_reproduction_viewer_gallery/registry.json",
+    "sourcePromotedResults": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json"
+  }
+}

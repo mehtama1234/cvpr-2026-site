@@ -1,0 +1,7 @@
+jobId=threed-01-github-com-deepinsight-insightfa
+repo=https://github.com/deepinsight/insightface
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

@@ -1,0 +1,10 @@
+{
+  "jobId": "video-02-github-com-deepfakes-face",
+  "repo": "https://github.com/deepfakes/face-",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

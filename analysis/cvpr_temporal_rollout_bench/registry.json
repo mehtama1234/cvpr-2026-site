@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "bench": "cvpr-temporal-rollout-bench",
+    "sourceSystem": "video-world-model",
+    "sourceStages": [
+      "temporal-memory",
+      "physics-consistency",
+      "future-rollout"
+    ],
+    "cases": 4,
+    "release": 4,
+    "review": 0,
+    "block": 0,
+    "avgReadiness": 77.8,
+    "maxDrift": 36.1,
+    "minIdentityStability": 72.7,
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-real"
+    ],
+    "gpuBacked": true,
+    "cachedRealCases": 4,
+    "colabWorker": "cvpr-colab-gpu-worker",
+    "playbookSource": "04-video-generation-and-world-models-temporal-rollout",
+    "status": "interactive"
+  },
+  "stageEvidence": {
+    "memory": 94,
+    "physics": 94,
+    "rollout": 94,
+    "evidenceDepth": 94
+  },
+  "records": [
+    {
+      "id": "short-stable",
+      "title": "Short stable rollout",
+      "system": "video-world-model",
+      "cluster": "Video generation and world models",
+      "sourceStages": [
+        "temporal-memory",
+        "physics-consistency",
+        "future-rollout"
+      ],
+      "controls": {
+        "rolloutLength": 24,
+        "identityDensity": 28,
+        "physicsViolations": 14,
+        "memoryWindow": 72
+      },
+      "metrics": {
+        "memoryLoad": 26.6,
+        "identityStability": 80.6,
+        "contactConsistency": 86.6,
+        "rolloutPlausibility": 85.7,
+        "drift": 21.0,
+        "readiness": 83.3
+      },
+      "cachedGpuMetrics": {
+        "readiness": 83.3,
+        "identityStability": 80.6,
+        "contactConsistency": 86.6,
+        "rolloutPlausibility": 85.7,
+        "drift": 21.0,
+        "memoryLoad": 26.6
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "crowded-memory",
+      "title": "Crowded identity memory",
+      "system": "video-world-model",
+      "cluster": "Video generation and world models",
+      "sourceStages": [
+        "temporal-memory",
+        "physics-consistency",
+        "future-rollout"
+      ],
+      "controls": {
+        "rolloutLength": 36,
+        "identityDensity": 76,
+        "physicsViolations": 26,
+        "memoryWindow": 82
+      },
+      "metrics": {
+        "memoryLoad": 43.8,
+        "identityStability": 73.8,
+        "contactConsistency": 79.4,
+        "rolloutPlausibility": 80.0,
+        "drift": 33.0,
+        "readiness": 75.9
+      },
+      "cachedGpuMetrics": {
+        "readiness": 75.9,
+        "identityStability": 73.8,
+        "contactConsistency": 79.4,
+        "rolloutPlausibility": 80.0,
+        "drift": 33.0,
+        "memoryLoad": 43.8
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "contact-heavy",
+      "title": "Contact-heavy prediction",
+      "system": "video-world-model",
+      "cluster": "Video generation and world models",
+      "sourceStages": [
+        "temporal-memory",
+        "physics-consistency",
+        "future-rollout"
+      ],
+      "controls": {
+        "rolloutLength": 56,
+        "identityDensity": 52,
+        "physicsViolations": 20,
+        "memoryWindow": 82
+      },
+      "metrics": {
+        "memoryLoad": 42.5,
+        "identityStability": 74.0,
+        "contactConsistency": 83.6,
+        "rolloutPlausibility": 77.1,
+        "drift": 34.3,
+        "readiness": 76.2
+      },
+      "cachedGpuMetrics": {
+        "readiness": 76.2,
+        "identityStability": 74.0,
+        "contactConsistency": 83.6,
+        "rolloutPlausibility": 77.1,
+        "drift": 34.3,
+        "memoryLoad": 42.5
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "long-rollout-drift",
+      "title": "Long rollout drift",
+      "system": "video-world-model",
+      "cluster": "Video generation and world models",
+      "sourceStages": [
+        "temporal-memory",
+        "physics-consistency",
+        "future-rollout"
+      ],
+      "controls": {
+        "rolloutLength": 66,
+        "identityDensity": 68,
+        "physicsViolations": 12,
+        "memoryWindow": 92
+      },
+      "metrics": {
+        "memoryLoad": 48.1,
+        "identityStability": 72.7,
+        "contactConsistency": 86.5,
+        "rolloutPlausibility": 75.5,
+        "drift": 36.1,
+        "readiness": 75.9
+      },
+      "cachedGpuMetrics": {
+        "readiness": 75.9,
+        "identityStability": 72.7,
+        "contactConsistency": 86.5,
+        "rolloutPlausibility": 75.5,
+        "drift": 36.1,
+        "memoryLoad": 48.1
+      },
+      "decision": "release",
+      "acceptancePass": true,
+      "runtimeModes": [
+        "simulated",
+        "cached-real"
+      ],
+      "preferredRuntime": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    }
+  ]
+}

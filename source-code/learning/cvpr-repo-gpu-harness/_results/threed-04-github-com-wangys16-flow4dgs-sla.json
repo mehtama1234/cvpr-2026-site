@@ -1,0 +1,20 @@
+{
+  "jobId": "threed-04-github-com-wangys16-flow4dgs-sla",
+  "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 35,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fourth-wave-threed-Flow4DGS-SLAM",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

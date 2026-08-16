@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "brief": "cvpr-production-release-brief",
+    "status": "release",
+    "themes": 8,
+    "systems": 11,
+    "stages": 33,
+    "demos": 41,
+    "arenaPairings": 328,
+    "arenaRelease": 328,
+    "arenaReview": 0,
+    "arenaBlock": 0,
+    "benchCases": 44,
+    "benchRelease": 44,
+    "benchReview": 0,
+    "benchBlock": 0,
+    "benchAcceptanceRate": 100.0,
+    "failureSeverity": 0,
+    "openThemes": 0,
+    "workerJobs": 10,
+    "cachedResults": 40,
+    "liveIntakeResults": 40,
+    "evidenceArtifacts": 7,
+    "importIssues": 0,
+    "packageTests": 148,
+    "fullStackStatus": "valid",
+    "gate": "release",
+    "posture": "all-clear",
+    "coverage": "8 themes \u00b7 11 systems \u00b7 33 stages \u00b7 41 demos \u00b7 328 arena releases \u00b7 44 bench releases"
+  },
+  "evidence": [
+    {
+      "label": "Mission control",
+      "page": "cvpr-mission-control.html",
+      "registry": "analysis/cvpr_mission_control/registry.json",
+      "status": "interactive"
+    },
+    {
+      "label": "Demo arena",
+      "page": "cvpr-demo-arena.html",
+      "registry": "analysis/cvpr_demo_arena/registry.json",
+      "status": "release"
+    },
+    {
+      "label": "Failure atlas",
+      "page": "cvpr-failure-atlas.html",
+      "registry": "analysis/cvpr_failure_atlas/registry.json",
+      "status": "release"
+    },
+    {
+      "label": "Theme release matrix",
+      "page": "cvpr-theme-release-matrix.html",
+      "registry": "analysis/cvpr_theme_release_matrix/registry.json",
+      "status": "release"
+    },
+    {
+      "label": "Colab release bundle",
+      "page": "cvpr-colab-release-bundle.html",
+      "registry": "analysis/cvpr_colab_release_bundle/registry.json",
+      "status": "release"
+    },
+    {
+      "label": "Evidence ledger",
+      "page": "cvpr-colab-evidence-ledger.html",
+      "registry": "analysis/cvpr_colab_evidence_ledger/registry.json",
+      "status": "release"
+    },
+    {
+      "label": "Validation center",
+      "page": "cvpr-validation-center.html",
+      "registry": "analysis/cvpr_full_stack_validation/registry.json",
+      "status": "valid"
+    }
+  ],
+  "inputRegistries": {
+    "mission": "analysis/cvpr_mission_control/registry.json",
+    "arena": "analysis/cvpr_demo_arena/registry.json",
+    "benches": "analysis/cvpr_failure_atlas/registry.json",
+    "themeMatrix": "analysis/cvpr_theme_release_matrix/registry.json",
+    "releaseBundle": "analysis/cvpr_colab_release_bundle/registry.json",
+    "evidenceLedger": "analysis/cvpr_colab_evidence_ledger/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

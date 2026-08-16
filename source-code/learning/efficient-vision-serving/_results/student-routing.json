@@ -1,0 +1,18 @@
+{
+  "system": "efficient-vision-serving",
+  "systemTitle": "Efficient vision serving",
+  "stage": "student-routing",
+  "stageTitle": "Route to small students",
+  "theme": "Learning more from less, and not breaking",
+  "themeSlug": "learning",
+  "cluster": "Efficient vision",
+  "clusterSlug": "efficient",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "send easy cases to cheaper models and escalate hard cases",
+  "reusableRule": "Efficient vision serving stage 'Route to small students' should send easy cases to cheaper models and escalate hard cases using measured CVPR evidence, not only paper novelty."
+}

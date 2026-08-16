@@ -1,0 +1,10 @@
+{
+  "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+  "repo": "https://github.com/szu-ai/safe-driving-drl",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "promoted-results-json",
+  "status": "rehydrated"
+}

@@ -1,0 +1,7 @@
+jobId=generation-04-github-com-jf-tan-lrdm
+repo=https://github.com/JF-Tan/LRDM
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

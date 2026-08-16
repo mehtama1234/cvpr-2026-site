@@ -1,0 +1,695 @@
+{
+  "summary": {
+    "audit": "cvpr-production-coverage-audit",
+    "systems": 11,
+    "stages": 33,
+    "demos": 41,
+    "benchSystems": 11,
+    "benchCases": 44,
+    "benchRelease": 44,
+    "benchReview": 0,
+    "benchBlock": 0,
+    "colabJobs": 10,
+    "cachedResults": 40,
+    "colabCoveredBenches": 10,
+    "systemEvidenceCoveredBenches": 1,
+    "missingBenchSystems": 0,
+    "missingColabEvidence": 0,
+    "intentionalSystemEvidence": [
+      "cvpr-vlm-answer-verification-bench"
+    ],
+    "importIssues": 0,
+    "releaseGate": "release",
+    "status": "release"
+  },
+  "systemRows": [
+    {
+      "system": "adversarial-provenance-gate",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Adversarial robustness",
+      "stages": 3,
+      "stageIds": [
+        "attack-surface",
+        "provenance-detection",
+        "unlearning-check"
+      ],
+      "page": "adversarial-provenance-gate.html",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "benchPage": "cvpr-adversarial-provenance-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "adversarial-provenance",
+      "gpuClass": "T4/L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "controllable-generation-studio",
+      "theme": "Making pixels from meaning",
+      "cluster": "Controllable generation",
+      "stages": 3,
+      "stageIds": [
+        "identity-preservation",
+        "layout-control",
+        "preference-reward"
+      ],
+      "page": "controllable-generation-studio.html",
+      "bench": "cvpr-constraint-generation-bench",
+      "benchPage": "cvpr-constraint-generation-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "constraint-generation",
+      "gpuClass": "L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "cluster": "Driving and vision-language-action",
+      "stages": 3,
+      "stageIds": [
+        "action-release",
+        "risk-anticipation",
+        "scene-grounding"
+      ],
+      "page": "driving-vla-release-gate.html",
+      "bench": "cvpr-driving-safety-bench",
+      "benchPage": "cvpr-driving-safety-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "driving-safety",
+      "gpuClass": "L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "efficient-vision-serving",
+      "theme": "Learning more from less, and not breaking",
+      "cluster": "Efficient vision",
+      "stages": 3,
+      "stageIds": [
+        "quantized-serving",
+        "student-routing",
+        "token-budget"
+      ],
+      "page": "efficient-vision-serving.html",
+      "bench": "cvpr-compute-serving-bench",
+      "benchPage": "cvpr-compute-serving-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "compute-serving",
+      "gpuClass": "T4/L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "gaussian-splatting-platform",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "Gaussian Splatting",
+      "stages": 3,
+      "stageIds": [
+        "semantic-splats",
+        "splat-fit",
+        "watermark-provenance"
+      ],
+      "page": "gaussian-splatting-platform.html",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "benchPage": "cvpr-gaussian-splatting-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "gaussian-splatting",
+      "gpuClass": "L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "medical-vision-validation",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Vision for science and medicine",
+      "stages": 3,
+      "stageIds": [
+        "clinical-evidence",
+        "domain-shift",
+        "uncertainty-triage"
+      ],
+      "page": "medical-vision-validation.html",
+      "bench": "cvpr-clinical-shift-bench",
+      "benchPage": "cvpr-clinical-shift-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "clinical-shift",
+      "gpuClass": "T4/L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "metric-3d-reconstruction",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "3D reconstruction and novel views",
+      "stages": 3,
+      "stageIds": [
+        "camera-geometry",
+        "metric-scale",
+        "surface-consistency"
+      ],
+      "page": "metric-3d-reconstruction.html",
+      "bench": "cvpr-metric-geometry-bench",
+      "benchPage": "cvpr-metric-geometry-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "metric-geometry",
+      "gpuClass": "L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "open-vocab-visual-search",
+      "theme": "Naming and locating what's in the picture",
+      "cluster": "Open-vocabulary vision",
+      "stages": 3,
+      "stageIds": [
+        "evidence-inspection",
+        "long-tail-retrieval",
+        "text-query-grounding"
+      ],
+      "page": "open-vocab-visual-search.html",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "benchPage": "cvpr-long-tail-grounding-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "open-vocab-grounding",
+      "gpuClass": "T4/L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "restoration-reliability-stack",
+      "theme": "Making pixels from meaning",
+      "cluster": "Image restoration",
+      "stages": 3,
+      "stageIds": [
+        "degradation-diagnosis",
+        "downstream-validation",
+        "fidelity-gate"
+      ],
+      "page": "restoration-reliability-stack.html",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "benchPage": "cvpr-restoration-fidelity-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "restoration-fidelity",
+      "gpuClass": "T4/L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "video-world-model",
+      "theme": "Seeing and making things that move",
+      "cluster": "Video generation and world models",
+      "stages": 3,
+      "stageIds": [
+        "future-rollout",
+        "physics-consistency",
+        "temporal-memory"
+      ],
+      "page": "video-world-model.html",
+      "bench": "cvpr-temporal-rollout-bench",
+      "benchPage": "cvpr-temporal-rollout-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "colab-pro-plus",
+      "colabJobId": "temporal-rollout",
+      "gpuClass": "L4/A100",
+      "intentionalSystemEvidence": false,
+      "status": "release"
+    },
+    {
+      "system": "vlm-grounded-reasoning",
+      "theme": "Teaching machines to see and talk at once",
+      "cluster": "Vision-language reasoning",
+      "stages": 3,
+      "stageIds": [
+        "hallucination-check",
+        "look-then-reason",
+        "tool-verified-answer"
+      ],
+      "page": "vlm-grounded-reasoning.html",
+      "bench": "cvpr-vlm-answer-verification-bench",
+      "benchPage": "cvpr-vlm-answer-verification-bench.html",
+      "benchCases": 4,
+      "benchRelease": 4,
+      "runtimeEvidence": "cached-system-evidence",
+      "colabJobId": "",
+      "gpuClass": "",
+      "intentionalSystemEvidence": true,
+      "status": "release"
+    }
+  ],
+  "stageRows": [
+    {
+      "stage": "text-query-grounding",
+      "system": "open-vocab-visual-search",
+      "theme": "Naming and locating what's in the picture",
+      "cluster": "Open-vocabulary vision",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "long-tail-retrieval",
+      "system": "open-vocab-visual-search",
+      "theme": "Naming and locating what's in the picture",
+      "cluster": "Open-vocabulary vision",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "evidence-inspection",
+      "system": "open-vocab-visual-search",
+      "theme": "Naming and locating what's in the picture",
+      "cluster": "Open-vocabulary vision",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "look-then-reason",
+      "system": "vlm-grounded-reasoning",
+      "theme": "Teaching machines to see and talk at once",
+      "cluster": "Vision-language reasoning",
+      "bench": "cvpr-vlm-answer-verification-bench",
+      "runtimeEvidence": "cached-system-evidence",
+      "status": "release"
+    },
+    {
+      "stage": "hallucination-check",
+      "system": "vlm-grounded-reasoning",
+      "theme": "Teaching machines to see and talk at once",
+      "cluster": "Vision-language reasoning",
+      "bench": "cvpr-vlm-answer-verification-bench",
+      "runtimeEvidence": "cached-system-evidence",
+      "status": "release"
+    },
+    {
+      "stage": "tool-verified-answer",
+      "system": "vlm-grounded-reasoning",
+      "theme": "Teaching machines to see and talk at once",
+      "cluster": "Vision-language reasoning",
+      "bench": "cvpr-vlm-answer-verification-bench",
+      "runtimeEvidence": "cached-system-evidence",
+      "status": "release"
+    },
+    {
+      "stage": "token-budget",
+      "system": "efficient-vision-serving",
+      "theme": "Learning more from less, and not breaking",
+      "cluster": "Efficient vision",
+      "bench": "cvpr-compute-serving-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "quantized-serving",
+      "system": "efficient-vision-serving",
+      "theme": "Learning more from less, and not breaking",
+      "cluster": "Efficient vision",
+      "bench": "cvpr-compute-serving-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "student-routing",
+      "system": "efficient-vision-serving",
+      "theme": "Learning more from less, and not breaking",
+      "cluster": "Efficient vision",
+      "bench": "cvpr-compute-serving-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "camera-geometry",
+      "system": "metric-3d-reconstruction",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "3D reconstruction and novel views",
+      "bench": "cvpr-metric-geometry-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "metric-scale",
+      "system": "metric-3d-reconstruction",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "3D reconstruction and novel views",
+      "bench": "cvpr-metric-geometry-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "surface-consistency",
+      "system": "metric-3d-reconstruction",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "3D reconstruction and novel views",
+      "bench": "cvpr-metric-geometry-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "splat-fit",
+      "system": "gaussian-splatting-platform",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "Gaussian Splatting",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "semantic-splats",
+      "system": "gaussian-splatting-platform",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "Gaussian Splatting",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "watermark-provenance",
+      "system": "gaussian-splatting-platform",
+      "theme": "Recovering the 3D world from flat pictures",
+      "cluster": "Gaussian Splatting",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "temporal-memory",
+      "system": "video-world-model",
+      "theme": "Seeing and making things that move",
+      "cluster": "Video generation and world models",
+      "bench": "cvpr-temporal-rollout-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "physics-consistency",
+      "system": "video-world-model",
+      "theme": "Seeing and making things that move",
+      "cluster": "Video generation and world models",
+      "bench": "cvpr-temporal-rollout-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "future-rollout",
+      "system": "video-world-model",
+      "theme": "Seeing and making things that move",
+      "cluster": "Video generation and world models",
+      "bench": "cvpr-temporal-rollout-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "layout-control",
+      "system": "controllable-generation-studio",
+      "theme": "Making pixels from meaning",
+      "cluster": "Controllable generation",
+      "bench": "cvpr-constraint-generation-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "identity-preservation",
+      "system": "controllable-generation-studio",
+      "theme": "Making pixels from meaning",
+      "cluster": "Controllable generation",
+      "bench": "cvpr-constraint-generation-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "preference-reward",
+      "system": "controllable-generation-studio",
+      "theme": "Making pixels from meaning",
+      "cluster": "Controllable generation",
+      "bench": "cvpr-constraint-generation-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "degradation-diagnosis",
+      "system": "restoration-reliability-stack",
+      "theme": "Making pixels from meaning",
+      "cluster": "Image restoration",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "fidelity-gate",
+      "system": "restoration-reliability-stack",
+      "theme": "Making pixels from meaning",
+      "cluster": "Image restoration",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "downstream-validation",
+      "system": "restoration-reliability-stack",
+      "theme": "Making pixels from meaning",
+      "cluster": "Image restoration",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "domain-shift",
+      "system": "medical-vision-validation",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Vision for science and medicine",
+      "bench": "cvpr-clinical-shift-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "uncertainty-triage",
+      "system": "medical-vision-validation",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Vision for science and medicine",
+      "bench": "cvpr-clinical-shift-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "clinical-evidence",
+      "system": "medical-vision-validation",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Vision for science and medicine",
+      "bench": "cvpr-clinical-shift-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "scene-grounding",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "cluster": "Driving and vision-language-action",
+      "bench": "cvpr-driving-safety-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "risk-anticipation",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "cluster": "Driving and vision-language-action",
+      "bench": "cvpr-driving-safety-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "action-release",
+      "system": "driving-vla-release-gate",
+      "theme": "Using vision to act in the world",
+      "cluster": "Driving and vision-language-action",
+      "bench": "cvpr-driving-safety-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "attack-surface",
+      "system": "adversarial-provenance-gate",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Adversarial robustness",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "provenance-detection",
+      "system": "adversarial-provenance-gate",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Adversarial robustness",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    },
+    {
+      "stage": "unlearning-check",
+      "system": "adversarial-provenance-gate",
+      "theme": "The frontier - new senses and new duties",
+      "cluster": "Adversarial robustness",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "runtimeEvidence": "colab-pro-plus",
+      "status": "release"
+    }
+  ],
+  "colabRows": [
+    {
+      "jobId": "open-vocab-grounding",
+      "bench": "cvpr-long-tail-grounding-bench",
+      "page": "cvpr-long-tail-grounding-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "siglip-base-patch16-224",
+        "grounding-dino-tiny",
+        "sam-vit-b"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "bench": "cvpr-restoration-fidelity-bench",
+      "page": "cvpr-restoration-fidelity-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "swinir-lightweight",
+        "real-esrgan-x2"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "bench": "cvpr-adversarial-provenance-bench",
+      "page": "cvpr-adversarial-provenance-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "watermark-detector",
+        "clip-perturbation-probe"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "temporal-rollout",
+      "bench": "cvpr-temporal-rollout-bench",
+      "page": "cvpr-temporal-rollout-bench.html",
+      "gpuClass": "L4/A100",
+      "models": [
+        "video-feature-tracker",
+        "raft-lite",
+        "world-rollout-probe"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "clinical-shift",
+      "bench": "cvpr-clinical-shift-bench",
+      "page": "cvpr-clinical-shift-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "dicom-embedding-shift-probe",
+        "temperature-calibration-head",
+        "uncertainty-triage-head"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "compute-serving",
+      "bench": "cvpr-compute-serving-bench",
+      "page": "cvpr-compute-serving-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "quantized-vision-encoder",
+        "student-router",
+        "latency-profiler"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "constraint-generation",
+      "bench": "cvpr-constraint-generation-bench",
+      "page": "cvpr-constraint-generation-bench.html",
+      "gpuClass": "L4/A100",
+      "models": [
+        "layout-controlnet",
+        "identity-embedding-lock",
+        "preference-reward-probe"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "driving-safety",
+      "bench": "cvpr-driving-safety-bench",
+      "page": "cvpr-driving-safety-bench.html",
+      "gpuClass": "L4/A100",
+      "models": [
+        "vla-scene-grounder",
+        "ttc-risk-head",
+        "safety-rule-monitor"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "metric-geometry",
+      "bench": "cvpr-metric-geometry-bench",
+      "page": "cvpr-metric-geometry-bench.html",
+      "gpuClass": "L4/A100",
+      "models": [
+        "torch-pose-bundle-adjuster",
+        "metric-scale-probe",
+        "surface-consistency-head"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "bench": "cvpr-gaussian-splatting-bench",
+      "page": "cvpr-gaussian-splatting-bench.html",
+      "gpuClass": "L4/A100",
+      "models": [
+        "torch-splat-renderer",
+        "semantic-splat-attach",
+        "provenance-trace-head"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    }
+  ],
+  "inputRegistries": {
+    "systems": "analysis/cvpr_systems/registry.json",
+    "demos": "analysis/cvpr_demos/registry.json",
+    "mission": "analysis/cvpr_mission_control/registry.json",
+    "worker": "analysis/cvpr_colab_gpu_worker/registry.json",
+    "themeMatrix": "analysis/cvpr_theme_release_matrix/registry.json",
+    "releaseBrief": "analysis/cvpr_production_release_brief/registry.json"
+  }
+}

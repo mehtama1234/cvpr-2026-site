@@ -1,0 +1,10 @@
+{
+  "jobId": "video-04-github-com-arturxe2-adaspot",
+  "repo": "https://github.com/arturxe2/AdaSpot",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "interactive-expansion-backlog",
+  "status": "rehydrated"
+}

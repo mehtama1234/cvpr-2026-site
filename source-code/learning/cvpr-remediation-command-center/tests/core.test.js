@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import { ledgerSummary, summary, surfaceRows } from "../src/fixtures.js";
+import { remediationGate, summarizeCommandCenter, surfaceReady } from "../src/core.js";
+
+const derived = summarizeCommandCenter(surfaceRows, ledgerSummary);
+assert.equal(derived.surfaces, 7);
+assert.equal(derived.readySurfaces, 7);
+assert.equal(surfaceRows.filter(surfaceReady).length, 7);
+assert.equal(summary.surfaces, 7);
+assert.equal(summary.readySurfaces, 7);
+assert.equal(summary.gauntletBlocks, 14);
+assert.equal(summary.actionableRows, 29);
+assert.equal(summary.postBlock, 0);
+assert.equal(summary.promote, 12);
+assert.equal(summary.monitor, 17);
+assert.equal(summary.canaryRollback, 0);
+assert.equal(summary.rollbackDrills, 12);
+assert.equal(summary.rehearsalMisses, 0);
+assert.equal(remediationGate(summary), "operator-ready");
+assert.equal(summary.status, "operator-ready");
+console.log("ok cvpr-remediation-command-center:", summary.readySurfaces, "surfaces ready");

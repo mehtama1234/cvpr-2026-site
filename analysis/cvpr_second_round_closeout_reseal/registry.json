@@ -1,0 +1,99 @@
+{
+  "summary": {
+    "demo": "cvpr-second-round-closeout-reseal",
+    "status": "sealed",
+    "rows": 6,
+    "sealedRows": 6,
+    "secondRoundDemos": 5,
+    "replayResults": 40,
+    "visualQaSurfaces": 8,
+    "scenarioRows": 12,
+    "rollbackStressRows": 6,
+    "clinicalSafetyRows": 8,
+    "fullStackStatus": "valid",
+    "packageTests": 148,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "closeoutRows": [
+    {
+      "id": "second-round-closeout-01-replay",
+      "kind": "replay",
+      "label": "Colab Pro+ evidence replay",
+      "ownerSurface": "cvpr-colab-result-replay.html",
+      "actual": "ready",
+      "expected": "ready",
+      "evidence": "analysis/cvpr_colab_result_replay/registry.json",
+      "verifyCommand": "python3 scripts/verify_cvpr_colab_result_replay.py",
+      "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "sealed"
+    },
+    {
+      "id": "second-round-closeout-02-visualQa",
+      "kind": "visualQa",
+      "label": "Visual QA sweep",
+      "ownerSurface": "cvpr-visual-qa-sweep-dashboard.html",
+      "actual": "ready",
+      "expected": "ready",
+      "evidence": "analysis/cvpr_visual_qa_sweep_dashboard/registry.json",
+      "verifyCommand": "python3 scripts/verify_cvpr_visual_qa_sweep_dashboard.py",
+      "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "sealed"
+    },
+    {
+      "id": "second-round-closeout-03-scenario",
+      "kind": "scenario",
+      "label": "Scenario expansion pack",
+      "ownerSurface": "cvpr-scenario-expansion-pack.html",
+      "actual": "ready",
+      "expected": "ready",
+      "evidence": "analysis/cvpr_scenario_expansion_pack/registry.json",
+      "verifyCommand": "python3 scripts/verify_cvpr_scenario_expansion_pack.py",
+      "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "sealed"
+    },
+    {
+      "id": "second-round-closeout-04-rollbackStress",
+      "kind": "rollbackStress",
+      "label": "3D temporal rollback stress",
+      "ownerSurface": "cvpr-3d-temporal-rollback-stress-lab.html",
+      "actual": "ready",
+      "expected": "ready",
+      "evidence": "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
+      "verifyCommand": "python3 scripts/verify_cvpr_3d_temporal_rollback_stress_lab.py",
+      "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "sealed"
+    },
+    {
+      "id": "second-round-closeout-05-clinicalSafety",
+      "kind": "clinicalSafety",
+      "label": "Clinical safety escalation",
+      "ownerSurface": "cvpr-clinical-safety-escalation-playbook.html",
+      "actual": "ready",
+      "expected": "ready",
+      "evidence": "analysis/cvpr_clinical_safety_escalation_playbook/registry.json",
+      "verifyCommand": "python3 scripts/verify_cvpr_clinical_safety_escalation_playbook.py",
+      "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "sealed"
+    },
+    {
+      "id": "second-round-closeout-06-validation",
+      "kind": "validation",
+      "label": "Full-stack validation",
+      "ownerSurface": "cvpr-validation-center.html",
+      "actual": "valid",
+      "expected": "valid",
+      "evidence": "analysis/cvpr_full_stack_validation/registry.json",
+      "verifyCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
+      "status": "sealed"
+    }
+  ],
+  "sources": {
+    "replay": "analysis/cvpr_colab_result_replay/registry.json",
+    "visualQa": "analysis/cvpr_visual_qa_sweep_dashboard/registry.json",
+    "scenario": "analysis/cvpr_scenario_expansion_pack/registry.json",
+    "rollbackStress": "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
+    "clinicalSafety": "analysis/cvpr_clinical_safety_escalation_playbook/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

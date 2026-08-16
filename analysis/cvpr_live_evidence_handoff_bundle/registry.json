@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "bundle": "cvpr-live-evidence-handoff-bundle",
+    "status": "handoff-ready",
+    "commandStatus": "operator-ready",
+    "manifestStatus": "manifest-ready",
+    "auditStatus": "coverage-complete",
+    "briefStatus": "release-ready",
+    "surfaces": 8,
+    "rows": 40,
+    "liveRows": 40,
+    "smokePassed": 40,
+    "missingArtifacts": 0,
+    "holdDemo": 0,
+    "zipPath": "analysis/cvpr_live_evidence_handoff_bundle/cvpr_live_evidence_handoff_bundle.zip",
+    "zipEntries": 13,
+    "zipEntryNames": [
+      "README.md",
+      "analysis/cvpr_live_evidence_command_center/registry.json",
+      "analysis/cvpr_live_evidence_coverage_audit/registry.json",
+      "analysis/cvpr_live_evidence_portfolio/registry.json",
+      "analysis/cvpr_live_evidence_release_brief/registry.json",
+      "analysis/cvpr_live_evidence_release_manifest/cvpr_live_evidence_release_manifest.json",
+      "analysis/cvpr_live_evidence_release_manifest/registry.json",
+      "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+      "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json",
+      "scripts/validate_cvpr_full_stack.py",
+      "scripts/validate_cvpr_repo_harness_results.py",
+      "scripts/verify_cvpr_live_evidence_command_center.py",
+      "source-code/learning/cvpr-live-evidence-handoff-bundle/LIVE_EVIDENCE_HANDOFF_RUNBOOK.md"
+    ],
+    "runbook": "source-code/learning/cvpr-live-evidence-handoff-bundle/LIVE_EVIDENCE_HANDOFF_RUNBOOK.md",
+    "promotedArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+    "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json",
+    "validator": "scripts/validate_cvpr_repo_harness_results.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  }
+}

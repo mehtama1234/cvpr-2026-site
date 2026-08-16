@@ -1,0 +1,430 @@
+export const papers = [
+  {
+    "title": "Feed-Forward One-Shot Animatable Textured Mesh Avatar Reconstruction",
+    "repo": "https://github.com/deepinsight/insightface",
+    "tags": [
+      "avatar",
+      "3d-reconstruction",
+      "mesh",
+      "texture-synthesis",
+      "feed-forward",
+      "human-face"
+    ],
+    "problem": "This paper is about creating an animatable textured head avatar from one image in a single forward pass. The everyday problem is recovering face shape, hair/head regions, and texture without minutes of per-person optimization."
+  },
+  {
+    "title": "Motion-Aware Animatable Gaussian Avatars Deblurring",
+    "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+    "tags": [
+      "avatar reconstruction",
+      "video deblurring",
+      "3D gaussian splatting",
+      "human motion",
+      "multi-view geometry",
+      "blur formation"
+    ],
+    "problem": "Motion-Aware Gaussian Avatars Deblurring is about building sharp animatable avatars from blurry videos. The everyday problem is that fast human movement smears frames, and 2D deblurring can disagree across camera views."
+  },
+  {
+    "title": "L2DGS: Low-Light Dynamic Gaussian Splatting",
+    "repo": "https://github.com/akumar005/L2DGS",
+    "tags": [
+      "low-light-imaging",
+      "dynamic-scene-reconstruction",
+      "gaussian-splatting",
+      "illumination-handling",
+      "4d-reconstruction",
+      "scene-decomposition"
+    ],
+    "problem": "L2DGS is about reconstructing a well-lit dynamic scene from low-light video. The everyday problem is that darkness, motion, shadows, occlusion, and exposure changes all hide the same underlying moving geometry."
+  },
+  {
+    "title": "Flow4DGS-SLAM: Optical Flow-Guided 4D Gaussian Splatting SLAM",
+    "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+    "tags": [
+      "SLAM",
+      "3d-gaussian-splatting",
+      "4d-reconstruction",
+      "optical-flow",
+      "dynamic-scenes",
+      "motion-estimation"
+    ],
+    "problem": "Flow4DGS-SLAM is about mapping dynamic scenes while tracking camera motion. The everyday problem is that moving objects confuse a map unless the system separates camera movement from scene movement."
+  },
+  {
+    "title": "Prune Wisely, Reconstruct Sharply: Compact 3D Gaussian Splatting via Adaptive Pruning and Difference-of-Gaussian Primitives",
+    "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+    "tags": [
+      "3d-reconstruction",
+      "gaussian-splatting",
+      "novel-view-synthesis",
+      "model-compression",
+      "pruning",
+      "rendering"
+    ],
+    "problem": "This paper is about making 3D Gaussian Splatting smaller without losing sharp rendering. The everyday problem is that many Gaussians are redundant, but pruning the wrong ones removes real detail."
+  }
+];
+export const cases = [
+  {
+    "id": "cvpr-3d-world-repo-arena-1",
+    "title": "Feed-Forward One-Shot Animatable Textured Mesh Avatar Reconstruction",
+    "dims": [
+      82,
+      72,
+      30,
+      38,
+      54,
+      44
+    ],
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "operatorAction": "one-shot avatar needs metric face and texture consistency"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-2",
+    "title": "Motion-Aware Animatable Gaussian Avatars Deblurring",
+    "dims": [
+      70,
+      88,
+      92,
+      32,
+      64,
+      48
+    ],
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "operatorAction": "deblurred Gaussian avatars must agree across views"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-3",
+    "title": "L2DGS",
+    "dims": [
+      78,
+      62,
+      76,
+      96,
+      72,
+      50
+    ],
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "operatorAction": "low-light dynamic splats need illumination-separated geometry"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-4",
+    "title": "Flow4DGS-SLAM",
+    "dims": [
+      94,
+      86,
+      68,
+      46,
+      88,
+      42
+    ],
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "operatorAction": "dynamic SLAM must separate camera motion from scene motion"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-5",
+    "title": "Prune Wisely, Reconstruct Sharply",
+    "dims": [
+      58,
+      64,
+      22,
+      28,
+      92,
+      76
+    ],
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "operatorAction": "prune Gaussians only when sharp details survive"
+  }
+];
+export const demoRows = [
+  {
+    "id": "cvpr-3d-world-repo-arena-1",
+    "title": "Feed-Forward One-Shot Animatable Textured Mesh Avatar Reconstruction",
+    "paperTitle": "Feed-Forward One-Shot Animatable Textured Mesh Avatar Reconstruction",
+    "repo": "https://github.com/deepinsight/insightface",
+    "tags": [
+      "avatar",
+      "3d-reconstruction",
+      "mesh",
+      "texture-synthesis",
+      "feed-forward",
+      "human-face"
+    ],
+    "paperProblem": "This paper is about creating an animatable textured head avatar from one image in a single forward pass. The everyday problem is recovering face shape, hair/head regions, and texture without minutes of per-person optimization.",
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "dims": [
+      82,
+      72,
+      30,
+      38,
+      54,
+      44
+    ],
+    "metrics": {
+      "dims": [
+        82,
+        72,
+        30,
+        38,
+        54,
+        44
+      ],
+      "primaryRisk": 58.6,
+      "evidenceRisk": 52.8,
+      "runtimeRisk": 51.0,
+      "readiness": 50.7
+    },
+    "decision": "review",
+    "operatorAction": "one-shot avatar needs metric face and texture consistency"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-2",
+    "title": "Motion-Aware Animatable Gaussian Avatars Deblurring",
+    "paperTitle": "Motion-Aware Animatable Gaussian Avatars Deblurring",
+    "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+    "tags": [
+      "avatar reconstruction",
+      "video deblurring",
+      "3D gaussian splatting",
+      "human motion",
+      "multi-view geometry",
+      "blur formation"
+    ],
+    "paperProblem": "Motion-Aware Gaussian Avatars Deblurring is about building sharp animatable avatars from blurry videos. The everyday problem is that fast human movement smears frames, and 2D deblurring can disagree across camera views.",
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "dims": [
+      70,
+      88,
+      92,
+      32,
+      64,
+      48
+    ],
+    "metrics": {
+      "dims": [
+        70,
+        88,
+        92,
+        32,
+        64,
+        48
+      ],
+      "primaryRisk": 70.6,
+      "evidenceRisk": 59.7,
+      "runtimeRisk": 63.6,
+      "readiness": 41.2
+    },
+    "decision": "block",
+    "operatorAction": "deblurred Gaussian avatars must agree across views"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-3",
+    "title": "L2DGS",
+    "paperTitle": "L2DGS: Low-Light Dynamic Gaussian Splatting",
+    "repo": "https://github.com/akumar005/L2DGS",
+    "tags": [
+      "low-light-imaging",
+      "dynamic-scene-reconstruction",
+      "gaussian-splatting",
+      "illumination-handling",
+      "4d-reconstruction",
+      "scene-decomposition"
+    ],
+    "paperProblem": "L2DGS is about reconstructing a well-lit dynamic scene from low-light video. The everyday problem is that darkness, motion, shadows, occlusion, and exposure changes all hide the same underlying moving geometry.",
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "dims": [
+      78,
+      62,
+      76,
+      96,
+      72,
+      50
+    ],
+    "metrics": {
+      "dims": [
+        78,
+        62,
+        76,
+        96,
+        72,
+        50
+      ],
+      "primaryRisk": 72.9,
+      "evidenceRisk": 72.4,
+      "runtimeRisk": 73.6,
+      "readiness": 34.4
+    },
+    "decision": "block",
+    "operatorAction": "low-light dynamic splats need illumination-separated geometry"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-4",
+    "title": "Flow4DGS-SLAM",
+    "paperTitle": "Flow4DGS-SLAM: Optical Flow-Guided 4D Gaussian Splatting SLAM",
+    "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+    "tags": [
+      "SLAM",
+      "3d-gaussian-splatting",
+      "4d-reconstruction",
+      "optical-flow",
+      "dynamic-scenes",
+      "motion-estimation"
+    ],
+    "paperProblem": "Flow4DGS-SLAM is about mapping dynamic scenes while tracking camera motion. The everyday problem is that moving objects confuse a map unless the system separates camera movement from scene movement.",
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "dims": [
+      94,
+      86,
+      68,
+      46,
+      88,
+      42
+    ],
+    "metrics": {
+      "dims": [
+        94,
+        86,
+        68,
+        46,
+        88,
+        42
+      ],
+      "primaryRisk": 76.0,
+      "evidenceRisk": 67.8,
+      "runtimeRisk": 71.3,
+      "readiness": 35.0
+    },
+    "decision": "block",
+    "operatorAction": "dynamic SLAM must separate camera motion from scene motion"
+  },
+  {
+    "id": "cvpr-3d-world-repo-arena-5",
+    "title": "Prune Wisely, Reconstruct Sharply",
+    "paperTitle": "Prune Wisely, Reconstruct Sharply: Compact 3D Gaussian Splatting via Adaptive Pruning and Difference-of-Gaussian Primitives",
+    "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+    "tags": [
+      "3d-reconstruction",
+      "gaussian-splatting",
+      "novel-view-synthesis",
+      "model-compression",
+      "pruning",
+      "rendering"
+    ],
+    "paperProblem": "This paper is about making 3D Gaussian Splatting smaller without losing sharp rendering. The everyday problem is that many Gaussians are redundant, but pruning the wrong ones removes real detail.",
+    "labels": [
+      "geometry drift",
+      "view inconsistency",
+      "motion blur",
+      "lighting shift",
+      "memory load",
+      "edit leakage"
+    ],
+    "dims": [
+      58,
+      64,
+      22,
+      28,
+      92,
+      76
+    ],
+    "metrics": {
+      "dims": [
+        58,
+        64,
+        22,
+        28,
+        92,
+        76
+      ],
+      "primaryRisk": 54.4,
+      "evidenceRisk": 60.8,
+      "runtimeRisk": 60.2,
+      "readiness": 47.9
+    },
+    "decision": "review",
+    "operatorAction": "prune Gaussians only when sharp details survive"
+  }
+];
+export const summary = {
+  "demo": "cvpr-3d-world-repo-arena",
+  "status": "ready",
+  "theme": "Recovering the 3D world from flat pictures",
+  "sourceForge": "cvpr-paper-repo-demo-forge.html",
+  "systems": [
+    "metric-3d-reconstruction",
+    "gaussian-splatting-platform"
+  ],
+  "repoPapers": 5,
+  "cases": 5,
+  "release": 0,
+  "review": 2,
+  "block": 3,
+  "maxPrimaryRisk": 76.0,
+  "maxEvidenceRisk": 72.4,
+  "minReadiness": 34.4,
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

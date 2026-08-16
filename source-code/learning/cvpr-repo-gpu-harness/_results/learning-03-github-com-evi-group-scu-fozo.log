@@ -1,0 +1,7 @@
+jobId=learning-03-github-com-evi-group-scu-fozo
+repo=https://github.com/eVI-group-SCU/FOZO
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

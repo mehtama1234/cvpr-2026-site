@@ -1,0 +1,7 @@
+jobId=frontier-04-github-com-jimmyxichen-mm-ovseg
+repo=https://github.com/Jimmyxichen/MM-OVSeg
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

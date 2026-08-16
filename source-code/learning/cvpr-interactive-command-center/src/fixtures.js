@@ -1,0 +1,95 @@
+export const commandSurfaces = [
+  {
+    "surface": "coverage",
+    "status": "coverage-ready",
+    "readyStatus": "coverage-ready",
+    "page": "cvpr-interactive-coverage-portfolio.html",
+    "registry": "analysis/cvpr_interactive_coverage_portfolio/registry.json",
+    "validator": "scripts/verify_cvpr_interactive_coverage_portfolio.py",
+    "pageExists": true,
+    "registryExists": true,
+    "validatorExists": true,
+    "rowCount": 40
+  },
+  {
+    "surface": "console",
+    "status": "console-ready",
+    "readyStatus": "console-ready",
+    "page": "cvpr-interactive-console.html",
+    "registry": "analysis/cvpr_interactive_console/registry.json",
+    "validator": "scripts/verify_cvpr_interactive_console.py",
+    "pageExists": true,
+    "registryExists": true,
+    "validatorExists": true,
+    "rowCount": 40
+  },
+  {
+    "surface": "scenario-runner",
+    "status": "runner-ready",
+    "readyStatus": "runner-ready",
+    "page": "cvpr-interactive-scenario-runner.html",
+    "registry": "analysis/cvpr_interactive_scenario_runner/registry.json",
+    "validator": "scripts/verify_cvpr_interactive_scenario_runner.py",
+    "pageExists": true,
+    "registryExists": true,
+    "validatorExists": true,
+    "rowCount": 120
+  },
+  {
+    "surface": "triage-board",
+    "status": "triage-ready",
+    "readyStatus": "triage-ready",
+    "page": "cvpr-interactive-triage-board.html",
+    "registry": "analysis/cvpr_interactive_triage_board/registry.json",
+    "validator": "scripts/verify_cvpr_interactive_triage_board.py",
+    "pageExists": true,
+    "registryExists": true,
+    "validatorExists": true,
+    "rowCount": 40
+  },
+  {
+    "surface": "release-pack",
+    "status": "release-pack-ready",
+    "readyStatus": "release-pack-ready",
+    "page": "cvpr-interactive-release-pack.html",
+    "registry": "analysis/cvpr_interactive_release_pack/registry.json",
+    "validator": "scripts/verify_cvpr_interactive_release_pack.py",
+    "pageExists": true,
+    "registryExists": true,
+    "validatorExists": true,
+    "rowCount": 4
+  },
+  {
+    "surface": "audit-ledger",
+    "status": "ledger-ready",
+    "readyStatus": "ledger-ready",
+    "page": "cvpr-interactive-audit-ledger.html",
+    "registry": "analysis/cvpr_interactive_audit_ledger/registry.json",
+    "validator": "scripts/verify_cvpr_interactive_audit_ledger.py",
+    "pageExists": true,
+    "registryExists": true,
+    "validatorExists": true,
+    "rowCount": 5
+  }
+];
+export const summary = {
+  "commandCenter": "cvpr-interactive-command-center",
+  "status": "command-center-ready",
+  "surfaces": 6,
+  "readySurfaces": 6,
+  "pages": 6,
+  "registries": 6,
+  "validators": 6,
+  "demos": 40,
+  "themes": 8,
+  "waves": 5,
+  "artifacts": 120,
+  "controls": 200,
+  "scenarioCases": 120,
+  "promoteDecisions": 40,
+  "auditEvents": 5,
+  "fingerprints": 5,
+  "holds": 0,
+  "validator": "scripts/verify_cvpr_interactive_command_center.py",
+  "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+};

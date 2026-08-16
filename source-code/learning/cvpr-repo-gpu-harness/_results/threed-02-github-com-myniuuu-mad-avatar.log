@@ -1,0 +1,7 @@
+jobId=threed-02-github-com-myniuuu-mad-avatar
+repo=https://github.com/MyNiuuu/MAD-Avatar
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

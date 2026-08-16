@@ -1,0 +1,20 @@
+{
+  "jobId": "generation-03-github-com-gyr02-nadb",
+  "repo": "https://github.com/gyr02/NADB",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 40,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "third-wave-generation-NADB",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

@@ -1,0 +1,18 @@
+{
+  "system": "vlm-grounded-reasoning",
+  "systemTitle": "VLM grounded reasoning",
+  "stage": "look-then-reason",
+  "stageTitle": "Look before reasoning",
+  "theme": "Teaching machines to see and talk at once",
+  "themeSlug": "vlm",
+  "cluster": "Vision-language reasoning",
+  "clusterSlug": "vlm_reasoning",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "force answers to cite visual evidence",
+  "reusableRule": "VLM grounded reasoning stage 'Look before reasoning' should force answers to cite visual evidence using measured CVPR evidence, not only paper novelty."
+}

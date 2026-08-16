@@ -1,0 +1,7 @@
+jobId=perception-02-github-com-zzzphaethon-dapass
+repo=https://github.com/ZZZPhaethon/DAPASS
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

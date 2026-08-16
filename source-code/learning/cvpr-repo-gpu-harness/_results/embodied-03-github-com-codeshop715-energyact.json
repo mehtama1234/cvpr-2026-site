@@ -1,0 +1,20 @@
+{
+  "jobId": "embodied-03-github-com-codeshop715-energyact",
+  "repo": "https://github.com/codeshop715/EnergyAction",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 54,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "third-wave-embodied-EnergyAction",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

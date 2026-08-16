@@ -1,0 +1,7 @@
+jobId=generation-02-github-com-chanson94-codsr
+repo=https://github.com/Chanson94/CODSR
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

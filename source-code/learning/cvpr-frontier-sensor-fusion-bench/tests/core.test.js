@@ -1,0 +1,23 @@
+import assert from "node:assert/strict";
+import { cases, fusionRows, papers, summary } from "../src/fixtures.js";
+import { evaluateCase, fusionDecision, scoreFusion, summarizeFusion } from "../src/core.js";
+
+assert.equal(papers.length, 5);
+assert.equal(cases.length, 5);
+assert.equal(fusionRows.length, 5);
+assert.ok(papers.every((paper) => paper.repo.startsWith("http")));
+const watermark = cases.find((row) => row.id === "watermark-view-synthesis");
+const attacked = scoreFusion(watermark);
+assert.ok(attacked.provenanceRisk > 80);
+assert.equal(fusionDecision(attacked), "block");
+const safer = scoreFusion(watermark, { modalityGap: 15, visibilityLoss: 15, geoScale: 20, languageGrounding: 20, watermarkAttack: 10, provenanceNeed: 30 });
+assert.ok(safer.readiness > attacked.readiness);
+const sar = evaluateCase(cases[3], papers[3]);
+assert.match(sar.paperTitle, /MM-OVSeg/);
+const derived = summarizeFusion(fusionRows);
+assert.equal(derived.repoBackedRows, 5);
+assert.equal(summary.demo, "cvpr-frontier-sensor-fusion-bench");
+assert.equal(summary.theme, "The frontier - new senses and new duties");
+assert.ok(summary.review + summary.block >= 4);
+assert.equal(summary.status, "ready");
+console.log("ok cvpr-frontier-sensor-fusion-bench:", summary.cases, "cases");

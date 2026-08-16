@@ -1,0 +1,280 @@
+{
+  "summary": {
+    "demo": "cvpr-scenario-expansion-pack",
+    "status": "ready",
+    "scenarios": 12,
+    "families": 6,
+    "systems": 2,
+    "themes": 2,
+    "ship": 5,
+    "retest": 7,
+    "block": 0,
+    "maxRisk": 70.6,
+    "minEvidence": 45.9,
+    "gauntletStatus": "release",
+    "roadmapStatus": "ready",
+    "visualQaStatus": "ready",
+    "fullStackStatus": "valid",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "scenarioRows": [
+    {
+      "id": "scenario-01",
+      "family": "rare-object",
+      "title": "Rare object under partial occlusion",
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab",
+      "targetPage": "cvpr-open-vocab-failure-hunt.html",
+      "sourceGauntletRow": "open-vocab/launch-audit",
+      "sourceDecision": "release",
+      "readinessShift": -8,
+      "riskShift": 13,
+      "evidenceShift": -9,
+      "expanded": {
+        "readiness": 72.3,
+        "risk": 48.6,
+        "evidence": 72.6
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "ship"
+    },
+    {
+      "id": "scenario-02",
+      "family": "rare-object",
+      "title": "Fine-grained medical object with lookalike distractor",
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab",
+      "targetPage": "cvpr-open-vocab-failure-hunt.html",
+      "sourceGauntletRow": "open-vocab/launch-audit",
+      "sourceDecision": "release",
+      "readinessShift": -10,
+      "riskShift": 15,
+      "evidenceShift": -11,
+      "expanded": {
+        "readiness": 70.3,
+        "risk": 50.6,
+        "evidence": 70.6
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "ship"
+    },
+    {
+      "id": "scenario-03",
+      "family": "adversarial-text",
+      "title": "Conflicting overlay text near true object",
+      "theme": "Teaching machines to see and talk at once",
+      "system": "grounded-answer",
+      "targetPage": "cvpr-grounded-answer-courtroom.html",
+      "sourceGauntletRow": "grounded-answer/launch-audit",
+      "sourceDecision": "review",
+      "readinessShift": -9,
+      "riskShift": 18,
+      "evidenceShift": -10,
+      "expanded": {
+        "readiness": 66.2,
+        "risk": 66.6,
+        "evidence": 51.9
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    },
+    {
+      "id": "scenario-04",
+      "family": "adversarial-text",
+      "title": "Prompt-injection label inside the scene",
+      "theme": "Teaching machines to see and talk at once",
+      "system": "grounded-answer",
+      "targetPage": "cvpr-grounded-answer-courtroom.html",
+      "sourceGauntletRow": "grounded-answer/launch-audit",
+      "sourceDecision": "review",
+      "readinessShift": -12,
+      "riskShift": 21,
+      "evidenceShift": -12,
+      "expanded": {
+        "readiness": 63.2,
+        "risk": 69.6,
+        "evidence": 49.9
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    },
+    {
+      "id": "scenario-05",
+      "family": "unsupported-query",
+      "title": "Question asks for hidden evidence outside the frame",
+      "theme": "Teaching machines to see and talk at once",
+      "system": "grounded-answer",
+      "targetPage": "cvpr-grounded-answer-courtroom.html",
+      "sourceGauntletRow": "grounded-answer/launch-audit",
+      "sourceDecision": "review",
+      "readinessShift": -7,
+      "riskShift": 16,
+      "evidenceShift": -14,
+      "expanded": {
+        "readiness": 68.2,
+        "risk": 64.6,
+        "evidence": 47.9
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    },
+    {
+      "id": "scenario-06",
+      "family": "unsupported-query",
+      "title": "Open-vocab class requested but localization is absent",
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab",
+      "targetPage": "cvpr-open-vocab-failure-hunt.html",
+      "sourceGauntletRow": "open-vocab/launch-audit",
+      "sourceDecision": "release",
+      "readinessShift": -9,
+      "riskShift": 17,
+      "evidenceShift": -13,
+      "expanded": {
+        "readiness": 71.3,
+        "risk": 52.6,
+        "evidence": 68.6
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "ship"
+    },
+    {
+      "id": "scenario-07",
+      "family": "spatial-ambiguity",
+      "title": "Small object inside cluttered nested containers",
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab",
+      "targetPage": "cvpr-open-vocab-failure-hunt.html",
+      "sourceGauntletRow": "open-vocab/launch-audit",
+      "sourceDecision": "release",
+      "readinessShift": -6,
+      "riskShift": 12,
+      "evidenceShift": -8,
+      "expanded": {
+        "readiness": 74.3,
+        "risk": 47.6,
+        "evidence": 73.6
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "ship"
+    },
+    {
+      "id": "scenario-08",
+      "family": "spatial-ambiguity",
+      "title": "Answer cites correct object but wrong region",
+      "theme": "Teaching machines to see and talk at once",
+      "system": "grounded-answer",
+      "targetPage": "cvpr-grounded-answer-courtroom.html",
+      "sourceGauntletRow": "grounded-answer/launch-audit",
+      "sourceDecision": "review",
+      "readinessShift": -8,
+      "riskShift": 14,
+      "evidenceShift": -11,
+      "expanded": {
+        "readiness": 67.2,
+        "risk": 62.6,
+        "evidence": 50.9
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    },
+    {
+      "id": "scenario-09",
+      "family": "temporal-mismatch",
+      "title": "Video answer relies on stale earlier frame",
+      "theme": "Teaching machines to see and talk at once",
+      "system": "grounded-answer",
+      "targetPage": "cvpr-grounded-answer-courtroom.html",
+      "sourceGauntletRow": "grounded-answer/launch-audit",
+      "sourceDecision": "review",
+      "readinessShift": -11,
+      "riskShift": 19,
+      "evidenceShift": -12,
+      "expanded": {
+        "readiness": 64.2,
+        "risk": 67.6,
+        "evidence": 49.9
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    },
+    {
+      "id": "scenario-10",
+      "family": "temporal-mismatch",
+      "title": "Open-vocab target appears only after scene cut",
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab",
+      "targetPage": "cvpr-open-vocab-failure-hunt.html",
+      "sourceGauntletRow": "open-vocab/launch-audit",
+      "sourceDecision": "release",
+      "readinessShift": -10,
+      "riskShift": 18,
+      "evidenceShift": -10,
+      "expanded": {
+        "readiness": 70.3,
+        "risk": 53.6,
+        "evidence": 71.6
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "ship"
+    },
+    {
+      "id": "scenario-11",
+      "family": "provenance-conflict",
+      "title": "Generated crop has missing source provenance",
+      "theme": "Naming and locating what's in the picture",
+      "system": "open-vocab",
+      "targetPage": "cvpr-open-vocab-failure-hunt.html",
+      "sourceGauntletRow": "open-vocab/launch-audit",
+      "sourceDecision": "release",
+      "readinessShift": -7,
+      "riskShift": 20,
+      "evidenceShift": -15,
+      "expanded": {
+        "readiness": 73.3,
+        "risk": 55.6,
+        "evidence": 66.6
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    },
+    {
+      "id": "scenario-12",
+      "family": "provenance-conflict",
+      "title": "VLM citation points to edited evidence",
+      "theme": "Teaching machines to see and talk at once",
+      "system": "grounded-answer",
+      "targetPage": "cvpr-grounded-answer-courtroom.html",
+      "sourceGauntletRow": "grounded-answer/launch-audit",
+      "sourceDecision": "review",
+      "readinessShift": -10,
+      "riskShift": 22,
+      "evidenceShift": -16,
+      "expanded": {
+        "readiness": 65.2,
+        "risk": 70.6,
+        "evidence": 45.9
+      },
+      "acceptance": "scenario appears in registry, page, package fixture, verifier, and full-stack validation",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "decision": "retest"
+    }
+  ],
+  "sources": {
+    "roadmap": "analysis/cvpr_second_round_demo_roadmap/registry.json",
+    "gauntlet": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json",
+    "visualQa": "analysis/cvpr_visual_qa_sweep_dashboard/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

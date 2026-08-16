@@ -1,0 +1,295 @@
+{
+  "summary": {
+    "dashboard": "cvpr-validation-center",
+    "status": "interactive",
+    "gateStatus": "release",
+    "fullStackStatus": "valid",
+    "commands": 286,
+    "steps": 287,
+    "packageTests": 148,
+    "workerJobs": 10,
+    "promotedRunners": 10,
+    "cachedResults": 40,
+    "importIssues": 0,
+    "promotionDeltaStatus": "release",
+    "promotionRegressions": 0,
+    "maxReadinessDrop": 0.0,
+    "validImportJobs": 10,
+    "implementedBenches": 11,
+    "benchCases": 44,
+    "benchBlock": 0,
+    "fullStackValidator": "scripts/validate_cvpr_full_stack.py",
+    "importValidator": "scripts/validate_cvpr_colab_results.py",
+    "statusLabel": "all gates valid",
+    "releaseGate": true,
+    "slowest": [
+      {
+        "command": "node source-code/learning/*/tests/core.test.js",
+        "returnCode": 0,
+        "durationSec": 20.437,
+        "testCount": 148,
+        "log": "/tmp/cvpr-core-tests.log",
+        "stdoutTail": [
+          "ok metric-3d-reconstruction: 94 3D reconstruction and novel views",
+          "ok open-vocab-visual-search: 94 Open-vocabulary vision",
+          "ok restoration-reliability-stack: 94 Image restoration",
+          "ok video-world-model: 94 Video generation and world models",
+          "ok vlm-grounded-reasoning: 94 Vision-language reasoning"
+        ],
+        "stderrTail": []
+      },
+      {
+        "command": "python3 scripts/build_cvpr_paper_repo_demo_forge.py",
+        "returnCode": 0,
+        "durationSec": 0.234,
+        "stdoutTail": [
+          "wrote cvpr-paper-repo-demo-forge.html: 8 blueprints, 40 repo papers, status ready"
+        ],
+        "stderrTail": []
+      },
+      {
+        "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
+        "returnCode": 0,
+        "durationSec": 0.092,
+        "stdoutTail": [
+          "verified CVPR live Colab intake: 40 live results, 0 issues"
+        ],
+        "stderrTail": []
+      },
+      {
+        "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
+        "returnCode": 0,
+        "durationSec": 0.083,
+        "stdoutTail": [
+          "verified CVPR live Colab promotion: 40 promoted cached-real results"
+        ],
+        "stderrTail": []
+      },
+      {
+        "command": "python3 scripts/build_cvpr_interactive_audit_ledger.py",
+        "returnCode": 0,
+        "durationSec": 0.079,
+        "stdoutTail": [
+          "wrote cvpr-interactive-audit-ledger.html: 5 events, status ledger-ready"
+        ],
+        "stderrTail": []
+      }
+    ]
+  },
+  "slowest": [
+    {
+      "command": "node source-code/learning/*/tests/core.test.js",
+      "returnCode": 0,
+      "durationSec": 20.437,
+      "testCount": 148,
+      "log": "/tmp/cvpr-core-tests.log",
+      "stdoutTail": [
+        "ok metric-3d-reconstruction: 94 3D reconstruction and novel views",
+        "ok open-vocab-visual-search: 94 Open-vocabulary vision",
+        "ok restoration-reliability-stack: 94 Image restoration",
+        "ok video-world-model: 94 Video generation and world models",
+        "ok vlm-grounded-reasoning: 94 Vision-language reasoning"
+      ],
+      "stderrTail": []
+    },
+    {
+      "command": "python3 scripts/build_cvpr_paper_repo_demo_forge.py",
+      "returnCode": 0,
+      "durationSec": 0.234,
+      "stdoutTail": [
+        "wrote cvpr-paper-repo-demo-forge.html: 8 blueprints, 40 repo papers, status ready"
+      ],
+      "stderrTail": []
+    },
+    {
+      "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
+      "returnCode": 0,
+      "durationSec": 0.092,
+      "stdoutTail": [
+        "verified CVPR live Colab intake: 40 live results, 0 issues"
+      ],
+      "stderrTail": []
+    },
+    {
+      "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
+      "returnCode": 0,
+      "durationSec": 0.083,
+      "stdoutTail": [
+        "verified CVPR live Colab promotion: 40 promoted cached-real results"
+      ],
+      "stderrTail": []
+    },
+    {
+      "command": "python3 scripts/build_cvpr_interactive_audit_ledger.py",
+      "returnCode": 0,
+      "durationSec": 0.079,
+      "stdoutTail": [
+        "wrote cvpr-interactive-audit-ledger.html: 5 events, status ledger-ready"
+      ],
+      "stderrTail": []
+    }
+  ],
+  "fullStack": {
+    "validator": "validate_cvpr_full_stack",
+    "status": "valid",
+    "commands": 286,
+    "steps": 287,
+    "packageTests": 148,
+    "workerJobs": 10,
+    "promotedRunners": 10,
+    "cachedResults": 40,
+    "importIssues": 0,
+    "durationSec": 30.484
+  },
+  "importReport": {
+    "validator": "validate_cvpr_colab_results",
+    "runtimePlane": "google-colab-pro-plus",
+    "expectedMode": "cached-real",
+    "jobs": 10,
+    "expectedResults": 40,
+    "actualResults": 40,
+    "validJobs": 10,
+    "issues": 0,
+    "status": "valid"
+  },
+  "worker": {
+    "worker": "cvpr-colab-gpu-worker",
+    "runtimePlane": "google-colab-pro-plus",
+    "controlPlane": "local-static-cvpr-site",
+    "resultPlane": "registry-and-cached-json",
+    "jobs": 10,
+    "liveCapable": 10,
+    "promotedRunners": 10,
+    "cachedCapable": 10,
+    "cachedResults": 40,
+    "validCachedResults": 40,
+    "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+    "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+    "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
+    "importValidator": "scripts/validate_cvpr_colab_results.py",
+    "validationReport": "analysis/cvpr_colab_gpu_worker/import_validation.json",
+    "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+    "liveIntakeGate": "scripts/stage_cvpr_live_colab_export.py",
+    "fullStackValidator": "scripts/validate_cvpr_full_stack.py",
+    "fullStackReport": "analysis/cvpr_full_stack_validation/registry.json",
+    "status": "interactive-contract"
+  },
+  "runnerCoverage": [
+    {
+      "jobId": "open-vocab-grounding",
+      "caseSymbol": "GROUNDING_CASES",
+      "loader": "load_open_vocab_models",
+      "runner": "run_open_vocab_grounding_batch",
+      "execution": "transformers-grounding-dino-siglip",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseSymbol": "RESTORATION_CASES",
+      "loader": "load_restoration_models",
+      "runner": "run_restoration_fidelity_batch",
+      "execution": "transformers-swin2sr-restoration",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseSymbol": "ADVERSARIAL_CASES",
+      "loader": "load_adversarial_models",
+      "runner": "run_adversarial_provenance_batch",
+      "execution": "transformers-clip-provenance-probe",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "temporal-rollout",
+      "caseSymbol": "TEMPORAL_CASES",
+      "loader": "load_temporal_models",
+      "runner": "run_temporal_rollout_batch",
+      "execution": "torchvision-raft-temporal-flow",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "clinical-shift",
+      "caseSymbol": "CLINICAL_CASES",
+      "loader": "load_clinical_models",
+      "runner": "run_clinical_shift_batch",
+      "execution": "torch-clinical-shift-embedding-probe",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "compute-serving",
+      "caseSymbol": "COMPUTE_CASES",
+      "loader": "load_compute_models",
+      "runner": "run_compute_serving_batch",
+      "execution": "torch-serving-latency-profiler",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "constraint-generation",
+      "caseSymbol": "CONSTRAINT_CASES",
+      "loader": "load_constraint_models",
+      "runner": "run_constraint_generation_batch",
+      "execution": "torch-layout-identity-reward-probe",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "driving-safety",
+      "caseSymbol": "DRIVING_CASES",
+      "loader": "load_driving_models",
+      "runner": "run_driving_safety_batch",
+      "execution": "torch-driving-scene-risk-probe",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseSymbol": "GEOMETRY_CASES",
+      "loader": "load_metric_geometry_models",
+      "runner": "run_metric_geometry_batch",
+      "execution": "torch-metric-geometry-probe",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseSymbol": "SPLATTING_CASES",
+      "loader": "load_gaussian_splatting_models",
+      "runner": "run_gaussian_splatting_batch",
+      "execution": "torch-gaussian-splatting-render-probe",
+      "strictMode": "require_real_models=True"
+    }
+  ],
+  "mission": {
+    "systems": 11,
+    "stages": 33,
+    "themesCovered": 8,
+    "clustersCovered": 11,
+    "demos": 41,
+    "flagshipDemos": 8,
+    "stageDemos": 33,
+    "arenaPairings": 328,
+    "arenaRelease": 328,
+    "arenaReview": 0,
+    "arenaBlock": 0,
+    "playbookPlays": 8,
+    "implementedBenches": 11,
+    "missingImplementations": 0,
+    "benchCases": 44,
+    "benchRelease": 44,
+    "benchReview": 0,
+    "benchBlock": 0,
+    "benchAcceptanceRate": 100.0,
+    "benchBlockRate": 0.0,
+    "status": "interactive"
+  },
+  "promotionDelta": {
+    "delta": "cvpr-colab-promotion-delta",
+    "status": "release",
+    "cases": 40,
+    "jobs": 10,
+    "missing": 0,
+    "modeMismatches": 0,
+    "regressions": 0,
+    "maxReadinessDrop": 0.0,
+    "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+    "promotedArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
+    "promotionStatus": "valid"
+  }
+}

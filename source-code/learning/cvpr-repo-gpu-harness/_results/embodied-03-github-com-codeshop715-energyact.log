@@ -1,0 +1,7 @@
+jobId=embodied-03-github-com-codeshop715-energyact
+repo=https://github.com/codeshop715/EnergyAction
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

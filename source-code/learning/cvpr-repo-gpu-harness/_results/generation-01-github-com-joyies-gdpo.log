@@ -1,0 +1,7 @@
+jobId=generation-01-github-com-joyies-gdpo
+repo=https://github.com/Joyies/GDPO
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=promoted-results-json
+status=rehydrated

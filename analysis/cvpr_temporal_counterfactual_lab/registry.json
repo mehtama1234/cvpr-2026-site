@@ -1,0 +1,577 @@
+{
+  "summary": {
+    "demo": "cvpr-temporal-counterfactual-lab",
+    "status": "release",
+    "backlogGoal": "Temporal counterfactual lab",
+    "backlogTasksCovered": 3,
+    "theme": "Seeing and making things that move",
+    "system": "video-world-model",
+    "bench": "cvpr-temporal-rollout-bench",
+    "cases": 4,
+    "forks": 4,
+    "counterfactualRows": 16,
+    "stable": 8,
+    "watch": 8,
+    "break": 0,
+    "gpuBackedCases": 4,
+    "maxDrift": 52.4,
+    "minIdentityStability": 59.8,
+    "avgReadiness": 71.4,
+    "proPlusJob": "temporal-rollout",
+    "replayRows": 1,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "forks": [
+    {
+      "id": "baseline-replay",
+      "title": "Baseline replay",
+      "lengthShift": 0,
+      "densityShift": 0,
+      "violationShift": 0,
+      "memoryShift": 0
+    },
+    {
+      "id": "identity-crowding",
+      "title": "Identity crowding",
+      "lengthShift": 8,
+      "densityShift": 22,
+      "violationShift": 4,
+      "memoryShift": -8
+    },
+    {
+      "id": "contact-perturbation",
+      "title": "Contact perturbation",
+      "lengthShift": 12,
+      "densityShift": 8,
+      "violationShift": 30,
+      "memoryShift": -4
+    },
+    {
+      "id": "long-horizon-fork",
+      "title": "Long-horizon fork",
+      "lengthShift": 24,
+      "densityShift": 12,
+      "violationShift": 12,
+      "memoryShift": -22
+    }
+  ],
+  "counterfactualRows": [
+    {
+      "id": "short-stable/baseline-replay",
+      "caseId": "short-stable",
+      "caseTitle": "Short stable rollout",
+      "forkId": "baseline-replay",
+      "forkTitle": "Baseline replay",
+      "controls": {
+        "rolloutLength": 24.0,
+        "identityDensity": 28.0,
+        "physicsViolations": 14.0,
+        "memoryWindow": 72.0
+      },
+      "metrics": {
+        "memoryLoad": 26.6,
+        "identityStability": 80.6,
+        "contactConsistency": 86.6,
+        "rolloutPlausibility": 85.7,
+        "drift": 21.0,
+        "readiness": 83.3
+      },
+      "identityDelta": 0.0,
+      "driftDelta": 0.0,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "short-stable/identity-crowding",
+      "caseId": "short-stable",
+      "caseTitle": "Short stable rollout",
+      "forkId": "identity-crowding",
+      "forkTitle": "Identity crowding",
+      "controls": {
+        "rolloutLength": 32.0,
+        "identityDensity": 50.0,
+        "physicsViolations": 18.0,
+        "memoryWindow": 64.0
+      },
+      "metrics": {
+        "memoryLoad": 39.4,
+        "identityStability": 73.3,
+        "contactConsistency": 82.3,
+        "rolloutPlausibility": 81.4,
+        "drift": 29.3,
+        "readiness": 77.5
+      },
+      "identityDelta": -7.3,
+      "driftDelta": 8.3,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "short-stable/contact-perturbation",
+      "caseId": "short-stable",
+      "caseTitle": "Short stable rollout",
+      "forkId": "contact-perturbation",
+      "forkTitle": "Contact perturbation",
+      "controls": {
+        "rolloutLength": 36.0,
+        "identityDensity": 36.0,
+        "physicsViolations": 44.0,
+        "memoryWindow": 68.0
+      },
+      "metrics": {
+        "memoryLoad": 34.7,
+        "identityStability": 76.0,
+        "contactConsistency": 74.0,
+        "rolloutPlausibility": 79.2,
+        "drift": 33.9,
+        "readiness": 74.7
+      },
+      "identityDelta": -4.6,
+      "driftDelta": 12.9,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "short-stable/long-horizon-fork",
+      "caseId": "short-stable",
+      "caseTitle": "Short stable rollout",
+      "forkId": "long-horizon-fork",
+      "forkTitle": "Long-horizon fork",
+      "controls": {
+        "rolloutLength": 48.0,
+        "identityDensity": 40.0,
+        "physicsViolations": 26.0,
+        "memoryWindow": 50.0
+      },
+      "metrics": {
+        "memoryLoad": 45.9,
+        "identityStability": 67.8,
+        "contactConsistency": 78.4,
+        "rolloutPlausibility": 76.1,
+        "drift": 37.4,
+        "readiness": 72.1
+      },
+      "identityDelta": -12.8,
+      "driftDelta": 16.4,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "crowded-memory/baseline-replay",
+      "caseId": "crowded-memory",
+      "caseTitle": "Crowded identity memory",
+      "forkId": "baseline-replay",
+      "forkTitle": "Baseline replay",
+      "controls": {
+        "rolloutLength": 36.0,
+        "identityDensity": 76.0,
+        "physicsViolations": 26.0,
+        "memoryWindow": 82.0
+      },
+      "metrics": {
+        "memoryLoad": 43.8,
+        "identityStability": 73.8,
+        "contactConsistency": 79.4,
+        "rolloutPlausibility": 80.0,
+        "drift": 33.0,
+        "readiness": 75.9
+      },
+      "identityDelta": 0.0,
+      "driftDelta": 0.0,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "crowded-memory/identity-crowding",
+      "caseId": "crowded-memory",
+      "caseTitle": "Crowded identity memory",
+      "forkId": "identity-crowding",
+      "forkTitle": "Identity crowding",
+      "controls": {
+        "rolloutLength": 44.0,
+        "identityDensity": 98.0,
+        "physicsViolations": 30.0,
+        "memoryWindow": 74.0
+      },
+      "metrics": {
+        "memoryLoad": 56.6,
+        "identityStability": 66.4,
+        "contactConsistency": 75.1,
+        "rolloutPlausibility": 75.8,
+        "drift": 41.3,
+        "readiness": 70.1
+      },
+      "identityDelta": -7.4,
+      "driftDelta": 8.3,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "crowded-memory/contact-perturbation",
+      "caseId": "crowded-memory",
+      "caseTitle": "Crowded identity memory",
+      "forkId": "contact-perturbation",
+      "forkTitle": "Contact perturbation",
+      "controls": {
+        "rolloutLength": 48.0,
+        "identityDensity": 84.0,
+        "physicsViolations": 56.0,
+        "memoryWindow": 78.0
+      },
+      "metrics": {
+        "memoryLoad": 51.9,
+        "identityStability": 69.2,
+        "contactConsistency": 66.8,
+        "rolloutPlausibility": 73.6,
+        "drift": 45.9,
+        "readiness": 67.3
+      },
+      "identityDelta": -4.6,
+      "driftDelta": 12.9,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "crowded-memory/long-horizon-fork",
+      "caseId": "crowded-memory",
+      "caseTitle": "Crowded identity memory",
+      "forkId": "long-horizon-fork",
+      "forkTitle": "Long-horizon fork",
+      "controls": {
+        "rolloutLength": 60.0,
+        "identityDensity": 88.0,
+        "physicsViolations": 38.0,
+        "memoryWindow": 60.0
+      },
+      "metrics": {
+        "memoryLoad": 63.1,
+        "identityStability": 61.0,
+        "contactConsistency": 71.2,
+        "rolloutPlausibility": 70.5,
+        "drift": 49.4,
+        "readiness": 64.6
+      },
+      "identityDelta": -12.8,
+      "driftDelta": 16.4,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "contact-heavy/baseline-replay",
+      "caseId": "contact-heavy",
+      "caseTitle": "Contact-heavy prediction",
+      "forkId": "baseline-replay",
+      "forkTitle": "Baseline replay",
+      "controls": {
+        "rolloutLength": 56.0,
+        "identityDensity": 52.0,
+        "physicsViolations": 20.0,
+        "memoryWindow": 82.0
+      },
+      "metrics": {
+        "memoryLoad": 42.5,
+        "identityStability": 74.0,
+        "contactConsistency": 83.6,
+        "rolloutPlausibility": 77.1,
+        "drift": 34.3,
+        "readiness": 76.2
+      },
+      "identityDelta": 0.0,
+      "driftDelta": 0.0,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "contact-heavy/identity-crowding",
+      "caseId": "contact-heavy",
+      "caseTitle": "Contact-heavy prediction",
+      "forkId": "identity-crowding",
+      "forkTitle": "Identity crowding",
+      "controls": {
+        "rolloutLength": 64.0,
+        "identityDensity": 74.0,
+        "physicsViolations": 24.0,
+        "memoryWindow": 74.0
+      },
+      "metrics": {
+        "memoryLoad": 55.2,
+        "identityStability": 66.7,
+        "contactConsistency": 79.3,
+        "rolloutPlausibility": 72.9,
+        "drift": 42.6,
+        "readiness": 70.3
+      },
+      "identityDelta": -7.3,
+      "driftDelta": 8.3,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "contact-heavy/contact-perturbation",
+      "caseId": "contact-heavy",
+      "caseTitle": "Contact-heavy prediction",
+      "forkId": "contact-perturbation",
+      "forkTitle": "Contact perturbation",
+      "controls": {
+        "rolloutLength": 68.0,
+        "identityDensity": 60.0,
+        "physicsViolations": 50.0,
+        "memoryWindow": 78.0
+      },
+      "metrics": {
+        "memoryLoad": 50.6,
+        "identityStability": 69.4,
+        "contactConsistency": 71.0,
+        "rolloutPlausibility": 70.7,
+        "drift": 47.2,
+        "readiness": 67.5
+      },
+      "identityDelta": -4.6,
+      "driftDelta": 12.9,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "contact-heavy/long-horizon-fork",
+      "caseId": "contact-heavy",
+      "caseTitle": "Contact-heavy prediction",
+      "forkId": "long-horizon-fork",
+      "forkTitle": "Long-horizon fork",
+      "controls": {
+        "rolloutLength": 80.0,
+        "identityDensity": 64.0,
+        "physicsViolations": 32.0,
+        "memoryWindow": 60.0
+      },
+      "metrics": {
+        "memoryLoad": 61.8,
+        "identityStability": 61.2,
+        "contactConsistency": 75.4,
+        "rolloutPlausibility": 67.5,
+        "drift": 50.6,
+        "readiness": 64.9
+      },
+      "identityDelta": -12.8,
+      "driftDelta": 16.3,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "long-rollout-drift/baseline-replay",
+      "caseId": "long-rollout-drift",
+      "caseTitle": "Long rollout drift",
+      "forkId": "baseline-replay",
+      "forkTitle": "Baseline replay",
+      "controls": {
+        "rolloutLength": 66.0,
+        "identityDensity": 68.0,
+        "physicsViolations": 12.0,
+        "memoryWindow": 92.0
+      },
+      "metrics": {
+        "memoryLoad": 48.1,
+        "identityStability": 72.7,
+        "contactConsistency": 86.5,
+        "rolloutPlausibility": 75.5,
+        "drift": 36.1,
+        "readiness": 75.9
+      },
+      "identityDelta": 0.0,
+      "driftDelta": 0.0,
+      "failureMode": "stable",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "long-rollout-drift/identity-crowding",
+      "caseId": "long-rollout-drift",
+      "caseTitle": "Long rollout drift",
+      "forkId": "identity-crowding",
+      "forkTitle": "Identity crowding",
+      "controls": {
+        "rolloutLength": 74.0,
+        "identityDensity": 90.0,
+        "physicsViolations": 16.0,
+        "memoryWindow": 84.0
+      },
+      "metrics": {
+        "memoryLoad": 60.9,
+        "identityStability": 65.3,
+        "contactConsistency": 82.3,
+        "rolloutPlausibility": 71.3,
+        "drift": 44.3,
+        "readiness": 70.1
+      },
+      "identityDelta": -7.4,
+      "driftDelta": 8.2,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "long-rollout-drift/contact-perturbation",
+      "caseId": "long-rollout-drift",
+      "caseTitle": "Long rollout drift",
+      "forkId": "contact-perturbation",
+      "forkTitle": "Contact perturbation",
+      "controls": {
+        "rolloutLength": 78.0,
+        "identityDensity": 76.0,
+        "physicsViolations": 42.0,
+        "memoryWindow": 88.0
+      },
+      "metrics": {
+        "memoryLoad": 56.2,
+        "identityStability": 68.0,
+        "contactConsistency": 74.0,
+        "rolloutPlausibility": 69.1,
+        "drift": 49.0,
+        "readiness": 67.3
+      },
+      "identityDelta": -4.7,
+      "driftDelta": 12.9,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    },
+    {
+      "id": "long-rollout-drift/long-horizon-fork",
+      "caseId": "long-rollout-drift",
+      "caseTitle": "Long rollout drift",
+      "forkId": "long-horizon-fork",
+      "forkTitle": "Long-horizon fork",
+      "controls": {
+        "rolloutLength": 90.0,
+        "identityDensity": 80.0,
+        "physicsViolations": 24.0,
+        "memoryWindow": 70.0
+      },
+      "metrics": {
+        "memoryLoad": 67.4,
+        "identityStability": 59.8,
+        "contactConsistency": 78.4,
+        "rolloutPlausibility": 65.9,
+        "drift": 52.4,
+        "readiness": 64.6
+      },
+      "identityDelta": -12.9,
+      "driftDelta": 16.3,
+      "failureMode": "watch",
+      "sourceBenchPage": "cvpr-temporal-rollout-bench.html",
+      "runtimeEvidence": "cached-real",
+      "gpuProvenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "GPU",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-temporal-rollout-bench"
+      }
+    }
+  ],
+  "sources": {
+    "backlog": "analysis/cvpr_demo_build_backlog/registry.json",
+    "bench": "analysis/cvpr_temporal_rollout_bench/registry.json",
+    "replay": "analysis/cvpr_colab_result_replay/registry.json"
+  }
+}

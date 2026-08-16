@@ -1,0 +1,7 @@
+jobId=vlm-02-github-com-dige945-ppa-cvpr26
+repo=https://github.com/Dige945/PPA_CVPR26
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

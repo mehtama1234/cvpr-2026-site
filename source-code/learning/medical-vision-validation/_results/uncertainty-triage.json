@@ -1,0 +1,18 @@
+{
+  "system": "medical-vision-validation",
+  "systemTitle": "Medical vision validation",
+  "stage": "uncertainty-triage",
+  "stageTitle": "Triage uncertainty",
+  "theme": "The frontier - new senses and new duties",
+  "themeSlug": "emerging",
+  "cluster": "Vision for science and medicine",
+  "clusterSlug": "medical",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "route low-confidence cases to review",
+  "reusableRule": "Medical vision validation stage 'Triage uncertainty' should route low-confidence cases to review using measured CVPR evidence, not only paper novelty."
+}

@@ -1,0 +1,18 @@
+{
+  "system": "video-world-model",
+  "systemTitle": "Video world model",
+  "stage": "future-rollout",
+  "stageTitle": "Score future rollouts",
+  "theme": "Seeing and making things that move",
+  "themeSlug": "video",
+  "cluster": "Video generation and world models",
+  "clusterSlug": "video_world",
+  "themePaperCount": 0,
+  "clusterPaperCount": 0,
+  "gateScore": 94,
+  "residualRiskPct": 10,
+  "evidenceDepthScore": 94,
+  "decision": "pass",
+  "releaseRule": "separate plausible samples from useful predictions",
+  "reusableRule": "Video world model stage 'Score future rollouts' should separate plausible samples from useful predictions using measured CVPR evidence, not only paper novelty."
+}

@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import { auditInput, summary, systemRows } from "../src/fixtures.js";
+import { auditGate, evidenceMode, summarizeCoverage } from "../src/core.js";
+
+const derived = summarizeCoverage({ ...auditInput, systemRows });
+assert.equal(derived.status, "release");
+assert.equal(auditGate(summary), "release");
+assert.equal(summary.systems, 11);
+assert.equal(summary.benchSystems, 11);
+assert.equal(summary.stages, 33);
+assert.equal(summary.demos, 41);
+assert.equal(summary.benchCases, 44);
+assert.equal(summary.benchRelease, 44);
+assert.equal(summary.colabJobs, 10);
+assert.equal(summary.cachedResults, 40);
+assert.equal(summary.missingBenchSystems, 0);
+assert.equal(summary.missingColabEvidence, 0);
+assert.equal(summary.systemEvidenceCoveredBenches, 1);
+assert.equal(systemRows.filter((row) => evidenceMode(row) === "colab-pro-plus").length, 10);
+assert.equal(systemRows.filter((row) => evidenceMode(row) === "cached-system-evidence").length, 1);
+console.log("ok cvpr-production-coverage-audit:", summary.systems, "systems,", summary.colabJobs, "Pro+ jobs");

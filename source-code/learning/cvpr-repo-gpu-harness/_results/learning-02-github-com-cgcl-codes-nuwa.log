@@ -1,0 +1,7 @@
+jobId=learning-02-github-com-cgcl-codes-nuwa
+repo=https://github.com/CGCL-codes/NuWa
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

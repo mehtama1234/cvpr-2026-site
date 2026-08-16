@@ -1,0 +1,336 @@
+{
+  "summary": {
+    "validator": "validate_cvpr_repo_harness_results",
+    "runtimePlane": "google-colab-pro-plus",
+    "expectedMode": "live-colab",
+    "jobs": 40,
+    "expectedResults": 40,
+    "actualResults": 40,
+    "validJobs": 40,
+    "issues": 0,
+    "status": "valid"
+  },
+  "jobs": [
+    {
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/yjzhao1019/MOS",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "frontier-02-github-com-earth-insights-segear",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/earth-insights/SegEarth-R2",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "frontier-03-github-com-fahadshamshad-raven",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/fahadshamshad/raven-",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "frontier-04-github-com-jimmyxichen-mm-ovseg",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/Jimmyxichen/MM-OVSeg",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "frontier-05-github-com-zhang-peirong-geovis",
+      "demo": "cvpr-frontier-sensor-fusion-bench",
+      "page": "cvpr-frontier-sensor-fusion-bench.html",
+      "repo": "https://github.com/Zhang-Peirong/GeoVis",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "threed-01-github-com-deepinsight-insightfa",
+      "demo": "cvpr-3d-world-repo-arena",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "repo": "https://github.com/deepinsight/insightface",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "threed-02-github-com-myniuuu-mad-avatar",
+      "demo": "cvpr-3d-world-repo-arena",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "repo": "https://github.com/MyNiuuu/MAD-Avatar",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "threed-03-github-com-akumar005-l2dgs",
+      "demo": "cvpr-3d-world-repo-arena",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "repo": "https://github.com/akumar005/L2DGS",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "threed-04-github-com-wangys16-flow4dgs-sla",
+      "demo": "cvpr-3d-world-repo-arena",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "repo": "https://github.com/wangys16/Flow4DGS-SLAM",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "threed-05-github-com-wanghaoran16-prune-wi",
+      "demo": "cvpr-3d-world-repo-arena",
+      "page": "cvpr-3d-world-repo-arena.html",
+      "repo": "https://github.com/WangHaoran16/Prune-Wisely-",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "video-01-github-com-black-forest-labs-flu",
+      "demo": "cvpr-video-temporal-repo-lab",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "repo": "https://github.com/black-forest-labs/flux",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "video-02-github-com-deepfakes-face",
+      "demo": "cvpr-video-temporal-repo-lab",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "repo": "https://github.com/deepfakes/face-",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "video-03-github-com-modelscope-diffsynth",
+      "demo": "cvpr-video-temporal-repo-lab",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "repo": "https://github.com/modelscope/DiffSynth-",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "video-04-github-com-arturxe2-adaspot",
+      "demo": "cvpr-video-temporal-repo-lab",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "repo": "https://github.com/arturxe2/AdaSpot",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "video-05-github-com-dmirlab-group-hal",
+      "demo": "cvpr-video-temporal-repo-lab",
+      "page": "cvpr-video-temporal-repo-lab.html",
+      "repo": "https://github.com/DMIRLAB-Group/HAL",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "generation-01-github-com-joyies-gdpo",
+      "demo": "cvpr-generation-control-repo-studio",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "repo": "https://github.com/Joyies/GDPO",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "generation-02-github-com-chanson94-codsr",
+      "demo": "cvpr-generation-control-repo-studio",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "repo": "https://github.com/Chanson94/CODSR",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "generation-03-github-com-gyr02-nadb",
+      "demo": "cvpr-generation-control-repo-studio",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "repo": "https://github.com/gyr02/NADB",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "generation-04-github-com-jf-tan-lrdm",
+      "demo": "cvpr-generation-control-repo-studio",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "repo": "https://github.com/JF-Tan/LRDM",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "generation-05-github-com-mililab-rdbm",
+      "demo": "cvpr-generation-control-repo-studio",
+      "page": "cvpr-generation-control-repo-studio.html",
+      "repo": "https://github.com/MiliLab/RDBM",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "vlm-01-github-com-chao2433-fedafd",
+      "demo": "cvpr-grounded-vlm-repo-court",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "repo": "https://github.com/Chao2433/FedAFD",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "vlm-02-github-com-dige945-ppa-cvpr26",
+      "demo": "cvpr-grounded-vlm-repo-court",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "repo": "https://github.com/Dige945/PPA_CVPR26",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "vlm-03-github-com-oamyjin-graphvlm",
+      "demo": "cvpr-grounded-vlm-repo-court",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "repo": "https://github.com/oamyjin/GraphVLM",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "vlm-04-github-com-remrico-recall",
+      "demo": "cvpr-grounded-vlm-repo-court",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "repo": "https://github.com/RemRico/Recall",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "vlm-05-github-com-uuuuzyc-see-it-say-it",
+      "demo": "cvpr-grounded-vlm-repo-court",
+      "page": "cvpr-grounded-vlm-repo-court.html",
+      "repo": "https://github.com/uuuuZYC/See-It-Say-It-Sorted",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "perception-01-github-com-primebo1-fob",
+      "demo": "cvpr-perception-parts-repo-bench",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "repo": "https://github.com/primebo1/FoB",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "perception-02-github-com-zzzphaethon-dapass",
+      "demo": "cvpr-perception-parts-repo-bench",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "repo": "https://github.com/ZZZPhaethon/DAPASS",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "perception-03-github-com-hzz-yy-tf-ssd",
+      "demo": "cvpr-perception-parts-repo-bench",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "repo": "https://github.com/hzz-yy/TF-SSD",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "perception-04-github-com-yvogao-tape",
+      "demo": "cvpr-perception-parts-repo-bench",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "repo": "https://github.com/YvoGao/TAPE",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "perception-05-github-com-jsliam94-erecu",
+      "demo": "cvpr-perception-parts-repo-bench",
+      "page": "cvpr-perception-parts-repo-bench.html",
+      "repo": "https://github.com/JSLiam94/EReCu",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+      "demo": "cvpr-embodied-control-repo-drill",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "repo": "https://github.com/szu-ai/safe-driving-drl",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "embodied-02-github-com-bofusun-srcp",
+      "demo": "cvpr-embodied-control-repo-drill",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "repo": "https://github.com/bofusun/SRCP",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "embodied-03-github-com-codeshop715-energyact",
+      "demo": "cvpr-embodied-control-repo-drill",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "repo": "https://github.com/codeshop715/EnergyAction",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "embodied-04-github-com-hrtan-diem",
+      "demo": "cvpr-embodied-control-repo-drill",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "repo": "https://github.com/hrtan/DIEM",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "embodied-05-github-com-jiutian-vl-hiconagent",
+      "demo": "cvpr-embodied-control-repo-drill",
+      "page": "cvpr-embodied-control-repo-drill.html",
+      "repo": "https://github.com/JiuTian-VL/HiconAgent",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "learning-01-github-com-eit-nlp-embedlens",
+      "demo": "cvpr-efficient-learning-repo-governor",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "repo": "https://github.com/EIT-NLP/EmbedLens",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "learning-02-github-com-cgcl-codes-nuwa",
+      "demo": "cvpr-efficient-learning-repo-governor",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "repo": "https://github.com/CGCL-codes/NuWa",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "learning-03-github-com-evi-group-scu-fozo",
+      "demo": "cvpr-efficient-learning-repo-governor",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "repo": "https://github.com/eVI-group-SCU/FOZO",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "learning-04-github-com-savadikarc-cheem",
+      "demo": "cvpr-efficient-learning-repo-governor",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "repo": "https://github.com/savadikarc/cheem",
+      "actualResults": 1,
+      "ready": true
+    },
+    {
+      "jobId": "learning-05-github-com-liwenwang919-bpfedctt",
+      "demo": "cvpr-efficient-learning-repo-governor",
+      "page": "cvpr-efficient-learning-repo-governor.html",
+      "repo": "https://github.com/LiwenWang919/BPFedCTTA",
+      "actualResults": 1,
+      "ready": true
+    }
+  ],
+  "issues": []
+}

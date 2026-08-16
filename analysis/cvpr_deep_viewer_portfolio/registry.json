@@ -1,0 +1,1216 @@
+{
+  "summary": {
+    "portfolio": "cvpr-deep-viewer-portfolio",
+    "status": "portfolio-ready",
+    "sourceGallery": "analysis/cvpr_reproduction_viewer_gallery/registry.json",
+    "sourcePromotedResults": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json",
+    "deepViewers": 8,
+    "readyDeepViewers": 8,
+    "themes": 8,
+    "pages": 8,
+    "panels": 40,
+    "readyPanels": 40,
+    "artifacts": 24,
+    "artifactLocalPaths": 24,
+    "artifactMissingPaths": 0,
+    "holdViewers": 0,
+    "validator": "scripts/verify_cvpr_deep_viewer_portfolio.py",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "portfolioRows": [
+    {
+      "viewer": "cvpr-frontier-mos-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "MOS",
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "theme": "frontier",
+      "page": "cvpr-frontier-mos-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-threed-insightface-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "insightface",
+      "jobId": "threed-01-github-com-deepinsight-insightfa",
+      "theme": "threed",
+      "page": "cvpr-threed-insightface-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-video-flux-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "flux",
+      "jobId": "video-01-github-com-black-forest-labs-flu",
+      "theme": "video",
+      "page": "cvpr-video-flux-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-generation-gdpo-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "GDPO",
+      "jobId": "generation-01-github-com-joyies-gdpo",
+      "theme": "generation",
+      "page": "cvpr-generation-gdpo-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-vlm-fedafd-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "FedAFD",
+      "jobId": "vlm-01-github-com-chao2433-fedafd",
+      "theme": "vlm",
+      "page": "cvpr-vlm-fedafd-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-perception-fob-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "FoB",
+      "jobId": "perception-01-github-com-primebo1-fob",
+      "theme": "perception",
+      "page": "cvpr-perception-fob-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-embodied-safe-driving-drl-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "safe-driving-drl",
+      "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+      "theme": "embodied",
+      "page": "cvpr-embodied-safe-driving-drl-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    },
+    {
+      "viewer": "cvpr-learning-embedlens-deep-viewer",
+      "status": "deep-viewer-ready",
+      "repo": "EmbedLens",
+      "jobId": "learning-01-github-com-eit-nlp-embedlens",
+      "theme": "learning",
+      "page": "cvpr-learning-embedlens-deep-viewer.html",
+      "panels": 5,
+      "readyPanels": 5,
+      "selectedPanel": "output",
+      "promotedEvidenceRows": 1,
+      "artifacts": 3,
+      "artifactLocalPaths": 3,
+      "artifactMissingPaths": 0,
+      "smokePassed": true,
+      "accelerator": "A100"
+    }
+  ],
+  "deepViewers": [
+    {
+      "viewer": "cvpr-frontier-mos-deep-viewer",
+      "page": "cvpr-frontier-mos-deep-viewer.html",
+      "jobId": "frontier-01-github-com-yjzhao1019-mos",
+      "repoName": "MOS",
+      "repo": "https://github.com/yjzhao1019/MOS",
+      "theme": "frontier",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "optical/SAR pair, event burst, or geospatial tile with degraded RGB evidence",
+          "operatorAction": "Select the cached MOS input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for MOS showing cross-modal readiness card with artifact link, smoke result, failure probe, and replay command.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "sensor mismatch, occlusion, and provenance loss",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "optical/SAR pair, event burst, or geospatial tile with degraded RGB evidence",
+      "expectedOutput": "cross-modal readiness card with artifact link, smoke result, failure probe, and replay command",
+      "failureProbe": "sensor mismatch, occlusion, and provenance loss",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for MOS showing cross-modal readiness card with artifact link, smoke result, failure probe, and replay command.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job frontier-01-github-com-yjzhao1019-mos",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to frontier-01-github-com-yjzhao1019-mos.",
+      "promotedEvidence": {
+        "jobId": "frontier-01-github-com-yjzhao1019-mos",
+        "mode": "live-colab",
+        "repo": "https://github.com/yjzhao1019/MOS",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 46,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json"
+        },
+        "page": "cvpr-frontier-sensor-fusion-bench.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/frontier-01-github-com-yjzhao1019-mos.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-frontier-mos-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "MOS",
+        "jobId": "frontier-01-github-com-yjzhao1019-mos",
+        "theme": "frontier",
+        "page": "cvpr-frontier-mos-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-threed-insightface-deep-viewer",
+      "page": "cvpr-threed-insightface-deep-viewer.html",
+      "jobId": "threed-01-github-com-deepinsight-insightfa",
+      "repoName": "insightface",
+      "repo": "https://github.com/deepinsight/insightface",
+      "theme": "threed",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "multi-view image set, avatar frame, LiDAR fragment, or 4D scene snippet",
+          "operatorAction": "Select the cached insightface input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for insightface showing geometry readiness card with snapshot artifact, runtime gate, and rollback target.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "pose drift, missing views, geometry collapse, and identity leakage",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-01-github-com-deepinsight-insightfa",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "multi-view image set, avatar frame, LiDAR fragment, or 4D scene snippet",
+      "expectedOutput": "geometry readiness card with snapshot artifact, runtime gate, and rollback target",
+      "failureProbe": "pose drift, missing views, geometry collapse, and identity leakage",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for insightface showing geometry readiness card with snapshot artifact, runtime gate, and rollback target.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job threed-01-github-com-deepinsight-insightfa",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to threed-01-github-com-deepinsight-insightfa.",
+      "promotedEvidence": {
+        "jobId": "threed-01-github-com-deepinsight-insightfa",
+        "mode": "live-colab",
+        "repo": "https://github.com/deepinsight/insightface",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 51,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.snapshot.json"
+        },
+        "page": "cvpr-3d-world-repo-arena.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/threed-01-github-com-deepinsight-insightfa.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-threed-insightface-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "insightface",
+        "jobId": "threed-01-github-com-deepinsight-insightfa",
+        "theme": "threed",
+        "page": "cvpr-threed-insightface-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-video-flux-deep-viewer",
+      "page": "cvpr-video-flux-deep-viewer.html",
+      "jobId": "video-01-github-com-black-forest-labs-flu",
+      "repoName": "flux",
+      "repo": "https://github.com/black-forest-labs/flux",
+      "theme": "video",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "short clip, frame sequence, or prompt-conditioned motion seed",
+          "operatorAction": "Select the cached flux input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for flux showing temporal output contract with artifact replay, drift probe, and review threshold.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "long-horizon drift, identity swap, hallucinated motion, and dropped objects",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-01-github-com-black-forest-labs-flu",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "short clip, frame sequence, or prompt-conditioned motion seed",
+      "expectedOutput": "temporal output contract with artifact replay, drift probe, and review threshold",
+      "failureProbe": "long-horizon drift, identity swap, hallucinated motion, and dropped objects",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for flux showing temporal output contract with artifact replay, drift probe, and review threshold.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job video-01-github-com-black-forest-labs-flu",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to video-01-github-com-black-forest-labs-flu.",
+      "promotedEvidence": {
+        "jobId": "video-01-github-com-black-forest-labs-flu",
+        "mode": "live-colab",
+        "repo": "https://github.com/black-forest-labs/flux",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 47,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.snapshot.json"
+        },
+        "page": "cvpr-video-temporal-repo-lab.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/video-01-github-com-black-forest-labs-flu.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-video-flux-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "flux",
+        "jobId": "video-01-github-com-black-forest-labs-flu",
+        "theme": "video",
+        "page": "cvpr-video-flux-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-generation-gdpo-deep-viewer",
+      "page": "cvpr-generation-gdpo-deep-viewer.html",
+      "jobId": "generation-01-github-com-joyies-gdpo",
+      "repoName": "GDPO",
+      "repo": "https://github.com/Joyies/GDPO",
+      "theme": "generation",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "prompt, degraded image, restoration target, or preference-control request",
+          "operatorAction": "Select the cached GDPO input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for GDPO showing generation comparison panel with constraint status, artifact trace, and promotion decision.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "prompt leakage, over-smoothing, restoration hallucination, and reward gaming",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-01-github-com-joyies-gdpo",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "prompt, degraded image, restoration target, or preference-control request",
+      "expectedOutput": "generation comparison panel with constraint status, artifact trace, and promotion decision",
+      "failureProbe": "prompt leakage, over-smoothing, restoration hallucination, and reward gaming",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for GDPO showing generation comparison panel with constraint status, artifact trace, and promotion decision.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job generation-01-github-com-joyies-gdpo",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to generation-01-github-com-joyies-gdpo.",
+      "promotedEvidence": {
+        "jobId": "generation-01-github-com-joyies-gdpo",
+        "mode": "live-colab",
+        "repo": "https://github.com/Joyies/GDPO",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 37,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.snapshot.json"
+        },
+        "page": "cvpr-generation-control-repo-studio.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/generation-01-github-com-joyies-gdpo.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-generation-gdpo-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "GDPO",
+        "jobId": "generation-01-github-com-joyies-gdpo",
+        "theme": "generation",
+        "page": "cvpr-generation-gdpo-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-vlm-fedafd-deep-viewer",
+      "page": "cvpr-vlm-fedafd-deep-viewer.html",
+      "jobId": "vlm-01-github-com-chao2433-fedafd",
+      "repoName": "FedAFD",
+      "repo": "https://github.com/Chao2433/FedAFD",
+      "theme": "vlm",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "image plus question, retrieval context, graph prompt, or privacy-sensitive visual evidence",
+          "operatorAction": "Select the cached FedAFD input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for FedAFD showing answer/evidence verdict with source artifact, grounding notes, and escalation gate.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "ungrounded answer, private attribute leak, graph shortcut, and retrieval mismatch",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-01-github-com-chao2433-fedafd",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "image plus question, retrieval context, graph prompt, or privacy-sensitive visual evidence",
+      "expectedOutput": "answer/evidence verdict with source artifact, grounding notes, and escalation gate",
+      "failureProbe": "ungrounded answer, private attribute leak, graph shortcut, and retrieval mismatch",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for FedAFD showing answer/evidence verdict with source artifact, grounding notes, and escalation gate.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job vlm-01-github-com-chao2433-fedafd",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to vlm-01-github-com-chao2433-fedafd.",
+      "promotedEvidence": {
+        "jobId": "vlm-01-github-com-chao2433-fedafd",
+        "mode": "live-colab",
+        "repo": "https://github.com/Chao2433/FedAFD",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 46,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.snapshot.json"
+        },
+        "page": "cvpr-grounded-vlm-repo-court.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-01-github-com-chao2433-fedafd.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-vlm-fedafd-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "FedAFD",
+        "jobId": "vlm-01-github-com-chao2433-fedafd",
+        "theme": "vlm",
+        "page": "cvpr-vlm-fedafd-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-perception-fob-deep-viewer",
+      "page": "cvpr-perception-fob-deep-viewer.html",
+      "jobId": "perception-01-github-com-primebo1-fob",
+      "repoName": "FoB",
+      "repo": "https://github.com/primebo1/FoB",
+      "theme": "perception",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "open-vocabulary scene, panoramic frame, camouflaged object, or few-shot support set",
+          "operatorAction": "Select the cached FoB input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for FoB showing mask/detection readiness panel with artifact-backed smoke result and failure tag.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "small object miss, class synonym drift, pseudo-label collapse, and occlusion",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-01-github-com-primebo1-fob",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "open-vocabulary scene, panoramic frame, camouflaged object, or few-shot support set",
+      "expectedOutput": "mask/detection readiness panel with artifact-backed smoke result and failure tag",
+      "failureProbe": "small object miss, class synonym drift, pseudo-label collapse, and occlusion",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for FoB showing mask/detection readiness panel with artifact-backed smoke result and failure tag.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job perception-01-github-com-primebo1-fob",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to perception-01-github-com-primebo1-fob.",
+      "promotedEvidence": {
+        "jobId": "perception-01-github-com-primebo1-fob",
+        "mode": "live-colab",
+        "repo": "https://github.com/primebo1/FoB",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 51,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.snapshot.json"
+        },
+        "page": "cvpr-perception-parts-repo-bench.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/perception-01-github-com-primebo1-fob.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-perception-fob-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "FoB",
+        "jobId": "perception-01-github-com-primebo1-fob",
+        "theme": "perception",
+        "page": "cvpr-perception-fob-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-embodied-safe-driving-drl-deep-viewer",
+      "page": "cvpr-embodied-safe-driving-drl-deep-viewer.html",
+      "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+      "repoName": "safe-driving-drl",
+      "repo": "https://github.com/szu-ai/safe-driving-drl",
+      "theme": "embodied",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "driving scene, GUI task, manipulation state, or visual RL observation",
+          "operatorAction": "Select the cached safe-driving-drl input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for safe-driving-drl showing policy readiness card with action trace, artifact evidence, and safety review path.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "unsafe action, reward shortcut, recovery failure, and scene distribution shift",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-01-github-com-szu-ai-safe-driving-d",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "driving scene, GUI task, manipulation state, or visual RL observation",
+      "expectedOutput": "policy readiness card with action trace, artifact evidence, and safety review path",
+      "failureProbe": "unsafe action, reward shortcut, recovery failure, and scene distribution shift",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for safe-driving-drl showing policy readiness card with action trace, artifact evidence, and safety review path.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job embodied-01-github-com-szu-ai-safe-driving-d",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to embodied-01-github-com-szu-ai-safe-driving-d.",
+      "promotedEvidence": {
+        "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+        "mode": "live-colab",
+        "repo": "https://github.com/szu-ai/safe-driving-drl",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 57,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.snapshot.json"
+        },
+        "page": "cvpr-embodied-control-repo-drill.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/embodied-01-github-com-szu-ai-safe-driving-d.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-embodied-safe-driving-drl-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "safe-driving-drl",
+        "jobId": "embodied-01-github-com-szu-ai-safe-driving-d",
+        "theme": "embodied",
+        "page": "cvpr-embodied-safe-driving-drl-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    },
+    {
+      "viewer": "cvpr-learning-embedlens-deep-viewer",
+      "page": "cvpr-learning-embedlens-deep-viewer.html",
+      "jobId": "learning-01-github-com-eit-nlp-embedlens",
+      "repoName": "EmbedLens",
+      "repo": "https://github.com/EIT-NLP/EmbedLens",
+      "theme": "learning",
+      "selectedPanel": "output",
+      "panels": [
+        {
+          "id": "input",
+          "label": "Input",
+          "status": "ready",
+          "content": "few-shot batch, continual stream, pruning target, or token budget",
+          "operatorAction": "Select the cached EmbedLens input fixture before inspecting outputs."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "status": "ready",
+          "content": "Cached viewer output for EmbedLens showing cost/quality tradeoff card with promoted artifact, runtime gate, and rollback path.",
+          "operatorAction": "Compare the cached output against the expected reproduction contract."
+        },
+        {
+          "id": "failure",
+          "label": "Failure",
+          "status": "ready",
+          "content": "quality cliff, adaptation drift, memory blow-up, and stale calibration",
+          "operatorAction": "Run the failure probe before treating the viewer as a demo candidate."
+        },
+        {
+          "id": "artifacts",
+          "label": "Artifacts",
+          "status": "ready",
+          "content": "Artifact paths are preserved in promoted evidence; local file availability is shown explicitly.",
+          "operatorAction": "Use promoted-results JSON as the source of truth when local files are absent."
+        },
+        {
+          "id": "replay",
+          "label": "Replay",
+          "status": "ready",
+          "content": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-01-github-com-eit-nlp-embedlens",
+          "operatorAction": "Rerun the promoted-results validator for this job before release."
+        }
+      ],
+      "sampleInput": "few-shot batch, continual stream, pruning target, or token budget",
+      "expectedOutput": "cost/quality tradeoff card with promoted artifact, runtime gate, and rollback path",
+      "failureProbe": "quality cliff, adaptation drift, memory blow-up, and stale calibration",
+      "failureProbeVerdict": "probe-ready",
+      "outputFixture": "Cached viewer output for EmbedLens showing cost/quality tradeoff card with promoted artifact, runtime gate, and rollback path.",
+      "replayCommand": "python3 scripts/validate_cvpr_repo_harness_results.py --results analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.promoted.json --job learning-01-github-com-eit-nlp-embedlens",
+      "promotionNote": "Ship as cached interactive viewer first; live Colab rerun remains bound to learning-01-github-com-eit-nlp-embedlens.",
+      "promotedEvidence": {
+        "jobId": "learning-01-github-com-eit-nlp-embedlens",
+        "mode": "live-colab",
+        "repo": "https://github.com/EIT-NLP/EmbedLens",
+        "commitSha": "replace-with-live-commit",
+        "createdAt": "replace-with-live-timestamp",
+        "environment": {
+          "python": "3.11",
+          "torch": "replace-with-live-version",
+          "cuda": "replace-with-live-version"
+        },
+        "metrics": {
+          "readiness": 57,
+          "smokePassed": true,
+          "runtimeSeconds": 0.0,
+          "filesScanned": 0
+        },
+        "provenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "A100",
+          "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+          "source": "live-export-template"
+        },
+        "artifacts": {
+          "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+          "log": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.log",
+          "repoSnapshot": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.snapshot.json"
+        },
+        "page": "cvpr-efficient-learning-repo-governor.html",
+        "evidenceArtifact": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+        "promotion": {
+          "receipt": "cvpr-repo-harness-replacement-receipt",
+          "promotedFrom": "cached-harness-contract",
+          "promotedTo": "live-colab",
+          "promotionDecision": "promote",
+          "sourceDelta": "analysis/cvpr_repo_harness_promotion_delta/registry.json",
+          "rollbackArtifact": "analysis/cvpr_repo_harness_replacement_receipt/cvpr_repo_harness_results.rollback.json"
+        }
+      },
+      "artifacts": [
+        {
+          "kind": "smokeJson",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "log",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.log",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        },
+        {
+          "kind": "repoSnapshot",
+          "path": "source-code/learning/cvpr-repo-gpu-harness/_results/learning-01-github-com-eit-nlp-embedlens.snapshot.json",
+          "exists": true,
+          "status": "available",
+          "sourceOfTruth": "promoted-results-json"
+        }
+      ],
+      "summary": {
+        "viewer": "cvpr-learning-embedlens-deep-viewer",
+        "status": "deep-viewer-ready",
+        "repo": "EmbedLens",
+        "jobId": "learning-01-github-com-eit-nlp-embedlens",
+        "theme": "learning",
+        "page": "cvpr-learning-embedlens-deep-viewer.html",
+        "panels": 5,
+        "readyPanels": 5,
+        "selectedPanel": "output",
+        "promotedEvidenceRows": 1,
+        "artifacts": 3,
+        "artifactLocalPaths": 3,
+        "artifactMissingPaths": 0,
+        "smokePassed": true,
+        "accelerator": "A100"
+      }
+    }
+  ]
+}

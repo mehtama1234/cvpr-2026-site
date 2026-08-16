@@ -1,0 +1,80 @@
+{
+  "summary": {
+    "demo": "cvpr-remediation-release-brief",
+    "status": "release",
+    "commandStatus": "operator-ready",
+    "ledgerStatus": "complete",
+    "surfaces": 7,
+    "readySurfaces": 7,
+    "stages": 7,
+    "readyStages": 7,
+    "gauntletRows": 32,
+    "gauntletBlocks": 14,
+    "actionableRows": 29,
+    "clearedBlocks": 14,
+    "postBlock": 0,
+    "promote": 12,
+    "monitor": 17,
+    "canaryClean": 12,
+    "canaryWatch": 17,
+    "canaryRollback": 0,
+    "rollbackDrills": 12,
+    "readyDrills": 12,
+    "rehearsals": 12,
+    "rehearsalMisses": 0,
+    "themes": 8,
+    "incidents": 4,
+    "packageTests": 148,
+    "fullStackStatus": "valid",
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
+    "gate": "release",
+    "posture": "controlled-watch",
+    "outcome": "14 gauntlet blocks \u00b7 14 cleared \u00b7 12 promote \u00b7 17 monitor \u00b7 12 rollback drills"
+  },
+  "evidence": [
+    {
+      "label": "Remediation command center",
+      "page": "cvpr-remediation-command-center.html",
+      "registry": "analysis/cvpr_remediation_command_center/registry.json",
+      "status": "operator-ready"
+    },
+    {
+      "label": "Remediation audit ledger",
+      "page": "cvpr-remediation-audit-ledger.html",
+      "registry": "analysis/cvpr_remediation_audit_ledger/registry.json",
+      "status": "complete"
+    },
+    {
+      "label": "Remediation canary monitor",
+      "page": "cvpr-remediation-canary-monitor.html",
+      "registry": "analysis/cvpr_remediation_canary_monitor/registry.json",
+      "status": "watching"
+    },
+    {
+      "label": "Remediation rollback drillbook",
+      "page": "cvpr-remediation-rollback-drillbook.html",
+      "registry": "analysis/cvpr_remediation_rollback_drillbook/registry.json",
+      "status": "ready"
+    },
+    {
+      "label": "Remediation rollback rehearsal lab",
+      "page": "cvpr-remediation-rollback-rehearsal-lab.html",
+      "registry": "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
+      "status": "release"
+    },
+    {
+      "label": "Full-stack validation",
+      "page": "cvpr-validation-center.html",
+      "registry": "analysis/cvpr_full_stack_validation/registry.json",
+      "status": "valid"
+    }
+  ],
+  "sources": {
+    "commandCenter": "analysis/cvpr_remediation_command_center/registry.json",
+    "ledger": "analysis/cvpr_remediation_audit_ledger/registry.json",
+    "canary": "analysis/cvpr_remediation_canary_monitor/registry.json",
+    "rollback": "analysis/cvpr_remediation_rollback_drillbook/registry.json",
+    "rehearsal": "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
+    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+  }
+}

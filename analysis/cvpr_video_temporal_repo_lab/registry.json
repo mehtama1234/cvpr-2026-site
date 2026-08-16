@@ -1,0 +1,349 @@
+{
+  "summary": {
+    "demo": "cvpr-video-temporal-repo-lab",
+    "status": "ready",
+    "theme": "Seeing and making things that move",
+    "sourceForge": "cvpr-paper-repo-demo-forge.html",
+    "systems": [
+      "video-world-model"
+    ],
+    "repoPapers": 5,
+    "cases": 5,
+    "release": 0,
+    "review": 3,
+    "block": 2,
+    "maxPrimaryRisk": 71.2,
+    "maxEvidenceRisk": 67.4,
+    "minReadiness": 36.4,
+    "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  "sourceBlueprint": {
+    "id": "paper-repo-03-video-temporal",
+    "theme": "video",
+    "title": "Video Temporal Repo Lab",
+    "query": [
+      "video",
+      "tracking",
+      "action",
+      "temporal",
+      "cardiac",
+      "diffusion"
+    ],
+    "systems": [
+      "video-world-model"
+    ],
+    "demoSurface": "cvpr-video-temporal-repo-lab.html",
+    "mechanic": "Stress video repo papers for long-horizon drift, action localization, hallucination, and tracking recovery.",
+    "themeName": "Seeing and making things that move",
+    "themeRepoCount": 164,
+    "repoPapers": 5,
+    "seedPapers": [
+      {
+        "title": "PAM: A Pose-Appearance-Motion Engine for Sim-to-Real HOI Video Generation",
+        "repo": "https://github.com/black-forest-labs/flux",
+        "tags": [
+          "video-generation",
+          "hand-object-interaction",
+          "sim-to-real",
+          "diffusion",
+          "controllable-generation",
+          "embodied-AI"
+        ],
+        "problem": "PAM is about generating realistic hand-object interaction videos from simulator-accessible inputs. The everyday problem is turning initial and target hand-object poses into a photorealistic video without having a real first frame."
+      },
+      {
+        "title": "Preserving Source Video Realism: High-Fidelity Face Swapping for Cinematic Quality",
+        "repo": "https://github.com/deepfakes/face-",
+        "tags": [
+          "face swapping",
+          "video editing",
+          "video generation",
+          "diffusion models",
+          "video synthesis",
+          "face manipulation"
+        ],
+        "problem": "This paper is about cinematic-quality face swapping. The everyday problem is that swapping identity can break lighting, expression, skin detail, or camera realism from the source video."
+      },
+      {
+        "title": "Back to the Feature: Explaining Video Classifiers with Video Counterfactual Explanations",
+        "repo": "https://github.com/modelscope/DiffSynth-",
+        "tags": [
+          "diffusion",
+          "video-generation",
+          "explainability",
+          "counterfactual",
+          "video-classification",
+          "interpretability"
+        ],
+        "problem": "This paper is about explaining video classifiers with counterfactual videos. The everyday problem is that to explain why a model saw running instead of walking, the changed video must still look smooth and physically believable."
+      },
+      {
+        "title": "AdaSpot: Spend Resolution Where It Matters for Precise Event Spotting",
+        "repo": "https://github.com/arturxe2/AdaSpot",
+        "tags": [
+          "event spotting",
+          "temporal action detection",
+          "spatial attention",
+          "video efficiency",
+          "dynamic computation",
+          "precise localization"
+        ],
+        "problem": "AdaSpot is about finding the exact moment of an event in video while spending high resolution only where it helps. The everyday problem is that a decisive action may happen in a small region, while most of the frame is irrelevant background."
+      },
+      {
+        "title": "Hierarchical Action Learning for Weakly-Supervised Action Segmentation",
+        "repo": "https://github.com/DMIRLAB-Group/HAL",
+        "tags": [
+          "action segmentation",
+          "weakly-supervised",
+          "hierarchical learning",
+          "causal models",
+          "temporal modeling",
+          "identifiability"
+        ],
+        "problem": "Hierarchical Action Learning is about segmenting actions in video from only ordered transcripts, not timestamps. The everyday problem is that the model knows the action order but must infer where each action starts and ends."
+      }
+    ],
+    "priority": "covered",
+    "acceptance": "build concrete page, registry, package test, verifier, source repo links, and full-stack validation",
+    "command": "python3 scripts/validate_cvpr_full_stack.py",
+    "status": "ready"
+  },
+  "demoRows": [
+    {
+      "id": "cvpr-video-temporal-repo-lab-1",
+      "title": "PAM",
+      "paperTitle": "PAM: A Pose-Appearance-Motion Engine for Sim-to-Real HOI Video Generation",
+      "repo": "https://github.com/black-forest-labs/flux",
+      "tags": [
+        "video-generation",
+        "hand-object-interaction",
+        "sim-to-real",
+        "diffusion",
+        "controllable-generation",
+        "embodied-AI"
+      ],
+      "paperProblem": "PAM is about generating realistic hand-object interaction videos from simulator-accessible inputs. The everyday problem is turning initial and target hand-object poses into a photorealistic video without having a real first frame.",
+      "labels": [
+        "temporal drift",
+        "identity break",
+        "motion artifact",
+        "event sparsity",
+        "counterfactual load",
+        "resolution budget"
+      ],
+      "dims": [
+        76,
+        54,
+        88,
+        38,
+        42,
+        66
+      ],
+      "metrics": {
+        "dims": [
+          76,
+          54,
+          88,
+          38,
+          42,
+          66
+        ],
+        "primaryRisk": 64.4,
+        "evidenceRisk": 54.2,
+        "runtimeRisk": 57.3,
+        "readiness": 46.6
+      },
+      "decision": "review",
+      "operatorAction": "HOI generation must preserve hand-object contact through time"
+    },
+    {
+      "id": "cvpr-video-temporal-repo-lab-2",
+      "title": "Preserving Source Video Realism",
+      "paperTitle": "Preserving Source Video Realism: High-Fidelity Face Swapping for Cinematic Quality",
+      "repo": "https://github.com/deepfakes/face-",
+      "tags": [
+        "face swapping",
+        "video editing",
+        "video generation",
+        "diffusion models",
+        "video synthesis",
+        "face manipulation"
+      ],
+      "paperProblem": "This paper is about cinematic-quality face swapping. The everyday problem is that swapping identity can break lighting, expression, skin detail, or camera realism from the source video.",
+      "labels": [
+        "temporal drift",
+        "identity break",
+        "motion artifact",
+        "event sparsity",
+        "counterfactual load",
+        "resolution budget"
+      ],
+      "dims": [
+        68,
+        94,
+        62,
+        26,
+        40,
+        72
+      ],
+      "metrics": {
+        "dims": [
+          68,
+          94,
+          62,
+          26,
+          40,
+          72
+        ],
+        "primaryRisk": 65.2,
+        "evidenceRisk": 56.9,
+        "runtimeRisk": 54.2,
+        "readiness": 46.3
+      },
+      "decision": "review",
+      "operatorAction": "face swapping must preserve source-video realism and identity boundaries"
+    },
+    {
+      "id": "cvpr-video-temporal-repo-lab-3",
+      "title": "Back to the Feature",
+      "paperTitle": "Back to the Feature: Explaining Video Classifiers with Video Counterfactual Explanations",
+      "repo": "https://github.com/modelscope/DiffSynth-",
+      "tags": [
+        "diffusion",
+        "video-generation",
+        "explainability",
+        "counterfactual",
+        "video-classification",
+        "interpretability"
+      ],
+      "paperProblem": "This paper is about explaining video classifiers with counterfactual videos. The everyday problem is that to explain why a model saw running instead of walking, the changed video must still look smooth and physically believable.",
+      "labels": [
+        "temporal drift",
+        "identity break",
+        "motion artifact",
+        "event sparsity",
+        "counterfactual load",
+        "resolution budget"
+      ],
+      "dims": [
+        82,
+        58,
+        80,
+        42,
+        96,
+        64
+      ],
+      "metrics": {
+        "dims": [
+          82,
+          58,
+          80,
+          42,
+          96,
+          64
+        ],
+        "primaryRisk": 71.2,
+        "evidenceRisk": 67.4,
+        "runtimeRisk": 73.8,
+        "readiness": 36.4
+      },
+      "decision": "block",
+      "operatorAction": "counterfactual explanations need plausible changed videos"
+    },
+    {
+      "id": "cvpr-video-temporal-repo-lab-4",
+      "title": "AdaSpot",
+      "paperTitle": "AdaSpot: Spend Resolution Where It Matters for Precise Event Spotting",
+      "repo": "https://github.com/arturxe2/AdaSpot",
+      "tags": [
+        "event spotting",
+        "temporal action detection",
+        "spatial attention",
+        "video efficiency",
+        "dynamic computation",
+        "precise localization"
+      ],
+      "paperProblem": "AdaSpot is about finding the exact moment of an event in video while spending high resolution only where it helps. The everyday problem is that a decisive action may happen in a small region, while most of the frame is irrelevant background.",
+      "labels": [
+        "temporal drift",
+        "identity break",
+        "motion artifact",
+        "event sparsity",
+        "counterfactual load",
+        "resolution budget"
+      ],
+      "dims": [
+        44,
+        32,
+        36,
+        94,
+        38,
+        88
+      ],
+      "metrics": {
+        "dims": [
+          44,
+          32,
+          36,
+          94,
+          38,
+          88
+        ],
+        "primaryRisk": 49.7,
+        "evidenceRisk": 60.8,
+        "runtimeRisk": 54.9,
+        "readiness": 50.9
+      },
+      "decision": "review",
+      "operatorAction": "event spotting should spend resolution only where action occurs"
+    },
+    {
+      "id": "cvpr-video-temporal-repo-lab-5",
+      "title": "Hierarchical Action Learning for Weakly-Supervised Action Segmentati",
+      "paperTitle": "Hierarchical Action Learning for Weakly-Supervised Action Segmentation",
+      "repo": "https://github.com/DMIRLAB-Group/HAL",
+      "tags": [
+        "action segmentation",
+        "weakly-supervised",
+        "hierarchical learning",
+        "causal models",
+        "temporal modeling",
+        "identifiability"
+      ],
+      "paperProblem": "Hierarchical Action Learning is about segmenting actions in video from only ordered transcripts, not timestamps. The everyday problem is that the model knows the action order but must infer where each action starts and ends.",
+      "labels": [
+        "temporal drift",
+        "identity break",
+        "motion artifact",
+        "event sparsity",
+        "counterfactual load",
+        "resolution budget"
+      ],
+      "dims": [
+        86,
+        48,
+        56,
+        82,
+        62,
+        50
+      ],
+      "metrics": {
+        "dims": [
+          86,
+          48,
+          56,
+          82,
+          62,
+          50
+        ],
+        "primaryRisk": 65.8,
+        "evidenceRisk": 63.9,
+        "runtimeRisk": 64.4,
+        "readiness": 41.6
+      },
+      "decision": "block",
+      "operatorAction": "weak transcripts need reliable action boundaries"
+    }
+  ]
+}

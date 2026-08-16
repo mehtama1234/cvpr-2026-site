@@ -1,0 +1,10 @@
+{
+  "jobId": "video-01-github-com-black-forest-labs-flu",
+  "repo": "https://github.com/black-forest-labs/flux",
+  "commitSha": "replace-with-live-commit",
+  "filesScanned": 0,
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "A100",
+  "rehydratedFrom": "promoted-results-json",
+  "status": "rehydrated"
+}

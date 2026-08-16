@@ -1,0 +1,7 @@
+jobId=threed-05-github-com-wanghaoran16-prune-wi
+repo=https://github.com/WangHaoran16/Prune-Wisely-
+runtime=google-colab-pro-plus
+accelerator=A100
+smokePassed=True
+rehydratedFrom=interactive-expansion-backlog
+status=rehydrated

@@ -1,0 +1,20 @@
+{
+  "jobId": "vlm-04-github-com-remrico-recall",
+  "repo": "https://github.com/RemRico/Recall",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 34,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fourth-wave-vlm-Recall",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}

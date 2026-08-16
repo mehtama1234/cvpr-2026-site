@@ -1,0 +1,20 @@
+{
+  "jobId": "embodied-04-github-com-hrtan-diem",
+  "repo": "https://github.com/hrtan/DIEM",
+  "mode": "live-colab",
+  "metrics": {
+    "readiness": 59,
+    "smokePassed": true,
+    "runtimeSeconds": 0.0,
+    "filesScanned": 0
+  },
+  "provenance": {
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "A100",
+    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
+    "source": "live-export-template"
+  },
+  "viewer": "fourth-wave-embodied-DIEM",
+  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
+  "status": "rehydrated"
+}
