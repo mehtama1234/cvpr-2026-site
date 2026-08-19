@@ -3,11 +3,11 @@
     "planner": "cvpr-colab-execution-planner",
     "status": "ready",
     "runtimePlane": "google-colab-pro-plus",
-    "jobs": 10,
+    "jobs": 14,
     "waves": 3,
-    "expectedResults": 40,
-    "cachedResults": 40,
-    "colabCoveredBenches": 10,
+    "expectedResults": 56,
+    "cachedResults": 56,
+    "colabCoveredBenches": 14,
     "systemEvidenceCoveredBenches": 1,
     "missingRuntimeEvidence": 0,
     "releaseStatus": "release",
@@ -42,11 +42,12 @@
     },
     {
       "wave": "wave-3-generation-driving-3d",
-      "jobs": 4,
-      "expectedResults": 16,
-      "cachedResults": 16,
+      "jobs": 8,
+      "expectedResults": 32,
+      "cachedResults": 32,
       "gpuClasses": [
-        "L4/A100"
+        "L4/A100",
+        "T4/L4/A100"
       ],
       "status": "ready"
     }
@@ -243,6 +244,29 @@
       "status": "ready"
     },
     {
+      "jobId": "depth-normal-consistency",
+      "title": "Depth-normal consistency GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 9,
+      "bench": "cvpr-depth-normal-consistency-bench",
+      "benchPage": "cvpr-depth-normal-consistency-bench.html",
+      "system": "geometry-consistency-probe",
+      "theme": "Recovering the 3D world from flat pictures",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torch-cuda-depth-normal-probe",
+        "finite-difference-normal-consistency"
+      ],
+      "runner": "run_depth_normal_consistency_batch",
+      "execution": "torch-cuda-depth-normal-live-demo",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('depth-normal-consistency', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job depth-normal-consistency",
+      "status": "ready"
+    },
+    {
       "jobId": "metric-geometry",
       "title": "Metric geometry GPU run",
       "wave": "wave-3-generation-driving-3d",
@@ -267,6 +291,29 @@
       "status": "ready"
     },
     {
+      "jobId": "corruption-robustness",
+      "title": "Corruption robustness GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 10,
+      "bench": "cvpr-corruption-robustness-bench",
+      "benchPage": "cvpr-corruption-robustness-bench.html",
+      "system": "robust-perception-gate",
+      "theme": "Naming and locating what's in the picture",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torchvision-resnet18",
+        "clean-corrupted-logit-delta"
+      ],
+      "runner": "run_corruption_robustness_batch",
+      "execution": "torchvision-resnet-corruption-live-demo",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('corruption-robustness', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job corruption-robustness",
+      "status": "ready"
+    },
+    {
       "jobId": "gaussian-splatting",
       "title": "Gaussian Splatting GPU run",
       "wave": "wave-3-generation-driving-3d",
@@ -288,6 +335,52 @@
       "cachedResults": 4,
       "command": "run_job('gaussian-splatting', mode='live-colab', strict=True)",
       "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting",
+      "status": "ready"
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "title": "Prompt segmentation robustness GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 11,
+      "bench": "cvpr-prompt-segmentation-robustness-bench",
+      "benchPage": "cvpr-prompt-segmentation-robustness-bench.html",
+      "system": "interactive-segmentation-gate",
+      "theme": "Making pixels from meaning",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torchvision-maskrcnn-resnet50-fpn",
+        "mask-rcnn-click-robustness-proxy"
+      ],
+      "runner": "run_prompt_segmentation_robustness_batch",
+      "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('prompt-segmentation-robustness', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job prompt-segmentation-robustness",
+      "status": "ready"
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "title": "Video identity tracking GPU run",
+      "wave": "wave-3-generation-driving-3d",
+      "priority": 12,
+      "bench": "cvpr-video-identity-tracking-bench",
+      "benchPage": "cvpr-video-identity-tracking-bench.html",
+      "system": "video-tracking-release-gate",
+      "theme": "Seeing and making things that move",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torch-cuda-centroid-assignment-tracker",
+        "mask-sequence-identity-drift"
+      ],
+      "runner": "run_video_identity_tracking_batch",
+      "execution": "torch-cuda-video-tracking-live-demo",
+      "strictMode": "require_real_models=True",
+      "expectedCases": 4,
+      "cachedResults": 4,
+      "command": "run_job('video-identity-tracking', mode='live-colab', strict=True)",
+      "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job video-identity-tracking",
       "status": "ready"
     }
   ],

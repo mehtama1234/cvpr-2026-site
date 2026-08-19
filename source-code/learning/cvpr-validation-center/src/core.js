@@ -15,6 +15,7 @@ export function summarizeValidationCenter(input) {
   const mission = input.mission.summary;
   const promotionDelta = input.promotionDelta.summary;
   const slowest = [...input.fullStack.steps].sort((a, b) => b.durationSec - a.durationSec).slice(0, 5);
+  const releaseGate = gateStatus(input.fullStack, input.promotionDelta) === "release";
   return {
     status: gateStatus(input.fullStack, input.promotionDelta),
     fullStackStatus: full.status,
@@ -32,6 +33,7 @@ export function summarizeValidationCenter(input) {
     implementedBenches: mission.implementedBenches,
     benchCases: mission.benchCases,
     benchBlock: mission.benchBlock,
+    releaseGate,
     slowest
   };
 }

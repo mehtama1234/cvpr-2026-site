@@ -1,7 +1,7 @@
 {
   "summary": {
     "portfolio": "cvpr-theme-portfolio-map",
-    "status": "release",
+    "status": "block",
     "themes": 8,
     "systems": 11,
     "stages": 33,
@@ -10,7 +10,7 @@
     "missingDemoEvidence": 0,
     "proPlusSystems": 10,
     "cachedEvidenceSystems": 1,
-    "operatorStatus": "operator-ready"
+    "operatorStatus": "block"
   },
   "themeRows": [
     {

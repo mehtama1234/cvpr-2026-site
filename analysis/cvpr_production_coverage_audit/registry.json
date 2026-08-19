@@ -9,8 +9,8 @@
     "benchRelease": 44,
     "benchReview": 0,
     "benchBlock": 0,
-    "colabJobs": 10,
-    "cachedResults": 40,
+    "colabJobs": 14,
+    "cachedResults": 56,
     "colabCoveredBenches": 10,
     "systemEvidenceCoveredBenches": 1,
     "missingBenchSystems": 0,
@@ -653,6 +653,54 @@
         "vla-scene-grounder",
         "ttc-risk-head",
         "safety-rule-monitor"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "bench": "cvpr-depth-normal-consistency-bench",
+      "page": "cvpr-depth-normal-consistency-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torch-cuda-depth-normal-probe",
+        "finite-difference-normal-consistency"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "corruption-robustness",
+      "bench": "cvpr-corruption-robustness-bench",
+      "page": "cvpr-corruption-robustness-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torchvision-resnet18",
+        "clean-corrupted-logit-delta"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "bench": "cvpr-prompt-segmentation-robustness-bench",
+      "page": "cvpr-prompt-segmentation-robustness-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torchvision-maskrcnn-resnet50-fpn",
+        "mask-rcnn-click-robustness-proxy"
+      ],
+      "cachedResults": 4,
+      "status": "release"
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "bench": "cvpr-video-identity-tracking-bench",
+      "page": "cvpr-video-identity-tracking-bench.html",
+      "gpuClass": "T4/L4/A100",
+      "models": [
+        "torch-cuda-centroid-assignment-tracker",
+        "mask-sequence-identity-drift"
       ],
       "cachedResults": 4,
       "status": "release"

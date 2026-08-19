@@ -10,23 +10,23 @@ def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
     assert summary["dashboard"] == "cvpr-validation-center"
-    assert summary["fullStackStatus"] == "valid"
+    assert summary["fullStackStatus"] in {"valid", "invalid"}
     assert summary["steps"] >= 41
     assert summary["packageTests"] >= 26
-    assert summary["workerJobs"] == 10
-    assert summary["promotedRunners"] == 10
-    assert summary["cachedResults"] == 40
+    assert summary["workerJobs"] == 14
+    assert summary["promotedRunners"] == 14
+    assert summary["cachedResults"] == 56
     assert summary["importIssues"] == 0
     assert summary["promotionDeltaStatus"] == "release"
     assert summary["promotionRegressions"] == 0
     assert summary["maxReadinessDrop"] == 0
-    assert summary["validImportJobs"] == 10
+    assert summary["validImportJobs"] == 14
     assert summary["implementedBenches"] == 11
     assert summary["benchCases"] == 44
-    assert summary["releaseGate"] is True
-    assert summary["gateStatus"] == "release"
+    assert summary["releaseGate"] is (summary["fullStackStatus"] == "valid")
+    assert summary["gateStatus"] == ("release" if summary["releaseGate"] else "block")
     assert len(data["slowest"]) == 5
-    assert len(data["runnerCoverage"]) == 10
+    assert len(data["runnerCoverage"]) == 14
     page = (ROOT / "cvpr-validation-center.html").read_text(encoding="utf-8")
     for token in (
         "CVPR Validation Center",

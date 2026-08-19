@@ -589,10 +589,10 @@ export const portfolioInput = {
       "stageDemos": 33,
       "flagshipDemos": 8,
       "totalDemos": 41,
-      "proPlusJobs": 10,
+      "proPlusJobs": 14,
       "proPlusWaves": 3,
-      "expectedLiveResults": 40,
-      "cachedResults": 40,
+      "expectedLiveResults": 56,
+      "cachedResults": 56,
       "benchRelease": 44,
       "benchCases": 44,
       "missingDemoEvidence": 0,
@@ -1416,18 +1416,18 @@ export const portfolioInput = {
   "commandCenter": {
     "summary": {
       "center": "cvpr-release-command-center",
-      "status": "operator-ready",
+      "status": "block",
       "surfaces": 8,
-      "readySurfaces": 8,
-      "alerts": 0,
+      "readySurfaces": 2,
+      "alerts": 5,
       "importIssues": 0,
       "fullStackStatus": "valid",
       "packageTests": 148,
       "systems": 11,
       "stages": 33,
       "demos": 41,
-      "workerJobs": 10,
-      "cachedResults": 40
+      "workerJobs": 14,
+      "cachedResults": 56
     },
     "surfaceRows": [
       {
@@ -1442,7 +1442,7 @@ export const portfolioInput = {
       {
         "surface": "cvpr-launch-readiness-pack.html",
         "label": "Launch readiness pack",
-        "actual": "launch-ready",
+        "actual": "block",
         "expected": "launch-ready",
         "metric": "148 package tests",
         "evidence": "analysis/cvpr_launch_readiness_pack/registry.json",
@@ -1451,7 +1451,7 @@ export const portfolioInput = {
       {
         "surface": "cvpr-release-manifest.html",
         "label": "Release manifest",
-        "actual": "sealed",
+        "actual": "block",
         "expected": "sealed",
         "metric": "13 artifacts",
         "evidence": "analysis/cvpr_release_manifest/registry.json",
@@ -1460,7 +1460,7 @@ export const portfolioInput = {
       {
         "surface": "cvpr-release-change-control.html",
         "label": "Release change control",
-        "actual": "controlled",
+        "actual": "block",
         "expected": "controlled",
         "metric": "13/13 rows",
         "evidence": "analysis/cvpr_release_change_control/registry.json",
@@ -1469,7 +1469,7 @@ export const portfolioInput = {
       {
         "surface": "cvpr-release-dependency-graph.html",
         "label": "Release dependency graph",
-        "actual": "ready",
+        "actual": "block",
         "expected": "ready",
         "metric": "15 nodes / 19 edges",
         "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
@@ -1478,18 +1478,18 @@ export const portfolioInput = {
       {
         "surface": "cvpr-post-launch-monitoring.html",
         "label": "Post-launch monitoring",
-        "actual": "watching",
+        "actual": "block",
         "expected": "watching",
-        "metric": "9/9 monitors",
+        "metric": "4/9 monitors",
         "evidence": "analysis/cvpr_post_launch_monitoring/registry.json",
         "command": "python3 scripts/build_cvpr_post_launch_monitoring.py && python3 scripts/verify_cvpr_post_launch_monitoring.py"
       },
       {
         "surface": "cvpr-release-audit-trail.html",
         "label": "Release audit trail",
-        "actual": "complete",
+        "actual": "block",
         "expected": "complete",
-        "metric": "58/58 events",
+        "metric": "56/58 events",
         "evidence": "analysis/cvpr_release_audit_trail/registry.json",
         "command": "python3 scripts/build_cvpr_release_audit_trail.py && python3 scripts/verify_cvpr_release_audit_trail.py"
       },
@@ -1607,7 +1607,7 @@ export const themeRows = [
 ];
 export const summary = {
   "portfolio": "cvpr-theme-portfolio-map",
-  "status": "release",
+  "status": "block",
   "themes": 8,
   "systems": 11,
   "stages": 33,
@@ -1616,5 +1616,5 @@ export const summary = {
   "missingDemoEvidence": 0,
   "proPlusSystems": 10,
   "cachedEvidenceSystems": 1,
-  "operatorStatus": "operator-ready"
+  "operatorStatus": "block"
 };

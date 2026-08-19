@@ -35,10 +35,10 @@ def main():
     assert summary["intake"] == "cvpr-colab-live-intake"
     assert summary["status"] == "valid"
     assert summary["expectedMode"] == "live-colab"
-    assert summary["jobs"] == 10
-    assert summary["expectedResults"] == 40
-    assert summary["actualResults"] == 40
-    assert summary["validJobs"] == 10
+    assert summary["jobs"] == 14
+    assert summary["expectedResults"] == 56
+    assert summary["actualResults"] == 56
+    assert summary["validJobs"] == 14
     assert summary["issues"] == 0
     assert summary["promoted"] is False
     assert summary["export"] == "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json"
@@ -51,7 +51,7 @@ def main():
         "stage_cvpr_live_colab_export.py",
     ):
         assert token in page
-    print("verified CVPR live Colab intake: 40 live results, 0 issues")
+    print("verified CVPR live Colab intake: 56 live results, 0 issues")
 
 
 if __name__ == "__main__":

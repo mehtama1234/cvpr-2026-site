@@ -27,6 +27,87 @@ export const gauntletRows = [
     "decision": "release"
   },
   {
+    "id": "adaptive-serving/rare-object-distractor",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 66.8,
+      "risk": 43.4,
+      "evidence": 70.3,
+      "resilience": 64.1
+    },
+    "decision": "review"
+  },
+  {
+    "id": "adaptive-serving/adversarial-text-overlay",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 63.8,
+      "risk": 51.4,
+      "evidence": 66.3,
+      "resilience": 59.2
+    },
+    "decision": "review"
+  },
+  {
+    "id": "adaptive-serving/unsupported-query",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 73.8,
+      "risk": 30.4,
+      "evidence": 76.3,
+      "rows": 12,
+      "proPlusJobs": [
+        "compute-serving"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 61.8,
+      "risk": 54.4,
+      "evidence": 62.3,
+      "resilience": 56.4
+    },
+    "decision": "review"
+  },
+  {
     "id": "adaptive-serving/gpu-brownout",
     "demoId": "adaptive-serving",
     "demoTitle": "Adaptive Serving Stress Lab",
@@ -134,6 +215,90 @@ export const gauntletRows = [
       "resilience": 72.9
     },
     "decision": "release"
+  },
+  {
+    "id": "constraint-edit/rare-object-distractor",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 70.8,
+      "risk": 50.4,
+      "evidence": 73.1,
+      "resilience": 64.1
+    },
+    "decision": "review"
+  },
+  {
+    "id": "constraint-edit/adversarial-text-overlay",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 67.8,
+      "risk": 58.4,
+      "evidence": 69.1,
+      "resilience": 59.2
+    },
+    "decision": "review"
+  },
+  {
+    "id": "constraint-edit/unsupported-query",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 37.4,
+      "evidence": 79.1,
+      "rows": 48,
+      "proPlusJobs": [
+        "constraint-generation",
+        "restoration-fidelity"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 65.8,
+      "risk": 61.4,
+      "evidence": 65.1,
+      "resilience": 56.4
+    },
+    "decision": "review"
   },
   {
     "id": "constraint-edit/gpu-brownout",
@@ -247,6 +412,87 @@ export const gauntletRows = [
     "decision": "release"
   },
   {
+    "id": "open-vocab/rare-object-distractor",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 73.3,
+      "risk": 48.6,
+      "evidence": 75.6,
+      "resilience": 66.4
+    },
+    "decision": "review"
+  },
+  {
+    "id": "open-vocab/adversarial-text-overlay",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 70.3,
+      "risk": 56.6,
+      "evidence": 71.6,
+      "resilience": 61.4
+    },
+    "decision": "review"
+  },
+  {
+    "id": "open-vocab/unsupported-query",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 80.3,
+      "risk": 35.6,
+      "evidence": 81.6,
+      "rows": 16,
+      "proPlusJobs": [
+        "open-vocab-grounding"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 68.3,
+      "risk": 59.6,
+      "evidence": 67.6,
+      "resilience": 58.7
+    },
+    "decision": "review"
+  },
+  {
     "id": "open-vocab/gpu-brownout",
     "demoId": "open-vocab",
     "demoTitle": "Open-Vocabulary Failure Hunt",
@@ -353,6 +599,81 @@ export const gauntletRows = [
     "decision": "review"
   },
   {
+    "id": "3d-edit-provenance/rare-object-distractor",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 71.8,
+      "risk": 55.3,
+      "evidence": 70.1,
+      "resilience": 62.2
+    },
+    "decision": "review"
+  },
+  {
+    "id": "3d-edit-provenance/adversarial-text-overlay",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 68.8,
+      "risk": 63.3,
+      "evidence": 66.1,
+      "resilience": 57.3
+    },
+    "decision": "review"
+  },
+  {
+    "id": "3d-edit-provenance/unsupported-query",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 77.8,
+      "risk": 43.3,
+      "evidence": 76.1,
+      "rows": 48,
+      "proPlusJobs": [],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 65.8,
+      "risk": 67.3,
+      "evidence": 62.1,
+      "resilience": 53.7
+    },
+    "decision": "block"
+  },
+  {
     "id": "3d-edit-provenance/gpu-brownout",
     "demoId": "3d-edit-provenance",
     "demoTitle": "3D Edit Provenance Room",
@@ -453,6 +774,87 @@ export const gauntletRows = [
       "resilience": 60.8
     },
     "decision": "review"
+  },
+  {
+    "id": "temporal-counterfactual/rare-object-distractor",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 64.4,
+      "risk": 65.4,
+      "evidence": 53.8,
+      "resilience": 51.9
+    },
+    "decision": "block"
+  },
+  {
+    "id": "temporal-counterfactual/adversarial-text-overlay",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 61.4,
+      "risk": 73.4,
+      "evidence": 49.8,
+      "resilience": 47.0
+    },
+    "decision": "block"
+  },
+  {
+    "id": "temporal-counterfactual/unsupported-query",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 71.4,
+      "risk": 52.4,
+      "evidence": 59.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "temporal-rollout"
+      ],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 59.4,
+      "risk": 76.4,
+      "evidence": 45.8,
+      "resilience": 44.2
+    },
+    "decision": "block"
   },
   {
     "id": "temporal-counterfactual/gpu-brownout",
@@ -561,6 +963,81 @@ export const gauntletRows = [
     "decision": "review"
   },
   {
+    "id": "grounded-answer/rare-object-distractor",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 69.2,
+      "risk": 60.6,
+      "evidence": 55.9,
+      "resilience": 56.1
+    },
+    "decision": "review"
+  },
+  {
+    "id": "grounded-answer/adversarial-text-overlay",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 66.2,
+      "risk": 68.6,
+      "evidence": 51.9,
+      "resilience": 51.2
+    },
+    "decision": "block"
+  },
+  {
+    "id": "grounded-answer/unsupported-query",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 75.2,
+      "risk": 48.6,
+      "evidence": 61.9,
+      "rows": 16,
+      "proPlusJobs": [],
+      "gpuBackedCases": 4,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 63.2,
+      "risk": 72.6,
+      "evidence": 47.9,
+      "resilience": 47.7
+    },
+    "decision": "block"
+  },
+  {
     "id": "grounded-answer/gpu-brownout",
     "demoId": "grounded-answer",
     "demoTitle": "Grounded Answer Courtroom",
@@ -644,8 +1121,8 @@ export const gauntletRows = [
     "incidentId": "launch-audit",
     "incidentTitle": "Launch audit",
     "signals": {
-      "readiness": 73.3,
-      "risk": 50.7,
+      "readiness": 75.0,
+      "risk": 43.6,
       "evidence": 78.8,
       "rows": 16,
       "proPlusJobs": [
@@ -653,15 +1130,99 @@ export const gauntletRows = [
         "clinical-shift"
       ],
       "gpuBackedCases": 8,
-      "sourceStatus": "release"
+      "sourceStatus": "inspect"
     },
     "metrics": {
-      "readiness": 73.3,
-      "risk": 50.7,
+      "readiness": 75.0,
+      "risk": 43.6,
       "evidence": 78.8,
-      "resilience": 66.3
+      "resilience": 69.5
     },
     "decision": "review"
+  },
+  {
+    "id": "provenance-red-team/rare-object-distractor",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 75.0,
+      "risk": 43.6,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "inspect"
+    },
+    "metrics": {
+      "readiness": 68.0,
+      "risk": 56.6,
+      "evidence": 72.8,
+      "resilience": 60.7
+    },
+    "decision": "review"
+  },
+  {
+    "id": "provenance-red-team/adversarial-text-overlay",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 75.0,
+      "risk": 43.6,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "inspect"
+    },
+    "metrics": {
+      "readiness": 65.0,
+      "risk": 64.6,
+      "evidence": 68.8,
+      "resilience": 55.8
+    },
+    "decision": "review"
+  },
+  {
+    "id": "provenance-red-team/unsupported-query",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 75.0,
+      "risk": 43.6,
+      "evidence": 78.8,
+      "rows": 16,
+      "proPlusJobs": [
+        "adversarial-provenance",
+        "clinical-shift"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "inspect"
+    },
+    "metrics": {
+      "readiness": 63.0,
+      "risk": 67.6,
+      "evidence": 64.8,
+      "resilience": 53.0
+    },
+    "decision": "block"
   },
   {
     "id": "provenance-red-team/gpu-brownout",
@@ -672,8 +1233,8 @@ export const gauntletRows = [
     "incidentId": "gpu-brownout",
     "incidentTitle": "GPU brownout",
     "signals": {
-      "readiness": 73.3,
-      "risk": 50.7,
+      "readiness": 75.0,
+      "risk": 43.6,
       "evidence": 78.8,
       "rows": 16,
       "proPlusJobs": [
@@ -681,13 +1242,13 @@ export const gauntletRows = [
         "clinical-shift"
       ],
       "gpuBackedCases": 8,
-      "sourceStatus": "release"
+      "sourceStatus": "inspect"
     },
     "metrics": {
-      "readiness": 59.3,
-      "risk": 62.7,
+      "readiness": 61.0,
+      "risk": 55.6,
       "evidence": 71.8,
-      "resilience": 54.6
+      "resilience": 57.7
     },
     "decision": "review"
   },
@@ -700,8 +1261,8 @@ export const gauntletRows = [
     "incidentId": "adversarial-content",
     "incidentTitle": "Adversarial content",
     "signals": {
-      "readiness": 73.3,
-      "risk": 50.7,
+      "readiness": 75.0,
+      "risk": 43.6,
       "evidence": 78.8,
       "rows": 16,
       "proPlusJobs": [
@@ -709,15 +1270,15 @@ export const gauntletRows = [
         "clinical-shift"
       ],
       "gpuBackedCases": 8,
-      "sourceStatus": "release"
+      "sourceStatus": "inspect"
     },
     "metrics": {
-      "readiness": 65.3,
-      "risk": 68.7,
+      "readiness": 67.0,
+      "risk": 61.6,
       "evidence": 70.8,
-      "resilience": 54.9
+      "resilience": 58.1
     },
-    "decision": "block"
+    "decision": "review"
   },
   {
     "id": "provenance-red-team/compound-launch",
@@ -728,8 +1289,8 @@ export const gauntletRows = [
     "incidentId": "compound-launch",
     "incidentTitle": "Compound launch",
     "signals": {
-      "readiness": 73.3,
-      "risk": 50.7,
+      "readiness": 75.0,
+      "risk": 43.6,
       "evidence": 78.8,
       "rows": 16,
       "proPlusJobs": [
@@ -737,13 +1298,13 @@ export const gauntletRows = [
         "clinical-shift"
       ],
       "gpuBackedCases": 8,
-      "sourceStatus": "release"
+      "sourceStatus": "inspect"
     },
     "metrics": {
-      "readiness": 50.3,
-      "risk": 80.7,
+      "readiness": 52.0,
+      "risk": 73.6,
       "evidence": 61.8,
-      "resilience": 42.3
+      "resilience": 45.5
     },
     "decision": "block"
   },
@@ -756,8 +1317,8 @@ export const gauntletRows = [
     "incidentId": "launch-audit",
     "incidentTitle": "Launch audit",
     "signals": {
-      "readiness": 56.1,
-      "risk": 52.2,
+      "readiness": 57.6,
+      "risk": 45.1,
       "evidence": 57.5,
       "rows": 16,
       "proPlusJobs": [
@@ -768,12 +1329,96 @@ export const gauntletRows = [
       "sourceStatus": "release"
     },
     "metrics": {
-      "readiness": 56.1,
-      "risk": 52.2,
+      "readiness": 57.6,
+      "risk": 45.1,
       "evidence": 57.5,
-      "resilience": 53.6
+      "resilience": 56.7
     },
     "decision": "review"
+  },
+  {
+    "id": "safety-deployment/rare-object-distractor",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "signals": {
+      "readiness": 57.6,
+      "risk": 45.1,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 50.6,
+      "risk": 58.1,
+      "evidence": 51.5,
+      "resilience": 47.8
+    },
+    "decision": "block"
+  },
+  {
+    "id": "safety-deployment/adversarial-text-overlay",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "signals": {
+      "readiness": 57.6,
+      "risk": 45.1,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 47.6,
+      "risk": 66.1,
+      "evidence": 47.5,
+      "resilience": 42.9
+    },
+    "decision": "block"
+  },
+  {
+    "id": "safety-deployment/unsupported-query",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "signals": {
+      "readiness": 57.6,
+      "risk": 45.1,
+      "evidence": 57.5,
+      "rows": 16,
+      "proPlusJobs": [
+        "clinical-shift",
+        "driving-safety"
+      ],
+      "gpuBackedCases": 8,
+      "sourceStatus": "release"
+    },
+    "metrics": {
+      "readiness": 45.6,
+      "risk": 69.1,
+      "evidence": 43.5,
+      "resilience": 40.1
+    },
+    "decision": "block"
   },
   {
     "id": "safety-deployment/gpu-brownout",
@@ -784,8 +1429,8 @@ export const gauntletRows = [
     "incidentId": "gpu-brownout",
     "incidentTitle": "GPU brownout",
     "signals": {
-      "readiness": 56.1,
-      "risk": 52.2,
+      "readiness": 57.6,
+      "risk": 45.1,
       "evidence": 57.5,
       "rows": 16,
       "proPlusJobs": [
@@ -796,10 +1441,10 @@ export const gauntletRows = [
       "sourceStatus": "release"
     },
     "metrics": {
-      "readiness": 42.1,
-      "risk": 64.2,
+      "readiness": 43.6,
+      "risk": 57.1,
       "evidence": 50.5,
-      "resilience": 41.8
+      "resilience": 44.9
     },
     "decision": "block"
   },
@@ -812,8 +1457,8 @@ export const gauntletRows = [
     "incidentId": "adversarial-content",
     "incidentTitle": "Adversarial content",
     "signals": {
-      "readiness": 56.1,
-      "risk": 52.2,
+      "readiness": 57.6,
+      "risk": 45.1,
       "evidence": 57.5,
       "rows": 16,
       "proPlusJobs": [
@@ -824,10 +1469,10 @@ export const gauntletRows = [
       "sourceStatus": "release"
     },
     "metrics": {
-      "readiness": 48.1,
-      "risk": 70.2,
+      "readiness": 49.6,
+      "risk": 63.1,
       "evidence": 49.5,
-      "resilience": 42.2
+      "resilience": 45.3
     },
     "decision": "block"
   },
@@ -840,8 +1485,8 @@ export const gauntletRows = [
     "incidentId": "compound-launch",
     "incidentTitle": "Compound launch",
     "signals": {
-      "readiness": 56.1,
-      "risk": 52.2,
+      "readiness": 57.6,
+      "risk": 45.1,
       "evidence": 57.5,
       "rows": 16,
       "proPlusJobs": [
@@ -852,15 +1497,69 @@ export const gauntletRows = [
       "sourceStatus": "release"
     },
     "metrics": {
-      "readiness": 33.1,
-      "risk": 82.2,
+      "readiness": 34.6,
+      "risk": 75.1,
       "evidence": 40.5,
-      "resilience": 29.5
+      "resilience": 32.6
     },
     "decision": "block"
   }
 ];
 export const actions = [
+  {
+    "id": "adaptive-serving/rare-object-distractor/review-hardening",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 64.1,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "adaptive-serving/adversarial-text-overlay/review-hardening",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 59.2,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "adaptive-serving/unsupported-query/review-hardening",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 56.4,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
   {
     "id": "adaptive-serving/gpu-brownout/review-hardening",
     "demoId": "adaptive-serving",
@@ -916,6 +1615,60 @@ export const actions = [
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
   {
+    "id": "constraint-edit/rare-object-distractor/review-hardening",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 64.1,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "constraint-edit/adversarial-text-overlay/review-hardening",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 59.2,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "constraint-edit/unsupported-query/review-hardening",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 56.4,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
     "id": "constraint-edit/gpu-brownout/review-hardening",
     "demoId": "constraint-edit",
     "demoTitle": "Constraint Edit Tournament",
@@ -966,6 +1719,60 @@ export const actions = [
     "baseline": 48.9,
     "decision": "block",
     "acceptanceCheck": "raise resilience under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "open-vocab/rare-object-distractor/review-hardening",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 66.4,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "open-vocab/adversarial-text-overlay/review-hardening",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 61.4,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "open-vocab/unsupported-query/review-hardening",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 58.7,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
@@ -1042,6 +1849,60 @@ export const actions = [
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
   {
+    "id": "3d-edit-provenance/rare-object-distractor/review-hardening",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 62.2,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "3d-edit-provenance/adversarial-text-overlay/review-hardening",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 57.3,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "3d-edit-provenance/unsupported-query/review-hardening",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "review-hardening",
+    "priority": "high",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 53.7,
+    "decision": "block",
+    "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
     "id": "3d-edit-provenance/gpu-brownout/review-hardening",
     "demoId": "3d-edit-provenance",
     "demoTitle": "3D Edit Provenance Room",
@@ -1110,6 +1971,60 @@ export const actions = [
     "baseline": 60.8,
     "decision": "review",
     "acceptanceCheck": "raise resilience under launch-audit and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "temporal-counterfactual/rare-object-distractor/review-hardening",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "high",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 51.9,
+    "decision": "block",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "temporal-counterfactual/adversarial-text-overlay/evidence-repair",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "evidence-repair",
+    "priority": "high",
+    "metric": "evidence",
+    "direction": "raise",
+    "baseline": 49.8,
+    "decision": "block",
+    "acceptanceCheck": "raise evidence under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "temporal-counterfactual/unsupported-query/risk-containment",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "risk-containment",
+    "priority": "critical",
+    "metric": "risk",
+    "direction": "lower",
+    "baseline": 76.4,
+    "decision": "block",
+    "acceptanceCheck": "lower risk under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
@@ -1186,6 +2101,60 @@ export const actions = [
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
   {
+    "id": "grounded-answer/rare-object-distractor/review-hardening",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 56.1,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "grounded-answer/adversarial-text-overlay/review-hardening",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "review-hardening",
+    "priority": "high",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 51.2,
+    "decision": "block",
+    "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "grounded-answer/unsupported-query/evidence-repair",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "evidence-repair",
+    "priority": "high",
+    "metric": "evidence",
+    "direction": "raise",
+    "baseline": 47.9,
+    "decision": "block",
+    "acceptanceCheck": "raise evidence under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
     "id": "grounded-answer/gpu-brownout/review-hardening",
     "demoId": "grounded-answer",
     "demoTitle": "Grounded Answer Courtroom",
@@ -1251,9 +2220,63 @@ export const actions = [
     "priority": "focused",
     "metric": "resilience",
     "direction": "raise",
-    "baseline": 66.3,
+    "baseline": 69.5,
     "decision": "review",
     "acceptanceCheck": "raise resilience under launch-audit and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "provenance-red-team/rare-object-distractor/review-hardening",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 60.7,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "provenance-red-team/adversarial-text-overlay/review-hardening",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "review-hardening",
+    "priority": "focused",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 55.8,
+    "decision": "review",
+    "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "provenance-red-team/unsupported-query/review-hardening",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "review-hardening",
+    "priority": "high",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 53.0,
+    "decision": "block",
+    "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
@@ -1269,7 +2292,7 @@ export const actions = [
     "priority": "focused",
     "metric": "resilience",
     "direction": "raise",
-    "baseline": 54.6,
+    "baseline": 57.7,
     "decision": "review",
     "acceptanceCheck": "raise resilience under gpu-brownout and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
@@ -1284,30 +2307,30 @@ export const actions = [
     "incidentId": "adversarial-content",
     "incidentTitle": "Adversarial content",
     "family": "review-hardening",
-    "priority": "high",
+    "priority": "focused",
     "metric": "resilience",
     "direction": "raise",
-    "baseline": 54.9,
-    "decision": "block",
+    "baseline": 58.1,
+    "decision": "review",
     "acceptanceCheck": "raise resilience under adversarial-content and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
   {
-    "id": "provenance-red-team/compound-launch/risk-containment",
+    "id": "provenance-red-team/compound-launch/review-hardening",
     "demoId": "provenance-red-team",
     "demoTitle": "Provenance Red-Team Arena",
     "theme": "The frontier - new senses and new duties",
     "page": "cvpr-provenance-red-team-arena.html",
     "incidentId": "compound-launch",
     "incidentTitle": "Compound launch",
-    "family": "risk-containment",
-    "priority": "critical",
-    "metric": "risk",
-    "direction": "lower",
-    "baseline": 80.7,
+    "family": "review-hardening",
+    "priority": "high",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 45.5,
     "decision": "block",
-    "acceptanceCheck": "lower risk under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
+    "acceptanceCheck": "raise resilience under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
@@ -1323,9 +2346,63 @@ export const actions = [
     "priority": "focused",
     "metric": "resilience",
     "direction": "raise",
-    "baseline": 53.6,
+    "baseline": 56.7,
     "decision": "review",
     "acceptanceCheck": "raise resilience under launch-audit and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "safety-deployment/rare-object-distractor/review-hardening",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "family": "review-hardening",
+    "priority": "high",
+    "metric": "resilience",
+    "direction": "raise",
+    "baseline": 47.8,
+    "decision": "block",
+    "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "safety-deployment/adversarial-text-overlay/evidence-repair",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "family": "evidence-repair",
+    "priority": "high",
+    "metric": "evidence",
+    "direction": "raise",
+    "baseline": 47.5,
+    "decision": "block",
+    "acceptanceCheck": "raise evidence under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+    "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+    "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+  },
+  {
+    "id": "safety-deployment/unsupported-query/evidence-repair",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "family": "evidence-repair",
+    "priority": "high",
+    "metric": "evidence",
+    "direction": "raise",
+    "baseline": 43.5,
+    "decision": "block",
+    "acceptanceCheck": "raise evidence under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
     "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
   },
@@ -1341,7 +2418,7 @@ export const actions = [
     "priority": "high",
     "metric": "readiness",
     "direction": "raise",
-    "baseline": 42.1,
+    "baseline": 43.6,
     "decision": "block",
     "acceptanceCheck": "raise readiness under gpu-brownout and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
@@ -1377,7 +2454,7 @@ export const actions = [
     "priority": "critical",
     "metric": "risk",
     "direction": "lower",
-    "baseline": 82.2,
+    "baseline": 75.1,
     "decision": "block",
     "acceptanceCheck": "lower risk under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
     "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
@@ -1391,6 +2468,24 @@ export const sprints = [
     "title": "Critical risk containment",
     "goal": "Stop compound-launch and high-risk incident rows from crossing the deployment risk ceiling.",
     "actions": [
+      {
+        "id": "temporal-counterfactual/unsupported-query/risk-containment",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "risk-containment",
+        "priority": "critical",
+        "metric": "risk",
+        "direction": "lower",
+        "baseline": 76.4,
+        "decision": "block",
+        "acceptanceCheck": "lower risk under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
       {
         "id": "temporal-counterfactual/compound-launch/risk-containment",
         "demoId": "temporal-counterfactual",
@@ -1428,24 +2523,6 @@ export const sprints = [
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
       {
-        "id": "provenance-red-team/compound-launch/risk-containment",
-        "demoId": "provenance-red-team",
-        "demoTitle": "Provenance Red-Team Arena",
-        "theme": "The frontier - new senses and new duties",
-        "page": "cvpr-provenance-red-team-arena.html",
-        "incidentId": "compound-launch",
-        "incidentTitle": "Compound launch",
-        "family": "risk-containment",
-        "priority": "critical",
-        "metric": "risk",
-        "direction": "lower",
-        "baseline": 80.7,
-        "decision": "block",
-        "acceptanceCheck": "lower risk under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
-        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
-        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
-      },
-      {
         "id": "safety-deployment/compound-launch/risk-containment",
         "demoId": "safety-deployment",
         "demoTitle": "Safety Deployment Simulator",
@@ -1457,7 +2534,7 @@ export const sprints = [
         "priority": "critical",
         "metric": "risk",
         "direction": "lower",
-        "baseline": 82.2,
+        "baseline": 75.1,
         "decision": "block",
         "acceptanceCheck": "lower risk under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
@@ -1532,6 +2609,24 @@ export const sprints = [
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
       {
+        "id": "3d-edit-provenance/unsupported-query/review-hardening",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "review-hardening",
+        "priority": "high",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 53.7,
+        "decision": "block",
+        "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
         "id": "3d-edit-provenance/compound-launch/review-hardening",
         "demoId": "3d-edit-provenance",
         "demoTitle": "3D Edit Provenance Room",
@@ -1546,6 +2641,42 @@ export const sprints = [
         "baseline": 48.8,
         "decision": "block",
         "acceptanceCheck": "raise resilience under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "temporal-counterfactual/rare-object-distractor/review-hardening",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "high",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 51.9,
+        "decision": "block",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "temporal-counterfactual/adversarial-text-overlay/evidence-repair",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "evidence-repair",
+        "priority": "high",
+        "metric": "evidence",
+        "direction": "raise",
+        "baseline": 49.8,
+        "decision": "block",
+        "acceptanceCheck": "raise evidence under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
@@ -1586,6 +2717,42 @@ export const sprints = [
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
       {
+        "id": "grounded-answer/adversarial-text-overlay/review-hardening",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "review-hardening",
+        "priority": "high",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 51.2,
+        "decision": "block",
+        "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "grounded-answer/unsupported-query/evidence-repair",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "evidence-repair",
+        "priority": "high",
+        "metric": "evidence",
+        "direction": "raise",
+        "baseline": 47.9,
+        "decision": "block",
+        "acceptanceCheck": "raise evidence under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
         "id": "grounded-answer/adversarial-content/review-hardening",
         "demoId": "grounded-answer",
         "demoTitle": "Grounded Answer Courtroom",
@@ -1604,20 +2771,92 @@ export const sprints = [
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
       {
-        "id": "provenance-red-team/adversarial-content/review-hardening",
+        "id": "provenance-red-team/unsupported-query/review-hardening",
         "demoId": "provenance-red-team",
         "demoTitle": "Provenance Red-Team Arena",
         "theme": "The frontier - new senses and new duties",
         "page": "cvpr-provenance-red-team-arena.html",
-        "incidentId": "adversarial-content",
-        "incidentTitle": "Adversarial content",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
         "family": "review-hardening",
         "priority": "high",
         "metric": "resilience",
         "direction": "raise",
-        "baseline": 54.9,
+        "baseline": 53.0,
         "decision": "block",
-        "acceptanceCheck": "raise resilience under adversarial-content and rerun cvpr-cross-theme-incident-gauntlet",
+        "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "provenance-red-team/compound-launch/review-hardening",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "compound-launch",
+        "incidentTitle": "Compound launch",
+        "family": "review-hardening",
+        "priority": "high",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 45.5,
+        "decision": "block",
+        "acceptanceCheck": "raise resilience under compound-launch and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "safety-deployment/rare-object-distractor/review-hardening",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "high",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 47.8,
+        "decision": "block",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "safety-deployment/adversarial-text-overlay/evidence-repair",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "evidence-repair",
+        "priority": "high",
+        "metric": "evidence",
+        "direction": "raise",
+        "baseline": 47.5,
+        "decision": "block",
+        "acceptanceCheck": "raise evidence under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "safety-deployment/unsupported-query/evidence-repair",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "evidence-repair",
+        "priority": "high",
+        "metric": "evidence",
+        "direction": "raise",
+        "baseline": 43.5,
+        "decision": "block",
+        "acceptanceCheck": "raise evidence under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
@@ -1633,7 +2872,7 @@ export const sprints = [
         "priority": "high",
         "metric": "readiness",
         "direction": "raise",
-        "baseline": 42.1,
+        "baseline": 43.6,
         "decision": "block",
         "acceptanceCheck": "raise readiness under gpu-brownout and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
@@ -1672,6 +2911,60 @@ export const sprints = [
     "goal": "Convert review rows into release candidates after the critical and high repairs land.",
     "actions": [
       {
+        "id": "adaptive-serving/rare-object-distractor/review-hardening",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 64.1,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "adaptive-serving/adversarial-text-overlay/review-hardening",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 59.2,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "adaptive-serving/unsupported-query/review-hardening",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 56.4,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
         "id": "adaptive-serving/gpu-brownout/review-hardening",
         "demoId": "adaptive-serving",
         "demoTitle": "Adaptive Serving Stress Lab",
@@ -1708,6 +3001,60 @@ export const sprints = [
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
       {
+        "id": "constraint-edit/rare-object-distractor/review-hardening",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 64.1,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "constraint-edit/adversarial-text-overlay/review-hardening",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 59.2,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "constraint-edit/unsupported-query/review-hardening",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 56.4,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
         "id": "constraint-edit/gpu-brownout/review-hardening",
         "demoId": "constraint-edit",
         "demoTitle": "Constraint Edit Tournament",
@@ -1740,6 +3087,60 @@ export const sprints = [
         "baseline": 61.5,
         "decision": "review",
         "acceptanceCheck": "raise resilience under adversarial-content and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "open-vocab/rare-object-distractor/review-hardening",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 66.4,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "open-vocab/adversarial-text-overlay/review-hardening",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 61.4,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "open-vocab/unsupported-query/review-hardening",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 58.7,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under unsupported-query and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
@@ -1794,6 +3195,42 @@ export const sprints = [
         "baseline": 70.3,
         "decision": "review",
         "acceptanceCheck": "raise resilience under launch-audit and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "3d-edit-provenance/rare-object-distractor/review-hardening",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 62.2,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "3d-edit-provenance/adversarial-text-overlay/review-hardening",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 57.3,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
@@ -1870,6 +3307,24 @@ export const sprints = [
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
       {
+        "id": "grounded-answer/rare-object-distractor/review-hardening",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 56.1,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
         "id": "grounded-answer/gpu-brownout/review-hardening",
         "demoId": "grounded-answer",
         "demoTitle": "Grounded Answer Courtroom",
@@ -1899,9 +3354,45 @@ export const sprints = [
         "priority": "focused",
         "metric": "resilience",
         "direction": "raise",
-        "baseline": 66.3,
+        "baseline": 69.5,
         "decision": "review",
         "acceptanceCheck": "raise resilience under launch-audit and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "provenance-red-team/rare-object-distractor/review-hardening",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 60.7,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under rare-object-distractor and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "provenance-red-team/adversarial-text-overlay/review-hardening",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 55.8,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under adversarial-text-overlay and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
@@ -1917,9 +3408,27 @@ export const sprints = [
         "priority": "focused",
         "metric": "resilience",
         "direction": "raise",
-        "baseline": 54.6,
+        "baseline": 57.7,
         "decision": "review",
         "acceptanceCheck": "raise resilience under gpu-brownout and rerun cvpr-cross-theme-incident-gauntlet",
+        "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
+        "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
+      },
+      {
+        "id": "provenance-red-team/adversarial-content/review-hardening",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "adversarial-content",
+        "incidentTitle": "Adversarial content",
+        "family": "review-hardening",
+        "priority": "focused",
+        "metric": "resilience",
+        "direction": "raise",
+        "baseline": 58.1,
+        "decision": "review",
+        "acceptanceCheck": "raise resilience under adversarial-content and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
         "sourceRegistry": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json"
       },
@@ -1935,7 +3444,7 @@ export const sprints = [
         "priority": "focused",
         "metric": "resilience",
         "direction": "raise",
-        "baseline": 53.6,
+        "baseline": 56.7,
         "decision": "review",
         "acceptanceCheck": "raise resilience under launch-audit and rerun cvpr-cross-theme-incident-gauntlet",
         "validationCommand": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
@@ -1952,18 +3461,18 @@ export const sprints = [
 ];
 export const summary = {
   "demo": "cvpr-gauntlet-remediation-sprint",
-  "status": "release",
+  "status": "inspect",
   "sourceDemo": "cvpr-cross-theme-incident-gauntlet",
-  "sourceRows": 32,
-  "actionableRows": 29,
-  "blockActions": 14,
-  "reviewActions": 15,
+  "sourceRows": 56,
+  "actionableRows": 53,
+  "blockActions": 23,
+  "reviewActions": 30,
   "criticalActions": 4,
-  "highActions": 10,
-  "focusedActions": 15,
+  "highActions": 19,
+  "focusedActions": 30,
   "sprints": 3,
   "themes": 8,
-  "incidents": 4,
-  "acceptanceChecks": 29,
+  "incidents": 7,
+  "acceptanceChecks": 53,
   "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
 };

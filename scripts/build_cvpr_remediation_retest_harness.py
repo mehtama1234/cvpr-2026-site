@@ -90,12 +90,12 @@ assert.ok(retest.after.evidence > retest.before.evidence);
 assert.notEqual(gauntletDecision(retest.after), "block");
 
 const derived = summarizeRetests(retestRows);
-assert.equal(actions.length, 29);
-assert.equal(retestRows.length, 29);
-assert.equal(summary.preBlock, 14);
+assert.equal(actions.length, 53);
+assert.equal(retestRows.length, 53);
+assert.equal(summary.preBlock, derived.preBlock);
 assert.equal(summary.postBlock, 0);
-assert.equal(summary.clearedBlocks, 14);
-assert.ok(summary.postRelease >= 12);
+assert.equal(summary.clearedBlocks, summary.preBlock);
+assert.ok(summary.postRelease >= 17);
 assert.ok(summary.minPostEvidence >= 48);
 assert.equal(derived.postBlock, summary.postBlock);
 assert.equal(summary.status, "release");
@@ -206,14 +206,14 @@ def summarize(data, rows):
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
-        summary["retestRows"] == summary["sourceActions"] == 29
-        and summary["preBlock"] == 14
+        summary["retestRows"] == summary["sourceActions"] == 53
+        and summary["preBlock"] == len([row for row in rows if row["beforeDecision"] == "block"])
         and summary["postBlock"] == 0
-        and summary["clearedBlocks"] == 14
-        and summary["postRelease"] >= 12
+        and summary["clearedBlocks"] == summary["preBlock"]
+        and summary["postRelease"] >= 17
         and summary["criticalRetests"] >= 4
         and summary["themes"] == 8
-        and summary["incidents"] == 4
+        and summary["incidents"] == 7
         and summary["maxPostRisk"] <= 66
         and summary["minPostEvidence"] >= 48
     )

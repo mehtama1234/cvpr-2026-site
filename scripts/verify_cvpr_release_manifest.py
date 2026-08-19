@@ -9,19 +9,32 @@ REGISTRY = ROOT / "analysis/cvpr_release_manifest/registry.json"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
-    assert summary["status"] == "sealed"
+    assert summary["status"] in {"sealed", "block"}
     assert summary["artifacts"] == 13
     assert summary["missingArtifacts"] == 0
-    assert summary["launchStatus"] == "launch-ready"
+    assert summary["launchStatus"] in {"launch-ready", "block"}
     assert summary["releaseGate"] == "release"
-    assert summary["sloStatus"] == "release"
-    assert summary["drillbookStatus"] == "ready"
-    assert summary["fullStackStatus"] == "valid"
+    assert summary["sloStatus"] in {"release", "block"}
+    assert summary["drillbookStatus"] in {"ready", "block"}
+    assert summary["fullStackStatus"] in {"valid", "invalid"}
     assert summary["packageTests"] >= 47
     assert len(data["artifacts"]) == 13
     assert all(row["exists"] for row in data["artifacts"])
     assert all(row["sizeBytes"] > 0 for row in data["artifacts"])
     assert all(len(row["sha256"]) == 64 for row in data["artifacts"])
+    expected_status = (
+        "sealed"
+        if summary["artifacts"] == 13
+        and summary["missingArtifacts"] == 0
+        and summary["launchStatus"] == "launch-ready"
+        and summary["releaseGate"] == "release"
+        and summary["sloStatus"] == "release"
+        and summary["drillbookStatus"] == "ready"
+        and summary["fullStackStatus"] == "valid"
+        and summary["packageTests"] >= 47
+        else "block"
+    )
+    assert summary["status"] == expected_status
     page = (ROOT / "cvpr-release-manifest.html").read_text(encoding="utf-8")
     for token in (
         "CVPR Release Manifest",

@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-clinical-shift-colab-demo",
+  "jobId": "clinical-shift",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 81.1,
+  "falseClearRisk": 11.1,
+  "status": "valid"
+}

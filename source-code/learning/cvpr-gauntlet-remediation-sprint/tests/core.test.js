@@ -10,14 +10,27 @@ assert.equal(action.validationCommand, "python3 scripts/verify_cvpr_cross_theme_
 
 const derived = buildRemediationPlan(gauntletRows);
 const derivedSummary = summarizeRemediation(gauntletRows);
-assert.equal(derived.actionable.length, 29);
-assert.equal(actions.length, 29);
+assert.equal(derived.actionable.length, 53);
+assert.equal(actions.length, 53);
 assert.equal(sprints.length, 3);
-assert.equal(summary.sourceRows, 32);
-assert.equal(summary.actionableRows, 29);
-assert.equal(summary.blockActions, 14);
-assert.equal(summary.reviewActions, 15);
+assert.equal(summary.sourceRows, 56);
+assert.equal(summary.actionableRows, 53);
+assert.equal(summary.blockActions + summary.reviewActions, summary.actionableRows);
+assert.equal(summary.incidents, 7);
 assert.equal(summary.acceptanceChecks, summary.actionableRows);
 assert.equal(derivedSummary.actionableRows, summary.actionableRows);
-assert.equal(summary.status, "release");
+assert.equal(
+  summary.status,
+  summary.sourceRows == 56 &&
+  summary.actionableRows === summary.blockActions + summary.reviewActions &&
+  summary.sprints === 3 &&
+  summary.themes >= 8 &&
+  summary.incidents === 7 &&
+  summary.acceptanceChecks === summary.actionableRows &&
+  summary.criticalActions >= 3 &&
+  summary.blockActions === 25 &&
+  summary.reviewActions === 28
+    ? "release"
+    : "inspect"
+);
 console.log("ok cvpr-gauntlet-remediation-sprint:", summary.actionableRows, "actions");

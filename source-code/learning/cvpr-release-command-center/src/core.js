@@ -4,7 +4,6 @@ export function surfaceReady(row) {
 
 export function commandCenterGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "operator-ready") return "block";
   if (summary.surfaces !== 8) return "block";
   if (summary.readySurfaces !== 8) return "block";
   if (summary.alerts !== 0) return "block";

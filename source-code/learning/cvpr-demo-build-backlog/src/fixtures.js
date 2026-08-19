@@ -2,14 +2,14 @@ export const backlogInput = {
   "roadmap": {
     "summary": {
       "roadmap": "cvpr-next-demo-roadmap",
-      "status": "ready",
+      "status": "block",
       "goals": 8,
       "themes": 8,
       "linkedSystems": 11,
       "proPlusGoals": 7,
       "cachedEvidenceGoals": 1,
       "missingEvidence": 0,
-      "operatorStatus": "operator-ready",
+      "operatorStatus": "block",
       "packageTests": 148
     },
     "roadmapGoals": [
@@ -34,7 +34,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 3,
         "benchCases": 4,
-        "readinessFloor": 73.5,
+        "readinessFloor": 86.9,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       },
@@ -63,7 +63,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 6,
         "benchCases": 8,
-        "readinessFloor": 77.4,
+        "readinessFloor": 70.5,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       },
@@ -88,7 +88,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 3,
         "benchCases": 4,
-        "readinessFloor": 83.8,
+        "readinessFloor": 44.0,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       },
@@ -117,7 +117,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 6,
         "benchCases": 8,
-        "readinessFloor": 72.0,
+        "readinessFloor": 73.6,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       },
@@ -142,7 +142,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 3,
         "benchCases": 4,
-        "readinessFloor": 75.9,
+        "readinessFloor": 80.3,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       },
@@ -196,7 +196,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 6,
         "benchCases": 8,
-        "readinessFloor": 72.5,
+        "readinessFloor": 53.8,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       },
@@ -221,7 +221,7 @@ export const backlogInput = {
         "cachedEvidenceSystems": [],
         "stageDemos": 3,
         "benchCases": 4,
-        "readinessFloor": 68.1,
+        "readinessFloor": 56.5,
         "command": "python3 scripts/validate_cvpr_full_stack.py",
         "status": "ready"
       }
@@ -236,7 +236,7 @@ export const backlogInput = {
   "portfolio": {
     "summary": {
       "portfolio": "cvpr-theme-portfolio-map",
-      "status": "release",
+      "status": "block",
       "themes": 8,
       "systems": 11,
       "stages": 33,
@@ -245,7 +245,7 @@ export const backlogInput = {
       "missingDemoEvidence": 0,
       "proPlusSystems": 10,
       "cachedEvidenceSystems": 1,
-      "operatorStatus": "operator-ready"
+      "operatorStatus": "block"
     },
     "themeRows": [
       {
@@ -481,18 +481,18 @@ export const backlogInput = {
   "commandCenter": {
     "summary": {
       "center": "cvpr-release-command-center",
-      "status": "operator-ready",
+      "status": "block",
       "surfaces": 8,
-      "readySurfaces": 8,
-      "alerts": 0,
+      "readySurfaces": 2,
+      "alerts": 5,
       "importIssues": 0,
       "fullStackStatus": "valid",
       "packageTests": 148,
       "systems": 11,
       "stages": 33,
       "demos": 41,
-      "workerJobs": 10,
-      "cachedResults": 40
+      "workerJobs": 14,
+      "cachedResults": 56
     },
     "surfaceRows": [
       {
@@ -507,7 +507,7 @@ export const backlogInput = {
       {
         "surface": "cvpr-launch-readiness-pack.html",
         "label": "Launch readiness pack",
-        "actual": "launch-ready",
+        "actual": "block",
         "expected": "launch-ready",
         "metric": "148 package tests",
         "evidence": "analysis/cvpr_launch_readiness_pack/registry.json",
@@ -516,7 +516,7 @@ export const backlogInput = {
       {
         "surface": "cvpr-release-manifest.html",
         "label": "Release manifest",
-        "actual": "sealed",
+        "actual": "block",
         "expected": "sealed",
         "metric": "13 artifacts",
         "evidence": "analysis/cvpr_release_manifest/registry.json",
@@ -525,7 +525,7 @@ export const backlogInput = {
       {
         "surface": "cvpr-release-change-control.html",
         "label": "Release change control",
-        "actual": "controlled",
+        "actual": "block",
         "expected": "controlled",
         "metric": "13/13 rows",
         "evidence": "analysis/cvpr_release_change_control/registry.json",
@@ -534,7 +534,7 @@ export const backlogInput = {
       {
         "surface": "cvpr-release-dependency-graph.html",
         "label": "Release dependency graph",
-        "actual": "ready",
+        "actual": "block",
         "expected": "ready",
         "metric": "15 nodes / 19 edges",
         "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
@@ -543,18 +543,18 @@ export const backlogInput = {
       {
         "surface": "cvpr-post-launch-monitoring.html",
         "label": "Post-launch monitoring",
-        "actual": "watching",
+        "actual": "block",
         "expected": "watching",
-        "metric": "9/9 monitors",
+        "metric": "4/9 monitors",
         "evidence": "analysis/cvpr_post_launch_monitoring/registry.json",
         "command": "python3 scripts/build_cvpr_post_launch_monitoring.py && python3 scripts/verify_cvpr_post_launch_monitoring.py"
       },
       {
         "surface": "cvpr-release-audit-trail.html",
         "label": "Release audit trail",
-        "actual": "complete",
+        "actual": "block",
         "expected": "complete",
-        "metric": "58/58 events",
+        "metric": "56/58 events",
         "evidence": "analysis/cvpr_release_audit_trail/registry.json",
         "command": "python3 scripts/build_cvpr_release_audit_trail.py && python3 scripts/verify_cvpr_release_audit_trail.py"
       },
@@ -602,7 +602,7 @@ export const backlogTasks = [
     "targetFile": "efficient-vision-serving.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 73.5,
+    "readinessFloor": 86.9,
     "status": "ready"
   },
   {
@@ -626,7 +626,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_compute_serving_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 73.5,
+    "readinessFloor": 86.9,
     "status": "ready"
   },
   {
@@ -650,7 +650,7 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 73.5,
+    "readinessFloor": 86.9,
     "status": "ready"
   },
   {
@@ -677,7 +677,7 @@ export const backlogTasks = [
     "targetFile": "controllable-generation-studio.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 77.4,
+    "readinessFloor": 70.5,
     "status": "ready"
   },
   {
@@ -704,7 +704,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_constraint_generation_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 77.4,
+    "readinessFloor": 70.5,
     "status": "ready"
   },
   {
@@ -731,7 +731,7 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 77.4,
+    "readinessFloor": 70.5,
     "status": "ready"
   },
   {
@@ -755,7 +755,7 @@ export const backlogTasks = [
     "targetFile": "open-vocab-visual-search.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 83.8,
+    "readinessFloor": 44.0,
     "status": "ready"
   },
   {
@@ -779,7 +779,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_long_tail_grounding_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 83.8,
+    "readinessFloor": 44.0,
     "status": "ready"
   },
   {
@@ -803,7 +803,7 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 83.8,
+    "readinessFloor": 44.0,
     "status": "ready"
   },
   {
@@ -830,7 +830,7 @@ export const backlogTasks = [
     "targetFile": "gaussian-splatting-platform.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 72.0,
+    "readinessFloor": 73.6,
     "status": "ready"
   },
   {
@@ -857,7 +857,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_gaussian_splatting_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 72.0,
+    "readinessFloor": 73.6,
     "status": "ready"
   },
   {
@@ -884,7 +884,7 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 72.0,
+    "readinessFloor": 73.6,
     "status": "ready"
   },
   {
@@ -908,7 +908,7 @@ export const backlogTasks = [
     "targetFile": "video-world-model.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 75.9,
+    "readinessFloor": 80.3,
     "status": "ready"
   },
   {
@@ -932,7 +932,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_temporal_rollout_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 75.9,
+    "readinessFloor": 80.3,
     "status": "ready"
   },
   {
@@ -956,7 +956,7 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 75.9,
+    "readinessFloor": 80.3,
     "status": "ready"
   },
   {
@@ -1055,7 +1055,7 @@ export const backlogTasks = [
     "targetFile": "adversarial-provenance-gate.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 72.5,
+    "readinessFloor": 53.8,
     "status": "ready"
   },
   {
@@ -1082,7 +1082,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_adversarial_provenance_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 72.5,
+    "readinessFloor": 53.8,
     "status": "ready"
   },
   {
@@ -1109,7 +1109,7 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 72.5,
+    "readinessFloor": 53.8,
     "status": "ready"
   },
   {
@@ -1133,7 +1133,7 @@ export const backlogTasks = [
     "targetFile": "driving-vla-release-gate.html",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "The demo has a named scenario, target system, linked theme, explicit stress cases, and inspection page handoff.",
-    "readinessFloor": 68.1,
+    "readinessFloor": 56.5,
     "status": "ready"
   },
   {
@@ -1157,7 +1157,7 @@ export const backlogTasks = [
     "targetFile": "analysis/cvpr_driving_safety_bench/registry.json",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Every demo claim resolves to a bench page, runtime evidence source, and reproducible registry row.",
-    "readinessFloor": 68.1,
+    "readinessFloor": 56.5,
     "status": "ready"
   },
   {
@@ -1181,13 +1181,13 @@ export const backlogTasks = [
     "targetFile": "scripts/validate_cvpr_full_stack.py",
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "acceptance": "Focused verifier, package test, release command center, and full-stack validator all pass.",
-    "readinessFloor": 68.1,
+    "readinessFloor": 56.5,
     "status": "ready"
   }
 ];
 export const summary = {
   "backlog": "cvpr-demo-build-backlog",
-  "status": "ready",
+  "status": "block",
   "goals": 8,
   "tasks": 24,
   "themes": 8,
@@ -1195,7 +1195,7 @@ export const summary = {
   "proPlusTasks": 21,
   "cachedEvidenceTasks": 3,
   "missingEvidence": 0,
-  "operatorStatus": "operator-ready",
+  "operatorStatus": "block",
   "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
   "packageTests": 148
 };

@@ -19,10 +19,10 @@ def main():
     assert summary["passing"] == 12
     assert summary["misses"] == 0
     assert summary["critical"] == 2
-    assert summary["high"] == 6
-    assert summary["focused"] == 4
-    assert summary["themes"] >= 7
-    assert summary["incidents"] == 4
+    assert summary["high"] == 9
+    assert summary["focused"] == 1
+    assert summary["themes"] == 8
+    assert summary["incidents"] == 7
     assert len(data["rehearsalRows"]) == 12
     assert all(row["elapsedMinutes"] <= row["targetMinutes"] for row in data["rehearsalRows"])
     assert all(row["validationCommand"] == "python3 scripts/validate_cvpr_full_stack.py" for row in data["rehearsalRows"])

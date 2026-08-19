@@ -76,6 +76,7 @@ export function validateExportContract(results, manifest, runnerCoverage) {
     if (result.mode !== "live-colab") issues.push(`mode:${result.jobId}:${result.caseId}`);
     if (result.provenance?.runtime !== "google-colab-pro-plus") issues.push(`runtime:${result.jobId}:${result.caseId}`);
     if (!result.provenance?.accelerator || result.provenance.accelerator === "CPU") issues.push(`accelerator:${result.jobId}:${result.caseId}`);
+    if (String(result.provenance?.execution || "").toLowerCase().includes("fallback")) issues.push(`fallback:${result.jobId}:${result.caseId}`);
     if (result.provenance?.notebook !== manifest?.notebook) issues.push(`notebook:${result.jobId}:${result.caseId}`);
     if (typeof result.metrics?.readiness !== "number") issues.push(`readiness:${result.jobId}:${result.caseId}`);
   }

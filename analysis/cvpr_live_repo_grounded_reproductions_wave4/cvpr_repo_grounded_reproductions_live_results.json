@@ -1,0 +1,140 @@
+[
+  {
+    "jobId": "repo-grounded-reproductions",
+    "caseId": "perception-01-github-com-primebo1-fob",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:46Z",
+    "model": {
+      "repoSmoke": "inline-git-clone-import-scan"
+    },
+    "inputs": {
+      "repo": "https://github.com/primebo1/FoB",
+      "page": "cvpr-perception-parts-repo-bench.html"
+    },
+    "outputs": {
+      "cloneStatus": "missing",
+      "commitSha": "unknown",
+      "runtimeSeconds": 0.02,
+      "pythonFiles": 0,
+      "importScan": []
+    },
+    "metrics": {
+      "readiness": 18.0,
+      "repoPresent": 0.0,
+      "runtimeSeconds": 0.02,
+      "coverageDepth": 0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-repo-grounded-reproductions-bench",
+      "execution": "git-clone-repo-smoke-live-demo"
+    }
+  },
+  {
+    "jobId": "repo-grounded-reproductions",
+    "caseId": "perception-04-github-com-yvogao-tape",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:47Z",
+    "model": {
+      "repoSmoke": "inline-git-clone-import-scan"
+    },
+    "inputs": {
+      "repo": "https://github.com/YvoGao/TAPE",
+      "page": "cvpr-perception-parts-repo-bench.html"
+    },
+    "outputs": {
+      "cloneStatus": "present",
+      "commitSha": "c80d17ddbada4c43401000eeeedb42f104cd1927",
+      "runtimeSeconds": 0.01,
+      "pythonFiles": 23,
+      "importScan": [
+        "loader.py",
+        "main.py",
+        "train.py",
+        "trainer.py",
+        "utils.py"
+      ]
+    },
+    "metrics": {
+      "readiness": 82.0,
+      "repoPresent": 100.0,
+      "runtimeSeconds": 0.01,
+      "coverageDepth": 13.8
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-repo-grounded-reproductions-bench",
+      "execution": "git-clone-repo-smoke-live-demo"
+    }
+  },
+  {
+    "jobId": "repo-grounded-reproductions",
+    "caseId": "learning-04-github-com-savadikarc-cheem",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:48Z",
+    "model": {
+      "repoSmoke": "inline-git-clone-import-scan"
+    },
+    "inputs": {
+      "repo": "https://github.com/savadikarc/cheem",
+      "page": "cvpr-efficient-learning-repo-governor.html"
+    },
+    "outputs": {
+      "cloneStatus": "present",
+      "commitSha": "d23b3240fad8b2a49f83b5e247468677c4fb413d",
+      "runtimeSeconds": 0.01,
+      "pythonFiles": 41,
+      "importScan": []
+    },
+    "metrics": {
+      "readiness": 82.0,
+      "repoPresent": 100.0,
+      "runtimeSeconds": 0.01,
+      "coverageDepth": 24.6
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-repo-grounded-reproductions-bench",
+      "execution": "git-clone-repo-smoke-live-demo"
+    }
+  },
+  {
+    "jobId": "repo-grounded-reproductions",
+    "caseId": "vlm-03-github-com-oamyjin-graphvlm",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:42:12Z",
+    "model": {
+      "repoSmoke": "inline-git-clone-import-scan"
+    },
+    "inputs": {
+      "repo": "https://github.com/oamyjin/GraphVLM",
+      "page": "cvpr-grounded-vlm-repo-court.html"
+    },
+    "outputs": {
+      "cloneStatus": "present",
+      "commitSha": "4e6c0f55b9d149b3abc354c4a62c43c2fa6d4274",
+      "runtimeSeconds": 1.01,
+      "pythonFiles": 191,
+      "importScan": []
+    },
+    "metrics": {
+      "readiness": 82.0,
+      "repoPresent": 100.0,
+      "runtimeSeconds": 1.01,
+      "coverageDepth": 100
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-repo-grounded-reproductions-bench",
+      "execution": "git-clone-repo-smoke-live-demo"
+    }
+  }
+]

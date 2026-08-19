@@ -4,85 +4,87 @@
     "status": "ready",
     "rows": 8,
     "systems": 2,
-    "releaseWatch": 2,
-    "humanReview": 5,
-    "safetyHold": 1,
+    "releaseWatch": 4,
+    "humanReview": 4,
+    "safetyHold": 0,
     "rollbackRehearsal": 0,
-    "maxSafetyRisk": 74.5,
-    "minEvidence": 72.5,
+    "maxSafetyRisk": 58.2,
+    "minEvidence": 69.9,
     "canaryRollback": 0,
     "rollbackStressStatus": "ready",
     "fullStackStatus": "valid",
+    "familyFlowCommand": "python3 scripts/run_cvpr_safety_deployment_flow.py",
+    "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
     "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
   },
   "escalationRows": [
     {
-      "id": "clinical/same-site-clean",
+      "id": "clinical/clear-baseline",
       "system": "medical-vision-validation",
       "theme": "Using vision to act in the world",
-      "title": "Same-site clean validation",
+      "title": "Clear baseline",
       "targetPage": "cvpr-clinical-shift-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 88.5,
-        "safetyRisk": 22.2,
-        "evidence": 87.9,
-        "rollbackRisk": 17.7
+        "readiness": 89.9,
+        "safetyRisk": 20.6,
+        "evidence": 92.5,
+        "rollbackRisk": 17.3
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "decision": "release-watch",
       "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
     },
     {
-      "id": "clinical/new-scanner",
+      "id": "clinical/scanner-shift",
       "system": "medical-vision-validation",
       "theme": "Using vision to act in the world",
-      "title": "New scanner protocol",
+      "title": "Scanner shift",
       "targetPage": "cvpr-clinical-shift-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 80.5,
-        "safetyRisk": 47.3,
-        "evidence": 80.3,
-        "rollbackRisk": 24.0
+        "readiness": 83.2,
+        "safetyRisk": 38.5,
+        "evidence": 88.0,
+        "rollbackRisk": 21.8
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "decision": "release-watch",
       "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
     },
     {
-      "id": "clinical/external-hospital",
+      "id": "clinical/rare-presentation",
       "system": "medical-vision-validation",
       "theme": "Using vision to act in the world",
-      "title": "External hospital cohort",
+      "title": "Rare presentation",
       "targetPage": "cvpr-clinical-shift-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 77.1,
-        "safetyRisk": 58.7,
-        "evidence": 76.9,
-        "rollbackRisk": 26.8
+        "readiness": 81.9,
+        "safetyRisk": 43.7,
+        "evidence": 86.5,
+        "rollbackRisk": 23.1
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
-      "decision": "human-review",
-      "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      "decision": "release-watch",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
     },
     {
-      "id": "clinical/noisy-rare-cohort",
+      "id": "clinical/motion-artifact",
       "system": "medical-vision-validation",
       "theme": "Using vision to act in the world",
-      "title": "Noisy rare cohort",
+      "title": "Motion artifact",
       "targetPage": "cvpr-clinical-shift-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 72.5,
-        "safetyRisk": 74.5,
-        "evidence": 72.5,
-        "rollbackRisk": 30.8
+        "readiness": 81.1,
+        "safetyRisk": 43.8,
+        "evidence": 86.2,
+        "rollbackRisk": 23.1
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
-      "decision": "safety-hold",
-      "responseCommand": "python3 scripts/verify_cvpr_remediation_canary_monitor.py"
+      "decision": "release-watch",
+      "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
     },
     {
       "id": "driving/urban-cut-in",
@@ -92,10 +94,10 @@
       "targetPage": "cvpr-driving-safety-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 68.1,
-        "safetyRisk": 53.6,
-        "evidence": 81.9,
-        "rollbackRisk": 27.2
+        "readiness": 75.3,
+        "safetyRisk": 53.0,
+        "evidence": 71.0,
+        "rollbackRisk": 27.0
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "decision": "human-review",
@@ -109,9 +111,9 @@
       "targetPage": "cvpr-driving-safety-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 68.2,
-        "safetyRisk": 49.2,
-        "evidence": 80.3,
+        "readiness": 75.8,
+        "safetyRisk": 48.9,
+        "evidence": 70.9,
         "rollbackRisk": 25.9
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
@@ -126,9 +128,9 @@
       "targetPage": "cvpr-driving-safety-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 68.2,
-        "safetyRisk": 58.1,
-        "evidence": 83.6,
+        "readiness": 74.3,
+        "safetyRisk": 58.2,
+        "evidence": 69.9,
         "rollbackRisk": 28.4
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
@@ -143,10 +145,10 @@
       "targetPage": "cvpr-driving-safety-bench.html",
       "sourceDecision": "release",
       "escalation": {
-        "readiness": 68.2,
-        "safetyRisk": 49.2,
-        "evidence": 79.4,
-        "rollbackRisk": 25.9
+        "readiness": 75.5,
+        "safetyRisk": 48.9,
+        "evidence": 70.1,
+        "rollbackRisk": 25.8
       },
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "decision": "human-review",
@@ -158,6 +160,6 @@
     "driving": "analysis/cvpr_driving_safety_bench/registry.json",
     "canary": "analysis/cvpr_remediation_canary_monitor/registry.json",
     "rollbackStress": "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
-    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+    "validation": "analysis/cvpr_validation_center/registry.json"
   }
 }

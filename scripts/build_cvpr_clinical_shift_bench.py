@@ -9,10 +9,10 @@ MEDICAL_FIXTURES = ROOT / "source-code/learning/medical-vision-validation/src/fi
 COLAB_RESULTS = ROOT / "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json"
 
 SCENARIOS = [
-    {"id": "same-site-clean", "title": "Same-site clean validation", "scannerShift": 16, "cohortMix": 22, "labelNoise": 8, "reviewThreshold": 62},
-    {"id": "new-scanner", "title": "New scanner protocol", "scannerShift": 58, "cohortMix": 34, "labelNoise": 16, "reviewThreshold": 68},
-    {"id": "external-hospital", "title": "External hospital cohort", "scannerShift": 52, "cohortMix": 72, "labelNoise": 16, "reviewThreshold": 74},
-    {"id": "noisy-rare-cohort", "title": "Noisy rare cohort", "scannerShift": 76, "cohortMix": 84, "labelNoise": 20, "reviewThreshold": 84},
+    {"id": "clear-baseline", "title": "Clear baseline", "scannerShift": 8, "cohortMix": 18, "labelNoise": 12, "reviewThreshold": 68},
+    {"id": "scanner-shift", "title": "Scanner shift", "scannerShift": 46, "cohortMix": 34, "labelNoise": 24, "reviewThreshold": 72},
+    {"id": "rare-presentation", "title": "Rare presentation", "scannerShift": 58, "cohortMix": 52, "labelNoise": 18, "reviewThreshold": 78},
+    {"id": "motion-artifact", "title": "Motion artifact", "scannerShift": 38, "cohortMix": 44, "labelNoise": 66, "reviewThreshold": 74},
 ]
 
 CORE = """export function clamp(value, lo = 0, hi = 100) {
@@ -36,12 +36,15 @@ export function scoreClinicalCase(input, stageEvidence = { domain: 65.8, triage:
 
 export function normalizeCachedGpuResult(result) {
   if (!result || result.jobId !== "clinical-shift" || result.mode !== "cached-real") return null;
-  const shiftLoad = clamp(result.metrics.shiftLoad);
+  const shiftLoad = clamp(result.metrics.shiftLoad ?? result.metrics.shiftScore);
   const calibration = clamp(result.metrics.calibration);
-  const domainEvidence = clamp(result.metrics.domainEvidence);
-  const triageRate = clamp(result.metrics.triageRate);
-  const residualRisk = clamp(result.metrics.residualRisk);
-  const clinicalEvidence = clamp(result.metrics.clinicalEvidence);
+  const domainEvidence = clamp(result.metrics.domainEvidence ?? (100 - shiftLoad * 0.45));
+  const triageRate = clamp(result.metrics.triageRate ?? result.metrics.escalationThreshold);
+  const residualRisk = clamp(result.metrics.residualRisk ?? result.metrics.falseClearRisk);
+  const clinicalEvidence = clamp(
+    result.metrics.clinicalEvidence
+    ?? (result.metrics.readiness * 0.52 + calibration * 0.24 + (100 - residualRisk) * 0.24)
+  );
   const readiness = clamp(result.metrics.readiness);
   return { shiftLoad, calibration, domainEvidence, triageRate, residualRisk, clinicalEvidence, readiness };
 }
@@ -130,7 +133,7 @@ assert.equal(selected.runtimeMode, "cached-real");
 const summary = summarizeBench(scenarios, stageEvidence, cachedGpuResults, "cached-real");
 assert.equal(summary.cases, 4);
 assert.ok(summary.maxResidualRisk < 38);
-assert.ok(summary.minClinicalEvidence > 66);
+assert.ok(summary.minClinicalEvidence > 80);
 assert.equal(summary.release, 4);
 assert.equal(summary.cachedRealCases, 4);
 assert.equal(summary.release + summary.review + summary.block, summary.cases);
@@ -206,8 +209,27 @@ def build_records(stages, stage_evidence):
     cached_by_case = {row["caseId"]: row for row in read_cached_gpu_results()}
     records = []
     for case in SCENARIOS:
-        metrics = score_case(case, stage_evidence)
         cached = cached_by_case.get(case["id"])
+        simulated_metrics = score_case(case, stage_evidence)
+        if cached:
+            cached_shift = round(float(cached["metrics"].get("shiftLoad", cached["metrics"].get("shiftScore", 0))), 1)
+            cached_risk = round(float(cached["metrics"].get("residualRisk", cached["metrics"].get("falseClearRisk", 0))), 1)
+            cached_calibration = round(float(cached["metrics"]["calibration"]), 1)
+            cached_readiness = round(float(cached["metrics"]["readiness"]), 1)
+            cached_triage = round(float(cached["metrics"].get("triageRate", cached["metrics"].get("escalationThreshold", 0))), 1)
+            cached_domain = round(float(cached["metrics"].get("domainEvidence", max(0, min(100, 100 - cached_shift * 0.45)))), 1)
+            cached_clinical = round(float(cached["metrics"].get("clinicalEvidence", max(0, min(100, cached_readiness * 0.52 + cached_calibration * 0.24 + (100 - cached_risk) * 0.24)))), 1)
+            metrics = {
+                "shiftLoad": cached_shift,
+                "calibration": cached_calibration,
+                "domainEvidence": cached_domain,
+                "triageRate": cached_triage,
+                "residualRisk": cached_risk,
+                "clinicalEvidence": cached_clinical,
+                "readiness": cached_readiness,
+            }
+        else:
+            metrics = simulated_metrics
         records.append(
             {
                 "id": case["id"],
@@ -217,6 +239,7 @@ def build_records(stages, stage_evidence):
                 "sourceStages": [stage["stage"] for stage in stages],
                 "controls": {key: case[key] for key in ("scannerShift", "cohortMix", "labelNoise", "reviewThreshold")},
                 "metrics": metrics,
+                "simulatedMetrics": simulated_metrics,
                 "cachedGpuMetrics": cached["metrics"] if cached else None,
                 "decision": decision(metrics),
                 "acceptancePass": metrics["readiness"] >= 62 and decision(metrics) != "block",

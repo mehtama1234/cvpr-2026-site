@@ -180,10 +180,94 @@
       }
     },
     {
+      "jobId": "depth-normal-consistency",
+      "bench": "cvpr-depth-normal-consistency-bench",
+      "page": "cvpr-depth-normal-consistency-bench.html",
+      "priority": 9,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "torch-cuda-depth-normal-probe",
+        "finite-difference-normal-consistency"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+      "resultFilter": {
+        "jobId": "depth-normal-consistency",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "corruption-robustness",
+      "bench": "cvpr-corruption-robustness-bench",
+      "page": "cvpr-corruption-robustness-bench.html",
+      "priority": 10,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "torchvision-resnet18",
+        "clean-corrupted-logit-delta"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+      "resultFilter": {
+        "jobId": "corruption-robustness",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "bench": "cvpr-prompt-segmentation-robustness-bench",
+      "page": "cvpr-prompt-segmentation-robustness-bench.html",
+      "priority": 11,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "torchvision-maskrcnn-resnet50-fpn",
+        "mask-rcnn-click-robustness-proxy"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+      "resultFilter": {
+        "jobId": "prompt-segmentation-robustness",
+        "mode": "cached-real"
+      }
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "bench": "cvpr-video-identity-tracking-bench",
+      "page": "cvpr-video-identity-tracking-bench.html",
+      "priority": 12,
+      "runtimeModes": [
+        "simulated",
+        "cached-real",
+        "live-colab"
+      ],
+      "models": [
+        "torch-cuda-centroid-assignment-tracker",
+        "mask-sequence-identity-drift"
+      ],
+      "expectedCases": 4,
+      "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+      "resultFilter": {
+        "jobId": "video-identity-tracking",
+        "mode": "cached-real"
+      }
+    },
+    {
       "jobId": "metric-geometry",
       "bench": "cvpr-metric-geometry-bench",
       "page": "cvpr-metric-geometry-bench.html",
-      "priority": 9,
+      "priority": 13,
       "runtimeModes": [
         "simulated",
         "cached-real",
@@ -205,7 +289,7 @@
       "jobId": "gaussian-splatting",
       "bench": "cvpr-gaussian-splatting-bench",
       "page": "cvpr-gaussian-splatting-bench.html",
-      "priority": 10,
+      "priority": 14,
       "runtimeModes": [
         "simulated",
         "cached-real",

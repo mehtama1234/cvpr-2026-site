@@ -1,0 +1,176 @@
+Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /root/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth
+Downloading: "https://download.pytorch.org/models/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth" to /root/.cache/torch/hub/checkpoints/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth
+===CVPR_LIVE_JSON_BEGIN===
+{
+  "summary": {
+    "demo": "cvpr-live-prompt-segmentation-colab-demo",
+    "jobId": "prompt-segmentation-robustness",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 57.8,
+    "unsupportedRegionRisk": 35.1,
+    "status": "valid"
+  },
+  "results": [
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "single-object",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:23:49Z",
+      "model": {
+        "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+        "promptProbe": "mask-rcnn-click-robustness-proxy"
+      },
+      "inputs": {
+        "promptControls": {
+          "objectClutter": 18,
+          "promptNoise": 8,
+          "occlusion": 10
+        },
+        "asset": "synthetic://segmentation/single-object.png"
+      },
+      "outputs": {
+        "meanMaskConfidence": 60.7,
+        "maskArea": 0.88176,
+        "maskOverlap": 0.38536
+      },
+      "metrics": {
+        "readiness": 65.4,
+        "maskStability": 57.2,
+        "promptSensitivity": 32.4,
+        "unsupportedRegionRisk": 20.2,
+        "detections": 2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo"
+      }
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "cluttered-scene",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:23:49Z",
+      "model": {
+        "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+        "promptProbe": "mask-rcnn-click-robustness-proxy"
+      },
+      "inputs": {
+        "promptControls": {
+          "objectClutter": 64,
+          "promptNoise": 18,
+          "occlusion": 24
+        },
+        "asset": "synthetic://segmentation/cluttered-scene.png"
+      },
+      "outputs": {
+        "meanMaskConfidence": 66.3,
+        "maskArea": 0.9091,
+        "maskOverlap": 0.40537
+      },
+      "metrics": {
+        "readiness": 62.3,
+        "maskStability": 59.4,
+        "promptSensitivity": 48.0,
+        "unsupportedRegionRisk": 22.8,
+        "detections": 2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo"
+      }
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "ambiguous-clicks",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:23:49Z",
+      "model": {
+        "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+        "promptProbe": "mask-rcnn-click-robustness-proxy"
+      },
+      "inputs": {
+        "promptControls": {
+          "objectClutter": 46,
+          "promptNoise": 62,
+          "occlusion": 18
+        },
+        "asset": "synthetic://segmentation/ambiguous-clicks.png"
+      },
+      "outputs": {
+        "meanMaskConfidence": 66.7,
+        "maskArea": 0.90569,
+        "maskOverlap": 0.38714
+      },
+      "metrics": {
+        "readiness": 58.3,
+        "maskStability": 60.7,
+        "promptSensitivity": 61.3,
+        "unsupportedRegionRisk": 28.2,
+        "detections": 2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo"
+      }
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "occluded-object",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:23:49Z",
+      "model": {
+        "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+        "promptProbe": "mask-rcnn-click-robustness-proxy"
+      },
+      "inputs": {
+        "promptControls": {
+          "objectClutter": 38,
+          "promptNoise": 26,
+          "occlusion": 70
+        },
+        "asset": "synthetic://segmentation/occluded-object.png"
+      },
+      "outputs": {
+        "meanMaskConfidence": 66.3,
+        "maskArea": 0.91259,
+        "maskOverlap": 0.40266
+      },
+      "metrics": {
+        "readiness": 57.8,
+        "maskStability": 53.9,
+        "promptSensitivity": 45.5,
+        "unsupportedRegionRisk": 35.1,
+        "detections": 2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo"
+      }
+    }
+  ]
+}
+===CVPR_LIVE_JSON_END===
+{
+  "demo": "cvpr-live-prompt-segmentation-colab-demo",
+  "jobId": "prompt-segmentation-robustness",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 57.8,
+  "unsupportedRegionRisk": 35.1,
+  "status": "valid"
+}

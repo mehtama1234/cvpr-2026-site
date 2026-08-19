@@ -1,0 +1,19 @@
+[colab] Creating session 'run-204746'...
+[colab] Session READY (run-204746). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_second_wave_demo.py...
+
+  0%|          | 0.00/44.7M [00:00<?, ?B/s]
+ 32%|███▏      | 14.1M/44.7M [00:00<00:00, 147MB/s]
+ 67%|██████▋   | 29.8M/44.7M [00:00<00:00, 156MB/s]
+100%|██████████| 44.7M/44.7M [00:00<00:00, 165MB/s]
+[colab] Stopping session 'run-204746'...
+[colab] Session terminated.
+
+
+[fallback-attempts]
+[
+  {
+    "gpu": "T4",
+    "returncode": 0,
+    "stderr": "[colab] Creating session 'run-204746'...\n[colab] Session READY (run-204746). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_second_wave_demo.py...\n\n  0%|          | 0.00/44.7M [00:00<?, ?B/s]\n 32%|\u2588\u2588\u2588\u258f      | 14.1M/44.7M [00:00<00:00, 147MB/s]\n 67%|\u2588\u2588\u2588\u2588\u2588\u2588\u258b   | 29.8M/44.7M [00:00<00:00, 156MB/s]\n100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 44.7M/44.7M [00:00<00:00, 165MB/s]\n[colab] Stopping session 'run-204746'...\n[colab] Session terminated.\n"
+  }
+]

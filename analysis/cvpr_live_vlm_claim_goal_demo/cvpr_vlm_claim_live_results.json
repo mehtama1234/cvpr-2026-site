@@ -1,0 +1,142 @@
+[
+  {
+    "jobId": "vlm-claim-auditor",
+    "caseId": "visible-count",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:29Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "there are multiple colored objects",
+      "asset": "synthetic://vlm-claim/visible-count.png"
+    },
+    "outputs": {
+      "caption": "a white background with a colorful circle pattern",
+      "clipScores": {
+        "there are multiple colored objects": 93.0,
+        "a white background with a colorful circle pattern": 6.8,
+        "an unrelated animal photo": 0.2
+      }
+    },
+    "metrics": {
+      "readiness": 70.6,
+      "claimSupport": 93.0,
+      "captionAlignment": 33.5,
+      "unsupportedClaimRisk": 8.3
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-vlm-claim-auditor-bench",
+      "execution": "transformers-blip-clip-claim-audit-live-demo"
+    }
+  },
+  {
+    "jobId": "vlm-claim-auditor",
+    "caseId": "attribute-relation",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:30Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "a red object is left of a blue object",
+      "asset": "synthetic://vlm-claim/attribute-relation.png"
+    },
+    "outputs": {
+      "caption": "the cover of the album, ' the future of the future '",
+      "clipScores": {
+        "a red object is left of a blue object": 13.0,
+        "the cover of the album, ' the future of the future '": 86.6,
+        "an unrelated animal photo": 0.4
+      }
+    },
+    "metrics": {
+      "readiness": 49.5,
+      "claimSupport": 13.0,
+      "captionAlignment": 74.9,
+      "unsupportedClaimRisk": 54.5
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-vlm-claim-auditor-bench",
+      "execution": "transformers-blip-clip-claim-audit-live-demo"
+    }
+  },
+  {
+    "jobId": "vlm-claim-auditor",
+    "caseId": "ocr-trap",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:30Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "the image contains the word verified",
+      "asset": "synthetic://vlm-claim/ocr-trap.png"
+    },
+    "outputs": {
+      "caption": "a white background with a colorful geometric pattern",
+      "clipScores": {
+        "the image contains the word verified": 25.9,
+        "a white background with a colorful geometric pattern": 70.3,
+        "an unrelated animal photo": 3.7
+      }
+    },
+    "metrics": {
+      "readiness": 47.7,
+      "claimSupport": 25.9,
+      "captionAlignment": 65.4,
+      "unsupportedClaimRisk": 55.4
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-vlm-claim-auditor-bench",
+      "execution": "transformers-blip-clip-claim-audit-live-demo"
+    }
+  },
+  {
+    "jobId": "vlm-claim-auditor",
+    "caseId": "counterfactual-object",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:30Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "a dog is visible in the image",
+      "asset": "synthetic://vlm-claim/counterfactual-object.png"
+    },
+    "outputs": {
+      "caption": "a white background with a colorful geometric pattern",
+      "clipScores": {
+        "a dog is visible in the image": 80.6,
+        "a white background with a colorful geometric pattern": 17.0,
+        "an unrelated animal photo": 2.3
+      }
+    },
+    "metrics": {
+      "readiness": 57.5,
+      "claimSupport": 80.6,
+      "captionAlignment": 38.2,
+      "unsupportedClaimRisk": 33.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-vlm-claim-auditor-bench",
+      "execution": "transformers-blip-clip-claim-audit-live-demo"
+    }
+  }
+]

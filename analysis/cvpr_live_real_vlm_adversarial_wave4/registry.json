@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-real-vlm-adversarial-wave4",
+  "jobId": "real-vlm-adversarial-verification",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 56.8,
+  "unsupportedClaimRisk": 48.7,
+  "status": "valid"
+}

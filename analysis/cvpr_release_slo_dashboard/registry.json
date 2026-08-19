@@ -1,12 +1,12 @@
 {
   "summary": {
     "dashboard": "cvpr-release-slo-dashboard",
-    "status": "release",
+    "status": "block",
     "slos": 10,
-    "passingSlos": 10,
-    "criticalFailures": 0,
-    "readinessFloor": 68.1,
-    "avgReadiness": 78.22,
+    "passingSlos": 9,
+    "criticalFailures": 1,
+    "readinessFloor": 44.0,
+    "avgReadiness": 75.14,
     "benchAcceptanceRate": 100.0,
     "releaseGate": "release",
     "fullStackStatus": "valid",
@@ -52,8 +52,8 @@
     {
       "id": "pro-plus-result-validity",
       "label": "All cached Pro+ results validate",
-      "actual": 40,
-      "target": 40,
+      "actual": 56,
+      "target": 56,
       "direction": "eq",
       "severity": "critical",
       "evidence": "analysis/cvpr_colab_result_replay/registry.json"
@@ -61,7 +61,7 @@
     {
       "id": "readiness-floor",
       "label": "Replay readiness floor stays above release minimum",
-      "actual": 68.1,
+      "actual": 44.0,
       "target": 68.0,
       "direction": "gte",
       "severity": "critical",

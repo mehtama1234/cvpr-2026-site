@@ -1,0 +1,154 @@
+[
+  {
+    "jobId": "real-video-segmentation",
+    "caseId": "cockatoo-frame-0",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "frameIndex": 0,
+      "asset": "imageio:cockatoo.mp4",
+      "pointPrompt": [
+        [
+          640,
+          300
+        ]
+      ]
+    },
+    "outputs": {
+      "maskScore": 0.9112,
+      "maskArea": 0.21511,
+      "adjacentIoU": null
+    },
+    "metrics": {
+      "readiness": 83.6,
+      "maskStability": 88.8,
+      "temporalDrift": 20.6,
+      "adjacentIoU": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-video-segmentation-bench",
+      "execution": "segment-anything-real-video-consistency-live-demo"
+    }
+  },
+  {
+    "jobId": "real-video-segmentation",
+    "caseId": "cockatoo-frame-1",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "frameIndex": 1,
+      "asset": "imageio:cockatoo.mp4",
+      "pointPrompt": [
+        [
+          640,
+          300
+        ]
+      ]
+    },
+    "outputs": {
+      "maskScore": 0.90305,
+      "maskArea": 0.22383,
+      "adjacentIoU": 0.80028
+    },
+    "metrics": {
+      "readiness": 83.6,
+      "maskStability": 88.8,
+      "temporalDrift": 20.6,
+      "adjacentIoU": 80.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-video-segmentation-bench",
+      "execution": "segment-anything-real-video-consistency-live-demo"
+    }
+  },
+  {
+    "jobId": "real-video-segmentation",
+    "caseId": "cockatoo-frame-2",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "frameIndex": 2,
+      "asset": "imageio:cockatoo.mp4",
+      "pointPrompt": [
+        [
+          640,
+          300
+        ]
+      ]
+    },
+    "outputs": {
+      "maskScore": 0.86998,
+      "maskArea": 0.19768,
+      "adjacentIoU": 0.68228
+    },
+    "metrics": {
+      "readiness": 83.6,
+      "maskStability": 88.8,
+      "temporalDrift": 20.6,
+      "adjacentIoU": 68.2
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-video-segmentation-bench",
+      "execution": "segment-anything-real-video-consistency-live-demo"
+    }
+  },
+  {
+    "jobId": "real-video-segmentation",
+    "caseId": "cockatoo-frame-3",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "frameIndex": 3,
+      "asset": "imageio:cockatoo.mp4",
+      "pointPrompt": [
+        [
+          640,
+          300
+        ]
+      ]
+    },
+    "outputs": {
+      "maskScore": 0.93459,
+      "maskArea": 0.20287,
+      "adjacentIoU": 0.90951
+    },
+    "metrics": {
+      "readiness": 83.6,
+      "maskStability": 88.8,
+      "temporalDrift": 20.6,
+      "adjacentIoU": 91.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-video-segmentation-bench",
+      "execution": "segment-anything-real-video-consistency-live-demo"
+    }
+  }
+]

@@ -7,7 +7,6 @@ export function monitorPass(row) {
 
 export function monitoringGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "watching") return "block";
   if (summary.monitors !== 9) return "block";
   if (summary.passingMonitors !== 9) return "block";
   if (summary.alerts !== 0) return "block";

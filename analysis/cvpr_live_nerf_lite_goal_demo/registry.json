@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-nerf-lite-goal-demo",
+  "jobId": "nerf-lite-novel-view",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 76.8,
+  "viewInstability": 25.5,
+  "status": "valid"
+}

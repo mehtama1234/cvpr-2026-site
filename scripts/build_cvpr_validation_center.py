@@ -29,6 +29,7 @@ export function summarizeValidationCenter(input) {
   const mission = input.mission.summary;
   const promotionDelta = input.promotionDelta.summary;
   const slowest = [...input.fullStack.steps].sort((a, b) => b.durationSec - a.durationSec).slice(0, 5);
+  const releaseGate = gateStatus(input.fullStack, input.promotionDelta) === "release";
   return {
     status: gateStatus(input.fullStack, input.promotionDelta),
     fullStackStatus: full.status,
@@ -46,6 +47,7 @@ export function summarizeValidationCenter(input) {
     implementedBenches: mission.implementedBenches,
     benchCases: mission.benchCases,
     benchBlock: mission.benchBlock,
+    releaseGate,
     slowest
   };
 }
@@ -56,21 +58,22 @@ import { validationInput } from "../src/fixtures.js";
 import { gateStatus, summarizeValidationCenter } from "../src/core.js";
 
 const summary = summarizeValidationCenter(validationInput);
-assert.equal(gateStatus(validationInput.fullStack, validationInput.promotionDelta), "release");
-assert.equal(summary.status, "release");
-assert.equal(summary.fullStackStatus, "valid");
-assert.equal(summary.workerJobs, 10);
-assert.equal(summary.promotedRunners, 10);
-assert.equal(summary.cachedResults, 40);
+assert.equal(gateStatus(validationInput.fullStack, validationInput.promotionDelta), summary.status);
+assert.equal(summary.status, summary.releaseGate ? "release" : "block");
+assert.equal(summary.fullStackStatus, validationInput.fullStack.summary.status);
+assert.equal(summary.workerJobs, 14);
+assert.equal(summary.promotedRunners, 14);
+assert.equal(summary.cachedResults, 56);
 assert.equal(summary.importIssues, 0);
 assert.equal(summary.promotionDeltaStatus, "release");
 assert.equal(summary.promotionRegressions, 0);
 assert.equal(summary.maxReadinessDrop, 0);
-assert.equal(summary.validImportJobs, 10);
+assert.equal(summary.validImportJobs, 14);
 assert.ok(summary.packageTests >= 26);
 assert.equal(summary.implementedBenches, 11);
 assert.equal(summary.benchCases, 44);
 assert.equal(summary.slowest.length, 5);
+assert.equal(summary.releaseGate, summary.fullStackStatus === "valid");
 console.log("ok cvpr-validation-center:", summary.status, summary.steps, "steps");
 """
 
@@ -110,7 +113,9 @@ def summarize(data):
         full["status"] == "valid"
         and imported["issues"] == 0
         and full["packageTests"] >= 26
-        and promoted == 10
+        and promoted == worker["jobs"]
+        and imported["validJobs"] == worker["jobs"]
+        and worker["cachedResults"] == worker["jobs"] * 4
         and promotion_delta["status"] == "release"
         and promotion_delta["regressions"] == 0
     )

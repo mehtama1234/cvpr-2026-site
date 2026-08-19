@@ -11,6 +11,9 @@ HARNESS_BASE = ROOT / "source-code/learning/cvpr-repo-gpu-harness"
 ANALYSIS = ROOT / "analysis/cvpr_repo_harness_live_intake"
 MANIFEST = HARNESS_BASE / "_results/cvpr_repo_harness_manifest.json"
 INCOMING = HARNESS_BASE / "_incoming/cvpr_repo_harness_live.json"
+WAVE5_RESULTS = ROOT / "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json"
+WAVE5_STDOUT = ROOT / "analysis/cvpr_live_repo_execution_wave5/colab_stdout.txt"
+WAVE5_STDERR = ROOT / "analysis/cvpr_live_repo_execution_wave5/colab_stderr.txt"
 
 CORE = """export function validateHarnessResult(result, manifestJob) {
   const required = ["jobId", "mode", "repo", "commitSha", "createdAt", "environment", "metrics", "provenance", "artifacts"];
@@ -70,6 +73,10 @@ def load_harness():
     return json.loads(HARNESS.read_text(encoding="utf-8"))
 
 
+def load_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def build_manifest(jobs):
     return {
         "manifest": "cvpr-repo-harness-live-v1",
@@ -95,9 +102,133 @@ def build_manifest(jobs):
     }
 
 
-def build_live_template(jobs):
+def build_live_overlay_index(jobs):
+    job_by_id = {job["jobId"]: job for job in jobs}
+    overlays = {}
+    if not WAVE5_RESULTS.exists():
+        return overlays
+    for row in load_json(WAVE5_RESULTS):
+        job_id = row.get("caseId")
+        if job_id not in job_by_id:
+            continue
+        job = job_by_id[job_id]
+        smoke_json = ROOT / job["evidenceArtifact"]
+        log_path = ROOT / job["evidenceArtifact"].replace(".json", ".log")
+        snapshot_path = ROOT / job["evidenceArtifact"].replace(".json", ".snapshot.json")
+        overlays[job_id] = {
+            "jobId": job_id,
+            "mode": "live-colab",
+            "repo": row["inputs"]["repo"],
+            "commitSha": row["outputs"]["commitSha"],
+            "createdAt": row["createdAt"],
+            "environment": {
+                "python": "3.11",
+                "torch": "runtime-collected-not-recorded",
+                "cuda": "runtime-collected-not-recorded",
+            },
+            "metrics": {
+                "readiness": row["metrics"]["readiness"],
+                "smokePassed": row["outputs"]["commandExitCode"] == 0 and row["provenance"]["failureMode"] == "none",
+                "runtimeSeconds": row["metrics"]["runtimeSeconds"],
+                "filesScanned": row["outputs"]["pythonFiles"],
+            },
+            "provenance": {
+                "runtime": row["provenance"]["runtime"],
+                "accelerator": row["provenance"]["accelerator"],
+                "notebook": row["provenance"]["notebook"],
+                "source": "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json",
+            },
+            "artifacts": {
+                "smokeJson": job["evidenceArtifact"],
+                "log": job["evidenceArtifact"].replace(".json", ".log"),
+                "repoSnapshot": job["evidenceArtifact"].replace(".json", ".snapshot.json"),
+            },
+            "_artifact_payloads": {
+                "smokeJson": {
+                    "jobId": job_id,
+                    "repo": row["inputs"]["repo"],
+                    "mode": "live-colab",
+                    "commitSha": row["outputs"]["commitSha"],
+                    "createdAt": row["createdAt"],
+                    "command": row["inputs"]["command"],
+                    "fallbackCommands": row["outputs"]["fallbackCommands"],
+                    "repairAttempts": row["outputs"]["repairAttempts"],
+                    "metrics": row["metrics"],
+                    "provenance": row["provenance"],
+                    "sourceArtifact": "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json",
+                    "status": "authoritative-live-colab-wave5",
+                },
+                "repoSnapshot": {
+                    "jobId": job_id,
+                    "repo": row["inputs"]["repo"],
+                    "page": row["inputs"]["page"],
+                    "theme": row["inputs"]["theme"],
+                    "commitSha": row["outputs"]["commitSha"],
+                    "pythonFiles": row["outputs"]["pythonFiles"],
+                    "cloneStatus": row["outputs"]["cloneStatus"],
+                    "dependencyInstallOk": row["outputs"]["dependencyInstallOk"],
+                    "repairAttempts": row["outputs"]["repairAttempts"],
+                    "sourceArtifact": "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json",
+                },
+                "log": build_overlay_log(row),
+            },
+            "_artifact_paths": {
+                "smokeJson": smoke_json,
+                "log": log_path,
+                "repoSnapshot": snapshot_path,
+            },
+        }
+    return overlays
+
+
+def build_overlay_log(row):
+    sections = [
+        f"jobId: {row['caseId']}",
+        f"createdAt: {row['createdAt']}",
+        f"repo: {row['inputs']['repo']}",
+        f"command: {row['inputs']['command']}",
+        f"commitSha: {row['outputs']['commitSha']}",
+        f"cloneStatus: {row['outputs']['cloneStatus']}",
+        f"commandExitCode: {row['outputs']['commandExitCode']}",
+        f"runtimeSeconds: {row['metrics']['runtimeSeconds']}",
+        "",
+        "[cloneLog]",
+        row["outputs"].get("cloneLog", ""),
+        "",
+        "[installLog]",
+        row["outputs"].get("installLog", ""),
+        "",
+        "[commandStdout]",
+        row["outputs"].get("commandStdout", ""),
+        "",
+        "[commandStderr]",
+        row["outputs"].get("commandStderr", ""),
+    ]
+    if WAVE5_STDOUT.exists():
+        sections.extend(["", "[colabStdout]", WAVE5_STDOUT.read_text(encoding="utf-8")])
+    if WAVE5_STDERR.exists():
+        sections.extend(["", "[colabStderr]", WAVE5_STDERR.read_text(encoding="utf-8")])
+    return "\n".join(sections).strip() + "\n"
+
+
+def write_overlay_artifacts(overlays):
+    for overlay in overlays.values():
+        paths = overlay.pop("_artifact_paths", {})
+        payloads = overlay.pop("_artifact_payloads", {})
+        if not paths:
+            continue
+        write(paths["smokeJson"], json.dumps(payloads["smokeJson"], indent=2) + "\n")
+        write(paths["repoSnapshot"], json.dumps(payloads["repoSnapshot"], indent=2) + "\n")
+        write(paths["log"], payloads["log"])
+
+
+def build_live_template(jobs, overlays):
     rows = []
     for job in jobs:
+        overlay = overlays.get(job["jobId"])
+        if overlay:
+            rows.append(overlay)
+            continue
         rows.append(
             {
                 "jobId": job["jobId"],
@@ -154,7 +285,9 @@ def main():
     harness = load_harness()
     jobs = harness["harnessJobs"]
     manifest = build_manifest(jobs)
-    results = build_live_template(jobs)
+    overlays = build_live_overlay_index(jobs)
+    write_overlay_artifacts(overlays)
+    results = build_live_template(jobs, overlays)
     write(MANIFEST, json.dumps(manifest, indent=2) + "\n")
     write(INCOMING, json.dumps(results, indent=2) + "\n")
     report = validate(manifest, results, "live-colab")

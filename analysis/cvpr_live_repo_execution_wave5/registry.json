@@ -1,0 +1,134 @@
+{
+  "summary": {
+    "demo": "cvpr-live-repo-execution-wave5",
+    "jobId": "repo-execution-wave5",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 1,
+    "successfulCommands": 1,
+    "presentRepos": 1,
+    "minReadiness": 90.0,
+    "status": "valid",
+    "probe": {
+      "cudaAvailable": true,
+      "deviceCount": 1,
+      "torchVersion": "2.11.0+cu128",
+      "pythonVersion": "3.12.13",
+      "deviceName": "Tesla T4",
+      "cudaVersion": "12.8"
+    },
+    "analysis": "cvpr_live_repo_execution_wave5",
+    "resultArtifact": "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json",
+    "stdoutArtifact": "analysis/cvpr_live_repo_execution_wave5/colab_stdout.txt",
+    "stderrArtifact": "analysis/cvpr_live_repo_execution_wave5/colab_stderr.txt",
+    "launcher": "python3 scripts/run_colab_live_fifth_wave_repo_execution.py",
+    "worker": "scripts/colab_live_fifth_wave_repo_execution_demo.py"
+  },
+  "results": [
+    {
+      "jobId": "repo-execution-wave5",
+      "caseId": "vlm-03-github-com-oamyjin-graphvlm",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T02:53:35Z",
+      "model": {
+        "repoExecution": "git-clone-plus-entrypoint-command",
+        "executionTarget": "GraphVLM"
+      },
+      "inputs": {
+        "repo": "https://github.com/oamyjin/GraphVLM",
+        "page": "cvpr-grounded-vlm-repo-court.html",
+        "theme": "vlm",
+        "packages": [],
+        "command": "/usr/bin/python3 Aligner/GraphPrompter/src/config.py --help"
+      },
+      "outputs": {
+        "cloneStatus": "present",
+        "commitSha": "4e6c0f55b9d149b3abc354c4a62c43c2fa6d4274",
+        "pythonFiles": 191,
+        "dependencyInstallOk": true,
+        "commandExitCode": 0,
+        "fallbackCommands": [
+          "/usr/bin/python3 Aligner/GraphPrompter/src/config.py --help"
+        ],
+        "repairAttempts": [
+          {
+            "missingModule": "torch_geometric",
+            "package": "torch_geometric",
+            "attempted": true,
+            "ok": true,
+            "reason": "mapped-module",
+            "install": {
+              "attempted": true,
+              "ok": true,
+              "packages": [
+                "torch_geometric"
+              ],
+              "command": "/usr/bin/python3 -m pip install -q torch_geometric",
+              "stdout": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 64.4/64.4 kB 4.3 MB/s eta 0:00:00\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.3/1.3 MB 38.4 MB/s eta 0:00:00",
+              "stderr": "",
+              "runtimeSeconds": 4.43
+            }
+          },
+          {
+            "missingModule": "dgl",
+            "package": "dgl",
+            "attempted": true,
+            "ok": true,
+            "reason": "mapped-module",
+            "install": {
+              "attempted": true,
+              "ok": true,
+              "packages": [
+                "dgl"
+              ],
+              "command": "/usr/bin/python3 -m pip install -q dgl",
+              "stdout": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 8.6/8.6 MB 71.6 MB/s eta 0:00:00",
+              "stderr": "",
+              "runtimeSeconds": 4.26
+            }
+          },
+          {
+            "missingModule": "torchdata.datapipes",
+            "package": "torchdata==0.7.1",
+            "attempted": true,
+            "ok": true,
+            "reason": "mapped-module",
+            "install": {
+              "attempted": true,
+              "ok": true,
+              "packages": [
+                "torchdata==0.7.1"
+              ],
+              "command": "/usr/bin/python3 -m pip install -q torchdata==0.7.1",
+              "stdout": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 184.4/184.4 kB 6.7 MB/s eta 0:00:00",
+              "stderr": "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\ntorchtune 0.6.1 requires torchdata==0.11.0, but you have torchdata 0.7.1 which is incompatible.",
+              "runtimeSeconds": 3.69
+            }
+          }
+        ],
+        "cloneLog": "Cloning into '/content/cvpr-wave5-bfglw6os/github-com-oamyjin-graphvlm'...\nUpdating files:   6% (517/8426)\nUpdating files:   7% (590/8426)\nUpdating files:   7% (593/8426)\nUpdating files:   8% (675/8426)\nUpdating files:   9% (759/8426)\nUpdating files:  10% (843/8426)\nUpdating files:  11% (927/8426)\nUpdating files:  12% (1012/8426)\nUpdating files:  13% (1096/8426)\nUpdating files:  14% (1180/8426)\nUpdating files:  15% (1264/8426)\nUpdating files:  16% (1349/8426)\nUpdating files:  17% (1433/8426)\nUpdating files:  18% (1517/8426)\nUpdating files:  19% (1601/8426)\nUpdating files:  20% (1686/8426)\nUpdating files:  21% (1770/8426)\nUpdating files:  22% (1854/8426)\nUpdating files:  23% (1938/8426)\nUpdating files:  24% (2023/8426)\nUpdating files:  25% (2107/8426)\nUpdating files:  26% (2191/8426)\nUpdating files:  27% (2276/8426)\nUpdating files:  28% (2360/8426)\nUpdating files:  29% (2444/8426)\nUpdating files:  30% (2528/8426)\nUpdating files:  31% (2613/8426)\nUpdating files:  32% (2697/8426)\nUpdating files:  33% (2781/8426)\nUpdating files:  34% (2865/8426)\nUpdating files:  35% (2950/8426)\nUpdating files:  36% (3034/8426)\nUpdating files:  37% (3118/8426)\nUpdating files:  38% (3202/8426)\nUpdating files:  39% (3287/8426)\nUpdating files:  40% (3371/8426)\nUpdating files:  41% (3455/8426)\nUpdating files:  42% (3539/8426)\nUpdating files:  43% (3624/8426)\nUpdating files:  44% (3708/8426)\nUpdating files:  45% (3792/8426)\nUpdating files:  46% (3876/8426)\nUpdating files:  47% (3961/8426)\nUpdating files:  48% (4045/8426)\nUpdating files:  49% (4129/8426)\nUpdating files:  50% (4213/8426)\nUpdating fi...",
+        "installLog": "",
+        "commandStdout": "",
+        "commandStderr": ""
+      },
+      "metrics": {
+        "readiness": 90.0,
+        "repoPresent": 100.0,
+        "dependencySetup": 100.0,
+        "commandExecuted": 100.0,
+        "gpuRuntime": 100.0,
+        "executionDepth": 80.0,
+        "repairPasses": 3.0,
+        "runtimeSeconds": 58.98
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "colab-cli-run",
+        "sourceBench": "cvpr-repo-execution-wave5-bench",
+        "execution": "colab-cli-git-clone-entrypoint-command-live-demo",
+        "failureMode": "none"
+      }
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 export function graphGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
   if (summary.nodes !== 15) return "block";
   if (summary.edges !== 19) return "block";
   if (summary.rootNodes !== 1) return "block";

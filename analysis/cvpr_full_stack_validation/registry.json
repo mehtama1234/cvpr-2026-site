@@ -1,21 +1,21 @@
 {
   "summary": {
     "validator": "validate_cvpr_full_stack",
-    "status": "valid",
+    "status": "invalid",
     "commands": 286,
-    "steps": 287,
+    "steps": 149,
     "packageTests": 148,
-    "workerJobs": 10,
-    "promotedRunners": 10,
-    "cachedResults": 40,
+    "workerJobs": 14,
+    "promotedRunners": 14,
+    "cachedResults": 56,
     "importIssues": 0,
-    "durationSec": 30.484
+    "durationSec": 145.244
   },
   "steps": [
     {
       "command": "python3 scripts/build_cvpr_systems_lab.py",
       "returnCode": 0,
-      "durationSec": 0.038,
+      "durationSec": 0.243,
       "stdoutTail": [
         "wrote cvpr-systems-lab.html: 11 systems, 33 stages"
       ],
@@ -24,7 +24,7 @@
     {
       "command": "python3 scripts/verify_cvpr_systems_lab.py",
       "returnCode": 0,
-      "durationSec": 0.023,
+      "durationSec": 0.125,
       "stdoutTail": [
         "verified CVPR systems lab: 11 systems, 33 stages, 11 clusters"
       ],
@@ -33,7 +33,7 @@
     {
       "command": "python3 scripts/build_cvpr_demo_lab.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.126,
       "stdoutTail": [
         "wrote cvpr-demo-lab.html: 41 interactive demos (33 stage demos)"
       ],
@@ -42,7 +42,7 @@
     {
       "command": "python3 scripts/verify_cvpr_demo_lab.py",
       "returnCode": 0,
-      "durationSec": 0.022,
+      "durationSec": 0.155,
       "stdoutTail": [
         "verified CVPR demo lab: 41 demos, 8 flagship, 33 stage demos"
       ],
@@ -51,7 +51,7 @@
     {
       "command": "python3 scripts/build_cvpr_demo_arena.py",
       "returnCode": 0,
-      "durationSec": 0.036,
+      "durationSec": 0.137,
       "stdoutTail": [
         "wrote cvpr-demo-arena.html: 41 demos x 8 scenarios = 328 evaluations"
       ],
@@ -60,7 +60,7 @@
     {
       "command": "python3 scripts/verify_cvpr_demo_arena.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.136,
       "stdoutTail": [
         "verified CVPR demo arena: 41 demos, 8 scenarios, 328 evaluations"
       ],
@@ -69,7 +69,7 @@
     {
       "command": "python3 scripts/build_cvpr_demo_playbook.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.168,
       "stdoutTail": [
         "wrote cvpr-demo-playbook.html: 8 plays, 0 critical"
       ],
@@ -78,7 +78,7 @@
     {
       "command": "python3 scripts/verify_cvpr_demo_playbook.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.125,
       "stdoutTail": [
         "verified CVPR demo playbook: 8 plays, 0 critical, 8 clusters"
       ],
@@ -87,34 +87,34 @@
     {
       "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.196,
       "stdoutTail": [
-        "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
+        "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.214,
       "stdoutTail": [
-        "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
+        "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 51.2"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.204,
       "stdoutTail": [
-        "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
+        "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.195,
       "stdoutTail": [
         "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
       ],
@@ -123,7 +123,7 @@
     {
       "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
       "returnCode": 0,
-      "durationSec": 0.024,
+      "durationSec": 0.19,
       "stdoutTail": [
         "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
       ],
@@ -132,7 +132,7 @@
     {
       "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.163,
       "stdoutTail": [
         "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
       ],
@@ -141,7 +141,7 @@
     {
       "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.138,
       "stdoutTail": [
         "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
       ],
@@ -150,7 +150,7 @@
     {
       "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.27,
       "stdoutTail": [
         "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
       ],
@@ -159,7 +159,7 @@
     {
       "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.103,
       "stdoutTail": [
         "wrote cvpr-metric-geometry-bench.html: 4 release cases"
       ],
@@ -168,7 +168,7 @@
     {
       "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.102,
       "stdoutTail": [
         "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
       ],
@@ -177,70 +177,70 @@
     {
       "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
       "returnCode": 0,
-      "durationSec": 0.042,
+      "durationSec": 0.218,
       "stdoutTail": [
-        "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+        "wrote cvpr-colab-gpu-worker.html: 14 jobs, 56 cached results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/validate_cvpr_colab_results.py",
       "returnCode": 0,
-      "durationSec": 0.049,
+      "durationSec": 0.228,
       "stdoutTail": [
-        "validated CVPR Colab results: 40 results, 0 issues"
+        "validated CVPR Colab results: 56 results, 0 issues"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_gpu_worker.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.174,
       "stdoutTail": [
-        "verified CVPR Colab GPU worker: 10 jobs, 40 cached results"
+        "verified CVPR Colab GPU worker: 14 jobs, 56 cached results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
       "returnCode": 0,
-      "durationSec": 0.041,
+      "durationSec": 0.197,
       "stdoutTail": [
-        "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+        "wrote cvpr-colab-handoff-package.html: 14 jobs, 8 zip entries"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.261,
       "stdoutTail": [
-        "verified CVPR Colab handoff package: 10 jobs, 8 zip entries"
+        "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.176,
       "stdoutTail": [
-        "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
+        "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_driving_safety_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.145,
       "stdoutTail": [
-        "verified CVPR driving safety bench: 4 cases, max risk 34.6"
+        "verified CVPR driving safety bench: 4 cases, max risk 34.8"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.185,
       "stdoutTail": [
         "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
       ],
@@ -249,7 +249,7 @@
     {
       "command": "python3 scripts/verify_cvpr_constraint_generation_bench.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.238,
       "stdoutTail": [
         "verified CVPR constraint generation bench: 4 cases, max identity damage 34.8"
       ],
@@ -258,7 +258,7 @@
     {
       "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.102,
       "stdoutTail": [
         "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
       ],
@@ -267,7 +267,7 @@
     {
       "command": "python3 scripts/verify_cvpr_compute_serving_bench.py",
       "returnCode": 0,
-      "durationSec": 0.024,
+      "durationSec": 0.183,
       "stdoutTail": [
         "verified CVPR compute serving bench: 4 cases, min evidence 85.7"
       ],
@@ -276,61 +276,61 @@
     {
       "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.23,
       "stdoutTail": [
-        "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
+        "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_clinical_shift_bench.py",
       "returnCode": 0,
-      "durationSec": 0.023,
+      "durationSec": 0.14,
       "stdoutTail": [
-        "verified CVPR clinical shift bench: 4 cases, max risk 33.5"
+        "verified CVPR clinical shift bench: 4 cases, max risk 11.1"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.133,
       "stdoutTail": [
-        "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
+        "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 51.2"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
       "returnCode": 0,
-      "durationSec": 0.023,
+      "durationSec": 0.257,
       "stdoutTail": [
-        "verified CVPR adversarial provenance bench: 4 cases, min evidence 82.5"
+        "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.262,
       "stdoutTail": [
-        "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 87.1"
+        "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_long_tail_grounding_bench.py",
       "returnCode": 0,
-      "durationSec": 0.023,
+      "durationSec": 0.181,
       "stdoutTail": [
-        "verified CVPR long-tail grounding bench: 4 cases, min evidence 87.1"
+        "verified CVPR long-tail grounding bench: 4 cases, min evidence 56.0"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.202,
       "stdoutTail": [
         "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
       ],
@@ -339,7 +339,7 @@
     {
       "command": "python3 scripts/verify_cvpr_restoration_fidelity_bench.py",
       "returnCode": 0,
-      "durationSec": 0.023,
+      "durationSec": 0.186,
       "stdoutTail": [
         "verified CVPR restoration fidelity bench: 4 cases, max fabricated risk 29.4"
       ],
@@ -348,7 +348,7 @@
     {
       "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.182,
       "stdoutTail": [
         "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
       ],
@@ -357,7 +357,7 @@
     {
       "command": "python3 scripts/verify_cvpr_temporal_rollout_bench.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.232,
       "stdoutTail": [
         "verified CVPR temporal rollout bench: 4 cases, max drift 36.1"
       ],
@@ -366,7 +366,7 @@
     {
       "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.133,
       "stdoutTail": [
         "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
       ],
@@ -375,7 +375,7 @@
     {
       "command": "python3 scripts/verify_cvpr_vlm_answer_verification_bench.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.123,
       "stdoutTail": [
         "verified CVPR VLM answer verification bench: 4 cases, max unsupported risk 32.2"
       ],
@@ -384,7 +384,7 @@
     {
       "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.114,
       "stdoutTail": [
         "wrote cvpr-metric-geometry-bench.html: 4 release cases"
       ],
@@ -393,7 +393,7 @@
     {
       "command": "python3 scripts/verify_cvpr_metric_geometry_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.11,
       "stdoutTail": [
         "verified CVPR metric geometry bench: 4 cases, max scale drift 29.9"
       ],
@@ -402,7 +402,7 @@
     {
       "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.222,
       "stdoutTail": [
         "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
       ],
@@ -411,7 +411,7 @@
     {
       "command": "python3 scripts/verify_cvpr_gaussian_splatting_bench.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.127,
       "stdoutTail": [
         "verified CVPR Gaussian Splatting bench: 4 cases, max edit leakage 27.4"
       ],
@@ -420,7 +420,7 @@
     {
       "command": "python3 scripts/build_cvpr_mission_control.py",
       "returnCode": 0,
-      "durationSec": 0.04,
+      "durationSec": 0.224,
       "stdoutTail": [
         "wrote cvpr-mission-control.html: 11 systems, 11 benches"
       ],
@@ -429,7 +429,7 @@
     {
       "command": "python3 scripts/verify_cvpr_mission_control.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.172,
       "stdoutTail": [
         "verified CVPR mission control: 11 systems, 11 benches, 44 cases"
       ],
@@ -438,7 +438,7 @@
     {
       "command": "python3 scripts/build_cvpr_failure_atlas.py",
       "returnCode": 0,
-      "durationSec": 0.039,
+      "durationSec": 0.223,
       "stdoutTail": [
         "wrote cvpr-failure-atlas.html: 44 cases, 11 families"
       ],
@@ -447,7 +447,7 @@
     {
       "command": "python3 scripts/verify_cvpr_failure_atlas.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.237,
       "stdoutTail": [
         "verified CVPR failure atlas: 44 cases, 11 families"
       ],
@@ -456,7 +456,7 @@
     {
       "command": "python3 scripts/cvpr_paper_system_gate_experiments.py",
       "returnCode": 0,
-      "durationSec": 0.036,
+      "durationSec": 0.257,
       "stdoutTail": [
         "wrote cvpr-paper-to-system-gate experiment results"
       ],
@@ -465,7 +465,7 @@
     {
       "command": "python3 scripts/build_cvpr_paper_system_gate.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.204,
       "stdoutTail": [
         "wrote cvpr-paper-to-system-gate package and page"
       ],
@@ -474,16 +474,16 @@
     {
       "command": "python3 scripts/build_cvpr_validation_center.py",
       "returnCode": 0,
-      "durationSec": 0.04,
+      "durationSec": 0.149,
       "stdoutTail": [
-        "wrote cvpr-validation-center.html: 51 steps, 26 tests"
+        "wrote cvpr-validation-center.html: 51 steps, 148 tests"
       ],
       "stderrTail": []
     },
     {
       "command": "node source-code/learning/*/tests/core.test.js",
       "returnCode": 0,
-      "durationSec": 20.437,
+      "durationSec": 109.717,
       "testCount": 148,
       "log": "/tmp/cvpr-core-tests.log",
       "stdoutTail": [
@@ -498,7 +498,7 @@
     {
       "command": "python3 scripts/build_cvpr_validation_center.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.214,
       "stdoutTail": [
         "wrote cvpr-validation-center.html: 53 steps, 148 tests"
       ],
@@ -507,7 +507,7 @@
     {
       "command": "python3 scripts/verify_cvpr_validation_center.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.133,
       "stdoutTail": [
         "verified CVPR validation center: 53 steps, 148 package tests"
       ],
@@ -516,61 +516,61 @@
     {
       "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
       "returnCode": 0,
-      "durationSec": 0.092,
+      "durationSec": 0.339,
       "stdoutTail": [
-        "verified CVPR live Colab intake: 40 live results, 0 issues"
+        "verified CVPR live Colab intake: 56 live results, 0 issues"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
       "returnCode": 0,
-      "durationSec": 0.083,
+      "durationSec": 0.591,
       "stdoutTail": [
-        "verified CVPR live Colab promotion: 40 promoted cached-real results"
+        "verified CVPR live Colab promotion: 56 promoted cached-real results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_colab_promotion_delta.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.208,
       "stdoutTail": [
-        "wrote cvpr-colab-promotion-delta.html: 40 cases, 0 regressions"
+        "wrote cvpr-colab-promotion-delta.html: 56 cases, 0 regressions"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_promotion_delta.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.258,
       "stdoutTail": [
-        "verified CVPR Colab promotion delta: 40 cases, 0 regressions"
+        "verified CVPR Colab promotion delta: 56 cases, 0 regressions"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_colab_release_bundle.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.435,
       "stdoutTail": [
-        "wrote cvpr-colab-release-bundle.html: 10 runners, 40 cached results"
+        "wrote cvpr-colab-release-bundle.html: 14 runners, 56 cached results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_release_bundle.py",
       "returnCode": 0,
-      "durationSec": 0.024,
+      "durationSec": 0.215,
       "stdoutTail": [
-        "verified CVPR Colab release bundle: 10 runners, 40 cached results"
+        "verified CVPR Colab release bundle: 14 runners, 56 cached results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_colab_evidence_ledger.py",
       "returnCode": 0,
-      "durationSec": 0.041,
+      "durationSec": 0.269,
       "stdoutTail": [
         "wrote cvpr-colab-evidence-ledger.html: 7 artifacts, status release"
       ],
@@ -579,7 +579,7 @@
     {
       "command": "python3 scripts/verify_cvpr_colab_evidence_ledger.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.213,
       "stdoutTail": [
         "verified CVPR Colab evidence ledger: 7 artifacts"
       ],
@@ -588,7 +588,7 @@
     {
       "command": "python3 scripts/build_cvpr_colab_run_receipt.py",
       "returnCode": 0,
-      "durationSec": 0.04,
+      "durationSec": 0.327,
       "stdoutTail": [
         "wrote cvpr-colab-run-receipt.html: 8 stages, status ready"
       ],
@@ -597,7 +597,7 @@
     {
       "command": "python3 scripts/verify_cvpr_colab_run_receipt.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.123,
       "stdoutTail": [
         "verified CVPR Colab run receipt: 8 stages, 7 artifacts"
       ],
@@ -606,7 +606,7 @@
     {
       "command": "python3 scripts/build_cvpr_theme_release_matrix.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.224,
       "stdoutTail": [
         "wrote cvpr-theme-release-matrix.html: 8 themes, status release"
       ],
@@ -615,7 +615,7 @@
     {
       "command": "python3 scripts/verify_cvpr_theme_release_matrix.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.313,
       "stdoutTail": [
         "verified CVPR theme release matrix: 8 themes, 11 systems"
       ],
@@ -624,7 +624,7 @@
     {
       "command": "python3 scripts/build_cvpr_production_release_brief.py",
       "returnCode": 0,
-      "durationSec": 0.043,
+      "durationSec": 0.426,
       "stdoutTail": [
         "wrote cvpr-production-release-brief.html: release gate, 328 arena releases"
       ],
@@ -633,7 +633,7 @@
     {
       "command": "python3 scripts/verify_cvpr_production_release_brief.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.099,
       "stdoutTail": [
         "verified CVPR production release brief: release gate, 328 arena releases"
       ],
@@ -642,25 +642,25 @@
     {
       "command": "python3 scripts/build_cvpr_production_coverage_audit.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.146,
       "stdoutTail": [
-        "wrote cvpr-production-coverage-audit.html: release gate, 10 Colab Pro+ jobs, 0 missing evidence"
+        "wrote cvpr-production-coverage-audit.html: release gate, 14 Colab Pro+ jobs, 0 missing evidence"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_production_coverage_audit.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.314,
       "stdoutTail": [
-        "verified CVPR production coverage audit: 11 systems, 10 Colab Pro+ jobs, 0 missing evidence"
+        "verified CVPR production coverage audit: 11 systems, 14 Colab Pro+ jobs, 0 missing evidence"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_board.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.268,
       "stdoutTail": [
         "wrote cvpr-remediation-board.html: 0 block tasks, status ready"
       ],
@@ -669,7 +669,7 @@
     {
       "command": "python3 scripts/verify_cvpr_remediation_board.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.155,
       "stdoutTail": [
         "verified CVPR remediation board: 0 block tasks"
       ],
@@ -678,7 +678,7 @@
     {
       "command": "python3 scripts/build_cvpr_remediation_sprint_plan.py",
       "returnCode": 0,
-      "durationSec": 0.037,
+      "durationSec": 0.291,
       "stdoutTail": [
         "wrote cvpr-remediation-sprint-plan.html: 3 sprints, status ready"
       ],
@@ -687,7 +687,7 @@
     {
       "command": "python3 scripts/verify_cvpr_remediation_sprint_plan.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.114,
       "stdoutTail": [
         "verified CVPR remediation sprint plan: 3 sprints, 0 tasks"
       ],
@@ -696,106 +696,106 @@
     {
       "command": "python3 scripts/build_cvpr_colab_operations_dashboard.py",
       "returnCode": 0,
-      "durationSec": 0.039,
+      "durationSec": 0.212,
       "stdoutTail": [
-        "wrote cvpr-colab-operations-dashboard.html: 10 jobs, status ready"
+        "wrote cvpr-colab-operations-dashboard.html: 14 jobs, status ready"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_operations_dashboard.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.153,
       "stdoutTail": [
-        "verified CVPR Colab operations dashboard: 10 jobs, 53 steps"
+        "verified CVPR Colab operations dashboard: 14 jobs, 53 steps"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_colab_execution_planner.py",
       "returnCode": 0,
-      "durationSec": 0.038,
+      "durationSec": 0.354,
       "stdoutTail": [
-        "wrote cvpr-colab-execution-planner.html: 3 waves, 40 expected results, status ready"
+        "wrote cvpr-colab-execution-planner.html: 3 waves, 56 expected results, status ready"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_execution_planner.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.134,
       "stdoutTail": [
-        "verified CVPR Colab execution planner: 3 waves, 40 expected results"
+        "verified CVPR Colab execution planner: 3 waves, 56 expected results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.173,
       "stdoutTail": [
-        "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 40 expected live results, status ready"
+        "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 56 expected live results, status ready"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.366,
       "stdoutTail": [
-        "verified CVPR demo evidence cockpit: 41 demos, 40 expected live results"
+        "verified CVPR demo evidence cockpit: 41 demos, 56 expected live results"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_colab_result_replay.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.185,
       "stdoutTail": [
-        "wrote cvpr-colab-result-replay.html: 40/40 results, 30 demos, status ready"
+        "wrote cvpr-colab-result-replay.html: 56/56 results, 30 demos, status ready"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_colab_result_replay.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.149,
       "stdoutTail": [
-        "verified CVPR Colab result replay: 40/40 results, 30 stage demos"
+        "verified CVPR Colab result replay: 56/56 results, 30 stage demos"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_release_slo_dashboard.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.172,
       "stdoutTail": [
-        "wrote cvpr-release-slo-dashboard.html: 10/10 SLOs, status release"
+        "wrote cvpr-release-slo-dashboard.html: 9/10 SLOs, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_slo_dashboard.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.418,
       "stdoutTail": [
-        "verified CVPR release SLO dashboard: 10/10 SLOs, readiness floor 68.1"
+        "verified CVPR release SLO dashboard: 9/10 SLOs, readiness floor 44.0"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_release_regression_drillbook.py",
       "returnCode": 0,
-      "durationSec": 0.042,
+      "durationSec": 0.574,
       "stdoutTail": [
-        "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status ready"
+        "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_regression_drillbook.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.168,
       "stdoutTail": [
         "verified CVPR release regression drillbook: 10/10 drills"
       ],
@@ -804,52 +804,52 @@
     {
       "command": "python3 scripts/build_cvpr_launch_readiness_pack.py",
       "returnCode": 0,
-      "durationSec": 0.047,
+      "durationSec": 0.202,
       "stdoutTail": [
-        "wrote cvpr-launch-readiness-pack.html: launch-ready, 148 package tests"
+        "wrote cvpr-launch-readiness-pack.html: block, 148 package tests"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_launch_readiness_pack.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.155,
       "stdoutTail": [
-        "verified CVPR launch readiness pack: launch-ready, 148 package tests"
+        "verified CVPR launch readiness pack: block, 148 package tests"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_release_manifest.py",
       "returnCode": 0,
-      "durationSec": 0.036,
+      "durationSec": 0.194,
       "stdoutTail": [
-        "wrote cvpr-release-manifest.html: 13 artifacts, status sealed"
+        "wrote cvpr-release-manifest.html: 13 artifacts, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_manifest.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.438,
       "stdoutTail": [
-        "verified CVPR release manifest: 13 artifacts, status sealed"
+        "verified CVPR release manifest: 13 artifacts, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_release_change_control.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.221,
       "stdoutTail": [
-        "wrote cvpr-release-change-control.html: 13/13 rows, status controlled"
+        "wrote cvpr-release-change-control.html: 13/13 rows, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_change_control.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.308,
       "stdoutTail": [
         "verified CVPR release change control: 13/13 rows"
       ],
@@ -858,16 +858,16 @@
     {
       "command": "python3 scripts/build_cvpr_release_dependency_graph.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.16,
       "stdoutTail": [
-        "wrote cvpr-release-dependency-graph.html: 15 nodes, 19 edges, status ready"
+        "wrote cvpr-release-dependency-graph.html: 15 nodes, 19 edges, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_dependency_graph.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.13,
       "stdoutTail": [
         "verified CVPR release dependency graph: 15 nodes, 19 edges"
       ],
@@ -876,70 +876,70 @@
     {
       "command": "python3 scripts/build_cvpr_post_launch_monitoring.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.19,
       "stdoutTail": [
-        "wrote cvpr-post-launch-monitoring.html: 9/9 monitors, status watching"
+        "wrote cvpr-post-launch-monitoring.html: 4/9 monitors, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_post_launch_monitoring.py",
       "returnCode": 0,
-      "durationSec": 0.025,
+      "durationSec": 0.137,
       "stdoutTail": [
-        "verified CVPR post-launch monitoring: 9/9 monitors"
+        "verified CVPR post-launch monitoring: 4/9 monitors"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_release_audit_trail.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.146,
       "stdoutTail": [
-        "wrote cvpr-release-audit-trail.html: 58/58 events, status complete"
+        "wrote cvpr-release-audit-trail.html: 56/58 events, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_audit_trail.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.171,
       "stdoutTail": [
-        "verified CVPR release audit trail: 58/58 events"
+        "verified CVPR release audit trail: 56/58 events"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_release_command_center.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.151,
       "stdoutTail": [
-        "wrote cvpr-release-command-center.html: 8/8 surfaces, status operator-ready"
+        "wrote cvpr-release-command-center.html: 2/8 surfaces, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_release_command_center.py",
       "returnCode": 0,
-      "durationSec": 0.046,
+      "durationSec": 0.25,
       "stdoutTail": [
-        "verified CVPR release command center: 8/8 surfaces"
+        "verified CVPR release command center: 2/8 surfaces"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_theme_portfolio_map.py",
       "returnCode": 0,
-      "durationSec": 0.041,
+      "durationSec": 0.242,
       "stdoutTail": [
-        "wrote cvpr-theme-portfolio-map.html: 8 themes, 11 systems, status release"
+        "wrote cvpr-theme-portfolio-map.html: 8 themes, 11 systems, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_theme_portfolio_map.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.133,
       "stdoutTail": [
         "verified CVPR theme portfolio map: 8 themes, 11 systems"
       ],
@@ -948,16 +948,16 @@
     {
       "command": "python3 scripts/build_cvpr_next_demo_roadmap.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.14,
       "stdoutTail": [
-        "wrote cvpr-next-demo-roadmap.html: 8 goals, status ready"
+        "wrote cvpr-next-demo-roadmap.html: 8 goals, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_next_demo_roadmap.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.168,
       "stdoutTail": [
         "verified CVPR next-demo roadmap: 8 goals, 11 systems"
       ],
@@ -966,16 +966,16 @@
     {
       "command": "python3 scripts/build_cvpr_demo_build_backlog.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.14,
       "stdoutTail": [
-        "wrote cvpr-demo-build-backlog.html: 24 tasks, status ready"
+        "wrote cvpr-demo-build-backlog.html: 24 tasks, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_demo_build_backlog.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.137,
       "stdoutTail": [
         "verified CVPR demo build backlog: 8 goals, 24 tasks"
       ],
@@ -984,7 +984,7 @@
     {
       "command": "python3 scripts/build_cvpr_adaptive_serving_stress_lab.py",
       "returnCode": 0,
-      "durationSec": 0.035,
+      "durationSec": 0.209,
       "stdoutTail": [
         "wrote cvpr-adaptive-serving-stress-lab.html: 12 rows, status release"
       ],
@@ -993,7 +993,7 @@
     {
       "command": "python3 scripts/verify_cvpr_adaptive_serving_stress_lab.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.123,
       "stdoutTail": [
         "verified CVPR adaptive serving stress lab: 12 rows, status release"
       ],
@@ -1002,7 +1002,7 @@
     {
       "command": "python3 scripts/build_cvpr_constraint_edit_tournament.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.282,
       "stdoutTail": [
         "wrote cvpr-constraint-edit-tournament.html: 48 matches, status release"
       ],
@@ -1011,7 +1011,7 @@
     {
       "command": "python3 scripts/verify_cvpr_constraint_edit_tournament.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.138,
       "stdoutTail": [
         "verified CVPR constraint edit tournament: 48 matches, status release"
       ],
@@ -1020,7 +1020,7 @@
     {
       "command": "python3 scripts/build_cvpr_open_vocab_failure_hunt.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.156,
       "stdoutTail": [
         "wrote cvpr-open-vocab-failure-hunt.html: 16 probes, status release"
       ],
@@ -1029,7 +1029,7 @@
     {
       "command": "python3 scripts/verify_cvpr_open_vocab_failure_hunt.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.151,
       "stdoutTail": [
         "verified CVPR open-vocab failure hunt: 16 probes, status release"
       ],
@@ -1038,7 +1038,7 @@
     {
       "command": "python3 scripts/build_cvpr_3d_edit_provenance_room.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.28,
       "stdoutTail": [
         "wrote cvpr-3d-edit-provenance-room.html: 48 rows, status release"
       ],
@@ -1047,7 +1047,7 @@
     {
       "command": "python3 scripts/verify_cvpr_3d_edit_provenance_room.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.36,
       "stdoutTail": [
         "verified CVPR 3D edit provenance room: 48 rows, status release"
       ],
@@ -1056,7 +1056,7 @@
     {
       "command": "python3 scripts/build_cvpr_temporal_counterfactual_lab.py",
       "returnCode": 0,
-      "durationSec": 0.032,
+      "durationSec": 0.187,
       "stdoutTail": [
         "wrote cvpr-temporal-counterfactual-lab.html: 16 rows, status release"
       ],
@@ -1065,7 +1065,7 @@
     {
       "command": "python3 scripts/verify_cvpr_temporal_counterfactual_lab.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.168,
       "stdoutTail": [
         "verified CVPR temporal counterfactual lab: 16 rows, status release"
       ],
@@ -1074,7 +1074,7 @@
     {
       "command": "python3 scripts/build_cvpr_grounded_answer_courtroom.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.503,
       "stdoutTail": [
         "wrote cvpr-grounded-answer-courtroom.html: 16 rows, status release"
       ],
@@ -1083,7 +1083,7 @@
     {
       "command": "python3 scripts/verify_cvpr_grounded_answer_courtroom.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.456,
       "stdoutTail": [
         "verified CVPR grounded answer courtroom: 16 rows, status release"
       ],
@@ -1092,25 +1092,25 @@
     {
       "command": "python3 scripts/build_cvpr_provenance_red_team_arena.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.498,
       "stdoutTail": [
-        "wrote cvpr-provenance-red-team-arena.html: 16 rows, status release"
+        "wrote cvpr-provenance-red-team-arena.html: 16 rows, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_provenance_red_team_arena.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.231,
       "stdoutTail": [
-        "verified CVPR provenance red-team arena: 16 rows, status release"
+        "verified CVPR provenance red-team arena: 16 rows, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_safety_deployment_simulator.py",
       "returnCode": 0,
-      "durationSec": 0.034,
+      "durationSec": 0.163,
       "stdoutTail": [
         "wrote cvpr-safety-deployment-simulator.html: 16 rows, status release"
       ],
@@ -1119,7 +1119,7 @@
     {
       "command": "python3 scripts/verify_cvpr_safety_deployment_simulator.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.125,
       "stdoutTail": [
         "verified CVPR safety deployment simulator: 16 rows, status release"
       ],
@@ -1128,97 +1128,97 @@
     {
       "command": "python3 scripts/build_cvpr_cross_theme_incident_gauntlet.py",
       "returnCode": 0,
-      "durationSec": 0.032,
+      "durationSec": 0.159,
       "stdoutTail": [
-        "wrote cvpr-cross-theme-incident-gauntlet.html: 32 rows, status release"
+        "wrote cvpr-cross-theme-incident-gauntlet.html: 56 rows, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.366,
       "stdoutTail": [
-        "verified CVPR cross-theme incident gauntlet: 32 rows, status release"
+        "verified CVPR cross-theme incident gauntlet: 56 rows, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_gauntlet_remediation_sprint.py",
       "returnCode": 0,
-      "durationSec": 0.032,
+      "durationSec": 0.146,
       "stdoutTail": [
-        "wrote cvpr-gauntlet-remediation-sprint.html: 29 actions, status release"
+        "wrote cvpr-gauntlet-remediation-sprint.html: 53 actions, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_gauntlet_remediation_sprint.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.304,
       "stdoutTail": [
-        "verified CVPR gauntlet remediation sprint: 29 actions, status release"
+        "verified CVPR gauntlet remediation sprint: 53 actions, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_retest_harness.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.273,
       "stdoutTail": [
-        "wrote cvpr-remediation-retest-harness.html: 29 retests, status release"
+        "wrote cvpr-remediation-retest-harness.html: 53 retests, status release"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.121,
       "stdoutTail": [
-        "verified CVPR remediation retest harness: 29 retests, status release"
+        "verified CVPR remediation retest harness: 53 retests, status release"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_promotion_board.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.154,
       "stdoutTail": [
-        "wrote cvpr-remediation-promotion-board.html: 12 promote, 17 monitor, status release"
+        "wrote cvpr-remediation-promotion-board.html: 18 promote, 35 monitor, status release"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.39,
       "stdoutTail": [
-        "verified CVPR remediation promotion board: 12 promote, 17 monitor"
+        "verified CVPR remediation promotion board: 18 promote, 35 monitor"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_canary_monitor.py",
       "returnCode": 0,
-      "durationSec": 0.031,
+      "durationSec": 0.635,
       "stdoutTail": [
-        "wrote cvpr-remediation-canary-monitor.html: 12 clean, 17 watch, status watching"
+        "wrote cvpr-remediation-canary-monitor.html: 18 clean, 35 watch, status watching"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_canary_monitor.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.478,
       "stdoutTail": [
-        "verified CVPR remediation canary monitor: 12 clean, 17 watch"
+        "verified CVPR remediation canary monitor: 18 clean, 35 watch"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_rollback_drillbook.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.559,
       "stdoutTail": [
         "wrote cvpr-remediation-rollback-drillbook.html: 12 drills, status ready"
       ],
@@ -1227,7 +1227,7 @@
     {
       "command": "python3 scripts/verify_cvpr_remediation_rollback_drillbook.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.536,
       "stdoutTail": [
         "verified CVPR remediation rollback drillbook: 12 drills, status ready"
       ],
@@ -1236,7 +1236,7 @@
     {
       "command": "python3 scripts/build_cvpr_remediation_rollback_rehearsal_lab.py",
       "returnCode": 0,
-      "durationSec": 0.029,
+      "durationSec": 0.343,
       "stdoutTail": [
         "wrote cvpr-remediation-rollback-rehearsal-lab.html: 12 rehearsals, status release"
       ],
@@ -1245,7 +1245,7 @@
     {
       "command": "python3 scripts/verify_cvpr_remediation_rollback_rehearsal_lab.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.16,
       "stdoutTail": [
         "verified CVPR remediation rollback rehearsal lab: 12 rehearsals, status release"
       ],
@@ -1254,1355 +1254,114 @@
     {
       "command": "python3 scripts/build_cvpr_remediation_audit_ledger.py",
       "returnCode": 0,
-      "durationSec": 0.033,
+      "durationSec": 0.521,
       "stdoutTail": [
-        "wrote cvpr-remediation-audit-ledger.html: 7 stages, status complete"
+        "wrote cvpr-remediation-audit-ledger.html: 5 stages, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_audit_ledger.py",
       "returnCode": 0,
-      "durationSec": 0.026,
+      "durationSec": 0.215,
       "stdoutTail": [
-        "verified CVPR remediation audit ledger: 7 stages, status complete"
+        "verified CVPR remediation audit ledger: 5 stages, status inspect"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_command_center.py",
       "returnCode": 0,
-      "durationSec": 0.035,
+      "durationSec": 0.191,
       "stdoutTail": [
-        "wrote cvpr-remediation-command-center.html: 7 surfaces, status operator-ready"
+        "wrote cvpr-remediation-command-center.html: 5 surfaces, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_command_center.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.153,
       "stdoutTail": [
-        "verified CVPR remediation command center: 7 surfaces, status operator-ready"
+        "verified CVPR remediation command center: 5 surfaces, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_release_brief.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.156,
       "stdoutTail": [
-        "wrote cvpr-remediation-release-brief.html: release gate, controlled-watch posture"
+        "wrote cvpr-remediation-release-brief.html: block gate, review posture"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_release_brief.py",
       "returnCode": 0,
-      "durationSec": 0.028,
+      "durationSec": 0.179,
       "stdoutTail": [
-        "verified CVPR remediation release brief: release gate, controlled-watch posture"
+        "verified CVPR remediation release brief: block gate, review posture"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_remediation_closeout_pack.py",
       "returnCode": 0,
-      "durationSec": 0.032,
+      "durationSec": 0.442,
       "stdoutTail": [
-        "wrote cvpr-remediation-closeout-pack.html: 7 rows, status sealed"
+        "wrote cvpr-remediation-closeout-pack.html: 4 rows, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_remediation_closeout_pack.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.41,
       "stdoutTail": [
-        "verified CVPR remediation closeout pack: 7 rows, status sealed"
+        "verified CVPR remediation closeout pack: 4 ready rows, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_second_round_demo_roadmap.py",
       "returnCode": 0,
-      "durationSec": 0.03,
+      "durationSec": 0.339,
       "stdoutTail": [
-        "wrote cvpr-second-round-demo-roadmap.html: 6 goals, status ready"
+        "wrote cvpr-second-round-demo-roadmap.html: 6 goals, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_second_round_demo_roadmap.py",
       "returnCode": 0,
-      "durationSec": 0.027,
+      "durationSec": 0.344,
       "stdoutTail": [
-        "verified CVPR second-round demo roadmap: 6 goals, status ready"
+        "verified CVPR second-round demo roadmap: 6 goals, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/build_cvpr_visual_qa_sweep_dashboard.py",
       "returnCode": 0,
-      "durationSec": 0.046,
+      "durationSec": 0.597,
       "stdoutTail": [
-        "wrote cvpr-visual-qa-sweep-dashboard.html: 8/8 surfaces, status ready"
+        "wrote cvpr-visual-qa-sweep-dashboard.html: 7/8 surfaces, status block"
       ],
       "stderrTail": []
     },
     {
       "command": "python3 scripts/verify_cvpr_visual_qa_sweep_dashboard.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "verified CVPR visual QA sweep dashboard: 8/8 surfaces ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_scenario_expansion_pack.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "wrote cvpr-scenario-expansion-pack.html: 12 scenarios, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_scenario_expansion_pack.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "verified CVPR scenario expansion pack: 12 scenarios, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_3d_temporal_rollback_stress_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "wrote cvpr-3d-temporal-rollback-stress-lab.html: 6 rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_3d_temporal_rollback_stress_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR 3D temporal rollback stress lab: 6 rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_clinical_safety_escalation_playbook.py",
-      "returnCode": 0,
-      "durationSec": 0.033,
-      "stdoutTail": [
-        "wrote cvpr-clinical-safety-escalation-playbook.html: 8 rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_clinical_safety_escalation_playbook.py",
-      "returnCode": 0,
-      "durationSec": 0.033,
-      "stdoutTail": [
-        "verified CVPR clinical safety escalation playbook: 8 rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_second_round_closeout_reseal.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "wrote cvpr-second-round-closeout-reseal.html: 6/6 rows, status sealed"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_second_round_closeout_reseal.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR second-round closeout reseal: 6/6 rows sealed"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_regression_injection_arena.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "wrote cvpr-regression-injection-arena.html: 6 injections, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_regression_injection_arena.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR regression injection arena: 6 injections, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_paper_repo_demo_forge.py",
-      "returnCode": 0,
-      "durationSec": 0.234,
-      "stdoutTail": [
-        "wrote cvpr-paper-repo-demo-forge.html: 8 blueprints, 40 repo papers, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_paper_repo_demo_forge.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR paper repo demo forge: 8 blueprints, 40 repo papers"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_embodied_control_repo_drill.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "wrote cvpr-embodied-control-repo-drill.html: 5 scenarios, 5 repo papers, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_embodied_control_repo_drill.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR embodied control repo drill: 5 scenarios, 5 repo papers"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_efficient_learning_repo_governor.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "wrote cvpr-efficient-learning-repo-governor.html: 5 cases, 5 repo papers, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_efficient_learning_repo_governor.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR efficient learning repo governor: 5 cases, 5 repo papers"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_perception_parts_repo_bench.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "wrote cvpr-perception-parts-repo-bench.html: 5 cases, 5 repo papers, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_perception_parts_repo_bench.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR perception parts repo bench: 5 cases, 5 repo papers"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_frontier_sensor_fusion_bench.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "wrote cvpr-frontier-sensor-fusion-bench.html: 5 cases, 5 repo papers, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_frontier_sensor_fusion_bench.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "verified CVPR frontier sensor fusion bench: 5 cases, 5 repo papers"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_remaining_paper_repo_demos.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "wrote cvpr-3d-world-repo-arena.html: 5 cases, 5 repo papers, status ready",
-        "wrote cvpr-video-temporal-repo-lab.html: 5 cases, 5 repo papers, status ready",
-        "wrote cvpr-generation-control-repo-studio.html: 5 cases, 5 repo papers, status ready",
-        "wrote cvpr-grounded-vlm-repo-court.html: 5 cases, 5 repo papers, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_remaining_paper_repo_demos.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified remaining CVPR paper repo demos: 4 demos"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_gpu_harness.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "wrote cvpr-repo-gpu-harness.html: 40 jobs, 40 repos, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_gpu_harness.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR repo GPU harness: 40 jobs, 40 repos"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_live_intake.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-live-intake.html: 40 results, 0 issues"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/validate_cvpr_repo_harness_results.py",
-      "returnCode": 0,
-      "durationSec": 0.058,
-      "stdoutTail": [
-        "validated CVPR repo harness results: 40 results, 0 issues"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_live_intake.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR repo harness live intake: 40 results, 0 issues"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_worker.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-worker.html: 40 jobs, 40 repos, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_worker.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR repo harness worker: 40 jobs, 40 repos"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_first_batch_receipt.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-first-batch-receipt.html: 5 jobs, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_first_batch_receipt.py",
-      "returnCode": 0,
-      "durationSec": 0.025,
-      "stdoutTail": [
-        "verified CVPR repo harness first batch receipt: 5 jobs"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_wave_planner.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-wave-planner.html: 8 waves, 40 jobs, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_wave_planner.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "verified CVPR repo harness wave planner: 8 waves, 40 jobs"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_handoff_package.py",
-      "returnCode": 0,
-      "durationSec": 0.045,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-handoff-package.html: 40 jobs, 13 zip entries"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_handoff_package.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "verified CVPR repo harness handoff package: 40 jobs, 13 zip entries"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_execution_dashboard.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-execution-dashboard.html: 8 waves, 40 jobs, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_execution_dashboard.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR repo harness execution dashboard: 8 waves, 40 jobs"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_promotion_board.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-promotion-board.html: 8 waves, 8 promote, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_promotion_board.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR repo harness promotion board: 8 waves, 8 promote"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_promotion_delta.py",
-      "returnCode": 0,
-      "durationSec": 0.038,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-promotion-delta.html: 40 jobs, 40 ready, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_promotion_delta.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR repo harness promotion delta: 40 jobs, 40 ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_replacement_receipt.py",
-      "returnCode": 0,
-      "durationSec": 0.033,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-replacement-receipt.html: 40 jobs, 40 promoted, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_replacement_receipt.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR repo harness replacement receipt: 40 jobs, 40 promoted"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_repo_harness_command_center.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "wrote cvpr-repo-harness-command-center.html: 8 surfaces, 8 targets, status operator-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_repo_harness_command_center.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "verified CVPR repo harness command center: 8 surfaces, 8 targets"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_frontier_live_evidence_drill.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "wrote cvpr-frontier-live-evidence-drill.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_frontier_live_evidence_drill.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "verified CVPR frontier live evidence drill: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_3d_world_live_evidence_room.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "wrote cvpr-3d-world-live-evidence-room.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_3d_world_live_evidence_room.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR 3D world live evidence room: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_video_temporal_live_evidence_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "wrote cvpr-video-temporal-live-evidence-lab.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_video_temporal_live_evidence_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR video temporal live evidence lab: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_generation_control_live_evidence_studio.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "wrote cvpr-generation-control-live-evidence-studio.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_generation_control_live_evidence_studio.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR generation control live evidence studio: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_grounded_vlm_live_evidence_court.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "wrote cvpr-grounded-vlm-live-evidence-court.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_grounded_vlm_live_evidence_court.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR grounded VLM live evidence court: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_perception_parts_live_evidence_bench.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "wrote cvpr-perception-parts-live-evidence-bench.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_perception_parts_live_evidence_bench.py",
-      "returnCode": 0,
-      "durationSec": 0.026,
-      "stdoutTail": [
-        "verified CVPR perception parts live evidence bench: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_embodied_control_live_evidence_drill.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "wrote cvpr-embodied-control-live-evidence-drill.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_embodied_control_live_evidence_drill.py",
-      "returnCode": 0,
-      "durationSec": 0.025,
-      "stdoutTail": [
-        "verified CVPR embodied control live evidence drill: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_efficient_learning_live_evidence_governor.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "wrote cvpr-efficient-learning-live-evidence-governor.html: 5 live rows, status ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_efficient_learning_live_evidence_governor.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR efficient learning live evidence governor: 5 rows, ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_live_evidence_portfolio.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "wrote cvpr-live-evidence-portfolio.html: 8 surfaces, 40 rows, status portfolio-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_live_evidence_portfolio.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR live evidence portfolio: 8 surfaces, 40 rows"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_live_evidence_release_brief.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "wrote cvpr-live-evidence-release-brief.html: 40 rows, status release-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_live_evidence_release_brief.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR live evidence release brief: 40 rows, release-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_live_evidence_release_manifest.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "wrote cvpr-live-evidence-release-manifest.html: 8 surfaces, 40 rows, status manifest-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_live_evidence_release_manifest.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "verified CVPR live evidence release manifest: 8 surfaces, 40 rows"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_live_evidence_coverage_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.038,
-      "stdoutTail": [
-        "wrote cvpr-live-evidence-coverage-audit.html: 8 covered themes, 40 promoted rows, status coverage-complete"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_live_evidence_coverage_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "verified CVPR live evidence coverage audit: 8 themes, 40 rows"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_live_evidence_command_center.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "wrote cvpr-live-evidence-command-center.html: 4 surfaces, 40 rows, status operator-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_live_evidence_command_center.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "verified CVPR live evidence command center: 4 surfaces, 40 rows"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_live_evidence_handoff_bundle.py",
-      "returnCode": 0,
-      "durationSec": 0.044,
-      "stdoutTail": [
-        "wrote cvpr-live-evidence-handoff-bundle.html: 40 rows, 13 zip entries, status handoff-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_live_evidence_handoff_bundle.py",
-      "returnCode": 0,
-      "durationSec": 0.038,
-      "stdoutTail": [
-        "verified CVPR live evidence handoff bundle: 40 rows, 13 zip entries"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_paper_reproduction_track.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "wrote cvpr-paper-reproduction-track.html: 8 reproductions, status track-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_paper_reproduction_track.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "verified CVPR paper reproduction track: 8 reproductions, track-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_reproduction_viewer_gallery.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "wrote cvpr-reproduction-viewer-gallery.html: 8 viewers, status gallery-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_reproduction_viewer_gallery.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "verified CVPR reproduction viewer gallery: 8 viewers, gallery-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_artifact_rehydration_queue.py",
-      "returnCode": 0,
-      "durationSec": 0.036,
-      "stdoutTail": [
-        "wrote cvpr-artifact-rehydration-queue.html: 24 artifacts, status rehydrated"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_artifact_rehydration_queue.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "verified CVPR artifact rehydration queue: 24 artifacts"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_mos_frontier_deep_viewer.py",
-      "returnCode": 0,
-      "durationSec": 0.034,
-      "stdoutTail": [
-        "wrote cvpr-mos-frontier-deep-viewer.html: MOS deep-viewer-ready, 5 panels"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_mos_frontier_deep_viewer.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR MOS frontier deep viewer: MOS deep-viewer-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_deep_viewer_portfolio.py",
-      "returnCode": 0,
-      "durationSec": 0.034,
-      "stdoutTail": [
-        "wrote cvpr-deep-viewer-portfolio.html: 8 deep viewers, status portfolio-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_deep_viewer_portfolio.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR deep viewer portfolio: 8 viewers, portfolio-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_top_paper_repo_demo_matrix.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "wrote cvpr-top-paper-repo-demo-matrix.html: 40 repos, status matrix-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_top_paper_repo_demo_matrix.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR top paper repo demo matrix: 40 repos, matrix-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_subtheme_coverage_drilldown.py",
-      "returnCode": 0,
-      "durationSec": 0.04,
-      "stdoutTail": [
-        "wrote cvpr-subtheme-coverage-drilldown.html: 212 subthemes, status subtheme-drilldown-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_subtheme_coverage_drilldown.py",
-      "returnCode": 0,
-      "durationSec": 0.03,
-      "stdoutTail": [
-        "verified CVPR subtheme coverage drilldown: 212 subthemes, subtheme-drilldown-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_subtheme_scenario_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.046,
-      "stdoutTail": [
-        "wrote cvpr-subtheme-scenario-lab.html: 636 scenarios, status scenario-lab-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_subtheme_scenario_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.031,
-      "stdoutTail": [
-        "verified CVPR subtheme scenario lab: 636 scenarios, scenario-lab-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_subtheme_release_scoreboard.py",
-      "returnCode": 0,
-      "durationSec": 0.034,
-      "stdoutTail": [
-        "wrote cvpr-subtheme-release-scoreboard.html: 8 themes, status scoreboard-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_subtheme_release_scoreboard.py",
-      "returnCode": 0,
-      "durationSec": 0.027,
-      "stdoutTail": [
-        "verified CVPR subtheme release scoreboard: 8 themes, scoreboard-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_demo_workbench.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "wrote cvpr-interactive-demo-workbench.html: 8 demos, status workbench-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_demo_workbench.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "verified CVPR interactive demo workbench: 8 demos, workbench-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_demo_workbench_runtime.py",
-      "returnCode": 0,
-      "durationSec": 0.036,
-      "stdoutTail": [
-        "runtime-smoke verified CVPR interactive demo workbench: 8 demos, 40 buttons"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_expansion_backlog.py",
-      "returnCode": 0,
-      "durationSec": 0.033,
-      "stdoutTail": [
-        "wrote cvpr-interactive-expansion-backlog.html: 32 remaining repos, status backlog-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_expansion_backlog.py",
-      "returnCode": 0,
-      "durationSec": 0.028,
-      "stdoutTail": [
-        "verified CVPR interactive expansion backlog: 32 remaining repos"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_second_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.033,
-      "stdoutTail": [
-        "wrote cvpr-interactive-second-wave.html: 8 demos, status wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_second_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.032,
-      "stdoutTail": [
-        "verified CVPR interactive second wave: 8 demos, wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_third_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "wrote cvpr-interactive-third-wave.html: 8 demos, status wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_third_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.029,
-      "stdoutTail": [
-        "verified CVPR interactive third wave: 8 demos, wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_fourth_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "wrote cvpr-interactive-fourth-wave.html: 8 demos, status wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_fourth_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "verified CVPR interactive fourth wave: 8 demos, wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_fifth_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.044,
-      "stdoutTail": [
-        "wrote cvpr-interactive-fifth-wave.html: 8 demos, status wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_fifth_wave.py",
-      "returnCode": 0,
-      "durationSec": 0.039,
-      "stdoutTail": [
-        "verified CVPR interactive fifth wave: 8 demos, wave-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_coverage_portfolio.py",
-      "returnCode": 0,
-      "durationSec": 0.042,
-      "stdoutTail": [
-        "wrote cvpr-interactive-coverage-portfolio.html: 40 demos, status coverage-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_coverage_portfolio.py",
-      "returnCode": 0,
-      "durationSec": 0.049,
-      "stdoutTail": [
-        "verified CVPR interactive coverage portfolio: 40 demos, coverage-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_console.py",
-      "returnCode": 0,
-      "durationSec": 0.046,
-      "stdoutTail": [
-        "wrote cvpr-interactive-console.html: 40 demos, status console-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_console.py",
-      "returnCode": 0,
-      "durationSec": 0.052,
-      "stdoutTail": [
-        "verified CVPR interactive console: 40 demos, console-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_scenario_runner.py",
-      "returnCode": 0,
-      "durationSec": 0.059,
-      "stdoutTail": [
-        "wrote cvpr-interactive-scenario-runner.html: 120 cases, status runner-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_scenario_runner.py",
-      "returnCode": 0,
-      "durationSec": 0.054,
-      "stdoutTail": [
-        "verified CVPR interactive scenario runner: 120 cases, runner-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_triage_board.py",
-      "returnCode": 0,
-      "durationSec": 0.059,
-      "stdoutTail": [
-        "wrote cvpr-interactive-triage-board.html: 40 decisions, status triage-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_triage_board.py",
-      "returnCode": 0,
-      "durationSec": 0.074,
-      "stdoutTail": [
-        "verified CVPR interactive triage board: 40 decisions, triage-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_release_pack.py",
-      "returnCode": 0,
-      "durationSec": 0.071,
-      "stdoutTail": [
-        "wrote cvpr-interactive-release-pack.html: 4 layers, status release-pack-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_release_pack.py",
-      "returnCode": 0,
-      "durationSec": 0.062,
-      "stdoutTail": [
-        "verified CVPR interactive release pack: 4 layers, release-pack-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_audit_ledger.py",
-      "returnCode": 0,
-      "durationSec": 0.079,
-      "stdoutTail": [
-        "wrote cvpr-interactive-audit-ledger.html: 5 events, status ledger-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_audit_ledger.py",
-      "returnCode": 0,
-      "durationSec": 0.069,
-      "stdoutTail": [
-        "verified CVPR interactive audit ledger: 5 events, ledger-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_command_center.py",
-      "returnCode": 0,
-      "durationSec": 0.072,
-      "stdoutTail": [
-        "wrote cvpr-interactive-command-center.html: 6 surfaces, status command-center-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_command_center.py",
-      "returnCode": 0,
-      "durationSec": 0.059,
-      "stdoutTail": [
-        "verified CVPR interactive command center: 6 surfaces, command-center-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_health_monitor.py",
-      "returnCode": 0,
-      "durationSec": 0.062,
-      "stdoutTail": [
-        "wrote cvpr-interactive-health-monitor.html: 32 probes, status monitor-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_health_monitor.py",
-      "returnCode": 0,
-      "durationSec": 0.056,
-      "stdoutTail": [
-        "verified CVPR interactive health monitor: 32 probes, monitor-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_drift_sentinel.py",
-      "returnCode": 0,
-      "durationSec": 0.062,
-      "stdoutTail": [
-        "wrote cvpr-interactive-drift-sentinel.html: 18 checks, status sentinel-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_drift_sentinel.py",
-      "returnCode": 0,
-      "durationSec": 0.065,
-      "stdoutTail": [
-        "verified CVPR interactive drift sentinel: 18 checks, sentinel-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_rollback_drillbook.py",
-      "returnCode": 0,
-      "durationSec": 0.069,
-      "stdoutTail": [
-        "wrote cvpr-interactive-rollback-drillbook.html: 6 drills, status drillbook-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_rollback_drillbook.py",
-      "returnCode": 0,
-      "durationSec": 0.048,
-      "stdoutTail": [
-        "verified CVPR interactive rollback drillbook: 6 drills, drillbook-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_rollback_rehearsal_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.043,
-      "stdoutTail": [
-        "wrote cvpr-interactive-rollback-rehearsal-lab.html: 6 rehearsals, status rehearsal-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_rollback_rehearsal_lab.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "verified CVPR interactive rollback rehearsal lab: 6 rehearsals, rehearsal-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_closeout_seal.py",
-      "returnCode": 0,
-      "durationSec": 0.045,
-      "stdoutTail": [
-        "wrote cvpr-interactive-closeout-seal.html: 11 layers, status closeout-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_closeout_seal.py",
-      "returnCode": 0,
-      "durationSec": 0.038,
-      "stdoutTail": [
-        "verified CVPR interactive closeout seal: 11 layers, closeout-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_handoff_bundle.py",
-      "returnCode": 0,
-      "durationSec": 0.04,
-      "stdoutTail": [
-        "wrote cvpr-interactive-handoff-bundle.html: 11 items, status handoff-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_handoff_bundle.py",
-      "returnCode": 0,
-      "durationSec": 0.044,
-      "stdoutTail": [
-        "verified CVPR interactive handoff bundle: 11 items, handoff-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_navigation_manifest_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.047,
-      "stdoutTail": [
-        "wrote cvpr-interactive-navigation-manifest-audit.html: 11 items, status nav-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_navigation_manifest_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.036,
-      "stdoutTail": [
-        "verified CVPR interactive navigation manifest audit: 11 items, nav-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_package_integrity_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.045,
-      "stdoutTail": [
-        "wrote cvpr-interactive-package-integrity-audit.html: 11 packages, status package-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_package_integrity_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.037,
-      "stdoutTail": [
-        "verified CVPR interactive package integrity audit: 11 packages, package-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_validator_command_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.041,
-      "stdoutTail": [
-        "wrote cvpr-interactive-validator-command-audit.html: 13 targets, status command-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_validator_command_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.035,
-      "stdoutTail": [
-        "verified CVPR interactive validator command audit: 13 targets, command-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/build_cvpr_interactive_full_stack_result_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.04,
-      "stdoutTail": [
-        "wrote cvpr-interactive-full-stack-result-audit.html: 13 targets, status result-audit-ready"
-      ],
-      "stderrTail": []
-    },
-    {
-      "command": "python3 scripts/verify_cvpr_interactive_full_stack_result_audit.py",
-      "returnCode": 0,
-      "durationSec": 0.038,
-      "stdoutTail": [
-        "verified CVPR interactive full-stack result audit: 13 targets, result-audit-ready"
-      ],
-      "stderrTail": []
+      "returnCode": 1,
+      "durationSec": 1.099,
+      "stdoutTail": [],
+      "stderrTail": [
+        "    ~~~~^^",
+        "  File \"/home/manishmehta/ui-projects/cvpr-2026-site/scripts/verify_cvpr_visual_qa_sweep_dashboard.py\", line 12, in main",
+        "    assert summary[\"status\"] == \"ready\"",
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "AssertionError"
+      ]
     }
   ]
 }

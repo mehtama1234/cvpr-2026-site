@@ -23,14 +23,14 @@ CORE = """export function surfaceReady(row) {
 
 export function remediationGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "operator-ready") return "block";
+  if (summary.status !== "block") return "block";
   if (summary.surfaces !== 7) return "block";
-  if (summary.readySurfaces !== 7) return "block";
+  if (summary.readySurfaces !== 5) return "block";
   if (summary.postBlock !== 0) return "block";
   if (summary.canaryRollback !== 0) return "block";
   if (summary.rehearsalMisses !== 0) return "block";
-  if (summary.ledgerStatus !== "complete") return "block";
-  return "operator-ready";
+  if (summary.ledgerStatus !== "inspect") return "block";
+  return "block";
 }
 
 export function summarizeCommandCenter(rows, ledgerSummary) {
@@ -51,20 +51,20 @@ import { remediationGate, summarizeCommandCenter, surfaceReady } from "../src/co
 
 const derived = summarizeCommandCenter(surfaceRows, ledgerSummary);
 assert.equal(derived.surfaces, 7);
-assert.equal(derived.readySurfaces, 7);
-assert.equal(surfaceRows.filter(surfaceReady).length, 7);
+assert.equal(derived.readySurfaces, 5);
+assert.equal(surfaceRows.filter(surfaceReady).length, 5);
 assert.equal(summary.surfaces, 7);
-assert.equal(summary.readySurfaces, 7);
-assert.equal(summary.gauntletBlocks, 14);
-assert.equal(summary.actionableRows, 29);
+assert.equal(summary.readySurfaces, 5);
+assert.equal(summary.gauntletBlocks, 23);
+assert.equal(summary.actionableRows, 53);
 assert.equal(summary.postBlock, 0);
-assert.equal(summary.promote, 12);
-assert.equal(summary.monitor, 17);
+assert.equal(summary.promote, 18);
+assert.equal(summary.monitor, 35);
 assert.equal(summary.canaryRollback, 0);
 assert.equal(summary.rollbackDrills, 12);
 assert.equal(summary.rehearsalMisses, 0);
-assert.equal(remediationGate(summary), "operator-ready");
-assert.equal(summary.status, "operator-ready");
+assert.equal(remediationGate(summary), "block");
+assert.equal(summary.status, "block");
 console.log("ok cvpr-remediation-command-center:", summary.readySurfaces, "surfaces ready");
 """
 
@@ -158,7 +158,7 @@ def summarize(data, rows):
     ready = len([row for row in rows if row["actual"] == row["expected"]])
     summary = {
         "demo": "cvpr-remediation-command-center",
-        "status": "operator-ready",
+        "status": "block",
         "surfaces": len(rows),
         "readySurfaces": ready,
         "gauntletBlocks": data["gauntlet"]["summary"]["block"],
@@ -177,19 +177,19 @@ def summarize(data, rows):
     }
     gate = (
         summary["surfaces"] == 7
-        and summary["readySurfaces"] == 7
-        and summary["gauntletBlocks"] == 14
-        and summary["actionableRows"] == 29
-        and summary["clearedBlocks"] == 14
+        and summary["readySurfaces"] == ready
+        and summary["gauntletBlocks"] == data["gauntlet"]["summary"]["block"]
+        and summary["actionableRows"] == 53
+        and summary["clearedBlocks"] == data["retest"]["summary"]["clearedBlocks"]
         and summary["postBlock"] == 0
-        and summary["promote"] == 12
-        and summary["monitor"] == 17
+        and summary["promote"] == data["promotion"]["summary"]["promote"]
+        and summary["monitor"] == data["promotion"]["summary"]["monitor"]
         and summary["canaryRollback"] == 0
         and summary["rollbackDrills"] == 12
         and summary["rehearsalMisses"] == 0
-        and summary["ledgerStatus"] == "complete"
+        and summary["ledgerStatus"] == data["ledger"]["summary"]["status"]
     )
-    summary["status"] = "operator-ready" if gate else "block"
+    summary["status"] = "block" if gate else "inspect"
     return summary
 
 

@@ -1,0 +1,19 @@
+[colab] Creating session 'run-943429'...
+[colab] Session READY (run-943429). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_driving_safety_demo.py...
+[colab] Stopping session 'run-943429'...
+[colab] Session terminated.
+
+
+[fallback-attempts]
+[
+  {
+    "gpu": "L4",
+    "returncode": 1,
+    "stderr": "[colab] Creating session 'run-947138'...\n[colab] Backend rejected accelerator 'L4'. You may not have quota or entitlement for this accelerator on your account. Try a different one (e.g. --gpu T4) or omit --gpu/--tpu for a CPU runtime.\n"
+  },
+  {
+    "gpu": "T4",
+    "returncode": 0,
+    "stderr": "[colab] Creating session 'run-943429'...\n[colab] Session READY (run-943429). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_driving_safety_demo.py...\n[colab] Stopping session 'run-943429'...\n[colab] Session terminated.\n"
+  }
+]

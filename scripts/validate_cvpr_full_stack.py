@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "analysis/cvpr_full_stack_validation/registry.json"
 CORE_TEST_LOG = Path("/tmp/cvpr-core-tests.log")
+CORE_TESTS = sorted((ROOT / "source-code/learning").glob("*/tests/core.test.js"))
 
 COMMANDS = [
     ["python3", "scripts/build_cvpr_systems_lab.py"],
@@ -317,17 +318,16 @@ def run_command(command):
 
 
 def run_core_tests():
-    tests = sorted((ROOT / "source-code/learning").glob("*/tests/core.test.js"))
     lines = []
     started = time.time()
-    for test in tests:
+    for test in CORE_TESTS:
         completed = subprocess.run(["node", str(test.relative_to(ROOT))], cwd=ROOT, text=True, capture_output=True)
         if completed.returncode != 0:
             return {
                 "command": "node source-code/learning/*/tests/core.test.js",
                 "returnCode": completed.returncode,
                 "durationSec": round(time.time() - started, 3),
-                "testCount": len(tests),
+                "testCount": len(CORE_TESTS),
                 "stdoutTail": completed.stdout.strip().splitlines()[-5:],
                 "stderrTail": completed.stderr.strip().splitlines()[-5:],
             }
@@ -337,7 +337,7 @@ def run_core_tests():
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
         "durationSec": round(time.time() - started, 3),
-        "testCount": len(tests),
+        "testCount": len(CORE_TESTS),
         "log": str(CORE_TEST_LOG),
         "stdoutTail": lines[-5:],
         "stderrTail": [],
@@ -365,7 +365,7 @@ def main():
             "status": status,
             "commands": len(COMMANDS) + len(VALIDATION_CENTER_PRE_COMMANDS) + len(VALIDATION_CENTER_POST_COMMANDS),
             "steps": len(steps),
-            "packageTests": 26,
+            "packageTests": len(CORE_TESTS),
             "workerJobs": worker["summary"]["jobs"],
             "promotedRunners": worker["summary"].get("promotedRunners", 0),
             "cachedResults": worker["summary"]["cachedResults"],

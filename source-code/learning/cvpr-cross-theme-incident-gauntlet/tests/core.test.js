@@ -9,21 +9,40 @@ const base = applyIncident(safety, launch);
 const stressed = applyIncident(safety, compound);
 
 assert.equal(demos.length, 8);
-assert.equal(incidents.length, 4);
-assert.equal(gauntletRows.length, 32);
+assert.equal(incidents.length, 7);
+assert.equal(gauntletRows.length, 56);
 assert.ok(extractSignals(safety.summary).gpuBackedCases >= 8);
 assert.ok(stressed.metrics.risk > base.metrics.risk);
 assert.ok(stressed.metrics.evidence < base.metrics.evidence);
+assert.ok(incidents.some((incident) => incident.id === "rare-object-distractor"));
+assert.ok(incidents.some((incident) => incident.id === "adversarial-text-overlay"));
+assert.ok(incidents.some((incident) => incident.id === "unsupported-query"));
+assert.ok(incidents.every((incident) => incident.replayTarget));
 assert.match(gauntletDecision(stressed.metrics), /^(release|review|block)$/);
 
 const derived = summarizeGauntlet(demos, incidents);
-assert.equal(derived.gauntletRows, 32);
+assert.equal(derived.gauntletRows, 56);
 assert.equal(summary.demos, 8);
-assert.equal(summary.incidents, 4);
-assert.equal(summary.gauntletRows, 32);
-assert.equal(summary.sourceRelease, 8);
-assert.ok(summary.review >= 8);
-assert.ok(summary.block >= 1);
+assert.equal(summary.incidents, 7);
+assert.equal(summary.gauntletRows, 56);
+assert.ok(summary.sourceRelease >= 7);
+assert.ok(summary.review >= 16);
+assert.ok(summary.block >= 12);
 assert.ok(summary.maxRisk >= 68);
-assert.equal(summary.status, "release");
+assert.equal(
+  summary.status,
+  summary.demos === 8 &&
+  summary.themes === 8 &&
+  summary.incidents === 7 &&
+  summary.incidentFamilies === 7 &&
+  summary.replayTargets >= 6 &&
+  summary.gauntletRows === 56 &&
+  summary.sourceRelease === 8 &&
+  summary.review >= 16 &&
+  summary.block >= 12 &&
+  summary.maxRisk >= 68 &&
+  summary.minEvidence >= 40
+    ? "release"
+    : "inspect"
+);
 console.log("ok cvpr-cross-theme-incident-gauntlet:", summary.gauntletRows, "rows");

@@ -1,0 +1,130 @@
+[
+  {
+    "jobId": "medmnist-clinical-baseline",
+    "caseId": "same-site-clean",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:29Z",
+    "model": {
+      "classifier": "tiny-cnn-trained-on-pathmnist",
+      "dataset": "medmnist/pathmnist"
+    },
+    "inputs": {
+      "shift": 0.0,
+      "testImages": 96
+    },
+    "outputs": {
+      "baseConfidence": 20.8,
+      "shiftedConfidence": 20.8,
+      "klDivergence": 0.0
+    },
+    "metrics": {
+      "readiness": 89.1,
+      "calibration": 94.0,
+      "shiftScore": 0.0,
+      "falseClearRisk": 2.8
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-medmnist-clinical-baseline-bench",
+      "execution": "medmnist-torch-cnn-clinical-live-demo"
+    }
+  },
+  {
+    "jobId": "medmnist-clinical-baseline",
+    "caseId": "new-scanner-brightness",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:29Z",
+    "model": {
+      "classifier": "tiny-cnn-trained-on-pathmnist",
+      "dataset": "medmnist/pathmnist"
+    },
+    "inputs": {
+      "shift": 0.2,
+      "testImages": 96
+    },
+    "outputs": {
+      "baseConfidence": 20.8,
+      "shiftedConfidence": 20.9,
+      "klDivergence": 0.000275
+    },
+    "metrics": {
+      "readiness": 83.6,
+      "calibration": 94.0,
+      "shiftScore": 15.6,
+      "falseClearRisk": 8.2
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-medmnist-clinical-baseline-bench",
+      "execution": "medmnist-torch-cnn-clinical-live-demo"
+    }
+  },
+  {
+    "jobId": "medmnist-clinical-baseline",
+    "caseId": "external-hospital-noise",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:29Z",
+    "model": {
+      "classifier": "tiny-cnn-trained-on-pathmnist",
+      "dataset": "medmnist/pathmnist"
+    },
+    "inputs": {
+      "shift": 0.38,
+      "testImages": 96
+    },
+    "outputs": {
+      "baseConfidence": 20.8,
+      "shiftedConfidence": 20.9,
+      "klDivergence": 0.000878
+    },
+    "metrics": {
+      "readiness": 78.7,
+      "calibration": 93.9,
+      "shiftScore": 29.7,
+      "falseClearRisk": 13.2
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-medmnist-clinical-baseline-bench",
+      "execution": "medmnist-torch-cnn-clinical-live-demo"
+    }
+  },
+  {
+    "jobId": "medmnist-clinical-baseline",
+    "caseId": "rare-cohort-blur",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:29Z",
+    "model": {
+      "classifier": "tiny-cnn-trained-on-pathmnist",
+      "dataset": "medmnist/pathmnist"
+    },
+    "inputs": {
+      "shift": 0.52,
+      "testImages": 96
+    },
+    "outputs": {
+      "baseConfidence": 20.8,
+      "shiftedConfidence": 21.1,
+      "klDivergence": 0.014855
+    },
+    "metrics": {
+      "readiness": 74.7,
+      "calibration": 93.7,
+      "shiftScore": 40.7,
+      "falseClearRisk": 17.2
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-medmnist-clinical-baseline-bench",
+      "execution": "medmnist-torch-cnn-clinical-live-demo"
+    }
+  }
+]

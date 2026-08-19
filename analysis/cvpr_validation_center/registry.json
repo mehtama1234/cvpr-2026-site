@@ -5,16 +5,16 @@
     "gateStatus": "release",
     "fullStackStatus": "valid",
     "commands": 286,
-    "steps": 287,
+    "steps": 53,
     "packageTests": 148,
-    "workerJobs": 10,
-    "promotedRunners": 10,
-    "cachedResults": 40,
+    "workerJobs": 14,
+    "promotedRunners": 14,
+    "cachedResults": 56,
     "importIssues": 0,
     "promotionDeltaStatus": "release",
     "promotionRegressions": 0,
     "maxReadinessDrop": 0.0,
-    "validImportJobs": 10,
+    "validImportJobs": 14,
     "implementedBenches": 11,
     "benchCases": 44,
     "benchBlock": 0,
@@ -26,7 +26,7 @@
       {
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
-        "durationSec": 20.437,
+        "durationSec": 109.717,
         "testCount": 148,
         "log": "/tmp/cvpr-core-tests.log",
         "stdoutTail": [
@@ -39,38 +39,38 @@
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_paper_repo_demo_forge.py",
+        "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.234,
+        "durationSec": 0.27,
         "stdoutTail": [
-          "wrote cvpr-paper-repo-demo-forge.html: 8 blueprints, 40 repo papers, status ready"
+          "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
+        "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.092,
+        "durationSec": 0.262,
         "stdoutTail": [
-          "verified CVPR live Colab intake: 40 live results, 0 issues"
+          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
+        "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.083,
+        "durationSec": 0.261,
         "stdoutTail": [
-          "verified CVPR live Colab promotion: 40 promoted cached-real results"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_interactive_audit_ledger.py",
+        "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.079,
+        "durationSec": 0.257,
         "stdoutTail": [
-          "wrote cvpr-interactive-audit-ledger.html: 5 events, status ledger-ready"
+          "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       }
@@ -80,7 +80,7 @@
     {
       "command": "node source-code/learning/*/tests/core.test.js",
       "returnCode": 0,
-      "durationSec": 20.437,
+      "durationSec": 109.717,
       "testCount": 148,
       "log": "/tmp/cvpr-core-tests.log",
       "stdoutTail": [
@@ -93,38 +93,38 @@
       "stderrTail": []
     },
     {
-      "command": "python3 scripts/build_cvpr_paper_repo_demo_forge.py",
+      "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
       "returnCode": 0,
-      "durationSec": 0.234,
+      "durationSec": 0.27,
       "stdoutTail": [
-        "wrote cvpr-paper-repo-demo-forge.html: 8 blueprints, 40 repo papers, status ready"
+        "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
       ],
       "stderrTail": []
     },
     {
-      "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
+      "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
       "returnCode": 0,
-      "durationSec": 0.092,
+      "durationSec": 0.262,
       "stdoutTail": [
-        "verified CVPR live Colab intake: 40 live results, 0 issues"
+        "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
       ],
       "stderrTail": []
     },
     {
-      "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
+      "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
       "returnCode": 0,
-      "durationSec": 0.083,
+      "durationSec": 0.261,
       "stdoutTail": [
-        "verified CVPR live Colab promotion: 40 promoted cached-real results"
+        "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
       ],
       "stderrTail": []
     },
     {
-      "command": "python3 scripts/build_cvpr_interactive_audit_ledger.py",
+      "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
       "returnCode": 0,
-      "durationSec": 0.079,
+      "durationSec": 0.257,
       "stdoutTail": [
-        "wrote cvpr-interactive-audit-ledger.html: 5 events, status ledger-ready"
+        "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
       ],
       "stderrTail": []
     }
@@ -133,22 +133,22 @@
     "validator": "validate_cvpr_full_stack",
     "status": "valid",
     "commands": 286,
-    "steps": 287,
+    "steps": 53,
     "packageTests": 148,
-    "workerJobs": 10,
-    "promotedRunners": 10,
-    "cachedResults": 40,
+    "workerJobs": 14,
+    "promotedRunners": 14,
+    "cachedResults": 56,
     "importIssues": 0,
-    "durationSec": 30.484
+    "durationSec": 119.128
   },
   "importReport": {
     "validator": "validate_cvpr_colab_results",
     "runtimePlane": "google-colab-pro-plus",
     "expectedMode": "cached-real",
-    "jobs": 10,
-    "expectedResults": 40,
-    "actualResults": 40,
-    "validJobs": 10,
+    "jobs": 14,
+    "expectedResults": 56,
+    "actualResults": 56,
+    "validJobs": 14,
     "issues": 0,
     "status": "valid"
   },
@@ -157,13 +157,16 @@
     "runtimePlane": "google-colab-pro-plus",
     "controlPlane": "local-static-cvpr-site",
     "resultPlane": "registry-and-cached-json",
-    "jobs": 10,
-    "liveCapable": 10,
-    "promotedRunners": 10,
-    "cachedCapable": 10,
-    "cachedResults": 40,
-    "validCachedResults": 40,
+    "jobs": 14,
+    "liveCapable": 14,
+    "promotedRunners": 14,
+    "runnerRows": 14,
+    "cachedCapable": 14,
+    "cachedResults": 56,
+    "validCachedResults": 56,
     "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+    "notebookNativeJobs": 10,
+    "externalLiveJobs": 4,
     "notebook": "notebooks/cvpr_gpu_worker.ipynb",
     "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
     "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -240,6 +243,38 @@
       "strictMode": "require_real_models=True"
     },
     {
+      "jobId": "depth-normal-consistency",
+      "caseSymbol": "DEPTH_NORMAL_CASES",
+      "loader": "load_depth_normal_models",
+      "runner": "run_depth_normal_consistency_batch",
+      "execution": "torch-cuda-depth-normal-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseSymbol": "CORRUPTION_CASES",
+      "loader": "load_corruption_models",
+      "runner": "run_corruption_robustness_batch",
+      "execution": "torchvision-resnet-corruption-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+      "loader": "load_prompt_segmentation_models",
+      "runner": "run_prompt_segmentation_robustness_batch",
+      "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseSymbol": "VIDEO_TRACKING_CASES",
+      "loader": "load_video_tracking_models",
+      "runner": "run_video_identity_tracking_batch",
+      "execution": "torch-cuda-video-tracking-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
       "jobId": "metric-geometry",
       "caseSymbol": "GEOMETRY_CASES",
       "loader": "load_metric_geometry_models",
@@ -282,8 +317,8 @@
   "promotionDelta": {
     "delta": "cvpr-colab-promotion-delta",
     "status": "release",
-    "cases": 40,
-    "jobs": 10,
+    "cases": 56,
+    "jobs": 14,
     "missing": 0,
     "modeMismatches": 0,
     "regressions": 0,

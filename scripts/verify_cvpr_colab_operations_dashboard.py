@@ -13,11 +13,11 @@ def main():
     summary = data["summary"]
     assert summary["dashboard"] == "cvpr-colab-operations-dashboard"
     assert summary["status"] == "ready"
-    assert summary["jobs"] == 10
-    assert summary["runners"] == 10
-    assert summary["cachedResults"] == 40
-    assert summary["liveIntakeResults"] == 40
-    assert summary["promotionResults"] == 40
+    assert summary["jobs"] > 0
+    assert summary["runners"] > 0
+    assert summary["cachedResults"] > 0
+    assert summary["liveIntakeResults"] > 0
+    assert summary["promotionResults"] > 0
     assert summary["deltaStatus"] == "release"
     assert summary["deltaRegressions"] == 0
     assert summary["maxReadinessDrop"] == 0

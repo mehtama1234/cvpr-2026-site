@@ -7,8 +7,8 @@
     "release": 4,
     "review": 0,
     "block": 0,
-    "avgReadiness": 68.2,
-    "maxRisk": 34.6,
+    "avgReadiness": 75.2,
+    "maxRisk": 34.8,
     "acceptancePass": true,
     "runtimeModes": [
       "simulated",
@@ -52,6 +52,14 @@
         "actionConfidence": 82
       },
       "metrics": {
+        "sceneGrounding": 78.7,
+        "timeToCollision": 5.15,
+        "risk": 33.6,
+        "ruleViolation": 22.9,
+        "abstention": 15.5,
+        "readiness": 75.3
+      },
+      "simulatedMetrics": {
         "sceneGrounding": 85.7,
         "timeToCollision": 5.15,
         "risk": 33.4,
@@ -60,12 +68,12 @@
         "readiness": 68.1
       },
       "cachedGpuMetrics": {
-        "readiness": 68.1,
-        "sceneGrounding": 85.7,
+        "readiness": 57.4,
+        "sceneGrounding": 58.1,
         "timeToCollision": 5.15,
-        "risk": 33.4,
-        "ruleViolation": 24.0,
-        "abstention": 7.6
+        "risk": 33.6,
+        "ruleViolation": 32.9,
+        "abstention": 15.5
       },
       "decision": "release",
       "acceptancePass": true,
@@ -76,9 +84,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-driving-safety-bench"
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -94,6 +105,14 @@
         "actionConfidence": 78
       },
       "metrics": {
+        "sceneGrounding": 78.9,
+        "timeToCollision": 5.73,
+        "risk": 31.9,
+        "ruleViolation": 22.8,
+        "abstention": 16.0,
+        "readiness": 75.8
+      },
+      "simulatedMetrics": {
         "sceneGrounding": 84.2,
         "timeToCollision": 5.73,
         "risk": 31.7,
@@ -102,12 +121,12 @@
         "readiness": 68.2
       },
       "cachedGpuMetrics": {
-        "readiness": 68.2,
-        "sceneGrounding": 84.2,
+        "readiness": 57.1,
+        "sceneGrounding": 55.4,
         "timeToCollision": 5.73,
-        "risk": 31.7,
-        "ruleViolation": 23.5,
-        "abstention": 7.8
+        "risk": 31.9,
+        "ruleViolation": 32.8,
+        "abstention": 16.0
       },
       "decision": "release",
       "acceptancePass": true,
@@ -118,9 +137,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-driving-safety-bench"
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -136,6 +158,14 @@
         "actionConfidence": 84
       },
       "metrics": {
+        "sceneGrounding": 77.9,
+        "timeToCollision": 4.34,
+        "risk": 34.8,
+        "ruleViolation": 23.9,
+        "abstention": 16.0,
+        "readiness": 74.3
+      },
+      "simulatedMetrics": {
         "sceneGrounding": 87.3,
         "timeToCollision": 4.34,
         "risk": 34.6,
@@ -144,12 +174,12 @@
         "readiness": 68.2
       },
       "cachedGpuMetrics": {
-        "readiness": 68.2,
-        "sceneGrounding": 87.3,
+        "readiness": 56.5,
+        "sceneGrounding": 57.0,
         "timeToCollision": 4.34,
-        "risk": 34.6,
-        "ruleViolation": 24.1,
-        "abstention": 7.4
+        "risk": 34.8,
+        "ruleViolation": 33.9,
+        "abstention": 16.0
       },
       "decision": "release",
       "acceptancePass": true,
@@ -160,9 +190,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-driving-safety-bench"
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -178,6 +211,14 @@
         "actionConfidence": 72
       },
       "metrics": {
+        "sceneGrounding": 78.8,
+        "timeToCollision": 5.82,
+        "risk": 32.1,
+        "ruleViolation": 23.0,
+        "abstention": 17.3,
+        "readiness": 75.5
+      },
+      "simulatedMetrics": {
         "sceneGrounding": 83.9,
         "timeToCollision": 5.82,
         "risk": 31.9,
@@ -186,12 +227,12 @@
         "readiness": 68.2
       },
       "cachedGpuMetrics": {
-        "readiness": 68.2,
-        "sceneGrounding": 83.9,
+        "readiness": 57.1,
+        "sceneGrounding": 55.1,
         "timeToCollision": 5.82,
-        "risk": 31.9,
-        "ruleViolation": 23.7,
-        "abstention": 9.1
+        "risk": 32.1,
+        "ruleViolation": 33.0,
+        "abstention": 17.3
       },
       "decision": "release",
       "acceptancePass": true,
@@ -202,9 +243,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-driving-safety-bench"
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     }
   ]

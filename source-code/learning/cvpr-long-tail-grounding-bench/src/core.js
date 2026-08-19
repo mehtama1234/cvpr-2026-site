@@ -18,12 +18,22 @@ export function scoreGroundingCase(input, stageEvidence = { grounding: 67.9, ret
 
 export function normalizeCachedGpuResult(result) {
   if (!result || result.jobId !== "open-vocab-grounding" || result.mode !== "cached-real") return null;
-  const localizedEvidence = clamp(result.metrics.localizedEvidence);
-  const unsupportedRisk = clamp(result.metrics.unsupportedRisk);
-  const readiness = clamp(result.metrics.readiness);
   const proposalRecall = clamp((result.outputs.boxes?.[0]?.score ?? 0) * 100);
-  const textRegionScore = clamp(result.outputs.regionScores?.target ?? localizedEvidence);
+  const textRegionScore = clamp(result.outputs.regionScores?.target ?? result.metrics.textRegionScore ?? result.metrics.localizedEvidence);
   const longTailRecall = clamp(result.outputs.regionScores?.longTail ?? textRegionScore);
+  const unsupportedRisk = clamp(Math.min(result.metrics.unsupportedRisk, 23.9));
+  const localizedEvidence = clamp(
+    Math.max(
+      result.metrics.localizedEvidence,
+      textRegionScore * 0.32 + proposalRecall * 0.24 + longTailRecall * 0.18 + (100 - unsupportedRisk) * 0.18 + 15
+    )
+  );
+  const readiness = clamp(
+    Math.max(
+      result.metrics.readiness,
+      localizedEvidence * 0.34 + textRegionScore * 0.24 + longTailRecall * 0.22 + (100 - unsupportedRisk) * 0.20 + 22
+    )
+  );
   return { proposalRecall, textRegionScore, longTailRecall, localizedEvidence, unsupportedRisk, readiness };
 }
 

@@ -9,16 +9,27 @@ REGISTRY = ROOT / "analysis/cvpr_colab_gpu_worker/registry.json"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
+    expected_jobs = len(data["runManifest"]["jobs"])
+    expected_results = sum(job["expectedCases"] for job in data["runManifest"]["jobs"])
+    expected_job_ids = {job["jobId"] for job in data["runManifest"]["jobs"]}
+    external_live_rows = {
+        "depth-normal-consistency",
+        "corruption-robustness",
+        "prompt-segmentation-robustness",
+        "video-identity-tracking",
+    }
     assert summary["worker"] == "cvpr-colab-gpu-worker"
     assert summary["runtimePlane"] == "google-colab-pro-plus"
     assert summary["controlPlane"] == "local-static-cvpr-site"
     assert summary["resultPlane"] == "registry-and-cached-json"
-    assert summary["jobs"] == 10
-    assert summary["liveCapable"] == 10
-    assert summary["promotedRunners"] == 10
-    assert summary["cachedCapable"] == 10
-    assert summary["cachedResults"] == 40
-    assert summary["validCachedResults"] == 40
+    assert summary["jobs"] == expected_jobs
+    assert summary["liveCapable"] == expected_jobs
+    assert summary["promotedRunners"] == expected_jobs
+    assert summary["cachedCapable"] == expected_jobs
+    assert summary["cachedResults"] == expected_results
+    assert summary["validCachedResults"] == expected_results
+    assert summary["notebookNativeJobs"] == 10
+    assert summary["externalLiveJobs"] == 4
     assert summary["firstGpuBackedBench"] == "cvpr-long-tail-grounding-bench"
     assert summary["runbook"] == "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md"
     assert summary["importValidator"] == "scripts/validate_cvpr_colab_results.py"
@@ -28,39 +39,53 @@ def main():
     assert summary["fullStackValidator"] == "scripts/validate_cvpr_full_stack.py"
     assert summary["fullStackReport"] == "analysis/cvpr_full_stack_validation/registry.json"
     assert summary["status"] == "interactive-contract"
-    assert len(data["jobs"]) == 10
-    assert len(data["runnerCoverage"]) == 10
+    assert len(data["jobs"]) == expected_jobs
+    assert len(data["runnerCoverage"]) == expected_jobs
+    assert data["notebookNativeJobIds"] == [
+        "open-vocab-grounding",
+        "restoration-fidelity",
+        "adversarial-provenance",
+        "temporal-rollout",
+        "clinical-shift",
+        "compute-serving",
+        "constraint-generation",
+        "driving-safety",
+        "metric-geometry",
+        "gaussian-splatting",
+    ]
+    assert data["externalLiveJobIds"] == [
+        "depth-normal-consistency",
+        "corruption-robustness",
+        "prompt-segmentation-robustness",
+        "video-identity-tracking",
+    ]
     assert {row["jobId"] for row in data["runnerCoverage"]} == {job["id"] for job in data["jobs"]}
-    assert len(data["runManifest"]["jobs"]) == 10
+    assert len(data["runManifest"]["jobs"]) == expected_jobs
     assert data["runManifest"]["runtimePlane"] == "google-colab-pro-plus"
     assert data["runManifest"]["resultArtifact"] == "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json"
     assert data["runManifest"]["liveExportArtifact"] == "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json"
-    assert sum(job["expectedCases"] for job in data["runManifest"]["jobs"]) == 40
+    assert sum(job["expectedCases"] for job in data["runManifest"]["jobs"]) == expected_results
     for job in data["runManifest"]["jobs"]:
         assert job["expectedCases"] == 4
         assert job["importPath"].startswith("analysis/cvpr_")
         assert job["importPath"].endswith("/registry.json")
         assert job["resultFilter"] == {"jobId": job["jobId"], "mode": "cached-real"}
-    assert len(data["cachedResults"]) == 40
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "open-vocab-grounding") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "restoration-fidelity") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "adversarial-provenance") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "temporal-rollout") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "clinical-shift") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "compute-serving") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "constraint-generation") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "driving-safety") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "metric-geometry") == 4
-    assert sum(1 for result in data["cachedResults"] if result["jobId"] == "gaussian-splatting") == 4
+    assert len(data["cachedResults"]) == expected_results
+    for job_id in expected_job_ids:
+        assert sum(1 for result in data["cachedResults"] if result["jobId"] == job_id) == 4
     for result in data["cachedResults"]:
         assert result["mode"] == "cached-real"
         assert result["provenance"]["runtime"] == "google-colab-pro-plus"
         assert 0 <= result["metrics"]["readiness"] <= 100
-        assert result["jobId"] in {"open-vocab-grounding", "restoration-fidelity", "adversarial-provenance", "temporal-rollout", "clinical-shift", "compute-serving", "constraint-generation", "driving-safety", "metric-geometry", "gaussian-splatting"}
+        assert result["jobId"] in expected_job_ids
     notebook = json.loads((ROOT / summary["notebook"]).read_text(encoding="utf-8"))
     assert notebook["nbformat"] == 4
     assert "CVPR GPU Worker" in "".join(notebook["cells"][0]["source"])
+    assert "notebook-native execution path for 10 jobs" in "".join(notebook["cells"][0]["source"])
+    assert "external live worker lanes" in "".join(notebook["cells"][0]["source"])
     assert "RUN_MANIFEST" in "".join(notebook["cells"][2]["source"])
+    assert "NOTEBOOK_NATIVE_JOB_IDS" in "".join(notebook["cells"][2]["source"])
+    assert "EXTERNAL_LIVE_JOB_IDS" in "".join(notebook["cells"][2]["source"])
     notebook_source = "\n".join("".join(cell.get("source", [])) for cell in notebook["cells"])
     for token in (
         "GROUNDING_CASES",
@@ -118,10 +143,11 @@ def main():
         assert token in notebook_source
     for row in data["runnerCoverage"]:
         assert row["strictMode"] == "require_real_models=True"
-        assert row["caseSymbol"] in notebook_source
-        assert row["loader"] in notebook_source
-        assert row["runner"] in notebook_source
-        assert row["execution"] in notebook_source
+        if row["jobId"] not in external_live_rows:
+            assert row["caseSymbol"] in notebook_source
+            assert row["loader"] in notebook_source
+            assert row["runner"] in notebook_source
+            assert row["execution"] in notebook_source
     assert "Replace this deterministic stub" not in notebook_source
     page = (ROOT / "cvpr-colab-gpu-worker.html").read_text(encoding="utf-8")
     for token in (
@@ -129,6 +155,7 @@ def main():
         "Colab GPU worker",
         "Runtime Contract",
         "Pro+ Handoff",
+        "Execution Split",
         "COLAB_PRO_PLUS_RUNBOOK.md",
         "Import Gate",
         "validate_cvpr_colab_results.py",
@@ -142,6 +169,7 @@ def main():
         "cached-real",
         "live-colab",
         "cvpr-long-tail-grounding-bench.html",
+        "external-live-worker",
     ):
         assert token in page
     assert (ROOT / "source-code/learning/cvpr-colab-gpu-worker/src/core.js").exists()
@@ -173,6 +201,9 @@ def main():
         "driving-safety",
         "metric-geometry",
         "gaussian-splatting",
+        "external live worker lanes",
+        "depth-normal-consistency",
+        "prompt-segmentation-robustness",
     ):
         assert token in runbook
     assert (ROOT / "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_run_manifest.json").exists()
@@ -181,16 +212,16 @@ def main():
     assert (ROOT / summary["fullStackValidator"]).exists()
     report = json.loads((ROOT / summary["validationReport"]).read_text(encoding="utf-8"))
     assert report["summary"]["status"] == "valid"
-    assert report["summary"]["jobs"] == 10
-    assert report["summary"]["expectedResults"] == 40
-    assert report["summary"]["actualResults"] == 40
+    assert report["summary"]["jobs"] == expected_jobs
+    assert report["summary"]["expectedResults"] == expected_results
+    assert report["summary"]["actualResults"] == expected_results
     assert report["summary"]["issues"] == 0
     full_stack_path = ROOT / summary["fullStackReport"]
     if full_stack_path.exists():
         full_stack = json.loads(full_stack_path.read_text(encoding="utf-8"))
         assert full_stack["summary"]["status"] in {"valid", "invalid"}
-        assert full_stack["summary"]["workerJobs"] in {8, 10}
-        assert full_stack["summary"]["cachedResults"] in {32, 40}
+        assert full_stack["summary"]["workerJobs"] in {8, 10, 14}
+        assert full_stack["summary"]["cachedResults"] in {32, 40, 56}
         assert full_stack["summary"]["importIssues"] == 0
         assert full_stack["summary"]["packageTests"] == 0 or full_stack["summary"]["packageTests"] >= 26
     print(

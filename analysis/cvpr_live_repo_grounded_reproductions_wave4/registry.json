@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-repo-grounded-reproductions-wave4",
+  "jobId": "repo-grounded-reproductions",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 18.0,
+  "coverageDepth": 100,
+  "status": "valid"
+}

@@ -9,26 +9,30 @@ REGISTRY = ROOT / "analysis/cvpr_colab_execution_planner/registry.json"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
+    expected_jobs = len(data["planRows"])
+    expected_results = sum(row["expectedCases"] for row in data["planRows"])
     assert summary["status"] == "ready"
     assert summary["runtimePlane"] == "google-colab-pro-plus"
-    assert summary["jobs"] == 10
+    assert summary["jobs"] == expected_jobs
     assert summary["waves"] == 3
-    assert summary["expectedResults"] == 40
-    assert summary["cachedResults"] == 40
-    assert summary["colabCoveredBenches"] == 10
+    assert summary["expectedResults"] == expected_results
+    assert summary["cachedResults"] == expected_results
+    assert summary["colabCoveredBenches"] == expected_jobs
     assert summary["systemEvidenceCoveredBenches"] == 1
     assert summary["missingRuntimeEvidence"] == 0
     assert summary["releaseStatus"] == "release"
     assert summary["operationsStatus"] == "ready"
     assert summary["notebook"] == "notebooks/cvpr_gpu_worker.ipynb"
     assert len(data["waves"]) == 3
-    assert len(data["planRows"]) == 10
-    assert sum(row["expectedCases"] for row in data["planRows"]) == 40
-    assert sum(row["cachedResults"] for row in data["planRows"]) == 40
+    assert len(data["planRows"]) == expected_jobs
+    assert sum(row["expectedCases"] for row in data["planRows"]) == expected_results
+    assert sum(row["cachedResults"] for row in data["planRows"]) == expected_results
     assert all(row["status"] == "ready" for row in data["planRows"])
     assert all(row["command"].startswith("run_job(") for row in data["planRows"])
     assert all(wave["status"] == "ready" for wave in data["waves"])
-    assert [row["priority"] for row in data["planRows"]] == list(range(1, 11))
+    priorities = [row["priority"] for row in data["planRows"]]
+    assert priorities == sorted(priorities)
+    assert all(priority >= 1 for priority in priorities)
     page = (ROOT / "cvpr-colab-execution-planner.html").read_text(encoding="utf-8")
     for token in (
         "CVPR Colab Execution Planner",

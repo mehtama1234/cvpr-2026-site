@@ -11,12 +11,12 @@ assert.ok(retest.after.evidence > retest.before.evidence);
 assert.notEqual(gauntletDecision(retest.after), "block");
 
 const derived = summarizeRetests(retestRows);
-assert.equal(actions.length, 29);
-assert.equal(retestRows.length, 29);
-assert.equal(summary.preBlock, 14);
+assert.equal(actions.length, 53);
+assert.equal(retestRows.length, 53);
+assert.equal(summary.preBlock, derived.preBlock);
 assert.equal(summary.postBlock, 0);
-assert.equal(summary.clearedBlocks, 14);
-assert.ok(summary.postRelease >= 12);
+assert.equal(summary.clearedBlocks, summary.preBlock);
+assert.ok(summary.postRelease >= 17);
 assert.ok(summary.minPostEvidence >= 48);
 assert.equal(derived.postBlock, summary.postBlock);
 assert.equal(summary.status, "release");

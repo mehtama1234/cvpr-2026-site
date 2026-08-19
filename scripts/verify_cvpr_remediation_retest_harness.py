@@ -14,17 +14,17 @@ def main():
     assert summary["demo"] == "cvpr-remediation-retest-harness"
     assert summary["status"] == "release"
     assert summary["sourceDemo"] == "cvpr-gauntlet-remediation-sprint"
-    assert summary["retestRows"] == 29
-    assert summary["sourceActions"] == 29
-    assert summary["preBlock"] == 14
+    assert summary["retestRows"] == 53
+    assert summary["sourceActions"] == 53
+    assert summary["preBlock"] == sum(1 for row in data["retestRows"] if row["beforeDecision"] == "block")
     assert summary["postBlock"] == 0
-    assert summary["clearedBlocks"] == 14
-    assert summary["postRelease"] >= 12
+    assert summary["clearedBlocks"] == summary["preBlock"]
+    assert summary["postRelease"] >= 17
     assert summary["themes"] == 8
-    assert summary["incidents"] == 4
+    assert summary["incidents"] == 7
     assert summary["maxPostRisk"] <= 66
     assert summary["minPostEvidence"] >= 48
-    assert len(data["retestRows"]) == 29
+    assert len(data["retestRows"]) == 53
     assert all(row["afterDecision"] != "block" for row in data["retestRows"])
     assert all(row["acceptanceCheck"].startswith("retest ") for row in data["retestRows"])
     page = PAGE.read_text(encoding="utf-8")

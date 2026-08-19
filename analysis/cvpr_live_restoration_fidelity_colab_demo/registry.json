@@ -1,0 +1,192 @@
+{
+  "summary": {
+    "demo": "cvpr-live-restoration-fidelity-colab-demo",
+    "jobId": "restoration-fidelity",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 78.5,
+    "maxFabricatedDetailRisk": 19.3,
+    "status": "valid",
+    "analysis": "cvpr_live_restoration_fidelity_colab_demo",
+    "resultArtifact": "analysis/cvpr_live_restoration_fidelity_colab_demo/cvpr_restoration_live_results.json",
+    "stdoutArtifact": "analysis/cvpr_live_restoration_fidelity_colab_demo/colab_stdout.txt",
+    "stderrArtifact": "analysis/cvpr_live_restoration_fidelity_colab_demo/colab_stderr.txt",
+    "launcher": "python3 scripts/run_colab_live_demo.py",
+    "worker": "scripts/colab_live_restoration_fidelity_demo.py"
+  },
+  "results": [
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "mild-noise",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:02:40Z",
+      "model": {
+        "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+        "artifactProbe": "pixel-delta-artifact-map"
+      },
+      "inputs": {
+        "degradationControls": {
+          "blur": 18,
+          "noise": 24,
+          "compression": 18,
+          "lowLight": 20,
+          "hallucinationPenalty": 36
+        },
+        "asset": "synthetic://mild-noise"
+      },
+      "outputs": {
+        "restoredImage": "synthetic://restoration/mild-noise-restored.png",
+        "artifactMap": "synthetic://restoration/mild-noise-artifact-map.png",
+        "downstreamScore": 85.1,
+        "fidelityScore": 80.6,
+        "deltaScore": 2.102
+      },
+      "metrics": {
+        "readiness": 81.6,
+        "degradationLoad": 21.6,
+        "diagnosisConfidence": 78.4,
+        "fidelityScore": 80.6,
+        "artifactRisk": 19.3,
+        "downstreamUtility": 85.1,
+        "fabricatedDetailRisk": 19.3
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo"
+      }
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "compressed-low-light",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:02:42Z",
+      "model": {
+        "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+        "artifactProbe": "pixel-delta-artifact-map"
+      },
+      "inputs": {
+        "degradationControls": {
+          "blur": 32,
+          "noise": 38,
+          "compression": 54,
+          "lowLight": 64,
+          "hallucinationPenalty": 16
+        },
+        "asset": "synthetic://compressed-low-light"
+      },
+      "outputs": {
+        "restoredImage": "synthetic://restoration/compressed-low-light-restored.png",
+        "artifactMap": "synthetic://restoration/compressed-low-light-artifact-map.png",
+        "downstreamScore": 78.8,
+        "fidelityScore": 85.2,
+        "deltaScore": 1.12
+      },
+      "metrics": {
+        "readiness": 78.5,
+        "degradationLoad": 43.6,
+        "diagnosisConfidence": 56.4,
+        "fidelityScore": 85.2,
+        "artifactRisk": 13.0,
+        "downstreamUtility": 78.8,
+        "fabricatedDetailRisk": 13.0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo"
+      }
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "motion-blur-task",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:02:43Z",
+      "model": {
+        "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+        "artifactProbe": "pixel-delta-artifact-map"
+      },
+      "inputs": {
+        "degradationControls": {
+          "blur": 64,
+          "noise": 36,
+          "compression": 38,
+          "lowLight": 36,
+          "hallucinationPenalty": 16
+        },
+        "asset": "synthetic://motion-blur-task"
+      },
+      "outputs": {
+        "restoredImage": "synthetic://restoration/motion-blur-task-restored.png",
+        "artifactMap": "synthetic://restoration/motion-blur-task-artifact-map.png",
+        "downstreamScore": 82.6,
+        "fidelityScore": 85.0,
+        "deltaScore": 1.597
+      },
+      "metrics": {
+        "readiness": 80.5,
+        "degradationLoad": 41.2,
+        "diagnosisConfidence": 58.8,
+        "fidelityScore": 85.0,
+        "artifactRisk": 10.9,
+        "downstreamUtility": 82.6,
+        "fabricatedDetailRisk": 10.9
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo"
+      }
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "caseId": "over-restored-detail",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:02:45Z",
+      "model": {
+        "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+        "artifactProbe": "pixel-delta-artifact-map"
+      },
+      "inputs": {
+        "degradationControls": {
+          "blur": 48,
+          "noise": 54,
+          "compression": 38,
+          "lowLight": 56,
+          "hallucinationPenalty": 18
+        },
+        "asset": "synthetic://over-restored-detail"
+      },
+      "outputs": {
+        "restoredImage": "synthetic://restoration/over-restored-detail-restored.png",
+        "artifactMap": "synthetic://restoration/over-restored-detail-artifact-map.png",
+        "downstreamScore": 81.2,
+        "fidelityScore": 85.8,
+        "deltaScore": 1.348
+      },
+      "metrics": {
+        "readiness": 78.9,
+        "degradationLoad": 45.9,
+        "diagnosisConfidence": 54.1,
+        "fidelityScore": 85.8,
+        "artifactRisk": 13.4,
+        "downstreamUtility": 81.2,
+        "fabricatedDetailRisk": 13.4
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo"
+      }
+    }
+  ]
+}

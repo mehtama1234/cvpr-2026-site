@@ -4,12 +4,12 @@ export function drillReady(drill) {
 
 export function drillbookGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
   if (summary.drills !== 10) return "block";
   if (summary.readyDrills !== 10) return "block";
   if (summary.activeCriticalFailures !== 0) return "block";
   if (summary.operationsStatus !== "ready") return "block";
   if (summary.validationGate !== "release") return "block";
+  if (summary.remediationStatus !== "ready") return "block";
   return "ready";
 }
 

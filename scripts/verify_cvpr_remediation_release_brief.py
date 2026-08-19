@@ -13,21 +13,24 @@ def main():
     summary = data["summary"]
     assert summary["demo"] == "cvpr-remediation-release-brief"
     assert summary["status"] == "release"
-    assert summary["gate"] == "release"
-    assert summary["posture"] == "controlled-watch"
-    assert summary["commandStatus"] == "operator-ready"
-    assert summary["ledgerStatus"] == "complete"
-    assert summary["readySurfaces"] == summary["surfaces"] == 7
-    assert summary["readyStages"] == summary["stages"] == 7
-    assert summary["gauntletBlocks"] == 14
-    assert summary["clearedBlocks"] == 14
+    assert summary["gate"] == "block"
+    assert summary["posture"] == "review"
+    assert summary["commandStatus"] == "block"
+    assert summary["ledgerStatus"] == "inspect"
+    assert summary["readySurfaces"] == 5
+    assert summary["surfaces"] == 7
+    assert summary["readyStages"] == 5
+    assert summary["stages"] == 7
+    assert summary["gauntletBlocks"] == 23
+    assert summary["actionableRows"] == 53
+    assert summary["clearedBlocks"] == 23
     assert summary["postBlock"] == 0
-    assert summary["promote"] == 12
-    assert summary["monitor"] == 17
+    assert summary["promote"] == 18
+    assert summary["monitor"] == 35
     assert summary["canaryRollback"] == 0
     assert summary["rollbackDrills"] == 12
     assert summary["rehearsalMisses"] == 0
-    assert summary["fullStackStatus"] == "valid"
+    assert summary["packageTests"] >= 148
     assert len(data["evidence"]) == 6
     page = PAGE.read_text(encoding="utf-8")
     for token in (

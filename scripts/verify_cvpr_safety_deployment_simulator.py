@@ -20,6 +20,10 @@ def main():
     assert summary["contexts"] == 4
     assert summary["deploymentRows"] == 16
     assert summary["gpuBackedCases"] == 8
+    assert summary["liveJobs"] == ["clinical-shift", "driving-safety"]
+    assert summary["liveExportArtifact"] == "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json"
+    assert summary["familyFlowCommand"] == "python3 scripts/run_cvpr_safety_deployment_flow.py"
+    assert len(summary["operatorCommands"]) == 5
     assert set(summary["proPlusJobs"]) == {"driving-safety", "clinical-shift"}
     assert summary["review"] + summary["block"] > 0
     assert summary["maxDeploymentRisk"] >= 45
@@ -39,6 +43,9 @@ def main():
         "cvpr-demo-build-backlog.html",
         "cvpr-driving-safety-bench.html",
         "cvpr-clinical-shift-bench.html",
+        "Operator Path",
+        "run_cvpr_safety_deployment_flow.py",
+        "stage_cvpr_live_colab_export.py --export source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json --job clinical-shift --promote",
         "scoreDeployment",
         "Release Gate",
     ):

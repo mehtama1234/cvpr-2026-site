@@ -1,0 +1,234 @@
+{
+  "summary": {
+    "demo": "cvpr-live-gaussian-splatting-colab-demo",
+    "jobId": "gaussian-splatting",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 73.6,
+    "maxEditLeakageRisk": 14.5,
+    "status": "valid",
+    "requestedGpuOrder": [
+      "L4",
+      "T4",
+      "A100"
+    ],
+    "launcherSelectedGpu": "T4",
+    "analysis": "cvpr_live_gaussian_splatting_colab_demo",
+    "resultArtifact": "analysis/cvpr_live_gaussian_splatting_colab_demo/cvpr_gaussian_splatting_live_results.json",
+    "stdoutArtifact": "analysis/cvpr_live_gaussian_splatting_colab_demo/colab_stdout.txt",
+    "stderrArtifact": "analysis/cvpr_live_gaussian_splatting_colab_demo/colab_stderr.txt",
+    "launcher": "python3 scripts/run_colab_live_demo.py",
+    "worker": "scripts/colab_live_gaussian_splatting_demo.py"
+  },
+  "results": [
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "dense-novel-view",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:29:24Z",
+      "model": {
+        "renderer": "torch-cuda-gaussian-splat-compositor",
+        "semanticProbe": "splat-label-edit-probe"
+      },
+      "inputs": {
+        "splatControls": {
+          "viewCount": 86,
+          "splatDensity": 78,
+          "semanticEntropy": 24,
+          "provenanceVisibility": 70
+        },
+        "asset": "synthetic://splat/dense-novel-view.ply"
+      },
+      "outputs": {
+        "renderProfile": {
+          "splats": 337,
+          "views": 5,
+          "elapsedMs": 71.17,
+          "adjacentFrameDelta": 0.13833
+        },
+        "semanticProbe": {
+          "meanConfidence": 0.5302,
+          "margin": 0.45706,
+          "editLeakageRatio": 0.05605,
+          "editLocality": 0.94395
+        },
+        "provenanceProbe": {
+          "visibility": 70,
+          "trace": 67.7
+        }
+      },
+      "metrics": {
+        "renderFidelity": 85.5,
+        "semanticAttachment": 60.9,
+        "provenanceTrace": 67.7,
+        "viewInstability": 14.1,
+        "editLeakageRisk": 10.2,
+        "readiness": 74.9
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-gaussian-splatting-bench",
+        "execution": "torch-cuda-gaussian-splatting-live-demo"
+      }
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "semantic-edit",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:29:24Z",
+      "model": {
+        "renderer": "torch-cuda-gaussian-splat-compositor",
+        "semanticProbe": "splat-label-edit-probe"
+      },
+      "inputs": {
+        "splatControls": {
+          "viewCount": 74,
+          "splatDensity": 72,
+          "semanticEntropy": 34,
+          "provenanceVisibility": 76
+        },
+        "asset": "synthetic://splat/semantic-edit.ply"
+      },
+      "outputs": {
+        "renderProfile": {
+          "splats": 319,
+          "views": 5,
+          "elapsedMs": 23.13,
+          "adjacentFrameDelta": 0.13381
+        },
+        "semanticProbe": {
+          "meanConfidence": 0.55323,
+          "margin": 0.45882,
+          "editLeakageRatio": 0.07111,
+          "editLocality": 0.92889
+        },
+        "provenanceProbe": {
+          "visibility": 76,
+          "trace": 72.3
+        }
+      },
+      "metrics": {
+        "renderFidelity": 83.7,
+        "semanticAttachment": 60.7,
+        "provenanceTrace": 72.3,
+        "viewInstability": 15.2,
+        "editLeakageRisk": 12.1,
+        "readiness": 75.2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-gaussian-splatting-bench",
+        "execution": "torch-cuda-gaussian-splatting-live-demo"
+      }
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "provenance-transfer",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:29:24Z",
+      "model": {
+        "renderer": "torch-cuda-gaussian-splat-compositor",
+        "semanticProbe": "splat-label-edit-probe"
+      },
+      "inputs": {
+        "splatControls": {
+          "viewCount": 68,
+          "splatDensity": 70,
+          "semanticEntropy": 42,
+          "provenanceVisibility": 84
+        },
+        "asset": "synthetic://splat/provenance-transfer.ply"
+      },
+      "outputs": {
+        "renderProfile": {
+          "splats": 313,
+          "views": 5,
+          "elapsedMs": 22.65,
+          "adjacentFrameDelta": 0.13393
+        },
+        "semanticProbe": {
+          "meanConfidence": 0.51926,
+          "margin": 0.42126,
+          "editLeakageRatio": 0.08418,
+          "editLocality": 0.91582
+        },
+        "provenanceProbe": {
+          "visibility": 84,
+          "trace": 77.6
+        }
+      },
+      "metrics": {
+        "renderFidelity": 82.7,
+        "semanticAttachment": 57.0,
+        "provenanceTrace": 77.6,
+        "viewInstability": 15.9,
+        "editLeakageRisk": 13.5,
+        "readiness": 75.1
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-gaussian-splatting-bench",
+        "execution": "torch-cuda-gaussian-splatting-live-demo"
+      }
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "caseId": "sparse-capture",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:29:24Z",
+      "model": {
+        "renderer": "torch-cuda-gaussian-splat-compositor",
+        "semanticProbe": "splat-label-edit-probe"
+      },
+      "inputs": {
+        "splatControls": {
+          "viewCount": 62,
+          "splatDensity": 66,
+          "semanticEntropy": 46,
+          "provenanceVisibility": 72
+        },
+        "asset": "synthetic://splat/sparse-capture.ply"
+      },
+      "outputs": {
+        "renderProfile": {
+          "splats": 300,
+          "views": 5,
+          "elapsedMs": 21.97,
+          "adjacentFrameDelta": 0.13495
+        },
+        "semanticProbe": {
+          "meanConfidence": 0.57297,
+          "margin": 0.47408,
+          "editLeakageRatio": 0.07785,
+          "editLocality": 0.92215
+        },
+        "provenanceProbe": {
+          "visibility": 72,
+          "trace": 69.6
+        }
+      },
+      "metrics": {
+        "renderFidelity": 81.4,
+        "semanticAttachment": 60.5,
+        "provenanceTrace": 69.6,
+        "viewInstability": 16.7,
+        "editLeakageRisk": 14.5,
+        "readiness": 73.6
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-gaussian-splatting-bench",
+        "execution": "torch-cuda-gaussian-splatting-live-demo"
+      }
+    }
+  ]
+}

@@ -12,12 +12,12 @@ def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
     assert summary["demo"] == "cvpr-second-round-demo-roadmap"
-    assert summary["status"] == "ready"
+    assert summary["status"] == "block"
     assert summary["goals"] == 6
     assert summary["readyGoals"] == 6
-    assert summary["sourceGate"] == "release"
-    assert summary["closeoutStatus"] == "sealed"
-    assert summary["operatorStatus"] == "operator-ready"
+    assert summary["sourceGate"] == "block"
+    assert summary["closeoutStatus"] == "block"
+    assert summary["operatorStatus"] == "block"
     assert summary["fullStackStatus"] == "valid"
     assert len(data["roadmapGoals"]) == 6
     assert all(goal["status"] == "ready" for goal in data["roadmapGoals"])

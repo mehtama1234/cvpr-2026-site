@@ -1,14 +1,14 @@
 {
   "summary": {
     "roadmap": "cvpr-next-demo-roadmap",
-    "status": "ready",
+    "status": "block",
     "goals": 8,
     "themes": 8,
     "linkedSystems": 11,
     "proPlusGoals": 7,
     "cachedEvidenceGoals": 1,
     "missingEvidence": 0,
-    "operatorStatus": "operator-ready",
+    "operatorStatus": "block",
     "packageTests": 148
   },
   "roadmapGoals": [
@@ -33,7 +33,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 3,
       "benchCases": 4,
-      "readinessFloor": 73.5,
+      "readinessFloor": 86.9,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     },
@@ -62,7 +62,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 6,
       "benchCases": 8,
-      "readinessFloor": 77.4,
+      "readinessFloor": 70.5,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     },
@@ -87,7 +87,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 3,
       "benchCases": 4,
-      "readinessFloor": 83.8,
+      "readinessFloor": 44.0,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     },
@@ -116,7 +116,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 6,
       "benchCases": 8,
-      "readinessFloor": 72.0,
+      "readinessFloor": 73.6,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     },
@@ -141,7 +141,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 3,
       "benchCases": 4,
-      "readinessFloor": 75.9,
+      "readinessFloor": 80.3,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     },
@@ -195,7 +195,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 6,
       "benchCases": 8,
-      "readinessFloor": 72.5,
+      "readinessFloor": 53.8,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     },
@@ -220,7 +220,7 @@
       "cachedEvidenceSystems": [],
       "stageDemos": 3,
       "benchCases": 4,
-      "readinessFloor": 68.1,
+      "readinessFloor": 56.5,
       "command": "python3 scripts/validate_cvpr_full_stack.py",
       "status": "ready"
     }

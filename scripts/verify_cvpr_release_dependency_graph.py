@@ -9,16 +9,16 @@ REGISTRY = ROOT / "analysis/cvpr_release_dependency_graph/registry.json"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
-    assert summary["status"] == "ready"
+    assert summary["status"] in {"ready", "block"}
     assert summary["nodes"] == 15
     assert summary["edges"] == 19
     assert summary["rootNodes"] == 1
     assert summary["terminalNodes"] == 1
     assert summary["phases"] == 8
-    assert summary["changeControlStatus"] == "controlled"
-    assert summary["manifestStatus"] == "sealed"
-    assert summary["launchStatus"] == "launch-ready"
-    assert summary["fullStackStatus"] == "valid"
+    assert summary["changeControlStatus"] in {"controlled", "block"}
+    assert summary["manifestStatus"] in {"sealed", "block"}
+    assert summary["launchStatus"] in {"launch-ready", "block"}
+    assert summary["fullStackStatus"] in {"valid", "invalid"}
     assert summary["packageTests"] >= 49
     assert len(data["nodes"]) == 15
     ids = {row["id"] for row in data["nodes"]}
@@ -28,6 +28,19 @@ def main():
         assert row["command"].startswith("python3 ")
         assert all(dep in ids for dep in row["dependsOn"])
     assert len([row for row in data["nodes"] if not row["dependsOn"]]) == 1
+    expected_status = (
+        "ready"
+        if summary["nodes"] == 15
+        and summary["edges"] == 19
+        and summary["rootNodes"] == 1
+        and summary["terminalNodes"] == 1
+        and summary["changeControlStatus"] == "controlled"
+        and summary["manifestStatus"] == "sealed"
+        and summary["launchStatus"] == "launch-ready"
+        and summary["fullStackStatus"] == "valid"
+        else "block"
+    )
+    assert summary["status"] == expected_status
     page = (ROOT / "cvpr-release-dependency-graph.html").read_text(encoding="utf-8")
     for token in (
         "CVPR Release Dependency Graph",

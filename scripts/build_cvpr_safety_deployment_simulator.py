@@ -12,6 +12,15 @@ SOURCES = {
     "clinical": ROOT / "analysis/cvpr_clinical_shift_bench/registry.json",
     "replay": ROOT / "analysis/cvpr_colab_result_replay/registry.json",
 }
+LIVE_EXPORT = "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json"
+FLOW_COMMAND = "python3 scripts/run_cvpr_safety_deployment_flow.py"
+OPERATOR_COMMANDS = [
+    "python3 scripts/run_colab_live_demo.py clinical-shift",
+    "python3 scripts/run_colab_live_demo.py driving-safety",
+    "python3 scripts/build_cvpr_live_colab_export_from_analysis.py",
+    f"python3 scripts/stage_cvpr_live_colab_export.py --export {LIVE_EXPORT} --job clinical-shift --promote",
+    f"python3 scripts/stage_cvpr_live_colab_export.py --export {LIVE_EXPORT} --job driving-safety --promote",
+]
 
 CONTEXTS = [
     {"id": "nominal-route", "title": "Nominal route", "hazardShift": 0, "speedShift": 0, "occlusionShift": 0, "confidenceShift": 0, "clinicalRiskShift": 0},
@@ -249,6 +258,10 @@ def summarize(data, rows, clinical_risk):
         "maxDeploymentRisk": max(row["metrics"]["deploymentRisk"] for row in rows),
         "avgDeploymentReadiness": round(sum(row["metrics"]["deploymentReadiness"] for row in rows) / len(rows), 1),
         "proPlusJobs": [row["jobId"] for row in replay_rows],
+        "liveJobs": ["clinical-shift", "driving-safety"],
+        "liveExportArtifact": LIVE_EXPORT,
+        "familyFlowCommand": FLOW_COMMAND,
+        "operatorCommands": OPERATOR_COMMANDS,
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
@@ -279,7 +292,14 @@ def build_package(data, summary, rows):
         "export const summary = " + json.dumps(summary, indent=2) + ";\n",
     )
     write(BASE / "tests/core.test.js", TEST)
-    write(BASE / "README.md", "# CVPR Safety Deployment Simulator\n\nStress deployment of the driving VLA release gate across rollout contexts with Pro+ driving evidence and clinical-shift residual risk.\n")
+    write(
+        BASE / "README.md",
+        "# CVPR Safety Deployment Simulator\n\n"
+        "Stress deployment of the driving VLA release gate across rollout contexts with Pro+ driving evidence and clinical-shift residual risk.\n\n"
+        "Operator flow:\n"
+        f"- `{FLOW_COMMAND}`\n"
+        + "".join(f"- `{command}`\n" for command in OPERATOR_COMMANDS),
+    )
 
 
 def build_registry(summary, rows):
@@ -317,7 +337,7 @@ def build_page(data, summary, rows):
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CVPR Safety Deployment Simulator</title>
 <style>:root{{--ink:#101719;--paper:#F5F6F4;--panel:#FBFCFB;--line:#D7DCD9;--muted:#59656A;--good:#277449;--warn:#B37A1E;--bad:#9B2D2D;--teal:#0E7C86;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Arial,sans-serif}}*{{box-sizing:border-box}}body{{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}}.wrap{{max-width:1320px;margin:0 auto;padding:0 24px}}header{{background:var(--ink);color:#E7ECED;padding:42px 0 34px}}.bug,nav a,.stat span,label,output,th,code{{font-family:var(--mono)}}.bug{{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4FC4CE}}h1{{font-size:44px;line-height:1.04;margin:10px 0}}header p{{max-width:100ch;color:#AEBABD}}nav a{{font-size:12px;color:#B7DDE1;margin-right:12px}}a{{color:#0A5A62}}.stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}}.stat,.panel{{background:var(--panel);border:1px solid var(--line);border-radius:8px}}.stat{{padding:13px}}.stat b{{display:block;font-size:24px;overflow-wrap:anywhere}}.stat span{{font-size:11px;color:var(--muted)}}.arena{{display:grid;grid-template-columns:330px 1fr;gap:16px;margin:18px 0}}.panel{{padding:16px;overflow-x:auto}}.controls{{display:grid;gap:12px}}select,input{{width:100%}}canvas{{width:100%;height:auto;background:#EEF3F2;border:1px solid var(--line);border-radius:6px;display:block}}.meters{{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}}.meters div{{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px}}.meters b{{display:block;font-size:22px}}table{{width:100%;border-collapse:collapse;font-size:13px;min-width:1050px}}td,th{{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}}th{{font-size:11px;color:var(--muted)}}code{{display:block;background:#EEF3F2;padding:7px;border-radius:6px;white-space:normal;overflow-wrap:anywhere}}.release{{color:var(--good);font-weight:700}}.review{{color:var(--warn);font-weight:700}}.block,.inspect{{color:var(--bad);font-weight:700}}footer{{border-top:1px solid var(--line);padding:20px 0 54px;color:var(--muted);font-family:var(--mono);font-size:12px}}@media(max-width:920px){{.stats,.arena{{grid-template-columns:1fr}}.meters{{grid-template-columns:repeat(2,1fr)}}h1{{font-size:34px}}}}</style></head>
 <body><header><div class="wrap"><div class="bug">CVPR 2026 · implemented roadmap demo</div><h1>Safety Deployment Simulator</h1><p>Stress the driving VLA release gate across bad weather, dense actors, and new-city rollout contexts using Pro+ driving safety evidence plus clinical-shift residual risk.</p><nav><a href="index.html">all themes</a><a href="cvpr-demo-build-backlog.html">build backlog</a><a href="cvpr-next-demo-roadmap.html">roadmap</a><a href="cvpr-driving-safety-bench.html">driving bench</a><a href="cvpr-clinical-shift-bench.html">clinical bench</a><a href="analysis/cvpr_safety_deployment_simulator/registry.json">registry</a></nav></div></header>
-<main class="wrap"><section class="stats">{stats_html}</section><section class="arena"><aside class="panel controls"><label>scene<select id="sceneSelect"></select></label><label>deployment context<select id="contextSelect"></select></label><label>hazard density<input id="hazardInput" type="range" min="0" max="100"></label><output id="hazardOut"></output><label>actor speed<input id="speedInput" type="range" min="0" max="100"></label><output id="speedOut"></output><label>occlusion<input id="occlusionInput" type="range" min="0" max="100"></label><output id="occlusionOut"></output><label>action confidence<input id="confidenceInput" type="range" min="0" max="100"></label><output id="confidenceOut"></output><code id="sourceLine"></code></aside><section class="panel"><canvas id="roadCanvas" width="820" height="390" aria-label="safety deployment simulator"></canvas><div class="meters"><div><b id="groundingMeter">0</b><span>grounding</span></div><div><b id="ttcMeter">0</b><span>TTC</span></div><div><b id="riskMeter">0</b><span>risk</span></div><div><b id="deployRiskMeter">0</b><span>deploy risk</span></div><div><b id="decisionMeter">-</b><span>decision</span></div></div></section></section><section class="panel"><h2>Deployment Matrix</h2><table><thead><tr><th>Scene</th><th>Context</th><th>Grounding</th><th>TTC</th><th>Scene risk</th><th>Rule violation</th><th>Deploy risk</th><th>Deploy readiness</th><th>Decision</th></tr></thead><tbody>{rows_html}</tbody></table></section><section class="panel"><h2>Release Gate</h2><code>{esc(summary['fullStackCommand'])} · backlog tasks covered: {summary['backlogTasksCovered']} · Pro+ jobs: {esc(', '.join(summary['proPlusJobs']))} · scoreDeployment</code></section></main>
+<main class="wrap"><section class="stats">{stats_html}</section><section class="arena"><aside class="panel controls"><label>scene<select id="sceneSelect"></select></label><label>deployment context<select id="contextSelect"></select></label><label>hazard density<input id="hazardInput" type="range" min="0" max="100"></label><output id="hazardOut"></output><label>actor speed<input id="speedInput" type="range" min="0" max="100"></label><output id="speedOut"></output><label>occlusion<input id="occlusionInput" type="range" min="0" max="100"></label><output id="occlusionOut"></output><label>action confidence<input id="confidenceInput" type="range" min="0" max="100"></label><output id="confidenceOut"></output><code id="sourceLine"></code></aside><section class="panel"><canvas id="roadCanvas" width="820" height="390" aria-label="safety deployment simulator"></canvas><div class="meters"><div><b id="groundingMeter">0</b><span>grounding</span></div><div><b id="ttcMeter">0</b><span>TTC</span></div><div><b id="riskMeter">0</b><span>risk</span></div><div><b id="deployRiskMeter">0</b><span>deploy risk</span></div><div><b id="decisionMeter">-</b><span>decision</span></div></div></section></section><section class="panel"><h2>Deployment Matrix</h2><table><thead><tr><th>Scene</th><th>Context</th><th>Grounding</th><th>TTC</th><th>Scene risk</th><th>Rule violation</th><th>Deploy risk</th><th>Deploy readiness</th><th>Decision</th></tr></thead><tbody>{rows_html}</tbody></table></section><section class="panel"><h2>Operator Path</h2><code>{esc(summary['familyFlowCommand'])}</code>{''.join(f'<code>{esc(command)}</code>' for command in summary['operatorCommands'])}<code>live export: {esc(summary['liveExportArtifact'])}</code></section><section class="panel"><h2>Release Gate</h2><code>{esc(summary['fullStackCommand'])} · backlog tasks covered: {summary['backlogTasksCovered']} · Pro+ jobs: {esc(', '.join(summary['proPlusJobs']))} · scoreDeployment</code></section></main>
 <footer><div class="wrap">Generated by scripts/build_cvpr_safety_deployment_simulator.py · tested package under source-code/learning/cvpr-safety-deployment-simulator</div></footer>
 <script type="module">
 import {{ applyContext, deploymentDecision, scoreDeployment }} from "./source-code/learning/cvpr-safety-deployment-simulator/src/core.js";

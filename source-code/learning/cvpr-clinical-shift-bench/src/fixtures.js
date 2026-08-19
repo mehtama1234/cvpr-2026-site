@@ -6,42 +6,42 @@ export const stageEvidence = {
 };
 export const scenarios = [
   {
-    "id": "same-site-clean",
-    "title": "Same-site clean validation",
-    "scannerShift": 16,
-    "cohortMix": 22,
-    "labelNoise": 8,
-    "reviewThreshold": 62
-  },
-  {
-    "id": "new-scanner",
-    "title": "New scanner protocol",
-    "scannerShift": 58,
-    "cohortMix": 34,
-    "labelNoise": 16,
+    "id": "clear-baseline",
+    "title": "Clear baseline",
+    "scannerShift": 8,
+    "cohortMix": 18,
+    "labelNoise": 12,
     "reviewThreshold": 68
   },
   {
-    "id": "external-hospital",
-    "title": "External hospital cohort",
-    "scannerShift": 52,
-    "cohortMix": 72,
-    "labelNoise": 16,
-    "reviewThreshold": 74
+    "id": "scanner-shift",
+    "title": "Scanner shift",
+    "scannerShift": 46,
+    "cohortMix": 34,
+    "labelNoise": 24,
+    "reviewThreshold": 72
   },
   {
-    "id": "noisy-rare-cohort",
-    "title": "Noisy rare cohort",
-    "scannerShift": 76,
-    "cohortMix": 84,
-    "labelNoise": 20,
-    "reviewThreshold": 84
+    "id": "rare-presentation",
+    "title": "Rare presentation",
+    "scannerShift": 58,
+    "cohortMix": 52,
+    "labelNoise": 18,
+    "reviewThreshold": 78
+  },
+  {
+    "id": "motion-artifact",
+    "title": "Motion artifact",
+    "scannerShift": 38,
+    "cohortMix": 44,
+    "labelNoise": 66,
+    "reviewThreshold": 74
   }
 ];
 export const records = [
   {
-    "id": "same-site-clean",
-    "title": "Same-site clean validation",
+    "id": "clear-baseline",
+    "title": "Clear baseline",
     "system": "medical-vision-validation",
     "cluster": "Vision for science and medicine",
     "sourceStages": [
@@ -50,28 +50,35 @@ export const records = [
       "clinical-evidence"
     ],
     "controls": {
-      "scannerShift": 16,
-      "cohortMix": 22,
-      "labelNoise": 8,
-      "reviewThreshold": 62
+      "scannerShift": 8,
+      "cohortMix": 18,
+      "labelNoise": 12,
+      "reviewThreshold": 68
     },
     "metrics": {
-      "shiftLoad": 16.7,
-      "calibration": 84.3,
-      "domainEvidence": 89.1,
-      "triageRate": 25.4,
-      "residualRisk": 9.6,
-      "clinicalEvidence": 90.3,
-      "readiness": 88.5
+      "shiftLoad": 7.6,
+      "calibration": 89.3,
+      "domainEvidence": 96.6,
+      "triageRate": 68.0,
+      "residualRisk": 2.4,
+      "clinicalEvidence": 91.6,
+      "readiness": 89.9
+    },
+    "simulatedMetrics": {
+      "shiftLoad": 12.6,
+      "calibration": 86.0,
+      "domainEvidence": 91.4,
+      "triageRate": 24.2,
+      "residualRisk": 8.5,
+      "clinicalEvidence": 91.4,
+      "readiness": 90.0
     },
     "cachedGpuMetrics": {
-      "readiness": 88.5,
-      "shiftLoad": 16.7,
-      "calibration": 84.3,
-      "domainEvidence": 89.1,
-      "triageRate": 25.4,
-      "residualRisk": 9.6,
-      "clinicalEvidence": 90.3
+      "readiness": 89.9,
+      "shiftScore": 7.6,
+      "calibration": 89.3,
+      "falseClearRisk": 2.4,
+      "escalationThreshold": 68
     },
     "decision": "release",
     "acceptancePass": true,
@@ -82,14 +89,75 @@ export const records = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
-    "id": "new-scanner",
-    "title": "New scanner protocol",
+    "id": "scanner-shift",
+    "title": "Scanner shift",
+    "system": "medical-vision-validation",
+    "cluster": "Vision for science and medicine",
+    "sourceStages": [
+      "domain-shift",
+      "uncertainty-triage",
+      "clinical-evidence"
+    ],
+    "controls": {
+      "scannerShift": 46,
+      "cohortMix": 34,
+      "labelNoise": 24,
+      "reviewThreshold": 72
+    },
+    "metrics": {
+      "shiftLoad": 32.7,
+      "calibration": 91.5,
+      "domainEvidence": 85.3,
+      "triageRate": 72.0,
+      "residualRisk": 8.9,
+      "clinicalEvidence": 87.1,
+      "readiness": 83.2
+    },
+    "simulatedMetrics": {
+      "shiftLoad": 37.0,
+      "calibration": 78.0,
+      "domainEvidence": 81.0,
+      "triageRate": 38.8,
+      "residualRisk": 22.0,
+      "clinicalEvidence": 85.6,
+      "readiness": 81.4
+    },
+    "cachedGpuMetrics": {
+      "readiness": 83.2,
+      "shiftScore": 32.7,
+      "calibration": 91.5,
+      "falseClearRisk": 8.9,
+      "escalationThreshold": 72
+    },
+    "decision": "release",
+    "acceptancePass": true,
+    "runtimeModes": [
+      "simulated",
+      "cached-real"
+    ],
+    "preferredRuntime": "cached-real",
+    "gpuProvenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
+    }
+  },
+  {
+    "id": "rare-presentation",
+    "title": "Rare presentation",
     "system": "medical-vision-validation",
     "cluster": "Vision for science and medicine",
     "sourceStages": [
@@ -99,27 +167,34 @@ export const records = [
     ],
     "controls": {
       "scannerShift": 58,
-      "cohortMix": 34,
-      "labelNoise": 16,
-      "reviewThreshold": 68
+      "cohortMix": 52,
+      "labelNoise": 18,
+      "reviewThreshold": 78
     },
     "metrics": {
-      "shiftLoad": 40.5,
-      "calibration": 77.5,
-      "domainEvidence": 78.6,
-      "triageRate": 39.7,
-      "residualRisk": 21.6,
-      "clinicalEvidence": 84.8,
-      "readiness": 80.5
+      "shiftLoad": 38.0,
+      "calibration": 90.7,
+      "domainEvidence": 82.9,
+      "triageRate": 78.0,
+      "residualRisk": 10.6,
+      "clinicalEvidence": 85.8,
+      "readiness": 81.9
+    },
+    "simulatedMetrics": {
+      "shiftLoad": 47.7,
+      "calibration": 77.2,
+      "domainEvidence": 75.3,
+      "triageRate": 45.1,
+      "residualRisk": 24.6,
+      "clinicalEvidence": 83.5,
+      "readiness": 78.8
     },
     "cachedGpuMetrics": {
-      "readiness": 80.5,
-      "shiftLoad": 40.5,
-      "calibration": 77.5,
-      "domainEvidence": 78.6,
-      "triageRate": 39.7,
-      "residualRisk": 21.6,
-      "clinicalEvidence": 84.8
+      "readiness": 81.9,
+      "shiftScore": 38.0,
+      "calibration": 90.7,
+      "falseClearRisk": 10.6,
+      "escalationThreshold": 78
     },
     "decision": "release",
     "acceptancePass": true,
@@ -130,14 +205,17 @@ export const records = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
-    "id": "external-hospital",
-    "title": "External hospital cohort",
+    "id": "motion-artifact",
+    "title": "Motion artifact",
     "system": "medical-vision-validation",
     "cluster": "Vision for science and medicine",
     "sourceStages": [
@@ -146,28 +224,35 @@ export const records = [
       "clinical-evidence"
     ],
     "controls": {
-      "scannerShift": 52,
-      "cohortMix": 72,
-      "labelNoise": 16,
+      "scannerShift": 38,
+      "cohortMix": 44,
+      "labelNoise": 66,
       "reviewThreshold": 74
     },
     "metrics": {
-      "shiftLoad": 52.4,
-      "calibration": 75.4,
-      "domainEvidence": 72.9,
-      "triageRate": 47.0,
-      "residualRisk": 26.4,
-      "clinicalEvidence": 82.3,
-      "readiness": 77.1
+      "shiftLoad": 39.0,
+      "calibration": 90.9,
+      "domainEvidence": 82.5,
+      "triageRate": 74.0,
+      "residualRisk": 11.1,
+      "clinicalEvidence": 85.3,
+      "readiness": 81.1
+    },
+    "simulatedMetrics": {
+      "shiftLoad": 45.9,
+      "calibration": 69.2,
+      "domainEvidence": 80.8,
+      "triageRate": 46.2,
+      "residualRisk": 37.1,
+      "clinicalEvidence": 82.2,
+      "readiness": 75.4
     },
     "cachedGpuMetrics": {
-      "readiness": 77.1,
-      "shiftLoad": 52.4,
-      "calibration": 75.4,
-      "domainEvidence": 72.9,
-      "triageRate": 47.0,
-      "residualRisk": 26.4,
-      "clinicalEvidence": 82.3
+      "readiness": 81.1,
+      "shiftScore": 39.0,
+      "calibration": 90.9,
+      "falseClearRisk": 11.1,
+      "escalationThreshold": 74
     },
     "decision": "release",
     "acceptancePass": true,
@@ -178,223 +263,170 @@ export const records = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
-    }
-  },
-  {
-    "id": "noisy-rare-cohort",
-    "title": "Noisy rare cohort",
-    "system": "medical-vision-validation",
-    "cluster": "Vision for science and medicine",
-    "sourceStages": [
-      "domain-shift",
-      "uncertainty-triage",
-      "clinical-evidence"
-    ],
-    "controls": {
-      "scannerShift": 76,
-      "cohortMix": 84,
-      "labelNoise": 20,
-      "reviewThreshold": 84
-    },
-    "metrics": {
-      "shiftLoad": 67.8,
-      "calibration": 72.4,
-      "domainEvidence": 66.0,
-      "triageRate": 57.0,
-      "residualRisk": 33.5,
-      "clinicalEvidence": 79.1,
-      "readiness": 72.5
-    },
-    "cachedGpuMetrics": {
-      "readiness": 72.5,
-      "shiftLoad": 67.8,
-      "calibration": 72.4,
-      "domainEvidence": 66.0,
-      "triageRate": 57.0,
-      "residualRisk": 33.5,
-      "clinicalEvidence": 79.1
-    },
-    "decision": "release",
-    "acceptancePass": true,
-    "runtimeModes": [
-      "simulated",
-      "cached-real"
-    ],
-    "preferredRuntime": "cached-real",
-    "gpuProvenance": {
-      "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
-      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   }
 ];
 export const cachedGpuResults = [
   {
     "jobId": "clinical-shift",
-    "caseId": "same-site-clean",
+    "caseId": "clear-baseline",
     "mode": "cached-real",
-    "createdAt": "2026-08-15T00:00:00Z",
+    "createdAt": "2026-08-17T01:09:30Z",
     "model": {
-      "embedding": "dicom-embedding-shift-probe",
-      "calibration": "temperature-calibration-head",
-      "triage": "uncertainty-triage-head"
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
     },
     "inputs": {
       "clinicalControls": {
-        "scannerShift": 16,
-        "cohortMix": 22,
-        "labelNoise": 8,
-        "reviewThreshold": 62
+        "domainShift": 8,
+        "artifactLoad": 12,
+        "escalationThreshold": 68
       },
-      "asset": "fixtures/clinical/same-site-clean.json"
+      "asset": "synthetic://clinical/clear-baseline.png"
     },
     "outputs": {
-      "domainEmbeddings": "fixtures/clinical/same-site-clean-domain-embeddings.npy",
-      "calibrationCurve": "fixtures/clinical/same-site-clean-calibration.json",
-      "triageScores": "fixtures/clinical/same-site-clean-triage.json",
-      "clinicalEvidence": 90.3
+      "cleanConfidence": 38.6,
+      "shiftedConfidence": 35.0,
+      "logitDivergence": 0.006642
     },
     "metrics": {
-      "readiness": 88.5,
-      "shiftLoad": 16.7,
-      "calibration": 84.3,
-      "domainEvidence": 89.1,
-      "triageRate": 25.4,
-      "residualRisk": 9.6,
-      "clinicalEvidence": 90.3
+      "readiness": 89.9,
+      "shiftScore": 7.6,
+      "calibration": 89.3,
+      "falseClearRisk": 2.4,
+      "escalationThreshold": 68
     },
     "provenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
     "jobId": "clinical-shift",
-    "caseId": "new-scanner",
+    "caseId": "scanner-shift",
     "mode": "cached-real",
-    "createdAt": "2026-08-15T00:00:00Z",
+    "createdAt": "2026-08-17T01:09:30Z",
     "model": {
-      "embedding": "dicom-embedding-shift-probe",
-      "calibration": "temperature-calibration-head",
-      "triage": "uncertainty-triage-head"
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
     },
     "inputs": {
       "clinicalControls": {
-        "scannerShift": 58,
-        "cohortMix": 34,
-        "labelNoise": 16,
-        "reviewThreshold": 68
+        "domainShift": 46,
+        "artifactLoad": 24,
+        "escalationThreshold": 72
       },
-      "asset": "fixtures/clinical/new-scanner.json"
+      "asset": "synthetic://clinical/scanner-shift.png"
     },
     "outputs": {
-      "domainEmbeddings": "fixtures/clinical/new-scanner-domain-embeddings.npy",
-      "calibrationCurve": "fixtures/clinical/new-scanner-calibration.json",
-      "triageScores": "fixtures/clinical/new-scanner-triage.json",
-      "clinicalEvidence": 84.8
+      "cleanConfidence": 33.4,
+      "shiftedConfidence": 33.9,
+      "logitDivergence": 0.014008
     },
     "metrics": {
-      "readiness": 80.5,
-      "shiftLoad": 40.5,
-      "calibration": 77.5,
-      "domainEvidence": 78.6,
-      "triageRate": 39.7,
-      "residualRisk": 21.6,
-      "clinicalEvidence": 84.8
+      "readiness": 83.2,
+      "shiftScore": 32.7,
+      "calibration": 91.5,
+      "falseClearRisk": 8.9,
+      "escalationThreshold": 72
     },
     "provenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
     "jobId": "clinical-shift",
-    "caseId": "external-hospital",
+    "caseId": "rare-presentation",
     "mode": "cached-real",
-    "createdAt": "2026-08-15T00:00:00Z",
+    "createdAt": "2026-08-17T01:09:30Z",
     "model": {
-      "embedding": "dicom-embedding-shift-probe",
-      "calibration": "temperature-calibration-head",
-      "triage": "uncertainty-triage-head"
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
     },
     "inputs": {
       "clinicalControls": {
-        "scannerShift": 52,
-        "cohortMix": 72,
-        "labelNoise": 16,
-        "reviewThreshold": 74
+        "domainShift": 58,
+        "artifactLoad": 18,
+        "escalationThreshold": 78
       },
-      "asset": "fixtures/clinical/external-hospital.json"
+      "asset": "synthetic://clinical/rare-presentation.png"
     },
     "outputs": {
-      "domainEmbeddings": "fixtures/clinical/external-hospital-domain-embeddings.npy",
-      "calibrationCurve": "fixtures/clinical/external-hospital-calibration.json",
-      "triageScores": "fixtures/clinical/external-hospital-triage.json",
-      "clinicalEvidence": 82.3
+      "cleanConfidence": 39.4,
+      "shiftedConfidence": 37.6,
+      "logitDivergence": 0.003941
     },
     "metrics": {
-      "readiness": 77.1,
-      "shiftLoad": 52.4,
-      "calibration": 75.4,
-      "domainEvidence": 72.9,
-      "triageRate": 47.0,
-      "residualRisk": 26.4,
-      "clinicalEvidence": 82.3
+      "readiness": 81.9,
+      "shiftScore": 38.0,
+      "calibration": 90.7,
+      "falseClearRisk": 10.6,
+      "escalationThreshold": 78
     },
     "provenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
     "jobId": "clinical-shift",
-    "caseId": "noisy-rare-cohort",
+    "caseId": "motion-artifact",
     "mode": "cached-real",
-    "createdAt": "2026-08-15T00:00:00Z",
+    "createdAt": "2026-08-17T01:09:30Z",
     "model": {
-      "embedding": "dicom-embedding-shift-probe",
-      "calibration": "temperature-calibration-head",
-      "triage": "uncertainty-triage-head"
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
     },
     "inputs": {
       "clinicalControls": {
-        "scannerShift": 76,
-        "cohortMix": 84,
-        "labelNoise": 20,
-        "reviewThreshold": 84
+        "domainShift": 38,
+        "artifactLoad": 66,
+        "escalationThreshold": 74
       },
-      "asset": "fixtures/clinical/noisy-rare-cohort.json"
+      "asset": "synthetic://clinical/motion-artifact.png"
     },
     "outputs": {
-      "domainEmbeddings": "fixtures/clinical/noisy-rare-cohort-domain-embeddings.npy",
-      "calibrationCurve": "fixtures/clinical/noisy-rare-cohort-calibration.json",
-      "triageScores": "fixtures/clinical/noisy-rare-cohort-triage.json",
-      "clinicalEvidence": 79.1
+      "cleanConfidence": 26.4,
+      "shiftedConfidence": 26.2,
+      "logitDivergence": 0.067713
     },
     "metrics": {
-      "readiness": 72.5,
-      "shiftLoad": 67.8,
-      "calibration": 72.4,
-      "domainEvidence": 66.0,
-      "triageRate": 57.0,
-      "residualRisk": 33.5,
-      "clinicalEvidence": 79.1
+      "readiness": 81.1,
+      "shiftScore": 39.0,
+      "calibration": 90.9,
+      "falseClearRisk": 11.1,
+      "escalationThreshold": 74
     },
     "provenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-clinical-shift-bench"
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   }
 ];

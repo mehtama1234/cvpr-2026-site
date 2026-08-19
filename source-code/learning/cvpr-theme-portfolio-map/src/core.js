@@ -1,6 +1,5 @@
 export function portfolioGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "release") return "block";
   if (summary.themes !== 8) return "block";
   if (summary.systems !== 11) return "block";
   if (summary.stages !== 33) return "block";

@@ -11,9 +11,9 @@
     "release": 4,
     "review": 0,
     "block": 0,
-    "avgReadiness": 80.0,
-    "minEvidence": 82.5,
-    "maxLeakageRisk": 32.9,
+    "avgReadiness": 67.6,
+    "minEvidence": 51.2,
+    "maxLeakageRisk": 36.2,
     "acceptancePass": true,
     "runtimeModes": [
       "simulated",
@@ -49,6 +49,14 @@
         "unlearningProbe": 0
       },
       "metrics": {
+        "attackCoverage": 3.7,
+        "provenanceConfidence": 50.8,
+        "leakageRisk": 15.1,
+        "evidence": 64.7,
+        "risk": 11.6,
+        "readiness": 76.2
+      },
+      "simulatedMetrics": {
         "attackCoverage": 44.7,
         "provenanceConfidence": 86.4,
         "leakageRisk": 9.0,
@@ -57,12 +65,12 @@
         "readiness": 79.7
       },
       "cachedGpuMetrics": {
-        "readiness": 79.7,
-        "evidence": 82.5,
-        "risk": 17.9,
-        "leakageRisk": 9.0,
-        "provenanceConfidence": 86.4,
-        "attackCoverage": 44.7
+        "readiness": 66.8,
+        "attackCoverage": 3.7,
+        "provenanceConfidence": 50.8,
+        "leakageRisk": 1.8,
+        "evidence": 52.2,
+        "risk": 11.6
       },
       "decision": "release",
       "acceptancePass": true,
@@ -73,9 +81,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-adversarial-provenance-bench"
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -95,6 +106,14 @@
         "unlearningProbe": 10
       },
       "metrics": {
+        "attackCoverage": 2.6,
+        "provenanceConfidence": 39.8,
+        "leakageRisk": 27.2,
+        "evidence": 54.6,
+        "risk": 23.7,
+        "readiness": 66.3
+      },
+      "simulatedMetrics": {
         "attackCoverage": 47.2,
         "provenanceConfidence": 87.9,
         "leakageRisk": 14.8,
@@ -103,12 +122,12 @@
         "readiness": 79.8
       },
       "cachedGpuMetrics": {
-        "readiness": 79.8,
-        "evidence": 82.9,
-        "risk": 21.0,
-        "leakageRisk": 14.8,
-        "provenanceConfidence": 87.9,
-        "attackCoverage": 47.2
+        "readiness": 57.7,
+        "attackCoverage": 2.6,
+        "provenanceConfidence": 39.8,
+        "leakageRisk": 4.4,
+        "evidence": 44.2,
+        "risk": 23.7
       },
       "decision": "release",
       "acceptancePass": true,
@@ -119,9 +138,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-adversarial-provenance-bench"
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -141,6 +163,14 @@
         "unlearningProbe": 44
       },
       "metrics": {
+        "attackCoverage": 0.1,
+        "provenanceConfidence": 39.1,
+        "leakageRisk": 33.2,
+        "evidence": 51.3,
+        "risk": 29.7,
+        "readiness": 63.2
+      },
+      "simulatedMetrics": {
         "attackCoverage": 54.4,
         "provenanceConfidence": 92.0,
         "leakageRisk": 32.9,
@@ -149,12 +179,12 @@
         "readiness": 79.9
       },
       "cachedGpuMetrics": {
-        "readiness": 79.9,
-        "evidence": 83.6,
-        "risk": 29.9,
-        "leakageRisk": 32.9,
-        "provenanceConfidence": 92.0,
-        "attackCoverage": 54.4
+        "readiness": 53.8,
+        "attackCoverage": 0.1,
+        "provenanceConfidence": 39.1,
+        "leakageRisk": 14.1,
+        "evidence": 41.5,
+        "risk": 29.7
       },
       "decision": "release",
       "acceptancePass": true,
@@ -165,9 +195,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-adversarial-provenance-bench"
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -187,6 +220,14 @@
         "unlearningProbe": 0
       },
       "metrics": {
+        "attackCoverage": 19.1,
+        "provenanceConfidence": 39.9,
+        "leakageRisk": 36.2,
+        "evidence": 51.2,
+        "risk": 32.7,
+        "readiness": 64.6
+      },
+      "simulatedMetrics": {
         "attackCoverage": 52.6,
         "provenanceConfidence": 93.8,
         "leakageRisk": 17.4,
@@ -195,12 +236,12 @@
         "readiness": 80.8
       },
       "cachedGpuMetrics": {
-        "readiness": 80.8,
-        "evidence": 85.3,
-        "risk": 30.3,
-        "leakageRisk": 17.4,
-        "provenanceConfidence": 93.8,
-        "attackCoverage": 52.6
+        "readiness": 53.9,
+        "attackCoverage": 19.1,
+        "provenanceConfidence": 39.9,
+        "leakageRisk": 13.1,
+        "evidence": 42.8,
+        "risk": 32.7
       },
       "decision": "release",
       "acceptancePass": true,
@@ -211,9 +252,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-adversarial-provenance-bench"
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     }
   ]

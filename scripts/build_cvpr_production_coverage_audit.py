@@ -30,7 +30,8 @@ export function auditGate(summary) {
   if (summary.missingColabEvidence !== 0) return "block";
   if (summary.benchRelease !== summary.benchCases) return "block";
   if (summary.benchReview !== 0 || summary.benchBlock !== 0) return "block";
-  if (summary.cachedResults !== 40 || summary.colabJobs !== 10) return "block";
+  if (summary.colabJobs < summary.colabCoveredBenches) return "block";
+  if (summary.cachedResults < summary.colabJobs * 4) return "block";
   if (summary.importIssues !== 0) return "block";
   if (summary.releaseGate !== "release") return "block";
   return "release";
@@ -82,8 +83,8 @@ assert.equal(summary.stages, 33);
 assert.equal(summary.demos, 41);
 assert.equal(summary.benchCases, 44);
 assert.equal(summary.benchRelease, 44);
-assert.equal(summary.colabJobs, 10);
-assert.equal(summary.cachedResults, 40);
+assert.equal(summary.colabJobs, 14);
+assert.equal(summary.cachedResults, 56);
 assert.equal(summary.missingBenchSystems, 0);
 assert.equal(summary.missingColabEvidence, 0);
 assert.equal(summary.systemEvidenceCoveredBenches, 1);
@@ -219,8 +220,8 @@ def summarize(data, system_rows):
         and summary["benchRelease"] == summary["benchCases"]
         and summary["benchReview"] == 0
         and summary["benchBlock"] == 0
-        and summary["cachedResults"] == 40
-        and summary["colabJobs"] == 10
+        and summary["colabJobs"] >= summary["colabCoveredBenches"]
+        and summary["cachedResults"] >= summary["colabJobs"] * 4
         and summary["importIssues"] == 0
         and summary["releaseGate"] == "release"
     )

@@ -1,0 +1,146 @@
+[
+  {
+    "jobId": "real-vlm-adversarial-verification",
+    "caseId": "astronaut-count",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:44Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "an astronaut is visible",
+      "adversarialClaim": "a dog is visible",
+      "asset": "skimage.real/astronaut-count"
+    },
+    "outputs": {
+      "caption": "a young man in an orange space suit holding a helmet",
+      "scores": {
+        "an astronaut is visible": 12.7,
+        "a dog is visible": 0.0,
+        "a young man in an orange space suit holding a helmet": 87.3
+      }
+    },
+    "metrics": {
+      "readiness": 58.7,
+      "claimSupport": 12.7,
+      "captionAlignment": 87.3,
+      "unsupportedClaimRisk": 41.9
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-vlm-adversarial-bench",
+      "execution": "transformers-blip-clip-real-vlm-live-demo"
+    }
+  },
+  {
+    "jobId": "real-vlm-adversarial-verification",
+    "caseId": "coffee-attribute",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:44Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "a cup of coffee is visible",
+      "adversarialClaim": "a city street is visible",
+      "asset": "skimage.real/coffee-attribute"
+    },
+    "outputs": {
+      "caption": "a cup of coffee on a wooden table",
+      "scores": {
+        "a cup of coffee is visible": 12.7,
+        "a city street is visible": 0.0,
+        "a cup of coffee on a wooden table": 87.3
+      }
+    },
+    "metrics": {
+      "readiness": 58.7,
+      "claimSupport": 12.7,
+      "captionAlignment": 87.3,
+      "unsupportedClaimRisk": 41.9
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-vlm-adversarial-bench",
+      "execution": "transformers-blip-clip-real-vlm-live-demo"
+    }
+  },
+  {
+    "jobId": "real-vlm-adversarial-verification",
+    "caseId": "chelsea-ocr-trap",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:45Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "the image contains readable printed text",
+      "adversarialClaim": "a cat is visible",
+      "asset": "skimage.real/chelsea-ocr-trap"
+    },
+    "outputs": {
+      "caption": "a cat with green eyes",
+      "scores": {
+        "the image contains readable printed text": 0.0,
+        "a cat is visible": 1.8,
+        "a cat with green eyes": 98.2
+      }
+    },
+    "metrics": {
+      "readiness": 56.8,
+      "claimSupport": 0.0,
+      "captionAlignment": 98.2,
+      "unsupportedClaimRisk": 48.7
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-vlm-adversarial-bench",
+      "execution": "transformers-blip-clip-real-vlm-live-demo"
+    }
+  },
+  {
+    "jobId": "real-vlm-adversarial-verification",
+    "caseId": "rocket-counterfactual",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:45Z",
+    "model": {
+      "captioner": "Salesforce/blip-image-captioning-base",
+      "auditor": "openai/clip-vit-base-patch32"
+    },
+    "inputs": {
+      "claim": "a rocket launch is visible",
+      "adversarialClaim": "an indoor bedroom is visible",
+      "asset": "skimage.real/rocket-counterfactual"
+    },
+    "outputs": {
+      "caption": "a rocket on a stand",
+      "scores": {
+        "a rocket launch is visible": 12.4,
+        "an indoor bedroom is visible": 0.0,
+        "a rocket on a stand": 87.6
+      }
+    },
+    "metrics": {
+      "readiness": 58.6,
+      "claimSupport": 12.4,
+      "captionAlignment": 87.6,
+      "unsupportedClaimRisk": 42.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-vlm-adversarial-bench",
+      "execution": "transformers-blip-clip-real-vlm-live-demo"
+    }
+  }
+]

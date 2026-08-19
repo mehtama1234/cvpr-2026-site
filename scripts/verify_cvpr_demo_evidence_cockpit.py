@@ -14,10 +14,10 @@ def main():
     assert summary["stageDemos"] == 33
     assert summary["flagshipDemos"] == 8
     assert summary["totalDemos"] == 41
-    assert summary["proPlusJobs"] == 10
+    assert summary["proPlusJobs"] == 14
     assert summary["proPlusWaves"] == 3
-    assert summary["expectedLiveResults"] == 40
-    assert summary["cachedResults"] == 40
+    assert summary["expectedLiveResults"] == 56
+    assert summary["cachedResults"] == 56
     assert summary["benchRelease"] == 44
     assert summary["benchCases"] == 44
     assert summary["missingDemoEvidence"] == 0

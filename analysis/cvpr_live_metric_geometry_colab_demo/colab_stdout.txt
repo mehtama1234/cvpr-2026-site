@@ -1,0 +1,238 @@
+===CVPR_LIVE_JSON_BEGIN===
+{
+  "summary": {
+    "demo": "cvpr-live-metric-geometry-colab-demo",
+    "jobId": "metric-geometry",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 89.1,
+    "maxScaleDrift": 6.3,
+    "status": "valid"
+  },
+  "results": [
+    {
+      "jobId": "metric-geometry",
+      "caseId": "wide-baseline",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:31:36Z",
+      "model": {
+        "solver": "torch-cuda-differentiable-camera-solver",
+        "geometry": "bundle-adjustment-scale-probe"
+      },
+      "inputs": {
+        "geometryControls": {
+          "baseline": 82,
+          "textureSparsity": 18,
+          "scaleAmbiguity": 24,
+          "surfaceComplexity": 42
+        },
+        "asset": "synthetic://geometry/wide-baseline.json"
+      },
+      "outputs": {
+        "cameraRecovery": {
+          "points": 204,
+          "meanReprojectionError": 0.00851,
+          "p95ReprojectionError": 0.01639,
+          "elapsedMs": 1331.44
+        },
+        "scaleRecovery": {
+          "trueScale": 1.13333,
+          "recoveredScale": 1.11517,
+          "relativeError": 0.01602
+        },
+        "optimizationTrace": {
+          "initialLoss": 0.00534,
+          "finalLoss": 0.001153,
+          "iterations": 220,
+          "calibratedScale": 1.19754
+        }
+      },
+      "metrics": {
+        "poseEvidence": 92.8,
+        "metricEvidence": 100.0,
+        "surfaceConsistency": 87.8,
+        "scaleDrift": 0.6,
+        "topologyRisk": 11.6,
+        "readiness": 92.9
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-metric-geometry-bench",
+        "execution": "torch-cuda-metric-geometry-live-demo"
+      }
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "scale-transfer",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:31:37Z",
+      "model": {
+        "solver": "torch-cuda-differentiable-camera-solver",
+        "geometry": "bundle-adjustment-scale-probe"
+      },
+      "inputs": {
+        "geometryControls": {
+          "baseline": 66,
+          "textureSparsity": 28,
+          "scaleAmbiguity": 44,
+          "surfaceComplexity": 46
+        },
+        "asset": "synthetic://geometry/scale-transfer.json"
+      },
+      "outputs": {
+        "cameraRecovery": {
+          "points": 196,
+          "meanReprojectionError": 0.00963,
+          "p95ReprojectionError": 0.0193,
+          "elapsedMs": 742.4
+        },
+        "scaleRecovery": {
+          "trueScale": 1.24444,
+          "recoveredScale": 1.21153,
+          "relativeError": 0.00475
+        },
+        "optimizationTrace": {
+          "initialLoss": 0.004471,
+          "finalLoss": 0.001505,
+          "iterations": 220,
+          "calibratedScale": 1.25036
+        }
+      },
+      "metrics": {
+        "poseEvidence": 91.7,
+        "metricEvidence": 99.4,
+        "surfaceConsistency": 87.2,
+        "scaleDrift": 3.8,
+        "topologyRisk": 12.5,
+        "readiness": 92.1
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-metric-geometry-bench",
+        "execution": "torch-cuda-metric-geometry-live-demo"
+      }
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "thin-structure",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:31:38Z",
+      "model": {
+        "solver": "torch-cuda-differentiable-camera-solver",
+        "geometry": "bundle-adjustment-scale-probe"
+      },
+      "inputs": {
+        "geometryControls": {
+          "baseline": 58,
+          "textureSparsity": 34,
+          "scaleAmbiguity": 32,
+          "surfaceComplexity": 72
+        },
+        "asset": "synthetic://geometry/thin-structure.json"
+      },
+      "outputs": {
+        "cameraRecovery": {
+          "points": 191,
+          "meanReprojectionError": 0.01438,
+          "p95ReprojectionError": 0.02784,
+          "elapsedMs": 759.71
+        },
+        "scaleRecovery": {
+          "trueScale": 1.17778,
+          "recoveredScale": 1.15349,
+          "relativeError": 0.01432
+        },
+        "optimizationTrace": {
+          "initialLoss": 0.005345,
+          "finalLoss": 0.00322,
+          "iterations": 220,
+          "calibratedScale": 1.19465
+        }
+      },
+      "metrics": {
+        "poseEvidence": 90.2,
+        "metricEvidence": 97.3,
+        "surfaceConsistency": 83.5,
+        "scaleDrift": 3.4,
+        "topologyRisk": 18.3,
+        "readiness": 89.1
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-metric-geometry-bench",
+        "execution": "torch-cuda-metric-geometry-live-demo"
+      }
+    },
+    {
+      "jobId": "metric-geometry",
+      "caseId": "low-texture-indoor",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:31:38Z",
+      "model": {
+        "solver": "torch-cuda-differentiable-camera-solver",
+        "geometry": "bundle-adjustment-scale-probe"
+      },
+      "inputs": {
+        "geometryControls": {
+          "baseline": 54,
+          "textureSparsity": 58,
+          "scaleAmbiguity": 48,
+          "surfaceComplexity": 50
+        },
+        "asset": "synthetic://geometry/low-texture-indoor.json"
+      },
+      "outputs": {
+        "cameraRecovery": {
+          "points": 158,
+          "meanReprojectionError": 0.01534,
+          "p95ReprojectionError": 0.02952,
+          "elapsedMs": 768.1
+        },
+        "scaleRecovery": {
+          "trueScale": 1.26667,
+          "recoveredScale": 1.23104,
+          "relativeError": 0.01505
+        },
+        "optimizationTrace": {
+          "initialLoss": 0.005659,
+          "finalLoss": 0.003549,
+          "iterations": 220,
+          "calibratedScale": 1.2476
+        }
+      },
+      "metrics": {
+        "poseEvidence": 88.1,
+        "metricEvidence": 95.3,
+        "surfaceConsistency": 86.0,
+        "scaleDrift": 6.3,
+        "topologyRisk": 13.9,
+        "readiness": 89.4
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-metric-geometry-bench",
+        "execution": "torch-cuda-metric-geometry-live-demo"
+      }
+    }
+  ]
+}
+===CVPR_LIVE_JSON_END===
+{
+  "demo": "cvpr-live-metric-geometry-colab-demo",
+  "jobId": "metric-geometry",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 89.1,
+  "maxScaleDrift": 6.3,
+  "status": "valid"
+}

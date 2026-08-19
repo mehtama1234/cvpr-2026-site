@@ -1,0 +1,226 @@
+preprocessor_config.json:   0%|          | 0.00/316 [00:00<?, ?B/s]
+config.json:   0%|          | 0.00/4.19k [00:00<?, ?B/s]
+tokenizer_config.json:   0%|          | 0.00/592 [00:00<?, ?B/s]
+vocab.json:   0%|          | 0.00/862k [00:00<?, ?B/s]
+merges.txt:   0%|          | 0.00/525k [00:00<?, ?B/s]
+tokenizer.json:   0%|          | 0.00/2.22M [00:00<?, ?B/s]
+special_tokens_map.json:   0%|          | 0.00/389 [00:00<?, ?B/s]
+pytorch_model.bin: reconstructing file:   0%|          |  0.00B /  605MB        
+pytorch_model.bin: downloading bytes:           |  0.00B            
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+model.safetensors: reconstructing file:   0%|          |  0.00B /  605MB        
+model.safetensors: downloading bytes:           |  0.00B            
+===CVPR_LIVE_JSON_BEGIN===
+{
+  "summary": {
+    "demo": "cvpr-live-adversarial-provenance-colab-demo",
+    "jobId": "adversarial-provenance",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 53.8,
+    "maxRisk": 32.7,
+    "status": "valid"
+  },
+  "results": [
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "clean-camera",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:04:05Z",
+      "model": {
+        "detector": "openai/clip-vit-base-patch32",
+        "probe": "clip-provenance-prompt-bank"
+      },
+      "inputs": {
+        "attackControls": {
+          "attackStrength": 0,
+          "generationSource": 56,
+          "watermarkVisibility": 100,
+          "unlearningProbe": 0
+        },
+        "asset": "synthetic://clean-camera"
+      },
+      "outputs": {
+        "provenanceConfidence": 50.8,
+        "attackHeatmap": "synthetic://adversarial/clean-camera-clip-heatmap.png",
+        "leakageRisk": 1.8,
+        "evidence": 52.2,
+        "clipProbeScores": {
+          "a clean camera photograph": 41.3,
+          "a synthetic generated image": 45.2,
+          "an edited social media image": 0.8,
+          "an adversarially perturbed image": 6.6,
+          "a watermarked image": 6.1
+        }
+      },
+      "metrics": {
+        "readiness": 66.8,
+        "attackCoverage": 3.7,
+        "provenanceConfidence": 50.8,
+        "leakageRisk": 1.8,
+        "evidence": 52.2,
+        "risk": 11.6
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo"
+      }
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "edited-social-post",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:04:05Z",
+      "model": {
+        "detector": "openai/clip-vit-base-patch32",
+        "probe": "clip-provenance-prompt-bank"
+      },
+      "inputs": {
+        "attackControls": {
+          "attackStrength": 0,
+          "generationSource": 64,
+          "watermarkVisibility": 98,
+          "unlearningProbe": 10
+        },
+        "asset": "synthetic://edited-social-post"
+      },
+      "outputs": {
+        "provenanceConfidence": 39.8,
+        "attackHeatmap": "synthetic://adversarial/edited-social-post-clip-heatmap.png",
+        "leakageRisk": 4.4,
+        "evidence": 44.2,
+        "clipProbeScores": {
+          "a clean camera photograph": 0.7,
+          "a synthetic generated image": 91.0,
+          "an edited social media image": 1.6,
+          "an adversarially perturbed image": 4.2,
+          "a watermarked image": 2.4
+        }
+      },
+      "metrics": {
+        "readiness": 57.7,
+        "attackCoverage": 2.6,
+        "provenanceConfidence": 39.8,
+        "leakageRisk": 4.4,
+        "evidence": 44.2,
+        "risk": 23.7
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo"
+      }
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "synthetic-watermarked",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:04:05Z",
+      "model": {
+        "detector": "openai/clip-vit-base-patch32",
+        "probe": "clip-provenance-prompt-bank"
+      },
+      "inputs": {
+        "attackControls": {
+          "attackStrength": 0,
+          "generationSource": 84,
+          "watermarkVisibility": 94,
+          "unlearningProbe": 44
+        },
+        "asset": "synthetic://synthetic-watermarked"
+      },
+      "outputs": {
+        "provenanceConfidence": 39.1,
+        "attackHeatmap": "synthetic://adversarial/synthetic-watermarked-clip-heatmap.png",
+        "leakageRisk": 14.1,
+        "evidence": 41.5,
+        "clipProbeScores": {
+          "a clean camera photograph": 0.0,
+          "a synthetic generated image": 99.1,
+          "an edited social media image": 0.0,
+          "an adversarially perturbed image": 0.1,
+          "a watermarked image": 0.8
+        }
+      },
+      "metrics": {
+        "readiness": 53.8,
+        "attackCoverage": 0.1,
+        "provenanceConfidence": 39.1,
+        "leakageRisk": 14.1,
+        "evidence": 41.5,
+        "risk": 29.7
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo"
+      }
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "caseId": "adaptive-attack",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:04:05Z",
+      "model": {
+        "detector": "openai/clip-vit-base-patch32",
+        "probe": "clip-provenance-prompt-bank"
+      },
+      "inputs": {
+        "attackControls": {
+          "attackStrength": 12,
+          "generationSource": 89,
+          "watermarkVisibility": 100,
+          "unlearningProbe": 0
+        },
+        "asset": "synthetic://adaptive-attack"
+      },
+      "outputs": {
+        "provenanceConfidence": 39.9,
+        "attackHeatmap": "synthetic://adversarial/adaptive-attack-clip-heatmap.png",
+        "leakageRisk": 13.1,
+        "evidence": 42.8,
+        "clipProbeScores": {
+          "a clean camera photograph": 0.7,
+          "a synthetic generated image": 85.7,
+          "an edited social media image": 1.7,
+          "an adversarially perturbed image": 8.1,
+          "a watermarked image": 3.9
+        }
+      },
+      "metrics": {
+        "readiness": 53.9,
+        "attackCoverage": 19.1,
+        "provenanceConfidence": 39.9,
+        "leakageRisk": 13.1,
+        "evidence": 42.8,
+        "risk": 32.7
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-adversarial-provenance-bench",
+        "execution": "transformers-clip-provenance-live-demo"
+      }
+    }
+  ]
+}
+===CVPR_LIVE_JSON_END===
+{
+  "demo": "cvpr-live-adversarial-provenance-colab-demo",
+  "jobId": "adversarial-provenance",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 53.8,
+  "maxRisk": 32.7,
+  "status": "valid"
+}

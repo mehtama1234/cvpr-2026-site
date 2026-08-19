@@ -1,0 +1,134 @@
+[
+  {
+    "jobId": "pgd-adversarial-robustness",
+    "caseId": "small-epsilon",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:31Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "projected-gradient-descent-linf"
+    },
+    "inputs": {
+      "epsilon": 0.007843,
+      "steps": 12,
+      "asset": "synthetic://pgd/small-epsilon.png"
+    },
+    "outputs": {
+      "cleanConfidence": 12.2,
+      "attackedConfidence": 100.0,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 73.9,
+      "confidenceCollapse": 0.0,
+      "attackSuccess": 70.0,
+      "epsilon255": 2.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-pgd-adversarial-robustness-bench",
+      "execution": "torchvision-resnet-pgd-live-demo"
+    }
+  },
+  {
+    "jobId": "pgd-adversarial-robustness",
+    "caseId": "medium-epsilon",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:31Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "projected-gradient-descent-linf"
+    },
+    "inputs": {
+      "epsilon": 0.015686,
+      "steps": 12,
+      "asset": "synthetic://pgd/medium-epsilon.png"
+    },
+    "outputs": {
+      "cleanConfidence": 15.8,
+      "attackedConfidence": 100.0,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 72.3,
+      "confidenceCollapse": 0.0,
+      "attackSuccess": 70.0,
+      "epsilon255": 4.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-pgd-adversarial-robustness-bench",
+      "execution": "torchvision-resnet-pgd-live-demo"
+    }
+  },
+  {
+    "jobId": "pgd-adversarial-robustness",
+    "caseId": "large-epsilon",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:31Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "projected-gradient-descent-linf"
+    },
+    "inputs": {
+      "epsilon": 0.031373,
+      "steps": 12,
+      "asset": "synthetic://pgd/large-epsilon.png"
+    },
+    "outputs": {
+      "cleanConfidence": 11.6,
+      "attackedConfidence": 100.0,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 69.1,
+      "confidenceCollapse": 0.0,
+      "attackSuccess": 70.0,
+      "epsilon255": 8.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-pgd-adversarial-robustness-bench",
+      "execution": "torchvision-resnet-pgd-live-demo"
+    }
+  },
+  {
+    "jobId": "pgd-adversarial-robustness",
+    "caseId": "patch-plus-pgd",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:32Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "projected-gradient-descent-linf"
+    },
+    "inputs": {
+      "epsilon": 0.039216,
+      "steps": 12,
+      "asset": "synthetic://pgd/patch-plus-pgd.png"
+    },
+    "outputs": {
+      "cleanConfidence": 39.2,
+      "attackedConfidence": 100.0,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 64.8,
+      "confidenceCollapse": 6.1,
+      "attackSuccess": 70.0,
+      "epsilon255": 10.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-pgd-adversarial-robustness-bench",
+      "execution": "torchvision-resnet-pgd-live-demo"
+    }
+  }
+]

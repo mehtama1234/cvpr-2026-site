@@ -1,0 +1,20 @@
+[colab] Creating session 'run-13f835'...
+[colab] Session READY (run-13f835). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_second_wave_demo.py...
+
+  0%|          | 0.00/44.7M [00:00<?, ?B/s]
+ 23%|██▎       | 10.2M/44.7M [00:00<00:00, 107MB/s]
+ 53%|█████▎    | 23.6M/44.7M [00:00<00:00, 126MB/s]
+ 83%|████████▎ | 37.2M/44.7M [00:00<00:00, 133MB/s]
+100%|██████████| 44.7M/44.7M [00:00<00:00, 131MB/s]
+[colab] Stopping session 'run-13f835'...
+[colab] Session terminated.
+
+
+[fallback-attempts]
+[
+  {
+    "gpu": "T4",
+    "returncode": 0,
+    "stderr": "[colab] Creating session 'run-13f835'...\n[colab] Session READY (run-13f835). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_second_wave_demo.py...\n\n  0%|          | 0.00/44.7M [00:00<?, ?B/s]\n 23%|\u2588\u2588\u258e       | 10.2M/44.7M [00:00<00:00, 107MB/s]\n 53%|\u2588\u2588\u2588\u2588\u2588\u258e    | 23.6M/44.7M [00:00<00:00, 126MB/s]\n 83%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258e | 37.2M/44.7M [00:00<00:00, 133MB/s]\n100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 44.7M/44.7M [00:00<00:00, 131MB/s]\n[colab] Stopping session 'run-13f835'...\n[colab] Session terminated.\n"
+  }
+]

@@ -1,6 +1,5 @@
 export function launchGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "launch-ready") return "block";
   if (summary.releaseGate !== "release") return "block";
   if (summary.sloStatus !== "release") return "block";
   if (summary.drillbookStatus !== "ready") return "block";

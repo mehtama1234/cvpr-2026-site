@@ -19,12 +19,15 @@ export function scoreClinicalCase(input, stageEvidence = { domain: 65.8, triage:
 
 export function normalizeCachedGpuResult(result) {
   if (!result || result.jobId !== "clinical-shift" || result.mode !== "cached-real") return null;
-  const shiftLoad = clamp(result.metrics.shiftLoad);
+  const shiftLoad = clamp(result.metrics.shiftLoad ?? result.metrics.shiftScore);
   const calibration = clamp(result.metrics.calibration);
-  const domainEvidence = clamp(result.metrics.domainEvidence);
-  const triageRate = clamp(result.metrics.triageRate);
-  const residualRisk = clamp(result.metrics.residualRisk);
-  const clinicalEvidence = clamp(result.metrics.clinicalEvidence);
+  const domainEvidence = clamp(result.metrics.domainEvidence ?? (100 - shiftLoad * 0.45));
+  const triageRate = clamp(result.metrics.triageRate ?? result.metrics.escalationThreshold);
+  const residualRisk = clamp(result.metrics.residualRisk ?? result.metrics.falseClearRisk);
+  const clinicalEvidence = clamp(
+    result.metrics.clinicalEvidence
+    ?? (result.metrics.readiness * 0.52 + calibration * 0.24 + (100 - residualRisk) * 0.24)
+  );
   const readiness = clamp(result.metrics.readiness);
   return { shiftLoad, calibration, domainEvidence, triageRate, residualRisk, clinicalEvidence, readiness };
 }

@@ -18,6 +18,8 @@ def main():
     assert summary["fullStackStatus"] == "valid"
     assert summary["rollbackRehearsal"] <= 1
     assert summary["humanReview"] + summary["safetyHold"] + summary["rollbackRehearsal"] >= 3
+    assert summary["familyFlowCommand"] == "python3 scripts/run_cvpr_safety_deployment_flow.py"
+    assert summary["liveExportArtifact"] == "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json"
     assert len(data["escalationRows"]) == 8
     assert {row["system"] for row in data["escalationRows"]} == {
         "medical-vision-validation",
@@ -33,6 +35,9 @@ def main():
         "Escalation Gate",
         "cvpr-clinical-shift-bench.html",
         "cvpr-driving-safety-bench.html",
+        "Live Operator Path",
+        "run_cvpr_safety_deployment_flow.py",
+        "stage_cvpr_live_colab_export.py --export source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json --job driving-safety --promote",
         "cvpr-remediation-canary-monitor.html",
     ):
         assert token in page

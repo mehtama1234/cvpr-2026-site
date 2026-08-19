@@ -1,0 +1,130 @@
+[
+  {
+    "jobId": "real-depth-anything",
+    "caseId": "low-texture-room",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:08Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-normal-consistency"
+    },
+    "inputs": {
+      "asset": "synthetic://depth-real/low-texture-room.png",
+      "difficulty": 0.35
+    },
+    "outputs": {
+      "depthRange": 583.90668,
+      "curvature": 0.792945,
+      "normalEnergy": 3.482808
+    },
+    "metrics": {
+      "readiness": 35.8,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 14.0,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-normal-bench",
+      "execution": "transformers-dpt-depth-live-demo"
+    }
+  },
+  {
+    "jobId": "real-depth-anything",
+    "caseId": "thin-structure",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:08Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-normal-consistency"
+    },
+    "inputs": {
+      "asset": "synthetic://depth-real/thin-structure.png",
+      "difficulty": 0.52
+    },
+    "outputs": {
+      "depthRange": 329.14999,
+      "curvature": 1.54867,
+      "normalEnergy": 3.376172
+    },
+    "metrics": {
+      "readiness": 33.8,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 20.8,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-normal-bench",
+      "execution": "transformers-dpt-depth-live-demo"
+    }
+  },
+  {
+    "jobId": "real-depth-anything",
+    "caseId": "reflective-surface",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:08Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-normal-consistency"
+    },
+    "inputs": {
+      "asset": "synthetic://depth-real/reflective-surface.png",
+      "difficulty": 0.48
+    },
+    "outputs": {
+      "depthRange": 746.19415,
+      "curvature": 3.037619,
+      "normalEnergy": 6.262067
+    },
+    "metrics": {
+      "readiness": 34.2,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 19.2,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-normal-bench",
+      "execution": "transformers-dpt-depth-live-demo"
+    }
+  },
+  {
+    "jobId": "real-depth-anything",
+    "caseId": "wide-baseline-scale",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:08Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-normal-consistency"
+    },
+    "inputs": {
+      "asset": "synthetic://depth-real/wide-baseline-scale.png",
+      "difficulty": 0.62
+    },
+    "outputs": {
+      "depthRange": 1012.16846,
+      "curvature": 2.172709,
+      "normalEnergy": 7.098727
+    },
+    "metrics": {
+      "readiness": 32.6,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 24.8,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-normal-bench",
+      "execution": "transformers-dpt-depth-live-demo"
+    }
+  }
+]

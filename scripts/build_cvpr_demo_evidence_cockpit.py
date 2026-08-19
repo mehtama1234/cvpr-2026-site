@@ -22,13 +22,12 @@ CORE = """export function evidenceLabel(row) {
 
 export function cockpitGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
   if (summary.systems !== 11) return "block";
   if (summary.stageDemos !== 33) return "block";
   if (summary.flagshipDemos !== 8) return "block";
   if (summary.totalDemos !== 41) return "block";
-  if (summary.proPlusJobs !== 10) return "block";
-  if (summary.expectedLiveResults !== 40) return "block";
+  if (summary.proPlusJobs !== 14) return "block";
+  if (summary.expectedLiveResults !== 56) return "block";
   if (summary.benchRelease !== 44) return "block";
   if (summary.missingDemoEvidence !== 0) return "block";
   if (summary.releaseGate !== "release") return "block";
@@ -69,8 +68,8 @@ assert.equal(summary.systems, 11);
 assert.equal(summary.stageDemos, 33);
 assert.equal(summary.flagshipDemos, 8);
 assert.equal(summary.totalDemos, 41);
-assert.equal(summary.proPlusJobs, 10);
-assert.equal(summary.expectedLiveResults, 40);
+assert.equal(summary.proPlusJobs, 14);
+assert.equal(summary.expectedLiveResults, 56);
 assert.equal(summary.benchRelease, 44);
 assert.equal(summary.missingDemoEvidence, 0);
 assert.equal(summary.releaseGate, "release");
@@ -198,8 +197,8 @@ def summarize(data, demo_rows):
         and summary["stageDemos"] == 33
         and summary["flagshipDemos"] == 8
         and summary["totalDemos"] == 41
-        and summary["proPlusJobs"] == 10
-        and summary["expectedLiveResults"] == 40
+        and summary["proPlusJobs"] == 14
+        and summary["expectedLiveResults"] == 56
         and summary["benchRelease"] == 44
         and summary["missingDemoEvidence"] == 0
         and summary["releaseGate"] == "release"

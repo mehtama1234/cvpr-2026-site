@@ -12,9 +12,9 @@ export const sources = {
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 79.7,
-      "maxResidualRisk": 33.5,
-      "minClinicalEvidence": 79.1,
+      "avgReadiness": 84.0,
+      "maxResidualRisk": 11.1,
+      "minClinicalEvidence": 85.3,
       "acceptancePass": true,
       "noBlock": true,
       "runtimeModes": [
@@ -35,8 +35,8 @@ export const sources = {
     },
     "records": [
       {
-        "id": "same-site-clean",
-        "title": "Same-site clean validation",
+        "id": "clear-baseline",
+        "title": "Clear baseline",
         "system": "medical-vision-validation",
         "cluster": "Vision for science and medicine",
         "sourceStages": [
@@ -45,28 +45,35 @@ export const sources = {
           "clinical-evidence"
         ],
         "controls": {
-          "scannerShift": 16,
-          "cohortMix": 22,
-          "labelNoise": 8,
-          "reviewThreshold": 62
+          "scannerShift": 8,
+          "cohortMix": 18,
+          "labelNoise": 12,
+          "reviewThreshold": 68
         },
         "metrics": {
-          "shiftLoad": 16.7,
-          "calibration": 84.3,
-          "domainEvidence": 89.1,
-          "triageRate": 25.4,
-          "residualRisk": 9.6,
-          "clinicalEvidence": 90.3,
-          "readiness": 88.5
+          "shiftLoad": 7.6,
+          "calibration": 89.3,
+          "domainEvidence": 96.6,
+          "triageRate": 68.0,
+          "residualRisk": 2.4,
+          "clinicalEvidence": 91.6,
+          "readiness": 89.9
+        },
+        "simulatedMetrics": {
+          "shiftLoad": 12.6,
+          "calibration": 86.0,
+          "domainEvidence": 91.4,
+          "triageRate": 24.2,
+          "residualRisk": 8.5,
+          "clinicalEvidence": 91.4,
+          "readiness": 90.0
         },
         "cachedGpuMetrics": {
-          "readiness": 88.5,
-          "shiftLoad": 16.7,
-          "calibration": 84.3,
-          "domainEvidence": 89.1,
-          "triageRate": 25.4,
-          "residualRisk": 9.6,
-          "clinicalEvidence": 90.3
+          "readiness": 89.9,
+          "shiftScore": 7.6,
+          "calibration": 89.3,
+          "falseClearRisk": 2.4,
+          "escalationThreshold": 68
         },
         "decision": "release",
         "acceptancePass": true,
@@ -77,14 +84,75 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-clinical-shift-bench"
+          "sourceBench": "cvpr-clinical-shift-bench",
+          "execution": "torchvision-resnet-clinical-shift-live-demo",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       },
       {
-        "id": "new-scanner",
-        "title": "New scanner protocol",
+        "id": "scanner-shift",
+        "title": "Scanner shift",
+        "system": "medical-vision-validation",
+        "cluster": "Vision for science and medicine",
+        "sourceStages": [
+          "domain-shift",
+          "uncertainty-triage",
+          "clinical-evidence"
+        ],
+        "controls": {
+          "scannerShift": 46,
+          "cohortMix": 34,
+          "labelNoise": 24,
+          "reviewThreshold": 72
+        },
+        "metrics": {
+          "shiftLoad": 32.7,
+          "calibration": 91.5,
+          "domainEvidence": 85.3,
+          "triageRate": 72.0,
+          "residualRisk": 8.9,
+          "clinicalEvidence": 87.1,
+          "readiness": 83.2
+        },
+        "simulatedMetrics": {
+          "shiftLoad": 37.0,
+          "calibration": 78.0,
+          "domainEvidence": 81.0,
+          "triageRate": 38.8,
+          "residualRisk": 22.0,
+          "clinicalEvidence": 85.6,
+          "readiness": 81.4
+        },
+        "cachedGpuMetrics": {
+          "readiness": 83.2,
+          "shiftScore": 32.7,
+          "calibration": 91.5,
+          "falseClearRisk": 8.9,
+          "escalationThreshold": 72
+        },
+        "decision": "release",
+        "acceptancePass": true,
+        "runtimeModes": [
+          "simulated",
+          "cached-real"
+        ],
+        "preferredRuntime": "cached-real",
+        "gpuProvenance": {
+          "runtime": "google-colab-pro-plus",
+          "accelerator": "Tesla T4",
+          "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+          "sourceBench": "cvpr-clinical-shift-bench",
+          "execution": "torchvision-resnet-clinical-shift-live-demo",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
+        }
+      },
+      {
+        "id": "rare-presentation",
+        "title": "Rare presentation",
         "system": "medical-vision-validation",
         "cluster": "Vision for science and medicine",
         "sourceStages": [
@@ -94,27 +162,34 @@ export const sources = {
         ],
         "controls": {
           "scannerShift": 58,
-          "cohortMix": 34,
-          "labelNoise": 16,
-          "reviewThreshold": 68
+          "cohortMix": 52,
+          "labelNoise": 18,
+          "reviewThreshold": 78
         },
         "metrics": {
-          "shiftLoad": 40.5,
-          "calibration": 77.5,
-          "domainEvidence": 78.6,
-          "triageRate": 39.7,
-          "residualRisk": 21.6,
-          "clinicalEvidence": 84.8,
-          "readiness": 80.5
+          "shiftLoad": 38.0,
+          "calibration": 90.7,
+          "domainEvidence": 82.9,
+          "triageRate": 78.0,
+          "residualRisk": 10.6,
+          "clinicalEvidence": 85.8,
+          "readiness": 81.9
+        },
+        "simulatedMetrics": {
+          "shiftLoad": 47.7,
+          "calibration": 77.2,
+          "domainEvidence": 75.3,
+          "triageRate": 45.1,
+          "residualRisk": 24.6,
+          "clinicalEvidence": 83.5,
+          "readiness": 78.8
         },
         "cachedGpuMetrics": {
-          "readiness": 80.5,
-          "shiftLoad": 40.5,
-          "calibration": 77.5,
-          "domainEvidence": 78.6,
-          "triageRate": 39.7,
-          "residualRisk": 21.6,
-          "clinicalEvidence": 84.8
+          "readiness": 81.9,
+          "shiftScore": 38.0,
+          "calibration": 90.7,
+          "falseClearRisk": 10.6,
+          "escalationThreshold": 78
         },
         "decision": "release",
         "acceptancePass": true,
@@ -125,14 +200,17 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-clinical-shift-bench"
+          "sourceBench": "cvpr-clinical-shift-bench",
+          "execution": "torchvision-resnet-clinical-shift-live-demo",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       },
       {
-        "id": "external-hospital",
-        "title": "External hospital cohort",
+        "id": "motion-artifact",
+        "title": "Motion artifact",
         "system": "medical-vision-validation",
         "cluster": "Vision for science and medicine",
         "sourceStages": [
@@ -141,28 +219,35 @@ export const sources = {
           "clinical-evidence"
         ],
         "controls": {
-          "scannerShift": 52,
-          "cohortMix": 72,
-          "labelNoise": 16,
+          "scannerShift": 38,
+          "cohortMix": 44,
+          "labelNoise": 66,
           "reviewThreshold": 74
         },
         "metrics": {
-          "shiftLoad": 52.4,
-          "calibration": 75.4,
-          "domainEvidence": 72.9,
-          "triageRate": 47.0,
-          "residualRisk": 26.4,
-          "clinicalEvidence": 82.3,
-          "readiness": 77.1
+          "shiftLoad": 39.0,
+          "calibration": 90.9,
+          "domainEvidence": 82.5,
+          "triageRate": 74.0,
+          "residualRisk": 11.1,
+          "clinicalEvidence": 85.3,
+          "readiness": 81.1
+        },
+        "simulatedMetrics": {
+          "shiftLoad": 45.9,
+          "calibration": 69.2,
+          "domainEvidence": 80.8,
+          "triageRate": 46.2,
+          "residualRisk": 37.1,
+          "clinicalEvidence": 82.2,
+          "readiness": 75.4
         },
         "cachedGpuMetrics": {
-          "readiness": 77.1,
-          "shiftLoad": 52.4,
-          "calibration": 75.4,
-          "domainEvidence": 72.9,
-          "triageRate": 47.0,
-          "residualRisk": 26.4,
-          "clinicalEvidence": 82.3
+          "readiness": 81.1,
+          "shiftScore": 39.0,
+          "calibration": 90.9,
+          "falseClearRisk": 11.1,
+          "escalationThreshold": 74
         },
         "decision": "release",
         "acceptancePass": true,
@@ -173,57 +258,12 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-clinical-shift-bench"
-        }
-      },
-      {
-        "id": "noisy-rare-cohort",
-        "title": "Noisy rare cohort",
-        "system": "medical-vision-validation",
-        "cluster": "Vision for science and medicine",
-        "sourceStages": [
-          "domain-shift",
-          "uncertainty-triage",
-          "clinical-evidence"
-        ],
-        "controls": {
-          "scannerShift": 76,
-          "cohortMix": 84,
-          "labelNoise": 20,
-          "reviewThreshold": 84
-        },
-        "metrics": {
-          "shiftLoad": 67.8,
-          "calibration": 72.4,
-          "domainEvidence": 66.0,
-          "triageRate": 57.0,
-          "residualRisk": 33.5,
-          "clinicalEvidence": 79.1,
-          "readiness": 72.5
-        },
-        "cachedGpuMetrics": {
-          "readiness": 72.5,
-          "shiftLoad": 67.8,
-          "calibration": 72.4,
-          "domainEvidence": 66.0,
-          "triageRate": 57.0,
-          "residualRisk": 33.5,
-          "clinicalEvidence": 79.1
-        },
-        "decision": "release",
-        "acceptancePass": true,
-        "runtimeModes": [
-          "simulated",
-          "cached-real"
-        ],
-        "preferredRuntime": "cached-real",
-        "gpuProvenance": {
-          "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
-          "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-clinical-shift-bench"
+          "sourceBench": "cvpr-clinical-shift-bench",
+          "execution": "torchvision-resnet-clinical-shift-live-demo",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       }
     ]
@@ -237,8 +277,8 @@ export const sources = {
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 68.2,
-      "maxRisk": 34.6,
+      "avgReadiness": 75.2,
+      "maxRisk": 34.8,
       "acceptancePass": true,
       "runtimeModes": [
         "simulated",
@@ -282,6 +322,14 @@ export const sources = {
           "actionConfidence": 82
         },
         "metrics": {
+          "sceneGrounding": 78.7,
+          "timeToCollision": 5.15,
+          "risk": 33.6,
+          "ruleViolation": 22.9,
+          "abstention": 15.5,
+          "readiness": 75.3
+        },
+        "simulatedMetrics": {
           "sceneGrounding": 85.7,
           "timeToCollision": 5.15,
           "risk": 33.4,
@@ -290,12 +338,12 @@ export const sources = {
           "readiness": 68.1
         },
         "cachedGpuMetrics": {
-          "readiness": 68.1,
-          "sceneGrounding": 85.7,
+          "readiness": 57.4,
+          "sceneGrounding": 58.1,
           "timeToCollision": 5.15,
-          "risk": 33.4,
-          "ruleViolation": 24.0,
-          "abstention": 7.6
+          "risk": 33.6,
+          "ruleViolation": 32.9,
+          "abstention": 15.5
         },
         "decision": "release",
         "acceptancePass": true,
@@ -306,9 +354,12 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-driving-safety-bench"
+          "sourceBench": "cvpr-driving-safety-bench",
+          "execution": "torch-driving-scene-risk-probe",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       },
       {
@@ -324,6 +375,14 @@ export const sources = {
           "actionConfidence": 78
         },
         "metrics": {
+          "sceneGrounding": 78.9,
+          "timeToCollision": 5.73,
+          "risk": 31.9,
+          "ruleViolation": 22.8,
+          "abstention": 16.0,
+          "readiness": 75.8
+        },
+        "simulatedMetrics": {
           "sceneGrounding": 84.2,
           "timeToCollision": 5.73,
           "risk": 31.7,
@@ -332,12 +391,12 @@ export const sources = {
           "readiness": 68.2
         },
         "cachedGpuMetrics": {
-          "readiness": 68.2,
-          "sceneGrounding": 84.2,
+          "readiness": 57.1,
+          "sceneGrounding": 55.4,
           "timeToCollision": 5.73,
-          "risk": 31.7,
-          "ruleViolation": 23.5,
-          "abstention": 7.8
+          "risk": 31.9,
+          "ruleViolation": 32.8,
+          "abstention": 16.0
         },
         "decision": "release",
         "acceptancePass": true,
@@ -348,9 +407,12 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-driving-safety-bench"
+          "sourceBench": "cvpr-driving-safety-bench",
+          "execution": "torch-driving-scene-risk-probe",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       },
       {
@@ -366,6 +428,14 @@ export const sources = {
           "actionConfidence": 84
         },
         "metrics": {
+          "sceneGrounding": 77.9,
+          "timeToCollision": 4.34,
+          "risk": 34.8,
+          "ruleViolation": 23.9,
+          "abstention": 16.0,
+          "readiness": 74.3
+        },
+        "simulatedMetrics": {
           "sceneGrounding": 87.3,
           "timeToCollision": 4.34,
           "risk": 34.6,
@@ -374,12 +444,12 @@ export const sources = {
           "readiness": 68.2
         },
         "cachedGpuMetrics": {
-          "readiness": 68.2,
-          "sceneGrounding": 87.3,
+          "readiness": 56.5,
+          "sceneGrounding": 57.0,
           "timeToCollision": 4.34,
-          "risk": 34.6,
-          "ruleViolation": 24.1,
-          "abstention": 7.4
+          "risk": 34.8,
+          "ruleViolation": 33.9,
+          "abstention": 16.0
         },
         "decision": "release",
         "acceptancePass": true,
@@ -390,9 +460,12 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-driving-safety-bench"
+          "sourceBench": "cvpr-driving-safety-bench",
+          "execution": "torch-driving-scene-risk-probe",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       },
       {
@@ -408,6 +481,14 @@ export const sources = {
           "actionConfidence": 72
         },
         "metrics": {
+          "sceneGrounding": 78.8,
+          "timeToCollision": 5.82,
+          "risk": 32.1,
+          "ruleViolation": 23.0,
+          "abstention": 17.3,
+          "readiness": 75.5
+        },
+        "simulatedMetrics": {
           "sceneGrounding": 83.9,
           "timeToCollision": 5.82,
           "risk": 31.9,
@@ -416,12 +497,12 @@ export const sources = {
           "readiness": 68.2
         },
         "cachedGpuMetrics": {
-          "readiness": 68.2,
-          "sceneGrounding": 83.9,
+          "readiness": 57.1,
+          "sceneGrounding": 55.1,
           "timeToCollision": 5.82,
-          "risk": 31.9,
-          "ruleViolation": 23.7,
-          "abstention": 9.1
+          "risk": 32.1,
+          "ruleViolation": 33.0,
+          "abstention": 17.3
         },
         "decision": "release",
         "acceptancePass": true,
@@ -432,9 +513,12 @@ export const sources = {
         "preferredRuntime": "cached-real",
         "gpuProvenance": {
           "runtime": "google-colab-pro-plus",
-          "accelerator": "GPU",
+          "accelerator": "Tesla T4",
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-          "sourceBench": "cvpr-driving-safety-bench"
+          "sourceBench": "cvpr-driving-safety-bench",
+          "execution": "torch-driving-scene-risk-probe",
+          "promotedFrom": "live-colab",
+          "canonicalMode": "cached-real"
         }
       }
     ]
@@ -444,20 +528,95 @@ export const sources = {
       "demo": "cvpr-remediation-canary-monitor",
       "status": "watching",
       "sourceDemo": "cvpr-remediation-promotion-board",
-      "rows": 29,
-      "sourcePromotions": 29,
-      "clean": 12,
-      "watch": 17,
+      "rows": 53,
+      "sourcePromotions": 53,
+      "clean": 18,
+      "watch": 35,
       "rollback": 0,
-      "promotedRows": 12,
-      "monitoredRows": 17,
+      "promotedRows": 18,
+      "monitoredRows": 35,
       "maxRollbackRisk": 27.0,
       "maxDrift": 9.3,
       "themes": 8,
-      "incidents": 4,
+      "incidents": 7,
       "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
     },
     "canaryRows": [
+      {
+        "id": "adaptive-serving/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "adaptive-serving/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "promote",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 80.8,
+          "risk": 31.4,
+          "evidence": 82.3,
+          "resilience": 77.0
+        },
+        "metrics": {
+          "drift": 6.2,
+          "rollbackRisk": 20.0,
+          "trafficPct": 20
+        },
+        "canaryStatus": "clean",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "adaptive-serving/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+        "promotionId": "adaptive-serving/adversarial-text-overlay/review-hardening/retest/promotion",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "promote",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 77.8,
+          "risk": 39.4,
+          "evidence": 78.3,
+          "resilience": 72.1
+        },
+        "metrics": {
+          "drift": 7.4,
+          "rollbackRisk": 24.6,
+          "trafficPct": 20
+        },
+        "canaryStatus": "clean",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "adaptive-serving/unsupported-query/review-hardening/retest/promotion/canary",
+        "promotionId": "adaptive-serving/unsupported-query/review-hardening/retest/promotion",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 75.8,
+          "risk": 42.4,
+          "evidence": 74.3,
+          "resilience": 69.3
+        },
+        "metrics": {
+          "drift": 4.4,
+          "rollbackRisk": 12.2,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
       {
         "id": "adaptive-serving/gpu-brownout/review-hardening/retest/promotion/canary",
         "promotionId": "adaptive-serving/gpu-brownout/review-hardening/retest/promotion",
@@ -534,6 +693,81 @@ export const sources = {
         "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
       },
       {
+        "id": "constraint-edit/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "constraint-edit/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "promote",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 84.8,
+          "risk": 38.4,
+          "evidence": 85.1,
+          "resilience": 77.0
+        },
+        "metrics": {
+          "drift": 6.8,
+          "rollbackRisk": 23.5,
+          "trafficPct": 20
+        },
+        "canaryStatus": "clean",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "constraint-edit/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+        "promotionId": "constraint-edit/adversarial-text-overlay/review-hardening/retest/promotion",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 81.8,
+          "risk": 46.4,
+          "evidence": 81.1,
+          "resilience": 72.1
+        },
+        "metrics": {
+          "drift": 4.4,
+          "rollbackRisk": 13.1,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "constraint-edit/unsupported-query/review-hardening/retest/promotion/canary",
+        "promotionId": "constraint-edit/unsupported-query/review-hardening/retest/promotion",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 79.8,
+          "risk": 49.4,
+          "evidence": 77.1,
+          "resilience": 69.3
+        },
+        "metrics": {
+          "drift": 4.7,
+          "rollbackRisk": 14.0,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
         "id": "constraint-edit/gpu-brownout/review-hardening/retest/promotion/canary",
         "promotionId": "constraint-edit/gpu-brownout/review-hardening/retest/promotion",
         "demoId": "constraint-edit",
@@ -603,6 +837,81 @@ export const sources = {
         "metrics": {
           "drift": 5.0,
           "rollbackRisk": 13.7,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "open-vocab/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "open-vocab/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "promote",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 87.3,
+          "risk": 36.6,
+          "evidence": 87.6,
+          "resilience": 79.2
+        },
+        "metrics": {
+          "drift": 6.4,
+          "rollbackRisk": 22.3,
+          "trafficPct": 20
+        },
+        "canaryStatus": "clean",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "open-vocab/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+        "promotionId": "open-vocab/adversarial-text-overlay/review-hardening/retest/promotion",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 84.3,
+          "risk": 44.6,
+          "evidence": 83.6,
+          "resilience": 74.3
+        },
+        "metrics": {
+          "drift": 4.2,
+          "rollbackRisk": 12.6,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "open-vocab/unsupported-query/review-hardening/retest/promotion/canary",
+        "promotionId": "open-vocab/unsupported-query/review-hardening/retest/promotion",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 82.3,
+          "risk": 47.6,
+          "evidence": 79.6,
+          "resilience": 71.5
+        },
+        "metrics": {
+          "drift": 4.5,
+          "rollbackRisk": 13.4,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -709,6 +1018,81 @@ export const sources = {
         "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
       },
       {
+        "id": "3d-edit-provenance/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "3d-edit-provenance/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 85.8,
+          "risk": 43.3,
+          "evidence": 82.1,
+          "resilience": 75.1
+        },
+        "metrics": {
+          "drift": 4.1,
+          "rollbackRisk": 12.2,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "3d-edit-provenance/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+        "promotionId": "3d-edit-provenance/adversarial-text-overlay/review-hardening/retest/promotion",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 82.8,
+          "risk": 51.3,
+          "evidence": 78.1,
+          "resilience": 70.2
+        },
+        "metrics": {
+          "drift": 4.8,
+          "rollbackRisk": 14.5,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "3d-edit-provenance/unsupported-query/review-hardening/retest/promotion/canary",
+        "promotionId": "3d-edit-provenance/unsupported-query/review-hardening/retest/promotion",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 87.8,
+          "risk": 47.3,
+          "evidence": 78.1,
+          "resilience": 73.7
+        },
+        "metrics": {
+          "drift": 4.5,
+          "rollbackRisk": 13.4,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
         "id": "3d-edit-provenance/gpu-brownout/review-hardening/retest/promotion/canary",
         "promotionId": "3d-edit-provenance/gpu-brownout/review-hardening/retest/promotion",
         "demoId": "3d-edit-provenance",
@@ -803,6 +1187,81 @@ export const sources = {
         "metrics": {
           "drift": 7.9,
           "rollbackRisk": 25.6,
+          "trafficPct": 20
+        },
+        "canaryStatus": "clean",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "temporal-counterfactual/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "temporal-counterfactual/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 86.4,
+          "risk": 45.4,
+          "evidence": 69.8,
+          "resilience": 71.9
+        },
+        "metrics": {
+          "drift": 4.7,
+          "rollbackRisk": 13.1,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "temporal-counterfactual/adversarial-text-overlay/evidence-repair/retest/promotion/canary",
+        "promotionId": "temporal-counterfactual/adversarial-text-overlay/evidence-repair/retest/promotion",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 77.4,
+          "risk": 59.4,
+          "evidence": 73.8,
+          "resilience": 64.1
+        },
+        "metrics": {
+          "drift": 5.4,
+          "rollbackRisk": 19.4,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "temporal-counterfactual/unsupported-query/risk-containment/retest/promotion/canary",
+        "promotionId": "temporal-counterfactual/unsupported-query/risk-containment/retest/promotion",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "promote",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 91.4,
+          "risk": 40.4,
+          "evidence": 63.8,
+          "resilience": 74.5
+        },
+        "metrics": {
+          "drift": 8.5,
+          "rollbackRisk": 26.4,
           "trafficPct": 20
         },
         "canaryStatus": "clean",
@@ -909,6 +1368,81 @@ export const sources = {
         "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
       },
       {
+        "id": "grounded-answer/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "grounded-answer/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 83.2,
+          "risk": 48.6,
+          "evidence": 67.9,
+          "resilience": 69.0
+        },
+        "metrics": {
+          "drift": 5.0,
+          "rollbackRisk": 14.0,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "grounded-answer/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+        "promotionId": "grounded-answer/adversarial-text-overlay/review-hardening/retest/promotion",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 88.2,
+          "risk": 48.6,
+          "evidence": 67.9,
+          "resilience": 71.2
+        },
+        "metrics": {
+          "drift": 5.0,
+          "rollbackRisk": 14.0,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "grounded-answer/unsupported-query/evidence-repair/retest/promotion/canary",
+        "promotionId": "grounded-answer/unsupported-query/evidence-repair/retest/promotion",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 79.2,
+          "risk": 58.6,
+          "evidence": 71.9,
+          "resilience": 64.7
+        },
+        "metrics": {
+          "drift": 5.5,
+          "rollbackRisk": 19.3,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
         "id": "grounded-answer/gpu-brownout/review-hardening/retest/promotion/canary",
         "promotionId": "grounded-answer/gpu-brownout/review-hardening/retest/promotion",
         "demoId": "grounded-answer",
@@ -995,18 +1529,93 @@ export const sources = {
         "promotion": "promote",
         "afterDecision": "release",
         "after": {
-          "readiness": 87.3,
-          "risk": 38.7,
+          "readiness": 89.0,
+          "risk": 31.6,
           "evidence": 90.8,
-          "resilience": 79.2
+          "resilience": 82.4
         },
         "metrics": {
-          "drift": 6.4,
-          "rollbackRisk": 23.2,
+          "drift": 5.6,
+          "rollbackRisk": 19.4,
           "trafficPct": 20
         },
         "canaryStatus": "clean",
         "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "provenance-red-team/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "provenance-red-team/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 82.0,
+          "risk": 44.6,
+          "evidence": 84.8,
+          "resilience": 73.6
+        },
+        "metrics": {
+          "drift": 4.1,
+          "rollbackRisk": 12.5,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "provenance-red-team/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+        "promotionId": "provenance-red-team/adversarial-text-overlay/review-hardening/retest/promotion",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 79.0,
+          "risk": 52.6,
+          "evidence": 80.8,
+          "resilience": 68.7
+        },
+        "metrics": {
+          "drift": 4.7,
+          "rollbackRisk": 14.7,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "provenance-red-team/unsupported-query/review-hardening/retest/promotion/canary",
+        "promotionId": "provenance-red-team/unsupported-query/review-hardening/retest/promotion",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 85.0,
+          "risk": 47.6,
+          "evidence": 80.8,
+          "resilience": 73.0
+        },
+        "metrics": {
+          "drift": 4.4,
+          "rollbackRisk": 13.4,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
         "id": "provenance-red-team/gpu-brownout/review-hardening/retest/promotion/canary",
@@ -1020,14 +1629,14 @@ export const sources = {
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 73.3,
-          "risk": 50.7,
+          "readiness": 75.0,
+          "risk": 43.6,
           "evidence": 83.8,
-          "resilience": 67.5
+          "resilience": 70.6
         },
         "metrics": {
-          "drift": 4.5,
-          "rollbackRisk": 16.9,
+          "drift": 4.1,
+          "rollbackRisk": 12.3,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -1045,22 +1654,22 @@ export const sources = {
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 87.3,
-          "risk": 48.7,
-          "evidence": 86.8,
-          "resilience": 75.0
+          "readiness": 81.0,
+          "risk": 49.6,
+          "evidence": 82.8,
+          "resilience": 71.0
         },
         "metrics": {
-          "drift": 4.6,
-          "rollbackRisk": 13.8,
+          "drift": 4.8,
+          "rollbackRisk": 14.1,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
         "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
-        "id": "provenance-red-team/compound-launch/risk-containment/retest/promotion/canary",
-        "promotionId": "provenance-red-team/compound-launch/risk-containment/retest/promotion",
+        "id": "provenance-red-team/compound-launch/review-hardening/retest/promotion/canary",
+        "promotionId": "provenance-red-team/compound-launch/review-hardening/retest/promotion",
         "demoId": "provenance-red-team",
         "demoTitle": "Provenance Red-Team Arena",
         "theme": "The frontier - new senses and new duties",
@@ -1070,14 +1679,14 @@ export const sources = {
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 82.3,
-          "risk": 44.7,
-          "evidence": 79.8,
-          "resilience": 72.6
+          "readiness": 74.0,
+          "risk": 53.6,
+          "evidence": 77.8,
+          "resilience": 65.5
         },
         "metrics": {
-          "drift": 4.8,
-          "rollbackRisk": 13.0,
+          "drift": 5.4,
+          "rollbackRisk": 18.1,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -1092,17 +1701,92 @@ export const sources = {
         "page": "cvpr-safety-deployment-simulator.html",
         "incidentId": "launch-audit",
         "incidentTitle": "Launch audit",
+        "promotion": "promote",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 71.6,
+          "risk": 33.1,
+          "evidence": 69.5,
+          "resilience": 69.5
+        },
+        "metrics": {
+          "drift": 7.3,
+          "rollbackRisk": 22.0,
+          "trafficPct": 20
+        },
+        "canaryStatus": "clean",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+      },
+      {
+        "id": "safety-deployment/rare-object-distractor/review-hardening/retest/promotion/canary",
+        "promotionId": "safety-deployment/rare-object-distractor/review-hardening/retest/promotion",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 70.1,
-          "risk": 40.2,
-          "evidence": 69.5,
-          "resilience": 66.5
+          "readiness": 72.6,
+          "risk": 38.1,
+          "evidence": 67.5,
+          "resilience": 67.8
         },
         "metrics": {
           "drift": 4.4,
-          "rollbackRisk": 14.5,
+          "rollbackRisk": 14.0,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "safety-deployment/adversarial-text-overlay/evidence-repair/retest/promotion/canary",
+        "promotionId": "safety-deployment/adversarial-text-overlay/evidence-repair/retest/promotion",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 63.6,
+          "risk": 52.1,
+          "evidence": 71.5,
+          "resilience": 60.0
+        },
+        "metrics": {
+          "drift": 5.1,
+          "rollbackRisk": 17.6,
+          "trafficPct": 8
+        },
+        "canaryStatus": "watch",
+        "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "safety-deployment/unsupported-query/evidence-repair/retest/promotion/canary",
+        "promotionId": "safety-deployment/unsupported-query/evidence-repair/retest/promotion",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "promotion": "monitor",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 61.6,
+          "risk": 55.1,
+          "evidence": 67.5,
+          "resilience": 57.2
+        },
+        "metrics": {
+          "drift": 5.4,
+          "rollbackRisk": 18.4,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -1120,14 +1804,14 @@ export const sources = {
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 70.1,
-          "risk": 52.2,
+          "readiness": 71.6,
+          "risk": 45.1,
           "evidence": 64.5,
-          "resilience": 61.3
+          "resilience": 64.4
         },
         "metrics": {
-          "drift": 5.3,
-          "rollbackRisk": 17.7,
+          "drift": 4.9,
+          "rollbackRisk": 15.9,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -1145,14 +1829,14 @@ export const sources = {
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 64.1,
-          "risk": 56.2,
+          "readiness": 65.6,
+          "risk": 49.1,
           "evidence": 73.5,
-          "resilience": 59.3
+          "resilience": 62.3
         },
         "metrics": {
-          "drift": 5.5,
-          "rollbackRisk": 18.7,
+          "drift": 5.1,
+          "rollbackRisk": 16.9,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -1170,14 +1854,14 @@ export const sources = {
         "promotion": "monitor",
         "afterDecision": "review",
         "after": {
-          "readiness": 65.1,
-          "risk": 46.2,
+          "readiness": 66.6,
+          "risk": 39.1,
           "evidence": 58.5,
-          "resilience": 59.8
+          "resilience": 62.9
         },
         "metrics": {
-          "drift": 5.7,
-          "rollbackRisk": 16.7,
+          "drift": 5.3,
+          "rollbackRisk": 14.9,
           "trafficPct": 8
         },
         "canaryStatus": "watch",
@@ -1185,6 +1869,78 @@ export const sources = {
       }
     ],
     "promotionRows": [
+      {
+        "id": "adaptive-serving/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "adaptive-serving/rare-object-distractor/review-hardening/retest",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 80.8,
+          "risk": 31.4,
+          "evidence": 82.3,
+          "resilience": 77.0
+        },
+        "clearedBlock": false,
+        "promotedRelease": true,
+        "promotion": "promote",
+        "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "adaptive-serving/adversarial-text-overlay/review-hardening/retest/promotion",
+        "retestId": "adaptive-serving/adversarial-text-overlay/review-hardening/retest",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 77.8,
+          "risk": 39.4,
+          "evidence": 78.3,
+          "resilience": 72.1
+        },
+        "clearedBlock": false,
+        "promotedRelease": true,
+        "promotion": "promote",
+        "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "adaptive-serving/unsupported-query/review-hardening/retest/promotion",
+        "retestId": "adaptive-serving/unsupported-query/review-hardening/retest",
+        "demoId": "adaptive-serving",
+        "demoTitle": "Adaptive Serving Stress Lab",
+        "theme": "Learning more from less, and not breaking",
+        "page": "cvpr-adaptive-serving-stress-lab.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 75.8,
+          "risk": 42.4,
+          "evidence": 74.3,
+          "resilience": 69.3
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
       {
         "id": "adaptive-serving/gpu-brownout/review-hardening/retest/promotion",
         "retestId": "adaptive-serving/gpu-brownout/review-hardening/retest",
@@ -1258,6 +2014,78 @@ export const sources = {
         "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
+        "id": "constraint-edit/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "constraint-edit/rare-object-distractor/review-hardening/retest",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 84.8,
+          "risk": 38.4,
+          "evidence": 85.1,
+          "resilience": 77.0
+        },
+        "clearedBlock": false,
+        "promotedRelease": true,
+        "promotion": "promote",
+        "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "constraint-edit/adversarial-text-overlay/review-hardening/retest/promotion",
+        "retestId": "constraint-edit/adversarial-text-overlay/review-hardening/retest",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 81.8,
+          "risk": 46.4,
+          "evidence": 81.1,
+          "resilience": 72.1
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "constraint-edit/unsupported-query/review-hardening/retest/promotion",
+        "retestId": "constraint-edit/unsupported-query/review-hardening/retest",
+        "demoId": "constraint-edit",
+        "demoTitle": "Constraint Edit Tournament",
+        "theme": "Making pixels from meaning",
+        "page": "cvpr-constraint-edit-tournament.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 79.8,
+          "risk": 49.4,
+          "evidence": 77.1,
+          "resilience": 69.3
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
         "id": "constraint-edit/gpu-brownout/review-hardening/retest/promotion",
         "retestId": "constraint-edit/gpu-brownout/review-hardening/retest",
         "demoId": "constraint-edit",
@@ -1324,6 +2152,78 @@ export const sources = {
           "resilience": 68.9
         },
         "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "open-vocab/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "open-vocab/rare-object-distractor/review-hardening/retest",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 87.3,
+          "risk": 36.6,
+          "evidence": 87.6,
+          "resilience": 79.2
+        },
+        "clearedBlock": false,
+        "promotedRelease": true,
+        "promotion": "promote",
+        "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "open-vocab/adversarial-text-overlay/review-hardening/retest/promotion",
+        "retestId": "open-vocab/adversarial-text-overlay/review-hardening/retest",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 84.3,
+          "risk": 44.6,
+          "evidence": 83.6,
+          "resilience": 74.3
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "open-vocab/unsupported-query/review-hardening/retest/promotion",
+        "retestId": "open-vocab/unsupported-query/review-hardening/retest",
+        "demoId": "open-vocab",
+        "demoTitle": "Open-Vocabulary Failure Hunt",
+        "theme": "Naming and locating what's in the picture",
+        "page": "cvpr-open-vocab-failure-hunt.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 82.3,
+          "risk": 47.6,
+          "evidence": 79.6,
+          "resilience": 71.5
+        },
+        "clearedBlock": false,
         "promotedRelease": false,
         "promotion": "monitor",
         "reason": "block cleared or review improved, but still requires launch monitoring",
@@ -1426,6 +2326,78 @@ export const sources = {
         "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
+        "id": "3d-edit-provenance/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "3d-edit-provenance/rare-object-distractor/review-hardening/retest",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 85.8,
+          "risk": 43.3,
+          "evidence": 82.1,
+          "resilience": 75.1
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "3d-edit-provenance/adversarial-text-overlay/review-hardening/retest/promotion",
+        "retestId": "3d-edit-provenance/adversarial-text-overlay/review-hardening/retest",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 82.8,
+          "risk": 51.3,
+          "evidence": 78.1,
+          "resilience": 70.2
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "3d-edit-provenance/unsupported-query/review-hardening/retest/promotion",
+        "retestId": "3d-edit-provenance/unsupported-query/review-hardening/retest",
+        "demoId": "3d-edit-provenance",
+        "demoTitle": "3D Edit Provenance Room",
+        "theme": "Recovering the 3D world from flat pictures",
+        "page": "cvpr-3d-edit-provenance-room.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 87.8,
+          "risk": 47.3,
+          "evidence": 78.1,
+          "resilience": 73.7
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
         "id": "3d-edit-provenance/gpu-brownout/review-hardening/retest/promotion",
         "retestId": "3d-edit-provenance/gpu-brownout/review-hardening/retest",
         "demoId": "3d-edit-provenance",
@@ -1516,6 +2488,78 @@ export const sources = {
           "resilience": 73.6
         },
         "clearedBlock": false,
+        "promotedRelease": true,
+        "promotion": "promote",
+        "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "temporal-counterfactual/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "temporal-counterfactual/rare-object-distractor/review-hardening/retest",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 86.4,
+          "risk": 45.4,
+          "evidence": 69.8,
+          "resilience": 71.9
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "temporal-counterfactual/adversarial-text-overlay/evidence-repair/retest/promotion",
+        "retestId": "temporal-counterfactual/adversarial-text-overlay/evidence-repair/retest",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 77.4,
+          "risk": 59.4,
+          "evidence": 73.8,
+          "resilience": 64.1
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "temporal-counterfactual/unsupported-query/risk-containment/retest/promotion",
+        "retestId": "temporal-counterfactual/unsupported-query/risk-containment/retest",
+        "demoId": "temporal-counterfactual",
+        "demoTitle": "Temporal Counterfactual Lab",
+        "theme": "Seeing and making things that move",
+        "page": "cvpr-temporal-counterfactual-lab.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "critical",
+        "beforeDecision": "block",
+        "afterDecision": "release",
+        "after": {
+          "readiness": 91.4,
+          "risk": 40.4,
+          "evidence": 63.8,
+          "resilience": 74.5
+        },
+        "clearedBlock": true,
         "promotedRelease": true,
         "promotion": "promote",
         "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
@@ -1618,6 +2662,78 @@ export const sources = {
         "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
+        "id": "grounded-answer/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "grounded-answer/rare-object-distractor/review-hardening/retest",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 83.2,
+          "risk": 48.6,
+          "evidence": 67.9,
+          "resilience": 69.0
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "grounded-answer/adversarial-text-overlay/review-hardening/retest/promotion",
+        "retestId": "grounded-answer/adversarial-text-overlay/review-hardening/retest",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 88.2,
+          "risk": 48.6,
+          "evidence": 67.9,
+          "resilience": 71.2
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "grounded-answer/unsupported-query/evidence-repair/retest/promotion",
+        "retestId": "grounded-answer/unsupported-query/evidence-repair/retest",
+        "demoId": "grounded-answer",
+        "demoTitle": "Grounded Answer Courtroom",
+        "theme": "Teaching machines to see and talk at once",
+        "page": "cvpr-grounded-answer-courtroom.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 79.2,
+          "risk": 58.6,
+          "evidence": 71.9,
+          "resilience": 64.7
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
         "id": "grounded-answer/gpu-brownout/review-hardening/retest/promotion",
         "retestId": "grounded-answer/gpu-brownout/review-hardening/retest",
         "demoId": "grounded-answer",
@@ -1702,15 +2818,87 @@ export const sources = {
         "beforeDecision": "review",
         "afterDecision": "release",
         "after": {
-          "readiness": 87.3,
-          "risk": 38.7,
+          "readiness": 89.0,
+          "risk": 31.6,
           "evidence": 90.8,
-          "resilience": 79.2
+          "resilience": 82.4
         },
         "clearedBlock": false,
         "promotedRelease": true,
         "promotion": "promote",
         "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "provenance-red-team/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "provenance-red-team/rare-object-distractor/review-hardening/retest",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 82.0,
+          "risk": 44.6,
+          "evidence": 84.8,
+          "resilience": 73.6
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "provenance-red-team/adversarial-text-overlay/review-hardening/retest/promotion",
+        "retestId": "provenance-red-team/adversarial-text-overlay/review-hardening/retest",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "focused",
+        "beforeDecision": "review",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 79.0,
+          "risk": 52.6,
+          "evidence": 80.8,
+          "resilience": 68.7
+        },
+        "clearedBlock": false,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "provenance-red-team/unsupported-query/review-hardening/retest/promotion",
+        "retestId": "provenance-red-team/unsupported-query/review-hardening/retest",
+        "demoId": "provenance-red-team",
+        "demoTitle": "Provenance Red-Team Arena",
+        "theme": "The frontier - new senses and new duties",
+        "page": "cvpr-provenance-red-team-arena.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 85.0,
+          "risk": 47.6,
+          "evidence": 80.8,
+          "resilience": 73.0
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
         "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
@@ -1726,10 +2914,10 @@ export const sources = {
         "beforeDecision": "review",
         "afterDecision": "review",
         "after": {
-          "readiness": 73.3,
-          "risk": 50.7,
+          "readiness": 75.0,
+          "risk": 43.6,
           "evidence": 83.8,
-          "resilience": 67.5
+          "resilience": 70.6
         },
         "clearedBlock": false,
         "promotedRelease": false,
@@ -1746,38 +2934,38 @@ export const sources = {
         "page": "cvpr-provenance-red-team-arena.html",
         "incidentId": "adversarial-content",
         "incidentTitle": "Adversarial content",
-        "priority": "high",
-        "beforeDecision": "block",
+        "priority": "focused",
+        "beforeDecision": "review",
         "afterDecision": "review",
         "after": {
-          "readiness": 87.3,
-          "risk": 48.7,
-          "evidence": 86.8,
-          "resilience": 75.0
+          "readiness": 81.0,
+          "risk": 49.6,
+          "evidence": 82.8,
+          "resilience": 71.0
         },
-        "clearedBlock": true,
+        "clearedBlock": false,
         "promotedRelease": false,
         "promotion": "monitor",
         "reason": "block cleared or review improved, but still requires launch monitoring",
         "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
       },
       {
-        "id": "provenance-red-team/compound-launch/risk-containment/retest/promotion",
-        "retestId": "provenance-red-team/compound-launch/risk-containment/retest",
+        "id": "provenance-red-team/compound-launch/review-hardening/retest/promotion",
+        "retestId": "provenance-red-team/compound-launch/review-hardening/retest",
         "demoId": "provenance-red-team",
         "demoTitle": "Provenance Red-Team Arena",
         "theme": "The frontier - new senses and new duties",
         "page": "cvpr-provenance-red-team-arena.html",
         "incidentId": "compound-launch",
         "incidentTitle": "Compound launch",
-        "priority": "critical",
+        "priority": "high",
         "beforeDecision": "block",
         "afterDecision": "review",
         "after": {
-          "readiness": 82.3,
-          "risk": 44.7,
-          "evidence": 79.8,
-          "resilience": 72.6
+          "readiness": 74.0,
+          "risk": 53.6,
+          "evidence": 77.8,
+          "resilience": 65.5
         },
         "clearedBlock": true,
         "promotedRelease": false,
@@ -1796,14 +2984,86 @@ export const sources = {
         "incidentTitle": "Launch audit",
         "priority": "focused",
         "beforeDecision": "review",
-        "afterDecision": "review",
+        "afterDecision": "release",
         "after": {
-          "readiness": 70.1,
-          "risk": 40.2,
+          "readiness": 71.6,
+          "risk": 33.1,
           "evidence": 69.5,
-          "resilience": 66.5
+          "resilience": 69.5
         },
         "clearedBlock": false,
+        "promotedRelease": true,
+        "promotion": "promote",
+        "reason": "release retest meets risk, evidence, and resilience promotion thresholds",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "safety-deployment/rare-object-distractor/review-hardening/retest/promotion",
+        "retestId": "safety-deployment/rare-object-distractor/review-hardening/retest",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "rare-object-distractor",
+        "incidentTitle": "Rare-object distractor",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 72.6,
+          "risk": 38.1,
+          "evidence": 67.5,
+          "resilience": 67.8
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "safety-deployment/adversarial-text-overlay/evidence-repair/retest/promotion",
+        "retestId": "safety-deployment/adversarial-text-overlay/evidence-repair/retest",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "adversarial-text-overlay",
+        "incidentTitle": "Adversarial text overlay",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 63.6,
+          "risk": 52.1,
+          "evidence": 71.5,
+          "resilience": 60.0
+        },
+        "clearedBlock": true,
+        "promotedRelease": false,
+        "promotion": "monitor",
+        "reason": "block cleared or review improved, but still requires launch monitoring",
+        "verificationCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+      },
+      {
+        "id": "safety-deployment/unsupported-query/evidence-repair/retest/promotion",
+        "retestId": "safety-deployment/unsupported-query/evidence-repair/retest",
+        "demoId": "safety-deployment",
+        "demoTitle": "Safety Deployment Simulator",
+        "theme": "Using vision to act in the world",
+        "page": "cvpr-safety-deployment-simulator.html",
+        "incidentId": "unsupported-query",
+        "incidentTitle": "Unsupported query",
+        "priority": "high",
+        "beforeDecision": "block",
+        "afterDecision": "review",
+        "after": {
+          "readiness": 61.6,
+          "risk": 55.1,
+          "evidence": 67.5,
+          "resilience": 57.2
+        },
+        "clearedBlock": true,
         "promotedRelease": false,
         "promotion": "monitor",
         "reason": "block cleared or review improved, but still requires launch monitoring",
@@ -1822,10 +3082,10 @@ export const sources = {
         "beforeDecision": "block",
         "afterDecision": "review",
         "after": {
-          "readiness": 70.1,
-          "risk": 52.2,
+          "readiness": 71.6,
+          "risk": 45.1,
           "evidence": 64.5,
-          "resilience": 61.3
+          "resilience": 64.4
         },
         "clearedBlock": true,
         "promotedRelease": false,
@@ -1846,10 +3106,10 @@ export const sources = {
         "beforeDecision": "block",
         "afterDecision": "review",
         "after": {
-          "readiness": 64.1,
-          "risk": 56.2,
+          "readiness": 65.6,
+          "risk": 49.1,
           "evidence": 73.5,
-          "resilience": 59.3
+          "resilience": 62.3
         },
         "clearedBlock": true,
         "promotedRelease": false,
@@ -1870,10 +3130,10 @@ export const sources = {
         "beforeDecision": "block",
         "afterDecision": "review",
         "after": {
-          "readiness": 65.1,
-          "risk": 46.2,
+          "readiness": 66.6,
+          "risk": 39.1,
           "evidence": 58.5,
-          "resilience": 59.8
+          "resilience": 62.9
         },
         "clearedBlock": true,
         "promotedRelease": false,
@@ -2095,1472 +3355,391 @@ export const sources = {
   },
   "validation": {
     "summary": {
-      "validator": "validate_cvpr_full_stack",
-      "status": "valid",
+      "dashboard": "cvpr-validation-center",
+      "status": "interactive",
+      "gateStatus": "release",
+      "fullStackStatus": "valid",
       "commands": 286,
-      "steps": 153,
-      "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "steps": 51,
+      "packageTests": 26,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
-      "durationSec": 25.216
+      "promotionDeltaStatus": "release",
+      "promotionRegressions": 0,
+      "maxReadinessDrop": 0.0,
+      "validImportJobs": 14,
+      "implementedBenches": 11,
+      "benchCases": 44,
+      "benchBlock": 0,
+      "fullStackValidator": "scripts/validate_cvpr_full_stack.py",
+      "importValidator": "scripts/validate_cvpr_colab_results.py",
+      "statusLabel": "all gates valid",
+      "releaseGate": true,
+      "slowest": [
+        {
+          "command": "python3 scripts/validate_cvpr_colab_results.py",
+          "returnCode": 0,
+          "durationSec": 0.247,
+          "stdoutTail": [
+            "validated CVPR Colab results: 56 results, 0 issues"
+          ],
+          "stderrTail": []
+        },
+        {
+          "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+          "returnCode": 0,
+          "durationSec": 0.187,
+          "stdoutTail": [
+            "wrote cvpr-colab-gpu-worker.html: 14 jobs, 56 cached results"
+          ],
+          "stderrTail": []
+        },
+        {
+          "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+          "returnCode": 0,
+          "durationSec": 0.184,
+          "stdoutTail": [
+            "wrote cvpr-colab-handoff-package.html: 14 jobs, 8 zip entries"
+          ],
+          "stderrTail": []
+        },
+        {
+          "command": "python3 scripts/build_cvpr_systems_lab.py",
+          "returnCode": 0,
+          "durationSec": 0.179,
+          "stdoutTail": [
+            "wrote cvpr-systems-lab.html: 11 systems, 33 stages"
+          ],
+          "stderrTail": []
+        },
+        {
+          "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
+          "returnCode": 0,
+          "durationSec": 0.159,
+          "stdoutTail": [
+            "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
+          ],
+          "stderrTail": []
+        }
+      ]
     },
-    "steps": [
+    "slowest": [
       {
-        "command": "python3 scripts/build_cvpr_systems_lab.py",
+        "command": "python3 scripts/validate_cvpr_colab_results.py",
         "returnCode": 0,
-        "durationSec": 0.038,
+        "durationSec": 0.247,
         "stdoutTail": [
-          "wrote cvpr-systems-lab.html: 11 systems, 33 stages"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_systems_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.023,
-        "stdoutTail": [
-          "verified CVPR systems lab: 11 systems, 33 stages, 11 clusters"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_demo_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "wrote cvpr-demo-lab.html: 41 interactive demos (33 stage demos)"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_demo_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.022,
-        "stdoutTail": [
-          "verified CVPR demo lab: 41 demos, 8 flagship, 33 stage demos"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_demo_arena.py",
-        "returnCode": 0,
-        "durationSec": 0.036,
-        "stdoutTail": [
-          "wrote cvpr-demo-arena.html: 41 demos x 8 scenarios = 328 evaluations"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_demo_arena.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "verified CVPR demo arena: 41 demos, 8 scenarios, 328 evaluations"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_demo_playbook.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "wrote cvpr-demo-playbook.html: 8 plays, 0 critical"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_demo_playbook.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR demo playbook: 8 plays, 0 critical, 8 clusters"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.024,
-        "stdoutTail": [
-          "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "wrote cvpr-metric-geometry-bench.html: 4 release cases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
+          "validated CVPR Colab results: 56 results, 0 issues"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.187,
         "stdoutTail": [
-          "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/validate_cvpr_colab_results.py",
-        "returnCode": 0,
-        "durationSec": 0.049,
-        "stdoutTail": [
-          "validated CVPR Colab results: 40 results, 0 issues"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_gpu_worker.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR Colab GPU worker: 10 jobs, 40 cached results"
+          "wrote cvpr-colab-gpu-worker.html: 14 jobs, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.184,
         "stdoutTail": [
-          "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+          "wrote cvpr-colab-handoff-package.html: 14 jobs, 8 zip entries"
+        ],
+        "stderrTail": []
+      },
+      {
+        "command": "python3 scripts/build_cvpr_systems_lab.py",
+        "returnCode": 0,
+        "durationSec": 0.179,
+        "stdoutTail": [
+          "wrote cvpr-systems-lab.html: 11 systems, 33 stages"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.159,
         "stdoutTail": [
-          "verified CVPR Colab handoff package: 10 jobs, 8 zip entries"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_driving_safety_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR driving safety bench: 4 cases, max risk 34.6"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_constraint_generation_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR constraint generation bench: 4 cases, max identity damage 34.8"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_compute_serving_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.024,
-        "stdoutTail": [
-          "verified CVPR compute serving bench: 4 cases, min evidence 85.7"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_clinical_shift_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.023,
-        "stdoutTail": [
-          "verified CVPR clinical shift bench: 4 cases, max risk 33.5"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.023,
-        "stdoutTail": [
-          "verified CVPR adversarial provenance bench: 4 cases, min evidence 82.5"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 87.1"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_long_tail_grounding_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.023,
-        "stdoutTail": [
-          "verified CVPR long-tail grounding bench: 4 cases, min evidence 87.1"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_restoration_fidelity_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.023,
-        "stdoutTail": [
-          "verified CVPR restoration fidelity bench: 4 cases, max fabricated risk 29.4"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_temporal_rollout_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR temporal rollout bench: 4 cases, max drift 36.1"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_vlm_answer_verification_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "verified CVPR VLM answer verification bench: 4 cases, max unsupported risk 32.2"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-metric-geometry-bench.html: 4 release cases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_metric_geometry_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR metric geometry bench: 4 cases, max scale drift 29.9"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_gaussian_splatting_bench.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR Gaussian Splatting bench: 4 cases, max edit leakage 27.4"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_mission_control.py",
-        "returnCode": 0,
-        "durationSec": 0.04,
-        "stdoutTail": [
-          "wrote cvpr-mission-control.html: 11 systems, 11 benches"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_mission_control.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR mission control: 11 systems, 11 benches, 44 cases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_failure_atlas.py",
-        "returnCode": 0,
-        "durationSec": 0.039,
-        "stdoutTail": [
-          "wrote cvpr-failure-atlas.html: 44 cases, 11 families"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_failure_atlas.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR failure atlas: 44 cases, 11 families"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/cvpr_paper_system_gate_experiments.py",
-        "returnCode": 0,
-        "durationSec": 0.036,
-        "stdoutTail": [
-          "wrote cvpr-paper-to-system-gate experiment results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_paper_system_gate.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-paper-to-system-gate package and page"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_validation_center.py",
-        "returnCode": 0,
-        "durationSec": 0.04,
-        "stdoutTail": [
-          "wrote cvpr-validation-center.html: 51 steps, 26 tests"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "node source-code/learning/*/tests/core.test.js",
-        "returnCode": 0,
-        "durationSec": 20.437,
-        "testCount": 148,
-        "log": "/tmp/cvpr-core-tests.log",
-        "stdoutTail": [
-          "ok metric-3d-reconstruction: 94 3D reconstruction and novel views",
-          "ok open-vocab-visual-search: 94 Open-vocabulary vision",
-          "ok restoration-reliability-stack: 94 Image restoration",
-          "ok video-world-model: 94 Video generation and world models",
-          "ok vlm-grounded-reasoning: 94 Vision-language reasoning"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_validation_center.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-validation-center.html: 53 steps, 148 tests"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_validation_center.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR validation center: 53 steps, 148 package tests"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
-        "returnCode": 0,
-        "durationSec": 0.092,
-        "stdoutTail": [
-          "verified CVPR live Colab intake: 40 live results, 0 issues"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
-        "returnCode": 0,
-        "durationSec": 0.083,
-        "stdoutTail": [
-          "verified CVPR live Colab promotion: 40 promoted cached-real results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_promotion_delta.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-colab-promotion-delta.html: 40 cases, 0 regressions"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_promotion_delta.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "verified CVPR Colab promotion delta: 40 cases, 0 regressions"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_release_bundle.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "wrote cvpr-colab-release-bundle.html: 10 runners, 40 cached results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_release_bundle.py",
-        "returnCode": 0,
-        "durationSec": 0.024,
-        "stdoutTail": [
-          "verified CVPR Colab release bundle: 10 runners, 40 cached results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_evidence_ledger.py",
-        "returnCode": 0,
-        "durationSec": 0.041,
-        "stdoutTail": [
-          "wrote cvpr-colab-evidence-ledger.html: 7 artifacts, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_evidence_ledger.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR Colab evidence ledger: 7 artifacts"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_run_receipt.py",
-        "returnCode": 0,
-        "durationSec": 0.04,
-        "stdoutTail": [
-          "wrote cvpr-colab-run-receipt.html: 8 stages, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_run_receipt.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR Colab run receipt: 8 stages, 7 artifacts"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_theme_release_matrix.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-theme-release-matrix.html: 8 themes, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_theme_release_matrix.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR theme release matrix: 8 themes, 11 systems"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_production_release_brief.py",
-        "returnCode": 0,
-        "durationSec": 0.043,
-        "stdoutTail": [
-          "wrote cvpr-production-release-brief.html: release gate, 328 arena releases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_production_release_brief.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "verified CVPR production release brief: release gate, 328 arena releases"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_production_coverage_audit.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-production-coverage-audit.html: release gate, 10 Colab Pro+ jobs, 0 missing evidence"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_production_coverage_audit.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "verified CVPR production coverage audit: 11 systems, 10 Colab Pro+ jobs, 0 missing evidence"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_board.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "wrote cvpr-remediation-board.html: 0 block tasks, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_board.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR remediation board: 0 block tasks"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_sprint_plan.py",
-        "returnCode": 0,
-        "durationSec": 0.037,
-        "stdoutTail": [
-          "wrote cvpr-remediation-sprint-plan.html: 3 sprints, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_sprint_plan.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR remediation sprint plan: 3 sprints, 0 tasks"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_operations_dashboard.py",
-        "returnCode": 0,
-        "durationSec": 0.039,
-        "stdoutTail": [
-          "wrote cvpr-colab-operations-dashboard.html: 10 jobs, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_operations_dashboard.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "verified CVPR Colab operations dashboard: 10 jobs, 53 steps"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_execution_planner.py",
-        "returnCode": 0,
-        "durationSec": 0.038,
-        "stdoutTail": [
-          "wrote cvpr-colab-execution-planner.html: 3 waves, 40 expected results, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_execution_planner.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR Colab execution planner: 3 waves, 40 expected results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 40 expected live results, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR demo evidence cockpit: 41 demos, 40 expected live results"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_colab_result_replay.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-colab-result-replay.html: 40/40 results, 30 demos, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_colab_result_replay.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR Colab result replay: 40/40 results, 30 stage demos"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_slo_dashboard.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-release-slo-dashboard.html: 10/10 SLOs, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_slo_dashboard.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR release SLO dashboard: 10/10 SLOs, readiness floor 68.1"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_regression_drillbook.py",
-        "returnCode": 0,
-        "durationSec": 0.042,
-        "stdoutTail": [
-          "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_regression_drillbook.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR release regression drillbook: 10/10 drills"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_launch_readiness_pack.py",
-        "returnCode": 0,
-        "durationSec": 0.047,
-        "stdoutTail": [
-          "wrote cvpr-launch-readiness-pack.html: launch-ready, 148 package tests"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_launch_readiness_pack.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "verified CVPR launch readiness pack: launch-ready, 148 package tests"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_manifest.py",
-        "returnCode": 0,
-        "durationSec": 0.036,
-        "stdoutTail": [
-          "wrote cvpr-release-manifest.html: 13 artifacts, status sealed"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_manifest.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR release manifest: 13 artifacts, status sealed"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_change_control.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-release-change-control.html: 13/13 rows, status controlled"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_change_control.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR release change control: 13/13 rows"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_dependency_graph.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-release-dependency-graph.html: 15 nodes, 19 edges, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_dependency_graph.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR release dependency graph: 15 nodes, 19 edges"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_post_launch_monitoring.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-post-launch-monitoring.html: 9/9 monitors, status watching"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_post_launch_monitoring.py",
-        "returnCode": 0,
-        "durationSec": 0.025,
-        "stdoutTail": [
-          "verified CVPR post-launch monitoring: 9/9 monitors"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_audit_trail.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-release-audit-trail.html: 58/58 events, status complete"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_audit_trail.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR release audit trail: 58/58 events"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_release_command_center.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-release-command-center.html: 8/8 surfaces, status operator-ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_release_command_center.py",
-        "returnCode": 0,
-        "durationSec": 0.046,
-        "stdoutTail": [
-          "verified CVPR release command center: 8/8 surfaces"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_theme_portfolio_map.py",
-        "returnCode": 0,
-        "durationSec": 0.041,
-        "stdoutTail": [
-          "wrote cvpr-theme-portfolio-map.html: 8 themes, 11 systems, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_theme_portfolio_map.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR theme portfolio map: 8 themes, 11 systems"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_next_demo_roadmap.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-next-demo-roadmap.html: 8 goals, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_next_demo_roadmap.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "verified CVPR next-demo roadmap: 8 goals, 11 systems"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_demo_build_backlog.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-demo-build-backlog.html: 24 tasks, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_demo_build_backlog.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR demo build backlog: 8 goals, 24 tasks"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_adaptive_serving_stress_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.035,
-        "stdoutTail": [
-          "wrote cvpr-adaptive-serving-stress-lab.html: 12 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_adaptive_serving_stress_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR adaptive serving stress lab: 12 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_constraint_edit_tournament.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-constraint-edit-tournament.html: 48 matches, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_constraint_edit_tournament.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR constraint edit tournament: 48 matches, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_open_vocab_failure_hunt.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-open-vocab-failure-hunt.html: 16 probes, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_open_vocab_failure_hunt.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "verified CVPR open-vocab failure hunt: 16 probes, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_3d_edit_provenance_room.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-3d-edit-provenance-room.html: 48 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_3d_edit_provenance_room.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR 3D edit provenance room: 48 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_temporal_counterfactual_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.032,
-        "stdoutTail": [
-          "wrote cvpr-temporal-counterfactual-lab.html: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_temporal_counterfactual_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR temporal counterfactual lab: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_grounded_answer_courtroom.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-grounded-answer-courtroom.html: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_grounded_answer_courtroom.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR grounded answer courtroom: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_provenance_red_team_arena.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-provenance-red-team-arena.html: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_provenance_red_team_arena.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR provenance red-team arena: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_safety_deployment_simulator.py",
-        "returnCode": 0,
-        "durationSec": 0.034,
-        "stdoutTail": [
-          "wrote cvpr-safety-deployment-simulator.html: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_safety_deployment_simulator.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR safety deployment simulator: 16 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_cross_theme_incident_gauntlet.py",
-        "returnCode": 0,
-        "durationSec": 0.032,
-        "stdoutTail": [
-          "wrote cvpr-cross-theme-incident-gauntlet.html: 32 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR cross-theme incident gauntlet: 32 rows, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_gauntlet_remediation_sprint.py",
-        "returnCode": 0,
-        "durationSec": 0.032,
-        "stdoutTail": [
-          "wrote cvpr-gauntlet-remediation-sprint.html: 29 actions, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_gauntlet_remediation_sprint.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "verified CVPR gauntlet remediation sprint: 29 actions, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_retest_harness.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-remediation-retest-harness.html: 29 retests, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR remediation retest harness: 29 retests, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_promotion_board.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-remediation-promotion-board.html: 12 promote, 17 monitor, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR remediation promotion board: 12 promote, 17 monitor"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_canary_monitor.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-remediation-canary-monitor.html: 12 clean, 17 watch, status watching"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_canary_monitor.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR remediation canary monitor: 12 clean, 17 watch"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_rollback_drillbook.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-remediation-rollback-drillbook.html: 12 drills, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_rollback_drillbook.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR remediation rollback drillbook: 12 drills, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_rollback_rehearsal_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "wrote cvpr-remediation-rollback-rehearsal-lab.html: 12 rehearsals, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_rollback_rehearsal_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR remediation rollback rehearsal lab: 12 rehearsals, status release"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_audit_ledger.py",
-        "returnCode": 0,
-        "durationSec": 0.033,
-        "stdoutTail": [
-          "wrote cvpr-remediation-audit-ledger.html: 7 stages, status complete"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_audit_ledger.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR remediation audit ledger: 7 stages, status complete"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_command_center.py",
-        "returnCode": 0,
-        "durationSec": 0.035,
-        "stdoutTail": [
-          "wrote cvpr-remediation-command-center.html: 7 surfaces, status operator-ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_command_center.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR remediation command center: 7 surfaces, status operator-ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_release_brief.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-remediation-release-brief.html: release gate, controlled-watch posture"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_release_brief.py",
-        "returnCode": 0,
-        "durationSec": 0.028,
-        "stdoutTail": [
-          "verified CVPR remediation release brief: release gate, controlled-watch posture"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_remediation_closeout_pack.py",
-        "returnCode": 0,
-        "durationSec": 0.032,
-        "stdoutTail": [
-          "wrote cvpr-remediation-closeout-pack.html: 7 rows, status sealed"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_remediation_closeout_pack.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR remediation closeout pack: 7 rows, status sealed"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_second_round_demo_roadmap.py",
-        "returnCode": 0,
-        "durationSec": 0.03,
-        "stdoutTail": [
-          "wrote cvpr-second-round-demo-roadmap.html: 6 goals, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_second_round_demo_roadmap.py",
-        "returnCode": 0,
-        "durationSec": 0.027,
-        "stdoutTail": [
-          "verified CVPR second-round demo roadmap: 6 goals, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_visual_qa_sweep_dashboard.py",
-        "returnCode": 0,
-        "durationSec": 0.046,
-        "stdoutTail": [
-          "wrote cvpr-visual-qa-sweep-dashboard.html: 8/8 surfaces, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_visual_qa_sweep_dashboard.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR visual QA sweep dashboard: 8/8 surfaces ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_scenario_expansion_pack.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-scenario-expansion-pack.html: 12 scenarios, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_scenario_expansion_pack.py",
-        "returnCode": 0,
-        "durationSec": 0.029,
-        "stdoutTail": [
-          "verified CVPR scenario expansion pack: 12 scenarios, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/build_cvpr_3d_temporal_rollback_stress_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.031,
-        "stdoutTail": [
-          "wrote cvpr-3d-temporal-rollback-stress-lab.html: 6 rows, status ready"
-        ],
-        "stderrTail": []
-      },
-      {
-        "command": "python3 scripts/verify_cvpr_3d_temporal_rollback_stress_lab.py",
-        "returnCode": 0,
-        "durationSec": 0.026,
-        "stdoutTail": [
-          "verified CVPR 3D temporal rollback stress lab: 6 rows, status ready"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       }
-    ]
+    ],
+    "fullStack": {
+      "validator": "validate_cvpr_full_stack",
+      "status": "valid",
+      "commands": 286,
+      "steps": 51,
+      "packageTests": 26,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
+      "importIssues": 0,
+      "durationSec": 6.061
+    },
+    "importReport": {
+      "validator": "validate_cvpr_colab_results",
+      "runtimePlane": "google-colab-pro-plus",
+      "expectedMode": "cached-real",
+      "jobs": 14,
+      "expectedResults": 56,
+      "actualResults": 56,
+      "validJobs": 14,
+      "issues": 0,
+      "status": "valid"
+    },
+    "worker": {
+      "worker": "cvpr-colab-gpu-worker",
+      "runtimePlane": "google-colab-pro-plus",
+      "controlPlane": "local-static-cvpr-site",
+      "resultPlane": "registry-and-cached-json",
+      "jobs": 14,
+      "liveCapable": 14,
+      "promotedRunners": 14,
+      "runnerRows": 14,
+      "cachedCapable": 14,
+      "cachedResults": 56,
+      "validCachedResults": 56,
+      "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+      "notebookNativeJobs": 10,
+      "externalLiveJobs": 4,
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
+      "importValidator": "scripts/validate_cvpr_colab_results.py",
+      "validationReport": "analysis/cvpr_colab_gpu_worker/import_validation.json",
+      "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+      "liveIntakeGate": "scripts/stage_cvpr_live_colab_export.py",
+      "fullStackValidator": "scripts/validate_cvpr_full_stack.py",
+      "fullStackReport": "analysis/cvpr_full_stack_validation/registry.json",
+      "status": "interactive-contract"
+    },
+    "runnerCoverage": [
+      {
+        "jobId": "open-vocab-grounding",
+        "caseSymbol": "GROUNDING_CASES",
+        "loader": "load_open_vocab_models",
+        "runner": "run_open_vocab_grounding_batch",
+        "execution": "transformers-grounding-dino-siglip",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "restoration-fidelity",
+        "caseSymbol": "RESTORATION_CASES",
+        "loader": "load_restoration_models",
+        "runner": "run_restoration_fidelity_batch",
+        "execution": "transformers-swin2sr-restoration",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "adversarial-provenance",
+        "caseSymbol": "ADVERSARIAL_CASES",
+        "loader": "load_adversarial_models",
+        "runner": "run_adversarial_provenance_batch",
+        "execution": "transformers-clip-provenance-probe",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "temporal-rollout",
+        "caseSymbol": "TEMPORAL_CASES",
+        "loader": "load_temporal_models",
+        "runner": "run_temporal_rollout_batch",
+        "execution": "torchvision-raft-temporal-flow",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "clinical-shift",
+        "caseSymbol": "CLINICAL_CASES",
+        "loader": "load_clinical_models",
+        "runner": "run_clinical_shift_batch",
+        "execution": "torch-clinical-shift-embedding-probe",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "compute-serving",
+        "caseSymbol": "COMPUTE_CASES",
+        "loader": "load_compute_models",
+        "runner": "run_compute_serving_batch",
+        "execution": "torch-serving-latency-profiler",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "constraint-generation",
+        "caseSymbol": "CONSTRAINT_CASES",
+        "loader": "load_constraint_models",
+        "runner": "run_constraint_generation_batch",
+        "execution": "torch-layout-identity-reward-probe",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "driving-safety",
+        "caseSymbol": "DRIVING_CASES",
+        "loader": "load_driving_models",
+        "runner": "run_driving_safety_batch",
+        "execution": "torch-driving-scene-risk-probe",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "depth-normal-consistency",
+        "caseSymbol": "DEPTH_NORMAL_CASES",
+        "loader": "load_depth_normal_models",
+        "runner": "run_depth_normal_consistency_batch",
+        "execution": "torch-cuda-depth-normal-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "corruption-robustness",
+        "caseSymbol": "CORRUPTION_CASES",
+        "loader": "load_corruption_models",
+        "runner": "run_corruption_robustness_batch",
+        "execution": "torchvision-resnet-corruption-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+        "loader": "load_prompt_segmentation_models",
+        "runner": "run_prompt_segmentation_robustness_batch",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "caseSymbol": "VIDEO_TRACKING_CASES",
+        "loader": "load_video_tracking_models",
+        "runner": "run_video_identity_tracking_batch",
+        "execution": "torch-cuda-video-tracking-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "metric-geometry",
+        "caseSymbol": "GEOMETRY_CASES",
+        "loader": "load_metric_geometry_models",
+        "runner": "run_metric_geometry_batch",
+        "execution": "torch-metric-geometry-probe",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "gaussian-splatting",
+        "caseSymbol": "SPLATTING_CASES",
+        "loader": "load_gaussian_splatting_models",
+        "runner": "run_gaussian_splatting_batch",
+        "execution": "torch-gaussian-splatting-render-probe",
+        "strictMode": "require_real_models=True"
+      }
+    ],
+    "mission": {
+      "systems": 11,
+      "stages": 33,
+      "themesCovered": 8,
+      "clustersCovered": 11,
+      "demos": 41,
+      "flagshipDemos": 8,
+      "stageDemos": 33,
+      "arenaPairings": 328,
+      "arenaRelease": 328,
+      "arenaReview": 0,
+      "arenaBlock": 0,
+      "playbookPlays": 8,
+      "implementedBenches": 11,
+      "missingImplementations": 0,
+      "benchCases": 44,
+      "benchRelease": 44,
+      "benchReview": 0,
+      "benchBlock": 0,
+      "benchAcceptanceRate": 100.0,
+      "benchBlockRate": 0.0,
+      "status": "interactive"
+    },
+    "promotionDelta": {
+      "delta": "cvpr-colab-promotion-delta",
+      "status": "release",
+      "cases": 56,
+      "jobs": 14,
+      "missing": 0,
+      "modeMismatches": 0,
+      "regressions": 0,
+      "maxReadinessDrop": 0.0,
+      "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+      "promotedArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
+      "promotionStatus": "valid"
+    }
   }
 };
 export const escalationRows = [
   {
-    "id": "clinical/same-site-clean",
+    "id": "clinical/clear-baseline",
     "system": "medical-vision-validation",
     "theme": "Using vision to act in the world",
-    "title": "Same-site clean validation",
+    "title": "Clear baseline",
     "targetPage": "cvpr-clinical-shift-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 88.5,
-      "safetyRisk": 22.2,
-      "evidence": 87.9,
-      "rollbackRisk": 17.7
+      "readiness": 89.9,
+      "safetyRisk": 20.6,
+      "evidence": 92.5,
+      "rollbackRisk": 17.3
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "decision": "release-watch",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
-    "id": "clinical/new-scanner",
+    "id": "clinical/scanner-shift",
     "system": "medical-vision-validation",
     "theme": "Using vision to act in the world",
-    "title": "New scanner protocol",
+    "title": "Scanner shift",
     "targetPage": "cvpr-clinical-shift-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 80.5,
-      "safetyRisk": 47.3,
-      "evidence": 80.3,
-      "rollbackRisk": 24.0
+      "readiness": 83.2,
+      "safetyRisk": 38.5,
+      "evidence": 88.0,
+      "rollbackRisk": 21.8
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "decision": "release-watch",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
-    "id": "clinical/external-hospital",
+    "id": "clinical/rare-presentation",
     "system": "medical-vision-validation",
     "theme": "Using vision to act in the world",
-    "title": "External hospital cohort",
+    "title": "Rare presentation",
     "targetPage": "cvpr-clinical-shift-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 77.1,
-      "safetyRisk": 58.7,
-      "evidence": 76.9,
-      "rollbackRisk": 26.8
+      "readiness": 81.9,
+      "safetyRisk": 43.7,
+      "evidence": 86.5,
+      "rollbackRisk": 23.1
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
-    "decision": "human-review",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+    "decision": "release-watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
-    "id": "clinical/noisy-rare-cohort",
+    "id": "clinical/motion-artifact",
     "system": "medical-vision-validation",
     "theme": "Using vision to act in the world",
-    "title": "Noisy rare cohort",
+    "title": "Motion artifact",
     "targetPage": "cvpr-clinical-shift-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 72.5,
-      "safetyRisk": 74.5,
-      "evidence": 72.5,
-      "rollbackRisk": 30.8
+      "readiness": 81.1,
+      "safetyRisk": 43.8,
+      "evidence": 86.2,
+      "rollbackRisk": 23.1
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
-    "decision": "safety-hold",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_canary_monitor.py"
+    "decision": "release-watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
     "id": "driving/urban-cut-in",
@@ -3570,10 +3749,10 @@ export const escalationRows = [
     "targetPage": "cvpr-driving-safety-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 68.1,
-      "safetyRisk": 53.6,
-      "evidence": 81.9,
-      "rollbackRisk": 27.2
+      "readiness": 75.3,
+      "safetyRisk": 53.0,
+      "evidence": 71.0,
+      "rollbackRisk": 27.0
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "decision": "human-review",
@@ -3587,9 +3766,9 @@ export const escalationRows = [
     "targetPage": "cvpr-driving-safety-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 68.2,
-      "safetyRisk": 49.2,
-      "evidence": 80.3,
+      "readiness": 75.8,
+      "safetyRisk": 48.9,
+      "evidence": 70.9,
       "rollbackRisk": 25.9
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
@@ -3604,9 +3783,9 @@ export const escalationRows = [
     "targetPage": "cvpr-driving-safety-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 68.2,
-      "safetyRisk": 58.1,
-      "evidence": 83.6,
+      "readiness": 74.3,
+      "safetyRisk": 58.2,
+      "evidence": 69.9,
       "rollbackRisk": 28.4
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
@@ -3621,10 +3800,10 @@ export const escalationRows = [
     "targetPage": "cvpr-driving-safety-bench.html",
     "sourceDecision": "release",
     "escalation": {
-      "readiness": 68.2,
-      "safetyRisk": 49.2,
-      "evidence": 79.4,
-      "rollbackRisk": 25.9
+      "readiness": 75.5,
+      "safetyRisk": 48.9,
+      "evidence": 70.1,
+      "rollbackRisk": 25.8
     },
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "decision": "human-review",
@@ -3636,14 +3815,16 @@ export const summary = {
   "status": "ready",
   "rows": 8,
   "systems": 2,
-  "releaseWatch": 2,
-  "humanReview": 5,
-  "safetyHold": 1,
+  "releaseWatch": 4,
+  "humanReview": 4,
+  "safetyHold": 0,
   "rollbackRehearsal": 0,
-  "maxSafetyRisk": 74.5,
-  "minEvidence": 72.5,
+  "maxSafetyRisk": 58.2,
+  "minEvidence": 69.9,
   "canaryRollback": 0,
   "rollbackStressStatus": "ready",
   "fullStackStatus": "valid",
+  "familyFlowCommand": "python3 scripts/run_cvpr_safety_deployment_flow.py",
+  "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
   "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
 };

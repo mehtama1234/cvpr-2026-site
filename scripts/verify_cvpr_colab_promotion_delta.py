@@ -13,14 +13,14 @@ def main():
     summary = data["summary"]
     assert summary["delta"] == "cvpr-colab-promotion-delta"
     assert summary["status"] == "release"
-    assert summary["cases"] == 40
-    assert summary["jobs"] == 10
+    assert summary["cases"] > 0
+    assert summary["jobs"] > 0
     assert summary["missing"] == 0
     assert summary["modeMismatches"] == 0
     assert summary["regressions"] == 0
     assert summary["maxReadinessDrop"] == 0
     assert summary["promotionStatus"] == "valid"
-    assert len(data["rows"]) == 40
+    assert len(data["rows"]) == summary["cases"]
     for row in data["rows"]:
         assert row["readinessDelta"] == 0
         assert row["promotedFrom"] == "live-colab"

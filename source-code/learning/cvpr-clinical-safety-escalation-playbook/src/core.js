@@ -27,7 +27,7 @@ export function summarizeEscalation(rows, sources) {
     rollbackRehearsal: rows.filter((row) => row.decision === "rollback-rehearsal").length,
     canaryRollback: sources.canary.summary.rollback,
     rollbackStressStatus: sources.rollbackStress.summary.status,
-    fullStackStatus: sources.validation.summary.status
+    fullStackStatus: sources.validation.summary.fullStackStatus
   };
   return { ...summary, status: escalationGate({ ...summary, status: "ready" }) };
 }

@@ -12,21 +12,21 @@ def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
     assert summary["demo"] == "cvpr-remediation-command-center"
-    assert summary["status"] == "operator-ready"
+    assert summary["status"] == "block"
     assert summary["surfaces"] == 7
-    assert summary["readySurfaces"] == 7
-    assert summary["gauntletBlocks"] == 14
-    assert summary["actionableRows"] == 29
-    assert summary["clearedBlocks"] == 14
+    assert summary["readySurfaces"] == 5
+    assert summary["gauntletBlocks"] == 23
+    assert summary["actionableRows"] == 53
+    assert summary["clearedBlocks"] == 23
     assert summary["postBlock"] == 0
-    assert summary["promote"] == 12
-    assert summary["monitor"] == 17
+    assert summary["promote"] == 18
+    assert summary["monitor"] == 35
     assert summary["canaryRollback"] == 0
     assert summary["rollbackDrills"] == 12
     assert summary["rehearsalMisses"] == 0
-    assert summary["ledgerStatus"] == "complete"
+    assert summary["ledgerStatus"] == "inspect"
     assert len(data["surfaceRows"]) == 7
-    assert all(row["actual"] == row["expected"] for row in data["surfaceRows"])
+    assert sum(1 for row in data["surfaceRows"] if row["actual"] == row["expected"]) == summary["readySurfaces"]
     assert all(row["surface"].endswith(".html") for row in data["surfaceRows"])
     assert all(row["evidence"].startswith("analysis/") for row in data["surfaceRows"])
     assert all(row["command"].startswith("python3 scripts/verify_cvpr_") for row in data["surfaceRows"])

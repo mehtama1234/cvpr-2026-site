@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "flow": "cvpr-safety-deployment-flow",
+    "status": "ready",
+    "familyStatus": "ready",
+    "fullStackStatus": "invalid",
+    "jobs": [
+      "clinical-shift",
+      "driving-safety"
+    ],
+    "launchLive": false,
+    "requireFullStack": false,
+    "export": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+    "steps": 12,
+    "successfulSteps": 11,
+    "failedStep": null,
+    "runner": "python3 scripts/run_cvpr_safety_deployment_flow.py"
+  },
+  "steps": [
+    {
+      "label": "assemble-live-export",
+      "command": "python3 scripts/build_cvpr_live_colab_export_from_analysis.py",
+      "returncode": 0,
+      "durationSeconds": 0.39,
+      "stdout": "assembled CVPR live Colab export from analysis: 14 jobs, 56 results, missing 0\n",
+      "stderr": ""
+    },
+    {
+      "label": "promote-clinical-shift",
+      "command": "python3 scripts/stage_cvpr_live_colab_export.py --export /home/manishmehta/ui-projects/cvpr-2026-site/source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json --job clinical-shift --promote",
+      "returncode": 0,
+      "durationSeconds": 0.73,
+      "stdout": "staged CVPR live Colab export: 4 results, 0 issues, promoted True\n",
+      "stderr": ""
+    },
+    {
+      "label": "promote-driving-safety",
+      "command": "python3 scripts/stage_cvpr_live_colab_export.py --export /home/manishmehta/ui-projects/cvpr-2026-site/source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json --job driving-safety --promote",
+      "returncode": 0,
+      "durationSeconds": 0.87,
+      "stdout": "staged CVPR live Colab export: 4 results, 0 issues, promoted True\n",
+      "stderr": ""
+    },
+    {
+      "label": "build-clinical-bench",
+      "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
+      "returncode": 0,
+      "durationSeconds": 0.28,
+      "stdout": "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1\n",
+      "stderr": ""
+    },
+    {
+      "label": "build-driving-bench",
+      "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
+      "returncode": 0,
+      "durationSeconds": 0.19,
+      "stdout": "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8\n",
+      "stderr": ""
+    },
+    {
+      "label": "build-simulator",
+      "command": "python3 scripts/build_cvpr_safety_deployment_simulator.py",
+      "returncode": 0,
+      "durationSeconds": 0.1,
+      "stdout": "wrote cvpr-safety-deployment-simulator.html: 16 rows, status release\n",
+      "stderr": ""
+    },
+    {
+      "label": "build-playbook",
+      "command": "python3 scripts/build_cvpr_clinical_safety_escalation_playbook.py",
+      "returncode": 0,
+      "durationSeconds": 0.11,
+      "stdout": "wrote cvpr-clinical-safety-escalation-playbook.html: 8 rows, status ready\n",
+      "stderr": ""
+    },
+    {
+      "label": "verify-clinical-bench",
+      "command": "python3 scripts/verify_cvpr_clinical_shift_bench.py",
+      "returncode": 0,
+      "durationSeconds": 0.13,
+      "stdout": "verified CVPR clinical shift bench: 4 cases, max risk 11.1\n",
+      "stderr": ""
+    },
+    {
+      "label": "verify-driving-bench",
+      "command": "python3 scripts/verify_cvpr_driving_safety_bench.py",
+      "returncode": 0,
+      "durationSeconds": 0.33,
+      "stdout": "verified CVPR driving safety bench: 4 cases, max risk 34.8\n",
+      "stderr": ""
+    },
+    {
+      "label": "verify-simulator",
+      "command": "python3 scripts/verify_cvpr_safety_deployment_simulator.py",
+      "returncode": 0,
+      "durationSeconds": 0.13,
+      "stdout": "verified CVPR safety deployment simulator: 16 rows, status release\n",
+      "stderr": ""
+    },
+    {
+      "label": "verify-playbook",
+      "command": "python3 scripts/verify_cvpr_clinical_safety_escalation_playbook.py",
+      "returncode": 0,
+      "durationSeconds": 0.13,
+      "stdout": "verified CVPR clinical safety escalation playbook: 8 rows, status ready\n",
+      "stderr": ""
+    },
+    {
+      "label": "validate-full-stack",
+      "command": "python3 scripts/validate_cvpr_full_stack.py",
+      "returncode": 1,
+      "durationSeconds": 72.9,
+      "stdout": "validated CVPR full stack: 53 steps, 148 package tests, status invalid\n",
+      "stderr": ""
+    }
+  ]
+}

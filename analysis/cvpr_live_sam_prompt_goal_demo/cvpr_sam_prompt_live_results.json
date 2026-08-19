@@ -1,0 +1,213 @@
+[
+  {
+    "jobId": "sam-prompt-mask-refinement",
+    "caseId": "center-click",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:06Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "points": [
+        [
+          128,
+          128
+        ]
+      ],
+      "labels": [
+        1
+      ],
+      "asset": "synthetic://sam/center-click.png"
+    },
+    "outputs": {
+      "maskScores": [
+        0.9832,
+        1.0137,
+        0.6152
+      ],
+      "maskAreas": [
+        0.7726,
+        0.76521,
+        0.36339
+      ],
+      "maskOverlap": 0.7641
+    },
+    "metrics": {
+      "readiness": 73.2,
+      "maskStability": 89.2,
+      "promptSensitivity": 83.9,
+      "unsupportedRegionRisk": 2.1,
+      "bestMaskScore": 101.4
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-sam-prompt-mask-refinement-bench",
+      "execution": "segment-anything-vit-b-live-demo"
+    }
+  },
+  {
+    "jobId": "sam-prompt-mask-refinement",
+    "caseId": "box-refine",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:07Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "points": [
+        [
+          74,
+          76
+        ],
+        [
+          184,
+          184
+        ]
+      ],
+      "labels": [
+        1,
+        1
+      ],
+      "asset": "synthetic://sam/box-refine.png"
+    },
+    "outputs": {
+      "maskScores": [
+        0.9988,
+        1.027,
+        0.73
+      ],
+      "maskAreas": [
+        0.89525,
+        0.82516,
+        0.54236
+      ],
+      "maskOverlap": 0.8251
+    },
+    "metrics": {
+      "readiness": 72.4,
+      "maskStability": 90.6,
+      "promptSensitivity": 83.8,
+      "unsupportedRegionRisk": 4.3,
+      "bestMaskScore": 102.7
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-sam-prompt-mask-refinement-bench",
+      "execution": "segment-anything-vit-b-live-demo"
+    }
+  },
+  {
+    "jobId": "sam-prompt-mask-refinement",
+    "caseId": "ambiguous-click",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:07Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "points": [
+        [
+          60,
+          64
+        ],
+        [
+          198,
+          190
+        ]
+      ],
+      "labels": [
+        1,
+        0
+      ],
+      "asset": "synthetic://sam/ambiguous-click.png"
+    },
+    "outputs": {
+      "maskScores": [
+        0.9965,
+        0.9844,
+        0.9344
+      ],
+      "maskAreas": [
+        0.72534,
+        0.65518,
+        0.50206
+      ],
+      "maskOverlap": 0.65512
+    },
+    "metrics": {
+      "readiness": 71.6,
+      "maskStability": 91.4,
+      "promptSensitivity": 71.5,
+      "unsupportedRegionRisk": 13.4,
+      "bestMaskScore": 99.7
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-sam-prompt-mask-refinement-bench",
+      "execution": "segment-anything-vit-b-live-demo"
+    }
+  },
+  {
+    "jobId": "sam-prompt-mask-refinement",
+    "caseId": "occlusion-mask",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:25:07Z",
+    "model": {
+      "segmenter": "segment-anything-vit-b",
+      "checkpoint": "sam_vit_b_01ec64"
+    },
+    "inputs": {
+      "points": [
+        [
+          130,
+          78
+        ],
+        [
+          134,
+          172
+        ]
+      ],
+      "labels": [
+        1,
+        1
+      ],
+      "asset": "synthetic://sam/occlusion-mask.png"
+    },
+    "outputs": {
+      "maskScores": [
+        1.0298,
+        1.0051,
+        0.9071
+      ],
+      "maskAreas": [
+        0.89159,
+        0.82602,
+        0.78969
+      ],
+      "maskOverlap": 0.82602
+    },
+    "metrics": {
+      "readiness": 71.7,
+      "maskStability": 94.3,
+      "promptSensitivity": 69.6,
+      "unsupportedRegionRisk": 15.5,
+      "bestMaskScore": 103.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-sam-prompt-mask-refinement-bench",
+      "execution": "segment-anything-vit-b-live-demo"
+    }
+  }
+]

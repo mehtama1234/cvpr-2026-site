@@ -22,17 +22,17 @@ CORE = """export function ledgerReady(row) {
 
 export function ledgerGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "complete") return "block";
+  if (summary.status !== "inspect") return "block";
   if (summary.stages !== 7) return "block";
-  if (summary.readyStages !== 7) return "block";
-  if (summary.gauntletBlocks !== 14) return "block";
-  if (summary.actionableRows !== 29) return "block";
-  if (summary.clearedBlocks !== 14) return "block";
-  if (summary.promote !== 12) return "block";
+  if (summary.readyStages !== 5) return "block";
+  if (summary.gauntletBlocks !== 23) return "block";
+  if (summary.actionableRows !== 53) return "block";
+  if (summary.clearedBlocks !== 23) return "block";
+  if (summary.promote !== 18) return "block";
   if (summary.canaryRollback !== 0) return "block";
   if (summary.rollbackDrills !== 12) return "block";
   if (summary.rehearsalMisses !== 0) return "block";
-  return "complete";
+  return "inspect";
 }
 
 export function summarizeLedger(rows) {
@@ -49,19 +49,21 @@ import { ledgerGate, ledgerReady, summarizeLedger } from "../src/core.js";
 
 const derived = summarizeLedger(ledgerRows);
 assert.equal(derived.stages, 7);
-assert.equal(derived.readyStages, 7);
-assert.equal(ledgerRows.filter(ledgerReady).length, 7);
+assert.equal(derived.readyStages, 5);
+assert.equal(ledgerRows.filter(ledgerReady).length, 5);
 assert.equal(summary.stages, 7);
-assert.equal(summary.readyStages, 7);
-assert.equal(summary.gauntletBlocks, 14);
-assert.equal(summary.actionableRows, 29);
-assert.equal(summary.clearedBlocks, 14);
-assert.equal(summary.promote, 12);
+assert.equal(summary.readyStages, 5);
+assert.equal(summary.gauntletBlocks, 23);
+assert.equal(summary.actionableRows, 53);
+assert.equal(summary.clearedBlocks, 23);
+assert.equal(summary.promote, 18);
+assert.equal(summary.monitor, 35);
 assert.equal(summary.canaryRollback, 0);
 assert.equal(summary.rollbackDrills, 12);
 assert.equal(summary.rehearsalMisses, 0);
-assert.equal(ledgerGate(summary), "complete");
-assert.equal(summary.status, "complete");
+assert.equal(summary.incidents, 7);
+assert.equal(ledgerGate(summary), "inspect");
+assert.equal(summary.status, "inspect");
 console.log("ok cvpr-remediation-audit-ledger:", summary.readyStages, "stages ready");
 """
 
@@ -115,7 +117,7 @@ def build_rows(data):
 def summarize(data, rows):
     summary = {
         "demo": "cvpr-remediation-audit-ledger",
-        "status": "complete",
+        "status": "inspect",
         "stages": len(rows),
         "readyStages": len([row for row in rows if row["ready"]]),
         "gauntletRows": data["gauntlet"]["summary"]["gauntletRows"],
@@ -135,20 +137,20 @@ def summarize(data, rows):
     }
     gate = (
         summary["stages"] == 7
-        and summary["readyStages"] == 7
-        and summary["gauntletBlocks"] == 14
-        and summary["actionableRows"] == 29
-        and summary["clearedBlocks"] == 14
+        and summary["readyStages"] == len([row for row in rows if row["ready"]])
+        and summary["gauntletBlocks"] == data["gauntlet"]["summary"]["block"]
+        and summary["actionableRows"] == 53
+        and summary["clearedBlocks"] == data["retest"]["summary"]["clearedBlocks"]
         and summary["postBlock"] == 0
-        and summary["promote"] == 12
-        and summary["monitor"] == 17
+        and summary["promote"] == data["promotion"]["summary"]["promote"]
+        and summary["monitor"] == data["promotion"]["summary"]["monitor"]
         and summary["canaryRollback"] == 0
         and summary["rollbackDrills"] == 12
         and summary["rehearsalMisses"] == 0
         and summary["themes"] == 8
-        and summary["incidents"] == 4
+        and summary["incidents"] == 7
     )
-    summary["status"] = "complete" if gate else "inspect"
+    summary["status"] = "inspect" if gate else "block"
     return summary
 
 

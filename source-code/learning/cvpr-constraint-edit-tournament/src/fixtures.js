@@ -26,14 +26,14 @@ export const generationRecords = [
       "readiness": 84.9
     },
     "cachedGpuMetrics": {
-      "readiness": 84.9,
+      "readiness": 78.5,
       "editPressure": 21.0,
-      "constraintSatisfaction": 86.1,
-      "identityPreservation": 85.0,
-      "editLocality": 82.8,
-      "rewardAlignment": 87.3,
-      "identityDamage": 18.5,
-      "provenanceRisk": 17.6
+      "constraintSatisfaction": 80.8,
+      "identityPreservation": 80.2,
+      "editLocality": 76.2,
+      "rewardAlignment": 73.6,
+      "identityDamage": 19.2,
+      "provenanceRisk": 20.1
     },
     "decision": "release",
     "acceptancePass": true,
@@ -44,9 +44,12 @@ export const generationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-constraint-generation-bench"
+      "sourceBench": "cvpr-constraint-generation-bench",
+      "execution": "torch-layout-identity-reward-probe",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
@@ -76,14 +79,14 @@ export const generationRecords = [
       "readiness": 77.4
     },
     "cachedGpuMetrics": {
-      "readiness": 77.4,
-      "editPressure": 39.2,
-      "constraintSatisfaction": 80.9,
-      "identityPreservation": 77.3,
-      "editLocality": 74.4,
-      "rewardAlignment": 81.3,
-      "identityDamage": 31.8,
-      "provenanceRisk": 29.5
+      "readiness": 70.9,
+      "editPressure": 39.3,
+      "constraintSatisfaction": 74.7,
+      "identityPreservation": 73.7,
+      "editLocality": 67.7,
+      "rewardAlignment": 66.0,
+      "identityDamage": 31.3,
+      "provenanceRisk": 32.2
     },
     "decision": "release",
     "acceptancePass": true,
@@ -94,9 +97,12 @@ export const generationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-constraint-generation-bench"
+      "sourceBench": "cvpr-constraint-generation-bench",
+      "execution": "torch-layout-identity-reward-probe",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
@@ -126,14 +132,14 @@ export const generationRecords = [
       "readiness": 77.5
     },
     "cachedGpuMetrics": {
-      "readiness": 77.5,
+      "readiness": 70.5,
       "editPressure": 45.7,
-      "constraintSatisfaction": 81.1,
-      "identityPreservation": 78.4,
-      "editLocality": 72.9,
-      "rewardAlignment": 82.4,
-      "identityDamage": 33.1,
-      "provenanceRisk": 29.9
+      "constraintSatisfaction": 73.2,
+      "identityPreservation": 75.0,
+      "editLocality": 65.9,
+      "rewardAlignment": 66.2,
+      "identityDamage": 32.4,
+      "provenanceRisk": 33.1
     },
     "decision": "release",
     "acceptancePass": true,
@@ -144,9 +150,12 @@ export const generationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-constraint-generation-bench"
+      "sourceBench": "cvpr-constraint-generation-bench",
+      "execution": "torch-layout-identity-reward-probe",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
@@ -176,14 +185,14 @@ export const generationRecords = [
       "readiness": 77.6
     },
     "cachedGpuMetrics": {
-      "readiness": 77.6,
-      "editPressure": 47.7,
-      "constraintSatisfaction": 82.3,
-      "identityPreservation": 77.3,
-      "editLocality": 73.6,
-      "rewardAlignment": 82.5,
-      "identityDamage": 34.8,
-      "provenanceRisk": 30.0
+      "readiness": 70.8,
+      "editPressure": 47.8,
+      "constraintSatisfaction": 74.7,
+      "identityPreservation": 74.0,
+      "editLocality": 66.7,
+      "rewardAlignment": 66.6,
+      "identityDamage": 34.0,
+      "provenanceRisk": 33.1
     },
     "decision": "release",
     "acceptancePass": true,
@@ -194,9 +203,12 @@ export const generationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-constraint-generation-bench"
+      "sourceBench": "cvpr-constraint-generation-bench",
+      "execution": "torch-layout-identity-reward-probe",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   }
 ];
@@ -228,10 +240,13 @@ export const restorationRecords = [
       "readiness": 82.0
     },
     "cachedGpuMetrics": {
-      "readiness": 82.0,
-      "downstreamUtility": 85.3,
-      "fabricatedDetailRisk": 25.8,
-      "fidelityScore": 82.2
+      "readiness": 81.6,
+      "degradationLoad": 21.6,
+      "diagnosisConfidence": 78.4,
+      "fidelityScore": 80.6,
+      "artifactRisk": 19.3,
+      "downstreamUtility": 85.1,
+      "fabricatedDetailRisk": 19.3
     },
     "decision": "release",
     "acceptancePass": true,
@@ -242,9 +257,12 @@ export const restorationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-restoration-fidelity-bench"
+      "sourceBench": "cvpr-restoration-fidelity-bench",
+      "execution": "transformers-swin2sr-restoration-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
@@ -274,10 +292,13 @@ export const restorationRecords = [
       "readiness": 77.7
     },
     "cachedGpuMetrics": {
-      "readiness": 77.7,
-      "downstreamUtility": 80.9,
-      "fabricatedDetailRisk": 29.4,
-      "fidelityScore": 80.3
+      "readiness": 78.5,
+      "degradationLoad": 43.6,
+      "diagnosisConfidence": 56.4,
+      "fidelityScore": 85.2,
+      "artifactRisk": 13.0,
+      "downstreamUtility": 78.8,
+      "fabricatedDetailRisk": 13.0
     },
     "decision": "release",
     "acceptancePass": true,
@@ -288,9 +309,12 @@ export const restorationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-restoration-fidelity-bench"
+      "sourceBench": "cvpr-restoration-fidelity-bench",
+      "execution": "transformers-swin2sr-restoration-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
@@ -320,10 +344,13 @@ export const restorationRecords = [
       "readiness": 77.7
     },
     "cachedGpuMetrics": {
-      "readiness": 77.7,
-      "downstreamUtility": 81.5,
-      "fabricatedDetailRisk": 26.5,
-      "fidelityScore": 79.0
+      "readiness": 80.5,
+      "degradationLoad": 41.2,
+      "diagnosisConfidence": 58.8,
+      "fidelityScore": 85.0,
+      "artifactRisk": 10.9,
+      "downstreamUtility": 82.6,
+      "fabricatedDetailRisk": 10.9
     },
     "decision": "release",
     "acceptancePass": true,
@@ -334,9 +361,12 @@ export const restorationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-restoration-fidelity-bench"
+      "sourceBench": "cvpr-restoration-fidelity-bench",
+      "execution": "transformers-swin2sr-restoration-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   },
   {
@@ -366,10 +396,13 @@ export const restorationRecords = [
       "readiness": 77.8
     },
     "cachedGpuMetrics": {
-      "readiness": 77.8,
+      "readiness": 78.9,
+      "degradationLoad": 45.9,
+      "diagnosisConfidence": 54.1,
+      "fidelityScore": 85.8,
+      "artifactRisk": 13.4,
       "downstreamUtility": 81.2,
-      "fabricatedDetailRisk": 28.6,
-      "fidelityScore": 80.1
+      "fabricatedDetailRisk": 13.4
     },
     "decision": "release",
     "acceptancePass": true,
@@ -380,9 +413,12 @@ export const restorationRecords = [
     "preferredRuntime": "cached-real",
     "gpuProvenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "GPU",
+      "accelerator": "Tesla T4",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-      "sourceBench": "cvpr-restoration-fidelity-bench"
+      "sourceBench": "cvpr-restoration-fidelity-bench",
+      "execution": "transformers-swin2sr-restoration-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real"
     }
   }
 ];
@@ -438,15 +474,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -475,15 +517,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -512,15 +560,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -549,15 +603,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -586,15 +646,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -623,15 +689,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -660,15 +732,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -697,15 +775,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -734,15 +818,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -771,15 +861,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -808,15 +904,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -845,15 +947,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -882,15 +990,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -919,15 +1033,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -956,15 +1076,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -993,15 +1119,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1030,15 +1162,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1067,15 +1205,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1104,15 +1248,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1141,15 +1291,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1178,15 +1334,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1215,15 +1377,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1252,15 +1420,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1289,15 +1463,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1326,15 +1506,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1363,15 +1549,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1400,15 +1592,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1437,15 +1635,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1474,15 +1678,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1511,15 +1721,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1548,15 +1764,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1585,15 +1807,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1622,15 +1850,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1659,15 +1893,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1696,15 +1936,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1733,15 +1979,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1770,15 +2022,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1807,15 +2065,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1844,15 +2108,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1881,15 +2151,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1918,15 +2194,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1955,15 +2237,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -1992,15 +2280,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -2029,15 +2323,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -2066,15 +2366,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -2103,15 +2409,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -2140,15 +2452,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   },
@@ -2177,15 +2495,21 @@ export const tournamentRows = [
     "provenance": [
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       },
       {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     ]
   }

@@ -12,15 +12,14 @@ def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
     assert summary["demo"] == "cvpr-gauntlet-remediation-sprint"
-    assert summary["status"] == "release"
+    assert summary["status"] in {"release", "inspect"}
     assert summary["sourceDemo"] == "cvpr-cross-theme-incident-gauntlet"
-    assert summary["sourceRows"] == 32
-    assert summary["actionableRows"] == 29
-    assert summary["blockActions"] == 14
-    assert summary["reviewActions"] == 15
+    assert summary["sourceRows"] == 56
+    assert summary["actionableRows"] == 53
+    assert summary["blockActions"] + summary["reviewActions"] == summary["actionableRows"]
     assert summary["sprints"] == 3
     assert summary["themes"] >= 8
-    assert summary["incidents"] == 4
+    assert summary["incidents"] == 7
     assert summary["acceptanceChecks"] == summary["actionableRows"]
     assert summary["criticalActions"] >= 3
     assert len(data["sprints"]) == 3
@@ -28,6 +27,20 @@ def main():
     assert all(action["validationCommand"] == "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py" for action in data["actions"])
     assert all(action["page"].endswith(".html") for action in data["actions"])
     assert all(action["acceptanceCheck"] for action in data["actions"])
+    expected_status = (
+        "release"
+        if summary["sourceRows"] == 56
+        and summary["actionableRows"] == summary["blockActions"] + summary["reviewActions"]
+        and summary["blockActions"] == 25
+        and summary["reviewActions"] == 28
+        and summary["sprints"] == 3
+        and summary["themes"] >= 8
+        and summary["incidents"] == 7
+        and summary["acceptanceChecks"] == summary["actionableRows"]
+        and summary["criticalActions"] >= 3
+        else "inspect"
+    )
+    assert summary["status"] == expected_status
     page = PAGE.read_text(encoding="utf-8")
     for token in (
         "Gauntlet Remediation Sprint",

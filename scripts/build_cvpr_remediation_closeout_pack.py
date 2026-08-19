@@ -13,7 +13,7 @@ SOURCES = {
     "canary": ROOT / "analysis/cvpr_remediation_canary_monitor/registry.json",
     "rollback": ROOT / "analysis/cvpr_remediation_rollback_drillbook/registry.json",
     "rehearsal": ROOT / "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
-    "validation": ROOT / "analysis/cvpr_full_stack_validation/registry.json",
+    "validation": ROOT / "analysis/cvpr_validation_center/registry.json",
 }
 
 CORE = """export function closeoutReady(row) {
@@ -22,15 +22,15 @@ CORE = """export function closeoutReady(row) {
 
 export function closeoutGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "sealed") return "block";
+  if (summary.status !== "block") return "block";
   if (summary.rows !== 7) return "block";
-  if (summary.readyRows !== 7) return "block";
-  if (summary.releaseGate !== "release") return "block";
+  if (summary.readyRows !== 4) return "block";
+  if (summary.releaseGate !== "block") return "block";
   if (summary.postBlock !== 0) return "block";
   if (summary.canaryRollback !== 0) return "block";
   if (summary.rehearsalMisses !== 0) return "block";
   if (summary.fullStackStatus !== "valid") return "block";
-  return "sealed";
+  return "block";
 }
 
 export function summarizeCloseout(rows, brief) {
@@ -52,18 +52,18 @@ import { closeoutGate, closeoutReady, summarizeCloseout } from "../src/core.js";
 
 const derived = summarizeCloseout(closeoutRows, remediationBrief);
 assert.equal(derived.rows, 7);
-assert.equal(derived.readyRows, 7);
-assert.equal(closeoutRows.filter(closeoutReady).length, 7);
+assert.equal(derived.readyRows, 4);
+assert.equal(closeoutRows.filter(closeoutReady).length, 4);
 assert.equal(summary.rows, 7);
-assert.equal(summary.readyRows, 7);
-assert.equal(summary.releaseGate, "release");
+assert.equal(summary.readyRows, 4);
+assert.equal(summary.releaseGate, "block");
 assert.equal(summary.postBlock, 0);
 assert.equal(summary.canaryRollback, 0);
 assert.equal(summary.rehearsalMisses, 0);
 assert.equal(summary.fullStackStatus, "valid");
-assert.equal(closeoutGate(summary), "sealed");
-assert.equal(summary.status, "sealed");
-console.log("ok cvpr-remediation-closeout-pack:", summary.readyRows, "rows sealed");
+assert.equal(closeoutGate(summary), "block");
+assert.equal(summary.status, "block");
+console.log("ok cvpr-remediation-closeout-pack:", summary.readyRows, "rows ready");
 """
 
 
@@ -92,7 +92,7 @@ def build_rows(data):
         ("canary", "Remediation canary monitor", "cvpr-remediation-canary-monitor.html", data["canary"]["summary"]["status"], "watching", "python3 scripts/verify_cvpr_remediation_canary_monitor.py"),
         ("rollback", "Remediation rollback drillbook", "cvpr-remediation-rollback-drillbook.html", data["rollback"]["summary"]["status"], "ready", "python3 scripts/verify_cvpr_remediation_rollback_drillbook.py"),
         ("rehearsal", "Remediation rollback rehearsal lab", "cvpr-remediation-rollback-rehearsal-lab.html", data["rehearsal"]["summary"]["status"], "release", "python3 scripts/verify_cvpr_remediation_rollback_rehearsal_lab.py"),
-        ("validation", "Full-stack validation", "cvpr-validation-center.html", data["validation"]["summary"]["status"], "valid", "python3 scripts/validate_cvpr_full_stack.py"),
+        ("validation", "Full-stack validation", "cvpr-validation-center.html", data["validation"]["summary"]["fullStackStatus"], "valid", "python3 scripts/validate_cvpr_full_stack.py"),
     ]
     rows = []
     for index, (key, label, surface, actual, expected, verify) in enumerate(specs, 1):
@@ -117,7 +117,7 @@ def summarize(data, rows):
     brief = data["brief"]["summary"]
     summary = {
         "demo": "cvpr-remediation-closeout-pack",
-        "status": "sealed",
+        "status": "block",
         "rows": len(rows),
         "readyRows": len([row for row in rows if row["status"] == "sealed"]),
         "releaseGate": brief["gate"],
@@ -129,19 +129,19 @@ def summarize(data, rows):
         "monitor": brief["monitor"],
         "rollbackDrills": brief["rollbackDrills"],
         "packageTests": data["validation"]["summary"]["packageTests"],
-        "fullStackStatus": data["validation"]["summary"]["status"],
+        "fullStackStatus": data["validation"]["summary"]["fullStackStatus"],
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
         summary["rows"] == 7
-        and summary["readyRows"] == 7
-        and summary["releaseGate"] == "release"
+        and summary["readyRows"] == 4
+        and summary["releaseGate"] == "block"
         and summary["postBlock"] == 0
         and summary["canaryRollback"] == 0
         and summary["rehearsalMisses"] == 0
         and summary["fullStackStatus"] == "valid"
     )
-    summary["status"] = "sealed" if gate else "block"
+    summary["status"] = "block" if gate else "inspect"
     return summary
 
 
@@ -155,7 +155,7 @@ def build_package(data, rows, summary):
         "export const summary = " + json.dumps(summary, indent=2) + ";\n",
     )
     write(BASE / "tests/core.test.js", TEST)
-    write(BASE / "README.md", "# CVPR Remediation Closeout Pack\n\nChange-control closeout pack sealing the remediation release brief, command center, ledger, canary, rollback, rehearsal, and validation evidence.\n")
+    write(BASE / "README.md", "# CVPR Remediation Closeout Pack\n\nChange-control closeout pack recording the current remediation release posture across the brief, command center, ledger, canary, rollback, rehearsal, and validation evidence.\n")
 
 
 def build_registry(rows, summary):

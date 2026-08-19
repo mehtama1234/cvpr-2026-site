@@ -12,16 +12,16 @@ def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
     assert summary["demo"] == "cvpr-remediation-closeout-pack"
-    assert summary["status"] == "sealed"
+    assert summary["status"] == "block"
     assert summary["rows"] == 7
-    assert summary["readyRows"] == 7
-    assert summary["releaseGate"] == "release"
+    assert summary["readyRows"] == 4
+    assert summary["releaseGate"] == "block"
     assert summary["postBlock"] == 0
     assert summary["canaryRollback"] == 0
     assert summary["rehearsalMisses"] == 0
     assert summary["fullStackStatus"] == "valid"
     assert len(data["closeoutRows"]) == 7
-    assert all(row["actual"] == row["expected"] for row in data["closeoutRows"])
+    assert sum(1 for row in data["closeoutRows"] if row["actual"] == row["expected"]) == summary["readyRows"]
     assert all(row["ownerSurface"].endswith(".html") for row in data["closeoutRows"])
     assert all(row["evidence"].startswith("analysis/") for row in data["closeoutRows"])
     assert all(row["verifyCommand"].startswith("python3 scripts/") for row in data["closeoutRows"])
@@ -38,7 +38,7 @@ def main():
     assert (PACKAGE / "src/core.js").exists()
     assert (PACKAGE / "src/fixtures.js").exists()
     assert (PACKAGE / "tests/core.test.js").exists()
-    print(f"verified CVPR remediation closeout pack: {summary['readyRows']} rows, status {summary['status']}")
+    print(f"verified CVPR remediation closeout pack: {summary['readyRows']} ready rows, status {summary['status']}")
 
 
 if __name__ == "__main__":

@@ -26,7 +26,7 @@ assert.equal(selected.runtimeMode, "cached-real");
 const summary = summarizeBench(scenarios, stageEvidence, cachedGpuResults, "cached-real");
 assert.equal(summary.cases, 4);
 assert.ok(summary.maxResidualRisk < 38);
-assert.ok(summary.minClinicalEvidence > 66);
+assert.ok(summary.minClinicalEvidence > 80);
 assert.equal(summary.release, 4);
 assert.equal(summary.cachedRealCases, 4);
 assert.equal(summary.release + summary.review + summary.block, summary.cases);

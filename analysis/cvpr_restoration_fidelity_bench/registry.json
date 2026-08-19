@@ -59,10 +59,13 @@
         "readiness": 82.0
       },
       "cachedGpuMetrics": {
-        "readiness": 82.0,
-        "downstreamUtility": 85.3,
-        "fabricatedDetailRisk": 25.8,
-        "fidelityScore": 82.2
+        "readiness": 81.6,
+        "degradationLoad": 21.6,
+        "diagnosisConfidence": 78.4,
+        "fidelityScore": 80.6,
+        "artifactRisk": 19.3,
+        "downstreamUtility": 85.1,
+        "fabricatedDetailRisk": 19.3
       },
       "decision": "release",
       "acceptancePass": true,
@@ -73,9 +76,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -105,10 +111,13 @@
         "readiness": 77.7
       },
       "cachedGpuMetrics": {
-        "readiness": 77.7,
-        "downstreamUtility": 80.9,
-        "fabricatedDetailRisk": 29.4,
-        "fidelityScore": 80.3
+        "readiness": 78.5,
+        "degradationLoad": 43.6,
+        "diagnosisConfidence": 56.4,
+        "fidelityScore": 85.2,
+        "artifactRisk": 13.0,
+        "downstreamUtility": 78.8,
+        "fabricatedDetailRisk": 13.0
       },
       "decision": "release",
       "acceptancePass": true,
@@ -119,9 +128,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -151,10 +163,13 @@
         "readiness": 77.7
       },
       "cachedGpuMetrics": {
-        "readiness": 77.7,
-        "downstreamUtility": 81.5,
-        "fabricatedDetailRisk": 26.5,
-        "fidelityScore": 79.0
+        "readiness": 80.5,
+        "degradationLoad": 41.2,
+        "diagnosisConfidence": 58.8,
+        "fidelityScore": 85.0,
+        "artifactRisk": 10.9,
+        "downstreamUtility": 82.6,
+        "fabricatedDetailRisk": 10.9
       },
       "decision": "release",
       "acceptancePass": true,
@@ -165,9 +180,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -197,10 +215,13 @@
         "readiness": 77.8
       },
       "cachedGpuMetrics": {
-        "readiness": 77.8,
+        "readiness": 78.9,
+        "degradationLoad": 45.9,
+        "diagnosisConfidence": 54.1,
+        "fidelityScore": 85.8,
+        "artifactRisk": 13.4,
         "downstreamUtility": 81.2,
-        "fabricatedDetailRisk": 28.6,
-        "fidelityScore": 80.1
+        "fabricatedDetailRisk": 13.4
       },
       "decision": "release",
       "acceptancePass": true,
@@ -211,9 +232,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-restoration-fidelity-bench"
+        "sourceBench": "cvpr-restoration-fidelity-bench",
+        "execution": "transformers-swin2sr-restoration-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     }
   ]

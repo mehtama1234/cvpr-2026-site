@@ -33,7 +33,7 @@
       "benchStatus": "implemented",
       "blockedCases": 0,
       "keyMetric": "maxRisk",
-      "keyMetricValue": 34.6,
+      "keyMetricValue": 34.8,
       "nextAction": "promote safety-critical-action evidence into release notes"
     },
     {
@@ -46,7 +46,7 @@
       "benchStatus": "implemented",
       "blockedCases": 0,
       "keyMetric": "minEvidence",
-      "keyMetricValue": 82.5,
+      "keyMetricValue": 51.2,
       "nextAction": "promote adversarial-media evidence into release notes"
     },
     {
@@ -59,7 +59,7 @@
       "benchStatus": "implemented",
       "blockedCases": 0,
       "keyMetric": "maxResidualRisk",
-      "keyMetricValue": 33.5,
+      "keyMetricValue": 11.1,
       "nextAction": "promote clinical-shift evidence into release notes"
     },
     {
@@ -111,7 +111,7 @@
       "benchStatus": "implemented",
       "blockedCases": 0,
       "keyMetric": "minLocalizedEvidence",
-      "keyMetricValue": 87.1,
+      "keyMetricValue": 56.0,
       "nextAction": "promote long-tail-open-world evidence into release notes"
     },
     {
@@ -139,12 +139,12 @@
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 68.2,
+      "avgReadiness": 75.2,
       "acceptancePass": true,
       "playbookSource": "01-driving-and-vision-language-action-safety-critical-action",
       "status": "interactive",
       "keyMetric": "maxRisk",
-      "keyMetricValue": 34.6,
+      "keyMetricValue": 34.8,
       "registry": "analysis/cvpr_driving_safety_bench/registry.json",
       "page": "cvpr-driving-safety-bench.html"
     },
@@ -160,12 +160,12 @@
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 80.0,
+      "avgReadiness": 67.6,
       "acceptancePass": true,
       "playbookSource": "02-adversarial-robustness-adversarial-media",
       "status": "interactive",
       "keyMetric": "minEvidence",
-      "keyMetricValue": 82.5,
+      "keyMetricValue": 51.2,
       "registry": "analysis/cvpr_adversarial_provenance_bench/registry.json",
       "page": "cvpr-adversarial-provenance-bench.html"
     },
@@ -181,12 +181,12 @@
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 79.7,
+      "avgReadiness": 84.0,
       "acceptancePass": true,
       "playbookSource": "03-vision-for-science-and-medicine-clinical-shift",
       "status": "interactive",
       "keyMetric": "maxResidualRisk",
-      "keyMetricValue": 33.5,
+      "keyMetricValue": 11.1,
       "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
       "page": "cvpr-clinical-shift-bench.html"
     },
@@ -223,12 +223,12 @@
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 84.0,
+      "avgReadiness": 83.2,
       "acceptancePass": true,
       "playbookSource": "07-open-vocabulary-vision-long-tail-open-world",
       "status": "interactive",
       "keyMetric": "minLocalizedEvidence",
-      "keyMetricValue": 87.1,
+      "keyMetricValue": 56.0,
       "registry": "analysis/cvpr_long_tail_grounding_bench/registry.json",
       "page": "cvpr-long-tail-grounding-bench.html"
     },

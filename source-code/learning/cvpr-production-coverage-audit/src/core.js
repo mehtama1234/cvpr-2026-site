@@ -11,7 +11,8 @@ export function auditGate(summary) {
   if (summary.missingColabEvidence !== 0) return "block";
   if (summary.benchRelease !== summary.benchCases) return "block";
   if (summary.benchReview !== 0 || summary.benchBlock !== 0) return "block";
-  if (summary.cachedResults !== 40 || summary.colabJobs !== 10) return "block";
+  if (summary.colabJobs < summary.colabCoveredBenches) return "block";
+  if (summary.cachedResults < summary.colabJobs * 4) return "block";
   if (summary.importIssues !== 0) return "block";
   if (summary.releaseGate !== "release") return "block";
   return "release";

@@ -1,0 +1,176 @@
+{
+  "summary": {
+    "demo": "cvpr-live-video-tracking-colab-demo",
+    "jobId": "video-identity-tracking",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 79.6,
+    "identityDrift": 3.2,
+    "status": "valid",
+    "requestedGpuOrder": [
+      "T4"
+    ],
+    "launcherSelectedGpu": "T4",
+    "analysis": "cvpr_live_video_tracking_colab_demo",
+    "resultArtifact": "analysis/cvpr_live_video_tracking_colab_demo/cvpr_video_tracking_live_results.json",
+    "stdoutArtifact": "analysis/cvpr_live_video_tracking_colab_demo/colab_stdout.txt",
+    "stderrArtifact": "analysis/cvpr_live_video_tracking_colab_demo/colab_stderr.txt",
+    "launcher": "python3 scripts/run_colab_live_demo.py",
+    "worker": "scripts/colab_live_second_wave_demo.py"
+  },
+  "results": [
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "clean-crossing",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:24:31Z",
+      "model": {
+        "tracker": "torch-cuda-centroid-assignment-tracker",
+        "temporalProbe": "mask-sequence-identity-drift"
+      },
+      "inputs": {
+        "trackingControls": {
+          "occlusion": 12,
+          "crowding": 22,
+          "velocity": 36
+        },
+        "asset": "synthetic://tracking/clean-crossing.mp4"
+      },
+      "outputs": {
+        "frames": 8,
+        "objects": 3,
+        "temporalDelta": 0.01013,
+        "trackTensor": "synthetic://tracking/clean-crossing-tracks.pt"
+      },
+      "metrics": {
+        "readiness": 88.8,
+        "identityStability": 88.9,
+        "occlusionRecovery": 85.0,
+        "trackContinuity": 91.5,
+        "identityDrift": 1.5
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-video-identity-tracking-bench",
+        "execution": "torch-cuda-video-tracking-live-demo"
+      }
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "identity-crossing",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:24:31Z",
+      "model": {
+        "tracker": "torch-cuda-centroid-assignment-tracker",
+        "temporalProbe": "mask-sequence-identity-drift"
+      },
+      "inputs": {
+        "trackingControls": {
+          "occlusion": 26,
+          "crowding": 68,
+          "velocity": 42
+        },
+        "asset": "synthetic://tracking/identity-crossing.mp4"
+      },
+      "outputs": {
+        "frames": 8,
+        "objects": 3,
+        "temporalDelta": 0.01697,
+        "trackTensor": "synthetic://tracking/identity-crossing-tracks.pt"
+      },
+      "metrics": {
+        "readiness": 82.6,
+        "identityStability": 81.4,
+        "occlusionRecovery": 79.2,
+        "trackContinuity": 90.0,
+        "identityDrift": 2.7
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-video-identity-tracking-bench",
+        "execution": "torch-cuda-video-tracking-live-demo"
+      }
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "long-occlusion",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:24:31Z",
+      "model": {
+        "tracker": "torch-cuda-centroid-assignment-tracker",
+        "temporalProbe": "mask-sequence-identity-drift"
+      },
+      "inputs": {
+        "trackingControls": {
+          "occlusion": 74,
+          "crowding": 36,
+          "velocity": 34
+        },
+        "asset": "synthetic://tracking/long-occlusion.mp4"
+      },
+      "outputs": {
+        "frames": 8,
+        "objects": 3,
+        "temporalDelta": 0.014317,
+        "trackTensor": "synthetic://tracking/long-occlusion-tracks.pt"
+      },
+      "metrics": {
+        "readiness": 79.6,
+        "identityStability": 79.2,
+        "occlusionRecovery": 75.4,
+        "trackContinuity": 91.1,
+        "identityDrift": 2.3
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-video-identity-tracking-bench",
+        "execution": "torch-cuda-video-tracking-live-demo"
+      }
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "fast-motion",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:24:31Z",
+      "model": {
+        "tracker": "torch-cuda-centroid-assignment-tracker",
+        "temporalProbe": "mask-sequence-identity-drift"
+      },
+      "inputs": {
+        "trackingControls": {
+          "occlusion": 22,
+          "crowding": 42,
+          "velocity": 78
+        },
+        "asset": "synthetic://tracking/fast-motion.mp4"
+      },
+      "outputs": {
+        "frames": 8,
+        "objects": 3,
+        "temporalDelta": 0.019914,
+        "trackTensor": "synthetic://tracking/fast-motion-tracks.pt"
+      },
+      "metrics": {
+        "readiness": 83.1,
+        "identityStability": 84.0,
+        "occlusionRecovery": 77.9,
+        "trackContinuity": 86.7,
+        "identityDrift": 3.2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-video-identity-tracking-bench",
+        "execution": "torch-cuda-video-tracking-live-demo"
+      }
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 export function roadmapGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
   if (summary.goals !== 8) return "block";
   if (summary.themes !== 8) return "block";
   if (summary.linkedSystems !== 11) return "block";

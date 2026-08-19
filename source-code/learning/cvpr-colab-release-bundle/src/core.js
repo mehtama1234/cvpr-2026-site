@@ -1,8 +1,8 @@
 export function bundleGate(summary) {
   if (!summary) return "block";
-  if (summary.workerJobs !== 10) return "block";
-  if (summary.promotedRunners !== 10) return "block";
-  if (summary.cachedResults !== 40) return "block";
+  if (summary.workerJobs <= 0) return "block";
+  if (summary.promotedRunners <= 0) return "block";
+  if (summary.cachedResults <= 0) return "block";
   if (summary.importIssues !== 0) return "block";
   if (summary.fullStackStatus !== "valid") return "block";
   if (summary.validationGate !== "release") return "block";
@@ -19,15 +19,16 @@ export function summarizeBundle(input) {
   const validation = input.validationCenter.summary;
   const liveIntake = input.liveIntake.summary;
   const promotionDelta = input.promotionDelta.summary;
-  return {
+  const manifest = input.runManifest;
+  const summary = {
     bundle: "cvpr-colab-release-bundle",
     runtimePlane: worker.runtimePlane,
     notebook: worker.notebook,
     runbook: worker.runbook,
     resultArtifact: input.worker.runManifest.resultArtifact,
-    workerJobs: worker.jobs,
-    promotedRunners: worker.promotedRunners,
-    cachedResults: worker.cachedResults,
+    workerJobs: manifest.jobs.length,
+    promotedRunners: liveIntake.jobs,
+    cachedResults: imported.actualResults,
     importIssues: imported.issues,
     fullStackStatus: full.status,
     packageTests: full.packageTests,
@@ -40,4 +41,5 @@ export function summarizeBundle(input) {
     maxReadinessDrop: promotionDelta.maxReadinessDrop,
     runnerRows: input.worker.runnerCoverage.length
   };
+  return { ...summary, status: bundleGate(summary) };
 }

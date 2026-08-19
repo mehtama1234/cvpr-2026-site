@@ -1,0 +1,190 @@
+===CVPR_LIVE_JSON_BEGIN===
+{
+  "summary": {
+    "demo": "cvpr-live-driving-safety-colab-demo",
+    "jobId": "driving-safety",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 56.5,
+    "maxRisk": 34.8,
+    "status": "valid"
+  },
+  "results": [
+    {
+      "jobId": "driving-safety",
+      "caseId": "urban-cut-in",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:14:48Z",
+      "model": {
+        "grounder": "torch-driving-scene-risk-probe",
+        "riskHead": "ttc-risk-head",
+        "ruleMonitor": "safety-rule-monitor"
+      },
+      "inputs": {
+        "safetyControls": {
+          "hazardDensity": 48,
+          "actorSpeed": 40,
+          "occlusion": 10,
+          "actionConfidence": 82
+        },
+        "asset": "synthetic://driving/urban-cut-in.mp4"
+      },
+      "outputs": {
+        "sceneGroundingMap": "synthetic://driving/urban-cut-in-grounding.png",
+        "timeToCollision": 5.15,
+        "riskTrace": "synthetic://driving/urban-cut-in-risk.json",
+        "ruleViolations": 32.9
+      },
+      "metrics": {
+        "readiness": 57.4,
+        "sceneGrounding": 58.1,
+        "timeToCollision": 5.15,
+        "risk": 33.6,
+        "ruleViolation": 32.9,
+        "abstention": 15.5
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe"
+      }
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "night-crosswalk",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:14:48Z",
+      "model": {
+        "grounder": "torch-driving-scene-risk-probe",
+        "riskHead": "ttc-risk-head",
+        "ruleMonitor": "safety-rule-monitor"
+      },
+      "inputs": {
+        "safetyControls": {
+          "hazardDensity": 36,
+          "actorSpeed": 34,
+          "occlusion": 18,
+          "actionConfidence": 78
+        },
+        "asset": "synthetic://driving/night-crosswalk.mp4"
+      },
+      "outputs": {
+        "sceneGroundingMap": "synthetic://driving/night-crosswalk-grounding.png",
+        "timeToCollision": 5.73,
+        "riskTrace": "synthetic://driving/night-crosswalk-risk.json",
+        "ruleViolations": 32.8
+      },
+      "metrics": {
+        "readiness": 57.1,
+        "sceneGrounding": 55.4,
+        "timeToCollision": 5.73,
+        "risk": 31.9,
+        "ruleViolation": 32.8,
+        "abstention": 16.0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe"
+      }
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "highway-merge",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:14:48Z",
+      "model": {
+        "grounder": "torch-driving-scene-risk-probe",
+        "riskHead": "ttc-risk-head",
+        "ruleMonitor": "safety-rule-monitor"
+      },
+      "inputs": {
+        "safetyControls": {
+          "hazardDensity": 24,
+          "actorSpeed": 72,
+          "occlusion": 16,
+          "actionConfidence": 84
+        },
+        "asset": "synthetic://driving/highway-merge.mp4"
+      },
+      "outputs": {
+        "sceneGroundingMap": "synthetic://driving/highway-merge-grounding.png",
+        "timeToCollision": 4.34,
+        "riskTrace": "synthetic://driving/highway-merge-risk.json",
+        "ruleViolations": 33.9
+      },
+      "metrics": {
+        "readiness": 56.5,
+        "sceneGrounding": 57.0,
+        "timeToCollision": 4.34,
+        "risk": 34.8,
+        "ruleViolation": 33.9,
+        "abstention": 16.0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe"
+      }
+    },
+    {
+      "jobId": "driving-safety",
+      "caseId": "construction-zone",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:14:48Z",
+      "model": {
+        "grounder": "torch-driving-scene-risk-probe",
+        "riskHead": "ttc-risk-head",
+        "ruleMonitor": "safety-rule-monitor"
+      },
+      "inputs": {
+        "safetyControls": {
+          "hazardDensity": 36,
+          "actorSpeed": 32,
+          "occlusion": 14,
+          "actionConfidence": 72
+        },
+        "asset": "synthetic://driving/construction-zone.mp4"
+      },
+      "outputs": {
+        "sceneGroundingMap": "synthetic://driving/construction-zone-grounding.png",
+        "timeToCollision": 5.82,
+        "riskTrace": "synthetic://driving/construction-zone-risk.json",
+        "ruleViolations": 33.0
+      },
+      "metrics": {
+        "readiness": 57.1,
+        "sceneGrounding": 55.1,
+        "timeToCollision": 5.82,
+        "risk": 32.1,
+        "ruleViolation": 33.0,
+        "abstention": 17.3
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-driving-safety-bench",
+        "execution": "torch-driving-scene-risk-probe"
+      }
+    }
+  ]
+}
+===CVPR_LIVE_JSON_END===
+{
+  "demo": "cvpr-live-driving-safety-colab-demo",
+  "jobId": "driving-safety",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 56.5,
+  "maxRisk": 34.8,
+  "status": "valid"
+}

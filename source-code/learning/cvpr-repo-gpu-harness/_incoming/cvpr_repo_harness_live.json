@@ -641,24 +641,24 @@
     "jobId": "vlm-03-github-com-oamyjin-graphvlm",
     "mode": "live-colab",
     "repo": "https://github.com/oamyjin/GraphVLM",
-    "commitSha": "replace-with-live-commit",
-    "createdAt": "replace-with-live-timestamp",
+    "commitSha": "4e6c0f55b9d149b3abc354c4a62c43c2fa6d4274",
+    "createdAt": "2026-08-17T02:53:35Z",
     "environment": {
       "python": "3.11",
-      "torch": "replace-with-live-version",
-      "cuda": "replace-with-live-version"
+      "torch": "runtime-collected-not-recorded",
+      "cuda": "runtime-collected-not-recorded"
     },
     "metrics": {
-      "readiness": 43,
+      "readiness": 90.0,
       "smokePassed": true,
-      "runtimeSeconds": 0.0,
-      "filesScanned": 0
+      "runtimeSeconds": 58.98,
+      "filesScanned": 191
     },
     "provenance": {
       "runtime": "google-colab-pro-plus",
-      "accelerator": "A100",
-      "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
-      "source": "live-export-template"
+      "accelerator": "Tesla T4",
+      "notebook": "colab-cli-run",
+      "source": "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json"
     },
     "artifacts": {
       "smokeJson": "source-code/learning/cvpr-repo-gpu-harness/_results/vlm-03-github-com-oamyjin-graphvlm.json",

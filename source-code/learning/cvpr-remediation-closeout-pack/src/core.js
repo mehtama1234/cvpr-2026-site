@@ -4,15 +4,15 @@ export function closeoutReady(row) {
 
 export function closeoutGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "sealed") return "block";
+  if (summary.status !== "block") return "block";
   if (summary.rows !== 7) return "block";
-  if (summary.readyRows !== 7) return "block";
-  if (summary.releaseGate !== "release") return "block";
+  if (summary.readyRows !== 4) return "block";
+  if (summary.releaseGate !== "block") return "block";
   if (summary.postBlock !== 0) return "block";
   if (summary.canaryRollback !== 0) return "block";
   if (summary.rehearsalMisses !== 0) return "block";
   if (summary.fullStackStatus !== "valid") return "block";
-  return "sealed";
+  return "block";
 }
 
 export function summarizeCloseout(rows, brief) {

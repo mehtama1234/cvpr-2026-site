@@ -79,9 +79,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -113,9 +116,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -147,9 +153,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -181,9 +190,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -215,9 +227,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -249,9 +264,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -283,9 +301,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -317,9 +338,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -351,9 +375,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -385,9 +412,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -419,9 +449,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -453,9 +486,12 @@
       "runtimeEvidence": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-compute-serving-bench"
+        "sourceBench": "cvpr-compute-serving-bench",
+        "execution": "torch-cuda-compute-serving-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     }
   ],

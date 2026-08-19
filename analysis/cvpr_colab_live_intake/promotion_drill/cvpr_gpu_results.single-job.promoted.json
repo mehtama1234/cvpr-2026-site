@@ -1,0 +1,162 @@
+[
+  {
+    "jobId": "clinical-shift",
+    "caseId": "clear-baseline",
+    "mode": "cached-real",
+    "createdAt": "2026-08-15T12:30:00Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
+    },
+    "inputs": {
+      "clinicalControls": {
+        "domainShift": 8,
+        "artifactLoad": 12,
+        "escalationThreshold": 68
+      },
+      "asset": "synthetic://clinical/clear-baseline.png"
+    },
+    "outputs": {
+      "cleanConfidence": 38.6,
+      "shiftedConfidence": 35.0,
+      "logitDivergence": 0.006642
+    },
+    "metrics": {
+      "readiness": 89.9,
+      "shiftScore": 7.6,
+      "calibration": 89.3,
+      "falseClearRisk": 2.4,
+      "escalationThreshold": 68
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "NVIDIA L4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real",
+      "exportKind": "live-colab-promotion-drill"
+    }
+  },
+  {
+    "jobId": "clinical-shift",
+    "caseId": "scanner-shift",
+    "mode": "cached-real",
+    "createdAt": "2026-08-15T12:30:00Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
+    },
+    "inputs": {
+      "clinicalControls": {
+        "domainShift": 46,
+        "artifactLoad": 24,
+        "escalationThreshold": 72
+      },
+      "asset": "synthetic://clinical/scanner-shift.png"
+    },
+    "outputs": {
+      "cleanConfidence": 33.4,
+      "shiftedConfidence": 33.9,
+      "logitDivergence": 0.014008
+    },
+    "metrics": {
+      "readiness": 83.2,
+      "shiftScore": 32.7,
+      "calibration": 91.5,
+      "falseClearRisk": 8.9,
+      "escalationThreshold": 72
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "NVIDIA L4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real",
+      "exportKind": "live-colab-promotion-drill"
+    }
+  },
+  {
+    "jobId": "clinical-shift",
+    "caseId": "rare-presentation",
+    "mode": "cached-real",
+    "createdAt": "2026-08-15T12:30:00Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
+    },
+    "inputs": {
+      "clinicalControls": {
+        "domainShift": 58,
+        "artifactLoad": 18,
+        "escalationThreshold": 78
+      },
+      "asset": "synthetic://clinical/rare-presentation.png"
+    },
+    "outputs": {
+      "cleanConfidence": 39.4,
+      "shiftedConfidence": 37.6,
+      "logitDivergence": 0.003941
+    },
+    "metrics": {
+      "readiness": 81.9,
+      "shiftScore": 38.0,
+      "calibration": 90.7,
+      "falseClearRisk": 10.6,
+      "escalationThreshold": 78
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "NVIDIA L4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real",
+      "exportKind": "live-colab-promotion-drill"
+    }
+  },
+  {
+    "jobId": "clinical-shift",
+    "caseId": "motion-artifact",
+    "mode": "cached-real",
+    "createdAt": "2026-08-15T12:30:00Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "shiftProbe": "resnet-logit-divergence-domain-shift"
+    },
+    "inputs": {
+      "clinicalControls": {
+        "domainShift": 38,
+        "artifactLoad": 66,
+        "escalationThreshold": 74
+      },
+      "asset": "synthetic://clinical/motion-artifact.png"
+    },
+    "outputs": {
+      "cleanConfidence": 26.4,
+      "shiftedConfidence": 26.2,
+      "logitDivergence": 0.067713
+    },
+    "metrics": {
+      "readiness": 81.1,
+      "shiftScore": 39.0,
+      "calibration": 90.9,
+      "falseClearRisk": 11.1,
+      "escalationThreshold": 74
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "NVIDIA L4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-clinical-shift-bench",
+      "execution": "torchvision-resnet-clinical-shift-live-demo",
+      "promotedFrom": "live-colab",
+      "canonicalMode": "cached-real",
+      "exportKind": "live-colab-promotion-drill"
+    }
+  }
+]

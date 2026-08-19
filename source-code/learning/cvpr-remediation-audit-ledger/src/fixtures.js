@@ -5,11 +5,11 @@ export const ledgerRows = [
     "key": "gauntlet",
     "title": "Cross-theme incident gauntlet",
     "surface": "cvpr-cross-theme-incident-gauntlet.html",
-    "status": "release",
-    "count": 32,
+    "status": "inspect",
+    "count": 56,
     "evidence": "analysis/cvpr_cross_theme_incident_gauntlet/registry.json",
     "command": "python3 scripts/verify_cvpr_cross_theme_incident_gauntlet.py",
-    "ready": true
+    "ready": false
   },
   {
     "id": "remediation-ledger-02-sprint",
@@ -17,11 +17,11 @@ export const ledgerRows = [
     "key": "sprint",
     "title": "Gauntlet remediation sprint",
     "surface": "cvpr-gauntlet-remediation-sprint.html",
-    "status": "release",
-    "count": 29,
+    "status": "inspect",
+    "count": 53,
     "evidence": "analysis/cvpr_gauntlet_remediation_sprint/registry.json",
     "command": "python3 scripts/verify_cvpr_gauntlet_remediation_sprint.py",
-    "ready": true
+    "ready": false
   },
   {
     "id": "remediation-ledger-03-retest",
@@ -30,7 +30,7 @@ export const ledgerRows = [
     "title": "Remediation retest harness",
     "surface": "cvpr-remediation-retest-harness.html",
     "status": "release",
-    "count": 29,
+    "count": 53,
     "evidence": "analysis/cvpr_remediation_retest_harness/registry.json",
     "command": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
     "ready": true
@@ -42,7 +42,7 @@ export const ledgerRows = [
     "title": "Remediation promotion board",
     "surface": "cvpr-remediation-promotion-board.html",
     "status": "release",
-    "count": 29,
+    "count": 53,
     "evidence": "analysis/cvpr_remediation_promotion_board/registry.json",
     "command": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
     "ready": true
@@ -54,7 +54,7 @@ export const ledgerRows = [
     "title": "Remediation canary monitor",
     "surface": "cvpr-remediation-canary-monitor.html",
     "status": "watching",
-    "count": 29,
+    "count": 53,
     "evidence": "analysis/cvpr_remediation_canary_monitor/registry.json",
     "command": "python3 scripts/verify_cvpr_remediation_canary_monitor.py",
     "ready": true
@@ -86,21 +86,21 @@ export const ledgerRows = [
 ];
 export const summary = {
   "demo": "cvpr-remediation-audit-ledger",
-  "status": "complete",
+  "status": "inspect",
   "stages": 7,
-  "readyStages": 7,
-  "gauntletRows": 32,
-  "gauntletBlocks": 14,
-  "actionableRows": 29,
-  "clearedBlocks": 14,
+  "readyStages": 5,
+  "gauntletRows": 56,
+  "gauntletBlocks": 23,
+  "actionableRows": 53,
+  "clearedBlocks": 23,
   "postBlock": 0,
-  "promote": 12,
-  "monitor": 17,
+  "promote": 18,
+  "monitor": 35,
   "canaryRollback": 0,
   "rollbackDrills": 12,
   "rehearsals": 12,
   "rehearsalMisses": 0,
   "themes": 8,
-  "incidents": 4,
+  "incidents": 7,
   "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
 };

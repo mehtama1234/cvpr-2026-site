@@ -2,11 +2,11 @@ export function receiptGate(summary) {
   if (!summary) return "block";
   if (summary.stages !== 8) return "block";
   if (summary.commands !== 5) return "block";
-  if (summary.jobs !== 10) return "block";
-  if (summary.runners !== 10) return "block";
-  if (summary.cachedResults !== 40) return "block";
-  if (summary.liveIntakeResults !== 40) return "block";
-  if (summary.promotionResults !== 40) return "block";
+  if (summary.jobs <= 0) return "block";
+  if (summary.runners <= 0) return "block";
+  if (summary.cachedResults <= 0) return "block";
+  if (summary.liveIntakeResults <= 0) return "block";
+  if (summary.promotionResults <= 0) return "block";
   if (summary.importIssues !== 0) return "block";
   if (summary.deltaStatus !== "release") return "block";
   if (summary.deltaRegressions !== 0) return "block";

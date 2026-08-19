@@ -11,8 +11,10 @@ SOURCES = {
     "driving": ROOT / "analysis/cvpr_driving_safety_bench/registry.json",
     "canary": ROOT / "analysis/cvpr_remediation_canary_monitor/registry.json",
     "rollbackStress": ROOT / "analysis/cvpr_3d_temporal_rollback_stress_lab/registry.json",
-    "validation": ROOT / "analysis/cvpr_full_stack_validation/registry.json",
+    "validation": ROOT / "analysis/cvpr_validation_center/registry.json",
 }
+LIVE_EXPORT = "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json"
+FLOW_COMMAND = "python3 scripts/run_cvpr_safety_deployment_flow.py"
 
 CORE = """export function escalationDecision(row) {
   if (row.escalation.rollbackRisk >= 44 || row.escalation.safetyRisk >= 76) return "rollback-rehearsal";
@@ -43,7 +45,7 @@ export function summarizeEscalation(rows, sources) {
     rollbackRehearsal: rows.filter((row) => row.decision === "rollback-rehearsal").length,
     canaryRollback: sources.canary.summary.rollback,
     rollbackStressStatus: sources.rollbackStress.summary.status,
-    fullStackStatus: sources.validation.summary.status
+    fullStackStatus: sources.validation.summary.fullStackStatus
   };
   return { ...summary, status: escalationGate({ ...summary, status: "ready" }) };
 }
@@ -185,7 +187,9 @@ def summarize(data, rows):
         "minEvidence": min(row["escalation"]["evidence"] for row in rows),
         "canaryRollback": data["canary"]["summary"]["rollback"],
         "rollbackStressStatus": data["rollbackStress"]["summary"]["status"],
-        "fullStackStatus": data["validation"]["summary"]["status"],
+        "fullStackStatus": data["validation"]["summary"]["fullStackStatus"],
+        "familyFlowCommand": FLOW_COMMAND,
+        "liveExportArtifact": LIVE_EXPORT,
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
@@ -210,7 +214,18 @@ def build_package(data, rows, summary):
         "export const summary = " + json.dumps(summary, indent=2) + ";\n",
     )
     write(BASE / "tests/core.test.js", TEST)
-    write(BASE / "README.md", "# CVPR Clinical Safety Escalation Playbook\n\nEscalation rows for clinical shift and driving VLA safety cases tied to canary and rollback response commands.\n")
+    write(
+        BASE / "README.md",
+        "# CVPR Clinical Safety Escalation Playbook\n\n"
+        "Escalation rows for clinical shift and driving VLA safety cases tied to canary and rollback response commands.\n\n"
+        "Live operator path:\n"
+        f"- `{FLOW_COMMAND}`\n"
+        "- `python3 scripts/run_colab_live_demo.py clinical-shift`\n"
+        "- `python3 scripts/run_colab_live_demo.py driving-safety`\n"
+        "- `python3 scripts/build_cvpr_live_colab_export_from_analysis.py`\n"
+        f"- `python3 scripts/stage_cvpr_live_colab_export.py --export {LIVE_EXPORT} --job clinical-shift --promote`\n"
+        f"- `python3 scripts/stage_cvpr_live_colab_export.py --export {LIVE_EXPORT} --job driving-safety --promote`\n",
+    )
 
 
 def build_registry(rows, summary):
@@ -239,7 +254,7 @@ def build_page(rows, summary):
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CVPR Clinical Safety Escalation Playbook</title>
 <style>:root{{--ink:#101719;--paper:#F6F7F3;--panel:#FFFFFF;--line:#D8DDD6;--muted:#5D665F;--good:#277449;--warn:#A86619;--bad:#9B2D2D;--accent:#0F6B74;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Arial,sans-serif}}*{{box-sizing:border-box}}body{{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}}.wrap{{max-width:1340px;margin:0 auto;padding:0 24px}}header{{background:#1B211D;color:#EEF4EF;padding:42px 0 34px}}.bug,nav a,.stat span,th,code{{font-family:var(--mono)}}.bug{{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:#80D2C2}}h1{{font-size:44px;line-height:1.04;margin:10px 0}}header p{{max-width:98ch;color:#C6D2CB}}nav a{{font-size:12px;color:#C8EFE5;margin-right:12px}}a{{color:var(--accent)}}.stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}}.stat,.panel{{background:var(--panel);border:1px solid var(--line);border-radius:8px}}.stat{{padding:13px}}.stat b{{display:block;font-size:24px;overflow-wrap:anywhere}}.stat span{{font-size:11px;color:var(--muted)}}.panel{{padding:16px;overflow-x:auto;margin:16px 0}}table{{width:100%;border-collapse:collapse;font-size:13px;min-width:1160px}}td,th{{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}}th{{font-size:11px;color:var(--muted)}}code{{display:block;background:#EEF3F2;padding:7px;border-radius:6px;white-space:normal;overflow-wrap:anywhere}}.release-watch{{color:var(--good);font-weight:700}}.human-review,.safety-hold{{color:var(--warn);font-weight:700}}.rollback-rehearsal{{color:var(--bad);font-weight:700}}footer{{border-top:1px solid var(--line);padding:20px 0 54px;color:var(--muted);font-family:var(--mono);font-size:12px}}@media(max-width:920px){{.stats{{grid-template-columns:1fr}}h1{{font-size:34px}}}}</style></head>
 <body><header><div class="wrap"><div class="bug">CVPR 2026 - clinical safety escalation</div><h1>CVPR Clinical Safety Escalation Playbook</h1><p>Escalation rows for clinical shift and driving VLA safety cases, tied to human review, canary watch, rollback rehearsal, and full-stack validation commands.</p><nav><a href="index.html">all themes</a><a href="cvpr-clinical-shift-bench.html">clinical shift</a><a href="cvpr-driving-safety-bench.html">driving safety</a><a href="cvpr-remediation-canary-monitor.html">canary monitor</a><a href="analysis/cvpr_clinical_safety_escalation_playbook/registry.json">registry</a></nav></div></header>
-<main class="wrap"><section class="stats">{stats_html}</section><section class="panel"><h2>Escalation Rows</h2><table><thead><tr><th>Case</th><th>System</th><th>Readiness</th><th>Safety risk</th><th>Evidence</th><th>Rollback risk</th><th>Decision</th><th>Response</th><th>Gate</th></tr></thead><tbody>{rows_html}</tbody></table></section><section class="panel"><h2>Escalation Gate</h2><code>{esc(summary['fullStackCommand'])} - canary rollback {esc(summary['canaryRollback'])} - rollback stress {esc(summary['rollbackStressStatus'])} - full stack {esc(summary['fullStackStatus'])}</code></section></main>
+<main class="wrap"><section class="stats">{stats_html}</section><section class="panel"><h2>Escalation Rows</h2><table><thead><tr><th>Case</th><th>System</th><th>Readiness</th><th>Safety risk</th><th>Evidence</th><th>Rollback risk</th><th>Decision</th><th>Response</th><th>Gate</th></tr></thead><tbody>{rows_html}</tbody></table></section><section class="panel"><h2>Live Operator Path</h2><code>{esc(summary['familyFlowCommand'])}</code><code>python3 scripts/run_colab_live_demo.py clinical-shift</code><code>python3 scripts/run_colab_live_demo.py driving-safety</code><code>python3 scripts/build_cvpr_live_colab_export_from_analysis.py</code><code>python3 scripts/stage_cvpr_live_colab_export.py --export {esc(summary['liveExportArtifact'])} --job clinical-shift --promote</code><code>python3 scripts/stage_cvpr_live_colab_export.py --export {esc(summary['liveExportArtifact'])} --job driving-safety --promote</code></section><section class="panel"><h2>Escalation Gate</h2><code>{esc(summary['fullStackCommand'])} - canary rollback {esc(summary['canaryRollback'])} - rollback stress {esc(summary['rollbackStressStatus'])} - full stack {esc(summary['fullStackStatus'])}</code></section></main>
 <footer><div class="wrap">Generated by scripts/build_cvpr_clinical_safety_escalation_playbook.py - tested package under source-code/learning/cvpr-clinical-safety-escalation-playbook</div></footer></body></html>"""
     write(ROOT / "cvpr-clinical-safety-escalation-playbook.html", page)
 

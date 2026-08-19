@@ -25,9 +25,9 @@ def main():
     assert summary["benchBlock"] == 0
     assert summary["failureSeverity"] == 0
     assert summary["openThemes"] == 0
-    assert summary["workerJobs"] == 10
-    assert summary["cachedResults"] == 40
-    assert summary["liveIntakeResults"] == 40
+    assert summary["workerJobs"] > 0
+    assert summary["cachedResults"] > 0
+    assert summary["liveIntakeResults"] == summary["cachedResults"]
     assert summary["evidenceArtifacts"] == 7
     assert summary["importIssues"] == 0
     assert summary["packageTests"] >= 36

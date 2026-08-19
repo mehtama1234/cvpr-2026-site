@@ -3,14 +3,14 @@
     "replay": "cvpr-colab-result-replay",
     "status": "ready",
     "runtimePlane": "google-colab-pro-plus",
-    "jobs": 10,
-    "replayRows": 10,
-    "results": 40,
-    "validResults": 40,
+    "jobs": 14,
+    "replayRows": 14,
+    "results": 56,
+    "validResults": 56,
     "stageDemosCovered": 30,
     "cachedSystemEvidenceDemos": 3,
-    "minReadiness": 68.1,
-    "avgReadiness": 78.22,
+    "minReadiness": 44.0,
+    "avgReadiness": 75.14,
     "provenanceIssues": 0,
     "releaseGate": "release",
     "notebook": "notebooks/cvpr_gpu_worker.ipynb",
@@ -36,9 +36,9 @@
         "rare-visible",
         "unsupported-query"
       ],
-      "minReadiness": 83.8,
-      "avgReadiness": 84.05,
-      "maxReadiness": 84.7,
+      "minReadiness": 44.0,
+      "avgReadiness": 57.35,
+      "maxReadiness": 88.0,
       "inputFields": [
         "asset",
         "controls",
@@ -46,6 +46,7 @@
       ],
       "outputFields": [
         "boxes",
+        "embeddingScore",
         "localizedEvidence",
         "regionScores"
       ],
@@ -72,15 +73,16 @@
         "motion-blur-task",
         "over-restored-detail"
       ],
-      "minReadiness": 77.7,
-      "avgReadiness": 78.8,
-      "maxReadiness": 82.0,
+      "minReadiness": 78.5,
+      "avgReadiness": 79.88,
+      "maxReadiness": 81.6,
       "inputFields": [
         "asset",
         "degradationControls"
       ],
       "outputFields": [
         "artifactMap",
+        "deltaScore",
         "downstreamScore",
         "fidelityScore",
         "restoredImage"
@@ -108,15 +110,16 @@
         "edited-social-post",
         "synthetic-watermarked"
       ],
-      "minReadiness": 79.7,
-      "avgReadiness": 80.05,
-      "maxReadiness": 80.8,
+      "minReadiness": 53.8,
+      "avgReadiness": 58.05,
+      "maxReadiness": 66.8,
       "inputFields": [
         "asset",
         "attackControls"
       ],
       "outputFields": [
         "attackHeatmap",
+        "clipProbeScores",
         "evidence",
         "leakageRisk",
         "provenanceConfidence"
@@ -144,9 +147,9 @@
         "long-rollout-drift",
         "short-stable"
       ],
-      "minReadiness": 75.9,
-      "avgReadiness": 77.83,
-      "maxReadiness": 83.3,
+      "minReadiness": 80.3,
+      "avgReadiness": 82.4,
+      "maxReadiness": 86.1,
       "inputFields": [
         "asset",
         "trackingControls"
@@ -154,6 +157,7 @@
       "outputFields": [
         "contactEvents",
         "driftCurve",
+        "flowProfile",
         "identityTracks",
         "rolloutPlausibility"
       ],
@@ -175,23 +179,22 @@
       "validResults": 4,
       "stageDemos": 3,
       "caseIds": [
-        "external-hospital",
-        "new-scanner",
-        "noisy-rare-cohort",
-        "same-site-clean"
+        "clear-baseline",
+        "motion-artifact",
+        "rare-presentation",
+        "scanner-shift"
       ],
-      "minReadiness": 72.5,
-      "avgReadiness": 79.65,
-      "maxReadiness": 88.5,
+      "minReadiness": 81.1,
+      "avgReadiness": 84.03,
+      "maxReadiness": 89.9,
       "inputFields": [
         "asset",
         "clinicalControls"
       ],
       "outputFields": [
-        "calibrationCurve",
-        "clinicalEvidence",
-        "domainEmbeddings",
-        "triageScores"
+        "cleanConfidence",
+        "logitDivergence",
+        "shiftedConfidence"
       ],
       "provenanceIssues": 0,
       "missingFields": [],
@@ -216,12 +219,12 @@
         "fleet-peak-load",
         "mobile-live"
       ],
-      "minReadiness": 73.5,
-      "avgReadiness": 74.82,
-      "maxReadiness": 76.6,
+      "minReadiness": 86.9,
+      "avgReadiness": 87.58,
+      "maxReadiness": 89.1,
       "inputFields": [
-        "asset",
-        "servingControls"
+        "servingControls",
+        "title"
       ],
       "outputFields": [
         "latencyProfile",
@@ -252,9 +255,9 @@
         "prompt-attack-edit",
         "style-with-locks"
       ],
-      "minReadiness": 77.4,
-      "avgReadiness": 79.35,
-      "maxReadiness": 84.9,
+      "minReadiness": 70.5,
+      "avgReadiness": 72.67,
+      "maxReadiness": 78.5,
       "inputFields": [
         "asset",
         "generationControls"
@@ -288,9 +291,9 @@
         "night-crosswalk",
         "urban-cut-in"
       ],
-      "minReadiness": 68.1,
-      "avgReadiness": 68.17,
-      "maxReadiness": 68.2,
+      "minReadiness": 56.5,
+      "avgReadiness": 57.02,
+      "maxReadiness": 57.4,
       "inputFields": [
         "asset",
         "safetyControls"
@@ -304,6 +307,41 @@
       "provenanceIssues": 0,
       "missingFields": [],
       "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job driving-safety --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-depth-normal-consistency-bench",
+      "benchPage": "cvpr-depth-normal-consistency-bench.html",
+      "system": "geometry-consistency-probe",
+      "theme": "Recovering the 3D world from flat pictures",
+      "runner": "run_depth_normal_consistency_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 0,
+      "caseIds": [
+        "indoor-low-texture",
+        "reflective-surface",
+        "thin-chair-legs",
+        "wide-room-scale"
+      ],
+      "minReadiness": 75.7,
+      "avgReadiness": 80.4,
+      "maxReadiness": 82.5,
+      "inputFields": [
+        "asset",
+        "depthControls"
+      ],
+      "outputFields": [
+        "curvature",
+        "depthMap",
+        "normalEnergy"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job depth-normal-consistency --promote",
       "status": "ready"
     },
     {
@@ -324,22 +362,57 @@
         "thin-structure",
         "wide-baseline"
       ],
-      "minReadiness": 72.0,
-      "avgReadiness": 78.0,
-      "maxReadiness": 85.8,
+      "minReadiness": 89.1,
+      "avgReadiness": 90.88,
+      "maxReadiness": 92.9,
       "inputFields": [
         "asset",
         "geometryControls"
       ],
       "outputFields": [
-        "poseGraph",
-        "scaleTrace",
-        "surfaceResidualMap",
-        "topologyWarnings"
+        "cameraRecovery",
+        "optimizationTrace",
+        "scaleRecovery"
       ],
       "provenanceIssues": 0,
       "missingFields": [],
       "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job metric-geometry --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "corruption-robustness",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-corruption-robustness-bench",
+      "benchPage": "cvpr-corruption-robustness-bench.html",
+      "system": "robust-perception-gate",
+      "theme": "Naming and locating what's in the picture",
+      "runner": "run_corruption_robustness_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 0,
+      "caseIds": [
+        "compression-shift",
+        "motion-blur",
+        "patch-attack",
+        "sensor-noise"
+      ],
+      "minReadiness": 80.8,
+      "avgReadiness": 82.6,
+      "maxReadiness": 84.4,
+      "inputFields": [
+        "asset",
+        "corruptionControls"
+      ],
+      "outputFields": [
+        "cleanConfidence",
+        "corruptedConfidence",
+        "featureCosine",
+        "jsDivergence"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job corruption-robustness --promote",
       "status": "ready"
     },
     {
@@ -360,22 +433,92 @@
         "semantic-edit",
         "sparse-capture"
       ],
-      "minReadiness": 77.7,
-      "avgReadiness": 81.5,
-      "maxReadiness": 85.6,
+      "minReadiness": 73.6,
+      "avgReadiness": 74.7,
+      "maxReadiness": 75.2,
       "inputFields": [
         "asset",
         "splatControls"
       ],
       "outputFields": [
-        "editLeakageReport",
-        "novelViewRenders",
-        "provenanceTrace",
-        "semanticSplatMap"
+        "provenanceProbe",
+        "renderProfile",
+        "semanticProbe"
       ],
       "provenanceIssues": 0,
       "missingFields": [],
       "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-prompt-segmentation-robustness-bench",
+      "benchPage": "cvpr-prompt-segmentation-robustness-bench.html",
+      "system": "interactive-segmentation-gate",
+      "theme": "Making pixels from meaning",
+      "runner": "run_prompt_segmentation_robustness_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 0,
+      "caseIds": [
+        "ambiguous-clicks",
+        "cluttered-scene",
+        "occluded-object",
+        "single-object"
+      ],
+      "minReadiness": 57.8,
+      "avgReadiness": 60.95,
+      "maxReadiness": 65.4,
+      "inputFields": [
+        "asset",
+        "promptControls"
+      ],
+      "outputFields": [
+        "maskArea",
+        "maskOverlap",
+        "meanMaskConfidence"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job prompt-segmentation-robustness --promote",
+      "status": "ready"
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "wave": "wave-3-generation-driving-3d",
+      "bench": "cvpr-video-identity-tracking-bench",
+      "benchPage": "cvpr-video-identity-tracking-bench.html",
+      "system": "video-tracking-release-gate",
+      "theme": "Seeing and making things that move",
+      "runner": "run_video_identity_tracking_batch",
+      "results": 4,
+      "expectedResults": 4,
+      "validResults": 4,
+      "stageDemos": 0,
+      "caseIds": [
+        "clean-crossing",
+        "fast-motion",
+        "identity-crossing",
+        "long-occlusion"
+      ],
+      "minReadiness": 79.6,
+      "avgReadiness": 83.52,
+      "maxReadiness": 88.8,
+      "inputFields": [
+        "asset",
+        "trackingControls"
+      ],
+      "outputFields": [
+        "frames",
+        "objects",
+        "temporalDelta",
+        "trackTensor"
+      ],
+      "provenanceIssues": 0,
+      "missingFields": [],
+      "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job video-identity-tracking --promote",
       "status": "ready"
     }
   ],

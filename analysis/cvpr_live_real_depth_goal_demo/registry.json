@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-real-depth-goal-demo",
+  "jobId": "real-depth-anything",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 32.6,
+  "scaleDrift": 24.8,
+  "status": "valid"
+}

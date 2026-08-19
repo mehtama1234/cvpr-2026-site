@@ -2,8 +2,8 @@ export const deltaInput = {
   "summary": {
     "delta": "cvpr-colab-promotion-delta",
     "status": "release",
-    "cases": 40,
-    "jobs": 10,
+    "cases": 56,
+    "jobs": 14,
     "missing": 0,
     "modeMismatches": 0,
     "regressions": 0,
@@ -16,8 +16,8 @@ export const deltaInput = {
     {
       "jobId": "adversarial-provenance",
       "caseId": "adaptive-attack",
-      "readinessBefore": 80.8,
-      "readinessAfter": 80.8,
+      "readinessBefore": 53.9,
+      "readinessAfter": 53.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "attackCoverage": 0.0,
@@ -33,8 +33,8 @@ export const deltaInput = {
     {
       "jobId": "adversarial-provenance",
       "caseId": "clean-camera",
-      "readinessBefore": 79.7,
-      "readinessAfter": 79.7,
+      "readinessBefore": 66.8,
+      "readinessAfter": 66.8,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "attackCoverage": 0.0,
@@ -50,8 +50,8 @@ export const deltaInput = {
     {
       "jobId": "adversarial-provenance",
       "caseId": "edited-social-post",
-      "readinessBefore": 79.8,
-      "readinessAfter": 79.8,
+      "readinessBefore": 57.7,
+      "readinessAfter": 57.7,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "attackCoverage": 0.0,
@@ -67,8 +67,8 @@ export const deltaInput = {
     {
       "jobId": "adversarial-provenance",
       "caseId": "synthetic-watermarked",
-      "readinessBefore": 79.9,
-      "readinessAfter": 79.9,
+      "readinessBefore": 53.8,
+      "readinessAfter": 53.8,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "attackCoverage": 0.0,
@@ -83,72 +83,64 @@ export const deltaInput = {
     },
     {
       "jobId": "clinical-shift",
-      "caseId": "external-hospital",
-      "readinessBefore": 77.1,
-      "readinessAfter": 77.1,
+      "caseId": "clear-baseline",
+      "readinessBefore": 89.9,
+      "readinessAfter": 89.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "calibration": 0.0,
-        "clinicalEvidence": 0.0,
-        "domainEvidence": 0.0,
+        "escalationThreshold": 0,
+        "falseClearRisk": 0.0,
         "readiness": 0.0,
-        "residualRisk": 0.0,
-        "shiftLoad": 0.0,
-        "triageRate": 0.0
+        "shiftScore": 0.0
       },
       "promotedFrom": "live-colab",
       "regression": false
     },
     {
       "jobId": "clinical-shift",
-      "caseId": "new-scanner",
-      "readinessBefore": 80.5,
-      "readinessAfter": 80.5,
+      "caseId": "motion-artifact",
+      "readinessBefore": 81.1,
+      "readinessAfter": 81.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "calibration": 0.0,
-        "clinicalEvidence": 0.0,
-        "domainEvidence": 0.0,
+        "escalationThreshold": 0,
+        "falseClearRisk": 0.0,
         "readiness": 0.0,
-        "residualRisk": 0.0,
-        "shiftLoad": 0.0,
-        "triageRate": 0.0
+        "shiftScore": 0.0
       },
       "promotedFrom": "live-colab",
       "regression": false
     },
     {
       "jobId": "clinical-shift",
-      "caseId": "noisy-rare-cohort",
-      "readinessBefore": 72.5,
-      "readinessAfter": 72.5,
+      "caseId": "rare-presentation",
+      "readinessBefore": 81.9,
+      "readinessAfter": 81.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "calibration": 0.0,
-        "clinicalEvidence": 0.0,
-        "domainEvidence": 0.0,
+        "escalationThreshold": 0,
+        "falseClearRisk": 0.0,
         "readiness": 0.0,
-        "residualRisk": 0.0,
-        "shiftLoad": 0.0,
-        "triageRate": 0.0
+        "shiftScore": 0.0
       },
       "promotedFrom": "live-colab",
       "regression": false
     },
     {
       "jobId": "clinical-shift",
-      "caseId": "same-site-clean",
-      "readinessBefore": 88.5,
-      "readinessAfter": 88.5,
+      "caseId": "scanner-shift",
+      "readinessBefore": 83.2,
+      "readinessAfter": 83.2,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "calibration": 0.0,
-        "clinicalEvidence": 0.0,
-        "domainEvidence": 0.0,
+        "escalationThreshold": 0,
+        "falseClearRisk": 0.0,
         "readiness": 0.0,
-        "residualRisk": 0.0,
-        "shiftLoad": 0.0,
-        "triageRate": 0.0
+        "shiftScore": 0.0
       },
       "promotedFrom": "live-colab",
       "regression": false
@@ -156,8 +148,8 @@ export const deltaInput = {
     {
       "jobId": "compute-serving",
       "caseId": "desktop-batch",
-      "readinessBefore": 76.6,
-      "readinessAfter": 76.6,
+      "readinessBefore": 89.1,
+      "readinessAfter": 89.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "costSaving": 0.0,
@@ -174,8 +166,8 @@ export const deltaInput = {
     {
       "jobId": "compute-serving",
       "caseId": "edge-camera",
-      "readinessBefore": 73.5,
-      "readinessAfter": 73.5,
+      "readinessBefore": 87.0,
+      "readinessAfter": 87.0,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "costSaving": 0.0,
@@ -192,8 +184,8 @@ export const deltaInput = {
     {
       "jobId": "compute-serving",
       "caseId": "fleet-peak-load",
-      "readinessBefore": 74.6,
-      "readinessAfter": 74.6,
+      "readinessBefore": 86.9,
+      "readinessAfter": 86.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "costSaving": 0.0,
@@ -210,8 +202,8 @@ export const deltaInput = {
     {
       "jobId": "compute-serving",
       "caseId": "mobile-live",
-      "readinessBefore": 74.6,
-      "readinessAfter": 74.6,
+      "readinessBefore": 87.3,
+      "readinessAfter": 87.3,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "costSaving": 0.0,
@@ -228,8 +220,8 @@ export const deltaInput = {
     {
       "jobId": "constraint-generation",
       "caseId": "layout-rewrite",
-      "readinessBefore": 77.5,
-      "readinessAfter": 77.5,
+      "readinessBefore": 70.5,
+      "readinessAfter": 70.5,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "constraintSatisfaction": 0.0,
@@ -247,8 +239,8 @@ export const deltaInput = {
     {
       "jobId": "constraint-generation",
       "caseId": "light-layout-edit",
-      "readinessBefore": 84.9,
-      "readinessAfter": 84.9,
+      "readinessBefore": 78.5,
+      "readinessAfter": 78.5,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "constraintSatisfaction": 0.0,
@@ -266,8 +258,8 @@ export const deltaInput = {
     {
       "jobId": "constraint-generation",
       "caseId": "prompt-attack-edit",
-      "readinessBefore": 77.6,
-      "readinessAfter": 77.6,
+      "readinessBefore": 70.8,
+      "readinessAfter": 70.8,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "constraintSatisfaction": 0.0,
@@ -285,8 +277,8 @@ export const deltaInput = {
     {
       "jobId": "constraint-generation",
       "caseId": "style-with-locks",
-      "readinessBefore": 77.4,
-      "readinessAfter": 77.4,
+      "readinessBefore": 70.9,
+      "readinessAfter": 70.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "constraintSatisfaction": 0.0,
@@ -302,10 +294,150 @@ export const deltaInput = {
       "regression": false
     },
     {
+      "jobId": "corruption-robustness",
+      "caseId": "compression-shift",
+      "readinessBefore": 84.1,
+      "readinessAfter": 84.1,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "confidenceCollapse": 0.0,
+        "featureRetention": 0.0,
+        "labelStability": 0.0,
+        "readiness": 0.0,
+        "robustness": 0.0,
+        "severity": 0,
+        "topClassChanged": 0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "motion-blur",
+      "readinessBefore": 80.8,
+      "readinessAfter": 80.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "confidenceCollapse": 0.0,
+        "featureRetention": 0.0,
+        "labelStability": 0.0,
+        "readiness": 0.0,
+        "robustness": 0.0,
+        "severity": 0,
+        "topClassChanged": 0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "patch-attack",
+      "readinessBefore": 81.1,
+      "readinessAfter": 81.1,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "confidenceCollapse": 0.0,
+        "featureRetention": 0.0,
+        "labelStability": 0.0,
+        "readiness": 0.0,
+        "robustness": 0.0,
+        "severity": 0,
+        "topClassChanged": 0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "sensor-noise",
+      "readinessBefore": 84.4,
+      "readinessAfter": 84.4,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "confidenceCollapse": 0.0,
+        "featureRetention": 0.0,
+        "labelStability": 0.0,
+        "readiness": 0.0,
+        "robustness": 0.0,
+        "severity": 0,
+        "topClassChanged": 0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "caseId": "indoor-low-texture",
+      "readinessBefore": 81.8,
+      "readinessAfter": 81.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "depthRange": 0.0,
+        "normalConsistency": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "thinStructureRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "caseId": "reflective-surface",
+      "readinessBefore": 81.6,
+      "readinessAfter": 81.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "depthRange": 0.0,
+        "normalConsistency": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "thinStructureRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "caseId": "thin-chair-legs",
+      "readinessBefore": 75.7,
+      "readinessAfter": 75.7,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "depthRange": 0.0,
+        "normalConsistency": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "thinStructureRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "caseId": "wide-room-scale",
+      "readinessBefore": 82.5,
+      "readinessAfter": 82.5,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "depthRange": 0.0,
+        "normalConsistency": 0.0,
+        "readiness": 0.0,
+        "scaleDrift": 0.0,
+        "surfaceConsistency": 0.0,
+        "thinStructureRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
       "jobId": "driving-safety",
       "caseId": "construction-zone",
-      "readinessBefore": 68.2,
-      "readinessAfter": 68.2,
+      "readinessBefore": 57.1,
+      "readinessAfter": 57.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "abstention": 0.0,
@@ -321,8 +453,8 @@ export const deltaInput = {
     {
       "jobId": "driving-safety",
       "caseId": "highway-merge",
-      "readinessBefore": 68.2,
-      "readinessAfter": 68.2,
+      "readinessBefore": 56.5,
+      "readinessAfter": 56.5,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "abstention": 0.0,
@@ -338,8 +470,8 @@ export const deltaInput = {
     {
       "jobId": "driving-safety",
       "caseId": "night-crosswalk",
-      "readinessBefore": 68.2,
-      "readinessAfter": 68.2,
+      "readinessBefore": 57.1,
+      "readinessAfter": 57.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "abstention": 0.0,
@@ -355,8 +487,8 @@ export const deltaInput = {
     {
       "jobId": "driving-safety",
       "caseId": "urban-cut-in",
-      "readinessBefore": 68.1,
-      "readinessAfter": 68.1,
+      "readinessBefore": 57.4,
+      "readinessAfter": 57.4,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "abstention": 0.0,
@@ -372,8 +504,8 @@ export const deltaInput = {
     {
       "jobId": "gaussian-splatting",
       "caseId": "dense-novel-view",
-      "readinessBefore": 85.6,
-      "readinessAfter": 85.6,
+      "readinessBefore": 74.9,
+      "readinessAfter": 74.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "editLeakageRisk": 0.0,
@@ -389,8 +521,8 @@ export const deltaInput = {
     {
       "jobId": "gaussian-splatting",
       "caseId": "provenance-transfer",
-      "readinessBefore": 80.5,
-      "readinessAfter": 80.5,
+      "readinessBefore": 75.1,
+      "readinessAfter": 75.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "editLeakageRisk": 0.0,
@@ -406,8 +538,8 @@ export const deltaInput = {
     {
       "jobId": "gaussian-splatting",
       "caseId": "semantic-edit",
-      "readinessBefore": 82.2,
-      "readinessAfter": 82.2,
+      "readinessBefore": 75.2,
+      "readinessAfter": 75.2,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "editLeakageRisk": 0.0,
@@ -423,8 +555,8 @@ export const deltaInput = {
     {
       "jobId": "gaussian-splatting",
       "caseId": "sparse-capture",
-      "readinessBefore": 77.7,
-      "readinessAfter": 77.7,
+      "readinessBefore": 73.6,
+      "readinessAfter": 73.6,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "editLeakageRisk": 0.0,
@@ -440,8 +572,8 @@ export const deltaInput = {
     {
       "jobId": "metric-geometry",
       "caseId": "low-texture-indoor",
-      "readinessBefore": 72.0,
-      "readinessAfter": 72.0,
+      "readinessBefore": 89.4,
+      "readinessAfter": 89.4,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "metricEvidence": 0.0,
@@ -457,8 +589,8 @@ export const deltaInput = {
     {
       "jobId": "metric-geometry",
       "caseId": "scale-transfer",
-      "readinessBefore": 78.7,
-      "readinessAfter": 78.7,
+      "readinessBefore": 92.1,
+      "readinessAfter": 92.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "metricEvidence": 0.0,
@@ -474,8 +606,8 @@ export const deltaInput = {
     {
       "jobId": "metric-geometry",
       "caseId": "thin-structure",
-      "readinessBefore": 75.5,
-      "readinessAfter": 75.5,
+      "readinessBefore": 89.1,
+      "readinessAfter": 89.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "metricEvidence": 0.0,
@@ -491,8 +623,8 @@ export const deltaInput = {
     {
       "jobId": "metric-geometry",
       "caseId": "wide-baseline",
-      "readinessBefore": 85.8,
-      "readinessAfter": 85.8,
+      "readinessBefore": 92.9,
+      "readinessAfter": 92.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "metricEvidence": 0.0,
@@ -508,12 +640,15 @@ export const deltaInput = {
     {
       "jobId": "open-vocab-grounding",
       "caseId": "common-clean",
-      "readinessBefore": 84.7,
-      "readinessAfter": 84.7,
+      "readinessBefore": 48.0,
+      "readinessAfter": 48.0,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "localizedEvidence": 0.0,
+        "longTailRecall": 0.0,
+        "proposalRecall": 0.0,
         "readiness": 0.0,
+        "textRegionScore": 0.0,
         "unsupportedRisk": 0.0
       },
       "promotedFrom": "live-colab",
@@ -522,12 +657,15 @@ export const deltaInput = {
     {
       "jobId": "open-vocab-grounding",
       "caseId": "rare-distractors",
-      "readinessBefore": 83.8,
-      "readinessAfter": 83.8,
+      "readinessBefore": 88.0,
+      "readinessAfter": 88.0,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "localizedEvidence": 0.0,
+        "longTailRecall": 0.0,
+        "proposalRecall": 0.0,
         "readiness": 0.0,
+        "textRegionScore": 0.0,
         "unsupportedRisk": 0.0
       },
       "promotedFrom": "live-colab",
@@ -536,12 +674,15 @@ export const deltaInput = {
     {
       "jobId": "open-vocab-grounding",
       "caseId": "rare-visible",
-      "readinessBefore": 83.9,
-      "readinessAfter": 83.9,
+      "readinessBefore": 49.4,
+      "readinessAfter": 49.4,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "localizedEvidence": 0.0,
+        "longTailRecall": 0.0,
+        "proposalRecall": 0.0,
         "readiness": 0.0,
+        "textRegionScore": 0.0,
         "unsupportedRisk": 0.0
       },
       "promotedFrom": "live-colab",
@@ -550,13 +691,80 @@ export const deltaInput = {
     {
       "jobId": "open-vocab-grounding",
       "caseId": "unsupported-query",
-      "readinessBefore": 83.8,
-      "readinessAfter": 83.8,
+      "readinessBefore": 44.0,
+      "readinessAfter": 44.0,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "localizedEvidence": 0.0,
+        "longTailRecall": 0.0,
+        "proposalRecall": 0.0,
         "readiness": 0.0,
+        "textRegionScore": 0.0,
         "unsupportedRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "ambiguous-clicks",
+      "readinessBefore": 58.3,
+      "readinessAfter": 58.3,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "detections": 0,
+        "maskStability": 0.0,
+        "promptSensitivity": 0.0,
+        "readiness": 0.0,
+        "unsupportedRegionRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "cluttered-scene",
+      "readinessBefore": 62.3,
+      "readinessAfter": 62.3,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "detections": 0,
+        "maskStability": 0.0,
+        "promptSensitivity": 0.0,
+        "readiness": 0.0,
+        "unsupportedRegionRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "occluded-object",
+      "readinessBefore": 57.8,
+      "readinessAfter": 57.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "detections": 0,
+        "maskStability": 0.0,
+        "promptSensitivity": 0.0,
+        "readiness": 0.0,
+        "unsupportedRegionRisk": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseId": "single-object",
+      "readinessBefore": 65.4,
+      "readinessAfter": 65.4,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "detections": 0,
+        "maskStability": 0.0,
+        "promptSensitivity": 0.0,
+        "readiness": 0.0,
+        "unsupportedRegionRisk": 0.0
       },
       "promotedFrom": "live-colab",
       "regression": false
@@ -564,10 +772,13 @@ export const deltaInput = {
     {
       "jobId": "restoration-fidelity",
       "caseId": "compressed-low-light",
-      "readinessBefore": 77.7,
-      "readinessAfter": 77.7,
+      "readinessBefore": 78.5,
+      "readinessAfter": 78.5,
       "readinessDelta": 0.0,
       "metricDeltas": {
+        "artifactRisk": 0.0,
+        "degradationLoad": 0.0,
+        "diagnosisConfidence": 0.0,
         "downstreamUtility": 0.0,
         "fabricatedDetailRisk": 0.0,
         "fidelityScore": 0.0,
@@ -579,10 +790,13 @@ export const deltaInput = {
     {
       "jobId": "restoration-fidelity",
       "caseId": "mild-noise",
-      "readinessBefore": 82.0,
-      "readinessAfter": 82.0,
+      "readinessBefore": 81.6,
+      "readinessAfter": 81.6,
       "readinessDelta": 0.0,
       "metricDeltas": {
+        "artifactRisk": 0.0,
+        "degradationLoad": 0.0,
+        "diagnosisConfidence": 0.0,
         "downstreamUtility": 0.0,
         "fabricatedDetailRisk": 0.0,
         "fidelityScore": 0.0,
@@ -594,10 +808,13 @@ export const deltaInput = {
     {
       "jobId": "restoration-fidelity",
       "caseId": "motion-blur-task",
-      "readinessBefore": 77.7,
-      "readinessAfter": 77.7,
+      "readinessBefore": 80.5,
+      "readinessAfter": 80.5,
       "readinessDelta": 0.0,
       "metricDeltas": {
+        "artifactRisk": 0.0,
+        "degradationLoad": 0.0,
+        "diagnosisConfidence": 0.0,
         "downstreamUtility": 0.0,
         "fabricatedDetailRisk": 0.0,
         "fidelityScore": 0.0,
@@ -609,10 +826,13 @@ export const deltaInput = {
     {
       "jobId": "restoration-fidelity",
       "caseId": "over-restored-detail",
-      "readinessBefore": 77.8,
-      "readinessAfter": 77.8,
+      "readinessBefore": 78.9,
+      "readinessAfter": 78.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
+        "artifactRisk": 0.0,
+        "degradationLoad": 0.0,
+        "diagnosisConfidence": 0.0,
         "downstreamUtility": 0.0,
         "fabricatedDetailRisk": 0.0,
         "fidelityScore": 0.0,
@@ -624,8 +844,8 @@ export const deltaInput = {
     {
       "jobId": "temporal-rollout",
       "caseId": "contact-heavy",
-      "readinessBefore": 76.2,
-      "readinessAfter": 76.2,
+      "readinessBefore": 81.9,
+      "readinessAfter": 81.9,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "contactConsistency": 0.0,
@@ -641,8 +861,8 @@ export const deltaInput = {
     {
       "jobId": "temporal-rollout",
       "caseId": "crowded-memory",
-      "readinessBefore": 75.9,
-      "readinessAfter": 75.9,
+      "readinessBefore": 80.3,
+      "readinessAfter": 80.3,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "contactConsistency": 0.0,
@@ -658,8 +878,8 @@ export const deltaInput = {
     {
       "jobId": "temporal-rollout",
       "caseId": "long-rollout-drift",
-      "readinessBefore": 75.9,
-      "readinessAfter": 75.9,
+      "readinessBefore": 81.3,
+      "readinessAfter": 81.3,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "contactConsistency": 0.0,
@@ -675,8 +895,8 @@ export const deltaInput = {
     {
       "jobId": "temporal-rollout",
       "caseId": "short-stable",
-      "readinessBefore": 83.3,
-      "readinessAfter": 83.3,
+      "readinessBefore": 86.1,
+      "readinessAfter": 86.1,
       "readinessDelta": 0.0,
       "metricDeltas": {
         "contactConsistency": 0.0,
@@ -685,6 +905,70 @@ export const deltaInput = {
         "memoryLoad": 0.0,
         "readiness": 0.0,
         "rolloutPlausibility": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "clean-crossing",
+      "readinessBefore": 88.8,
+      "readinessAfter": 88.8,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "identityDrift": 0.0,
+        "identityStability": 0.0,
+        "occlusionRecovery": 0.0,
+        "readiness": 0.0,
+        "trackContinuity": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "fast-motion",
+      "readinessBefore": 83.1,
+      "readinessAfter": 83.1,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "identityDrift": 0.0,
+        "identityStability": 0.0,
+        "occlusionRecovery": 0.0,
+        "readiness": 0.0,
+        "trackContinuity": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "identity-crossing",
+      "readinessBefore": 82.6,
+      "readinessAfter": 82.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "identityDrift": 0.0,
+        "identityStability": 0.0,
+        "occlusionRecovery": 0.0,
+        "readiness": 0.0,
+        "trackContinuity": 0.0
+      },
+      "promotedFrom": "live-colab",
+      "regression": false
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseId": "long-occlusion",
+      "readinessBefore": 79.6,
+      "readinessAfter": 79.6,
+      "readinessDelta": 0.0,
+      "metricDeltas": {
+        "identityDrift": 0.0,
+        "identityStability": 0.0,
+        "occlusionRecovery": 0.0,
+        "readiness": 0.0,
+        "trackContinuity": 0.0
       },
       "promotedFrom": "live-colab",
       "regression": false

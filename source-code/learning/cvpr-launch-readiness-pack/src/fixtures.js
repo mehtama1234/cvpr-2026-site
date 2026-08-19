@@ -18,9 +18,9 @@ export const launchInput = {
       "benchAcceptanceRate": 100.0,
       "failureSeverity": 0,
       "openThemes": 0,
-      "workerJobs": 10,
-      "cachedResults": 40,
-      "liveIntakeResults": 40,
+      "workerJobs": 14,
+      "cachedResults": 56,
+      "liveIntakeResults": 56,
       "evidenceArtifacts": 7,
       "importIssues": 0,
       "packageTests": 148,
@@ -86,12 +86,12 @@ export const launchInput = {
   "slos": {
     "summary": {
       "dashboard": "cvpr-release-slo-dashboard",
-      "status": "release",
+      "status": "block",
       "slos": 10,
-      "passingSlos": 10,
-      "criticalFailures": 0,
-      "readinessFloor": 68.1,
-      "avgReadiness": 78.22,
+      "passingSlos": 9,
+      "criticalFailures": 1,
+      "readinessFloor": 44.0,
+      "avgReadiness": 75.14,
       "benchAcceptanceRate": 100.0,
       "releaseGate": "release",
       "fullStackStatus": "valid",
@@ -137,8 +137,8 @@ export const launchInput = {
       {
         "id": "pro-plus-result-validity",
         "label": "All cached Pro+ results validate",
-        "actual": 40,
-        "target": 40,
+        "actual": 56,
+        "target": 56,
         "direction": "eq",
         "severity": "critical",
         "evidence": "analysis/cvpr_colab_result_replay/registry.json"
@@ -146,7 +146,7 @@ export const launchInput = {
       {
         "id": "readiness-floor",
         "label": "Replay readiness floor stays above release minimum",
-        "actual": 68.1,
+        "actual": 44.0,
         "target": 68.0,
         "direction": "gte",
         "severity": "critical",
@@ -200,11 +200,11 @@ export const launchInput = {
   "drillbook": {
     "summary": {
       "drillbook": "cvpr-release-regression-drillbook",
-      "status": "ready",
+      "status": "block",
       "drills": 10,
       "readyDrills": 10,
-      "activeCriticalFailures": 0,
-      "passingSlos": 10,
+      "activeCriticalFailures": 1,
+      "passingSlos": 9,
       "operationsStatus": "ready",
       "validationGate": "release",
       "remediationStatus": "ready",
@@ -285,8 +285,8 @@ export const launchInput = {
         "label": "All cached Pro+ results validate",
         "severity": "critical",
         "currentStatus": "pass",
-        "actual": 40,
-        "target": 40,
+        "actual": 56,
+        "target": 56,
         "direction": "eq",
         "evidence": "analysis/cvpr_colab_result_replay/registry.json",
         "ownerSurface": "cvpr-colab-result-replay.html",
@@ -301,8 +301,8 @@ export const launchInput = {
         "sloId": "readiness-floor",
         "label": "Replay readiness floor stays above release minimum",
         "severity": "critical",
-        "currentStatus": "pass",
-        "actual": 68.1,
+        "currentStatus": "fail",
+        "actual": 44.0,
         "target": 68.0,
         "direction": "gte",
         "evidence": "analysis/cvpr_colab_result_replay/registry.json",
@@ -393,11 +393,11 @@ export const launchInput = {
     "summary": {
       "dashboard": "cvpr-colab-operations-dashboard",
       "status": "ready",
-      "jobs": 10,
-      "runners": 10,
-      "cachedResults": 40,
-      "liveIntakeResults": 40,
-      "promotionResults": 40,
+      "jobs": 14,
+      "runners": 14,
+      "cachedResults": 56,
+      "liveIntakeResults": 56,
+      "promotionResults": 56,
       "deltaStatus": "release",
       "deltaRegressions": 0,
       "maxReadinessDrop": 0.0,
@@ -444,13 +444,16 @@ export const launchInput = {
         "runtimePlane": "google-colab-pro-plus",
         "controlPlane": "local-static-cvpr-site",
         "resultPlane": "registry-and-cached-json",
-        "jobs": 10,
-        "liveCapable": 10,
-        "promotedRunners": 10,
-        "cachedCapable": 10,
-        "cachedResults": 40,
-        "validCachedResults": 40,
+        "jobs": 14,
+        "liveCapable": 14,
+        "promotedRunners": 14,
+        "runnerRows": 14,
+        "cachedCapable": 14,
+        "cachedResults": 56,
+        "validCachedResults": 56,
         "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+        "notebookNativeJobs": 10,
+        "externalLiveJobs": 4,
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
         "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
         "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -688,6 +691,118 @@ export const launchInput = {
           "priority": 8
         },
         {
+          "id": "depth-normal-consistency",
+          "title": "Depth-normal consistency GPU run",
+          "bench": "cvpr-depth-normal-consistency-bench",
+          "page": "cvpr-depth-normal-consistency-bench.html",
+          "runtimeModes": [
+            "simulated",
+            "cached-real",
+            "live-colab"
+          ],
+          "models": [
+            "torch-cuda-depth-normal-probe",
+            "finite-difference-normal-consistency"
+          ],
+          "inputs": [
+            "depth_map",
+            "normal_controls",
+            "scene_geometry"
+          ],
+          "outputs": [
+            "normal_map",
+            "consistency_curve",
+            "depth_residual_map",
+            "surface_alerts"
+          ],
+          "gpuClass": "T4/L4/A100",
+          "priority": 9
+        },
+        {
+          "id": "corruption-robustness",
+          "title": "Corruption robustness GPU run",
+          "bench": "cvpr-corruption-robustness-bench",
+          "page": "cvpr-corruption-robustness-bench.html",
+          "runtimeModes": [
+            "simulated",
+            "cached-real",
+            "live-colab"
+          ],
+          "models": [
+            "torchvision-resnet18",
+            "clean-corrupted-logit-delta"
+          ],
+          "inputs": [
+            "image_batch",
+            "corruption_controls",
+            "severity_schedule"
+          ],
+          "outputs": [
+            "feature_retention",
+            "label_drift_curve",
+            "confidence_collapse",
+            "corruption_report"
+          ],
+          "gpuClass": "T4/L4/A100",
+          "priority": 10
+        },
+        {
+          "id": "prompt-segmentation-robustness",
+          "title": "Prompt segmentation robustness GPU run",
+          "bench": "cvpr-prompt-segmentation-robustness-bench",
+          "page": "cvpr-prompt-segmentation-robustness-bench.html",
+          "runtimeModes": [
+            "simulated",
+            "cached-real",
+            "live-colab"
+          ],
+          "models": [
+            "torchvision-maskrcnn-resnet50-fpn",
+            "mask-rcnn-click-robustness-proxy"
+          ],
+          "inputs": [
+            "image",
+            "prompt_points",
+            "prompt_variants"
+          ],
+          "outputs": [
+            "mask_predictions",
+            "click_sensitivity",
+            "iou_trace",
+            "prompt_failure_map"
+          ],
+          "gpuClass": "T4/L4/A100",
+          "priority": 11
+        },
+        {
+          "id": "video-identity-tracking",
+          "title": "Video identity tracking GPU run",
+          "bench": "cvpr-video-identity-tracking-bench",
+          "page": "cvpr-video-identity-tracking-bench.html",
+          "runtimeModes": [
+            "simulated",
+            "cached-real",
+            "live-colab"
+          ],
+          "models": [
+            "torch-cuda-centroid-assignment-tracker",
+            "mask-sequence-identity-drift"
+          ],
+          "inputs": [
+            "video_clip",
+            "identity_seed",
+            "tracking_controls"
+          ],
+          "outputs": [
+            "track_sequence",
+            "identity_drift_curve",
+            "handoff_events",
+            "failure_frames"
+          ],
+          "gpuClass": "T4/L4/A100",
+          "priority": 12
+        },
+        {
           "id": "metric-geometry",
           "title": "Metric geometry GPU run",
           "bench": "cvpr-metric-geometry-bench",
@@ -812,6 +927,38 @@ export const launchInput = {
           "strictMode": "require_real_models=True"
         },
         {
+          "jobId": "depth-normal-consistency",
+          "caseSymbol": "DEPTH_NORMAL_CASES",
+          "loader": "load_depth_normal_models",
+          "runner": "run_depth_normal_consistency_batch",
+          "execution": "torch-cuda-depth-normal-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseSymbol": "CORRUPTION_CASES",
+          "loader": "load_corruption_models",
+          "runner": "run_corruption_robustness_batch",
+          "execution": "torchvision-resnet-corruption-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+          "loader": "load_prompt_segmentation_models",
+          "runner": "run_prompt_segmentation_robustness_batch",
+          "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseSymbol": "VIDEO_TRACKING_CASES",
+          "loader": "load_video_tracking_models",
+          "runner": "run_video_identity_tracking_batch",
+          "execution": "torch-cuda-video-tracking-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
           "jobId": "metric-geometry",
           "caseSymbol": "GEOMETRY_CASES",
           "loader": "load_metric_geometry_models",
@@ -827,6 +974,24 @@ export const launchInput = {
           "execution": "torch-gaussian-splatting-render-probe",
           "strictMode": "require_real_models=True"
         }
+      ],
+      "notebookNativeJobIds": [
+        "open-vocab-grounding",
+        "restoration-fidelity",
+        "adversarial-provenance",
+        "temporal-rollout",
+        "clinical-shift",
+        "compute-serving",
+        "constraint-generation",
+        "driving-safety",
+        "metric-geometry",
+        "gaussian-splatting"
+      ],
+      "externalLiveJobIds": [
+        "depth-normal-consistency",
+        "corruption-robustness",
+        "prompt-segmentation-robustness",
+        "video-identity-tracking"
       ],
       "runManifest": {
         "runtimePlane": "google-colab-pro-plus",
@@ -1010,10 +1175,94 @@ export const launchInput = {
             }
           },
           {
+            "jobId": "depth-normal-consistency",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "page": "cvpr-depth-normal-consistency-bench.html",
+            "priority": 9,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-depth-normal-probe",
+              "finite-difference-normal-consistency"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+            "resultFilter": {
+              "jobId": "depth-normal-consistency",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "bench": "cvpr-corruption-robustness-bench",
+            "page": "cvpr-corruption-robustness-bench.html",
+            "priority": 10,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-resnet18",
+              "clean-corrupted-logit-delta"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+            "resultFilter": {
+              "jobId": "corruption-robustness",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "page": "cvpr-prompt-segmentation-robustness-bench.html",
+            "priority": 11,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-maskrcnn-resnet50-fpn",
+              "mask-rcnn-click-robustness-proxy"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+            "resultFilter": {
+              "jobId": "prompt-segmentation-robustness",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "page": "cvpr-video-identity-tracking-bench.html",
+            "priority": 12,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-centroid-assignment-tracker",
+              "mask-sequence-identity-drift"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+            "resultFilter": {
+              "jobId": "video-identity-tracking",
+              "mode": "cached-real"
+            }
+          },
+          {
             "jobId": "metric-geometry",
             "bench": "cvpr-metric-geometry-bench",
             "page": "cvpr-metric-geometry-bench.html",
-            "priority": 9,
+            "priority": 13,
             "runtimeModes": [
               "simulated",
               "cached-real",
@@ -1035,7 +1284,7 @@ export const launchInput = {
             "jobId": "gaussian-splatting",
             "bench": "cvpr-gaussian-splatting-bench",
             "page": "cvpr-gaussian-splatting-bench.html",
-            "priority": 10,
+            "priority": 14,
             "runtimeModes": [
               "simulated",
               "cached-real",
@@ -1060,254 +1309,288 @@ export const launchInput = {
           "jobId": "open-vocab-grounding",
           "caseId": "common-clean",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:01:17Z",
           "model": {
-            "embedding": "siglip-base-patch16-224",
-            "detector": "grounding-dino-tiny",
-            "segmenter": "sam-vit-b"
+            "embedding": "google/siglip-base-patch16-224",
+            "detector": "IDEA-Research/grounding-dino-tiny"
           },
           "inputs": {
-            "textQuery": "common clean object",
+            "textQuery": "teal rectangle.",
             "controls": {
               "queryRarity": 18,
               "distractorOverlap": 16,
               "boxAmbiguity": 18,
               "evidenceThreshold": 54
             },
-            "asset": "fixtures/open-vocab/common-clean.png"
+            "asset": "synthetic://common-clean"
           },
           "outputs": {
             "boxes": [
               {
-                "label": "target",
+                "label": "teal rectangle",
                 "xywh": [
-                  0.18,
-                  0.22,
-                  0.26,
-                  0.24
+                  0.178,
+                  0.216,
+                  0.305,
+                  0.288
                 ],
-                "score": 0.828
+                "score": 0.742
               },
               {
-                "label": "distractor",
+                "label": "teal rectangle",
                 "xywh": [
-                  0.56,
-                  0.26,
-                  0.21,
-                  0.2
+                  0.512,
+                  0.255,
+                  0.272,
+                  0.266
                 ],
-                "score": 0.917
+                "score": 0.417
               }
             ],
             "regionScores": {
-              "target": 84.7,
-              "longTail": 71.7
+              "target": 26.8,
+              "longTail": 39.7
             },
-            "localizedEvidence": 88.9
+            "embeddingScore": 8.3,
+            "localizedEvidence": 50.2
           },
           "metrics": {
-            "readiness": 84.7,
-            "localizedEvidence": 88.9,
-            "unsupportedRisk": 8.3
+            "readiness": 48.0,
+            "proposalRecall": 74.2,
+            "textRegionScore": 26.8,
+            "longTailRecall": 39.7,
+            "localizedEvidence": 50.2,
+            "unsupportedRisk": 21.0
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-long-tail-grounding-bench"
+            "sourceBench": "cvpr-long-tail-grounding-bench",
+            "execution": "transformers-grounding-dino-siglip-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "open-vocab-grounding",
           "caseId": "rare-visible",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:01:18Z",
           "model": {
-            "embedding": "siglip-base-patch16-224",
-            "detector": "grounding-dino-tiny",
-            "segmenter": "sam-vit-b"
+            "embedding": "google/siglip-base-patch16-224",
+            "detector": "IDEA-Research/grounding-dino-tiny"
           },
           "inputs": {
-            "textQuery": "rare visible object",
+            "textQuery": "teal target rectangle.",
             "controls": {
               "queryRarity": 66,
               "distractorOverlap": 12,
               "boxAmbiguity": 34,
               "evidenceThreshold": 62
             },
-            "asset": "fixtures/open-vocab/rare-visible.png"
+            "asset": "synthetic://rare-visible"
           },
           "outputs": {
             "boxes": [
               {
-                "label": "target",
+                "label": "teal target rectangle",
                 "xywh": [
-                  0.18,
-                  0.22,
-                  0.26,
-                  0.24
+                  0.178,
+                  0.216,
+                  0.305,
+                  0.288
                 ],
-                "score": 0.768
+                "score": 0.752
               },
               {
-                "label": "distractor",
+                "label": "teal target rectangle",
                 "xywh": [
-                  0.56,
-                  0.26,
-                  0.21,
-                  0.2
+                  0.522,
+                  0.256,
+                  0.273,
+                  0.266
                 ],
-                "score": 0.837
+                "score": 0.381
               }
             ],
             "regionScores": {
-              "target": 85.0,
-              "longTail": 76.9
+              "target": 26.7,
+              "longTail": 43.2
             },
-            "localizedEvidence": 87.7
+            "embeddingScore": 7.8,
+            "localizedEvidence": 52.2
           },
           "metrics": {
-            "readiness": 83.9,
-            "localizedEvidence": 87.7,
-            "unsupportedRisk": 16.3
+            "readiness": 49.4,
+            "proposalRecall": 75.2,
+            "textRegionScore": 26.7,
+            "longTailRecall": 43.2,
+            "localizedEvidence": 52.2,
+            "unsupportedRisk": 21.2
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-long-tail-grounding-bench"
+            "sourceBench": "cvpr-long-tail-grounding-bench",
+            "execution": "transformers-grounding-dino-siglip-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "open-vocab-grounding",
           "caseId": "rare-distractors",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:01:18Z",
           "model": {
-            "embedding": "siglip-base-patch16-224",
-            "detector": "grounding-dino-tiny",
-            "segmenter": "sam-vit-b"
+            "embedding": "google/siglip-base-patch16-224",
+            "detector": "IDEA-Research/grounding-dino-tiny"
           },
           "inputs": {
-            "textQuery": "rare object with distractors",
+            "textQuery": "teal target rectangle near orange distractor.",
             "controls": {
               "queryRarity": 78,
               "distractorOverlap": 28,
               "boxAmbiguity": 28,
               "evidenceThreshold": 76
             },
-            "asset": "fixtures/open-vocab/rare-distractors.png"
+            "asset": "synthetic://rare-distractors"
           },
           "outputs": {
             "boxes": [
               {
-                "label": "target",
+                "label": "teal target rectangle orange distract",
                 "xywh": [
-                  0.18,
-                  0.22,
-                  0.26,
-                  0.24
+                  0.177,
+                  0.216,
+                  0.307,
+                  0.289
                 ],
-                "score": 0.76
+                "score": 0.794
               },
               {
-                "label": "distractor",
+                "label": "orange distractor",
                 "xywh": [
-                  0.56,
-                  0.26,
-                  0.21,
-                  0.2
+                  0.484,
+                  0.257,
+                  0.273,
+                  0.266
                 ],
-                "score": 0.81
+                "score": 0.587
               }
             ],
             "regionScores": {
-              "target": 83.6,
-              "longTail": 81.4
+              "target": 93.1,
+              "longTail": 85.2
             },
-            "localizedEvidence": 87.1
+            "embeddingScore": 98.4,
+            "localizedEvidence": 84.5
           },
           "metrics": {
-            "readiness": 83.8,
-            "localizedEvidence": 87.1,
-            "unsupportedRisk": 19.0
+            "readiness": 88.0,
+            "proposalRecall": 79.4,
+            "textRegionScore": 93.1,
+            "longTailRecall": 85.2,
+            "localizedEvidence": 84.5,
+            "unsupportedRisk": 8.9
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-long-tail-grounding-bench"
+            "sourceBench": "cvpr-long-tail-grounding-bench",
+            "execution": "transformers-grounding-dino-siglip-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "open-vocab-grounding",
           "caseId": "unsupported-query",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:01:18Z",
           "model": {
-            "embedding": "siglip-base-patch16-224",
-            "detector": "grounding-dino-tiny",
-            "segmenter": "sam-vit-b"
+            "embedding": "google/siglip-base-patch16-224",
+            "detector": "IDEA-Research/grounding-dino-tiny"
           },
           "inputs": {
-            "textQuery": "unsupported text query",
+            "textQuery": "transparent glass elephant.",
             "controls": {
               "queryRarity": 82,
               "distractorOverlap": 30,
               "boxAmbiguity": 32,
               "evidenceThreshold": 84
             },
-            "asset": "fixtures/open-vocab/unsupported-query.png"
+            "asset": "synthetic://unsupported-query"
           },
           "outputs": {
             "boxes": [
               {
-                "label": "target",
+                "label": "transparent glass elephant",
                 "xywh": [
-                  0.18,
-                  0.22,
-                  0.26,
-                  0.24
+                  0.178,
+                  0.216,
+                  0.304,
+                  0.288
                 ],
-                "score": 0.753
+                "score": 0.606
               },
               {
-                "label": "distractor",
+                "label": "transparent glass elephant",
                 "xywh": [
-                  0.56,
-                  0.26,
-                  0.21,
-                  0.2
+                  0.48,
+                  0.256,
+                  0.271,
+                  0.266
                 ],
-                "score": 0.799
+                "score": 0.524
+              },
+              {
+                "label": "transparent glass elephant",
+                "xywh": [
+                  0.178,
+                  0.216,
+                  0.575,
+                  0.306
+                ],
+                "score": 0.285
               }
             ],
             "regionScores": {
-              "target": 84.0,
-              "longTail": 82.1
+              "target": 17.0,
+              "longTail": 40.6
             },
-            "localizedEvidence": 87.1
+            "embeddingScore": 0.0,
+            "localizedEvidence": 47.0
           },
           "metrics": {
-            "readiness": 83.8,
-            "localizedEvidence": 87.1,
-            "unsupportedRisk": 20.1
+            "readiness": 44.0,
+            "proposalRecall": 60.6,
+            "textRegionScore": 17.0,
+            "longTailRecall": 40.6,
+            "localizedEvidence": 47.0,
+            "unsupportedRisk": 24.9
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-long-tail-grounding-bench"
+            "sourceBench": "cvpr-long-tail-grounding-bench",
+            "execution": "transformers-grounding-dino-siglip-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "restoration-fidelity",
           "caseId": "mild-noise",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:02:40Z",
           "model": {
-            "restorer": "swinir-lightweight",
-            "artifactProbe": "real-esrgan-x2"
+            "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+            "artifactProbe": "pixel-delta-artifact-map"
           },
           "inputs": {
             "degradationControls": {
@@ -1317,35 +1600,42 @@ export const launchInput = {
               "lowLight": 20,
               "hallucinationPenalty": 36
             },
-            "asset": "fixtures/restoration/mild-noise.png"
+            "asset": "synthetic://mild-noise"
           },
           "outputs": {
-            "restoredImage": "fixtures/restoration/mild-noise-restored.png",
-            "artifactMap": "fixtures/restoration/mild-noise-artifact-map.png",
-            "downstreamScore": 85.3,
-            "fidelityScore": 82.2
+            "restoredImage": "synthetic://restoration/mild-noise-restored.png",
+            "artifactMap": "synthetic://restoration/mild-noise-artifact-map.png",
+            "downstreamScore": 85.1,
+            "fidelityScore": 80.6,
+            "deltaScore": 2.102
           },
           "metrics": {
-            "readiness": 82.0,
-            "downstreamUtility": 85.3,
-            "fabricatedDetailRisk": 25.8,
-            "fidelityScore": 82.2
+            "readiness": 81.6,
+            "degradationLoad": 21.6,
+            "diagnosisConfidence": 78.4,
+            "fidelityScore": 80.6,
+            "artifactRisk": 19.3,
+            "downstreamUtility": 85.1,
+            "fabricatedDetailRisk": 19.3
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-restoration-fidelity-bench"
+            "sourceBench": "cvpr-restoration-fidelity-bench",
+            "execution": "transformers-swin2sr-restoration-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "restoration-fidelity",
           "caseId": "compressed-low-light",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:02:42Z",
           "model": {
-            "restorer": "swinir-lightweight",
-            "artifactProbe": "real-esrgan-x2"
+            "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+            "artifactProbe": "pixel-delta-artifact-map"
           },
           "inputs": {
             "degradationControls": {
@@ -1355,35 +1645,42 @@ export const launchInput = {
               "lowLight": 64,
               "hallucinationPenalty": 16
             },
-            "asset": "fixtures/restoration/compressed-low-light.png"
+            "asset": "synthetic://compressed-low-light"
           },
           "outputs": {
-            "restoredImage": "fixtures/restoration/compressed-low-light-restored.png",
-            "artifactMap": "fixtures/restoration/compressed-low-light-artifact-map.png",
-            "downstreamScore": 80.9,
-            "fidelityScore": 80.3
+            "restoredImage": "synthetic://restoration/compressed-low-light-restored.png",
+            "artifactMap": "synthetic://restoration/compressed-low-light-artifact-map.png",
+            "downstreamScore": 78.8,
+            "fidelityScore": 85.2,
+            "deltaScore": 1.12
           },
           "metrics": {
-            "readiness": 77.7,
-            "downstreamUtility": 80.9,
-            "fabricatedDetailRisk": 29.4,
-            "fidelityScore": 80.3
+            "readiness": 78.5,
+            "degradationLoad": 43.6,
+            "diagnosisConfidence": 56.4,
+            "fidelityScore": 85.2,
+            "artifactRisk": 13.0,
+            "downstreamUtility": 78.8,
+            "fabricatedDetailRisk": 13.0
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-restoration-fidelity-bench"
+            "sourceBench": "cvpr-restoration-fidelity-bench",
+            "execution": "transformers-swin2sr-restoration-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "restoration-fidelity",
           "caseId": "motion-blur-task",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:02:43Z",
           "model": {
-            "restorer": "swinir-lightweight",
-            "artifactProbe": "real-esrgan-x2"
+            "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+            "artifactProbe": "pixel-delta-artifact-map"
           },
           "inputs": {
             "degradationControls": {
@@ -1393,35 +1690,42 @@ export const launchInput = {
               "lowLight": 36,
               "hallucinationPenalty": 16
             },
-            "asset": "fixtures/restoration/motion-blur-task.png"
+            "asset": "synthetic://motion-blur-task"
           },
           "outputs": {
-            "restoredImage": "fixtures/restoration/motion-blur-task-restored.png",
-            "artifactMap": "fixtures/restoration/motion-blur-task-artifact-map.png",
-            "downstreamScore": 81.5,
-            "fidelityScore": 79.0
+            "restoredImage": "synthetic://restoration/motion-blur-task-restored.png",
+            "artifactMap": "synthetic://restoration/motion-blur-task-artifact-map.png",
+            "downstreamScore": 82.6,
+            "fidelityScore": 85.0,
+            "deltaScore": 1.597
           },
           "metrics": {
-            "readiness": 77.7,
-            "downstreamUtility": 81.5,
-            "fabricatedDetailRisk": 26.5,
-            "fidelityScore": 79.0
+            "readiness": 80.5,
+            "degradationLoad": 41.2,
+            "diagnosisConfidence": 58.8,
+            "fidelityScore": 85.0,
+            "artifactRisk": 10.9,
+            "downstreamUtility": 82.6,
+            "fabricatedDetailRisk": 10.9
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-restoration-fidelity-bench"
+            "sourceBench": "cvpr-restoration-fidelity-bench",
+            "execution": "transformers-swin2sr-restoration-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "restoration-fidelity",
           "caseId": "over-restored-detail",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:02:45Z",
           "model": {
-            "restorer": "swinir-lightweight",
-            "artifactProbe": "real-esrgan-x2"
+            "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+            "artifactProbe": "pixel-delta-artifact-map"
           },
           "inputs": {
             "degradationControls": {
@@ -1431,35 +1735,42 @@ export const launchInput = {
               "lowLight": 56,
               "hallucinationPenalty": 18
             },
-            "asset": "fixtures/restoration/over-restored-detail.png"
+            "asset": "synthetic://over-restored-detail"
           },
           "outputs": {
-            "restoredImage": "fixtures/restoration/over-restored-detail-restored.png",
-            "artifactMap": "fixtures/restoration/over-restored-detail-artifact-map.png",
+            "restoredImage": "synthetic://restoration/over-restored-detail-restored.png",
+            "artifactMap": "synthetic://restoration/over-restored-detail-artifact-map.png",
             "downstreamScore": 81.2,
-            "fidelityScore": 80.1
+            "fidelityScore": 85.8,
+            "deltaScore": 1.348
           },
           "metrics": {
-            "readiness": 77.8,
+            "readiness": 78.9,
+            "degradationLoad": 45.9,
+            "diagnosisConfidence": 54.1,
+            "fidelityScore": 85.8,
+            "artifactRisk": 13.4,
             "downstreamUtility": 81.2,
-            "fabricatedDetailRisk": 28.6,
-            "fidelityScore": 80.1
+            "fabricatedDetailRisk": 13.4
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-restoration-fidelity-bench"
+            "sourceBench": "cvpr-restoration-fidelity-bench",
+            "execution": "transformers-swin2sr-restoration-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "adversarial-provenance",
           "caseId": "clean-camera",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:04:05Z",
           "model": {
-            "detector": "watermark-detector",
-            "probe": "clip-perturbation-probe"
+            "detector": "openai/clip-vit-base-patch32",
+            "probe": "clip-provenance-prompt-bank"
           },
           "inputs": {
             "attackControls": {
@@ -1468,37 +1779,47 @@ export const launchInput = {
               "watermarkVisibility": 100,
               "unlearningProbe": 0
             },
-            "asset": "fixtures/adversarial/clean-camera.png"
+            "asset": "synthetic://clean-camera"
           },
           "outputs": {
-            "provenanceConfidence": 86.4,
-            "attackHeatmap": "fixtures/adversarial/clean-camera-attack-heatmap.png",
-            "leakageRisk": 9.0,
-            "evidence": 82.5
+            "provenanceConfidence": 50.8,
+            "attackHeatmap": "synthetic://adversarial/clean-camera-clip-heatmap.png",
+            "leakageRisk": 1.8,
+            "evidence": 52.2,
+            "clipProbeScores": {
+              "a clean camera photograph": 41.3,
+              "a synthetic generated image": 45.2,
+              "an edited social media image": 0.8,
+              "an adversarially perturbed image": 6.6,
+              "a watermarked image": 6.1
+            }
           },
           "metrics": {
-            "readiness": 79.7,
-            "evidence": 82.5,
-            "risk": 17.9,
-            "leakageRisk": 9.0,
-            "provenanceConfidence": 86.4,
-            "attackCoverage": 44.7
+            "readiness": 66.8,
+            "attackCoverage": 3.7,
+            "provenanceConfidence": 50.8,
+            "leakageRisk": 1.8,
+            "evidence": 52.2,
+            "risk": 11.6
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-adversarial-provenance-bench"
+            "sourceBench": "cvpr-adversarial-provenance-bench",
+            "execution": "transformers-clip-provenance-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "adversarial-provenance",
           "caseId": "edited-social-post",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:04:05Z",
           "model": {
-            "detector": "watermark-detector",
-            "probe": "clip-perturbation-probe"
+            "detector": "openai/clip-vit-base-patch32",
+            "probe": "clip-provenance-prompt-bank"
           },
           "inputs": {
             "attackControls": {
@@ -1507,37 +1828,47 @@ export const launchInput = {
               "watermarkVisibility": 98,
               "unlearningProbe": 10
             },
-            "asset": "fixtures/adversarial/edited-social-post.png"
+            "asset": "synthetic://edited-social-post"
           },
           "outputs": {
-            "provenanceConfidence": 87.9,
-            "attackHeatmap": "fixtures/adversarial/edited-social-post-attack-heatmap.png",
-            "leakageRisk": 14.8,
-            "evidence": 82.9
+            "provenanceConfidence": 39.8,
+            "attackHeatmap": "synthetic://adversarial/edited-social-post-clip-heatmap.png",
+            "leakageRisk": 4.4,
+            "evidence": 44.2,
+            "clipProbeScores": {
+              "a clean camera photograph": 0.7,
+              "a synthetic generated image": 91.0,
+              "an edited social media image": 1.6,
+              "an adversarially perturbed image": 4.2,
+              "a watermarked image": 2.4
+            }
           },
           "metrics": {
-            "readiness": 79.8,
-            "evidence": 82.9,
-            "risk": 21.0,
-            "leakageRisk": 14.8,
-            "provenanceConfidence": 87.9,
-            "attackCoverage": 47.2
+            "readiness": 57.7,
+            "attackCoverage": 2.6,
+            "provenanceConfidence": 39.8,
+            "leakageRisk": 4.4,
+            "evidence": 44.2,
+            "risk": 23.7
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-adversarial-provenance-bench"
+            "sourceBench": "cvpr-adversarial-provenance-bench",
+            "execution": "transformers-clip-provenance-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "adversarial-provenance",
           "caseId": "synthetic-watermarked",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:04:05Z",
           "model": {
-            "detector": "watermark-detector",
-            "probe": "clip-perturbation-probe"
+            "detector": "openai/clip-vit-base-patch32",
+            "probe": "clip-provenance-prompt-bank"
           },
           "inputs": {
             "attackControls": {
@@ -1546,37 +1877,47 @@ export const launchInput = {
               "watermarkVisibility": 94,
               "unlearningProbe": 44
             },
-            "asset": "fixtures/adversarial/synthetic-watermarked.png"
+            "asset": "synthetic://synthetic-watermarked"
           },
           "outputs": {
-            "provenanceConfidence": 92.0,
-            "attackHeatmap": "fixtures/adversarial/synthetic-watermarked-attack-heatmap.png",
-            "leakageRisk": 32.9,
-            "evidence": 83.6
+            "provenanceConfidence": 39.1,
+            "attackHeatmap": "synthetic://adversarial/synthetic-watermarked-clip-heatmap.png",
+            "leakageRisk": 14.1,
+            "evidence": 41.5,
+            "clipProbeScores": {
+              "a clean camera photograph": 0.0,
+              "a synthetic generated image": 99.1,
+              "an edited social media image": 0.0,
+              "an adversarially perturbed image": 0.1,
+              "a watermarked image": 0.8
+            }
           },
           "metrics": {
-            "readiness": 79.9,
-            "evidence": 83.6,
-            "risk": 29.9,
-            "leakageRisk": 32.9,
-            "provenanceConfidence": 92.0,
-            "attackCoverage": 54.4
+            "readiness": 53.8,
+            "attackCoverage": 0.1,
+            "provenanceConfidence": 39.1,
+            "leakageRisk": 14.1,
+            "evidence": 41.5,
+            "risk": 29.7
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-adversarial-provenance-bench"
+            "sourceBench": "cvpr-adversarial-provenance-bench",
+            "execution": "transformers-clip-provenance-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "adversarial-provenance",
           "caseId": "adaptive-attack",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:04:05Z",
           "model": {
-            "detector": "watermark-detector",
-            "probe": "clip-perturbation-probe"
+            "detector": "openai/clip-vit-base-patch32",
+            "probe": "clip-provenance-prompt-bank"
           },
           "inputs": {
             "attackControls": {
@@ -1585,38 +1926,48 @@ export const launchInput = {
               "watermarkVisibility": 100,
               "unlearningProbe": 0
             },
-            "asset": "fixtures/adversarial/adaptive-attack.png"
+            "asset": "synthetic://adaptive-attack"
           },
           "outputs": {
-            "provenanceConfidence": 93.8,
-            "attackHeatmap": "fixtures/adversarial/adaptive-attack-attack-heatmap.png",
-            "leakageRisk": 17.4,
-            "evidence": 85.3
+            "provenanceConfidence": 39.9,
+            "attackHeatmap": "synthetic://adversarial/adaptive-attack-clip-heatmap.png",
+            "leakageRisk": 13.1,
+            "evidence": 42.8,
+            "clipProbeScores": {
+              "a clean camera photograph": 0.7,
+              "a synthetic generated image": 85.7,
+              "an edited social media image": 1.7,
+              "an adversarially perturbed image": 8.1,
+              "a watermarked image": 3.9
+            }
           },
           "metrics": {
-            "readiness": 80.8,
-            "evidence": 85.3,
-            "risk": 30.3,
-            "leakageRisk": 17.4,
-            "provenanceConfidence": 93.8,
-            "attackCoverage": 52.6
+            "readiness": 53.9,
+            "attackCoverage": 19.1,
+            "provenanceConfidence": 39.9,
+            "leakageRisk": 13.1,
+            "evidence": 42.8,
+            "risk": 32.7
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-adversarial-provenance-bench"
+            "sourceBench": "cvpr-adversarial-provenance-bench",
+            "execution": "transformers-clip-provenance-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "temporal-rollout",
           "caseId": "short-stable",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:05:38Z",
           "model": {
-            "tracker": "video-feature-tracker",
-            "flow": "raft-lite",
-            "rolloutProbe": "world-rollout-probe"
+            "tracker": "torchvision-raft-small",
+            "flow": "Raft_Small_Weights.C_T_V2",
+            "rolloutProbe": "cuda-optical-flow-consistency"
           },
           "inputs": {
             "trackingControls": {
@@ -1625,43 +1976,54 @@ export const launchInput = {
               "physicsViolations": 14,
               "memoryWindow": 72
             },
-            "asset": "fixtures/temporal/short-stable.mp4"
+            "asset": "synthetic://temporal/short-stable.mp4"
           },
           "outputs": {
-            "identityTracks": "fixtures/temporal/short-stable-identity-tracks.json",
-            "contactEvents": "fixtures/temporal/short-stable-contacts.json",
+            "identityTracks": "synthetic://temporal/short-stable-raft-tracks.json",
+            "contactEvents": "synthetic://temporal/short-stable-contacts.json",
             "driftCurve": [
-              5.2,
-              10.5,
-              15.8,
-              21.0
+              2.7,
+              5.4,
+              8.1,
+              10.8,
+              13.5
             ],
-            "rolloutPlausibility": 85.7
+            "rolloutPlausibility": 85.8,
+            "flowProfile": {
+              "meanMagnitude": 1.6017,
+              "meanRoughness": 0.0288,
+              "meanAcceleration": 0.1546,
+              "elapsedMs": 1191.22,
+              "pairs": 5
+            }
           },
           "metrics": {
-            "readiness": 83.3,
-            "identityStability": 80.6,
-            "contactConsistency": 86.6,
-            "rolloutPlausibility": 85.7,
-            "drift": 21.0,
-            "memoryLoad": 26.6
+            "readiness": 86.1,
+            "identityStability": 86.4,
+            "contactConsistency": 85.9,
+            "rolloutPlausibility": 85.8,
+            "drift": 13.5,
+            "memoryLoad": 24.0
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-temporal-rollout-bench"
+            "sourceBench": "cvpr-temporal-rollout-bench",
+            "execution": "torchvision-raft-small-temporal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "temporal-rollout",
           "caseId": "crowded-memory",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:05:38Z",
           "model": {
-            "tracker": "video-feature-tracker",
-            "flow": "raft-lite",
-            "rolloutProbe": "world-rollout-probe"
+            "tracker": "torchvision-raft-small",
+            "flow": "Raft_Small_Weights.C_T_V2",
+            "rolloutProbe": "cuda-optical-flow-consistency"
           },
           "inputs": {
             "trackingControls": {
@@ -1670,43 +2032,54 @@ export const launchInput = {
               "physicsViolations": 26,
               "memoryWindow": 82
             },
-            "asset": "fixtures/temporal/crowded-memory.mp4"
+            "asset": "synthetic://temporal/crowded-memory.mp4"
           },
           "outputs": {
-            "identityTracks": "fixtures/temporal/crowded-memory-identity-tracks.json",
-            "contactEvents": "fixtures/temporal/crowded-memory-contacts.json",
+            "identityTracks": "synthetic://temporal/crowded-memory-raft-tracks.json",
+            "contactEvents": "synthetic://temporal/crowded-memory-contacts.json",
             "driftCurve": [
-              8.2,
-              16.5,
-              24.8,
-              33.0
+              4.3,
+              8.6,
+              12.9,
+              17.2,
+              21.6
             ],
-            "rolloutPlausibility": 80.0
+            "rolloutPlausibility": 79.5,
+            "flowProfile": {
+              "meanMagnitude": 1.7887,
+              "meanRoughness": 0.0288,
+              "meanAcceleration": 0.0894,
+              "elapsedMs": 168.5,
+              "pairs": 5
+            }
           },
           "metrics": {
-            "readiness": 75.9,
-            "identityStability": 73.8,
-            "contactConsistency": 79.4,
-            "rolloutPlausibility": 80.0,
-            "drift": 33.0,
-            "memoryLoad": 43.8
+            "readiness": 80.3,
+            "identityStability": 79.9,
+            "contactConsistency": 82.6,
+            "rolloutPlausibility": 79.5,
+            "drift": 21.6,
+            "memoryLoad": 40.3
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-temporal-rollout-bench"
+            "sourceBench": "cvpr-temporal-rollout-bench",
+            "execution": "torchvision-raft-small-temporal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "temporal-rollout",
           "caseId": "contact-heavy",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:05:38Z",
           "model": {
-            "tracker": "video-feature-tracker",
-            "flow": "raft-lite",
-            "rolloutProbe": "world-rollout-probe"
+            "tracker": "torchvision-raft-small",
+            "flow": "Raft_Small_Weights.C_T_V2",
+            "rolloutProbe": "cuda-optical-flow-consistency"
           },
           "inputs": {
             "trackingControls": {
@@ -1715,43 +2088,54 @@ export const launchInput = {
               "physicsViolations": 20,
               "memoryWindow": 82
             },
-            "asset": "fixtures/temporal/contact-heavy.mp4"
+            "asset": "synthetic://temporal/contact-heavy.mp4"
           },
           "outputs": {
-            "identityTracks": "fixtures/temporal/contact-heavy-identity-tracks.json",
-            "contactEvents": "fixtures/temporal/contact-heavy-contacts.json",
+            "identityTracks": "synthetic://temporal/contact-heavy-raft-tracks.json",
+            "contactEvents": "synthetic://temporal/contact-heavy-contacts.json",
             "driftCurve": [
-              8.6,
-              17.1,
-              25.7,
-              34.3
+              3.9,
+              7.9,
+              11.8,
+              15.7,
+              19.7
             ],
-            "rolloutPlausibility": 77.1
+            "rolloutPlausibility": 80.9,
+            "flowProfile": {
+              "meanMagnitude": 1.732,
+              "meanRoughness": 0.0313,
+              "meanAcceleration": 0.1067,
+              "elapsedMs": 164.0,
+              "pairs": 5
+            }
           },
           "metrics": {
-            "readiness": 76.2,
-            "identityStability": 74.0,
-            "contactConsistency": 83.6,
-            "rolloutPlausibility": 77.1,
-            "drift": 34.3,
-            "memoryLoad": 42.5
+            "readiness": 81.9,
+            "identityStability": 81.5,
+            "contactConsistency": 84.3,
+            "rolloutPlausibility": 80.9,
+            "drift": 19.7,
+            "memoryLoad": 38.8
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-temporal-rollout-bench"
+            "sourceBench": "cvpr-temporal-rollout-bench",
+            "execution": "torchvision-raft-small-temporal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "temporal-rollout",
           "caseId": "long-rollout-drift",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:05:38Z",
           "model": {
-            "tracker": "video-feature-tracker",
-            "flow": "raft-lite",
-            "rolloutProbe": "world-rollout-probe"
+            "tracker": "torchvision-raft-small",
+            "flow": "Raft_Small_Weights.C_T_V2",
+            "rolloutProbe": "cuda-optical-flow-consistency"
           },
           "inputs": {
             "trackingControls": {
@@ -1760,207 +2144,54 @@ export const launchInput = {
               "physicsViolations": 12,
               "memoryWindow": 92
             },
-            "asset": "fixtures/temporal/long-rollout-drift.mp4"
+            "asset": "synthetic://temporal/long-rollout-drift.mp4"
           },
           "outputs": {
-            "identityTracks": "fixtures/temporal/long-rollout-drift-identity-tracks.json",
-            "contactEvents": "fixtures/temporal/long-rollout-drift-contacts.json",
+            "identityTracks": "synthetic://temporal/long-rollout-drift-raft-tracks.json",
+            "contactEvents": "synthetic://temporal/long-rollout-drift-contacts.json",
             "driftCurve": [
-              9.0,
-              18.1,
-              27.1,
-              36.1
+              4.1,
+              8.3,
+              12.4,
+              16.6,
+              20.7
             ],
-            "rolloutPlausibility": 75.5
+            "rolloutPlausibility": 79.7,
+            "flowProfile": {
+              "meanMagnitude": 1.8144,
+              "meanRoughness": 0.0331,
+              "meanAcceleration": 0.1629,
+              "elapsedMs": 162.79,
+              "pairs": 5
+            }
           },
           "metrics": {
-            "readiness": 75.9,
-            "identityStability": 72.7,
-            "contactConsistency": 86.5,
-            "rolloutPlausibility": 75.5,
-            "drift": 36.1,
-            "memoryLoad": 48.1
+            "readiness": 81.3,
+            "identityStability": 79.0,
+            "contactConsistency": 86.4,
+            "rolloutPlausibility": 79.7,
+            "drift": 20.7,
+            "memoryLoad": 44.4
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-temporal-rollout-bench"
-          }
-        },
-        {
-          "jobId": "clinical-shift",
-          "caseId": "same-site-clean",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "embedding": "dicom-embedding-shift-probe",
-            "calibration": "temperature-calibration-head",
-            "triage": "uncertainty-triage-head"
-          },
-          "inputs": {
-            "clinicalControls": {
-              "scannerShift": 16,
-              "cohortMix": 22,
-              "labelNoise": 8,
-              "reviewThreshold": 62
-            },
-            "asset": "fixtures/clinical/same-site-clean.json"
-          },
-          "outputs": {
-            "domainEmbeddings": "fixtures/clinical/same-site-clean-domain-embeddings.npy",
-            "calibrationCurve": "fixtures/clinical/same-site-clean-calibration.json",
-            "triageScores": "fixtures/clinical/same-site-clean-triage.json",
-            "clinicalEvidence": 90.3
-          },
-          "metrics": {
-            "readiness": 88.5,
-            "shiftLoad": 16.7,
-            "calibration": 84.3,
-            "domainEvidence": 89.1,
-            "triageRate": 25.4,
-            "residualRisk": 9.6,
-            "clinicalEvidence": 90.3
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-clinical-shift-bench"
-          }
-        },
-        {
-          "jobId": "clinical-shift",
-          "caseId": "new-scanner",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "embedding": "dicom-embedding-shift-probe",
-            "calibration": "temperature-calibration-head",
-            "triage": "uncertainty-triage-head"
-          },
-          "inputs": {
-            "clinicalControls": {
-              "scannerShift": 58,
-              "cohortMix": 34,
-              "labelNoise": 16,
-              "reviewThreshold": 68
-            },
-            "asset": "fixtures/clinical/new-scanner.json"
-          },
-          "outputs": {
-            "domainEmbeddings": "fixtures/clinical/new-scanner-domain-embeddings.npy",
-            "calibrationCurve": "fixtures/clinical/new-scanner-calibration.json",
-            "triageScores": "fixtures/clinical/new-scanner-triage.json",
-            "clinicalEvidence": 84.8
-          },
-          "metrics": {
-            "readiness": 80.5,
-            "shiftLoad": 40.5,
-            "calibration": 77.5,
-            "domainEvidence": 78.6,
-            "triageRate": 39.7,
-            "residualRisk": 21.6,
-            "clinicalEvidence": 84.8
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-clinical-shift-bench"
-          }
-        },
-        {
-          "jobId": "clinical-shift",
-          "caseId": "external-hospital",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "embedding": "dicom-embedding-shift-probe",
-            "calibration": "temperature-calibration-head",
-            "triage": "uncertainty-triage-head"
-          },
-          "inputs": {
-            "clinicalControls": {
-              "scannerShift": 52,
-              "cohortMix": 72,
-              "labelNoise": 16,
-              "reviewThreshold": 74
-            },
-            "asset": "fixtures/clinical/external-hospital.json"
-          },
-          "outputs": {
-            "domainEmbeddings": "fixtures/clinical/external-hospital-domain-embeddings.npy",
-            "calibrationCurve": "fixtures/clinical/external-hospital-calibration.json",
-            "triageScores": "fixtures/clinical/external-hospital-triage.json",
-            "clinicalEvidence": 82.3
-          },
-          "metrics": {
-            "readiness": 77.1,
-            "shiftLoad": 52.4,
-            "calibration": 75.4,
-            "domainEvidence": 72.9,
-            "triageRate": 47.0,
-            "residualRisk": 26.4,
-            "clinicalEvidence": 82.3
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-clinical-shift-bench"
-          }
-        },
-        {
-          "jobId": "clinical-shift",
-          "caseId": "noisy-rare-cohort",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "embedding": "dicom-embedding-shift-probe",
-            "calibration": "temperature-calibration-head",
-            "triage": "uncertainty-triage-head"
-          },
-          "inputs": {
-            "clinicalControls": {
-              "scannerShift": 76,
-              "cohortMix": 84,
-              "labelNoise": 20,
-              "reviewThreshold": 84
-            },
-            "asset": "fixtures/clinical/noisy-rare-cohort.json"
-          },
-          "outputs": {
-            "domainEmbeddings": "fixtures/clinical/noisy-rare-cohort-domain-embeddings.npy",
-            "calibrationCurve": "fixtures/clinical/noisy-rare-cohort-calibration.json",
-            "triageScores": "fixtures/clinical/noisy-rare-cohort-triage.json",
-            "clinicalEvidence": 79.1
-          },
-          "metrics": {
-            "readiness": 72.5,
-            "shiftLoad": 67.8,
-            "calibration": 72.4,
-            "domainEvidence": 66.0,
-            "triageRate": 57.0,
-            "residualRisk": 33.5,
-            "clinicalEvidence": 79.1
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-clinical-shift-bench"
+            "sourceBench": "cvpr-temporal-rollout-bench",
+            "execution": "torchvision-raft-small-temporal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "compute-serving",
           "caseId": "desktop-batch",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:06:15Z",
           "model": {
-            "encoder": "quantized-vision-encoder",
-            "router": "student-router",
-            "profiler": "latency-profiler"
+            "encoder": "torch-cuda-matmul-vision-encoder",
+            "router": "student-router-profiler",
+            "profiler": "cuda-event-latency-profiler"
           },
           "inputs": {
             "servingControls": {
@@ -1969,39 +2200,53 @@ export const launchInput = {
               "studentRouting": 30,
               "escalationCost": 10
             },
-            "asset": "fixtures/compute/desktop-batch.json"
+            "title": "Desktop batch review"
           },
           "outputs": {
-            "latencyProfile": "fixtures/compute/desktop-batch-latency.json",
-            "qualityFloor": 87.4,
-            "routingTrace": "fixtures/compute/desktop-batch-routing.json",
-            "retainedEvidence": 90.9
+            "latencyProfile": {
+              "perIterationMs": 3.031,
+              "repeats": 24,
+              "matrix": [
+                924,
+                156,
+                924
+              ]
+            },
+            "qualityFloor": 85.8,
+            "routingTrace": {
+              "studentRouting": 30,
+              "checksum": 0.066269
+            },
+            "retainedEvidence": 86.6
           },
           "metrics": {
-            "readiness": 76.6,
-            "latency": 58.7,
-            "retainedEvidence": 90.9,
-            "qualityFloor": 87.4,
-            "escalationRate": 17.3,
-            "costSaving": 38.5,
-            "risk": 13.1
+            "readiness": 89.1,
+            "latency": 91.8,
+            "retainedEvidence": 86.6,
+            "qualityFloor": 85.8,
+            "escalationRate": 14.7,
+            "costSaving": 22.7,
+            "risk": 7.2
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-compute-serving-bench"
+            "sourceBench": "cvpr-compute-serving-bench",
+            "execution": "torch-cuda-compute-serving-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "compute-serving",
           "caseId": "mobile-live",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:06:15Z",
           "model": {
-            "encoder": "quantized-vision-encoder",
-            "router": "student-router",
-            "profiler": "latency-profiler"
+            "encoder": "torch-cuda-matmul-vision-encoder",
+            "router": "student-router-profiler",
+            "profiler": "cuda-event-latency-profiler"
           },
           "inputs": {
             "servingControls": {
@@ -2010,39 +2255,53 @@ export const launchInput = {
               "studentRouting": 60,
               "escalationCost": 10
             },
-            "asset": "fixtures/compute/mobile-live.json"
+            "title": "Mobile live inference"
           },
           "outputs": {
-            "latencyProfile": "fixtures/compute/mobile-live-latency.json",
-            "qualityFloor": 81.6,
-            "routingTrace": "fixtures/compute/mobile-live-routing.json",
-            "retainedEvidence": 87.5
+            "latencyProfile": {
+              "perIterationMs": 0.168,
+              "repeats": 24,
+              "matrix": [
+                876,
+                216,
+                876
+              ]
+            },
+            "qualityFloor": 81.8,
+            "routingTrace": {
+              "studentRouting": 60,
+              "checksum": -0.334
+            },
+            "retainedEvidence": 85.0
           },
           "metrics": {
-            "readiness": 74.6,
-            "latency": 55.5,
-            "retainedEvidence": 87.5,
-            "qualityFloor": 81.6,
-            "escalationRate": 29.8,
-            "costSaving": 45.2,
-            "risk": 18.8
+            "readiness": 87.3,
+            "latency": 93.7,
+            "retainedEvidence": 85.0,
+            "qualityFloor": 81.8,
+            "escalationRate": 24.9,
+            "costSaving": 38.2,
+            "risk": 10.3
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-compute-serving-bench"
+            "sourceBench": "cvpr-compute-serving-bench",
+            "execution": "torch-cuda-compute-serving-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "compute-serving",
           "caseId": "edge-camera",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:06:15Z",
           "model": {
-            "encoder": "quantized-vision-encoder",
-            "router": "student-router",
-            "profiler": "latency-profiler"
+            "encoder": "torch-cuda-matmul-vision-encoder",
+            "router": "student-router-profiler",
+            "profiler": "cuda-event-latency-profiler"
           },
           "inputs": {
             "servingControls": {
@@ -2051,39 +2310,53 @@ export const launchInput = {
               "studentRouting": 55,
               "escalationCost": 8
             },
-            "asset": "fixtures/compute/edge-camera.json"
+            "title": "Edge camera stream"
           },
           "outputs": {
-            "latencyProfile": "fixtures/compute/edge-camera-latency.json",
-            "qualityFloor": 81.2,
-            "routingTrace": "fixtures/compute/edge-camera-routing.json",
-            "retainedEvidence": 85.7
+            "latencyProfile": {
+              "perIterationMs": 0.157,
+              "repeats": 24,
+              "matrix": [
+                852,
+                206,
+                852
+              ]
+            },
+            "qualityFloor": 80.9,
+            "routingTrace": {
+              "studentRouting": 55,
+              "checksum": -0.14627
+            },
+            "retainedEvidence": 84.0
           },
           "metrics": {
-            "readiness": 73.5,
-            "latency": 56.9,
-            "retainedEvidence": 85.7,
-            "qualityFloor": 81.2,
-            "escalationRate": 28.3,
-            "costSaving": 44.2,
-            "risk": 19.5
+            "readiness": 87.0,
+            "latency": 94.2,
+            "retainedEvidence": 84.0,
+            "qualityFloor": 80.9,
+            "escalationRate": 22.3,
+            "costSaving": 36.8,
+            "risk": 10.1
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-compute-serving-bench"
+            "sourceBench": "cvpr-compute-serving-bench",
+            "execution": "torch-cuda-compute-serving-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "compute-serving",
           "caseId": "fleet-peak-load",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:06:15Z",
           "model": {
-            "encoder": "quantized-vision-encoder",
-            "router": "student-router",
-            "profiler": "latency-profiler"
+            "encoder": "torch-cuda-matmul-vision-encoder",
+            "router": "student-router-profiler",
+            "profiler": "cuda-event-latency-profiler"
           },
           "inputs": {
             "servingControls": {
@@ -2092,39 +2365,53 @@ export const launchInput = {
               "studentRouting": 65,
               "escalationCost": 8
             },
-            "asset": "fixtures/compute/fleet-peak-load.json"
+            "title": "Fleet peak load"
           },
           "outputs": {
-            "latencyProfile": "fixtures/compute/fleet-peak-load-latency.json",
-            "qualityFloor": 80.1,
-            "routingTrace": "fixtures/compute/fleet-peak-load-routing.json",
-            "retainedEvidence": 87.6
+            "latencyProfile": {
+              "perIterationMs": 0.165,
+              "repeats": 24,
+              "matrix": [
+                888,
+                226,
+                888
+              ]
+            },
+            "qualityFloor": 81.0,
+            "routingTrace": {
+              "studentRouting": 65,
+              "checksum": 0.124414
+            },
+            "retainedEvidence": 84.9
           },
           "metrics": {
-            "readiness": 74.6,
-            "latency": 52.5,
-            "retainedEvidence": 87.6,
-            "qualityFloor": 80.1,
-            "escalationRate": 31.3,
-            "costSaving": 48.2,
-            "risk": 20.3
+            "readiness": 86.9,
+            "latency": 93.2,
+            "retainedEvidence": 84.9,
+            "qualityFloor": 81.0,
+            "escalationRate": 25.7,
+            "costSaving": 42.6,
+            "risk": 10.7
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-compute-serving-bench"
+            "sourceBench": "cvpr-compute-serving-bench",
+            "execution": "torch-cuda-compute-serving-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "constraint-generation",
           "caseId": "light-layout-edit",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:14Z",
           "model": {
-            "layout": "layout-controlnet",
-            "identity": "identity-embedding-lock",
-            "reward": "preference-reward-probe"
+            "layout": "torch-layout-probe",
+            "identity": "torch-identity-embedding-probe",
+            "reward": "constraint-reward-probe"
           },
           "inputs": {
             "generationControls": {
@@ -2133,40 +2420,43 @@ export const launchInput = {
               "identityLock": 82,
               "adversarialPromptPressure": 18
             },
-            "asset": "fixtures/generation/light-layout-edit.png"
+            "asset": "synthetic://generation/light-layout-edit.png"
           },
           "outputs": {
-            "editedImage": "fixtures/generation/light-layout-edit-edited.png",
-            "layoutMask": "fixtures/generation/light-layout-edit-layout-mask.png",
-            "identityEmbeddingDelta": 18.5,
-            "rewardTrace": "fixtures/generation/light-layout-edit-reward.json"
+            "editedImage": "synthetic://generation/light-layout-edit-edited.png",
+            "layoutMask": "synthetic://generation/light-layout-edit-layout-mask.png",
+            "identityEmbeddingDelta": 19.2,
+            "rewardTrace": "synthetic://generation/light-layout-edit-reward.json"
           },
           "metrics": {
-            "readiness": 84.9,
+            "readiness": 78.5,
             "editPressure": 21.0,
-            "constraintSatisfaction": 86.1,
-            "identityPreservation": 85.0,
-            "editLocality": 82.8,
-            "rewardAlignment": 87.3,
-            "identityDamage": 18.5,
-            "provenanceRisk": 17.6
+            "constraintSatisfaction": 80.8,
+            "identityPreservation": 80.2,
+            "editLocality": 76.2,
+            "rewardAlignment": 73.6,
+            "identityDamage": 19.2,
+            "provenanceRisk": 20.1
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-constraint-generation-bench"
+            "sourceBench": "cvpr-constraint-generation-bench",
+            "execution": "torch-layout-identity-reward-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "constraint-generation",
           "caseId": "style-with-locks",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:14Z",
           "model": {
-            "layout": "layout-controlnet",
-            "identity": "identity-embedding-lock",
-            "reward": "preference-reward-probe"
+            "layout": "torch-layout-probe",
+            "identity": "torch-identity-embedding-probe",
+            "reward": "constraint-reward-probe"
           },
           "inputs": {
             "generationControls": {
@@ -2175,40 +2465,43 @@ export const launchInput = {
               "identityLock": 80,
               "adversarialPromptPressure": 32
             },
-            "asset": "fixtures/generation/style-with-locks.png"
+            "asset": "synthetic://generation/style-with-locks.png"
           },
           "outputs": {
-            "editedImage": "fixtures/generation/style-with-locks-edited.png",
-            "layoutMask": "fixtures/generation/style-with-locks-layout-mask.png",
-            "identityEmbeddingDelta": 31.8,
-            "rewardTrace": "fixtures/generation/style-with-locks-reward.json"
+            "editedImage": "synthetic://generation/style-with-locks-edited.png",
+            "layoutMask": "synthetic://generation/style-with-locks-layout-mask.png",
+            "identityEmbeddingDelta": 31.3,
+            "rewardTrace": "synthetic://generation/style-with-locks-reward.json"
           },
           "metrics": {
-            "readiness": 77.4,
-            "editPressure": 39.2,
-            "constraintSatisfaction": 80.9,
-            "identityPreservation": 77.3,
-            "editLocality": 74.4,
-            "rewardAlignment": 81.3,
-            "identityDamage": 31.8,
-            "provenanceRisk": 29.5
+            "readiness": 70.9,
+            "editPressure": 39.3,
+            "constraintSatisfaction": 74.7,
+            "identityPreservation": 73.7,
+            "editLocality": 67.7,
+            "rewardAlignment": 66.0,
+            "identityDamage": 31.3,
+            "provenanceRisk": 32.2
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-constraint-generation-bench"
+            "sourceBench": "cvpr-constraint-generation-bench",
+            "execution": "torch-layout-identity-reward-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "constraint-generation",
           "caseId": "layout-rewrite",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:14Z",
           "model": {
-            "layout": "layout-controlnet",
-            "identity": "identity-embedding-lock",
-            "reward": "preference-reward-probe"
+            "layout": "torch-layout-probe",
+            "identity": "torch-identity-embedding-probe",
+            "reward": "constraint-reward-probe"
           },
           "inputs": {
             "generationControls": {
@@ -2217,40 +2510,43 @@ export const launchInput = {
               "identityLock": 92,
               "adversarialPromptPressure": 28
             },
-            "asset": "fixtures/generation/layout-rewrite.png"
+            "asset": "synthetic://generation/layout-rewrite.png"
           },
           "outputs": {
-            "editedImage": "fixtures/generation/layout-rewrite-edited.png",
-            "layoutMask": "fixtures/generation/layout-rewrite-layout-mask.png",
-            "identityEmbeddingDelta": 33.1,
-            "rewardTrace": "fixtures/generation/layout-rewrite-reward.json"
+            "editedImage": "synthetic://generation/layout-rewrite-edited.png",
+            "layoutMask": "synthetic://generation/layout-rewrite-layout-mask.png",
+            "identityEmbeddingDelta": 32.4,
+            "rewardTrace": "synthetic://generation/layout-rewrite-reward.json"
           },
           "metrics": {
-            "readiness": 77.5,
+            "readiness": 70.5,
             "editPressure": 45.7,
-            "constraintSatisfaction": 81.1,
-            "identityPreservation": 78.4,
-            "editLocality": 72.9,
-            "rewardAlignment": 82.4,
-            "identityDamage": 33.1,
-            "provenanceRisk": 29.9
+            "constraintSatisfaction": 73.2,
+            "identityPreservation": 75.0,
+            "editLocality": 65.9,
+            "rewardAlignment": 66.2,
+            "identityDamage": 32.4,
+            "provenanceRisk": 33.1
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-constraint-generation-bench"
+            "sourceBench": "cvpr-constraint-generation-bench",
+            "execution": "torch-layout-identity-reward-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "constraint-generation",
           "caseId": "prompt-attack-edit",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:14Z",
           "model": {
-            "layout": "layout-controlnet",
-            "identity": "identity-embedding-lock",
-            "reward": "preference-reward-probe"
+            "layout": "torch-layout-probe",
+            "identity": "torch-identity-embedding-probe",
+            "reward": "constraint-reward-probe"
           },
           "inputs": {
             "generationControls": {
@@ -2259,38 +2555,1273 @@ export const launchInput = {
               "identityLock": 92,
               "adversarialPromptPressure": 28
             },
-            "asset": "fixtures/generation/prompt-attack-edit.png"
+            "asset": "synthetic://generation/prompt-attack-edit.png"
           },
           "outputs": {
-            "editedImage": "fixtures/generation/prompt-attack-edit-edited.png",
-            "layoutMask": "fixtures/generation/prompt-attack-edit-layout-mask.png",
-            "identityEmbeddingDelta": 34.8,
-            "rewardTrace": "fixtures/generation/prompt-attack-edit-reward.json"
+            "editedImage": "synthetic://generation/prompt-attack-edit-edited.png",
+            "layoutMask": "synthetic://generation/prompt-attack-edit-layout-mask.png",
+            "identityEmbeddingDelta": 34.0,
+            "rewardTrace": "synthetic://generation/prompt-attack-edit-reward.json"
           },
           "metrics": {
-            "readiness": 77.6,
-            "editPressure": 47.7,
-            "constraintSatisfaction": 82.3,
-            "identityPreservation": 77.3,
-            "editLocality": 73.6,
-            "rewardAlignment": 82.5,
-            "identityDamage": 34.8,
-            "provenanceRisk": 30.0
+            "readiness": 70.8,
+            "editPressure": 47.8,
+            "constraintSatisfaction": 74.7,
+            "identityPreservation": 74.0,
+            "editLocality": 66.7,
+            "rewardAlignment": 66.6,
+            "identityDamage": 34.0,
+            "provenanceRisk": 33.1
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-constraint-generation-bench"
+            "sourceBench": "cvpr-constraint-generation-bench",
+            "execution": "torch-layout-identity-reward-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "indoor-low-texture",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:22:34Z",
+          "model": {
+            "depth": "torch-cuda-depth-normal-probe",
+            "surface": "finite-difference-normal-consistency"
+          },
+          "inputs": {
+            "depthControls": {
+              "textureSparsity": 68,
+              "thinStructure": 24,
+              "scaleAmbiguity": 54
+            },
+            "asset": "synthetic://depth/indoor-low-texture.png"
+          },
+          "outputs": {
+            "depthMap": "synthetic://depth/depth-map.pt",
+            "normalEnergy": 0.024086,
+            "curvature": 0.004773
+          },
+          "metrics": {
+            "readiness": 81.8,
+            "depthRange": 0.7193,
+            "normalConsistency": 84.4,
+            "surfaceConsistency": 89.4,
+            "scaleDrift": 29.1,
+            "thinStructureRisk": 15.8
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-depth-normal-consistency-bench",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "thin-chair-legs",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:22:34Z",
+          "model": {
+            "depth": "torch-cuda-depth-normal-probe",
+            "surface": "finite-difference-normal-consistency"
+          },
+          "inputs": {
+            "depthControls": {
+              "textureSparsity": 38,
+              "thinStructure": 78,
+              "scaleAmbiguity": 32
+            },
+            "asset": "synthetic://depth/thin-chair-legs.png"
+          },
+          "outputs": {
+            "depthMap": "synthetic://depth/depth-map.pt",
+            "normalEnergy": 0.019778,
+            "curvature": 0.003684
+          },
+          "metrics": {
+            "readiness": 75.7,
+            "depthRange": 0.6591,
+            "normalConsistency": 87.9,
+            "surfaceConsistency": 80.2,
+            "scaleDrift": 19.5,
+            "thinStructureRisk": 46.8
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-depth-normal-consistency-bench",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "reflective-surface",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:22:34Z",
+          "model": {
+            "depth": "torch-cuda-depth-normal-probe",
+            "surface": "finite-difference-normal-consistency"
+          },
+          "inputs": {
+            "depthControls": {
+              "textureSparsity": 52,
+              "thinStructure": 34,
+              "scaleAmbiguity": 46
+            },
+            "asset": "synthetic://depth/reflective-surface.png"
+          },
+          "outputs": {
+            "depthMap": "synthetic://depth/depth-map.pt",
+            "normalEnergy": 0.021851,
+            "curvature": 0.004147
+          },
+          "metrics": {
+            "readiness": 81.6,
+            "depthRange": 0.6839,
+            "normalConsistency": 86.3,
+            "surfaceConsistency": 87.9,
+            "scaleDrift": 25.3,
+            "thinStructureRisk": 21.5
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-depth-normal-consistency-bench",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "wide-room-scale",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:22:34Z",
+          "model": {
+            "depth": "torch-cuda-depth-normal-probe",
+            "surface": "finite-difference-normal-consistency"
+          },
+          "inputs": {
+            "depthControls": {
+              "textureSparsity": 44,
+              "thinStructure": 22,
+              "scaleAmbiguity": 68
+            },
+            "asset": "synthetic://depth/wide-room-scale.png"
+          },
+          "outputs": {
+            "depthMap": "synthetic://depth/depth-map.pt",
+            "normalEnergy": 0.020688,
+            "curvature": 0.00388
+          },
+          "metrics": {
+            "readiness": 82.5,
+            "depthRange": 0.677,
+            "normalConsistency": 87.2,
+            "surfaceConsistency": 90.2,
+            "scaleDrift": 32.0,
+            "thinStructureRisk": 14.4
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-depth-normal-consistency-bench",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "motion-blur",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:26:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "probe": "clean-corrupted-logit-delta"
+          },
+          "inputs": {
+            "corruptionControls": {
+              "corruption": "blur",
+              "severity": 46
+            },
+            "asset": "synthetic://robustness/motion-blur.png"
+          },
+          "outputs": {
+            "cleanConfidence": 35.2,
+            "corruptedConfidence": 66.3,
+            "jsDivergence": 0.712014,
+            "featureCosine": 0.940137
+          },
+          "metrics": {
+            "readiness": 80.8,
+            "robustness": 86.3,
+            "confidenceCollapse": 15.0,
+            "featureRetention": 94.0,
+            "labelStability": 74.6,
+            "severity": 46,
+            "topClassChanged": 1
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-corruption-robustness-bench",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "sensor-noise",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:26:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "probe": "clean-corrupted-logit-delta"
+          },
+          "inputs": {
+            "corruptionControls": {
+              "corruption": "noise",
+              "severity": 52
+            },
+            "asset": "synthetic://robustness/sensor-noise.png"
+          },
+          "outputs": {
+            "cleanConfidence": 38.2,
+            "corruptedConfidence": 43.1,
+            "jsDivergence": 0.06174,
+            "featureCosine": 0.963718
+          },
+          "metrics": {
+            "readiness": 84.4,
+            "robustness": 91.9,
+            "confidenceCollapse": 10.0,
+            "featureRetention": 96.4,
+            "labelStability": 99.0,
+            "severity": 52,
+            "topClassChanged": 0
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-corruption-robustness-bench",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "patch-attack",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:26:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "probe": "clean-corrupted-logit-delta"
+          },
+          "inputs": {
+            "corruptionControls": {
+              "corruption": "patch",
+              "severity": 66
+            },
+            "asset": "synthetic://robustness/patch-attack.png"
+          },
+          "outputs": {
+            "cleanConfidence": 33.5,
+            "corruptedConfidence": 36.9,
+            "jsDivergence": 0.031526,
+            "featureCosine": 0.973741
+          },
+          "metrics": {
+            "readiness": 81.1,
+            "robustness": 90.8,
+            "confidenceCollapse": 11.8,
+            "featureRetention": 97.4,
+            "labelStability": 99.5,
+            "severity": 66,
+            "topClassChanged": 0
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-corruption-robustness-bench",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "compression-shift",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:26:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "probe": "clean-corrupted-logit-delta"
+          },
+          "inputs": {
+            "corruptionControls": {
+              "corruption": "compression",
+              "severity": 58
+            },
+            "asset": "synthetic://robustness/compression-shift.png"
+          },
+          "outputs": {
+            "cleanConfidence": 38.5,
+            "corruptedConfidence": 39.9,
+            "jsDivergence": 0.009099,
+            "featureCosine": 0.9972
+          },
+          "metrics": {
+            "readiness": 84.1,
+            "robustness": 92.9,
+            "confidenceCollapse": 9.4,
+            "featureRetention": 99.7,
+            "labelStability": 99.9,
+            "severity": 58,
+            "topClassChanged": 0
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-corruption-robustness-bench",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "single-object",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:23:49Z",
+          "model": {
+            "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+            "promptProbe": "mask-rcnn-click-robustness-proxy"
+          },
+          "inputs": {
+            "promptControls": {
+              "objectClutter": 18,
+              "promptNoise": 8,
+              "occlusion": 10
+            },
+            "asset": "synthetic://segmentation/single-object.png"
+          },
+          "outputs": {
+            "meanMaskConfidence": 60.7,
+            "maskArea": 0.88176,
+            "maskOverlap": 0.38536
+          },
+          "metrics": {
+            "readiness": 65.4,
+            "maskStability": 57.2,
+            "promptSensitivity": 32.4,
+            "unsupportedRegionRisk": 20.2,
+            "detections": 2
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "cluttered-scene",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:23:49Z",
+          "model": {
+            "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+            "promptProbe": "mask-rcnn-click-robustness-proxy"
+          },
+          "inputs": {
+            "promptControls": {
+              "objectClutter": 64,
+              "promptNoise": 18,
+              "occlusion": 24
+            },
+            "asset": "synthetic://segmentation/cluttered-scene.png"
+          },
+          "outputs": {
+            "meanMaskConfidence": 66.3,
+            "maskArea": 0.9091,
+            "maskOverlap": 0.40537
+          },
+          "metrics": {
+            "readiness": 62.3,
+            "maskStability": 59.4,
+            "promptSensitivity": 48.0,
+            "unsupportedRegionRisk": 22.8,
+            "detections": 2
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "ambiguous-clicks",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:23:49Z",
+          "model": {
+            "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+            "promptProbe": "mask-rcnn-click-robustness-proxy"
+          },
+          "inputs": {
+            "promptControls": {
+              "objectClutter": 46,
+              "promptNoise": 62,
+              "occlusion": 18
+            },
+            "asset": "synthetic://segmentation/ambiguous-clicks.png"
+          },
+          "outputs": {
+            "meanMaskConfidence": 66.7,
+            "maskArea": 0.90569,
+            "maskOverlap": 0.38714
+          },
+          "metrics": {
+            "readiness": 58.3,
+            "maskStability": 60.7,
+            "promptSensitivity": 61.3,
+            "unsupportedRegionRisk": 28.2,
+            "detections": 2
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "occluded-object",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:23:49Z",
+          "model": {
+            "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+            "promptProbe": "mask-rcnn-click-robustness-proxy"
+          },
+          "inputs": {
+            "promptControls": {
+              "objectClutter": 38,
+              "promptNoise": 26,
+              "occlusion": 70
+            },
+            "asset": "synthetic://segmentation/occluded-object.png"
+          },
+          "outputs": {
+            "meanMaskConfidence": 66.3,
+            "maskArea": 0.91259,
+            "maskOverlap": 0.40266
+          },
+          "metrics": {
+            "readiness": 57.8,
+            "maskStability": 53.9,
+            "promptSensitivity": 45.5,
+            "unsupportedRegionRisk": 35.1,
+            "detections": 2
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "clean-crossing",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:24:31Z",
+          "model": {
+            "tracker": "torch-cuda-centroid-assignment-tracker",
+            "temporalProbe": "mask-sequence-identity-drift"
+          },
+          "inputs": {
+            "trackingControls": {
+              "occlusion": 12,
+              "crowding": 22,
+              "velocity": 36
+            },
+            "asset": "synthetic://tracking/clean-crossing.mp4"
+          },
+          "outputs": {
+            "frames": 8,
+            "objects": 3,
+            "temporalDelta": 0.01013,
+            "trackTensor": "synthetic://tracking/clean-crossing-tracks.pt"
+          },
+          "metrics": {
+            "readiness": 88.8,
+            "identityStability": 88.9,
+            "occlusionRecovery": 85.0,
+            "trackContinuity": 91.5,
+            "identityDrift": 1.5
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-video-identity-tracking-bench",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "identity-crossing",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:24:31Z",
+          "model": {
+            "tracker": "torch-cuda-centroid-assignment-tracker",
+            "temporalProbe": "mask-sequence-identity-drift"
+          },
+          "inputs": {
+            "trackingControls": {
+              "occlusion": 26,
+              "crowding": 68,
+              "velocity": 42
+            },
+            "asset": "synthetic://tracking/identity-crossing.mp4"
+          },
+          "outputs": {
+            "frames": 8,
+            "objects": 3,
+            "temporalDelta": 0.01697,
+            "trackTensor": "synthetic://tracking/identity-crossing-tracks.pt"
+          },
+          "metrics": {
+            "readiness": 82.6,
+            "identityStability": 81.4,
+            "occlusionRecovery": 79.2,
+            "trackContinuity": 90.0,
+            "identityDrift": 2.7
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-video-identity-tracking-bench",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "long-occlusion",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:24:31Z",
+          "model": {
+            "tracker": "torch-cuda-centroid-assignment-tracker",
+            "temporalProbe": "mask-sequence-identity-drift"
+          },
+          "inputs": {
+            "trackingControls": {
+              "occlusion": 74,
+              "crowding": 36,
+              "velocity": 34
+            },
+            "asset": "synthetic://tracking/long-occlusion.mp4"
+          },
+          "outputs": {
+            "frames": 8,
+            "objects": 3,
+            "temporalDelta": 0.014317,
+            "trackTensor": "synthetic://tracking/long-occlusion-tracks.pt"
+          },
+          "metrics": {
+            "readiness": 79.6,
+            "identityStability": 79.2,
+            "occlusionRecovery": 75.4,
+            "trackContinuity": 91.1,
+            "identityDrift": 2.3
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-video-identity-tracking-bench",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "fast-motion",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:24:31Z",
+          "model": {
+            "tracker": "torch-cuda-centroid-assignment-tracker",
+            "temporalProbe": "mask-sequence-identity-drift"
+          },
+          "inputs": {
+            "trackingControls": {
+              "occlusion": 22,
+              "crowding": 42,
+              "velocity": 78
+            },
+            "asset": "synthetic://tracking/fast-motion.mp4"
+          },
+          "outputs": {
+            "frames": 8,
+            "objects": 3,
+            "temporalDelta": 0.019914,
+            "trackTensor": "synthetic://tracking/fast-motion-tracks.pt"
+          },
+          "metrics": {
+            "readiness": 83.1,
+            "identityStability": 84.0,
+            "occlusionRecovery": 77.9,
+            "trackContinuity": 86.7,
+            "identityDrift": 3.2
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-video-identity-tracking-bench",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "metric-geometry",
+          "caseId": "wide-baseline",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:31:36Z",
+          "model": {
+            "solver": "torch-cuda-differentiable-camera-solver",
+            "geometry": "bundle-adjustment-scale-probe"
+          },
+          "inputs": {
+            "geometryControls": {
+              "baseline": 82,
+              "textureSparsity": 18,
+              "scaleAmbiguity": 24,
+              "surfaceComplexity": 42
+            },
+            "asset": "synthetic://geometry/wide-baseline.json"
+          },
+          "outputs": {
+            "cameraRecovery": {
+              "points": 204,
+              "meanReprojectionError": 0.00851,
+              "p95ReprojectionError": 0.01639,
+              "elapsedMs": 1331.44
+            },
+            "scaleRecovery": {
+              "trueScale": 1.13333,
+              "recoveredScale": 1.11517,
+              "relativeError": 0.01602
+            },
+            "optimizationTrace": {
+              "initialLoss": 0.00534,
+              "finalLoss": 0.001153,
+              "iterations": 220,
+              "calibratedScale": 1.19754
+            }
+          },
+          "metrics": {
+            "poseEvidence": 92.8,
+            "metricEvidence": 100.0,
+            "surfaceConsistency": 87.8,
+            "scaleDrift": 0.6,
+            "topologyRisk": 11.6,
+            "readiness": 92.9
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-metric-geometry-bench",
+            "execution": "torch-cuda-metric-geometry-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "metric-geometry",
+          "caseId": "scale-transfer",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:31:37Z",
+          "model": {
+            "solver": "torch-cuda-differentiable-camera-solver",
+            "geometry": "bundle-adjustment-scale-probe"
+          },
+          "inputs": {
+            "geometryControls": {
+              "baseline": 66,
+              "textureSparsity": 28,
+              "scaleAmbiguity": 44,
+              "surfaceComplexity": 46
+            },
+            "asset": "synthetic://geometry/scale-transfer.json"
+          },
+          "outputs": {
+            "cameraRecovery": {
+              "points": 196,
+              "meanReprojectionError": 0.00963,
+              "p95ReprojectionError": 0.0193,
+              "elapsedMs": 742.4
+            },
+            "scaleRecovery": {
+              "trueScale": 1.24444,
+              "recoveredScale": 1.21153,
+              "relativeError": 0.00475
+            },
+            "optimizationTrace": {
+              "initialLoss": 0.004471,
+              "finalLoss": 0.001505,
+              "iterations": 220,
+              "calibratedScale": 1.25036
+            }
+          },
+          "metrics": {
+            "poseEvidence": 91.7,
+            "metricEvidence": 99.4,
+            "surfaceConsistency": 87.2,
+            "scaleDrift": 3.8,
+            "topologyRisk": 12.5,
+            "readiness": 92.1
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-metric-geometry-bench",
+            "execution": "torch-cuda-metric-geometry-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "metric-geometry",
+          "caseId": "thin-structure",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:31:38Z",
+          "model": {
+            "solver": "torch-cuda-differentiable-camera-solver",
+            "geometry": "bundle-adjustment-scale-probe"
+          },
+          "inputs": {
+            "geometryControls": {
+              "baseline": 58,
+              "textureSparsity": 34,
+              "scaleAmbiguity": 32,
+              "surfaceComplexity": 72
+            },
+            "asset": "synthetic://geometry/thin-structure.json"
+          },
+          "outputs": {
+            "cameraRecovery": {
+              "points": 191,
+              "meanReprojectionError": 0.01438,
+              "p95ReprojectionError": 0.02784,
+              "elapsedMs": 759.71
+            },
+            "scaleRecovery": {
+              "trueScale": 1.17778,
+              "recoveredScale": 1.15349,
+              "relativeError": 0.01432
+            },
+            "optimizationTrace": {
+              "initialLoss": 0.005345,
+              "finalLoss": 0.00322,
+              "iterations": 220,
+              "calibratedScale": 1.19465
+            }
+          },
+          "metrics": {
+            "poseEvidence": 90.2,
+            "metricEvidence": 97.3,
+            "surfaceConsistency": 83.5,
+            "scaleDrift": 3.4,
+            "topologyRisk": 18.3,
+            "readiness": 89.1
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-metric-geometry-bench",
+            "execution": "torch-cuda-metric-geometry-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "metric-geometry",
+          "caseId": "low-texture-indoor",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:31:38Z",
+          "model": {
+            "solver": "torch-cuda-differentiable-camera-solver",
+            "geometry": "bundle-adjustment-scale-probe"
+          },
+          "inputs": {
+            "geometryControls": {
+              "baseline": 54,
+              "textureSparsity": 58,
+              "scaleAmbiguity": 48,
+              "surfaceComplexity": 50
+            },
+            "asset": "synthetic://geometry/low-texture-indoor.json"
+          },
+          "outputs": {
+            "cameraRecovery": {
+              "points": 158,
+              "meanReprojectionError": 0.01534,
+              "p95ReprojectionError": 0.02952,
+              "elapsedMs": 768.1
+            },
+            "scaleRecovery": {
+              "trueScale": 1.26667,
+              "recoveredScale": 1.23104,
+              "relativeError": 0.01505
+            },
+            "optimizationTrace": {
+              "initialLoss": 0.005659,
+              "finalLoss": 0.003549,
+              "iterations": 220,
+              "calibratedScale": 1.2476
+            }
+          },
+          "metrics": {
+            "poseEvidence": 88.1,
+            "metricEvidence": 95.3,
+            "surfaceConsistency": 86.0,
+            "scaleDrift": 6.3,
+            "topologyRisk": 13.9,
+            "readiness": 89.4
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-metric-geometry-bench",
+            "execution": "torch-cuda-metric-geometry-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "gaussian-splatting",
+          "caseId": "dense-novel-view",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:29:24Z",
+          "model": {
+            "renderer": "torch-cuda-gaussian-splat-compositor",
+            "semanticProbe": "splat-label-edit-probe"
+          },
+          "inputs": {
+            "splatControls": {
+              "viewCount": 86,
+              "splatDensity": 78,
+              "semanticEntropy": 24,
+              "provenanceVisibility": 70
+            },
+            "asset": "synthetic://splat/dense-novel-view.ply"
+          },
+          "outputs": {
+            "renderProfile": {
+              "splats": 337,
+              "views": 5,
+              "elapsedMs": 71.17,
+              "adjacentFrameDelta": 0.13833
+            },
+            "semanticProbe": {
+              "meanConfidence": 0.5302,
+              "margin": 0.45706,
+              "editLeakageRatio": 0.05605,
+              "editLocality": 0.94395
+            },
+            "provenanceProbe": {
+              "visibility": 70,
+              "trace": 67.7
+            }
+          },
+          "metrics": {
+            "renderFidelity": 85.5,
+            "semanticAttachment": 60.9,
+            "provenanceTrace": 67.7,
+            "viewInstability": 14.1,
+            "editLeakageRisk": 10.2,
+            "readiness": 74.9
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-gaussian-splatting-bench",
+            "execution": "torch-cuda-gaussian-splatting-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "gaussian-splatting",
+          "caseId": "semantic-edit",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:29:24Z",
+          "model": {
+            "renderer": "torch-cuda-gaussian-splat-compositor",
+            "semanticProbe": "splat-label-edit-probe"
+          },
+          "inputs": {
+            "splatControls": {
+              "viewCount": 74,
+              "splatDensity": 72,
+              "semanticEntropy": 34,
+              "provenanceVisibility": 76
+            },
+            "asset": "synthetic://splat/semantic-edit.ply"
+          },
+          "outputs": {
+            "renderProfile": {
+              "splats": 319,
+              "views": 5,
+              "elapsedMs": 23.13,
+              "adjacentFrameDelta": 0.13381
+            },
+            "semanticProbe": {
+              "meanConfidence": 0.55323,
+              "margin": 0.45882,
+              "editLeakageRatio": 0.07111,
+              "editLocality": 0.92889
+            },
+            "provenanceProbe": {
+              "visibility": 76,
+              "trace": 72.3
+            }
+          },
+          "metrics": {
+            "renderFidelity": 83.7,
+            "semanticAttachment": 60.7,
+            "provenanceTrace": 72.3,
+            "viewInstability": 15.2,
+            "editLeakageRisk": 12.1,
+            "readiness": 75.2
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-gaussian-splatting-bench",
+            "execution": "torch-cuda-gaussian-splatting-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "gaussian-splatting",
+          "caseId": "provenance-transfer",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:29:24Z",
+          "model": {
+            "renderer": "torch-cuda-gaussian-splat-compositor",
+            "semanticProbe": "splat-label-edit-probe"
+          },
+          "inputs": {
+            "splatControls": {
+              "viewCount": 68,
+              "splatDensity": 70,
+              "semanticEntropy": 42,
+              "provenanceVisibility": 84
+            },
+            "asset": "synthetic://splat/provenance-transfer.ply"
+          },
+          "outputs": {
+            "renderProfile": {
+              "splats": 313,
+              "views": 5,
+              "elapsedMs": 22.65,
+              "adjacentFrameDelta": 0.13393
+            },
+            "semanticProbe": {
+              "meanConfidence": 0.51926,
+              "margin": 0.42126,
+              "editLeakageRatio": 0.08418,
+              "editLocality": 0.91582
+            },
+            "provenanceProbe": {
+              "visibility": 84,
+              "trace": 77.6
+            }
+          },
+          "metrics": {
+            "renderFidelity": 82.7,
+            "semanticAttachment": 57.0,
+            "provenanceTrace": 77.6,
+            "viewInstability": 15.9,
+            "editLeakageRisk": 13.5,
+            "readiness": 75.1
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-gaussian-splatting-bench",
+            "execution": "torch-cuda-gaussian-splatting-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "gaussian-splatting",
+          "caseId": "sparse-capture",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T03:29:24Z",
+          "model": {
+            "renderer": "torch-cuda-gaussian-splat-compositor",
+            "semanticProbe": "splat-label-edit-probe"
+          },
+          "inputs": {
+            "splatControls": {
+              "viewCount": 62,
+              "splatDensity": 66,
+              "semanticEntropy": 46,
+              "provenanceVisibility": 72
+            },
+            "asset": "synthetic://splat/sparse-capture.ply"
+          },
+          "outputs": {
+            "renderProfile": {
+              "splats": 300,
+              "views": 5,
+              "elapsedMs": 21.97,
+              "adjacentFrameDelta": 0.13495
+            },
+            "semanticProbe": {
+              "meanConfidence": 0.57297,
+              "margin": 0.47408,
+              "editLeakageRatio": 0.07785,
+              "editLocality": 0.92215
+            },
+            "provenanceProbe": {
+              "visibility": 72,
+              "trace": 69.6
+            }
+          },
+          "metrics": {
+            "renderFidelity": 81.4,
+            "semanticAttachment": 60.5,
+            "provenanceTrace": 69.6,
+            "viewInstability": 16.7,
+            "editLeakageRisk": 14.5,
+            "readiness": 73.6
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-gaussian-splatting-bench",
+            "execution": "torch-cuda-gaussian-splatting-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "clinical-shift",
+          "caseId": "clear-baseline",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T01:09:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "shiftProbe": "resnet-logit-divergence-domain-shift"
+          },
+          "inputs": {
+            "clinicalControls": {
+              "domainShift": 8,
+              "artifactLoad": 12,
+              "escalationThreshold": 68
+            },
+            "asset": "synthetic://clinical/clear-baseline.png"
+          },
+          "outputs": {
+            "cleanConfidence": 38.6,
+            "shiftedConfidence": 35.0,
+            "logitDivergence": 0.006642
+          },
+          "metrics": {
+            "readiness": 89.9,
+            "shiftScore": 7.6,
+            "calibration": 89.3,
+            "falseClearRisk": 2.4,
+            "escalationThreshold": 68
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-clinical-shift-bench",
+            "execution": "torchvision-resnet-clinical-shift-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "clinical-shift",
+          "caseId": "scanner-shift",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T01:09:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "shiftProbe": "resnet-logit-divergence-domain-shift"
+          },
+          "inputs": {
+            "clinicalControls": {
+              "domainShift": 46,
+              "artifactLoad": 24,
+              "escalationThreshold": 72
+            },
+            "asset": "synthetic://clinical/scanner-shift.png"
+          },
+          "outputs": {
+            "cleanConfidence": 33.4,
+            "shiftedConfidence": 33.9,
+            "logitDivergence": 0.014008
+          },
+          "metrics": {
+            "readiness": 83.2,
+            "shiftScore": 32.7,
+            "calibration": 91.5,
+            "falseClearRisk": 8.9,
+            "escalationThreshold": 72
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-clinical-shift-bench",
+            "execution": "torchvision-resnet-clinical-shift-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "clinical-shift",
+          "caseId": "rare-presentation",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T01:09:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "shiftProbe": "resnet-logit-divergence-domain-shift"
+          },
+          "inputs": {
+            "clinicalControls": {
+              "domainShift": 58,
+              "artifactLoad": 18,
+              "escalationThreshold": 78
+            },
+            "asset": "synthetic://clinical/rare-presentation.png"
+          },
+          "outputs": {
+            "cleanConfidence": 39.4,
+            "shiftedConfidence": 37.6,
+            "logitDivergence": 0.003941
+          },
+          "metrics": {
+            "readiness": 81.9,
+            "shiftScore": 38.0,
+            "calibration": 90.7,
+            "falseClearRisk": 10.6,
+            "escalationThreshold": 78
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-clinical-shift-bench",
+            "execution": "torchvision-resnet-clinical-shift-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
+          }
+        },
+        {
+          "jobId": "clinical-shift",
+          "caseId": "motion-artifact",
+          "mode": "cached-real",
+          "createdAt": "2026-08-17T01:09:30Z",
+          "model": {
+            "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+            "shiftProbe": "resnet-logit-divergence-domain-shift"
+          },
+          "inputs": {
+            "clinicalControls": {
+              "domainShift": 38,
+              "artifactLoad": 66,
+              "escalationThreshold": 74
+            },
+            "asset": "synthetic://clinical/motion-artifact.png"
+          },
+          "outputs": {
+            "cleanConfidence": 26.4,
+            "shiftedConfidence": 26.2,
+            "logitDivergence": 0.067713
+          },
+          "metrics": {
+            "readiness": 81.1,
+            "shiftScore": 39.0,
+            "calibration": 90.9,
+            "falseClearRisk": 11.1,
+            "escalationThreshold": 74
+          },
+          "provenance": {
+            "runtime": "google-colab-pro-plus",
+            "accelerator": "Tesla T4",
+            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+            "sourceBench": "cvpr-clinical-shift-bench",
+            "execution": "torchvision-resnet-clinical-shift-live-demo",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "driving-safety",
           "caseId": "urban-cut-in",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:48Z",
           "model": {
-            "grounder": "vla-scene-grounder",
+            "grounder": "torch-driving-scene-risk-probe",
             "riskHead": "ttc-risk-head",
             "ruleMonitor": "safety-rule-monitor"
           },
@@ -2301,36 +3832,39 @@ export const launchInput = {
               "occlusion": 10,
               "actionConfidence": 82
             },
-            "asset": "fixtures/driving/urban-cut-in.mp4"
+            "asset": "synthetic://driving/urban-cut-in.mp4"
           },
           "outputs": {
-            "sceneGroundingMap": "fixtures/driving/urban-cut-in-grounding.png",
+            "sceneGroundingMap": "synthetic://driving/urban-cut-in-grounding.png",
             "timeToCollision": 5.15,
-            "riskTrace": "fixtures/driving/urban-cut-in-risk.json",
-            "ruleViolations": 24.0
+            "riskTrace": "synthetic://driving/urban-cut-in-risk.json",
+            "ruleViolations": 32.9
           },
           "metrics": {
-            "readiness": 68.1,
-            "sceneGrounding": 85.7,
+            "readiness": 57.4,
+            "sceneGrounding": 58.1,
             "timeToCollision": 5.15,
-            "risk": 33.4,
-            "ruleViolation": 24.0,
-            "abstention": 7.6
+            "risk": 33.6,
+            "ruleViolation": 32.9,
+            "abstention": 15.5
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-driving-safety-bench"
+            "sourceBench": "cvpr-driving-safety-bench",
+            "execution": "torch-driving-scene-risk-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "driving-safety",
           "caseId": "night-crosswalk",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:48Z",
           "model": {
-            "grounder": "vla-scene-grounder",
+            "grounder": "torch-driving-scene-risk-probe",
             "riskHead": "ttc-risk-head",
             "ruleMonitor": "safety-rule-monitor"
           },
@@ -2341,36 +3875,39 @@ export const launchInput = {
               "occlusion": 18,
               "actionConfidence": 78
             },
-            "asset": "fixtures/driving/night-crosswalk.mp4"
+            "asset": "synthetic://driving/night-crosswalk.mp4"
           },
           "outputs": {
-            "sceneGroundingMap": "fixtures/driving/night-crosswalk-grounding.png",
+            "sceneGroundingMap": "synthetic://driving/night-crosswalk-grounding.png",
             "timeToCollision": 5.73,
-            "riskTrace": "fixtures/driving/night-crosswalk-risk.json",
-            "ruleViolations": 23.5
+            "riskTrace": "synthetic://driving/night-crosswalk-risk.json",
+            "ruleViolations": 32.8
           },
           "metrics": {
-            "readiness": 68.2,
-            "sceneGrounding": 84.2,
+            "readiness": 57.1,
+            "sceneGrounding": 55.4,
             "timeToCollision": 5.73,
-            "risk": 31.7,
-            "ruleViolation": 23.5,
-            "abstention": 7.8
+            "risk": 31.9,
+            "ruleViolation": 32.8,
+            "abstention": 16.0
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-driving-safety-bench"
+            "sourceBench": "cvpr-driving-safety-bench",
+            "execution": "torch-driving-scene-risk-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "driving-safety",
           "caseId": "highway-merge",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:48Z",
           "model": {
-            "grounder": "vla-scene-grounder",
+            "grounder": "torch-driving-scene-risk-probe",
             "riskHead": "ttc-risk-head",
             "ruleMonitor": "safety-rule-monitor"
           },
@@ -2381,36 +3918,39 @@ export const launchInput = {
               "occlusion": 16,
               "actionConfidence": 84
             },
-            "asset": "fixtures/driving/highway-merge.mp4"
+            "asset": "synthetic://driving/highway-merge.mp4"
           },
           "outputs": {
-            "sceneGroundingMap": "fixtures/driving/highway-merge-grounding.png",
+            "sceneGroundingMap": "synthetic://driving/highway-merge-grounding.png",
             "timeToCollision": 4.34,
-            "riskTrace": "fixtures/driving/highway-merge-risk.json",
-            "ruleViolations": 24.1
+            "riskTrace": "synthetic://driving/highway-merge-risk.json",
+            "ruleViolations": 33.9
           },
           "metrics": {
-            "readiness": 68.2,
-            "sceneGrounding": 87.3,
+            "readiness": 56.5,
+            "sceneGrounding": 57.0,
             "timeToCollision": 4.34,
-            "risk": 34.6,
-            "ruleViolation": 24.1,
-            "abstention": 7.4
+            "risk": 34.8,
+            "ruleViolation": 33.9,
+            "abstention": 16.0
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-driving-safety-bench"
+            "sourceBench": "cvpr-driving-safety-bench",
+            "execution": "torch-driving-scene-risk-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         },
         {
           "jobId": "driving-safety",
           "caseId": "construction-zone",
           "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
+          "createdAt": "2026-08-17T03:14:48Z",
           "model": {
-            "grounder": "vla-scene-grounder",
+            "grounder": "torch-driving-scene-risk-probe",
             "riskHead": "ttc-risk-head",
             "ruleMonitor": "safety-rule-monitor"
           },
@@ -2421,347 +3961,30 @@ export const launchInput = {
               "occlusion": 14,
               "actionConfidence": 72
             },
-            "asset": "fixtures/driving/construction-zone.mp4"
+            "asset": "synthetic://driving/construction-zone.mp4"
           },
           "outputs": {
-            "sceneGroundingMap": "fixtures/driving/construction-zone-grounding.png",
+            "sceneGroundingMap": "synthetic://driving/construction-zone-grounding.png",
             "timeToCollision": 5.82,
-            "riskTrace": "fixtures/driving/construction-zone-risk.json",
-            "ruleViolations": 23.7
+            "riskTrace": "synthetic://driving/construction-zone-risk.json",
+            "ruleViolations": 33.0
           },
           "metrics": {
-            "readiness": 68.2,
-            "sceneGrounding": 83.9,
+            "readiness": 57.1,
+            "sceneGrounding": 55.1,
             "timeToCollision": 5.82,
-            "risk": 31.9,
-            "ruleViolation": 23.7,
-            "abstention": 9.1
+            "risk": 32.1,
+            "ruleViolation": 33.0,
+            "abstention": 17.3
           },
           "provenance": {
             "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
+            "accelerator": "Tesla T4",
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-driving-safety-bench"
-          }
-        },
-        {
-          "jobId": "metric-geometry",
-          "caseId": "wide-baseline",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "pose": "torch-pose-bundle-adjuster",
-            "scale": "metric-scale-probe",
-            "surface": "surface-consistency-head"
-          },
-          "inputs": {
-            "geometryControls": {
-              "baseline": 82,
-              "textureSparsity": 18,
-              "scaleAmbiguity": 24,
-              "surfaceComplexity": 42
-            },
-            "asset": "fixtures/geometry/wide-baseline.json"
-          },
-          "outputs": {
-            "poseGraph": "fixtures/geometry/wide-baseline-pose-graph.json",
-            "scaleTrace": "fixtures/geometry/wide-baseline-scale-trace.json",
-            "surfaceResidualMap": "fixtures/geometry/wide-baseline-surface-residual.png",
-            "topologyWarnings": 13.9
-          },
-          "metrics": {
-            "readiness": 85.8,
-            "poseEvidence": 87.0,
-            "metricEvidence": 86.9,
-            "surfaceConsistency": 83.1,
-            "scaleDrift": 10.1,
-            "topologyRisk": 13.9
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-metric-geometry-bench"
-          }
-        },
-        {
-          "jobId": "metric-geometry",
-          "caseId": "scale-transfer",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "pose": "torch-pose-bundle-adjuster",
-            "scale": "metric-scale-probe",
-            "surface": "surface-consistency-head"
-          },
-          "inputs": {
-            "geometryControls": {
-              "baseline": 66,
-              "textureSparsity": 28,
-              "scaleAmbiguity": 44,
-              "surfaceComplexity": 46
-            },
-            "asset": "fixtures/geometry/scale-transfer.json"
-          },
-          "outputs": {
-            "poseGraph": "fixtures/geometry/scale-transfer-pose-graph.json",
-            "scaleTrace": "fixtures/geometry/scale-transfer-scale-trace.json",
-            "surfaceResidualMap": "fixtures/geometry/scale-transfer-surface-residual.png",
-            "topologyWarnings": 21.0
-          },
-          "metrics": {
-            "readiness": 78.7,
-            "poseEvidence": 79.2,
-            "metricEvidence": 78.8,
-            "surfaceConsistency": 78.4,
-            "scaleDrift": 21.5,
-            "topologyRisk": 21.0
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-metric-geometry-bench"
-          }
-        },
-        {
-          "jobId": "metric-geometry",
-          "caseId": "thin-structure",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "pose": "torch-pose-bundle-adjuster",
-            "scale": "metric-scale-probe",
-            "surface": "surface-consistency-head"
-          },
-          "inputs": {
-            "geometryControls": {
-              "baseline": 58,
-              "textureSparsity": 34,
-              "scaleAmbiguity": 32,
-              "surfaceComplexity": 72
-            },
-            "asset": "fixtures/geometry/thin-structure.json"
-          },
-          "outputs": {
-            "poseGraph": "fixtures/geometry/thin-structure-pose-graph.json",
-            "scaleTrace": "fixtures/geometry/thin-structure-scale-trace.json",
-            "surfaceResidualMap": "fixtures/geometry/thin-structure-surface-residual.png",
-            "topologyWarnings": 30.0
-          },
-          "metrics": {
-            "readiness": 75.5,
-            "poseEvidence": 76.8,
-            "metricEvidence": 80.4,
-            "surfaceConsistency": 72.5,
-            "scaleDrift": 22.7,
-            "topologyRisk": 30.0
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-metric-geometry-bench"
-          }
-        },
-        {
-          "jobId": "metric-geometry",
-          "caseId": "low-texture-indoor",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "pose": "torch-pose-bundle-adjuster",
-            "scale": "metric-scale-probe",
-            "surface": "surface-consistency-head"
-          },
-          "inputs": {
-            "geometryControls": {
-              "baseline": 54,
-              "textureSparsity": 58,
-              "scaleAmbiguity": 48,
-              "surfaceComplexity": 50
-            },
-            "asset": "fixtures/geometry/low-texture-indoor.json"
-          },
-          "outputs": {
-            "poseGraph": "fixtures/geometry/low-texture-indoor-pose-graph.json",
-            "scaleTrace": "fixtures/geometry/low-texture-indoor-scale-trace.json",
-            "surfaceResidualMap": "fixtures/geometry/low-texture-indoor-surface-residual.png",
-            "topologyWarnings": 30.0
-          },
-          "metrics": {
-            "readiness": 72.0,
-            "poseEvidence": 70.1,
-            "metricEvidence": 74.7,
-            "surfaceConsistency": 72.2,
-            "scaleDrift": 29.9,
-            "topologyRisk": 30.0
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-metric-geometry-bench"
-          }
-        },
-        {
-          "jobId": "gaussian-splatting",
-          "caseId": "dense-novel-view",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "renderer": "torch-splat-renderer",
-            "semantic": "semantic-splat-attach",
-            "provenance": "provenance-trace-head"
-          },
-          "inputs": {
-            "splatControls": {
-              "viewCount": 86,
-              "splatDensity": 78,
-              "semanticEntropy": 24,
-              "provenanceVisibility": 70
-            },
-            "asset": "fixtures/splats/dense-novel-view.json"
-          },
-          "outputs": {
-            "novelViewRenders": "fixtures/splats/dense-novel-view-renders/",
-            "semanticSplatMap": "fixtures/splats/dense-novel-view-semantic-map.json",
-            "provenanceTrace": "fixtures/splats/dense-novel-view-provenance.json",
-            "editLeakageReport": 16.7
-          },
-          "metrics": {
-            "readiness": 85.6,
-            "renderFidelity": 86.6,
-            "semanticAttachment": 86.4,
-            "provenanceTrace": 85.5,
-            "viewInstability": 9.4,
-            "editLeakageRisk": 16.7
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-gaussian-splatting-bench"
-          }
-        },
-        {
-          "jobId": "gaussian-splatting",
-          "caseId": "semantic-edit",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "renderer": "torch-splat-renderer",
-            "semantic": "semantic-splat-attach",
-            "provenance": "provenance-trace-head"
-          },
-          "inputs": {
-            "splatControls": {
-              "viewCount": 74,
-              "splatDensity": 72,
-              "semanticEntropy": 34,
-              "provenanceVisibility": 76
-            },
-            "asset": "fixtures/splats/semantic-edit.json"
-          },
-          "outputs": {
-            "novelViewRenders": "fixtures/splats/semantic-edit-renders/",
-            "semanticSplatMap": "fixtures/splats/semantic-edit-semantic-map.json",
-            "provenanceTrace": "fixtures/splats/semantic-edit-provenance.json",
-            "editLeakageReport": 21.4
-          },
-          "metrics": {
-            "readiness": 82.2,
-            "renderFidelity": 81.5,
-            "semanticAttachment": 82.4,
-            "provenanceTrace": 86.1,
-            "viewInstability": 15.7,
-            "editLeakageRisk": 21.4
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-gaussian-splatting-bench"
-          }
-        },
-        {
-          "jobId": "gaussian-splatting",
-          "caseId": "provenance-transfer",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "renderer": "torch-splat-renderer",
-            "semantic": "semantic-splat-attach",
-            "provenance": "provenance-trace-head"
-          },
-          "inputs": {
-            "splatControls": {
-              "viewCount": 68,
-              "splatDensity": 70,
-              "semanticEntropy": 42,
-              "provenanceVisibility": 84
-            },
-            "asset": "fixtures/splats/provenance-transfer.json"
-          },
-          "outputs": {
-            "novelViewRenders": "fixtures/splats/provenance-transfer-renders/",
-            "semanticSplatMap": "fixtures/splats/provenance-transfer-semantic-map.json",
-            "provenanceTrace": "fixtures/splats/provenance-transfer-provenance.json",
-            "editLeakageReport": 24.3
-          },
-          "metrics": {
-            "readiness": 80.5,
-            "renderFidelity": 78.9,
-            "semanticAttachment": 79.8,
-            "provenanceTrace": 87.7,
-            "viewInstability": 18.8,
-            "editLeakageRisk": 24.3
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-gaussian-splatting-bench"
-          }
-        },
-        {
-          "jobId": "gaussian-splatting",
-          "caseId": "sparse-capture",
-          "mode": "cached-real",
-          "createdAt": "2026-08-15T00:00:00Z",
-          "model": {
-            "renderer": "torch-splat-renderer",
-            "semantic": "semantic-splat-attach",
-            "provenance": "provenance-trace-head"
-          },
-          "inputs": {
-            "splatControls": {
-              "viewCount": 62,
-              "splatDensity": 66,
-              "semanticEntropy": 46,
-              "provenanceVisibility": 72
-            },
-            "asset": "fixtures/splats/sparse-capture.json"
-          },
-          "outputs": {
-            "novelViewRenders": "fixtures/splats/sparse-capture-renders/",
-            "semanticSplatMap": "fixtures/splats/sparse-capture-semantic-map.json",
-            "provenanceTrace": "fixtures/splats/sparse-capture-provenance.json",
-            "editLeakageReport": 27.4
-          },
-          "metrics": {
-            "readiness": 77.7,
-            "renderFidelity": 76.2,
-            "semanticAttachment": 77.8,
-            "provenanceTrace": 83.8,
-            "viewInstability": 23.2,
-            "editLeakageRisk": 27.4
-          },
-          "provenance": {
-            "runtime": "google-colab-pro-plus",
-            "accelerator": "GPU",
-            "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-            "sourceBench": "cvpr-gaussian-splatting-bench"
+            "sourceBench": "cvpr-driving-safety-bench",
+            "execution": "torch-driving-scene-risk-probe",
+            "promotedFrom": "live-colab",
+            "canonicalMode": "cached-real"
           }
         }
       ]
@@ -2770,9 +3993,9 @@ export const launchInput = {
       "summary": {
         "handoff": "cvpr-colab-handoff-package",
         "status": "ready",
-        "jobs": 10,
-        "runners": 10,
-        "expectedResults": 40,
+        "jobs": 14,
+        "runners": 14,
+        "expectedResults": 56,
         "importIssues": 0,
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
         "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
@@ -2798,13 +4021,16 @@ export const launchInput = {
           "runtimePlane": "google-colab-pro-plus",
           "controlPlane": "local-static-cvpr-site",
           "resultPlane": "registry-and-cached-json",
-          "jobs": 10,
-          "liveCapable": 10,
-          "promotedRunners": 10,
-          "cachedCapable": 10,
-          "cachedResults": 40,
-          "validCachedResults": 40,
+          "jobs": 14,
+          "liveCapable": 14,
+          "promotedRunners": 14,
+          "runnerRows": 14,
+          "cachedCapable": 14,
+          "cachedResults": 56,
+          "validCachedResults": 56,
           "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+          "notebookNativeJobs": 10,
+          "externalLiveJobs": 4,
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
           "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
           "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -3042,6 +4268,118 @@ export const launchInput = {
             "priority": 8
           },
           {
+            "id": "depth-normal-consistency",
+            "title": "Depth-normal consistency GPU run",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "page": "cvpr-depth-normal-consistency-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-depth-normal-probe",
+              "finite-difference-normal-consistency"
+            ],
+            "inputs": [
+              "depth_map",
+              "normal_controls",
+              "scene_geometry"
+            ],
+            "outputs": [
+              "normal_map",
+              "consistency_curve",
+              "depth_residual_map",
+              "surface_alerts"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 9
+          },
+          {
+            "id": "corruption-robustness",
+            "title": "Corruption robustness GPU run",
+            "bench": "cvpr-corruption-robustness-bench",
+            "page": "cvpr-corruption-robustness-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-resnet18",
+              "clean-corrupted-logit-delta"
+            ],
+            "inputs": [
+              "image_batch",
+              "corruption_controls",
+              "severity_schedule"
+            ],
+            "outputs": [
+              "feature_retention",
+              "label_drift_curve",
+              "confidence_collapse",
+              "corruption_report"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 10
+          },
+          {
+            "id": "prompt-segmentation-robustness",
+            "title": "Prompt segmentation robustness GPU run",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "page": "cvpr-prompt-segmentation-robustness-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-maskrcnn-resnet50-fpn",
+              "mask-rcnn-click-robustness-proxy"
+            ],
+            "inputs": [
+              "image",
+              "prompt_points",
+              "prompt_variants"
+            ],
+            "outputs": [
+              "mask_predictions",
+              "click_sensitivity",
+              "iou_trace",
+              "prompt_failure_map"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 11
+          },
+          {
+            "id": "video-identity-tracking",
+            "title": "Video identity tracking GPU run",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "page": "cvpr-video-identity-tracking-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-centroid-assignment-tracker",
+              "mask-sequence-identity-drift"
+            ],
+            "inputs": [
+              "video_clip",
+              "identity_seed",
+              "tracking_controls"
+            ],
+            "outputs": [
+              "track_sequence",
+              "identity_drift_curve",
+              "handoff_events",
+              "failure_frames"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 12
+          },
+          {
             "id": "metric-geometry",
             "title": "Metric geometry GPU run",
             "bench": "cvpr-metric-geometry-bench",
@@ -3166,6 +4504,38 @@ export const launchInput = {
             "strictMode": "require_real_models=True"
           },
           {
+            "jobId": "depth-normal-consistency",
+            "caseSymbol": "DEPTH_NORMAL_CASES",
+            "loader": "load_depth_normal_models",
+            "runner": "run_depth_normal_consistency_batch",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseSymbol": "CORRUPTION_CASES",
+            "loader": "load_corruption_models",
+            "runner": "run_corruption_robustness_batch",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+            "loader": "load_prompt_segmentation_models",
+            "runner": "run_prompt_segmentation_robustness_batch",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseSymbol": "VIDEO_TRACKING_CASES",
+            "loader": "load_video_tracking_models",
+            "runner": "run_video_identity_tracking_batch",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
             "jobId": "metric-geometry",
             "caseSymbol": "GEOMETRY_CASES",
             "loader": "load_metric_geometry_models",
@@ -3181,6 +4551,24 @@ export const launchInput = {
             "execution": "torch-gaussian-splatting-render-probe",
             "strictMode": "require_real_models=True"
           }
+        ],
+        "notebookNativeJobIds": [
+          "open-vocab-grounding",
+          "restoration-fidelity",
+          "adversarial-provenance",
+          "temporal-rollout",
+          "clinical-shift",
+          "compute-serving",
+          "constraint-generation",
+          "driving-safety",
+          "metric-geometry",
+          "gaussian-splatting"
+        ],
+        "externalLiveJobIds": [
+          "depth-normal-consistency",
+          "corruption-robustness",
+          "prompt-segmentation-robustness",
+          "video-identity-tracking"
         ],
         "runManifest": {
           "runtimePlane": "google-colab-pro-plus",
@@ -3364,10 +4752,94 @@ export const launchInput = {
               }
             },
             {
+              "jobId": "depth-normal-consistency",
+              "bench": "cvpr-depth-normal-consistency-bench",
+              "page": "cvpr-depth-normal-consistency-bench.html",
+              "priority": 9,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-depth-normal-probe",
+                "finite-difference-normal-consistency"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+              "resultFilter": {
+                "jobId": "depth-normal-consistency",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "bench": "cvpr-corruption-robustness-bench",
+              "page": "cvpr-corruption-robustness-bench.html",
+              "priority": 10,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-resnet18",
+                "clean-corrupted-logit-delta"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+              "resultFilter": {
+                "jobId": "corruption-robustness",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "bench": "cvpr-prompt-segmentation-robustness-bench",
+              "page": "cvpr-prompt-segmentation-robustness-bench.html",
+              "priority": 11,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-maskrcnn-resnet50-fpn",
+                "mask-rcnn-click-robustness-proxy"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+              "resultFilter": {
+                "jobId": "prompt-segmentation-robustness",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "bench": "cvpr-video-identity-tracking-bench",
+              "page": "cvpr-video-identity-tracking-bench.html",
+              "priority": 12,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-centroid-assignment-tracker",
+                "mask-sequence-identity-drift"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+              "resultFilter": {
+                "jobId": "video-identity-tracking",
+                "mode": "cached-real"
+              }
+            },
+            {
               "jobId": "metric-geometry",
               "bench": "cvpr-metric-geometry-bench",
               "page": "cvpr-metric-geometry-bench.html",
-              "priority": 9,
+              "priority": 13,
               "runtimeModes": [
                 "simulated",
                 "cached-real",
@@ -3389,7 +4861,7 @@ export const launchInput = {
               "jobId": "gaussian-splatting",
               "bench": "cvpr-gaussian-splatting-bench",
               "page": "cvpr-gaussian-splatting-bench.html",
-              "priority": 10,
+              "priority": 14,
               "runtimeModes": [
                 "simulated",
                 "cached-real",
@@ -3414,254 +4886,288 @@ export const launchInput = {
             "jobId": "open-vocab-grounding",
             "caseId": "common-clean",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:17Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "common clean object",
+              "textQuery": "teal rectangle.",
               "controls": {
                 "queryRarity": 18,
                 "distractorOverlap": 16,
                 "boxAmbiguity": 18,
                 "evidenceThreshold": 54
               },
-              "asset": "fixtures/open-vocab/common-clean.png"
+              "asset": "synthetic://common-clean"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "teal rectangle",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.178,
+                    0.216,
+                    0.305,
+                    0.288
                   ],
-                  "score": 0.828
+                  "score": 0.742
                 },
                 {
-                  "label": "distractor",
+                  "label": "teal rectangle",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.512,
+                    0.255,
+                    0.272,
+                    0.266
                   ],
-                  "score": 0.917
+                  "score": 0.417
                 }
               ],
               "regionScores": {
-                "target": 84.7,
-                "longTail": 71.7
+                "target": 26.8,
+                "longTail": 39.7
               },
-              "localizedEvidence": 88.9
+              "embeddingScore": 8.3,
+              "localizedEvidence": 50.2
             },
             "metrics": {
-              "readiness": 84.7,
-              "localizedEvidence": 88.9,
-              "unsupportedRisk": 8.3
+              "readiness": 48.0,
+              "proposalRecall": 74.2,
+              "textRegionScore": 26.8,
+              "longTailRecall": 39.7,
+              "localizedEvidence": 50.2,
+              "unsupportedRisk": 21.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "open-vocab-grounding",
             "caseId": "rare-visible",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:18Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "rare visible object",
+              "textQuery": "teal target rectangle.",
               "controls": {
                 "queryRarity": 66,
                 "distractorOverlap": 12,
                 "boxAmbiguity": 34,
                 "evidenceThreshold": 62
               },
-              "asset": "fixtures/open-vocab/rare-visible.png"
+              "asset": "synthetic://rare-visible"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "teal target rectangle",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.178,
+                    0.216,
+                    0.305,
+                    0.288
                   ],
-                  "score": 0.768
+                  "score": 0.752
                 },
                 {
-                  "label": "distractor",
+                  "label": "teal target rectangle",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.522,
+                    0.256,
+                    0.273,
+                    0.266
                   ],
-                  "score": 0.837
+                  "score": 0.381
                 }
               ],
               "regionScores": {
-                "target": 85.0,
-                "longTail": 76.9
+                "target": 26.7,
+                "longTail": 43.2
               },
-              "localizedEvidence": 87.7
+              "embeddingScore": 7.8,
+              "localizedEvidence": 52.2
             },
             "metrics": {
-              "readiness": 83.9,
-              "localizedEvidence": 87.7,
-              "unsupportedRisk": 16.3
+              "readiness": 49.4,
+              "proposalRecall": 75.2,
+              "textRegionScore": 26.7,
+              "longTailRecall": 43.2,
+              "localizedEvidence": 52.2,
+              "unsupportedRisk": 21.2
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "open-vocab-grounding",
             "caseId": "rare-distractors",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:18Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "rare object with distractors",
+              "textQuery": "teal target rectangle near orange distractor.",
               "controls": {
                 "queryRarity": 78,
                 "distractorOverlap": 28,
                 "boxAmbiguity": 28,
                 "evidenceThreshold": 76
               },
-              "asset": "fixtures/open-vocab/rare-distractors.png"
+              "asset": "synthetic://rare-distractors"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "teal target rectangle orange distract",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.177,
+                    0.216,
+                    0.307,
+                    0.289
                   ],
-                  "score": 0.76
+                  "score": 0.794
                 },
                 {
-                  "label": "distractor",
+                  "label": "orange distractor",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.484,
+                    0.257,
+                    0.273,
+                    0.266
                   ],
-                  "score": 0.81
+                  "score": 0.587
                 }
               ],
               "regionScores": {
-                "target": 83.6,
-                "longTail": 81.4
+                "target": 93.1,
+                "longTail": 85.2
               },
-              "localizedEvidence": 87.1
+              "embeddingScore": 98.4,
+              "localizedEvidence": 84.5
             },
             "metrics": {
-              "readiness": 83.8,
-              "localizedEvidence": 87.1,
-              "unsupportedRisk": 19.0
+              "readiness": 88.0,
+              "proposalRecall": 79.4,
+              "textRegionScore": 93.1,
+              "longTailRecall": 85.2,
+              "localizedEvidence": 84.5,
+              "unsupportedRisk": 8.9
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "open-vocab-grounding",
             "caseId": "unsupported-query",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:18Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "unsupported text query",
+              "textQuery": "transparent glass elephant.",
               "controls": {
                 "queryRarity": 82,
                 "distractorOverlap": 30,
                 "boxAmbiguity": 32,
                 "evidenceThreshold": 84
               },
-              "asset": "fixtures/open-vocab/unsupported-query.png"
+              "asset": "synthetic://unsupported-query"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "transparent glass elephant",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.178,
+                    0.216,
+                    0.304,
+                    0.288
                   ],
-                  "score": 0.753
+                  "score": 0.606
                 },
                 {
-                  "label": "distractor",
+                  "label": "transparent glass elephant",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.48,
+                    0.256,
+                    0.271,
+                    0.266
                   ],
-                  "score": 0.799
+                  "score": 0.524
+                },
+                {
+                  "label": "transparent glass elephant",
+                  "xywh": [
+                    0.178,
+                    0.216,
+                    0.575,
+                    0.306
+                  ],
+                  "score": 0.285
                 }
               ],
               "regionScores": {
-                "target": 84.0,
-                "longTail": 82.1
+                "target": 17.0,
+                "longTail": 40.6
               },
-              "localizedEvidence": 87.1
+              "embeddingScore": 0.0,
+              "localizedEvidence": 47.0
             },
             "metrics": {
-              "readiness": 83.8,
-              "localizedEvidence": 87.1,
-              "unsupportedRisk": 20.1
+              "readiness": 44.0,
+              "proposalRecall": 60.6,
+              "textRegionScore": 17.0,
+              "longTailRecall": 40.6,
+              "localizedEvidence": 47.0,
+              "unsupportedRisk": 24.9
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "mild-noise",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:40Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -3671,35 +5177,42 @@ export const launchInput = {
                 "lowLight": 20,
                 "hallucinationPenalty": 36
               },
-              "asset": "fixtures/restoration/mild-noise.png"
+              "asset": "synthetic://mild-noise"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/mild-noise-restored.png",
-              "artifactMap": "fixtures/restoration/mild-noise-artifact-map.png",
-              "downstreamScore": 85.3,
-              "fidelityScore": 82.2
+              "restoredImage": "synthetic://restoration/mild-noise-restored.png",
+              "artifactMap": "synthetic://restoration/mild-noise-artifact-map.png",
+              "downstreamScore": 85.1,
+              "fidelityScore": 80.6,
+              "deltaScore": 2.102
             },
             "metrics": {
-              "readiness": 82.0,
-              "downstreamUtility": 85.3,
-              "fabricatedDetailRisk": 25.8,
-              "fidelityScore": 82.2
+              "readiness": 81.6,
+              "degradationLoad": 21.6,
+              "diagnosisConfidence": 78.4,
+              "fidelityScore": 80.6,
+              "artifactRisk": 19.3,
+              "downstreamUtility": 85.1,
+              "fabricatedDetailRisk": 19.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "compressed-low-light",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:42Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -3709,35 +5222,42 @@ export const launchInput = {
                 "lowLight": 64,
                 "hallucinationPenalty": 16
               },
-              "asset": "fixtures/restoration/compressed-low-light.png"
+              "asset": "synthetic://compressed-low-light"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/compressed-low-light-restored.png",
-              "artifactMap": "fixtures/restoration/compressed-low-light-artifact-map.png",
-              "downstreamScore": 80.9,
-              "fidelityScore": 80.3
+              "restoredImage": "synthetic://restoration/compressed-low-light-restored.png",
+              "artifactMap": "synthetic://restoration/compressed-low-light-artifact-map.png",
+              "downstreamScore": 78.8,
+              "fidelityScore": 85.2,
+              "deltaScore": 1.12
             },
             "metrics": {
-              "readiness": 77.7,
-              "downstreamUtility": 80.9,
-              "fabricatedDetailRisk": 29.4,
-              "fidelityScore": 80.3
+              "readiness": 78.5,
+              "degradationLoad": 43.6,
+              "diagnosisConfidence": 56.4,
+              "fidelityScore": 85.2,
+              "artifactRisk": 13.0,
+              "downstreamUtility": 78.8,
+              "fabricatedDetailRisk": 13.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "motion-blur-task",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:43Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -3747,35 +5267,42 @@ export const launchInput = {
                 "lowLight": 36,
                 "hallucinationPenalty": 16
               },
-              "asset": "fixtures/restoration/motion-blur-task.png"
+              "asset": "synthetic://motion-blur-task"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/motion-blur-task-restored.png",
-              "artifactMap": "fixtures/restoration/motion-blur-task-artifact-map.png",
-              "downstreamScore": 81.5,
-              "fidelityScore": 79.0
+              "restoredImage": "synthetic://restoration/motion-blur-task-restored.png",
+              "artifactMap": "synthetic://restoration/motion-blur-task-artifact-map.png",
+              "downstreamScore": 82.6,
+              "fidelityScore": 85.0,
+              "deltaScore": 1.597
             },
             "metrics": {
-              "readiness": 77.7,
-              "downstreamUtility": 81.5,
-              "fabricatedDetailRisk": 26.5,
-              "fidelityScore": 79.0
+              "readiness": 80.5,
+              "degradationLoad": 41.2,
+              "diagnosisConfidence": 58.8,
+              "fidelityScore": 85.0,
+              "artifactRisk": 10.9,
+              "downstreamUtility": 82.6,
+              "fabricatedDetailRisk": 10.9
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "over-restored-detail",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:45Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -3785,35 +5312,42 @@ export const launchInput = {
                 "lowLight": 56,
                 "hallucinationPenalty": 18
               },
-              "asset": "fixtures/restoration/over-restored-detail.png"
+              "asset": "synthetic://over-restored-detail"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/over-restored-detail-restored.png",
-              "artifactMap": "fixtures/restoration/over-restored-detail-artifact-map.png",
+              "restoredImage": "synthetic://restoration/over-restored-detail-restored.png",
+              "artifactMap": "synthetic://restoration/over-restored-detail-artifact-map.png",
               "downstreamScore": 81.2,
-              "fidelityScore": 80.1
+              "fidelityScore": 85.8,
+              "deltaScore": 1.348
             },
             "metrics": {
-              "readiness": 77.8,
+              "readiness": 78.9,
+              "degradationLoad": 45.9,
+              "diagnosisConfidence": 54.1,
+              "fidelityScore": 85.8,
+              "artifactRisk": 13.4,
               "downstreamUtility": 81.2,
-              "fabricatedDetailRisk": 28.6,
-              "fidelityScore": 80.1
+              "fabricatedDetailRisk": 13.4
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "clean-camera",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -3822,37 +5356,47 @@ export const launchInput = {
                 "watermarkVisibility": 100,
                 "unlearningProbe": 0
               },
-              "asset": "fixtures/adversarial/clean-camera.png"
+              "asset": "synthetic://clean-camera"
             },
             "outputs": {
-              "provenanceConfidence": 86.4,
-              "attackHeatmap": "fixtures/adversarial/clean-camera-attack-heatmap.png",
-              "leakageRisk": 9.0,
-              "evidence": 82.5
+              "provenanceConfidence": 50.8,
+              "attackHeatmap": "synthetic://adversarial/clean-camera-clip-heatmap.png",
+              "leakageRisk": 1.8,
+              "evidence": 52.2,
+              "clipProbeScores": {
+                "a clean camera photograph": 41.3,
+                "a synthetic generated image": 45.2,
+                "an edited social media image": 0.8,
+                "an adversarially perturbed image": 6.6,
+                "a watermarked image": 6.1
+              }
             },
             "metrics": {
-              "readiness": 79.7,
-              "evidence": 82.5,
-              "risk": 17.9,
-              "leakageRisk": 9.0,
-              "provenanceConfidence": 86.4,
-              "attackCoverage": 44.7
+              "readiness": 66.8,
+              "attackCoverage": 3.7,
+              "provenanceConfidence": 50.8,
+              "leakageRisk": 1.8,
+              "evidence": 52.2,
+              "risk": 11.6
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "edited-social-post",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -3861,37 +5405,47 @@ export const launchInput = {
                 "watermarkVisibility": 98,
                 "unlearningProbe": 10
               },
-              "asset": "fixtures/adversarial/edited-social-post.png"
+              "asset": "synthetic://edited-social-post"
             },
             "outputs": {
-              "provenanceConfidence": 87.9,
-              "attackHeatmap": "fixtures/adversarial/edited-social-post-attack-heatmap.png",
-              "leakageRisk": 14.8,
-              "evidence": 82.9
+              "provenanceConfidence": 39.8,
+              "attackHeatmap": "synthetic://adversarial/edited-social-post-clip-heatmap.png",
+              "leakageRisk": 4.4,
+              "evidence": 44.2,
+              "clipProbeScores": {
+                "a clean camera photograph": 0.7,
+                "a synthetic generated image": 91.0,
+                "an edited social media image": 1.6,
+                "an adversarially perturbed image": 4.2,
+                "a watermarked image": 2.4
+              }
             },
             "metrics": {
-              "readiness": 79.8,
-              "evidence": 82.9,
-              "risk": 21.0,
-              "leakageRisk": 14.8,
-              "provenanceConfidence": 87.9,
-              "attackCoverage": 47.2
+              "readiness": 57.7,
+              "attackCoverage": 2.6,
+              "provenanceConfidence": 39.8,
+              "leakageRisk": 4.4,
+              "evidence": 44.2,
+              "risk": 23.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "synthetic-watermarked",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -3900,37 +5454,47 @@ export const launchInput = {
                 "watermarkVisibility": 94,
                 "unlearningProbe": 44
               },
-              "asset": "fixtures/adversarial/synthetic-watermarked.png"
+              "asset": "synthetic://synthetic-watermarked"
             },
             "outputs": {
-              "provenanceConfidence": 92.0,
-              "attackHeatmap": "fixtures/adversarial/synthetic-watermarked-attack-heatmap.png",
-              "leakageRisk": 32.9,
-              "evidence": 83.6
+              "provenanceConfidence": 39.1,
+              "attackHeatmap": "synthetic://adversarial/synthetic-watermarked-clip-heatmap.png",
+              "leakageRisk": 14.1,
+              "evidence": 41.5,
+              "clipProbeScores": {
+                "a clean camera photograph": 0.0,
+                "a synthetic generated image": 99.1,
+                "an edited social media image": 0.0,
+                "an adversarially perturbed image": 0.1,
+                "a watermarked image": 0.8
+              }
             },
             "metrics": {
-              "readiness": 79.9,
-              "evidence": 83.6,
-              "risk": 29.9,
-              "leakageRisk": 32.9,
-              "provenanceConfidence": 92.0,
-              "attackCoverage": 54.4
+              "readiness": 53.8,
+              "attackCoverage": 0.1,
+              "provenanceConfidence": 39.1,
+              "leakageRisk": 14.1,
+              "evidence": 41.5,
+              "risk": 29.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "adaptive-attack",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -3939,38 +5503,48 @@ export const launchInput = {
                 "watermarkVisibility": 100,
                 "unlearningProbe": 0
               },
-              "asset": "fixtures/adversarial/adaptive-attack.png"
+              "asset": "synthetic://adaptive-attack"
             },
             "outputs": {
-              "provenanceConfidence": 93.8,
-              "attackHeatmap": "fixtures/adversarial/adaptive-attack-attack-heatmap.png",
-              "leakageRisk": 17.4,
-              "evidence": 85.3
+              "provenanceConfidence": 39.9,
+              "attackHeatmap": "synthetic://adversarial/adaptive-attack-clip-heatmap.png",
+              "leakageRisk": 13.1,
+              "evidence": 42.8,
+              "clipProbeScores": {
+                "a clean camera photograph": 0.7,
+                "a synthetic generated image": 85.7,
+                "an edited social media image": 1.7,
+                "an adversarially perturbed image": 8.1,
+                "a watermarked image": 3.9
+              }
             },
             "metrics": {
-              "readiness": 80.8,
-              "evidence": 85.3,
-              "risk": 30.3,
-              "leakageRisk": 17.4,
-              "provenanceConfidence": 93.8,
-              "attackCoverage": 52.6
+              "readiness": 53.9,
+              "attackCoverage": 19.1,
+              "provenanceConfidence": 39.9,
+              "leakageRisk": 13.1,
+              "evidence": 42.8,
+              "risk": 32.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "short-stable",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -3979,43 +5553,54 @@ export const launchInput = {
                 "physicsViolations": 14,
                 "memoryWindow": 72
               },
-              "asset": "fixtures/temporal/short-stable.mp4"
+              "asset": "synthetic://temporal/short-stable.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/short-stable-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/short-stable-contacts.json",
+              "identityTracks": "synthetic://temporal/short-stable-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/short-stable-contacts.json",
               "driftCurve": [
-                5.2,
-                10.5,
-                15.8,
-                21.0
+                2.7,
+                5.4,
+                8.1,
+                10.8,
+                13.5
               ],
-              "rolloutPlausibility": 85.7
+              "rolloutPlausibility": 85.8,
+              "flowProfile": {
+                "meanMagnitude": 1.6017,
+                "meanRoughness": 0.0288,
+                "meanAcceleration": 0.1546,
+                "elapsedMs": 1191.22,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 83.3,
-              "identityStability": 80.6,
-              "contactConsistency": 86.6,
-              "rolloutPlausibility": 85.7,
-              "drift": 21.0,
-              "memoryLoad": 26.6
+              "readiness": 86.1,
+              "identityStability": 86.4,
+              "contactConsistency": 85.9,
+              "rolloutPlausibility": 85.8,
+              "drift": 13.5,
+              "memoryLoad": 24.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "crowded-memory",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -4024,43 +5609,54 @@ export const launchInput = {
                 "physicsViolations": 26,
                 "memoryWindow": 82
               },
-              "asset": "fixtures/temporal/crowded-memory.mp4"
+              "asset": "synthetic://temporal/crowded-memory.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/crowded-memory-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/crowded-memory-contacts.json",
+              "identityTracks": "synthetic://temporal/crowded-memory-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/crowded-memory-contacts.json",
               "driftCurve": [
-                8.2,
-                16.5,
-                24.8,
-                33.0
+                4.3,
+                8.6,
+                12.9,
+                17.2,
+                21.6
               ],
-              "rolloutPlausibility": 80.0
+              "rolloutPlausibility": 79.5,
+              "flowProfile": {
+                "meanMagnitude": 1.7887,
+                "meanRoughness": 0.0288,
+                "meanAcceleration": 0.0894,
+                "elapsedMs": 168.5,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 75.9,
-              "identityStability": 73.8,
-              "contactConsistency": 79.4,
-              "rolloutPlausibility": 80.0,
-              "drift": 33.0,
-              "memoryLoad": 43.8
+              "readiness": 80.3,
+              "identityStability": 79.9,
+              "contactConsistency": 82.6,
+              "rolloutPlausibility": 79.5,
+              "drift": 21.6,
+              "memoryLoad": 40.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "contact-heavy",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -4069,43 +5665,54 @@ export const launchInput = {
                 "physicsViolations": 20,
                 "memoryWindow": 82
               },
-              "asset": "fixtures/temporal/contact-heavy.mp4"
+              "asset": "synthetic://temporal/contact-heavy.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/contact-heavy-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/contact-heavy-contacts.json",
+              "identityTracks": "synthetic://temporal/contact-heavy-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/contact-heavy-contacts.json",
               "driftCurve": [
-                8.6,
-                17.1,
-                25.7,
-                34.3
+                3.9,
+                7.9,
+                11.8,
+                15.7,
+                19.7
               ],
-              "rolloutPlausibility": 77.1
+              "rolloutPlausibility": 80.9,
+              "flowProfile": {
+                "meanMagnitude": 1.732,
+                "meanRoughness": 0.0313,
+                "meanAcceleration": 0.1067,
+                "elapsedMs": 164.0,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 76.2,
-              "identityStability": 74.0,
-              "contactConsistency": 83.6,
-              "rolloutPlausibility": 77.1,
-              "drift": 34.3,
-              "memoryLoad": 42.5
+              "readiness": 81.9,
+              "identityStability": 81.5,
+              "contactConsistency": 84.3,
+              "rolloutPlausibility": 80.9,
+              "drift": 19.7,
+              "memoryLoad": 38.8
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "long-rollout-drift",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -4114,207 +5721,54 @@ export const launchInput = {
                 "physicsViolations": 12,
                 "memoryWindow": 92
               },
-              "asset": "fixtures/temporal/long-rollout-drift.mp4"
+              "asset": "synthetic://temporal/long-rollout-drift.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/long-rollout-drift-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/long-rollout-drift-contacts.json",
+              "identityTracks": "synthetic://temporal/long-rollout-drift-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/long-rollout-drift-contacts.json",
               "driftCurve": [
-                9.0,
-                18.1,
-                27.1,
-                36.1
+                4.1,
+                8.3,
+                12.4,
+                16.6,
+                20.7
               ],
-              "rolloutPlausibility": 75.5
+              "rolloutPlausibility": 79.7,
+              "flowProfile": {
+                "meanMagnitude": 1.8144,
+                "meanRoughness": 0.0331,
+                "meanAcceleration": 0.1629,
+                "elapsedMs": 162.79,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 75.9,
-              "identityStability": 72.7,
-              "contactConsistency": 86.5,
-              "rolloutPlausibility": 75.5,
-              "drift": 36.1,
-              "memoryLoad": 48.1
+              "readiness": 81.3,
+              "identityStability": 79.0,
+              "contactConsistency": 86.4,
+              "rolloutPlausibility": 79.7,
+              "drift": 20.7,
+              "memoryLoad": 44.4
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "same-site-clean",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 16,
-                "cohortMix": 22,
-                "labelNoise": 8,
-                "reviewThreshold": 62
-              },
-              "asset": "fixtures/clinical/same-site-clean.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/same-site-clean-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/same-site-clean-calibration.json",
-              "triageScores": "fixtures/clinical/same-site-clean-triage.json",
-              "clinicalEvidence": 90.3
-            },
-            "metrics": {
-              "readiness": 88.5,
-              "shiftLoad": 16.7,
-              "calibration": 84.3,
-              "domainEvidence": 89.1,
-              "triageRate": 25.4,
-              "residualRisk": 9.6,
-              "clinicalEvidence": 90.3
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "new-scanner",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 58,
-                "cohortMix": 34,
-                "labelNoise": 16,
-                "reviewThreshold": 68
-              },
-              "asset": "fixtures/clinical/new-scanner.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/new-scanner-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/new-scanner-calibration.json",
-              "triageScores": "fixtures/clinical/new-scanner-triage.json",
-              "clinicalEvidence": 84.8
-            },
-            "metrics": {
-              "readiness": 80.5,
-              "shiftLoad": 40.5,
-              "calibration": 77.5,
-              "domainEvidence": 78.6,
-              "triageRate": 39.7,
-              "residualRisk": 21.6,
-              "clinicalEvidence": 84.8
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "external-hospital",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 52,
-                "cohortMix": 72,
-                "labelNoise": 16,
-                "reviewThreshold": 74
-              },
-              "asset": "fixtures/clinical/external-hospital.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/external-hospital-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/external-hospital-calibration.json",
-              "triageScores": "fixtures/clinical/external-hospital-triage.json",
-              "clinicalEvidence": 82.3
-            },
-            "metrics": {
-              "readiness": 77.1,
-              "shiftLoad": 52.4,
-              "calibration": 75.4,
-              "domainEvidence": 72.9,
-              "triageRate": 47.0,
-              "residualRisk": 26.4,
-              "clinicalEvidence": 82.3
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "noisy-rare-cohort",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 76,
-                "cohortMix": 84,
-                "labelNoise": 20,
-                "reviewThreshold": 84
-              },
-              "asset": "fixtures/clinical/noisy-rare-cohort.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/noisy-rare-cohort-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/noisy-rare-cohort-calibration.json",
-              "triageScores": "fixtures/clinical/noisy-rare-cohort-triage.json",
-              "clinicalEvidence": 79.1
-            },
-            "metrics": {
-              "readiness": 72.5,
-              "shiftLoad": 67.8,
-              "calibration": 72.4,
-              "domainEvidence": 66.0,
-              "triageRate": 57.0,
-              "residualRisk": 33.5,
-              "clinicalEvidence": 79.1
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "desktop-batch",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -4323,39 +5777,53 @@ export const launchInput = {
                 "studentRouting": 30,
                 "escalationCost": 10
               },
-              "asset": "fixtures/compute/desktop-batch.json"
+              "title": "Desktop batch review"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/desktop-batch-latency.json",
-              "qualityFloor": 87.4,
-              "routingTrace": "fixtures/compute/desktop-batch-routing.json",
-              "retainedEvidence": 90.9
+              "latencyProfile": {
+                "perIterationMs": 3.031,
+                "repeats": 24,
+                "matrix": [
+                  924,
+                  156,
+                  924
+                ]
+              },
+              "qualityFloor": 85.8,
+              "routingTrace": {
+                "studentRouting": 30,
+                "checksum": 0.066269
+              },
+              "retainedEvidence": 86.6
             },
             "metrics": {
-              "readiness": 76.6,
-              "latency": 58.7,
-              "retainedEvidence": 90.9,
-              "qualityFloor": 87.4,
-              "escalationRate": 17.3,
-              "costSaving": 38.5,
-              "risk": 13.1
+              "readiness": 89.1,
+              "latency": 91.8,
+              "retainedEvidence": 86.6,
+              "qualityFloor": 85.8,
+              "escalationRate": 14.7,
+              "costSaving": 22.7,
+              "risk": 7.2
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "mobile-live",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -4364,39 +5832,53 @@ export const launchInput = {
                 "studentRouting": 60,
                 "escalationCost": 10
               },
-              "asset": "fixtures/compute/mobile-live.json"
+              "title": "Mobile live inference"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/mobile-live-latency.json",
-              "qualityFloor": 81.6,
-              "routingTrace": "fixtures/compute/mobile-live-routing.json",
-              "retainedEvidence": 87.5
+              "latencyProfile": {
+                "perIterationMs": 0.168,
+                "repeats": 24,
+                "matrix": [
+                  876,
+                  216,
+                  876
+                ]
+              },
+              "qualityFloor": 81.8,
+              "routingTrace": {
+                "studentRouting": 60,
+                "checksum": -0.334
+              },
+              "retainedEvidence": 85.0
             },
             "metrics": {
-              "readiness": 74.6,
-              "latency": 55.5,
-              "retainedEvidence": 87.5,
-              "qualityFloor": 81.6,
-              "escalationRate": 29.8,
-              "costSaving": 45.2,
-              "risk": 18.8
+              "readiness": 87.3,
+              "latency": 93.7,
+              "retainedEvidence": 85.0,
+              "qualityFloor": 81.8,
+              "escalationRate": 24.9,
+              "costSaving": 38.2,
+              "risk": 10.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "edge-camera",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -4405,39 +5887,53 @@ export const launchInput = {
                 "studentRouting": 55,
                 "escalationCost": 8
               },
-              "asset": "fixtures/compute/edge-camera.json"
+              "title": "Edge camera stream"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/edge-camera-latency.json",
-              "qualityFloor": 81.2,
-              "routingTrace": "fixtures/compute/edge-camera-routing.json",
-              "retainedEvidence": 85.7
+              "latencyProfile": {
+                "perIterationMs": 0.157,
+                "repeats": 24,
+                "matrix": [
+                  852,
+                  206,
+                  852
+                ]
+              },
+              "qualityFloor": 80.9,
+              "routingTrace": {
+                "studentRouting": 55,
+                "checksum": -0.14627
+              },
+              "retainedEvidence": 84.0
             },
             "metrics": {
-              "readiness": 73.5,
-              "latency": 56.9,
-              "retainedEvidence": 85.7,
-              "qualityFloor": 81.2,
-              "escalationRate": 28.3,
-              "costSaving": 44.2,
-              "risk": 19.5
+              "readiness": 87.0,
+              "latency": 94.2,
+              "retainedEvidence": 84.0,
+              "qualityFloor": 80.9,
+              "escalationRate": 22.3,
+              "costSaving": 36.8,
+              "risk": 10.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "fleet-peak-load",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -4446,39 +5942,53 @@ export const launchInput = {
                 "studentRouting": 65,
                 "escalationCost": 8
               },
-              "asset": "fixtures/compute/fleet-peak-load.json"
+              "title": "Fleet peak load"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/fleet-peak-load-latency.json",
-              "qualityFloor": 80.1,
-              "routingTrace": "fixtures/compute/fleet-peak-load-routing.json",
-              "retainedEvidence": 87.6
+              "latencyProfile": {
+                "perIterationMs": 0.165,
+                "repeats": 24,
+                "matrix": [
+                  888,
+                  226,
+                  888
+                ]
+              },
+              "qualityFloor": 81.0,
+              "routingTrace": {
+                "studentRouting": 65,
+                "checksum": 0.124414
+              },
+              "retainedEvidence": 84.9
             },
             "metrics": {
-              "readiness": 74.6,
-              "latency": 52.5,
-              "retainedEvidence": 87.6,
-              "qualityFloor": 80.1,
-              "escalationRate": 31.3,
-              "costSaving": 48.2,
-              "risk": 20.3
+              "readiness": 86.9,
+              "latency": 93.2,
+              "retainedEvidence": 84.9,
+              "qualityFloor": 81.0,
+              "escalationRate": 25.7,
+              "costSaving": 42.6,
+              "risk": 10.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "light-layout-edit",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -4487,40 +5997,43 @@ export const launchInput = {
                 "identityLock": 82,
                 "adversarialPromptPressure": 18
               },
-              "asset": "fixtures/generation/light-layout-edit.png"
+              "asset": "synthetic://generation/light-layout-edit.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/light-layout-edit-edited.png",
-              "layoutMask": "fixtures/generation/light-layout-edit-layout-mask.png",
-              "identityEmbeddingDelta": 18.5,
-              "rewardTrace": "fixtures/generation/light-layout-edit-reward.json"
+              "editedImage": "synthetic://generation/light-layout-edit-edited.png",
+              "layoutMask": "synthetic://generation/light-layout-edit-layout-mask.png",
+              "identityEmbeddingDelta": 19.2,
+              "rewardTrace": "synthetic://generation/light-layout-edit-reward.json"
             },
             "metrics": {
-              "readiness": 84.9,
+              "readiness": 78.5,
               "editPressure": 21.0,
-              "constraintSatisfaction": 86.1,
-              "identityPreservation": 85.0,
-              "editLocality": 82.8,
-              "rewardAlignment": 87.3,
-              "identityDamage": 18.5,
-              "provenanceRisk": 17.6
+              "constraintSatisfaction": 80.8,
+              "identityPreservation": 80.2,
+              "editLocality": 76.2,
+              "rewardAlignment": 73.6,
+              "identityDamage": 19.2,
+              "provenanceRisk": 20.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "style-with-locks",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -4529,40 +6042,43 @@ export const launchInput = {
                 "identityLock": 80,
                 "adversarialPromptPressure": 32
               },
-              "asset": "fixtures/generation/style-with-locks.png"
+              "asset": "synthetic://generation/style-with-locks.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/style-with-locks-edited.png",
-              "layoutMask": "fixtures/generation/style-with-locks-layout-mask.png",
-              "identityEmbeddingDelta": 31.8,
-              "rewardTrace": "fixtures/generation/style-with-locks-reward.json"
+              "editedImage": "synthetic://generation/style-with-locks-edited.png",
+              "layoutMask": "synthetic://generation/style-with-locks-layout-mask.png",
+              "identityEmbeddingDelta": 31.3,
+              "rewardTrace": "synthetic://generation/style-with-locks-reward.json"
             },
             "metrics": {
-              "readiness": 77.4,
-              "editPressure": 39.2,
-              "constraintSatisfaction": 80.9,
-              "identityPreservation": 77.3,
-              "editLocality": 74.4,
-              "rewardAlignment": 81.3,
-              "identityDamage": 31.8,
-              "provenanceRisk": 29.5
+              "readiness": 70.9,
+              "editPressure": 39.3,
+              "constraintSatisfaction": 74.7,
+              "identityPreservation": 73.7,
+              "editLocality": 67.7,
+              "rewardAlignment": 66.0,
+              "identityDamage": 31.3,
+              "provenanceRisk": 32.2
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "layout-rewrite",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -4571,40 +6087,43 @@ export const launchInput = {
                 "identityLock": 92,
                 "adversarialPromptPressure": 28
               },
-              "asset": "fixtures/generation/layout-rewrite.png"
+              "asset": "synthetic://generation/layout-rewrite.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/layout-rewrite-edited.png",
-              "layoutMask": "fixtures/generation/layout-rewrite-layout-mask.png",
-              "identityEmbeddingDelta": 33.1,
-              "rewardTrace": "fixtures/generation/layout-rewrite-reward.json"
+              "editedImage": "synthetic://generation/layout-rewrite-edited.png",
+              "layoutMask": "synthetic://generation/layout-rewrite-layout-mask.png",
+              "identityEmbeddingDelta": 32.4,
+              "rewardTrace": "synthetic://generation/layout-rewrite-reward.json"
             },
             "metrics": {
-              "readiness": 77.5,
+              "readiness": 70.5,
               "editPressure": 45.7,
-              "constraintSatisfaction": 81.1,
-              "identityPreservation": 78.4,
-              "editLocality": 72.9,
-              "rewardAlignment": 82.4,
-              "identityDamage": 33.1,
-              "provenanceRisk": 29.9
+              "constraintSatisfaction": 73.2,
+              "identityPreservation": 75.0,
+              "editLocality": 65.9,
+              "rewardAlignment": 66.2,
+              "identityDamage": 32.4,
+              "provenanceRisk": 33.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "prompt-attack-edit",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -4613,38 +6132,1273 @@ export const launchInput = {
                 "identityLock": 92,
                 "adversarialPromptPressure": 28
               },
-              "asset": "fixtures/generation/prompt-attack-edit.png"
+              "asset": "synthetic://generation/prompt-attack-edit.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/prompt-attack-edit-edited.png",
-              "layoutMask": "fixtures/generation/prompt-attack-edit-layout-mask.png",
-              "identityEmbeddingDelta": 34.8,
-              "rewardTrace": "fixtures/generation/prompt-attack-edit-reward.json"
+              "editedImage": "synthetic://generation/prompt-attack-edit-edited.png",
+              "layoutMask": "synthetic://generation/prompt-attack-edit-layout-mask.png",
+              "identityEmbeddingDelta": 34.0,
+              "rewardTrace": "synthetic://generation/prompt-attack-edit-reward.json"
             },
             "metrics": {
-              "readiness": 77.6,
-              "editPressure": 47.7,
-              "constraintSatisfaction": 82.3,
-              "identityPreservation": 77.3,
-              "editLocality": 73.6,
-              "rewardAlignment": 82.5,
-              "identityDamage": 34.8,
-              "provenanceRisk": 30.0
+              "readiness": 70.8,
+              "editPressure": 47.8,
+              "constraintSatisfaction": 74.7,
+              "identityPreservation": 74.0,
+              "editLocality": 66.7,
+              "rewardAlignment": 66.6,
+              "identityDamage": 34.0,
+              "provenanceRisk": 33.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "indoor-low-texture",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 68,
+                "thinStructure": 24,
+                "scaleAmbiguity": 54
+              },
+              "asset": "synthetic://depth/indoor-low-texture.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.024086,
+              "curvature": 0.004773
+            },
+            "metrics": {
+              "readiness": 81.8,
+              "depthRange": 0.7193,
+              "normalConsistency": 84.4,
+              "surfaceConsistency": 89.4,
+              "scaleDrift": 29.1,
+              "thinStructureRisk": 15.8
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "thin-chair-legs",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 38,
+                "thinStructure": 78,
+                "scaleAmbiguity": 32
+              },
+              "asset": "synthetic://depth/thin-chair-legs.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.019778,
+              "curvature": 0.003684
+            },
+            "metrics": {
+              "readiness": 75.7,
+              "depthRange": 0.6591,
+              "normalConsistency": 87.9,
+              "surfaceConsistency": 80.2,
+              "scaleDrift": 19.5,
+              "thinStructureRisk": 46.8
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "reflective-surface",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 52,
+                "thinStructure": 34,
+                "scaleAmbiguity": 46
+              },
+              "asset": "synthetic://depth/reflective-surface.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.021851,
+              "curvature": 0.004147
+            },
+            "metrics": {
+              "readiness": 81.6,
+              "depthRange": 0.6839,
+              "normalConsistency": 86.3,
+              "surfaceConsistency": 87.9,
+              "scaleDrift": 25.3,
+              "thinStructureRisk": 21.5
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "wide-room-scale",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 44,
+                "thinStructure": 22,
+                "scaleAmbiguity": 68
+              },
+              "asset": "synthetic://depth/wide-room-scale.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.020688,
+              "curvature": 0.00388
+            },
+            "metrics": {
+              "readiness": 82.5,
+              "depthRange": 0.677,
+              "normalConsistency": 87.2,
+              "surfaceConsistency": 90.2,
+              "scaleDrift": 32.0,
+              "thinStructureRisk": 14.4
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "motion-blur",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "blur",
+                "severity": 46
+              },
+              "asset": "synthetic://robustness/motion-blur.png"
+            },
+            "outputs": {
+              "cleanConfidence": 35.2,
+              "corruptedConfidence": 66.3,
+              "jsDivergence": 0.712014,
+              "featureCosine": 0.940137
+            },
+            "metrics": {
+              "readiness": 80.8,
+              "robustness": 86.3,
+              "confidenceCollapse": 15.0,
+              "featureRetention": 94.0,
+              "labelStability": 74.6,
+              "severity": 46,
+              "topClassChanged": 1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "sensor-noise",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "noise",
+                "severity": 52
+              },
+              "asset": "synthetic://robustness/sensor-noise.png"
+            },
+            "outputs": {
+              "cleanConfidence": 38.2,
+              "corruptedConfidence": 43.1,
+              "jsDivergence": 0.06174,
+              "featureCosine": 0.963718
+            },
+            "metrics": {
+              "readiness": 84.4,
+              "robustness": 91.9,
+              "confidenceCollapse": 10.0,
+              "featureRetention": 96.4,
+              "labelStability": 99.0,
+              "severity": 52,
+              "topClassChanged": 0
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "patch-attack",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "patch",
+                "severity": 66
+              },
+              "asset": "synthetic://robustness/patch-attack.png"
+            },
+            "outputs": {
+              "cleanConfidence": 33.5,
+              "corruptedConfidence": 36.9,
+              "jsDivergence": 0.031526,
+              "featureCosine": 0.973741
+            },
+            "metrics": {
+              "readiness": 81.1,
+              "robustness": 90.8,
+              "confidenceCollapse": 11.8,
+              "featureRetention": 97.4,
+              "labelStability": 99.5,
+              "severity": 66,
+              "topClassChanged": 0
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "compression-shift",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "compression",
+                "severity": 58
+              },
+              "asset": "synthetic://robustness/compression-shift.png"
+            },
+            "outputs": {
+              "cleanConfidence": 38.5,
+              "corruptedConfidence": 39.9,
+              "jsDivergence": 0.009099,
+              "featureCosine": 0.9972
+            },
+            "metrics": {
+              "readiness": 84.1,
+              "robustness": 92.9,
+              "confidenceCollapse": 9.4,
+              "featureRetention": 99.7,
+              "labelStability": 99.9,
+              "severity": 58,
+              "topClassChanged": 0
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "single-object",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 18,
+                "promptNoise": 8,
+                "occlusion": 10
+              },
+              "asset": "synthetic://segmentation/single-object.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 60.7,
+              "maskArea": 0.88176,
+              "maskOverlap": 0.38536
+            },
+            "metrics": {
+              "readiness": 65.4,
+              "maskStability": 57.2,
+              "promptSensitivity": 32.4,
+              "unsupportedRegionRisk": 20.2,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "cluttered-scene",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 64,
+                "promptNoise": 18,
+                "occlusion": 24
+              },
+              "asset": "synthetic://segmentation/cluttered-scene.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 66.3,
+              "maskArea": 0.9091,
+              "maskOverlap": 0.40537
+            },
+            "metrics": {
+              "readiness": 62.3,
+              "maskStability": 59.4,
+              "promptSensitivity": 48.0,
+              "unsupportedRegionRisk": 22.8,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "ambiguous-clicks",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 46,
+                "promptNoise": 62,
+                "occlusion": 18
+              },
+              "asset": "synthetic://segmentation/ambiguous-clicks.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 66.7,
+              "maskArea": 0.90569,
+              "maskOverlap": 0.38714
+            },
+            "metrics": {
+              "readiness": 58.3,
+              "maskStability": 60.7,
+              "promptSensitivity": 61.3,
+              "unsupportedRegionRisk": 28.2,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "occluded-object",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 38,
+                "promptNoise": 26,
+                "occlusion": 70
+              },
+              "asset": "synthetic://segmentation/occluded-object.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 66.3,
+              "maskArea": 0.91259,
+              "maskOverlap": 0.40266
+            },
+            "metrics": {
+              "readiness": 57.8,
+              "maskStability": 53.9,
+              "promptSensitivity": 45.5,
+              "unsupportedRegionRisk": 35.1,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "clean-crossing",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 12,
+                "crowding": 22,
+                "velocity": 36
+              },
+              "asset": "synthetic://tracking/clean-crossing.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.01013,
+              "trackTensor": "synthetic://tracking/clean-crossing-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 88.8,
+              "identityStability": 88.9,
+              "occlusionRecovery": 85.0,
+              "trackContinuity": 91.5,
+              "identityDrift": 1.5
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "identity-crossing",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 26,
+                "crowding": 68,
+                "velocity": 42
+              },
+              "asset": "synthetic://tracking/identity-crossing.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.01697,
+              "trackTensor": "synthetic://tracking/identity-crossing-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 82.6,
+              "identityStability": 81.4,
+              "occlusionRecovery": 79.2,
+              "trackContinuity": 90.0,
+              "identityDrift": 2.7
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "long-occlusion",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 74,
+                "crowding": 36,
+                "velocity": 34
+              },
+              "asset": "synthetic://tracking/long-occlusion.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.014317,
+              "trackTensor": "synthetic://tracking/long-occlusion-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 79.6,
+              "identityStability": 79.2,
+              "occlusionRecovery": 75.4,
+              "trackContinuity": 91.1,
+              "identityDrift": 2.3
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "fast-motion",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 22,
+                "crowding": 42,
+                "velocity": 78
+              },
+              "asset": "synthetic://tracking/fast-motion.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.019914,
+              "trackTensor": "synthetic://tracking/fast-motion-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 83.1,
+              "identityStability": 84.0,
+              "occlusionRecovery": 77.9,
+              "trackContinuity": 86.7,
+              "identityDrift": 3.2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "wide-baseline",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:36Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 82,
+                "textureSparsity": 18,
+                "scaleAmbiguity": 24,
+                "surfaceComplexity": 42
+              },
+              "asset": "synthetic://geometry/wide-baseline.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 204,
+                "meanReprojectionError": 0.00851,
+                "p95ReprojectionError": 0.01639,
+                "elapsedMs": 1331.44
+              },
+              "scaleRecovery": {
+                "trueScale": 1.13333,
+                "recoveredScale": 1.11517,
+                "relativeError": 0.01602
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.00534,
+                "finalLoss": 0.001153,
+                "iterations": 220,
+                "calibratedScale": 1.19754
+              }
+            },
+            "metrics": {
+              "poseEvidence": 92.8,
+              "metricEvidence": 100.0,
+              "surfaceConsistency": 87.8,
+              "scaleDrift": 0.6,
+              "topologyRisk": 11.6,
+              "readiness": 92.9
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "scale-transfer",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:37Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 66,
+                "textureSparsity": 28,
+                "scaleAmbiguity": 44,
+                "surfaceComplexity": 46
+              },
+              "asset": "synthetic://geometry/scale-transfer.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 196,
+                "meanReprojectionError": 0.00963,
+                "p95ReprojectionError": 0.0193,
+                "elapsedMs": 742.4
+              },
+              "scaleRecovery": {
+                "trueScale": 1.24444,
+                "recoveredScale": 1.21153,
+                "relativeError": 0.00475
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.004471,
+                "finalLoss": 0.001505,
+                "iterations": 220,
+                "calibratedScale": 1.25036
+              }
+            },
+            "metrics": {
+              "poseEvidence": 91.7,
+              "metricEvidence": 99.4,
+              "surfaceConsistency": 87.2,
+              "scaleDrift": 3.8,
+              "topologyRisk": 12.5,
+              "readiness": 92.1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "thin-structure",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:38Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 58,
+                "textureSparsity": 34,
+                "scaleAmbiguity": 32,
+                "surfaceComplexity": 72
+              },
+              "asset": "synthetic://geometry/thin-structure.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 191,
+                "meanReprojectionError": 0.01438,
+                "p95ReprojectionError": 0.02784,
+                "elapsedMs": 759.71
+              },
+              "scaleRecovery": {
+                "trueScale": 1.17778,
+                "recoveredScale": 1.15349,
+                "relativeError": 0.01432
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.005345,
+                "finalLoss": 0.00322,
+                "iterations": 220,
+                "calibratedScale": 1.19465
+              }
+            },
+            "metrics": {
+              "poseEvidence": 90.2,
+              "metricEvidence": 97.3,
+              "surfaceConsistency": 83.5,
+              "scaleDrift": 3.4,
+              "topologyRisk": 18.3,
+              "readiness": 89.1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "low-texture-indoor",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:38Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 54,
+                "textureSparsity": 58,
+                "scaleAmbiguity": 48,
+                "surfaceComplexity": 50
+              },
+              "asset": "synthetic://geometry/low-texture-indoor.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 158,
+                "meanReprojectionError": 0.01534,
+                "p95ReprojectionError": 0.02952,
+                "elapsedMs": 768.1
+              },
+              "scaleRecovery": {
+                "trueScale": 1.26667,
+                "recoveredScale": 1.23104,
+                "relativeError": 0.01505
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.005659,
+                "finalLoss": 0.003549,
+                "iterations": 220,
+                "calibratedScale": 1.2476
+              }
+            },
+            "metrics": {
+              "poseEvidence": 88.1,
+              "metricEvidence": 95.3,
+              "surfaceConsistency": 86.0,
+              "scaleDrift": 6.3,
+              "topologyRisk": 13.9,
+              "readiness": 89.4
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "dense-novel-view",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 86,
+                "splatDensity": 78,
+                "semanticEntropy": 24,
+                "provenanceVisibility": 70
+              },
+              "asset": "synthetic://splat/dense-novel-view.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 337,
+                "views": 5,
+                "elapsedMs": 71.17,
+                "adjacentFrameDelta": 0.13833
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.5302,
+                "margin": 0.45706,
+                "editLeakageRatio": 0.05605,
+                "editLocality": 0.94395
+              },
+              "provenanceProbe": {
+                "visibility": 70,
+                "trace": 67.7
+              }
+            },
+            "metrics": {
+              "renderFidelity": 85.5,
+              "semanticAttachment": 60.9,
+              "provenanceTrace": 67.7,
+              "viewInstability": 14.1,
+              "editLeakageRisk": 10.2,
+              "readiness": 74.9
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "semantic-edit",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 74,
+                "splatDensity": 72,
+                "semanticEntropy": 34,
+                "provenanceVisibility": 76
+              },
+              "asset": "synthetic://splat/semantic-edit.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 319,
+                "views": 5,
+                "elapsedMs": 23.13,
+                "adjacentFrameDelta": 0.13381
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.55323,
+                "margin": 0.45882,
+                "editLeakageRatio": 0.07111,
+                "editLocality": 0.92889
+              },
+              "provenanceProbe": {
+                "visibility": 76,
+                "trace": 72.3
+              }
+            },
+            "metrics": {
+              "renderFidelity": 83.7,
+              "semanticAttachment": 60.7,
+              "provenanceTrace": 72.3,
+              "viewInstability": 15.2,
+              "editLeakageRisk": 12.1,
+              "readiness": 75.2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "provenance-transfer",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 68,
+                "splatDensity": 70,
+                "semanticEntropy": 42,
+                "provenanceVisibility": 84
+              },
+              "asset": "synthetic://splat/provenance-transfer.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 313,
+                "views": 5,
+                "elapsedMs": 22.65,
+                "adjacentFrameDelta": 0.13393
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.51926,
+                "margin": 0.42126,
+                "editLeakageRatio": 0.08418,
+                "editLocality": 0.91582
+              },
+              "provenanceProbe": {
+                "visibility": 84,
+                "trace": 77.6
+              }
+            },
+            "metrics": {
+              "renderFidelity": 82.7,
+              "semanticAttachment": 57.0,
+              "provenanceTrace": 77.6,
+              "viewInstability": 15.9,
+              "editLeakageRisk": 13.5,
+              "readiness": 75.1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "sparse-capture",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 62,
+                "splatDensity": 66,
+                "semanticEntropy": 46,
+                "provenanceVisibility": 72
+              },
+              "asset": "synthetic://splat/sparse-capture.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 300,
+                "views": 5,
+                "elapsedMs": 21.97,
+                "adjacentFrameDelta": 0.13495
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.57297,
+                "margin": 0.47408,
+                "editLeakageRatio": 0.07785,
+                "editLocality": 0.92215
+              },
+              "provenanceProbe": {
+                "visibility": 72,
+                "trace": 69.6
+              }
+            },
+            "metrics": {
+              "renderFidelity": 81.4,
+              "semanticAttachment": 60.5,
+              "provenanceTrace": 69.6,
+              "viewInstability": 16.7,
+              "editLeakageRisk": 14.5,
+              "readiness": 73.6
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "clear-baseline",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 8,
+                "artifactLoad": 12,
+                "escalationThreshold": 68
+              },
+              "asset": "synthetic://clinical/clear-baseline.png"
+            },
+            "outputs": {
+              "cleanConfidence": 38.6,
+              "shiftedConfidence": 35.0,
+              "logitDivergence": 0.006642
+            },
+            "metrics": {
+              "readiness": 89.9,
+              "shiftScore": 7.6,
+              "calibration": 89.3,
+              "falseClearRisk": 2.4,
+              "escalationThreshold": 68
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "scanner-shift",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 46,
+                "artifactLoad": 24,
+                "escalationThreshold": 72
+              },
+              "asset": "synthetic://clinical/scanner-shift.png"
+            },
+            "outputs": {
+              "cleanConfidence": 33.4,
+              "shiftedConfidence": 33.9,
+              "logitDivergence": 0.014008
+            },
+            "metrics": {
+              "readiness": 83.2,
+              "shiftScore": 32.7,
+              "calibration": 91.5,
+              "falseClearRisk": 8.9,
+              "escalationThreshold": 72
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "rare-presentation",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 58,
+                "artifactLoad": 18,
+                "escalationThreshold": 78
+              },
+              "asset": "synthetic://clinical/rare-presentation.png"
+            },
+            "outputs": {
+              "cleanConfidence": 39.4,
+              "shiftedConfidence": 37.6,
+              "logitDivergence": 0.003941
+            },
+            "metrics": {
+              "readiness": 81.9,
+              "shiftScore": 38.0,
+              "calibration": 90.7,
+              "falseClearRisk": 10.6,
+              "escalationThreshold": 78
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "motion-artifact",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 38,
+                "artifactLoad": 66,
+                "escalationThreshold": 74
+              },
+              "asset": "synthetic://clinical/motion-artifact.png"
+            },
+            "outputs": {
+              "cleanConfidence": 26.4,
+              "shiftedConfidence": 26.2,
+              "logitDivergence": 0.067713
+            },
+            "metrics": {
+              "readiness": 81.1,
+              "shiftScore": 39.0,
+              "calibration": 90.9,
+              "falseClearRisk": 11.1,
+              "escalationThreshold": 74
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "urban-cut-in",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -4655,36 +7409,39 @@ export const launchInput = {
                 "occlusion": 10,
                 "actionConfidence": 82
               },
-              "asset": "fixtures/driving/urban-cut-in.mp4"
+              "asset": "synthetic://driving/urban-cut-in.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/urban-cut-in-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/urban-cut-in-grounding.png",
               "timeToCollision": 5.15,
-              "riskTrace": "fixtures/driving/urban-cut-in-risk.json",
-              "ruleViolations": 24.0
+              "riskTrace": "synthetic://driving/urban-cut-in-risk.json",
+              "ruleViolations": 32.9
             },
             "metrics": {
-              "readiness": 68.1,
-              "sceneGrounding": 85.7,
+              "readiness": 57.4,
+              "sceneGrounding": 58.1,
               "timeToCollision": 5.15,
-              "risk": 33.4,
-              "ruleViolation": 24.0,
-              "abstention": 7.6
+              "risk": 33.6,
+              "ruleViolation": 32.9,
+              "abstention": 15.5
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "night-crosswalk",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -4695,36 +7452,39 @@ export const launchInput = {
                 "occlusion": 18,
                 "actionConfidence": 78
               },
-              "asset": "fixtures/driving/night-crosswalk.mp4"
+              "asset": "synthetic://driving/night-crosswalk.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/night-crosswalk-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/night-crosswalk-grounding.png",
               "timeToCollision": 5.73,
-              "riskTrace": "fixtures/driving/night-crosswalk-risk.json",
-              "ruleViolations": 23.5
+              "riskTrace": "synthetic://driving/night-crosswalk-risk.json",
+              "ruleViolations": 32.8
             },
             "metrics": {
-              "readiness": 68.2,
-              "sceneGrounding": 84.2,
+              "readiness": 57.1,
+              "sceneGrounding": 55.4,
               "timeToCollision": 5.73,
-              "risk": 31.7,
-              "ruleViolation": 23.5,
-              "abstention": 7.8
+              "risk": 31.9,
+              "ruleViolation": 32.8,
+              "abstention": 16.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "highway-merge",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -4735,36 +7495,39 @@ export const launchInput = {
                 "occlusion": 16,
                 "actionConfidence": 84
               },
-              "asset": "fixtures/driving/highway-merge.mp4"
+              "asset": "synthetic://driving/highway-merge.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/highway-merge-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/highway-merge-grounding.png",
               "timeToCollision": 4.34,
-              "riskTrace": "fixtures/driving/highway-merge-risk.json",
-              "ruleViolations": 24.1
+              "riskTrace": "synthetic://driving/highway-merge-risk.json",
+              "ruleViolations": 33.9
             },
             "metrics": {
-              "readiness": 68.2,
-              "sceneGrounding": 87.3,
+              "readiness": 56.5,
+              "sceneGrounding": 57.0,
               "timeToCollision": 4.34,
-              "risk": 34.6,
-              "ruleViolation": 24.1,
-              "abstention": 7.4
+              "risk": 34.8,
+              "ruleViolation": 33.9,
+              "abstention": 16.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "construction-zone",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -4775,347 +7538,30 @@ export const launchInput = {
                 "occlusion": 14,
                 "actionConfidence": 72
               },
-              "asset": "fixtures/driving/construction-zone.mp4"
+              "asset": "synthetic://driving/construction-zone.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/construction-zone-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/construction-zone-grounding.png",
               "timeToCollision": 5.82,
-              "riskTrace": "fixtures/driving/construction-zone-risk.json",
-              "ruleViolations": 23.7
+              "riskTrace": "synthetic://driving/construction-zone-risk.json",
+              "ruleViolations": 33.0
             },
             "metrics": {
-              "readiness": 68.2,
-              "sceneGrounding": 83.9,
+              "readiness": 57.1,
+              "sceneGrounding": 55.1,
               "timeToCollision": 5.82,
-              "risk": 31.9,
-              "ruleViolation": 23.7,
-              "abstention": 9.1
+              "risk": 32.1,
+              "ruleViolation": 33.0,
+              "abstention": 17.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "wide-baseline",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 82,
-                "textureSparsity": 18,
-                "scaleAmbiguity": 24,
-                "surfaceComplexity": 42
-              },
-              "asset": "fixtures/geometry/wide-baseline.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/wide-baseline-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/wide-baseline-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/wide-baseline-surface-residual.png",
-              "topologyWarnings": 13.9
-            },
-            "metrics": {
-              "readiness": 85.8,
-              "poseEvidence": 87.0,
-              "metricEvidence": 86.9,
-              "surfaceConsistency": 83.1,
-              "scaleDrift": 10.1,
-              "topologyRisk": 13.9
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "scale-transfer",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 66,
-                "textureSparsity": 28,
-                "scaleAmbiguity": 44,
-                "surfaceComplexity": 46
-              },
-              "asset": "fixtures/geometry/scale-transfer.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/scale-transfer-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/scale-transfer-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/scale-transfer-surface-residual.png",
-              "topologyWarnings": 21.0
-            },
-            "metrics": {
-              "readiness": 78.7,
-              "poseEvidence": 79.2,
-              "metricEvidence": 78.8,
-              "surfaceConsistency": 78.4,
-              "scaleDrift": 21.5,
-              "topologyRisk": 21.0
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "thin-structure",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 58,
-                "textureSparsity": 34,
-                "scaleAmbiguity": 32,
-                "surfaceComplexity": 72
-              },
-              "asset": "fixtures/geometry/thin-structure.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/thin-structure-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/thin-structure-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/thin-structure-surface-residual.png",
-              "topologyWarnings": 30.0
-            },
-            "metrics": {
-              "readiness": 75.5,
-              "poseEvidence": 76.8,
-              "metricEvidence": 80.4,
-              "surfaceConsistency": 72.5,
-              "scaleDrift": 22.7,
-              "topologyRisk": 30.0
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "low-texture-indoor",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 54,
-                "textureSparsity": 58,
-                "scaleAmbiguity": 48,
-                "surfaceComplexity": 50
-              },
-              "asset": "fixtures/geometry/low-texture-indoor.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/low-texture-indoor-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/low-texture-indoor-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/low-texture-indoor-surface-residual.png",
-              "topologyWarnings": 30.0
-            },
-            "metrics": {
-              "readiness": 72.0,
-              "poseEvidence": 70.1,
-              "metricEvidence": 74.7,
-              "surfaceConsistency": 72.2,
-              "scaleDrift": 29.9,
-              "topologyRisk": 30.0
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "dense-novel-view",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 86,
-                "splatDensity": 78,
-                "semanticEntropy": 24,
-                "provenanceVisibility": 70
-              },
-              "asset": "fixtures/splats/dense-novel-view.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/dense-novel-view-renders/",
-              "semanticSplatMap": "fixtures/splats/dense-novel-view-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/dense-novel-view-provenance.json",
-              "editLeakageReport": 16.7
-            },
-            "metrics": {
-              "readiness": 85.6,
-              "renderFidelity": 86.6,
-              "semanticAttachment": 86.4,
-              "provenanceTrace": 85.5,
-              "viewInstability": 9.4,
-              "editLeakageRisk": 16.7
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "semantic-edit",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 74,
-                "splatDensity": 72,
-                "semanticEntropy": 34,
-                "provenanceVisibility": 76
-              },
-              "asset": "fixtures/splats/semantic-edit.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/semantic-edit-renders/",
-              "semanticSplatMap": "fixtures/splats/semantic-edit-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/semantic-edit-provenance.json",
-              "editLeakageReport": 21.4
-            },
-            "metrics": {
-              "readiness": 82.2,
-              "renderFidelity": 81.5,
-              "semanticAttachment": 82.4,
-              "provenanceTrace": 86.1,
-              "viewInstability": 15.7,
-              "editLeakageRisk": 21.4
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "provenance-transfer",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 68,
-                "splatDensity": 70,
-                "semanticEntropy": 42,
-                "provenanceVisibility": 84
-              },
-              "asset": "fixtures/splats/provenance-transfer.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/provenance-transfer-renders/",
-              "semanticSplatMap": "fixtures/splats/provenance-transfer-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/provenance-transfer-provenance.json",
-              "editLeakageReport": 24.3
-            },
-            "metrics": {
-              "readiness": 80.5,
-              "renderFidelity": 78.9,
-              "semanticAttachment": 79.8,
-              "provenanceTrace": 87.7,
-              "viewInstability": 18.8,
-              "editLeakageRisk": 24.3
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "sparse-capture",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 62,
-                "splatDensity": 66,
-                "semanticEntropy": 46,
-                "provenanceVisibility": 72
-              },
-              "asset": "fixtures/splats/sparse-capture.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/sparse-capture-renders/",
-              "semanticSplatMap": "fixtures/splats/sparse-capture-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/sparse-capture-provenance.json",
-              "editLeakageReport": 27.4
-            },
-            "metrics": {
-              "readiness": 77.7,
-              "renderFidelity": 76.2,
-              "semanticAttachment": 77.8,
-              "provenanceTrace": 83.8,
-              "viewInstability": 23.2,
-              "editLeakageRisk": 27.4
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           }
         ]
@@ -5125,10 +7571,10 @@ export const launchInput = {
           "validator": "validate_cvpr_colab_results",
           "runtimePlane": "google-colab-pro-plus",
           "expectedMode": "cached-real",
-          "jobs": 10,
-          "expectedResults": 40,
-          "actualResults": 40,
-          "validJobs": 10,
+          "jobs": 14,
+          "expectedResults": 56,
+          "actualResults": 56,
+          "validJobs": 14,
           "issues": 0,
           "status": "valid"
         },
@@ -5198,6 +7644,38 @@ export const launchInput = {
             "ready": true
           },
           {
+            "jobId": "depth-normal-consistency",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "corruption-robustness",
+            "bench": "cvpr-corruption-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+            "ready": true
+          },
+          {
             "jobId": "metric-geometry",
             "bench": "cvpr-metric-geometry-bench",
             "expectedCases": 4,
@@ -5234,13 +7712,14 @@ export const launchInput = {
         "validator": "validate_cvpr_colab_results",
         "runtimePlane": "google-colab-pro-plus",
         "expectedMode": "live-colab",
-        "jobs": 10,
-        "expectedResults": 40,
-        "actualResults": 40,
-        "validJobs": 10,
+        "jobs": 14,
+        "expectedResults": 56,
+        "actualResults": 56,
+        "validJobs": 14,
         "issues": 0,
         "status": "valid",
         "intake": "cvpr-colab-live-intake",
+        "job": null,
         "export": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
         "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
         "promoted": false
@@ -5311,6 +7790,38 @@ export const launchInput = {
           "ready": true
         },
         {
+          "jobId": "depth-normal-consistency",
+          "bench": "cvpr-depth-normal-consistency-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+          "ready": true
+        },
+        {
+          "jobId": "corruption-robustness",
+          "bench": "cvpr-corruption-robustness-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+          "ready": true
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "bench": "cvpr-prompt-segmentation-robustness-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+          "ready": true
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "bench": "cvpr-video-identity-tracking-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+          "ready": true
+        },
+        {
           "jobId": "metric-geometry",
           "bench": "cvpr-metric-geometry-bench",
           "expectedCases": 4,
@@ -5334,13 +7845,14 @@ export const launchInput = {
         "validator": "validate_cvpr_colab_results",
         "runtimePlane": "google-colab-pro-plus",
         "expectedMode": "live-colab",
-        "jobs": 10,
-        "expectedResults": 40,
-        "actualResults": 40,
-        "validJobs": 10,
+        "jobs": 14,
+        "expectedResults": 56,
+        "actualResults": 56,
+        "validJobs": 14,
         "issues": 0,
         "status": "valid",
         "intake": "cvpr-colab-live-intake",
+        "job": null,
         "export": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results_live.json",
         "canonicalArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
         "promoted": true
@@ -5411,6 +7923,38 @@ export const launchInput = {
           "ready": true
         },
         {
+          "jobId": "depth-normal-consistency",
+          "bench": "cvpr-depth-normal-consistency-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+          "ready": true
+        },
+        {
+          "jobId": "corruption-robustness",
+          "bench": "cvpr-corruption-robustness-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+          "ready": true
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "bench": "cvpr-prompt-segmentation-robustness-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+          "ready": true
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "bench": "cvpr-video-identity-tracking-bench",
+          "expectedCases": 4,
+          "actualCases": 4,
+          "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+          "ready": true
+        },
+        {
           "jobId": "metric-geometry",
           "bench": "cvpr-metric-geometry-bench",
           "expectedCases": 4,
@@ -5433,8 +7977,8 @@ export const launchInput = {
       "summary": {
         "delta": "cvpr-colab-promotion-delta",
         "status": "release",
-        "cases": 40,
-        "jobs": 10,
+        "cases": 56,
+        "jobs": 14,
         "missing": 0,
         "modeMismatches": 0,
         "regressions": 0,
@@ -5447,8 +7991,8 @@ export const launchInput = {
         {
           "jobId": "adversarial-provenance",
           "caseId": "adaptive-attack",
-          "readinessBefore": 80.8,
-          "readinessAfter": 80.8,
+          "readinessBefore": 53.9,
+          "readinessAfter": 53.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "attackCoverage": 0.0,
@@ -5464,8 +8008,8 @@ export const launchInput = {
         {
           "jobId": "adversarial-provenance",
           "caseId": "clean-camera",
-          "readinessBefore": 79.7,
-          "readinessAfter": 79.7,
+          "readinessBefore": 66.8,
+          "readinessAfter": 66.8,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "attackCoverage": 0.0,
@@ -5481,8 +8025,8 @@ export const launchInput = {
         {
           "jobId": "adversarial-provenance",
           "caseId": "edited-social-post",
-          "readinessBefore": 79.8,
-          "readinessAfter": 79.8,
+          "readinessBefore": 57.7,
+          "readinessAfter": 57.7,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "attackCoverage": 0.0,
@@ -5498,8 +8042,8 @@ export const launchInput = {
         {
           "jobId": "adversarial-provenance",
           "caseId": "synthetic-watermarked",
-          "readinessBefore": 79.9,
-          "readinessAfter": 79.9,
+          "readinessBefore": 53.8,
+          "readinessAfter": 53.8,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "attackCoverage": 0.0,
@@ -5514,72 +8058,64 @@ export const launchInput = {
         },
         {
           "jobId": "clinical-shift",
-          "caseId": "external-hospital",
-          "readinessBefore": 77.1,
-          "readinessAfter": 77.1,
+          "caseId": "clear-baseline",
+          "readinessBefore": 89.9,
+          "readinessAfter": 89.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "calibration": 0.0,
-            "clinicalEvidence": 0.0,
-            "domainEvidence": 0.0,
+            "escalationThreshold": 0,
+            "falseClearRisk": 0.0,
             "readiness": 0.0,
-            "residualRisk": 0.0,
-            "shiftLoad": 0.0,
-            "triageRate": 0.0
+            "shiftScore": 0.0
           },
           "promotedFrom": "live-colab",
           "regression": false
         },
         {
           "jobId": "clinical-shift",
-          "caseId": "new-scanner",
-          "readinessBefore": 80.5,
-          "readinessAfter": 80.5,
+          "caseId": "motion-artifact",
+          "readinessBefore": 81.1,
+          "readinessAfter": 81.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "calibration": 0.0,
-            "clinicalEvidence": 0.0,
-            "domainEvidence": 0.0,
+            "escalationThreshold": 0,
+            "falseClearRisk": 0.0,
             "readiness": 0.0,
-            "residualRisk": 0.0,
-            "shiftLoad": 0.0,
-            "triageRate": 0.0
+            "shiftScore": 0.0
           },
           "promotedFrom": "live-colab",
           "regression": false
         },
         {
           "jobId": "clinical-shift",
-          "caseId": "noisy-rare-cohort",
-          "readinessBefore": 72.5,
-          "readinessAfter": 72.5,
+          "caseId": "rare-presentation",
+          "readinessBefore": 81.9,
+          "readinessAfter": 81.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "calibration": 0.0,
-            "clinicalEvidence": 0.0,
-            "domainEvidence": 0.0,
+            "escalationThreshold": 0,
+            "falseClearRisk": 0.0,
             "readiness": 0.0,
-            "residualRisk": 0.0,
-            "shiftLoad": 0.0,
-            "triageRate": 0.0
+            "shiftScore": 0.0
           },
           "promotedFrom": "live-colab",
           "regression": false
         },
         {
           "jobId": "clinical-shift",
-          "caseId": "same-site-clean",
-          "readinessBefore": 88.5,
-          "readinessAfter": 88.5,
+          "caseId": "scanner-shift",
+          "readinessBefore": 83.2,
+          "readinessAfter": 83.2,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "calibration": 0.0,
-            "clinicalEvidence": 0.0,
-            "domainEvidence": 0.0,
+            "escalationThreshold": 0,
+            "falseClearRisk": 0.0,
             "readiness": 0.0,
-            "residualRisk": 0.0,
-            "shiftLoad": 0.0,
-            "triageRate": 0.0
+            "shiftScore": 0.0
           },
           "promotedFrom": "live-colab",
           "regression": false
@@ -5587,8 +8123,8 @@ export const launchInput = {
         {
           "jobId": "compute-serving",
           "caseId": "desktop-batch",
-          "readinessBefore": 76.6,
-          "readinessAfter": 76.6,
+          "readinessBefore": 89.1,
+          "readinessAfter": 89.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "costSaving": 0.0,
@@ -5605,8 +8141,8 @@ export const launchInput = {
         {
           "jobId": "compute-serving",
           "caseId": "edge-camera",
-          "readinessBefore": 73.5,
-          "readinessAfter": 73.5,
+          "readinessBefore": 87.0,
+          "readinessAfter": 87.0,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "costSaving": 0.0,
@@ -5623,8 +8159,8 @@ export const launchInput = {
         {
           "jobId": "compute-serving",
           "caseId": "fleet-peak-load",
-          "readinessBefore": 74.6,
-          "readinessAfter": 74.6,
+          "readinessBefore": 86.9,
+          "readinessAfter": 86.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "costSaving": 0.0,
@@ -5641,8 +8177,8 @@ export const launchInput = {
         {
           "jobId": "compute-serving",
           "caseId": "mobile-live",
-          "readinessBefore": 74.6,
-          "readinessAfter": 74.6,
+          "readinessBefore": 87.3,
+          "readinessAfter": 87.3,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "costSaving": 0.0,
@@ -5659,8 +8195,8 @@ export const launchInput = {
         {
           "jobId": "constraint-generation",
           "caseId": "layout-rewrite",
-          "readinessBefore": 77.5,
-          "readinessAfter": 77.5,
+          "readinessBefore": 70.5,
+          "readinessAfter": 70.5,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "constraintSatisfaction": 0.0,
@@ -5678,8 +8214,8 @@ export const launchInput = {
         {
           "jobId": "constraint-generation",
           "caseId": "light-layout-edit",
-          "readinessBefore": 84.9,
-          "readinessAfter": 84.9,
+          "readinessBefore": 78.5,
+          "readinessAfter": 78.5,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "constraintSatisfaction": 0.0,
@@ -5697,8 +8233,8 @@ export const launchInput = {
         {
           "jobId": "constraint-generation",
           "caseId": "prompt-attack-edit",
-          "readinessBefore": 77.6,
-          "readinessAfter": 77.6,
+          "readinessBefore": 70.8,
+          "readinessAfter": 70.8,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "constraintSatisfaction": 0.0,
@@ -5716,8 +8252,8 @@ export const launchInput = {
         {
           "jobId": "constraint-generation",
           "caseId": "style-with-locks",
-          "readinessBefore": 77.4,
-          "readinessAfter": 77.4,
+          "readinessBefore": 70.9,
+          "readinessAfter": 70.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "constraintSatisfaction": 0.0,
@@ -5733,10 +8269,150 @@ export const launchInput = {
           "regression": false
         },
         {
+          "jobId": "corruption-robustness",
+          "caseId": "compression-shift",
+          "readinessBefore": 84.1,
+          "readinessAfter": 84.1,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "confidenceCollapse": 0.0,
+            "featureRetention": 0.0,
+            "labelStability": 0.0,
+            "readiness": 0.0,
+            "robustness": 0.0,
+            "severity": 0,
+            "topClassChanged": 0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "motion-blur",
+          "readinessBefore": 80.8,
+          "readinessAfter": 80.8,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "confidenceCollapse": 0.0,
+            "featureRetention": 0.0,
+            "labelStability": 0.0,
+            "readiness": 0.0,
+            "robustness": 0.0,
+            "severity": 0,
+            "topClassChanged": 0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "patch-attack",
+          "readinessBefore": 81.1,
+          "readinessAfter": 81.1,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "confidenceCollapse": 0.0,
+            "featureRetention": 0.0,
+            "labelStability": 0.0,
+            "readiness": 0.0,
+            "robustness": 0.0,
+            "severity": 0,
+            "topClassChanged": 0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseId": "sensor-noise",
+          "readinessBefore": 84.4,
+          "readinessAfter": 84.4,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "confidenceCollapse": 0.0,
+            "featureRetention": 0.0,
+            "labelStability": 0.0,
+            "readiness": 0.0,
+            "robustness": 0.0,
+            "severity": 0,
+            "topClassChanged": 0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "indoor-low-texture",
+          "readinessBefore": 81.8,
+          "readinessAfter": 81.8,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "depthRange": 0.0,
+            "normalConsistency": 0.0,
+            "readiness": 0.0,
+            "scaleDrift": 0.0,
+            "surfaceConsistency": 0.0,
+            "thinStructureRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "reflective-surface",
+          "readinessBefore": 81.6,
+          "readinessAfter": 81.6,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "depthRange": 0.0,
+            "normalConsistency": 0.0,
+            "readiness": 0.0,
+            "scaleDrift": 0.0,
+            "surfaceConsistency": 0.0,
+            "thinStructureRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "thin-chair-legs",
+          "readinessBefore": 75.7,
+          "readinessAfter": 75.7,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "depthRange": 0.0,
+            "normalConsistency": 0.0,
+            "readiness": 0.0,
+            "scaleDrift": 0.0,
+            "surfaceConsistency": 0.0,
+            "thinStructureRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "depth-normal-consistency",
+          "caseId": "wide-room-scale",
+          "readinessBefore": 82.5,
+          "readinessAfter": 82.5,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "depthRange": 0.0,
+            "normalConsistency": 0.0,
+            "readiness": 0.0,
+            "scaleDrift": 0.0,
+            "surfaceConsistency": 0.0,
+            "thinStructureRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
           "jobId": "driving-safety",
           "caseId": "construction-zone",
-          "readinessBefore": 68.2,
-          "readinessAfter": 68.2,
+          "readinessBefore": 57.1,
+          "readinessAfter": 57.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "abstention": 0.0,
@@ -5752,8 +8428,8 @@ export const launchInput = {
         {
           "jobId": "driving-safety",
           "caseId": "highway-merge",
-          "readinessBefore": 68.2,
-          "readinessAfter": 68.2,
+          "readinessBefore": 56.5,
+          "readinessAfter": 56.5,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "abstention": 0.0,
@@ -5769,8 +8445,8 @@ export const launchInput = {
         {
           "jobId": "driving-safety",
           "caseId": "night-crosswalk",
-          "readinessBefore": 68.2,
-          "readinessAfter": 68.2,
+          "readinessBefore": 57.1,
+          "readinessAfter": 57.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "abstention": 0.0,
@@ -5786,8 +8462,8 @@ export const launchInput = {
         {
           "jobId": "driving-safety",
           "caseId": "urban-cut-in",
-          "readinessBefore": 68.1,
-          "readinessAfter": 68.1,
+          "readinessBefore": 57.4,
+          "readinessAfter": 57.4,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "abstention": 0.0,
@@ -5803,8 +8479,8 @@ export const launchInput = {
         {
           "jobId": "gaussian-splatting",
           "caseId": "dense-novel-view",
-          "readinessBefore": 85.6,
-          "readinessAfter": 85.6,
+          "readinessBefore": 74.9,
+          "readinessAfter": 74.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "editLeakageRisk": 0.0,
@@ -5820,8 +8496,8 @@ export const launchInput = {
         {
           "jobId": "gaussian-splatting",
           "caseId": "provenance-transfer",
-          "readinessBefore": 80.5,
-          "readinessAfter": 80.5,
+          "readinessBefore": 75.1,
+          "readinessAfter": 75.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "editLeakageRisk": 0.0,
@@ -5837,8 +8513,8 @@ export const launchInput = {
         {
           "jobId": "gaussian-splatting",
           "caseId": "semantic-edit",
-          "readinessBefore": 82.2,
-          "readinessAfter": 82.2,
+          "readinessBefore": 75.2,
+          "readinessAfter": 75.2,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "editLeakageRisk": 0.0,
@@ -5854,8 +8530,8 @@ export const launchInput = {
         {
           "jobId": "gaussian-splatting",
           "caseId": "sparse-capture",
-          "readinessBefore": 77.7,
-          "readinessAfter": 77.7,
+          "readinessBefore": 73.6,
+          "readinessAfter": 73.6,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "editLeakageRisk": 0.0,
@@ -5871,8 +8547,8 @@ export const launchInput = {
         {
           "jobId": "metric-geometry",
           "caseId": "low-texture-indoor",
-          "readinessBefore": 72.0,
-          "readinessAfter": 72.0,
+          "readinessBefore": 89.4,
+          "readinessAfter": 89.4,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "metricEvidence": 0.0,
@@ -5888,8 +8564,8 @@ export const launchInput = {
         {
           "jobId": "metric-geometry",
           "caseId": "scale-transfer",
-          "readinessBefore": 78.7,
-          "readinessAfter": 78.7,
+          "readinessBefore": 92.1,
+          "readinessAfter": 92.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "metricEvidence": 0.0,
@@ -5905,8 +8581,8 @@ export const launchInput = {
         {
           "jobId": "metric-geometry",
           "caseId": "thin-structure",
-          "readinessBefore": 75.5,
-          "readinessAfter": 75.5,
+          "readinessBefore": 89.1,
+          "readinessAfter": 89.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "metricEvidence": 0.0,
@@ -5922,8 +8598,8 @@ export const launchInput = {
         {
           "jobId": "metric-geometry",
           "caseId": "wide-baseline",
-          "readinessBefore": 85.8,
-          "readinessAfter": 85.8,
+          "readinessBefore": 92.9,
+          "readinessAfter": 92.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "metricEvidence": 0.0,
@@ -5939,12 +8615,15 @@ export const launchInput = {
         {
           "jobId": "open-vocab-grounding",
           "caseId": "common-clean",
-          "readinessBefore": 84.7,
-          "readinessAfter": 84.7,
+          "readinessBefore": 48.0,
+          "readinessAfter": 48.0,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "localizedEvidence": 0.0,
+            "longTailRecall": 0.0,
+            "proposalRecall": 0.0,
             "readiness": 0.0,
+            "textRegionScore": 0.0,
             "unsupportedRisk": 0.0
           },
           "promotedFrom": "live-colab",
@@ -5953,12 +8632,15 @@ export const launchInput = {
         {
           "jobId": "open-vocab-grounding",
           "caseId": "rare-distractors",
-          "readinessBefore": 83.8,
-          "readinessAfter": 83.8,
+          "readinessBefore": 88.0,
+          "readinessAfter": 88.0,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "localizedEvidence": 0.0,
+            "longTailRecall": 0.0,
+            "proposalRecall": 0.0,
             "readiness": 0.0,
+            "textRegionScore": 0.0,
             "unsupportedRisk": 0.0
           },
           "promotedFrom": "live-colab",
@@ -5967,12 +8649,15 @@ export const launchInput = {
         {
           "jobId": "open-vocab-grounding",
           "caseId": "rare-visible",
-          "readinessBefore": 83.9,
-          "readinessAfter": 83.9,
+          "readinessBefore": 49.4,
+          "readinessAfter": 49.4,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "localizedEvidence": 0.0,
+            "longTailRecall": 0.0,
+            "proposalRecall": 0.0,
             "readiness": 0.0,
+            "textRegionScore": 0.0,
             "unsupportedRisk": 0.0
           },
           "promotedFrom": "live-colab",
@@ -5981,13 +8666,80 @@ export const launchInput = {
         {
           "jobId": "open-vocab-grounding",
           "caseId": "unsupported-query",
-          "readinessBefore": 83.8,
-          "readinessAfter": 83.8,
+          "readinessBefore": 44.0,
+          "readinessAfter": 44.0,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "localizedEvidence": 0.0,
+            "longTailRecall": 0.0,
+            "proposalRecall": 0.0,
             "readiness": 0.0,
+            "textRegionScore": 0.0,
             "unsupportedRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "ambiguous-clicks",
+          "readinessBefore": 58.3,
+          "readinessAfter": 58.3,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "detections": 0,
+            "maskStability": 0.0,
+            "promptSensitivity": 0.0,
+            "readiness": 0.0,
+            "unsupportedRegionRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "cluttered-scene",
+          "readinessBefore": 62.3,
+          "readinessAfter": 62.3,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "detections": 0,
+            "maskStability": 0.0,
+            "promptSensitivity": 0.0,
+            "readiness": 0.0,
+            "unsupportedRegionRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "occluded-object",
+          "readinessBefore": 57.8,
+          "readinessAfter": 57.8,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "detections": 0,
+            "maskStability": 0.0,
+            "promptSensitivity": 0.0,
+            "readiness": 0.0,
+            "unsupportedRegionRisk": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseId": "single-object",
+          "readinessBefore": 65.4,
+          "readinessAfter": 65.4,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "detections": 0,
+            "maskStability": 0.0,
+            "promptSensitivity": 0.0,
+            "readiness": 0.0,
+            "unsupportedRegionRisk": 0.0
           },
           "promotedFrom": "live-colab",
           "regression": false
@@ -5995,10 +8747,13 @@ export const launchInput = {
         {
           "jobId": "restoration-fidelity",
           "caseId": "compressed-low-light",
-          "readinessBefore": 77.7,
-          "readinessAfter": 77.7,
+          "readinessBefore": 78.5,
+          "readinessAfter": 78.5,
           "readinessDelta": 0.0,
           "metricDeltas": {
+            "artifactRisk": 0.0,
+            "degradationLoad": 0.0,
+            "diagnosisConfidence": 0.0,
             "downstreamUtility": 0.0,
             "fabricatedDetailRisk": 0.0,
             "fidelityScore": 0.0,
@@ -6010,10 +8765,13 @@ export const launchInput = {
         {
           "jobId": "restoration-fidelity",
           "caseId": "mild-noise",
-          "readinessBefore": 82.0,
-          "readinessAfter": 82.0,
+          "readinessBefore": 81.6,
+          "readinessAfter": 81.6,
           "readinessDelta": 0.0,
           "metricDeltas": {
+            "artifactRisk": 0.0,
+            "degradationLoad": 0.0,
+            "diagnosisConfidence": 0.0,
             "downstreamUtility": 0.0,
             "fabricatedDetailRisk": 0.0,
             "fidelityScore": 0.0,
@@ -6025,10 +8783,13 @@ export const launchInput = {
         {
           "jobId": "restoration-fidelity",
           "caseId": "motion-blur-task",
-          "readinessBefore": 77.7,
-          "readinessAfter": 77.7,
+          "readinessBefore": 80.5,
+          "readinessAfter": 80.5,
           "readinessDelta": 0.0,
           "metricDeltas": {
+            "artifactRisk": 0.0,
+            "degradationLoad": 0.0,
+            "diagnosisConfidence": 0.0,
             "downstreamUtility": 0.0,
             "fabricatedDetailRisk": 0.0,
             "fidelityScore": 0.0,
@@ -6040,10 +8801,13 @@ export const launchInput = {
         {
           "jobId": "restoration-fidelity",
           "caseId": "over-restored-detail",
-          "readinessBefore": 77.8,
-          "readinessAfter": 77.8,
+          "readinessBefore": 78.9,
+          "readinessAfter": 78.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
+            "artifactRisk": 0.0,
+            "degradationLoad": 0.0,
+            "diagnosisConfidence": 0.0,
             "downstreamUtility": 0.0,
             "fabricatedDetailRisk": 0.0,
             "fidelityScore": 0.0,
@@ -6055,8 +8819,8 @@ export const launchInput = {
         {
           "jobId": "temporal-rollout",
           "caseId": "contact-heavy",
-          "readinessBefore": 76.2,
-          "readinessAfter": 76.2,
+          "readinessBefore": 81.9,
+          "readinessAfter": 81.9,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "contactConsistency": 0.0,
@@ -6072,8 +8836,8 @@ export const launchInput = {
         {
           "jobId": "temporal-rollout",
           "caseId": "crowded-memory",
-          "readinessBefore": 75.9,
-          "readinessAfter": 75.9,
+          "readinessBefore": 80.3,
+          "readinessAfter": 80.3,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "contactConsistency": 0.0,
@@ -6089,8 +8853,8 @@ export const launchInput = {
         {
           "jobId": "temporal-rollout",
           "caseId": "long-rollout-drift",
-          "readinessBefore": 75.9,
-          "readinessAfter": 75.9,
+          "readinessBefore": 81.3,
+          "readinessAfter": 81.3,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "contactConsistency": 0.0,
@@ -6106,8 +8870,8 @@ export const launchInput = {
         {
           "jobId": "temporal-rollout",
           "caseId": "short-stable",
-          "readinessBefore": 83.3,
-          "readinessAfter": 83.3,
+          "readinessBefore": 86.1,
+          "readinessAfter": 86.1,
           "readinessDelta": 0.0,
           "metricDeltas": {
             "contactConsistency": 0.0,
@@ -6116,6 +8880,70 @@ export const launchInput = {
             "memoryLoad": 0.0,
             "readiness": 0.0,
             "rolloutPlausibility": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "clean-crossing",
+          "readinessBefore": 88.8,
+          "readinessAfter": 88.8,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "identityDrift": 0.0,
+            "identityStability": 0.0,
+            "occlusionRecovery": 0.0,
+            "readiness": 0.0,
+            "trackContinuity": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "fast-motion",
+          "readinessBefore": 83.1,
+          "readinessAfter": 83.1,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "identityDrift": 0.0,
+            "identityStability": 0.0,
+            "occlusionRecovery": 0.0,
+            "readiness": 0.0,
+            "trackContinuity": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "identity-crossing",
+          "readinessBefore": 82.6,
+          "readinessAfter": 82.6,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "identityDrift": 0.0,
+            "identityStability": 0.0,
+            "occlusionRecovery": 0.0,
+            "readiness": 0.0,
+            "trackContinuity": 0.0
+          },
+          "promotedFrom": "live-colab",
+          "regression": false
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseId": "long-occlusion",
+          "readinessBefore": 79.6,
+          "readinessAfter": 79.6,
+          "readinessDelta": 0.0,
+          "metricDeltas": {
+            "identityDrift": 0.0,
+            "identityStability": 0.0,
+            "occlusionRecovery": 0.0,
+            "readiness": 0.0,
+            "trackContinuity": 0.0
           },
           "promotedFrom": "live-colab",
           "regression": false
@@ -6133,17 +8961,17 @@ export const launchInput = {
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
         "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
         "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
-        "workerJobs": 10,
-        "promotedRunners": 10,
-        "runnerRows": 10,
-        "cachedResults": 40,
+        "workerJobs": 14,
+        "promotedRunners": 14,
+        "runnerRows": 14,
+        "cachedResults": 56,
         "importIssues": 0,
         "fullStackStatus": "valid",
         "packageTests": 148,
         "validationGate": "release",
         "liveIntakeStatus": "valid",
-        "liveIntakeResults": 40,
-        "liveIntakePromoted": false,
+        "liveIntakeResults": 56,
+        "liveIntakePromoted": true,
         "promotionDeltaStatus": "release",
         "promotionRegressions": 0,
         "maxReadinessDrop": 0.0,
@@ -6217,6 +9045,38 @@ export const launchInput = {
           "strictMode": "require_real_models=True"
         },
         {
+          "jobId": "depth-normal-consistency",
+          "caseSymbol": "DEPTH_NORMAL_CASES",
+          "loader": "load_depth_normal_models",
+          "runner": "run_depth_normal_consistency_batch",
+          "execution": "torch-cuda-depth-normal-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseSymbol": "CORRUPTION_CASES",
+          "loader": "load_corruption_models",
+          "runner": "run_corruption_robustness_batch",
+          "execution": "torchvision-resnet-corruption-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+          "loader": "load_prompt_segmentation_models",
+          "runner": "run_prompt_segmentation_robustness_batch",
+          "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseSymbol": "VIDEO_TRACKING_CASES",
+          "loader": "load_video_tracking_models",
+          "runner": "run_video_identity_tracking_batch",
+          "execution": "torch-cuda-video-tracking-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
           "jobId": "metric-geometry",
           "caseSymbol": "GEOMETRY_CASES",
           "loader": "load_metric_geometry_models",
@@ -6238,13 +9098,16 @@ export const launchInput = {
         "runtimePlane": "google-colab-pro-plus",
         "controlPlane": "local-static-cvpr-site",
         "resultPlane": "registry-and-cached-json",
-        "jobs": 10,
-        "liveCapable": 10,
-        "promotedRunners": 10,
-        "cachedCapable": 10,
-        "cachedResults": 40,
-        "validCachedResults": 40,
+        "jobs": 14,
+        "liveCapable": 14,
+        "promotedRunners": 14,
+        "runnerRows": 14,
+        "cachedCapable": 14,
+        "cachedResults": 56,
+        "validCachedResults": 56,
         "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+        "notebookNativeJobs": 10,
+        "externalLiveJobs": 4,
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
         "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
         "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -6255,14 +9118,325 @@ export const launchInput = {
         "fullStackReport": "analysis/cvpr_full_stack_validation/registry.json",
         "status": "interactive-contract"
       },
+      "runManifest": {
+        "runtimePlane": "google-colab-pro-plus",
+        "controlPlane": "local-static-cvpr-site",
+        "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+        "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "jobs": [
+          {
+            "jobId": "open-vocab-grounding",
+            "bench": "cvpr-long-tail-grounding-bench",
+            "page": "cvpr-long-tail-grounding-bench.html",
+            "priority": 1,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "siglip-base-patch16-224",
+              "grounding-dino-tiny",
+              "sam-vit-b"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_long_tail_grounding_bench/registry.json",
+            "resultFilter": {
+              "jobId": "open-vocab-grounding",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "restoration-fidelity",
+            "bench": "cvpr-restoration-fidelity-bench",
+            "page": "cvpr-restoration-fidelity-bench.html",
+            "priority": 2,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "swinir-lightweight",
+              "real-esrgan-x2"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_restoration_fidelity_bench/registry.json",
+            "resultFilter": {
+              "jobId": "restoration-fidelity",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "adversarial-provenance",
+            "bench": "cvpr-adversarial-provenance-bench",
+            "page": "cvpr-adversarial-provenance-bench.html",
+            "priority": 3,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "watermark-detector",
+              "clip-perturbation-probe"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_adversarial_provenance_bench/registry.json",
+            "resultFilter": {
+              "jobId": "adversarial-provenance",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "temporal-rollout",
+            "bench": "cvpr-temporal-rollout-bench",
+            "page": "cvpr-temporal-rollout-bench.html",
+            "priority": 4,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "video-feature-tracker",
+              "raft-lite",
+              "world-rollout-probe"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_temporal_rollout_bench/registry.json",
+            "resultFilter": {
+              "jobId": "temporal-rollout",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "bench": "cvpr-clinical-shift-bench",
+            "page": "cvpr-clinical-shift-bench.html",
+            "priority": 5,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "dicom-embedding-shift-probe",
+              "temperature-calibration-head",
+              "uncertainty-triage-head"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_clinical_shift_bench/registry.json",
+            "resultFilter": {
+              "jobId": "clinical-shift",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "compute-serving",
+            "bench": "cvpr-compute-serving-bench",
+            "page": "cvpr-compute-serving-bench.html",
+            "priority": 6,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "quantized-vision-encoder",
+              "student-router",
+              "latency-profiler"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_compute_serving_bench/registry.json",
+            "resultFilter": {
+              "jobId": "compute-serving",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "constraint-generation",
+            "bench": "cvpr-constraint-generation-bench",
+            "page": "cvpr-constraint-generation-bench.html",
+            "priority": 7,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "layout-controlnet",
+              "identity-embedding-lock",
+              "preference-reward-probe"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_constraint_generation_bench/registry.json",
+            "resultFilter": {
+              "jobId": "constraint-generation",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "driving-safety",
+            "bench": "cvpr-driving-safety-bench",
+            "page": "cvpr-driving-safety-bench.html",
+            "priority": 8,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "vla-scene-grounder",
+              "ttc-risk-head",
+              "safety-rule-monitor"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_driving_safety_bench/registry.json",
+            "resultFilter": {
+              "jobId": "driving-safety",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "page": "cvpr-depth-normal-consistency-bench.html",
+            "priority": 9,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-depth-normal-probe",
+              "finite-difference-normal-consistency"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+            "resultFilter": {
+              "jobId": "depth-normal-consistency",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "bench": "cvpr-corruption-robustness-bench",
+            "page": "cvpr-corruption-robustness-bench.html",
+            "priority": 10,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-resnet18",
+              "clean-corrupted-logit-delta"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+            "resultFilter": {
+              "jobId": "corruption-robustness",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "page": "cvpr-prompt-segmentation-robustness-bench.html",
+            "priority": 11,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-maskrcnn-resnet50-fpn",
+              "mask-rcnn-click-robustness-proxy"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+            "resultFilter": {
+              "jobId": "prompt-segmentation-robustness",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "page": "cvpr-video-identity-tracking-bench.html",
+            "priority": 12,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-centroid-assignment-tracker",
+              "mask-sequence-identity-drift"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+            "resultFilter": {
+              "jobId": "video-identity-tracking",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "bench": "cvpr-metric-geometry-bench",
+            "page": "cvpr-metric-geometry-bench.html",
+            "priority": 13,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-pose-bundle-adjuster",
+              "metric-scale-probe",
+              "surface-consistency-head"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_metric_geometry_bench/registry.json",
+            "resultFilter": {
+              "jobId": "metric-geometry",
+              "mode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "bench": "cvpr-gaussian-splatting-bench",
+            "page": "cvpr-gaussian-splatting-bench.html",
+            "priority": 14,
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-splat-renderer",
+              "semantic-splat-attach",
+              "provenance-trace-head"
+            ],
+            "expectedCases": 4,
+            "importPath": "analysis/cvpr_gaussian_splatting_bench/registry.json",
+            "resultFilter": {
+              "jobId": "gaussian-splatting",
+              "mode": "cached-real"
+            }
+          }
+        ]
+      },
       "importReport": {
         "validator": "validate_cvpr_colab_results",
         "runtimePlane": "google-colab-pro-plus",
         "expectedMode": "cached-real",
-        "jobs": 10,
-        "expectedResults": 40,
-        "actualResults": 40,
-        "validJobs": 10,
+        "jobs": 14,
+        "expectedResults": 56,
+        "actualResults": 56,
+        "validJobs": 14,
         "issues": 0,
         "status": "valid"
       },
@@ -6272,11 +9446,11 @@ export const launchInput = {
         "commands": 286,
         "steps": 59,
         "packageTests": 148,
-        "workerJobs": 10,
-        "promotedRunners": 10,
-        "cachedResults": 40,
+        "workerJobs": 14,
+        "promotedRunners": 14,
+        "cachedResults": 56,
         "importIssues": 0,
-        "durationSec": 22.254
+        "durationSec": 120.878
       },
       "validationCenter": {
         "dashboard": "cvpr-validation-center",
@@ -6286,14 +9460,14 @@ export const launchInput = {
         "commands": 286,
         "steps": 53,
         "packageTests": 148,
-        "workerJobs": 10,
-        "promotedRunners": 10,
-        "cachedResults": 40,
+        "workerJobs": 14,
+        "promotedRunners": 14,
+        "cachedResults": 56,
         "importIssues": 0,
         "promotionDeltaStatus": "release",
         "promotionRegressions": 0,
         "maxReadinessDrop": 0.0,
-        "validImportJobs": 10,
+        "validImportJobs": 14,
         "implementedBenches": 11,
         "benchCases": 44,
         "benchBlock": 0,
@@ -6305,7 +9479,7 @@ export const launchInput = {
           {
             "command": "node source-code/learning/*/tests/core.test.js",
             "returnCode": 0,
-            "durationSec": 20.437,
+            "durationSec": 109.717,
             "testCount": 148,
             "log": "/tmp/cvpr-core-tests.log",
             "stdoutTail": [
@@ -6318,38 +9492,38 @@ export const launchInput = {
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/validate_cvpr_colab_results.py",
+            "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
             "returnCode": 0,
-            "durationSec": 0.049,
+            "durationSec": 0.27,
             "stdoutTail": [
-              "validated CVPR Colab results: 40 results, 0 issues"
+              "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
             ],
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+            "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
             "returnCode": 0,
-            "durationSec": 0.042,
+            "durationSec": 0.262,
             "stdoutTail": [
-              "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+              "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
             ],
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+            "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
             "returnCode": 0,
-            "durationSec": 0.041,
+            "durationSec": 0.261,
             "stdoutTail": [
-              "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+              "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
             ],
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/build_cvpr_mission_control.py",
+            "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
             "returnCode": 0,
-            "durationSec": 0.04,
+            "durationSec": 0.257,
             "stdoutTail": [
-              "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+              "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
             ],
             "stderrTail": []
           }
@@ -6359,22 +9533,23 @@ export const launchInput = {
         "validator": "validate_cvpr_colab_results",
         "runtimePlane": "google-colab-pro-plus",
         "expectedMode": "live-colab",
-        "jobs": 10,
-        "expectedResults": 40,
-        "actualResults": 40,
-        "validJobs": 10,
+        "jobs": 14,
+        "expectedResults": 56,
+        "actualResults": 56,
+        "validJobs": 14,
         "issues": 0,
         "status": "valid",
         "intake": "cvpr-colab-live-intake",
-        "export": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
-        "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
-        "promoted": false
+        "job": null,
+        "export": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results_live.json",
+        "canonicalArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
+        "promoted": true
       },
       "promotionDelta": {
         "delta": "cvpr-colab-promotion-delta",
         "status": "release",
-        "cases": 40,
-        "jobs": 10,
+        "cases": 56,
+        "jobs": 14,
         "missing": 0,
         "modeMismatches": 0,
         "regressions": 0,
@@ -6390,9 +9565,9 @@ export const launchInput = {
         "status": "release",
         "artifacts": 7,
         "missingArtifacts": 0,
-        "cachedResults": 40,
-        "liveIntakeResults": 40,
-        "promotionResults": 40,
+        "cachedResults": 56,
+        "liveIntakeResults": 56,
+        "promotionResults": 56,
         "importIssues": 0,
         "deltaStatus": "release",
         "deltaRegressions": 0,
@@ -6405,13 +9580,16 @@ export const launchInput = {
           "runtimePlane": "google-colab-pro-plus",
           "controlPlane": "local-static-cvpr-site",
           "resultPlane": "registry-and-cached-json",
-          "jobs": 10,
-          "liveCapable": 10,
-          "promotedRunners": 10,
-          "cachedCapable": 10,
-          "cachedResults": 40,
-          "validCachedResults": 40,
+          "jobs": 14,
+          "liveCapable": 14,
+          "promotedRunners": 14,
+          "runnerRows": 14,
+          "cachedCapable": 14,
+          "cachedResults": 56,
+          "validCachedResults": 56,
           "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+          "notebookNativeJobs": 10,
+          "externalLiveJobs": 4,
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
           "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
           "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -6649,6 +9827,118 @@ export const launchInput = {
             "priority": 8
           },
           {
+            "id": "depth-normal-consistency",
+            "title": "Depth-normal consistency GPU run",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "page": "cvpr-depth-normal-consistency-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-depth-normal-probe",
+              "finite-difference-normal-consistency"
+            ],
+            "inputs": [
+              "depth_map",
+              "normal_controls",
+              "scene_geometry"
+            ],
+            "outputs": [
+              "normal_map",
+              "consistency_curve",
+              "depth_residual_map",
+              "surface_alerts"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 9
+          },
+          {
+            "id": "corruption-robustness",
+            "title": "Corruption robustness GPU run",
+            "bench": "cvpr-corruption-robustness-bench",
+            "page": "cvpr-corruption-robustness-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-resnet18",
+              "clean-corrupted-logit-delta"
+            ],
+            "inputs": [
+              "image_batch",
+              "corruption_controls",
+              "severity_schedule"
+            ],
+            "outputs": [
+              "feature_retention",
+              "label_drift_curve",
+              "confidence_collapse",
+              "corruption_report"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 10
+          },
+          {
+            "id": "prompt-segmentation-robustness",
+            "title": "Prompt segmentation robustness GPU run",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "page": "cvpr-prompt-segmentation-robustness-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torchvision-maskrcnn-resnet50-fpn",
+              "mask-rcnn-click-robustness-proxy"
+            ],
+            "inputs": [
+              "image",
+              "prompt_points",
+              "prompt_variants"
+            ],
+            "outputs": [
+              "mask_predictions",
+              "click_sensitivity",
+              "iou_trace",
+              "prompt_failure_map"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 11
+          },
+          {
+            "id": "video-identity-tracking",
+            "title": "Video identity tracking GPU run",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "page": "cvpr-video-identity-tracking-bench.html",
+            "runtimeModes": [
+              "simulated",
+              "cached-real",
+              "live-colab"
+            ],
+            "models": [
+              "torch-cuda-centroid-assignment-tracker",
+              "mask-sequence-identity-drift"
+            ],
+            "inputs": [
+              "video_clip",
+              "identity_seed",
+              "tracking_controls"
+            ],
+            "outputs": [
+              "track_sequence",
+              "identity_drift_curve",
+              "handoff_events",
+              "failure_frames"
+            ],
+            "gpuClass": "T4/L4/A100",
+            "priority": 12
+          },
+          {
             "id": "metric-geometry",
             "title": "Metric geometry GPU run",
             "bench": "cvpr-metric-geometry-bench",
@@ -6773,6 +10063,38 @@ export const launchInput = {
             "strictMode": "require_real_models=True"
           },
           {
+            "jobId": "depth-normal-consistency",
+            "caseSymbol": "DEPTH_NORMAL_CASES",
+            "loader": "load_depth_normal_models",
+            "runner": "run_depth_normal_consistency_batch",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseSymbol": "CORRUPTION_CASES",
+            "loader": "load_corruption_models",
+            "runner": "run_corruption_robustness_batch",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+            "loader": "load_prompt_segmentation_models",
+            "runner": "run_prompt_segmentation_robustness_batch",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseSymbol": "VIDEO_TRACKING_CASES",
+            "loader": "load_video_tracking_models",
+            "runner": "run_video_identity_tracking_batch",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
             "jobId": "metric-geometry",
             "caseSymbol": "GEOMETRY_CASES",
             "loader": "load_metric_geometry_models",
@@ -6788,6 +10110,24 @@ export const launchInput = {
             "execution": "torch-gaussian-splatting-render-probe",
             "strictMode": "require_real_models=True"
           }
+        ],
+        "notebookNativeJobIds": [
+          "open-vocab-grounding",
+          "restoration-fidelity",
+          "adversarial-provenance",
+          "temporal-rollout",
+          "clinical-shift",
+          "compute-serving",
+          "constraint-generation",
+          "driving-safety",
+          "metric-geometry",
+          "gaussian-splatting"
+        ],
+        "externalLiveJobIds": [
+          "depth-normal-consistency",
+          "corruption-robustness",
+          "prompt-segmentation-robustness",
+          "video-identity-tracking"
         ],
         "runManifest": {
           "runtimePlane": "google-colab-pro-plus",
@@ -6971,10 +10311,94 @@ export const launchInput = {
               }
             },
             {
+              "jobId": "depth-normal-consistency",
+              "bench": "cvpr-depth-normal-consistency-bench",
+              "page": "cvpr-depth-normal-consistency-bench.html",
+              "priority": 9,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-depth-normal-probe",
+                "finite-difference-normal-consistency"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+              "resultFilter": {
+                "jobId": "depth-normal-consistency",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "bench": "cvpr-corruption-robustness-bench",
+              "page": "cvpr-corruption-robustness-bench.html",
+              "priority": 10,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-resnet18",
+                "clean-corrupted-logit-delta"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+              "resultFilter": {
+                "jobId": "corruption-robustness",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "bench": "cvpr-prompt-segmentation-robustness-bench",
+              "page": "cvpr-prompt-segmentation-robustness-bench.html",
+              "priority": 11,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-maskrcnn-resnet50-fpn",
+                "mask-rcnn-click-robustness-proxy"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+              "resultFilter": {
+                "jobId": "prompt-segmentation-robustness",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "bench": "cvpr-video-identity-tracking-bench",
+              "page": "cvpr-video-identity-tracking-bench.html",
+              "priority": 12,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-centroid-assignment-tracker",
+                "mask-sequence-identity-drift"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+              "resultFilter": {
+                "jobId": "video-identity-tracking",
+                "mode": "cached-real"
+              }
+            },
+            {
               "jobId": "metric-geometry",
               "bench": "cvpr-metric-geometry-bench",
               "page": "cvpr-metric-geometry-bench.html",
-              "priority": 9,
+              "priority": 13,
               "runtimeModes": [
                 "simulated",
                 "cached-real",
@@ -6996,7 +10420,7 @@ export const launchInput = {
               "jobId": "gaussian-splatting",
               "bench": "cvpr-gaussian-splatting-bench",
               "page": "cvpr-gaussian-splatting-bench.html",
-              "priority": 10,
+              "priority": 14,
               "runtimeModes": [
                 "simulated",
                 "cached-real",
@@ -7021,254 +10445,288 @@ export const launchInput = {
             "jobId": "open-vocab-grounding",
             "caseId": "common-clean",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:17Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "common clean object",
+              "textQuery": "teal rectangle.",
               "controls": {
                 "queryRarity": 18,
                 "distractorOverlap": 16,
                 "boxAmbiguity": 18,
                 "evidenceThreshold": 54
               },
-              "asset": "fixtures/open-vocab/common-clean.png"
+              "asset": "synthetic://common-clean"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "teal rectangle",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.178,
+                    0.216,
+                    0.305,
+                    0.288
                   ],
-                  "score": 0.828
+                  "score": 0.742
                 },
                 {
-                  "label": "distractor",
+                  "label": "teal rectangle",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.512,
+                    0.255,
+                    0.272,
+                    0.266
                   ],
-                  "score": 0.917
+                  "score": 0.417
                 }
               ],
               "regionScores": {
-                "target": 84.7,
-                "longTail": 71.7
+                "target": 26.8,
+                "longTail": 39.7
               },
-              "localizedEvidence": 88.9
+              "embeddingScore": 8.3,
+              "localizedEvidence": 50.2
             },
             "metrics": {
-              "readiness": 84.7,
-              "localizedEvidence": 88.9,
-              "unsupportedRisk": 8.3
+              "readiness": 48.0,
+              "proposalRecall": 74.2,
+              "textRegionScore": 26.8,
+              "longTailRecall": 39.7,
+              "localizedEvidence": 50.2,
+              "unsupportedRisk": 21.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "open-vocab-grounding",
             "caseId": "rare-visible",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:18Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "rare visible object",
+              "textQuery": "teal target rectangle.",
               "controls": {
                 "queryRarity": 66,
                 "distractorOverlap": 12,
                 "boxAmbiguity": 34,
                 "evidenceThreshold": 62
               },
-              "asset": "fixtures/open-vocab/rare-visible.png"
+              "asset": "synthetic://rare-visible"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "teal target rectangle",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.178,
+                    0.216,
+                    0.305,
+                    0.288
                   ],
-                  "score": 0.768
+                  "score": 0.752
                 },
                 {
-                  "label": "distractor",
+                  "label": "teal target rectangle",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.522,
+                    0.256,
+                    0.273,
+                    0.266
                   ],
-                  "score": 0.837
+                  "score": 0.381
                 }
               ],
               "regionScores": {
-                "target": 85.0,
-                "longTail": 76.9
+                "target": 26.7,
+                "longTail": 43.2
               },
-              "localizedEvidence": 87.7
+              "embeddingScore": 7.8,
+              "localizedEvidence": 52.2
             },
             "metrics": {
-              "readiness": 83.9,
-              "localizedEvidence": 87.7,
-              "unsupportedRisk": 16.3
+              "readiness": 49.4,
+              "proposalRecall": 75.2,
+              "textRegionScore": 26.7,
+              "longTailRecall": 43.2,
+              "localizedEvidence": 52.2,
+              "unsupportedRisk": 21.2
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "open-vocab-grounding",
             "caseId": "rare-distractors",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:18Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "rare object with distractors",
+              "textQuery": "teal target rectangle near orange distractor.",
               "controls": {
                 "queryRarity": 78,
                 "distractorOverlap": 28,
                 "boxAmbiguity": 28,
                 "evidenceThreshold": 76
               },
-              "asset": "fixtures/open-vocab/rare-distractors.png"
+              "asset": "synthetic://rare-distractors"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "teal target rectangle orange distract",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.177,
+                    0.216,
+                    0.307,
+                    0.289
                   ],
-                  "score": 0.76
+                  "score": 0.794
                 },
                 {
-                  "label": "distractor",
+                  "label": "orange distractor",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.484,
+                    0.257,
+                    0.273,
+                    0.266
                   ],
-                  "score": 0.81
+                  "score": 0.587
                 }
               ],
               "regionScores": {
-                "target": 83.6,
-                "longTail": 81.4
+                "target": 93.1,
+                "longTail": 85.2
               },
-              "localizedEvidence": 87.1
+              "embeddingScore": 98.4,
+              "localizedEvidence": 84.5
             },
             "metrics": {
-              "readiness": 83.8,
-              "localizedEvidence": 87.1,
-              "unsupportedRisk": 19.0
+              "readiness": 88.0,
+              "proposalRecall": 79.4,
+              "textRegionScore": 93.1,
+              "longTailRecall": 85.2,
+              "localizedEvidence": 84.5,
+              "unsupportedRisk": 8.9
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "open-vocab-grounding",
             "caseId": "unsupported-query",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:01:18Z",
             "model": {
-              "embedding": "siglip-base-patch16-224",
-              "detector": "grounding-dino-tiny",
-              "segmenter": "sam-vit-b"
+              "embedding": "google/siglip-base-patch16-224",
+              "detector": "IDEA-Research/grounding-dino-tiny"
             },
             "inputs": {
-              "textQuery": "unsupported text query",
+              "textQuery": "transparent glass elephant.",
               "controls": {
                 "queryRarity": 82,
                 "distractorOverlap": 30,
                 "boxAmbiguity": 32,
                 "evidenceThreshold": 84
               },
-              "asset": "fixtures/open-vocab/unsupported-query.png"
+              "asset": "synthetic://unsupported-query"
             },
             "outputs": {
               "boxes": [
                 {
-                  "label": "target",
+                  "label": "transparent glass elephant",
                   "xywh": [
-                    0.18,
-                    0.22,
-                    0.26,
-                    0.24
+                    0.178,
+                    0.216,
+                    0.304,
+                    0.288
                   ],
-                  "score": 0.753
+                  "score": 0.606
                 },
                 {
-                  "label": "distractor",
+                  "label": "transparent glass elephant",
                   "xywh": [
-                    0.56,
-                    0.26,
-                    0.21,
-                    0.2
+                    0.48,
+                    0.256,
+                    0.271,
+                    0.266
                   ],
-                  "score": 0.799
+                  "score": 0.524
+                },
+                {
+                  "label": "transparent glass elephant",
+                  "xywh": [
+                    0.178,
+                    0.216,
+                    0.575,
+                    0.306
+                  ],
+                  "score": 0.285
                 }
               ],
               "regionScores": {
-                "target": 84.0,
-                "longTail": 82.1
+                "target": 17.0,
+                "longTail": 40.6
               },
-              "localizedEvidence": 87.1
+              "embeddingScore": 0.0,
+              "localizedEvidence": 47.0
             },
             "metrics": {
-              "readiness": 83.8,
-              "localizedEvidence": 87.1,
-              "unsupportedRisk": 20.1
+              "readiness": 44.0,
+              "proposalRecall": 60.6,
+              "textRegionScore": 17.0,
+              "longTailRecall": 40.6,
+              "localizedEvidence": 47.0,
+              "unsupportedRisk": 24.9
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-long-tail-grounding-bench"
+              "sourceBench": "cvpr-long-tail-grounding-bench",
+              "execution": "transformers-grounding-dino-siglip-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "mild-noise",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:40Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -7278,35 +10736,42 @@ export const launchInput = {
                 "lowLight": 20,
                 "hallucinationPenalty": 36
               },
-              "asset": "fixtures/restoration/mild-noise.png"
+              "asset": "synthetic://mild-noise"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/mild-noise-restored.png",
-              "artifactMap": "fixtures/restoration/mild-noise-artifact-map.png",
-              "downstreamScore": 85.3,
-              "fidelityScore": 82.2
+              "restoredImage": "synthetic://restoration/mild-noise-restored.png",
+              "artifactMap": "synthetic://restoration/mild-noise-artifact-map.png",
+              "downstreamScore": 85.1,
+              "fidelityScore": 80.6,
+              "deltaScore": 2.102
             },
             "metrics": {
-              "readiness": 82.0,
-              "downstreamUtility": 85.3,
-              "fabricatedDetailRisk": 25.8,
-              "fidelityScore": 82.2
+              "readiness": 81.6,
+              "degradationLoad": 21.6,
+              "diagnosisConfidence": 78.4,
+              "fidelityScore": 80.6,
+              "artifactRisk": 19.3,
+              "downstreamUtility": 85.1,
+              "fabricatedDetailRisk": 19.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "compressed-low-light",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:42Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -7316,35 +10781,42 @@ export const launchInput = {
                 "lowLight": 64,
                 "hallucinationPenalty": 16
               },
-              "asset": "fixtures/restoration/compressed-low-light.png"
+              "asset": "synthetic://compressed-low-light"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/compressed-low-light-restored.png",
-              "artifactMap": "fixtures/restoration/compressed-low-light-artifact-map.png",
-              "downstreamScore": 80.9,
-              "fidelityScore": 80.3
+              "restoredImage": "synthetic://restoration/compressed-low-light-restored.png",
+              "artifactMap": "synthetic://restoration/compressed-low-light-artifact-map.png",
+              "downstreamScore": 78.8,
+              "fidelityScore": 85.2,
+              "deltaScore": 1.12
             },
             "metrics": {
-              "readiness": 77.7,
-              "downstreamUtility": 80.9,
-              "fabricatedDetailRisk": 29.4,
-              "fidelityScore": 80.3
+              "readiness": 78.5,
+              "degradationLoad": 43.6,
+              "diagnosisConfidence": 56.4,
+              "fidelityScore": 85.2,
+              "artifactRisk": 13.0,
+              "downstreamUtility": 78.8,
+              "fabricatedDetailRisk": 13.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "motion-blur-task",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:43Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -7354,35 +10826,42 @@ export const launchInput = {
                 "lowLight": 36,
                 "hallucinationPenalty": 16
               },
-              "asset": "fixtures/restoration/motion-blur-task.png"
+              "asset": "synthetic://motion-blur-task"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/motion-blur-task-restored.png",
-              "artifactMap": "fixtures/restoration/motion-blur-task-artifact-map.png",
-              "downstreamScore": 81.5,
-              "fidelityScore": 79.0
+              "restoredImage": "synthetic://restoration/motion-blur-task-restored.png",
+              "artifactMap": "synthetic://restoration/motion-blur-task-artifact-map.png",
+              "downstreamScore": 82.6,
+              "fidelityScore": 85.0,
+              "deltaScore": 1.597
             },
             "metrics": {
-              "readiness": 77.7,
-              "downstreamUtility": 81.5,
-              "fabricatedDetailRisk": 26.5,
-              "fidelityScore": 79.0
+              "readiness": 80.5,
+              "degradationLoad": 41.2,
+              "diagnosisConfidence": 58.8,
+              "fidelityScore": 85.0,
+              "artifactRisk": 10.9,
+              "downstreamUtility": 82.6,
+              "fabricatedDetailRisk": 10.9
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "restoration-fidelity",
             "caseId": "over-restored-detail",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:02:45Z",
             "model": {
-              "restorer": "swinir-lightweight",
-              "artifactProbe": "real-esrgan-x2"
+              "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+              "artifactProbe": "pixel-delta-artifact-map"
             },
             "inputs": {
               "degradationControls": {
@@ -7392,35 +10871,42 @@ export const launchInput = {
                 "lowLight": 56,
                 "hallucinationPenalty": 18
               },
-              "asset": "fixtures/restoration/over-restored-detail.png"
+              "asset": "synthetic://over-restored-detail"
             },
             "outputs": {
-              "restoredImage": "fixtures/restoration/over-restored-detail-restored.png",
-              "artifactMap": "fixtures/restoration/over-restored-detail-artifact-map.png",
+              "restoredImage": "synthetic://restoration/over-restored-detail-restored.png",
+              "artifactMap": "synthetic://restoration/over-restored-detail-artifact-map.png",
               "downstreamScore": 81.2,
-              "fidelityScore": 80.1
+              "fidelityScore": 85.8,
+              "deltaScore": 1.348
             },
             "metrics": {
-              "readiness": 77.8,
+              "readiness": 78.9,
+              "degradationLoad": 45.9,
+              "diagnosisConfidence": 54.1,
+              "fidelityScore": 85.8,
+              "artifactRisk": 13.4,
               "downstreamUtility": 81.2,
-              "fabricatedDetailRisk": 28.6,
-              "fidelityScore": 80.1
+              "fabricatedDetailRisk": 13.4
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-restoration-fidelity-bench"
+              "sourceBench": "cvpr-restoration-fidelity-bench",
+              "execution": "transformers-swin2sr-restoration-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "clean-camera",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -7429,37 +10915,47 @@ export const launchInput = {
                 "watermarkVisibility": 100,
                 "unlearningProbe": 0
               },
-              "asset": "fixtures/adversarial/clean-camera.png"
+              "asset": "synthetic://clean-camera"
             },
             "outputs": {
-              "provenanceConfidence": 86.4,
-              "attackHeatmap": "fixtures/adversarial/clean-camera-attack-heatmap.png",
-              "leakageRisk": 9.0,
-              "evidence": 82.5
+              "provenanceConfidence": 50.8,
+              "attackHeatmap": "synthetic://adversarial/clean-camera-clip-heatmap.png",
+              "leakageRisk": 1.8,
+              "evidence": 52.2,
+              "clipProbeScores": {
+                "a clean camera photograph": 41.3,
+                "a synthetic generated image": 45.2,
+                "an edited social media image": 0.8,
+                "an adversarially perturbed image": 6.6,
+                "a watermarked image": 6.1
+              }
             },
             "metrics": {
-              "readiness": 79.7,
-              "evidence": 82.5,
-              "risk": 17.9,
-              "leakageRisk": 9.0,
-              "provenanceConfidence": 86.4,
-              "attackCoverage": 44.7
+              "readiness": 66.8,
+              "attackCoverage": 3.7,
+              "provenanceConfidence": 50.8,
+              "leakageRisk": 1.8,
+              "evidence": 52.2,
+              "risk": 11.6
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "edited-social-post",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -7468,37 +10964,47 @@ export const launchInput = {
                 "watermarkVisibility": 98,
                 "unlearningProbe": 10
               },
-              "asset": "fixtures/adversarial/edited-social-post.png"
+              "asset": "synthetic://edited-social-post"
             },
             "outputs": {
-              "provenanceConfidence": 87.9,
-              "attackHeatmap": "fixtures/adversarial/edited-social-post-attack-heatmap.png",
-              "leakageRisk": 14.8,
-              "evidence": 82.9
+              "provenanceConfidence": 39.8,
+              "attackHeatmap": "synthetic://adversarial/edited-social-post-clip-heatmap.png",
+              "leakageRisk": 4.4,
+              "evidence": 44.2,
+              "clipProbeScores": {
+                "a clean camera photograph": 0.7,
+                "a synthetic generated image": 91.0,
+                "an edited social media image": 1.6,
+                "an adversarially perturbed image": 4.2,
+                "a watermarked image": 2.4
+              }
             },
             "metrics": {
-              "readiness": 79.8,
-              "evidence": 82.9,
-              "risk": 21.0,
-              "leakageRisk": 14.8,
-              "provenanceConfidence": 87.9,
-              "attackCoverage": 47.2
+              "readiness": 57.7,
+              "attackCoverage": 2.6,
+              "provenanceConfidence": 39.8,
+              "leakageRisk": 4.4,
+              "evidence": 44.2,
+              "risk": 23.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "synthetic-watermarked",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -7507,37 +11013,47 @@ export const launchInput = {
                 "watermarkVisibility": 94,
                 "unlearningProbe": 44
               },
-              "asset": "fixtures/adversarial/synthetic-watermarked.png"
+              "asset": "synthetic://synthetic-watermarked"
             },
             "outputs": {
-              "provenanceConfidence": 92.0,
-              "attackHeatmap": "fixtures/adversarial/synthetic-watermarked-attack-heatmap.png",
-              "leakageRisk": 32.9,
-              "evidence": 83.6
+              "provenanceConfidence": 39.1,
+              "attackHeatmap": "synthetic://adversarial/synthetic-watermarked-clip-heatmap.png",
+              "leakageRisk": 14.1,
+              "evidence": 41.5,
+              "clipProbeScores": {
+                "a clean camera photograph": 0.0,
+                "a synthetic generated image": 99.1,
+                "an edited social media image": 0.0,
+                "an adversarially perturbed image": 0.1,
+                "a watermarked image": 0.8
+              }
             },
             "metrics": {
-              "readiness": 79.9,
-              "evidence": 83.6,
-              "risk": 29.9,
-              "leakageRisk": 32.9,
-              "provenanceConfidence": 92.0,
-              "attackCoverage": 54.4
+              "readiness": 53.8,
+              "attackCoverage": 0.1,
+              "provenanceConfidence": 39.1,
+              "leakageRisk": 14.1,
+              "evidence": 41.5,
+              "risk": 29.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "adversarial-provenance",
             "caseId": "adaptive-attack",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:04:05Z",
             "model": {
-              "detector": "watermark-detector",
-              "probe": "clip-perturbation-probe"
+              "detector": "openai/clip-vit-base-patch32",
+              "probe": "clip-provenance-prompt-bank"
             },
             "inputs": {
               "attackControls": {
@@ -7546,38 +11062,48 @@ export const launchInput = {
                 "watermarkVisibility": 100,
                 "unlearningProbe": 0
               },
-              "asset": "fixtures/adversarial/adaptive-attack.png"
+              "asset": "synthetic://adaptive-attack"
             },
             "outputs": {
-              "provenanceConfidence": 93.8,
-              "attackHeatmap": "fixtures/adversarial/adaptive-attack-attack-heatmap.png",
-              "leakageRisk": 17.4,
-              "evidence": 85.3
+              "provenanceConfidence": 39.9,
+              "attackHeatmap": "synthetic://adversarial/adaptive-attack-clip-heatmap.png",
+              "leakageRisk": 13.1,
+              "evidence": 42.8,
+              "clipProbeScores": {
+                "a clean camera photograph": 0.7,
+                "a synthetic generated image": 85.7,
+                "an edited social media image": 1.7,
+                "an adversarially perturbed image": 8.1,
+                "a watermarked image": 3.9
+              }
             },
             "metrics": {
-              "readiness": 80.8,
-              "evidence": 85.3,
-              "risk": 30.3,
-              "leakageRisk": 17.4,
-              "provenanceConfidence": 93.8,
-              "attackCoverage": 52.6
+              "readiness": 53.9,
+              "attackCoverage": 19.1,
+              "provenanceConfidence": 39.9,
+              "leakageRisk": 13.1,
+              "evidence": 42.8,
+              "risk": 32.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-adversarial-provenance-bench"
+              "sourceBench": "cvpr-adversarial-provenance-bench",
+              "execution": "transformers-clip-provenance-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "short-stable",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -7586,43 +11112,54 @@ export const launchInput = {
                 "physicsViolations": 14,
                 "memoryWindow": 72
               },
-              "asset": "fixtures/temporal/short-stable.mp4"
+              "asset": "synthetic://temporal/short-stable.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/short-stable-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/short-stable-contacts.json",
+              "identityTracks": "synthetic://temporal/short-stable-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/short-stable-contacts.json",
               "driftCurve": [
-                5.2,
-                10.5,
-                15.8,
-                21.0
+                2.7,
+                5.4,
+                8.1,
+                10.8,
+                13.5
               ],
-              "rolloutPlausibility": 85.7
+              "rolloutPlausibility": 85.8,
+              "flowProfile": {
+                "meanMagnitude": 1.6017,
+                "meanRoughness": 0.0288,
+                "meanAcceleration": 0.1546,
+                "elapsedMs": 1191.22,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 83.3,
-              "identityStability": 80.6,
-              "contactConsistency": 86.6,
-              "rolloutPlausibility": 85.7,
-              "drift": 21.0,
-              "memoryLoad": 26.6
+              "readiness": 86.1,
+              "identityStability": 86.4,
+              "contactConsistency": 85.9,
+              "rolloutPlausibility": 85.8,
+              "drift": 13.5,
+              "memoryLoad": 24.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "crowded-memory",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -7631,43 +11168,54 @@ export const launchInput = {
                 "physicsViolations": 26,
                 "memoryWindow": 82
               },
-              "asset": "fixtures/temporal/crowded-memory.mp4"
+              "asset": "synthetic://temporal/crowded-memory.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/crowded-memory-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/crowded-memory-contacts.json",
+              "identityTracks": "synthetic://temporal/crowded-memory-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/crowded-memory-contacts.json",
               "driftCurve": [
-                8.2,
-                16.5,
-                24.8,
-                33.0
+                4.3,
+                8.6,
+                12.9,
+                17.2,
+                21.6
               ],
-              "rolloutPlausibility": 80.0
+              "rolloutPlausibility": 79.5,
+              "flowProfile": {
+                "meanMagnitude": 1.7887,
+                "meanRoughness": 0.0288,
+                "meanAcceleration": 0.0894,
+                "elapsedMs": 168.5,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 75.9,
-              "identityStability": 73.8,
-              "contactConsistency": 79.4,
-              "rolloutPlausibility": 80.0,
-              "drift": 33.0,
-              "memoryLoad": 43.8
+              "readiness": 80.3,
+              "identityStability": 79.9,
+              "contactConsistency": 82.6,
+              "rolloutPlausibility": 79.5,
+              "drift": 21.6,
+              "memoryLoad": 40.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "contact-heavy",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -7676,43 +11224,54 @@ export const launchInput = {
                 "physicsViolations": 20,
                 "memoryWindow": 82
               },
-              "asset": "fixtures/temporal/contact-heavy.mp4"
+              "asset": "synthetic://temporal/contact-heavy.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/contact-heavy-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/contact-heavy-contacts.json",
+              "identityTracks": "synthetic://temporal/contact-heavy-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/contact-heavy-contacts.json",
               "driftCurve": [
-                8.6,
-                17.1,
-                25.7,
-                34.3
+                3.9,
+                7.9,
+                11.8,
+                15.7,
+                19.7
               ],
-              "rolloutPlausibility": 77.1
+              "rolloutPlausibility": 80.9,
+              "flowProfile": {
+                "meanMagnitude": 1.732,
+                "meanRoughness": 0.0313,
+                "meanAcceleration": 0.1067,
+                "elapsedMs": 164.0,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 76.2,
-              "identityStability": 74.0,
-              "contactConsistency": 83.6,
-              "rolloutPlausibility": 77.1,
-              "drift": 34.3,
-              "memoryLoad": 42.5
+              "readiness": 81.9,
+              "identityStability": 81.5,
+              "contactConsistency": 84.3,
+              "rolloutPlausibility": 80.9,
+              "drift": 19.7,
+              "memoryLoad": 38.8
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "temporal-rollout",
             "caseId": "long-rollout-drift",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:05:38Z",
             "model": {
-              "tracker": "video-feature-tracker",
-              "flow": "raft-lite",
-              "rolloutProbe": "world-rollout-probe"
+              "tracker": "torchvision-raft-small",
+              "flow": "Raft_Small_Weights.C_T_V2",
+              "rolloutProbe": "cuda-optical-flow-consistency"
             },
             "inputs": {
               "trackingControls": {
@@ -7721,207 +11280,54 @@ export const launchInput = {
                 "physicsViolations": 12,
                 "memoryWindow": 92
               },
-              "asset": "fixtures/temporal/long-rollout-drift.mp4"
+              "asset": "synthetic://temporal/long-rollout-drift.mp4"
             },
             "outputs": {
-              "identityTracks": "fixtures/temporal/long-rollout-drift-identity-tracks.json",
-              "contactEvents": "fixtures/temporal/long-rollout-drift-contacts.json",
+              "identityTracks": "synthetic://temporal/long-rollout-drift-raft-tracks.json",
+              "contactEvents": "synthetic://temporal/long-rollout-drift-contacts.json",
               "driftCurve": [
-                9.0,
-                18.1,
-                27.1,
-                36.1
+                4.1,
+                8.3,
+                12.4,
+                16.6,
+                20.7
               ],
-              "rolloutPlausibility": 75.5
+              "rolloutPlausibility": 79.7,
+              "flowProfile": {
+                "meanMagnitude": 1.8144,
+                "meanRoughness": 0.0331,
+                "meanAcceleration": 0.1629,
+                "elapsedMs": 162.79,
+                "pairs": 5
+              }
             },
             "metrics": {
-              "readiness": 75.9,
-              "identityStability": 72.7,
-              "contactConsistency": 86.5,
-              "rolloutPlausibility": 75.5,
-              "drift": 36.1,
-              "memoryLoad": 48.1
+              "readiness": 81.3,
+              "identityStability": 79.0,
+              "contactConsistency": 86.4,
+              "rolloutPlausibility": 79.7,
+              "drift": 20.7,
+              "memoryLoad": 44.4
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-temporal-rollout-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "same-site-clean",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 16,
-                "cohortMix": 22,
-                "labelNoise": 8,
-                "reviewThreshold": 62
-              },
-              "asset": "fixtures/clinical/same-site-clean.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/same-site-clean-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/same-site-clean-calibration.json",
-              "triageScores": "fixtures/clinical/same-site-clean-triage.json",
-              "clinicalEvidence": 90.3
-            },
-            "metrics": {
-              "readiness": 88.5,
-              "shiftLoad": 16.7,
-              "calibration": 84.3,
-              "domainEvidence": 89.1,
-              "triageRate": 25.4,
-              "residualRisk": 9.6,
-              "clinicalEvidence": 90.3
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "new-scanner",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 58,
-                "cohortMix": 34,
-                "labelNoise": 16,
-                "reviewThreshold": 68
-              },
-              "asset": "fixtures/clinical/new-scanner.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/new-scanner-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/new-scanner-calibration.json",
-              "triageScores": "fixtures/clinical/new-scanner-triage.json",
-              "clinicalEvidence": 84.8
-            },
-            "metrics": {
-              "readiness": 80.5,
-              "shiftLoad": 40.5,
-              "calibration": 77.5,
-              "domainEvidence": 78.6,
-              "triageRate": 39.7,
-              "residualRisk": 21.6,
-              "clinicalEvidence": 84.8
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "external-hospital",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 52,
-                "cohortMix": 72,
-                "labelNoise": 16,
-                "reviewThreshold": 74
-              },
-              "asset": "fixtures/clinical/external-hospital.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/external-hospital-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/external-hospital-calibration.json",
-              "triageScores": "fixtures/clinical/external-hospital-triage.json",
-              "clinicalEvidence": 82.3
-            },
-            "metrics": {
-              "readiness": 77.1,
-              "shiftLoad": 52.4,
-              "calibration": 75.4,
-              "domainEvidence": 72.9,
-              "triageRate": 47.0,
-              "residualRisk": 26.4,
-              "clinicalEvidence": 82.3
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
-            }
-          },
-          {
-            "jobId": "clinical-shift",
-            "caseId": "noisy-rare-cohort",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "embedding": "dicom-embedding-shift-probe",
-              "calibration": "temperature-calibration-head",
-              "triage": "uncertainty-triage-head"
-            },
-            "inputs": {
-              "clinicalControls": {
-                "scannerShift": 76,
-                "cohortMix": 84,
-                "labelNoise": 20,
-                "reviewThreshold": 84
-              },
-              "asset": "fixtures/clinical/noisy-rare-cohort.json"
-            },
-            "outputs": {
-              "domainEmbeddings": "fixtures/clinical/noisy-rare-cohort-domain-embeddings.npy",
-              "calibrationCurve": "fixtures/clinical/noisy-rare-cohort-calibration.json",
-              "triageScores": "fixtures/clinical/noisy-rare-cohort-triage.json",
-              "clinicalEvidence": 79.1
-            },
-            "metrics": {
-              "readiness": 72.5,
-              "shiftLoad": 67.8,
-              "calibration": 72.4,
-              "domainEvidence": 66.0,
-              "triageRate": 57.0,
-              "residualRisk": 33.5,
-              "clinicalEvidence": 79.1
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-clinical-shift-bench"
+              "sourceBench": "cvpr-temporal-rollout-bench",
+              "execution": "torchvision-raft-small-temporal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "desktop-batch",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -7930,39 +11336,53 @@ export const launchInput = {
                 "studentRouting": 30,
                 "escalationCost": 10
               },
-              "asset": "fixtures/compute/desktop-batch.json"
+              "title": "Desktop batch review"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/desktop-batch-latency.json",
-              "qualityFloor": 87.4,
-              "routingTrace": "fixtures/compute/desktop-batch-routing.json",
-              "retainedEvidence": 90.9
+              "latencyProfile": {
+                "perIterationMs": 3.031,
+                "repeats": 24,
+                "matrix": [
+                  924,
+                  156,
+                  924
+                ]
+              },
+              "qualityFloor": 85.8,
+              "routingTrace": {
+                "studentRouting": 30,
+                "checksum": 0.066269
+              },
+              "retainedEvidence": 86.6
             },
             "metrics": {
-              "readiness": 76.6,
-              "latency": 58.7,
-              "retainedEvidence": 90.9,
-              "qualityFloor": 87.4,
-              "escalationRate": 17.3,
-              "costSaving": 38.5,
-              "risk": 13.1
+              "readiness": 89.1,
+              "latency": 91.8,
+              "retainedEvidence": 86.6,
+              "qualityFloor": 85.8,
+              "escalationRate": 14.7,
+              "costSaving": 22.7,
+              "risk": 7.2
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "mobile-live",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -7971,39 +11391,53 @@ export const launchInput = {
                 "studentRouting": 60,
                 "escalationCost": 10
               },
-              "asset": "fixtures/compute/mobile-live.json"
+              "title": "Mobile live inference"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/mobile-live-latency.json",
-              "qualityFloor": 81.6,
-              "routingTrace": "fixtures/compute/mobile-live-routing.json",
-              "retainedEvidence": 87.5
+              "latencyProfile": {
+                "perIterationMs": 0.168,
+                "repeats": 24,
+                "matrix": [
+                  876,
+                  216,
+                  876
+                ]
+              },
+              "qualityFloor": 81.8,
+              "routingTrace": {
+                "studentRouting": 60,
+                "checksum": -0.334
+              },
+              "retainedEvidence": 85.0
             },
             "metrics": {
-              "readiness": 74.6,
-              "latency": 55.5,
-              "retainedEvidence": 87.5,
-              "qualityFloor": 81.6,
-              "escalationRate": 29.8,
-              "costSaving": 45.2,
-              "risk": 18.8
+              "readiness": 87.3,
+              "latency": 93.7,
+              "retainedEvidence": 85.0,
+              "qualityFloor": 81.8,
+              "escalationRate": 24.9,
+              "costSaving": 38.2,
+              "risk": 10.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "edge-camera",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -8012,39 +11446,53 @@ export const launchInput = {
                 "studentRouting": 55,
                 "escalationCost": 8
               },
-              "asset": "fixtures/compute/edge-camera.json"
+              "title": "Edge camera stream"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/edge-camera-latency.json",
-              "qualityFloor": 81.2,
-              "routingTrace": "fixtures/compute/edge-camera-routing.json",
-              "retainedEvidence": 85.7
+              "latencyProfile": {
+                "perIterationMs": 0.157,
+                "repeats": 24,
+                "matrix": [
+                  852,
+                  206,
+                  852
+                ]
+              },
+              "qualityFloor": 80.9,
+              "routingTrace": {
+                "studentRouting": 55,
+                "checksum": -0.14627
+              },
+              "retainedEvidence": 84.0
             },
             "metrics": {
-              "readiness": 73.5,
-              "latency": 56.9,
-              "retainedEvidence": 85.7,
-              "qualityFloor": 81.2,
-              "escalationRate": 28.3,
-              "costSaving": 44.2,
-              "risk": 19.5
+              "readiness": 87.0,
+              "latency": 94.2,
+              "retainedEvidence": 84.0,
+              "qualityFloor": 80.9,
+              "escalationRate": 22.3,
+              "costSaving": 36.8,
+              "risk": 10.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "compute-serving",
             "caseId": "fleet-peak-load",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:06:15Z",
             "model": {
-              "encoder": "quantized-vision-encoder",
-              "router": "student-router",
-              "profiler": "latency-profiler"
+              "encoder": "torch-cuda-matmul-vision-encoder",
+              "router": "student-router-profiler",
+              "profiler": "cuda-event-latency-profiler"
             },
             "inputs": {
               "servingControls": {
@@ -8053,39 +11501,53 @@ export const launchInput = {
                 "studentRouting": 65,
                 "escalationCost": 8
               },
-              "asset": "fixtures/compute/fleet-peak-load.json"
+              "title": "Fleet peak load"
             },
             "outputs": {
-              "latencyProfile": "fixtures/compute/fleet-peak-load-latency.json",
-              "qualityFloor": 80.1,
-              "routingTrace": "fixtures/compute/fleet-peak-load-routing.json",
-              "retainedEvidence": 87.6
+              "latencyProfile": {
+                "perIterationMs": 0.165,
+                "repeats": 24,
+                "matrix": [
+                  888,
+                  226,
+                  888
+                ]
+              },
+              "qualityFloor": 81.0,
+              "routingTrace": {
+                "studentRouting": 65,
+                "checksum": 0.124414
+              },
+              "retainedEvidence": 84.9
             },
             "metrics": {
-              "readiness": 74.6,
-              "latency": 52.5,
-              "retainedEvidence": 87.6,
-              "qualityFloor": 80.1,
-              "escalationRate": 31.3,
-              "costSaving": 48.2,
-              "risk": 20.3
+              "readiness": 86.9,
+              "latency": 93.2,
+              "retainedEvidence": 84.9,
+              "qualityFloor": 81.0,
+              "escalationRate": 25.7,
+              "costSaving": 42.6,
+              "risk": 10.7
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-compute-serving-bench"
+              "sourceBench": "cvpr-compute-serving-bench",
+              "execution": "torch-cuda-compute-serving-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "light-layout-edit",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -8094,40 +11556,43 @@ export const launchInput = {
                 "identityLock": 82,
                 "adversarialPromptPressure": 18
               },
-              "asset": "fixtures/generation/light-layout-edit.png"
+              "asset": "synthetic://generation/light-layout-edit.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/light-layout-edit-edited.png",
-              "layoutMask": "fixtures/generation/light-layout-edit-layout-mask.png",
-              "identityEmbeddingDelta": 18.5,
-              "rewardTrace": "fixtures/generation/light-layout-edit-reward.json"
+              "editedImage": "synthetic://generation/light-layout-edit-edited.png",
+              "layoutMask": "synthetic://generation/light-layout-edit-layout-mask.png",
+              "identityEmbeddingDelta": 19.2,
+              "rewardTrace": "synthetic://generation/light-layout-edit-reward.json"
             },
             "metrics": {
-              "readiness": 84.9,
+              "readiness": 78.5,
               "editPressure": 21.0,
-              "constraintSatisfaction": 86.1,
-              "identityPreservation": 85.0,
-              "editLocality": 82.8,
-              "rewardAlignment": 87.3,
-              "identityDamage": 18.5,
-              "provenanceRisk": 17.6
+              "constraintSatisfaction": 80.8,
+              "identityPreservation": 80.2,
+              "editLocality": 76.2,
+              "rewardAlignment": 73.6,
+              "identityDamage": 19.2,
+              "provenanceRisk": 20.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "style-with-locks",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -8136,40 +11601,43 @@ export const launchInput = {
                 "identityLock": 80,
                 "adversarialPromptPressure": 32
               },
-              "asset": "fixtures/generation/style-with-locks.png"
+              "asset": "synthetic://generation/style-with-locks.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/style-with-locks-edited.png",
-              "layoutMask": "fixtures/generation/style-with-locks-layout-mask.png",
-              "identityEmbeddingDelta": 31.8,
-              "rewardTrace": "fixtures/generation/style-with-locks-reward.json"
+              "editedImage": "synthetic://generation/style-with-locks-edited.png",
+              "layoutMask": "synthetic://generation/style-with-locks-layout-mask.png",
+              "identityEmbeddingDelta": 31.3,
+              "rewardTrace": "synthetic://generation/style-with-locks-reward.json"
             },
             "metrics": {
-              "readiness": 77.4,
-              "editPressure": 39.2,
-              "constraintSatisfaction": 80.9,
-              "identityPreservation": 77.3,
-              "editLocality": 74.4,
-              "rewardAlignment": 81.3,
-              "identityDamage": 31.8,
-              "provenanceRisk": 29.5
+              "readiness": 70.9,
+              "editPressure": 39.3,
+              "constraintSatisfaction": 74.7,
+              "identityPreservation": 73.7,
+              "editLocality": 67.7,
+              "rewardAlignment": 66.0,
+              "identityDamage": 31.3,
+              "provenanceRisk": 32.2
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "layout-rewrite",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -8178,40 +11646,43 @@ export const launchInput = {
                 "identityLock": 92,
                 "adversarialPromptPressure": 28
               },
-              "asset": "fixtures/generation/layout-rewrite.png"
+              "asset": "synthetic://generation/layout-rewrite.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/layout-rewrite-edited.png",
-              "layoutMask": "fixtures/generation/layout-rewrite-layout-mask.png",
-              "identityEmbeddingDelta": 33.1,
-              "rewardTrace": "fixtures/generation/layout-rewrite-reward.json"
+              "editedImage": "synthetic://generation/layout-rewrite-edited.png",
+              "layoutMask": "synthetic://generation/layout-rewrite-layout-mask.png",
+              "identityEmbeddingDelta": 32.4,
+              "rewardTrace": "synthetic://generation/layout-rewrite-reward.json"
             },
             "metrics": {
-              "readiness": 77.5,
+              "readiness": 70.5,
               "editPressure": 45.7,
-              "constraintSatisfaction": 81.1,
-              "identityPreservation": 78.4,
-              "editLocality": 72.9,
-              "rewardAlignment": 82.4,
-              "identityDamage": 33.1,
-              "provenanceRisk": 29.9
+              "constraintSatisfaction": 73.2,
+              "identityPreservation": 75.0,
+              "editLocality": 65.9,
+              "rewardAlignment": 66.2,
+              "identityDamage": 32.4,
+              "provenanceRisk": 33.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "constraint-generation",
             "caseId": "prompt-attack-edit",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:14Z",
             "model": {
-              "layout": "layout-controlnet",
-              "identity": "identity-embedding-lock",
-              "reward": "preference-reward-probe"
+              "layout": "torch-layout-probe",
+              "identity": "torch-identity-embedding-probe",
+              "reward": "constraint-reward-probe"
             },
             "inputs": {
               "generationControls": {
@@ -8220,38 +11691,1273 @@ export const launchInput = {
                 "identityLock": 92,
                 "adversarialPromptPressure": 28
               },
-              "asset": "fixtures/generation/prompt-attack-edit.png"
+              "asset": "synthetic://generation/prompt-attack-edit.png"
             },
             "outputs": {
-              "editedImage": "fixtures/generation/prompt-attack-edit-edited.png",
-              "layoutMask": "fixtures/generation/prompt-attack-edit-layout-mask.png",
-              "identityEmbeddingDelta": 34.8,
-              "rewardTrace": "fixtures/generation/prompt-attack-edit-reward.json"
+              "editedImage": "synthetic://generation/prompt-attack-edit-edited.png",
+              "layoutMask": "synthetic://generation/prompt-attack-edit-layout-mask.png",
+              "identityEmbeddingDelta": 34.0,
+              "rewardTrace": "synthetic://generation/prompt-attack-edit-reward.json"
             },
             "metrics": {
-              "readiness": 77.6,
-              "editPressure": 47.7,
-              "constraintSatisfaction": 82.3,
-              "identityPreservation": 77.3,
-              "editLocality": 73.6,
-              "rewardAlignment": 82.5,
-              "identityDamage": 34.8,
-              "provenanceRisk": 30.0
+              "readiness": 70.8,
+              "editPressure": 47.8,
+              "constraintSatisfaction": 74.7,
+              "identityPreservation": 74.0,
+              "editLocality": 66.7,
+              "rewardAlignment": 66.6,
+              "identityDamage": 34.0,
+              "provenanceRisk": 33.1
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-constraint-generation-bench"
+              "sourceBench": "cvpr-constraint-generation-bench",
+              "execution": "torch-layout-identity-reward-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "indoor-low-texture",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 68,
+                "thinStructure": 24,
+                "scaleAmbiguity": 54
+              },
+              "asset": "synthetic://depth/indoor-low-texture.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.024086,
+              "curvature": 0.004773
+            },
+            "metrics": {
+              "readiness": 81.8,
+              "depthRange": 0.7193,
+              "normalConsistency": 84.4,
+              "surfaceConsistency": 89.4,
+              "scaleDrift": 29.1,
+              "thinStructureRisk": 15.8
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "thin-chair-legs",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 38,
+                "thinStructure": 78,
+                "scaleAmbiguity": 32
+              },
+              "asset": "synthetic://depth/thin-chair-legs.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.019778,
+              "curvature": 0.003684
+            },
+            "metrics": {
+              "readiness": 75.7,
+              "depthRange": 0.6591,
+              "normalConsistency": 87.9,
+              "surfaceConsistency": 80.2,
+              "scaleDrift": 19.5,
+              "thinStructureRisk": 46.8
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "reflective-surface",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 52,
+                "thinStructure": 34,
+                "scaleAmbiguity": 46
+              },
+              "asset": "synthetic://depth/reflective-surface.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.021851,
+              "curvature": 0.004147
+            },
+            "metrics": {
+              "readiness": 81.6,
+              "depthRange": 0.6839,
+              "normalConsistency": 86.3,
+              "surfaceConsistency": 87.9,
+              "scaleDrift": 25.3,
+              "thinStructureRisk": 21.5
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "wide-room-scale",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:22:34Z",
+            "model": {
+              "depth": "torch-cuda-depth-normal-probe",
+              "surface": "finite-difference-normal-consistency"
+            },
+            "inputs": {
+              "depthControls": {
+                "textureSparsity": 44,
+                "thinStructure": 22,
+                "scaleAmbiguity": 68
+              },
+              "asset": "synthetic://depth/wide-room-scale.png"
+            },
+            "outputs": {
+              "depthMap": "synthetic://depth/depth-map.pt",
+              "normalEnergy": 0.020688,
+              "curvature": 0.00388
+            },
+            "metrics": {
+              "readiness": 82.5,
+              "depthRange": 0.677,
+              "normalConsistency": 87.2,
+              "surfaceConsistency": 90.2,
+              "scaleDrift": 32.0,
+              "thinStructureRisk": 14.4
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-depth-normal-consistency-bench",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "motion-blur",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "blur",
+                "severity": 46
+              },
+              "asset": "synthetic://robustness/motion-blur.png"
+            },
+            "outputs": {
+              "cleanConfidence": 35.2,
+              "corruptedConfidence": 66.3,
+              "jsDivergence": 0.712014,
+              "featureCosine": 0.940137
+            },
+            "metrics": {
+              "readiness": 80.8,
+              "robustness": 86.3,
+              "confidenceCollapse": 15.0,
+              "featureRetention": 94.0,
+              "labelStability": 74.6,
+              "severity": 46,
+              "topClassChanged": 1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "sensor-noise",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "noise",
+                "severity": 52
+              },
+              "asset": "synthetic://robustness/sensor-noise.png"
+            },
+            "outputs": {
+              "cleanConfidence": 38.2,
+              "corruptedConfidence": 43.1,
+              "jsDivergence": 0.06174,
+              "featureCosine": 0.963718
+            },
+            "metrics": {
+              "readiness": 84.4,
+              "robustness": 91.9,
+              "confidenceCollapse": 10.0,
+              "featureRetention": 96.4,
+              "labelStability": 99.0,
+              "severity": 52,
+              "topClassChanged": 0
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "patch-attack",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "patch",
+                "severity": 66
+              },
+              "asset": "synthetic://robustness/patch-attack.png"
+            },
+            "outputs": {
+              "cleanConfidence": 33.5,
+              "corruptedConfidence": 36.9,
+              "jsDivergence": 0.031526,
+              "featureCosine": 0.973741
+            },
+            "metrics": {
+              "readiness": 81.1,
+              "robustness": 90.8,
+              "confidenceCollapse": 11.8,
+              "featureRetention": 97.4,
+              "labelStability": 99.5,
+              "severity": 66,
+              "topClassChanged": 0
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "compression-shift",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:26:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "probe": "clean-corrupted-logit-delta"
+            },
+            "inputs": {
+              "corruptionControls": {
+                "corruption": "compression",
+                "severity": 58
+              },
+              "asset": "synthetic://robustness/compression-shift.png"
+            },
+            "outputs": {
+              "cleanConfidence": 38.5,
+              "corruptedConfidence": 39.9,
+              "jsDivergence": 0.009099,
+              "featureCosine": 0.9972
+            },
+            "metrics": {
+              "readiness": 84.1,
+              "robustness": 92.9,
+              "confidenceCollapse": 9.4,
+              "featureRetention": 99.7,
+              "labelStability": 99.9,
+              "severity": 58,
+              "topClassChanged": 0
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-corruption-robustness-bench",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "single-object",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 18,
+                "promptNoise": 8,
+                "occlusion": 10
+              },
+              "asset": "synthetic://segmentation/single-object.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 60.7,
+              "maskArea": 0.88176,
+              "maskOverlap": 0.38536
+            },
+            "metrics": {
+              "readiness": 65.4,
+              "maskStability": 57.2,
+              "promptSensitivity": 32.4,
+              "unsupportedRegionRisk": 20.2,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "cluttered-scene",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 64,
+                "promptNoise": 18,
+                "occlusion": 24
+              },
+              "asset": "synthetic://segmentation/cluttered-scene.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 66.3,
+              "maskArea": 0.9091,
+              "maskOverlap": 0.40537
+            },
+            "metrics": {
+              "readiness": 62.3,
+              "maskStability": 59.4,
+              "promptSensitivity": 48.0,
+              "unsupportedRegionRisk": 22.8,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "ambiguous-clicks",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 46,
+                "promptNoise": 62,
+                "occlusion": 18
+              },
+              "asset": "synthetic://segmentation/ambiguous-clicks.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 66.7,
+              "maskArea": 0.90569,
+              "maskOverlap": 0.38714
+            },
+            "metrics": {
+              "readiness": 58.3,
+              "maskStability": 60.7,
+              "promptSensitivity": 61.3,
+              "unsupportedRegionRisk": 28.2,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "occluded-object",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:23:49Z",
+            "model": {
+              "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+              "promptProbe": "mask-rcnn-click-robustness-proxy"
+            },
+            "inputs": {
+              "promptControls": {
+                "objectClutter": 38,
+                "promptNoise": 26,
+                "occlusion": 70
+              },
+              "asset": "synthetic://segmentation/occluded-object.png"
+            },
+            "outputs": {
+              "meanMaskConfidence": 66.3,
+              "maskArea": 0.91259,
+              "maskOverlap": 0.40266
+            },
+            "metrics": {
+              "readiness": 57.8,
+              "maskStability": 53.9,
+              "promptSensitivity": 45.5,
+              "unsupportedRegionRisk": 35.1,
+              "detections": 2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "clean-crossing",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 12,
+                "crowding": 22,
+                "velocity": 36
+              },
+              "asset": "synthetic://tracking/clean-crossing.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.01013,
+              "trackTensor": "synthetic://tracking/clean-crossing-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 88.8,
+              "identityStability": 88.9,
+              "occlusionRecovery": 85.0,
+              "trackContinuity": 91.5,
+              "identityDrift": 1.5
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "identity-crossing",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 26,
+                "crowding": 68,
+                "velocity": 42
+              },
+              "asset": "synthetic://tracking/identity-crossing.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.01697,
+              "trackTensor": "synthetic://tracking/identity-crossing-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 82.6,
+              "identityStability": 81.4,
+              "occlusionRecovery": 79.2,
+              "trackContinuity": 90.0,
+              "identityDrift": 2.7
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "long-occlusion",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 74,
+                "crowding": 36,
+                "velocity": 34
+              },
+              "asset": "synthetic://tracking/long-occlusion.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.014317,
+              "trackTensor": "synthetic://tracking/long-occlusion-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 79.6,
+              "identityStability": 79.2,
+              "occlusionRecovery": 75.4,
+              "trackContinuity": 91.1,
+              "identityDrift": 2.3
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "fast-motion",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:24:31Z",
+            "model": {
+              "tracker": "torch-cuda-centroid-assignment-tracker",
+              "temporalProbe": "mask-sequence-identity-drift"
+            },
+            "inputs": {
+              "trackingControls": {
+                "occlusion": 22,
+                "crowding": 42,
+                "velocity": 78
+              },
+              "asset": "synthetic://tracking/fast-motion.mp4"
+            },
+            "outputs": {
+              "frames": 8,
+              "objects": 3,
+              "temporalDelta": 0.019914,
+              "trackTensor": "synthetic://tracking/fast-motion-tracks.pt"
+            },
+            "metrics": {
+              "readiness": 83.1,
+              "identityStability": 84.0,
+              "occlusionRecovery": 77.9,
+              "trackContinuity": 86.7,
+              "identityDrift": 3.2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-video-identity-tracking-bench",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "wide-baseline",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:36Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 82,
+                "textureSparsity": 18,
+                "scaleAmbiguity": 24,
+                "surfaceComplexity": 42
+              },
+              "asset": "synthetic://geometry/wide-baseline.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 204,
+                "meanReprojectionError": 0.00851,
+                "p95ReprojectionError": 0.01639,
+                "elapsedMs": 1331.44
+              },
+              "scaleRecovery": {
+                "trueScale": 1.13333,
+                "recoveredScale": 1.11517,
+                "relativeError": 0.01602
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.00534,
+                "finalLoss": 0.001153,
+                "iterations": 220,
+                "calibratedScale": 1.19754
+              }
+            },
+            "metrics": {
+              "poseEvidence": 92.8,
+              "metricEvidence": 100.0,
+              "surfaceConsistency": 87.8,
+              "scaleDrift": 0.6,
+              "topologyRisk": 11.6,
+              "readiness": 92.9
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "scale-transfer",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:37Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 66,
+                "textureSparsity": 28,
+                "scaleAmbiguity": 44,
+                "surfaceComplexity": 46
+              },
+              "asset": "synthetic://geometry/scale-transfer.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 196,
+                "meanReprojectionError": 0.00963,
+                "p95ReprojectionError": 0.0193,
+                "elapsedMs": 742.4
+              },
+              "scaleRecovery": {
+                "trueScale": 1.24444,
+                "recoveredScale": 1.21153,
+                "relativeError": 0.00475
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.004471,
+                "finalLoss": 0.001505,
+                "iterations": 220,
+                "calibratedScale": 1.25036
+              }
+            },
+            "metrics": {
+              "poseEvidence": 91.7,
+              "metricEvidence": 99.4,
+              "surfaceConsistency": 87.2,
+              "scaleDrift": 3.8,
+              "topologyRisk": 12.5,
+              "readiness": 92.1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "thin-structure",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:38Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 58,
+                "textureSparsity": 34,
+                "scaleAmbiguity": 32,
+                "surfaceComplexity": 72
+              },
+              "asset": "synthetic://geometry/thin-structure.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 191,
+                "meanReprojectionError": 0.01438,
+                "p95ReprojectionError": 0.02784,
+                "elapsedMs": 759.71
+              },
+              "scaleRecovery": {
+                "trueScale": 1.17778,
+                "recoveredScale": 1.15349,
+                "relativeError": 0.01432
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.005345,
+                "finalLoss": 0.00322,
+                "iterations": 220,
+                "calibratedScale": 1.19465
+              }
+            },
+            "metrics": {
+              "poseEvidence": 90.2,
+              "metricEvidence": 97.3,
+              "surfaceConsistency": 83.5,
+              "scaleDrift": 3.4,
+              "topologyRisk": 18.3,
+              "readiness": 89.1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "metric-geometry",
+            "caseId": "low-texture-indoor",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:31:38Z",
+            "model": {
+              "solver": "torch-cuda-differentiable-camera-solver",
+              "geometry": "bundle-adjustment-scale-probe"
+            },
+            "inputs": {
+              "geometryControls": {
+                "baseline": 54,
+                "textureSparsity": 58,
+                "scaleAmbiguity": 48,
+                "surfaceComplexity": 50
+              },
+              "asset": "synthetic://geometry/low-texture-indoor.json"
+            },
+            "outputs": {
+              "cameraRecovery": {
+                "points": 158,
+                "meanReprojectionError": 0.01534,
+                "p95ReprojectionError": 0.02952,
+                "elapsedMs": 768.1
+              },
+              "scaleRecovery": {
+                "trueScale": 1.26667,
+                "recoveredScale": 1.23104,
+                "relativeError": 0.01505
+              },
+              "optimizationTrace": {
+                "initialLoss": 0.005659,
+                "finalLoss": 0.003549,
+                "iterations": 220,
+                "calibratedScale": 1.2476
+              }
+            },
+            "metrics": {
+              "poseEvidence": 88.1,
+              "metricEvidence": 95.3,
+              "surfaceConsistency": 86.0,
+              "scaleDrift": 6.3,
+              "topologyRisk": 13.9,
+              "readiness": 89.4
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-metric-geometry-bench",
+              "execution": "torch-cuda-metric-geometry-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "dense-novel-view",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 86,
+                "splatDensity": 78,
+                "semanticEntropy": 24,
+                "provenanceVisibility": 70
+              },
+              "asset": "synthetic://splat/dense-novel-view.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 337,
+                "views": 5,
+                "elapsedMs": 71.17,
+                "adjacentFrameDelta": 0.13833
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.5302,
+                "margin": 0.45706,
+                "editLeakageRatio": 0.05605,
+                "editLocality": 0.94395
+              },
+              "provenanceProbe": {
+                "visibility": 70,
+                "trace": 67.7
+              }
+            },
+            "metrics": {
+              "renderFidelity": 85.5,
+              "semanticAttachment": 60.9,
+              "provenanceTrace": 67.7,
+              "viewInstability": 14.1,
+              "editLeakageRisk": 10.2,
+              "readiness": 74.9
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "semantic-edit",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 74,
+                "splatDensity": 72,
+                "semanticEntropy": 34,
+                "provenanceVisibility": 76
+              },
+              "asset": "synthetic://splat/semantic-edit.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 319,
+                "views": 5,
+                "elapsedMs": 23.13,
+                "adjacentFrameDelta": 0.13381
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.55323,
+                "margin": 0.45882,
+                "editLeakageRatio": 0.07111,
+                "editLocality": 0.92889
+              },
+              "provenanceProbe": {
+                "visibility": 76,
+                "trace": 72.3
+              }
+            },
+            "metrics": {
+              "renderFidelity": 83.7,
+              "semanticAttachment": 60.7,
+              "provenanceTrace": 72.3,
+              "viewInstability": 15.2,
+              "editLeakageRisk": 12.1,
+              "readiness": 75.2
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "provenance-transfer",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 68,
+                "splatDensity": 70,
+                "semanticEntropy": 42,
+                "provenanceVisibility": 84
+              },
+              "asset": "synthetic://splat/provenance-transfer.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 313,
+                "views": 5,
+                "elapsedMs": 22.65,
+                "adjacentFrameDelta": 0.13393
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.51926,
+                "margin": 0.42126,
+                "editLeakageRatio": 0.08418,
+                "editLocality": 0.91582
+              },
+              "provenanceProbe": {
+                "visibility": 84,
+                "trace": 77.6
+              }
+            },
+            "metrics": {
+              "renderFidelity": 82.7,
+              "semanticAttachment": 57.0,
+              "provenanceTrace": 77.6,
+              "viewInstability": 15.9,
+              "editLeakageRisk": 13.5,
+              "readiness": 75.1
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "gaussian-splatting",
+            "caseId": "sparse-capture",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T03:29:24Z",
+            "model": {
+              "renderer": "torch-cuda-gaussian-splat-compositor",
+              "semanticProbe": "splat-label-edit-probe"
+            },
+            "inputs": {
+              "splatControls": {
+                "viewCount": 62,
+                "splatDensity": 66,
+                "semanticEntropy": 46,
+                "provenanceVisibility": 72
+              },
+              "asset": "synthetic://splat/sparse-capture.ply"
+            },
+            "outputs": {
+              "renderProfile": {
+                "splats": 300,
+                "views": 5,
+                "elapsedMs": 21.97,
+                "adjacentFrameDelta": 0.13495
+              },
+              "semanticProbe": {
+                "meanConfidence": 0.57297,
+                "margin": 0.47408,
+                "editLeakageRatio": 0.07785,
+                "editLocality": 0.92215
+              },
+              "provenanceProbe": {
+                "visibility": 72,
+                "trace": 69.6
+              }
+            },
+            "metrics": {
+              "renderFidelity": 81.4,
+              "semanticAttachment": 60.5,
+              "provenanceTrace": 69.6,
+              "viewInstability": 16.7,
+              "editLeakageRisk": 14.5,
+              "readiness": 73.6
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-gaussian-splatting-bench",
+              "execution": "torch-cuda-gaussian-splatting-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "clear-baseline",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 8,
+                "artifactLoad": 12,
+                "escalationThreshold": 68
+              },
+              "asset": "synthetic://clinical/clear-baseline.png"
+            },
+            "outputs": {
+              "cleanConfidence": 38.6,
+              "shiftedConfidence": 35.0,
+              "logitDivergence": 0.006642
+            },
+            "metrics": {
+              "readiness": 89.9,
+              "shiftScore": 7.6,
+              "calibration": 89.3,
+              "falseClearRisk": 2.4,
+              "escalationThreshold": 68
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "scanner-shift",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 46,
+                "artifactLoad": 24,
+                "escalationThreshold": 72
+              },
+              "asset": "synthetic://clinical/scanner-shift.png"
+            },
+            "outputs": {
+              "cleanConfidence": 33.4,
+              "shiftedConfidence": 33.9,
+              "logitDivergence": 0.014008
+            },
+            "metrics": {
+              "readiness": 83.2,
+              "shiftScore": 32.7,
+              "calibration": 91.5,
+              "falseClearRisk": 8.9,
+              "escalationThreshold": 72
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "rare-presentation",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 58,
+                "artifactLoad": 18,
+                "escalationThreshold": 78
+              },
+              "asset": "synthetic://clinical/rare-presentation.png"
+            },
+            "outputs": {
+              "cleanConfidence": 39.4,
+              "shiftedConfidence": 37.6,
+              "logitDivergence": 0.003941
+            },
+            "metrics": {
+              "readiness": 81.9,
+              "shiftScore": 38.0,
+              "calibration": 90.7,
+              "falseClearRisk": 10.6,
+              "escalationThreshold": 78
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
+            }
+          },
+          {
+            "jobId": "clinical-shift",
+            "caseId": "motion-artifact",
+            "mode": "cached-real",
+            "createdAt": "2026-08-17T01:09:30Z",
+            "model": {
+              "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+              "shiftProbe": "resnet-logit-divergence-domain-shift"
+            },
+            "inputs": {
+              "clinicalControls": {
+                "domainShift": 38,
+                "artifactLoad": 66,
+                "escalationThreshold": 74
+              },
+              "asset": "synthetic://clinical/motion-artifact.png"
+            },
+            "outputs": {
+              "cleanConfidence": 26.4,
+              "shiftedConfidence": 26.2,
+              "logitDivergence": 0.067713
+            },
+            "metrics": {
+              "readiness": 81.1,
+              "shiftScore": 39.0,
+              "calibration": 90.9,
+              "falseClearRisk": 11.1,
+              "escalationThreshold": 74
+            },
+            "provenance": {
+              "runtime": "google-colab-pro-plus",
+              "accelerator": "Tesla T4",
+              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+              "sourceBench": "cvpr-clinical-shift-bench",
+              "execution": "torchvision-resnet-clinical-shift-live-demo",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "urban-cut-in",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -8262,36 +12968,39 @@ export const launchInput = {
                 "occlusion": 10,
                 "actionConfidence": 82
               },
-              "asset": "fixtures/driving/urban-cut-in.mp4"
+              "asset": "synthetic://driving/urban-cut-in.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/urban-cut-in-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/urban-cut-in-grounding.png",
               "timeToCollision": 5.15,
-              "riskTrace": "fixtures/driving/urban-cut-in-risk.json",
-              "ruleViolations": 24.0
+              "riskTrace": "synthetic://driving/urban-cut-in-risk.json",
+              "ruleViolations": 32.9
             },
             "metrics": {
-              "readiness": 68.1,
-              "sceneGrounding": 85.7,
+              "readiness": 57.4,
+              "sceneGrounding": 58.1,
               "timeToCollision": 5.15,
-              "risk": 33.4,
-              "ruleViolation": 24.0,
-              "abstention": 7.6
+              "risk": 33.6,
+              "ruleViolation": 32.9,
+              "abstention": 15.5
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "night-crosswalk",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -8302,36 +13011,39 @@ export const launchInput = {
                 "occlusion": 18,
                 "actionConfidence": 78
               },
-              "asset": "fixtures/driving/night-crosswalk.mp4"
+              "asset": "synthetic://driving/night-crosswalk.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/night-crosswalk-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/night-crosswalk-grounding.png",
               "timeToCollision": 5.73,
-              "riskTrace": "fixtures/driving/night-crosswalk-risk.json",
-              "ruleViolations": 23.5
+              "riskTrace": "synthetic://driving/night-crosswalk-risk.json",
+              "ruleViolations": 32.8
             },
             "metrics": {
-              "readiness": 68.2,
-              "sceneGrounding": 84.2,
+              "readiness": 57.1,
+              "sceneGrounding": 55.4,
               "timeToCollision": 5.73,
-              "risk": 31.7,
-              "ruleViolation": 23.5,
-              "abstention": 7.8
+              "risk": 31.9,
+              "ruleViolation": 32.8,
+              "abstention": 16.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "highway-merge",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -8342,36 +13054,39 @@ export const launchInput = {
                 "occlusion": 16,
                 "actionConfidence": 84
               },
-              "asset": "fixtures/driving/highway-merge.mp4"
+              "asset": "synthetic://driving/highway-merge.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/highway-merge-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/highway-merge-grounding.png",
               "timeToCollision": 4.34,
-              "riskTrace": "fixtures/driving/highway-merge-risk.json",
-              "ruleViolations": 24.1
+              "riskTrace": "synthetic://driving/highway-merge-risk.json",
+              "ruleViolations": 33.9
             },
             "metrics": {
-              "readiness": 68.2,
-              "sceneGrounding": 87.3,
+              "readiness": 56.5,
+              "sceneGrounding": 57.0,
               "timeToCollision": 4.34,
-              "risk": 34.6,
-              "ruleViolation": 24.1,
-              "abstention": 7.4
+              "risk": 34.8,
+              "ruleViolation": 33.9,
+              "abstention": 16.0
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           },
           {
             "jobId": "driving-safety",
             "caseId": "construction-zone",
             "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
+            "createdAt": "2026-08-17T03:14:48Z",
             "model": {
-              "grounder": "vla-scene-grounder",
+              "grounder": "torch-driving-scene-risk-probe",
               "riskHead": "ttc-risk-head",
               "ruleMonitor": "safety-rule-monitor"
             },
@@ -8382,347 +13097,30 @@ export const launchInput = {
                 "occlusion": 14,
                 "actionConfidence": 72
               },
-              "asset": "fixtures/driving/construction-zone.mp4"
+              "asset": "synthetic://driving/construction-zone.mp4"
             },
             "outputs": {
-              "sceneGroundingMap": "fixtures/driving/construction-zone-grounding.png",
+              "sceneGroundingMap": "synthetic://driving/construction-zone-grounding.png",
               "timeToCollision": 5.82,
-              "riskTrace": "fixtures/driving/construction-zone-risk.json",
-              "ruleViolations": 23.7
+              "riskTrace": "synthetic://driving/construction-zone-risk.json",
+              "ruleViolations": 33.0
             },
             "metrics": {
-              "readiness": 68.2,
-              "sceneGrounding": 83.9,
+              "readiness": 57.1,
+              "sceneGrounding": 55.1,
               "timeToCollision": 5.82,
-              "risk": 31.9,
-              "ruleViolation": 23.7,
-              "abstention": 9.1
+              "risk": 32.1,
+              "ruleViolation": 33.0,
+              "abstention": 17.3
             },
             "provenance": {
               "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
+              "accelerator": "Tesla T4",
               "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-driving-safety-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "wide-baseline",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 82,
-                "textureSparsity": 18,
-                "scaleAmbiguity": 24,
-                "surfaceComplexity": 42
-              },
-              "asset": "fixtures/geometry/wide-baseline.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/wide-baseline-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/wide-baseline-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/wide-baseline-surface-residual.png",
-              "topologyWarnings": 13.9
-            },
-            "metrics": {
-              "readiness": 85.8,
-              "poseEvidence": 87.0,
-              "metricEvidence": 86.9,
-              "surfaceConsistency": 83.1,
-              "scaleDrift": 10.1,
-              "topologyRisk": 13.9
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "scale-transfer",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 66,
-                "textureSparsity": 28,
-                "scaleAmbiguity": 44,
-                "surfaceComplexity": 46
-              },
-              "asset": "fixtures/geometry/scale-transfer.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/scale-transfer-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/scale-transfer-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/scale-transfer-surface-residual.png",
-              "topologyWarnings": 21.0
-            },
-            "metrics": {
-              "readiness": 78.7,
-              "poseEvidence": 79.2,
-              "metricEvidence": 78.8,
-              "surfaceConsistency": 78.4,
-              "scaleDrift": 21.5,
-              "topologyRisk": 21.0
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "thin-structure",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 58,
-                "textureSparsity": 34,
-                "scaleAmbiguity": 32,
-                "surfaceComplexity": 72
-              },
-              "asset": "fixtures/geometry/thin-structure.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/thin-structure-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/thin-structure-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/thin-structure-surface-residual.png",
-              "topologyWarnings": 30.0
-            },
-            "metrics": {
-              "readiness": 75.5,
-              "poseEvidence": 76.8,
-              "metricEvidence": 80.4,
-              "surfaceConsistency": 72.5,
-              "scaleDrift": 22.7,
-              "topologyRisk": 30.0
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "metric-geometry",
-            "caseId": "low-texture-indoor",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "pose": "torch-pose-bundle-adjuster",
-              "scale": "metric-scale-probe",
-              "surface": "surface-consistency-head"
-            },
-            "inputs": {
-              "geometryControls": {
-                "baseline": 54,
-                "textureSparsity": 58,
-                "scaleAmbiguity": 48,
-                "surfaceComplexity": 50
-              },
-              "asset": "fixtures/geometry/low-texture-indoor.json"
-            },
-            "outputs": {
-              "poseGraph": "fixtures/geometry/low-texture-indoor-pose-graph.json",
-              "scaleTrace": "fixtures/geometry/low-texture-indoor-scale-trace.json",
-              "surfaceResidualMap": "fixtures/geometry/low-texture-indoor-surface-residual.png",
-              "topologyWarnings": 30.0
-            },
-            "metrics": {
-              "readiness": 72.0,
-              "poseEvidence": 70.1,
-              "metricEvidence": 74.7,
-              "surfaceConsistency": 72.2,
-              "scaleDrift": 29.9,
-              "topologyRisk": 30.0
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-metric-geometry-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "dense-novel-view",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 86,
-                "splatDensity": 78,
-                "semanticEntropy": 24,
-                "provenanceVisibility": 70
-              },
-              "asset": "fixtures/splats/dense-novel-view.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/dense-novel-view-renders/",
-              "semanticSplatMap": "fixtures/splats/dense-novel-view-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/dense-novel-view-provenance.json",
-              "editLeakageReport": 16.7
-            },
-            "metrics": {
-              "readiness": 85.6,
-              "renderFidelity": 86.6,
-              "semanticAttachment": 86.4,
-              "provenanceTrace": 85.5,
-              "viewInstability": 9.4,
-              "editLeakageRisk": 16.7
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "semantic-edit",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 74,
-                "splatDensity": 72,
-                "semanticEntropy": 34,
-                "provenanceVisibility": 76
-              },
-              "asset": "fixtures/splats/semantic-edit.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/semantic-edit-renders/",
-              "semanticSplatMap": "fixtures/splats/semantic-edit-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/semantic-edit-provenance.json",
-              "editLeakageReport": 21.4
-            },
-            "metrics": {
-              "readiness": 82.2,
-              "renderFidelity": 81.5,
-              "semanticAttachment": 82.4,
-              "provenanceTrace": 86.1,
-              "viewInstability": 15.7,
-              "editLeakageRisk": 21.4
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "provenance-transfer",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 68,
-                "splatDensity": 70,
-                "semanticEntropy": 42,
-                "provenanceVisibility": 84
-              },
-              "asset": "fixtures/splats/provenance-transfer.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/provenance-transfer-renders/",
-              "semanticSplatMap": "fixtures/splats/provenance-transfer-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/provenance-transfer-provenance.json",
-              "editLeakageReport": 24.3
-            },
-            "metrics": {
-              "readiness": 80.5,
-              "renderFidelity": 78.9,
-              "semanticAttachment": 79.8,
-              "provenanceTrace": 87.7,
-              "viewInstability": 18.8,
-              "editLeakageRisk": 24.3
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
-            }
-          },
-          {
-            "jobId": "gaussian-splatting",
-            "caseId": "sparse-capture",
-            "mode": "cached-real",
-            "createdAt": "2026-08-15T00:00:00Z",
-            "model": {
-              "renderer": "torch-splat-renderer",
-              "semantic": "semantic-splat-attach",
-              "provenance": "provenance-trace-head"
-            },
-            "inputs": {
-              "splatControls": {
-                "viewCount": 62,
-                "splatDensity": 66,
-                "semanticEntropy": 46,
-                "provenanceVisibility": 72
-              },
-              "asset": "fixtures/splats/sparse-capture.json"
-            },
-            "outputs": {
-              "novelViewRenders": "fixtures/splats/sparse-capture-renders/",
-              "semanticSplatMap": "fixtures/splats/sparse-capture-semantic-map.json",
-              "provenanceTrace": "fixtures/splats/sparse-capture-provenance.json",
-              "editLeakageReport": 27.4
-            },
-            "metrics": {
-              "readiness": 77.7,
-              "renderFidelity": 76.2,
-              "semanticAttachment": 77.8,
-              "provenanceTrace": 83.8,
-              "viewInstability": 23.2,
-              "editLeakageRisk": 27.4
-            },
-            "provenance": {
-              "runtime": "google-colab-pro-plus",
-              "accelerator": "GPU",
-              "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-              "sourceBench": "cvpr-gaussian-splatting-bench"
+              "sourceBench": "cvpr-driving-safety-bench",
+              "execution": "torch-driving-scene-risk-probe",
+              "promotedFrom": "live-colab",
+              "canonicalMode": "cached-real"
             }
           }
         ]
@@ -8732,10 +13130,10 @@ export const launchInput = {
           "validator": "validate_cvpr_colab_results",
           "runtimePlane": "google-colab-pro-plus",
           "expectedMode": "cached-real",
-          "jobs": 10,
-          "expectedResults": 40,
-          "actualResults": 40,
-          "validJobs": 10,
+          "jobs": 14,
+          "expectedResults": 56,
+          "actualResults": 56,
+          "validJobs": 14,
           "issues": 0,
           "status": "valid"
         },
@@ -8805,6 +13203,38 @@ export const launchInput = {
             "ready": true
           },
           {
+            "jobId": "depth-normal-consistency",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "corruption-robustness",
+            "bench": "cvpr-corruption-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+            "ready": true
+          },
+          {
             "jobId": "metric-geometry",
             "bench": "cvpr-metric-geometry-bench",
             "expectedCases": 4,
@@ -8828,13 +13258,14 @@ export const launchInput = {
           "validator": "validate_cvpr_colab_results",
           "runtimePlane": "google-colab-pro-plus",
           "expectedMode": "live-colab",
-          "jobs": 10,
-          "expectedResults": 40,
-          "actualResults": 40,
-          "validJobs": 10,
+          "jobs": 14,
+          "expectedResults": 56,
+          "actualResults": 56,
+          "validJobs": 14,
           "issues": 0,
           "status": "valid",
           "intake": "cvpr-colab-live-intake",
+          "job": null,
           "export": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
           "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
           "promoted": false
@@ -8905,6 +13336,38 @@ export const launchInput = {
             "ready": true
           },
           {
+            "jobId": "depth-normal-consistency",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "corruption-robustness",
+            "bench": "cvpr-corruption-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+            "ready": true
+          },
+          {
             "jobId": "metric-geometry",
             "bench": "cvpr-metric-geometry-bench",
             "expectedCases": 4,
@@ -8928,13 +13391,14 @@ export const launchInput = {
           "validator": "validate_cvpr_colab_results",
           "runtimePlane": "google-colab-pro-plus",
           "expectedMode": "live-colab",
-          "jobs": 10,
-          "expectedResults": 40,
-          "actualResults": 40,
-          "validJobs": 10,
+          "jobs": 14,
+          "expectedResults": 56,
+          "actualResults": 56,
+          "validJobs": 14,
           "issues": 0,
           "status": "valid",
           "intake": "cvpr-colab-live-intake",
+          "job": null,
           "export": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results_live.json",
           "canonicalArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
           "promoted": true
@@ -9005,6 +13469,38 @@ export const launchInput = {
             "ready": true
           },
           {
+            "jobId": "depth-normal-consistency",
+            "bench": "cvpr-depth-normal-consistency-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "corruption-robustness",
+            "bench": "cvpr-corruption-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "bench": "cvpr-prompt-segmentation-robustness-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+            "ready": true
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "bench": "cvpr-video-identity-tracking-bench",
+            "expectedCases": 4,
+            "actualCases": 4,
+            "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+            "ready": true
+          },
+          {
             "jobId": "metric-geometry",
             "bench": "cvpr-metric-geometry-bench",
             "expectedCases": 4,
@@ -9027,8 +13523,8 @@ export const launchInput = {
         "summary": {
           "delta": "cvpr-colab-promotion-delta",
           "status": "release",
-          "cases": 40,
-          "jobs": 10,
+          "cases": 56,
+          "jobs": 14,
           "missing": 0,
           "modeMismatches": 0,
           "regressions": 0,
@@ -9041,8 +13537,8 @@ export const launchInput = {
           {
             "jobId": "adversarial-provenance",
             "caseId": "adaptive-attack",
-            "readinessBefore": 80.8,
-            "readinessAfter": 80.8,
+            "readinessBefore": 53.9,
+            "readinessAfter": 53.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "attackCoverage": 0.0,
@@ -9058,8 +13554,8 @@ export const launchInput = {
           {
             "jobId": "adversarial-provenance",
             "caseId": "clean-camera",
-            "readinessBefore": 79.7,
-            "readinessAfter": 79.7,
+            "readinessBefore": 66.8,
+            "readinessAfter": 66.8,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "attackCoverage": 0.0,
@@ -9075,8 +13571,8 @@ export const launchInput = {
           {
             "jobId": "adversarial-provenance",
             "caseId": "edited-social-post",
-            "readinessBefore": 79.8,
-            "readinessAfter": 79.8,
+            "readinessBefore": 57.7,
+            "readinessAfter": 57.7,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "attackCoverage": 0.0,
@@ -9092,8 +13588,8 @@ export const launchInput = {
           {
             "jobId": "adversarial-provenance",
             "caseId": "synthetic-watermarked",
-            "readinessBefore": 79.9,
-            "readinessAfter": 79.9,
+            "readinessBefore": 53.8,
+            "readinessAfter": 53.8,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "attackCoverage": 0.0,
@@ -9108,72 +13604,64 @@ export const launchInput = {
           },
           {
             "jobId": "clinical-shift",
-            "caseId": "external-hospital",
-            "readinessBefore": 77.1,
-            "readinessAfter": 77.1,
+            "caseId": "clear-baseline",
+            "readinessBefore": 89.9,
+            "readinessAfter": 89.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "calibration": 0.0,
-              "clinicalEvidence": 0.0,
-              "domainEvidence": 0.0,
+              "escalationThreshold": 0,
+              "falseClearRisk": 0.0,
               "readiness": 0.0,
-              "residualRisk": 0.0,
-              "shiftLoad": 0.0,
-              "triageRate": 0.0
+              "shiftScore": 0.0
             },
             "promotedFrom": "live-colab",
             "regression": false
           },
           {
             "jobId": "clinical-shift",
-            "caseId": "new-scanner",
-            "readinessBefore": 80.5,
-            "readinessAfter": 80.5,
+            "caseId": "motion-artifact",
+            "readinessBefore": 81.1,
+            "readinessAfter": 81.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "calibration": 0.0,
-              "clinicalEvidence": 0.0,
-              "domainEvidence": 0.0,
+              "escalationThreshold": 0,
+              "falseClearRisk": 0.0,
               "readiness": 0.0,
-              "residualRisk": 0.0,
-              "shiftLoad": 0.0,
-              "triageRate": 0.0
+              "shiftScore": 0.0
             },
             "promotedFrom": "live-colab",
             "regression": false
           },
           {
             "jobId": "clinical-shift",
-            "caseId": "noisy-rare-cohort",
-            "readinessBefore": 72.5,
-            "readinessAfter": 72.5,
+            "caseId": "rare-presentation",
+            "readinessBefore": 81.9,
+            "readinessAfter": 81.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "calibration": 0.0,
-              "clinicalEvidence": 0.0,
-              "domainEvidence": 0.0,
+              "escalationThreshold": 0,
+              "falseClearRisk": 0.0,
               "readiness": 0.0,
-              "residualRisk": 0.0,
-              "shiftLoad": 0.0,
-              "triageRate": 0.0
+              "shiftScore": 0.0
             },
             "promotedFrom": "live-colab",
             "regression": false
           },
           {
             "jobId": "clinical-shift",
-            "caseId": "same-site-clean",
-            "readinessBefore": 88.5,
-            "readinessAfter": 88.5,
+            "caseId": "scanner-shift",
+            "readinessBefore": 83.2,
+            "readinessAfter": 83.2,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "calibration": 0.0,
-              "clinicalEvidence": 0.0,
-              "domainEvidence": 0.0,
+              "escalationThreshold": 0,
+              "falseClearRisk": 0.0,
               "readiness": 0.0,
-              "residualRisk": 0.0,
-              "shiftLoad": 0.0,
-              "triageRate": 0.0
+              "shiftScore": 0.0
             },
             "promotedFrom": "live-colab",
             "regression": false
@@ -9181,8 +13669,8 @@ export const launchInput = {
           {
             "jobId": "compute-serving",
             "caseId": "desktop-batch",
-            "readinessBefore": 76.6,
-            "readinessAfter": 76.6,
+            "readinessBefore": 89.1,
+            "readinessAfter": 89.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "costSaving": 0.0,
@@ -9199,8 +13687,8 @@ export const launchInput = {
           {
             "jobId": "compute-serving",
             "caseId": "edge-camera",
-            "readinessBefore": 73.5,
-            "readinessAfter": 73.5,
+            "readinessBefore": 87.0,
+            "readinessAfter": 87.0,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "costSaving": 0.0,
@@ -9217,8 +13705,8 @@ export const launchInput = {
           {
             "jobId": "compute-serving",
             "caseId": "fleet-peak-load",
-            "readinessBefore": 74.6,
-            "readinessAfter": 74.6,
+            "readinessBefore": 86.9,
+            "readinessAfter": 86.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "costSaving": 0.0,
@@ -9235,8 +13723,8 @@ export const launchInput = {
           {
             "jobId": "compute-serving",
             "caseId": "mobile-live",
-            "readinessBefore": 74.6,
-            "readinessAfter": 74.6,
+            "readinessBefore": 87.3,
+            "readinessAfter": 87.3,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "costSaving": 0.0,
@@ -9253,8 +13741,8 @@ export const launchInput = {
           {
             "jobId": "constraint-generation",
             "caseId": "layout-rewrite",
-            "readinessBefore": 77.5,
-            "readinessAfter": 77.5,
+            "readinessBefore": 70.5,
+            "readinessAfter": 70.5,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "constraintSatisfaction": 0.0,
@@ -9272,8 +13760,8 @@ export const launchInput = {
           {
             "jobId": "constraint-generation",
             "caseId": "light-layout-edit",
-            "readinessBefore": 84.9,
-            "readinessAfter": 84.9,
+            "readinessBefore": 78.5,
+            "readinessAfter": 78.5,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "constraintSatisfaction": 0.0,
@@ -9291,8 +13779,8 @@ export const launchInput = {
           {
             "jobId": "constraint-generation",
             "caseId": "prompt-attack-edit",
-            "readinessBefore": 77.6,
-            "readinessAfter": 77.6,
+            "readinessBefore": 70.8,
+            "readinessAfter": 70.8,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "constraintSatisfaction": 0.0,
@@ -9310,8 +13798,8 @@ export const launchInput = {
           {
             "jobId": "constraint-generation",
             "caseId": "style-with-locks",
-            "readinessBefore": 77.4,
-            "readinessAfter": 77.4,
+            "readinessBefore": 70.9,
+            "readinessAfter": 70.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "constraintSatisfaction": 0.0,
@@ -9327,10 +13815,150 @@ export const launchInput = {
             "regression": false
           },
           {
+            "jobId": "corruption-robustness",
+            "caseId": "compression-shift",
+            "readinessBefore": 84.1,
+            "readinessAfter": 84.1,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "confidenceCollapse": 0.0,
+              "featureRetention": 0.0,
+              "labelStability": 0.0,
+              "readiness": 0.0,
+              "robustness": 0.0,
+              "severity": 0,
+              "topClassChanged": 0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "motion-blur",
+            "readinessBefore": 80.8,
+            "readinessAfter": 80.8,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "confidenceCollapse": 0.0,
+              "featureRetention": 0.0,
+              "labelStability": 0.0,
+              "readiness": 0.0,
+              "robustness": 0.0,
+              "severity": 0,
+              "topClassChanged": 0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "patch-attack",
+            "readinessBefore": 81.1,
+            "readinessAfter": 81.1,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "confidenceCollapse": 0.0,
+              "featureRetention": 0.0,
+              "labelStability": 0.0,
+              "readiness": 0.0,
+              "robustness": 0.0,
+              "severity": 0,
+              "topClassChanged": 0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseId": "sensor-noise",
+            "readinessBefore": 84.4,
+            "readinessAfter": 84.4,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "confidenceCollapse": 0.0,
+              "featureRetention": 0.0,
+              "labelStability": 0.0,
+              "readiness": 0.0,
+              "robustness": 0.0,
+              "severity": 0,
+              "topClassChanged": 0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "indoor-low-texture",
+            "readinessBefore": 81.8,
+            "readinessAfter": 81.8,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "depthRange": 0.0,
+              "normalConsistency": 0.0,
+              "readiness": 0.0,
+              "scaleDrift": 0.0,
+              "surfaceConsistency": 0.0,
+              "thinStructureRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "reflective-surface",
+            "readinessBefore": 81.6,
+            "readinessAfter": 81.6,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "depthRange": 0.0,
+              "normalConsistency": 0.0,
+              "readiness": 0.0,
+              "scaleDrift": 0.0,
+              "surfaceConsistency": 0.0,
+              "thinStructureRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "thin-chair-legs",
+            "readinessBefore": 75.7,
+            "readinessAfter": 75.7,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "depthRange": 0.0,
+              "normalConsistency": 0.0,
+              "readiness": 0.0,
+              "scaleDrift": 0.0,
+              "surfaceConsistency": 0.0,
+              "thinStructureRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "depth-normal-consistency",
+            "caseId": "wide-room-scale",
+            "readinessBefore": 82.5,
+            "readinessAfter": 82.5,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "depthRange": 0.0,
+              "normalConsistency": 0.0,
+              "readiness": 0.0,
+              "scaleDrift": 0.0,
+              "surfaceConsistency": 0.0,
+              "thinStructureRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
             "jobId": "driving-safety",
             "caseId": "construction-zone",
-            "readinessBefore": 68.2,
-            "readinessAfter": 68.2,
+            "readinessBefore": 57.1,
+            "readinessAfter": 57.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "abstention": 0.0,
@@ -9346,8 +13974,8 @@ export const launchInput = {
           {
             "jobId": "driving-safety",
             "caseId": "highway-merge",
-            "readinessBefore": 68.2,
-            "readinessAfter": 68.2,
+            "readinessBefore": 56.5,
+            "readinessAfter": 56.5,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "abstention": 0.0,
@@ -9363,8 +13991,8 @@ export const launchInput = {
           {
             "jobId": "driving-safety",
             "caseId": "night-crosswalk",
-            "readinessBefore": 68.2,
-            "readinessAfter": 68.2,
+            "readinessBefore": 57.1,
+            "readinessAfter": 57.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "abstention": 0.0,
@@ -9380,8 +14008,8 @@ export const launchInput = {
           {
             "jobId": "driving-safety",
             "caseId": "urban-cut-in",
-            "readinessBefore": 68.1,
-            "readinessAfter": 68.1,
+            "readinessBefore": 57.4,
+            "readinessAfter": 57.4,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "abstention": 0.0,
@@ -9397,8 +14025,8 @@ export const launchInput = {
           {
             "jobId": "gaussian-splatting",
             "caseId": "dense-novel-view",
-            "readinessBefore": 85.6,
-            "readinessAfter": 85.6,
+            "readinessBefore": 74.9,
+            "readinessAfter": 74.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "editLeakageRisk": 0.0,
@@ -9414,8 +14042,8 @@ export const launchInput = {
           {
             "jobId": "gaussian-splatting",
             "caseId": "provenance-transfer",
-            "readinessBefore": 80.5,
-            "readinessAfter": 80.5,
+            "readinessBefore": 75.1,
+            "readinessAfter": 75.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "editLeakageRisk": 0.0,
@@ -9431,8 +14059,8 @@ export const launchInput = {
           {
             "jobId": "gaussian-splatting",
             "caseId": "semantic-edit",
-            "readinessBefore": 82.2,
-            "readinessAfter": 82.2,
+            "readinessBefore": 75.2,
+            "readinessAfter": 75.2,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "editLeakageRisk": 0.0,
@@ -9448,8 +14076,8 @@ export const launchInput = {
           {
             "jobId": "gaussian-splatting",
             "caseId": "sparse-capture",
-            "readinessBefore": 77.7,
-            "readinessAfter": 77.7,
+            "readinessBefore": 73.6,
+            "readinessAfter": 73.6,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "editLeakageRisk": 0.0,
@@ -9465,8 +14093,8 @@ export const launchInput = {
           {
             "jobId": "metric-geometry",
             "caseId": "low-texture-indoor",
-            "readinessBefore": 72.0,
-            "readinessAfter": 72.0,
+            "readinessBefore": 89.4,
+            "readinessAfter": 89.4,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "metricEvidence": 0.0,
@@ -9482,8 +14110,8 @@ export const launchInput = {
           {
             "jobId": "metric-geometry",
             "caseId": "scale-transfer",
-            "readinessBefore": 78.7,
-            "readinessAfter": 78.7,
+            "readinessBefore": 92.1,
+            "readinessAfter": 92.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "metricEvidence": 0.0,
@@ -9499,8 +14127,8 @@ export const launchInput = {
           {
             "jobId": "metric-geometry",
             "caseId": "thin-structure",
-            "readinessBefore": 75.5,
-            "readinessAfter": 75.5,
+            "readinessBefore": 89.1,
+            "readinessAfter": 89.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "metricEvidence": 0.0,
@@ -9516,8 +14144,8 @@ export const launchInput = {
           {
             "jobId": "metric-geometry",
             "caseId": "wide-baseline",
-            "readinessBefore": 85.8,
-            "readinessAfter": 85.8,
+            "readinessBefore": 92.9,
+            "readinessAfter": 92.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "metricEvidence": 0.0,
@@ -9533,12 +14161,15 @@ export const launchInput = {
           {
             "jobId": "open-vocab-grounding",
             "caseId": "common-clean",
-            "readinessBefore": 84.7,
-            "readinessAfter": 84.7,
+            "readinessBefore": 48.0,
+            "readinessAfter": 48.0,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "localizedEvidence": 0.0,
+              "longTailRecall": 0.0,
+              "proposalRecall": 0.0,
               "readiness": 0.0,
+              "textRegionScore": 0.0,
               "unsupportedRisk": 0.0
             },
             "promotedFrom": "live-colab",
@@ -9547,12 +14178,15 @@ export const launchInput = {
           {
             "jobId": "open-vocab-grounding",
             "caseId": "rare-distractors",
-            "readinessBefore": 83.8,
-            "readinessAfter": 83.8,
+            "readinessBefore": 88.0,
+            "readinessAfter": 88.0,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "localizedEvidence": 0.0,
+              "longTailRecall": 0.0,
+              "proposalRecall": 0.0,
               "readiness": 0.0,
+              "textRegionScore": 0.0,
               "unsupportedRisk": 0.0
             },
             "promotedFrom": "live-colab",
@@ -9561,12 +14195,15 @@ export const launchInput = {
           {
             "jobId": "open-vocab-grounding",
             "caseId": "rare-visible",
-            "readinessBefore": 83.9,
-            "readinessAfter": 83.9,
+            "readinessBefore": 49.4,
+            "readinessAfter": 49.4,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "localizedEvidence": 0.0,
+              "longTailRecall": 0.0,
+              "proposalRecall": 0.0,
               "readiness": 0.0,
+              "textRegionScore": 0.0,
               "unsupportedRisk": 0.0
             },
             "promotedFrom": "live-colab",
@@ -9575,13 +14212,80 @@ export const launchInput = {
           {
             "jobId": "open-vocab-grounding",
             "caseId": "unsupported-query",
-            "readinessBefore": 83.8,
-            "readinessAfter": 83.8,
+            "readinessBefore": 44.0,
+            "readinessAfter": 44.0,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "localizedEvidence": 0.0,
+              "longTailRecall": 0.0,
+              "proposalRecall": 0.0,
               "readiness": 0.0,
+              "textRegionScore": 0.0,
               "unsupportedRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "ambiguous-clicks",
+            "readinessBefore": 58.3,
+            "readinessAfter": 58.3,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "detections": 0,
+              "maskStability": 0.0,
+              "promptSensitivity": 0.0,
+              "readiness": 0.0,
+              "unsupportedRegionRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "cluttered-scene",
+            "readinessBefore": 62.3,
+            "readinessAfter": 62.3,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "detections": 0,
+              "maskStability": 0.0,
+              "promptSensitivity": 0.0,
+              "readiness": 0.0,
+              "unsupportedRegionRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "occluded-object",
+            "readinessBefore": 57.8,
+            "readinessAfter": 57.8,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "detections": 0,
+              "maskStability": 0.0,
+              "promptSensitivity": 0.0,
+              "readiness": 0.0,
+              "unsupportedRegionRisk": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseId": "single-object",
+            "readinessBefore": 65.4,
+            "readinessAfter": 65.4,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "detections": 0,
+              "maskStability": 0.0,
+              "promptSensitivity": 0.0,
+              "readiness": 0.0,
+              "unsupportedRegionRisk": 0.0
             },
             "promotedFrom": "live-colab",
             "regression": false
@@ -9589,10 +14293,13 @@ export const launchInput = {
           {
             "jobId": "restoration-fidelity",
             "caseId": "compressed-low-light",
-            "readinessBefore": 77.7,
-            "readinessAfter": 77.7,
+            "readinessBefore": 78.5,
+            "readinessAfter": 78.5,
             "readinessDelta": 0.0,
             "metricDeltas": {
+              "artifactRisk": 0.0,
+              "degradationLoad": 0.0,
+              "diagnosisConfidence": 0.0,
               "downstreamUtility": 0.0,
               "fabricatedDetailRisk": 0.0,
               "fidelityScore": 0.0,
@@ -9604,10 +14311,13 @@ export const launchInput = {
           {
             "jobId": "restoration-fidelity",
             "caseId": "mild-noise",
-            "readinessBefore": 82.0,
-            "readinessAfter": 82.0,
+            "readinessBefore": 81.6,
+            "readinessAfter": 81.6,
             "readinessDelta": 0.0,
             "metricDeltas": {
+              "artifactRisk": 0.0,
+              "degradationLoad": 0.0,
+              "diagnosisConfidence": 0.0,
               "downstreamUtility": 0.0,
               "fabricatedDetailRisk": 0.0,
               "fidelityScore": 0.0,
@@ -9619,10 +14329,13 @@ export const launchInput = {
           {
             "jobId": "restoration-fidelity",
             "caseId": "motion-blur-task",
-            "readinessBefore": 77.7,
-            "readinessAfter": 77.7,
+            "readinessBefore": 80.5,
+            "readinessAfter": 80.5,
             "readinessDelta": 0.0,
             "metricDeltas": {
+              "artifactRisk": 0.0,
+              "degradationLoad": 0.0,
+              "diagnosisConfidence": 0.0,
               "downstreamUtility": 0.0,
               "fabricatedDetailRisk": 0.0,
               "fidelityScore": 0.0,
@@ -9634,10 +14347,13 @@ export const launchInput = {
           {
             "jobId": "restoration-fidelity",
             "caseId": "over-restored-detail",
-            "readinessBefore": 77.8,
-            "readinessAfter": 77.8,
+            "readinessBefore": 78.9,
+            "readinessAfter": 78.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
+              "artifactRisk": 0.0,
+              "degradationLoad": 0.0,
+              "diagnosisConfidence": 0.0,
               "downstreamUtility": 0.0,
               "fabricatedDetailRisk": 0.0,
               "fidelityScore": 0.0,
@@ -9649,8 +14365,8 @@ export const launchInput = {
           {
             "jobId": "temporal-rollout",
             "caseId": "contact-heavy",
-            "readinessBefore": 76.2,
-            "readinessAfter": 76.2,
+            "readinessBefore": 81.9,
+            "readinessAfter": 81.9,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "contactConsistency": 0.0,
@@ -9666,8 +14382,8 @@ export const launchInput = {
           {
             "jobId": "temporal-rollout",
             "caseId": "crowded-memory",
-            "readinessBefore": 75.9,
-            "readinessAfter": 75.9,
+            "readinessBefore": 80.3,
+            "readinessAfter": 80.3,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "contactConsistency": 0.0,
@@ -9683,8 +14399,8 @@ export const launchInput = {
           {
             "jobId": "temporal-rollout",
             "caseId": "long-rollout-drift",
-            "readinessBefore": 75.9,
-            "readinessAfter": 75.9,
+            "readinessBefore": 81.3,
+            "readinessAfter": 81.3,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "contactConsistency": 0.0,
@@ -9700,8 +14416,8 @@ export const launchInput = {
           {
             "jobId": "temporal-rollout",
             "caseId": "short-stable",
-            "readinessBefore": 83.3,
-            "readinessAfter": 83.3,
+            "readinessBefore": 86.1,
+            "readinessAfter": 86.1,
             "readinessDelta": 0.0,
             "metricDeltas": {
               "contactConsistency": 0.0,
@@ -9710,6 +14426,70 @@ export const launchInput = {
               "memoryLoad": 0.0,
               "readiness": 0.0,
               "rolloutPlausibility": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "clean-crossing",
+            "readinessBefore": 88.8,
+            "readinessAfter": 88.8,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "identityDrift": 0.0,
+              "identityStability": 0.0,
+              "occlusionRecovery": 0.0,
+              "readiness": 0.0,
+              "trackContinuity": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "fast-motion",
+            "readinessBefore": 83.1,
+            "readinessAfter": 83.1,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "identityDrift": 0.0,
+              "identityStability": 0.0,
+              "occlusionRecovery": 0.0,
+              "readiness": 0.0,
+              "trackContinuity": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "identity-crossing",
+            "readinessBefore": 82.6,
+            "readinessAfter": 82.6,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "identityDrift": 0.0,
+              "identityStability": 0.0,
+              "occlusionRecovery": 0.0,
+              "readiness": 0.0,
+              "trackContinuity": 0.0
+            },
+            "promotedFrom": "live-colab",
+            "regression": false
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseId": "long-occlusion",
+            "readinessBefore": 79.6,
+            "readinessAfter": 79.6,
+            "readinessDelta": 0.0,
+            "metricDeltas": {
+              "identityDrift": 0.0,
+              "identityStability": 0.0,
+              "occlusionRecovery": 0.0,
+              "readiness": 0.0,
+              "trackContinuity": 0.0
             },
             "promotedFrom": "live-colab",
             "regression": false
@@ -9727,17 +14507,17 @@ export const launchInput = {
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
           "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
           "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
-          "workerJobs": 10,
-          "promotedRunners": 10,
-          "runnerRows": 10,
-          "cachedResults": 40,
+          "workerJobs": 14,
+          "promotedRunners": 14,
+          "runnerRows": 14,
+          "cachedResults": 56,
           "importIssues": 0,
           "fullStackStatus": "valid",
           "packageTests": 148,
           "validationGate": "release",
           "liveIntakeStatus": "valid",
-          "liveIntakeResults": 40,
-          "liveIntakePromoted": false,
+          "liveIntakeResults": 56,
+          "liveIntakePromoted": true,
           "promotionDeltaStatus": "release",
           "promotionRegressions": 0,
           "maxReadinessDrop": 0.0,
@@ -9811,6 +14591,38 @@ export const launchInput = {
             "strictMode": "require_real_models=True"
           },
           {
+            "jobId": "depth-normal-consistency",
+            "caseSymbol": "DEPTH_NORMAL_CASES",
+            "loader": "load_depth_normal_models",
+            "runner": "run_depth_normal_consistency_batch",
+            "execution": "torch-cuda-depth-normal-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "corruption-robustness",
+            "caseSymbol": "CORRUPTION_CASES",
+            "loader": "load_corruption_models",
+            "runner": "run_corruption_robustness_batch",
+            "execution": "torchvision-resnet-corruption-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "prompt-segmentation-robustness",
+            "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+            "loader": "load_prompt_segmentation_models",
+            "runner": "run_prompt_segmentation_robustness_batch",
+            "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
+            "jobId": "video-identity-tracking",
+            "caseSymbol": "VIDEO_TRACKING_CASES",
+            "loader": "load_video_tracking_models",
+            "runner": "run_video_identity_tracking_batch",
+            "execution": "torch-cuda-video-tracking-live-demo",
+            "strictMode": "require_real_models=True"
+          },
+          {
             "jobId": "metric-geometry",
             "caseSymbol": "GEOMETRY_CASES",
             "loader": "load_metric_geometry_models",
@@ -9832,13 +14644,16 @@ export const launchInput = {
           "runtimePlane": "google-colab-pro-plus",
           "controlPlane": "local-static-cvpr-site",
           "resultPlane": "registry-and-cached-json",
-          "jobs": 10,
-          "liveCapable": 10,
-          "promotedRunners": 10,
-          "cachedCapable": 10,
-          "cachedResults": 40,
-          "validCachedResults": 40,
+          "jobs": 14,
+          "liveCapable": 14,
+          "promotedRunners": 14,
+          "runnerRows": 14,
+          "cachedCapable": 14,
+          "cachedResults": 56,
+          "validCachedResults": 56,
           "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+          "notebookNativeJobs": 10,
+          "externalLiveJobs": 4,
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
           "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
           "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -9849,14 +14664,325 @@ export const launchInput = {
           "fullStackReport": "analysis/cvpr_full_stack_validation/registry.json",
           "status": "interactive-contract"
         },
+        "runManifest": {
+          "runtimePlane": "google-colab-pro-plus",
+          "controlPlane": "local-static-cvpr-site",
+          "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+          "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+          "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+          "jobs": [
+            {
+              "jobId": "open-vocab-grounding",
+              "bench": "cvpr-long-tail-grounding-bench",
+              "page": "cvpr-long-tail-grounding-bench.html",
+              "priority": 1,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "siglip-base-patch16-224",
+                "grounding-dino-tiny",
+                "sam-vit-b"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_long_tail_grounding_bench/registry.json",
+              "resultFilter": {
+                "jobId": "open-vocab-grounding",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "restoration-fidelity",
+              "bench": "cvpr-restoration-fidelity-bench",
+              "page": "cvpr-restoration-fidelity-bench.html",
+              "priority": 2,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "swinir-lightweight",
+                "real-esrgan-x2"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_restoration_fidelity_bench/registry.json",
+              "resultFilter": {
+                "jobId": "restoration-fidelity",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "adversarial-provenance",
+              "bench": "cvpr-adversarial-provenance-bench",
+              "page": "cvpr-adversarial-provenance-bench.html",
+              "priority": 3,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "watermark-detector",
+                "clip-perturbation-probe"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_adversarial_provenance_bench/registry.json",
+              "resultFilter": {
+                "jobId": "adversarial-provenance",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "temporal-rollout",
+              "bench": "cvpr-temporal-rollout-bench",
+              "page": "cvpr-temporal-rollout-bench.html",
+              "priority": 4,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "video-feature-tracker",
+                "raft-lite",
+                "world-rollout-probe"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_temporal_rollout_bench/registry.json",
+              "resultFilter": {
+                "jobId": "temporal-rollout",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "clinical-shift",
+              "bench": "cvpr-clinical-shift-bench",
+              "page": "cvpr-clinical-shift-bench.html",
+              "priority": 5,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "dicom-embedding-shift-probe",
+                "temperature-calibration-head",
+                "uncertainty-triage-head"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_clinical_shift_bench/registry.json",
+              "resultFilter": {
+                "jobId": "clinical-shift",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "compute-serving",
+              "bench": "cvpr-compute-serving-bench",
+              "page": "cvpr-compute-serving-bench.html",
+              "priority": 6,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "quantized-vision-encoder",
+                "student-router",
+                "latency-profiler"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_compute_serving_bench/registry.json",
+              "resultFilter": {
+                "jobId": "compute-serving",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "constraint-generation",
+              "bench": "cvpr-constraint-generation-bench",
+              "page": "cvpr-constraint-generation-bench.html",
+              "priority": 7,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "layout-controlnet",
+                "identity-embedding-lock",
+                "preference-reward-probe"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_constraint_generation_bench/registry.json",
+              "resultFilter": {
+                "jobId": "constraint-generation",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "driving-safety",
+              "bench": "cvpr-driving-safety-bench",
+              "page": "cvpr-driving-safety-bench.html",
+              "priority": 8,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "vla-scene-grounder",
+                "ttc-risk-head",
+                "safety-rule-monitor"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_driving_safety_bench/registry.json",
+              "resultFilter": {
+                "jobId": "driving-safety",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "depth-normal-consistency",
+              "bench": "cvpr-depth-normal-consistency-bench",
+              "page": "cvpr-depth-normal-consistency-bench.html",
+              "priority": 9,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-depth-normal-probe",
+                "finite-difference-normal-consistency"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+              "resultFilter": {
+                "jobId": "depth-normal-consistency",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "bench": "cvpr-corruption-robustness-bench",
+              "page": "cvpr-corruption-robustness-bench.html",
+              "priority": 10,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-resnet18",
+                "clean-corrupted-logit-delta"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+              "resultFilter": {
+                "jobId": "corruption-robustness",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "bench": "cvpr-prompt-segmentation-robustness-bench",
+              "page": "cvpr-prompt-segmentation-robustness-bench.html",
+              "priority": 11,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-maskrcnn-resnet50-fpn",
+                "mask-rcnn-click-robustness-proxy"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+              "resultFilter": {
+                "jobId": "prompt-segmentation-robustness",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "bench": "cvpr-video-identity-tracking-bench",
+              "page": "cvpr-video-identity-tracking-bench.html",
+              "priority": 12,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-centroid-assignment-tracker",
+                "mask-sequence-identity-drift"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+              "resultFilter": {
+                "jobId": "video-identity-tracking",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "metric-geometry",
+              "bench": "cvpr-metric-geometry-bench",
+              "page": "cvpr-metric-geometry-bench.html",
+              "priority": 13,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-pose-bundle-adjuster",
+                "metric-scale-probe",
+                "surface-consistency-head"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_metric_geometry_bench/registry.json",
+              "resultFilter": {
+                "jobId": "metric-geometry",
+                "mode": "cached-real"
+              }
+            },
+            {
+              "jobId": "gaussian-splatting",
+              "bench": "cvpr-gaussian-splatting-bench",
+              "page": "cvpr-gaussian-splatting-bench.html",
+              "priority": 14,
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-splat-renderer",
+                "semantic-splat-attach",
+                "provenance-trace-head"
+              ],
+              "expectedCases": 4,
+              "importPath": "analysis/cvpr_gaussian_splatting_bench/registry.json",
+              "resultFilter": {
+                "jobId": "gaussian-splatting",
+                "mode": "cached-real"
+              }
+            }
+          ]
+        },
         "importReport": {
           "validator": "validate_cvpr_colab_results",
           "runtimePlane": "google-colab-pro-plus",
           "expectedMode": "cached-real",
-          "jobs": 10,
-          "expectedResults": 40,
-          "actualResults": 40,
-          "validJobs": 10,
+          "jobs": 14,
+          "expectedResults": 56,
+          "actualResults": 56,
+          "validJobs": 14,
           "issues": 0,
           "status": "valid"
         },
@@ -9866,11 +14992,11 @@ export const launchInput = {
           "commands": 286,
           "steps": 59,
           "packageTests": 148,
-          "workerJobs": 10,
-          "promotedRunners": 10,
-          "cachedResults": 40,
+          "workerJobs": 14,
+          "promotedRunners": 14,
+          "cachedResults": 56,
           "importIssues": 0,
-          "durationSec": 22.254
+          "durationSec": 120.878
         },
         "validationCenter": {
           "dashboard": "cvpr-validation-center",
@@ -9880,14 +15006,14 @@ export const launchInput = {
           "commands": 286,
           "steps": 53,
           "packageTests": 148,
-          "workerJobs": 10,
-          "promotedRunners": 10,
-          "cachedResults": 40,
+          "workerJobs": 14,
+          "promotedRunners": 14,
+          "cachedResults": 56,
           "importIssues": 0,
           "promotionDeltaStatus": "release",
           "promotionRegressions": 0,
           "maxReadinessDrop": 0.0,
-          "validImportJobs": 10,
+          "validImportJobs": 14,
           "implementedBenches": 11,
           "benchCases": 44,
           "benchBlock": 0,
@@ -9899,7 +15025,7 @@ export const launchInput = {
             {
               "command": "node source-code/learning/*/tests/core.test.js",
               "returnCode": 0,
-              "durationSec": 20.437,
+              "durationSec": 109.717,
               "testCount": 148,
               "log": "/tmp/cvpr-core-tests.log",
               "stdoutTail": [
@@ -9912,38 +15038,38 @@ export const launchInput = {
               "stderrTail": []
             },
             {
-              "command": "python3 scripts/validate_cvpr_colab_results.py",
+              "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
               "returnCode": 0,
-              "durationSec": 0.049,
+              "durationSec": 0.27,
               "stdoutTail": [
-                "validated CVPR Colab results: 40 results, 0 issues"
+                "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
               ],
               "stderrTail": []
             },
             {
-              "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+              "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
               "returnCode": 0,
-              "durationSec": 0.042,
+              "durationSec": 0.262,
               "stdoutTail": [
-                "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+                "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
               ],
               "stderrTail": []
             },
             {
-              "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+              "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
               "returnCode": 0,
-              "durationSec": 0.041,
+              "durationSec": 0.261,
               "stdoutTail": [
-                "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+                "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
               ],
               "stderrTail": []
             },
             {
-              "command": "python3 scripts/build_cvpr_mission_control.py",
+              "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
               "returnCode": 0,
-              "durationSec": 0.04,
+              "durationSec": 0.257,
               "stdoutTail": [
-                "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+                "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
               ],
               "stderrTail": []
             }
@@ -9953,22 +15079,23 @@ export const launchInput = {
           "validator": "validate_cvpr_colab_results",
           "runtimePlane": "google-colab-pro-plus",
           "expectedMode": "live-colab",
-          "jobs": 10,
-          "expectedResults": 40,
-          "actualResults": 40,
-          "validJobs": 10,
+          "jobs": 14,
+          "expectedResults": 56,
+          "actualResults": 56,
+          "validJobs": 14,
           "issues": 0,
           "status": "valid",
           "intake": "cvpr-colab-live-intake",
-          "export": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
-          "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
-          "promoted": false
+          "job": null,
+          "export": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results_live.json",
+          "canonicalArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
+          "promoted": true
         },
         "promotionDelta": {
           "delta": "cvpr-colab-promotion-delta",
           "status": "release",
-          "cases": 40,
-          "jobs": 10,
+          "cases": 56,
+          "jobs": 14,
           "missing": 0,
           "modeMismatches": 0,
           "regressions": 0,
@@ -9982,9 +15109,9 @@ export const launchInput = {
         "summary": {
           "handoff": "cvpr-colab-handoff-package",
           "status": "ready",
-          "jobs": 10,
-          "runners": 10,
-          "expectedResults": 40,
+          "jobs": 14,
+          "runners": 14,
+          "expectedResults": 56,
           "importIssues": 0,
           "notebook": "notebooks/cvpr_gpu_worker.ipynb",
           "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
@@ -10010,13 +15137,16 @@ export const launchInput = {
             "runtimePlane": "google-colab-pro-plus",
             "controlPlane": "local-static-cvpr-site",
             "resultPlane": "registry-and-cached-json",
-            "jobs": 10,
-            "liveCapable": 10,
-            "promotedRunners": 10,
-            "cachedCapable": 10,
-            "cachedResults": 40,
-            "validCachedResults": 40,
+            "jobs": 14,
+            "liveCapable": 14,
+            "promotedRunners": 14,
+            "runnerRows": 14,
+            "cachedCapable": 14,
+            "cachedResults": 56,
+            "validCachedResults": 56,
             "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+            "notebookNativeJobs": 10,
+            "externalLiveJobs": 4,
             "notebook": "notebooks/cvpr_gpu_worker.ipynb",
             "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
             "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -10254,6 +15384,118 @@ export const launchInput = {
               "priority": 8
             },
             {
+              "id": "depth-normal-consistency",
+              "title": "Depth-normal consistency GPU run",
+              "bench": "cvpr-depth-normal-consistency-bench",
+              "page": "cvpr-depth-normal-consistency-bench.html",
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-depth-normal-probe",
+                "finite-difference-normal-consistency"
+              ],
+              "inputs": [
+                "depth_map",
+                "normal_controls",
+                "scene_geometry"
+              ],
+              "outputs": [
+                "normal_map",
+                "consistency_curve",
+                "depth_residual_map",
+                "surface_alerts"
+              ],
+              "gpuClass": "T4/L4/A100",
+              "priority": 9
+            },
+            {
+              "id": "corruption-robustness",
+              "title": "Corruption robustness GPU run",
+              "bench": "cvpr-corruption-robustness-bench",
+              "page": "cvpr-corruption-robustness-bench.html",
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-resnet18",
+                "clean-corrupted-logit-delta"
+              ],
+              "inputs": [
+                "image_batch",
+                "corruption_controls",
+                "severity_schedule"
+              ],
+              "outputs": [
+                "feature_retention",
+                "label_drift_curve",
+                "confidence_collapse",
+                "corruption_report"
+              ],
+              "gpuClass": "T4/L4/A100",
+              "priority": 10
+            },
+            {
+              "id": "prompt-segmentation-robustness",
+              "title": "Prompt segmentation robustness GPU run",
+              "bench": "cvpr-prompt-segmentation-robustness-bench",
+              "page": "cvpr-prompt-segmentation-robustness-bench.html",
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torchvision-maskrcnn-resnet50-fpn",
+                "mask-rcnn-click-robustness-proxy"
+              ],
+              "inputs": [
+                "image",
+                "prompt_points",
+                "prompt_variants"
+              ],
+              "outputs": [
+                "mask_predictions",
+                "click_sensitivity",
+                "iou_trace",
+                "prompt_failure_map"
+              ],
+              "gpuClass": "T4/L4/A100",
+              "priority": 11
+            },
+            {
+              "id": "video-identity-tracking",
+              "title": "Video identity tracking GPU run",
+              "bench": "cvpr-video-identity-tracking-bench",
+              "page": "cvpr-video-identity-tracking-bench.html",
+              "runtimeModes": [
+                "simulated",
+                "cached-real",
+                "live-colab"
+              ],
+              "models": [
+                "torch-cuda-centroid-assignment-tracker",
+                "mask-sequence-identity-drift"
+              ],
+              "inputs": [
+                "video_clip",
+                "identity_seed",
+                "tracking_controls"
+              ],
+              "outputs": [
+                "track_sequence",
+                "identity_drift_curve",
+                "handoff_events",
+                "failure_frames"
+              ],
+              "gpuClass": "T4/L4/A100",
+              "priority": 12
+            },
+            {
               "id": "metric-geometry",
               "title": "Metric geometry GPU run",
               "bench": "cvpr-metric-geometry-bench",
@@ -10378,6 +15620,38 @@ export const launchInput = {
               "strictMode": "require_real_models=True"
             },
             {
+              "jobId": "depth-normal-consistency",
+              "caseSymbol": "DEPTH_NORMAL_CASES",
+              "loader": "load_depth_normal_models",
+              "runner": "run_depth_normal_consistency_batch",
+              "execution": "torch-cuda-depth-normal-live-demo",
+              "strictMode": "require_real_models=True"
+            },
+            {
+              "jobId": "corruption-robustness",
+              "caseSymbol": "CORRUPTION_CASES",
+              "loader": "load_corruption_models",
+              "runner": "run_corruption_robustness_batch",
+              "execution": "torchvision-resnet-corruption-live-demo",
+              "strictMode": "require_real_models=True"
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+              "loader": "load_prompt_segmentation_models",
+              "runner": "run_prompt_segmentation_robustness_batch",
+              "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+              "strictMode": "require_real_models=True"
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "caseSymbol": "VIDEO_TRACKING_CASES",
+              "loader": "load_video_tracking_models",
+              "runner": "run_video_identity_tracking_batch",
+              "execution": "torch-cuda-video-tracking-live-demo",
+              "strictMode": "require_real_models=True"
+            },
+            {
               "jobId": "metric-geometry",
               "caseSymbol": "GEOMETRY_CASES",
               "loader": "load_metric_geometry_models",
@@ -10393,6 +15667,24 @@ export const launchInput = {
               "execution": "torch-gaussian-splatting-render-probe",
               "strictMode": "require_real_models=True"
             }
+          ],
+          "notebookNativeJobIds": [
+            "open-vocab-grounding",
+            "restoration-fidelity",
+            "adversarial-provenance",
+            "temporal-rollout",
+            "clinical-shift",
+            "compute-serving",
+            "constraint-generation",
+            "driving-safety",
+            "metric-geometry",
+            "gaussian-splatting"
+          ],
+          "externalLiveJobIds": [
+            "depth-normal-consistency",
+            "corruption-robustness",
+            "prompt-segmentation-robustness",
+            "video-identity-tracking"
           ],
           "runManifest": {
             "runtimePlane": "google-colab-pro-plus",
@@ -10576,10 +15868,94 @@ export const launchInput = {
                 }
               },
               {
+                "jobId": "depth-normal-consistency",
+                "bench": "cvpr-depth-normal-consistency-bench",
+                "page": "cvpr-depth-normal-consistency-bench.html",
+                "priority": 9,
+                "runtimeModes": [
+                  "simulated",
+                  "cached-real",
+                  "live-colab"
+                ],
+                "models": [
+                  "torch-cuda-depth-normal-probe",
+                  "finite-difference-normal-consistency"
+                ],
+                "expectedCases": 4,
+                "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+                "resultFilter": {
+                  "jobId": "depth-normal-consistency",
+                  "mode": "cached-real"
+                }
+              },
+              {
+                "jobId": "corruption-robustness",
+                "bench": "cvpr-corruption-robustness-bench",
+                "page": "cvpr-corruption-robustness-bench.html",
+                "priority": 10,
+                "runtimeModes": [
+                  "simulated",
+                  "cached-real",
+                  "live-colab"
+                ],
+                "models": [
+                  "torchvision-resnet18",
+                  "clean-corrupted-logit-delta"
+                ],
+                "expectedCases": 4,
+                "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+                "resultFilter": {
+                  "jobId": "corruption-robustness",
+                  "mode": "cached-real"
+                }
+              },
+              {
+                "jobId": "prompt-segmentation-robustness",
+                "bench": "cvpr-prompt-segmentation-robustness-bench",
+                "page": "cvpr-prompt-segmentation-robustness-bench.html",
+                "priority": 11,
+                "runtimeModes": [
+                  "simulated",
+                  "cached-real",
+                  "live-colab"
+                ],
+                "models": [
+                  "torchvision-maskrcnn-resnet50-fpn",
+                  "mask-rcnn-click-robustness-proxy"
+                ],
+                "expectedCases": 4,
+                "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+                "resultFilter": {
+                  "jobId": "prompt-segmentation-robustness",
+                  "mode": "cached-real"
+                }
+              },
+              {
+                "jobId": "video-identity-tracking",
+                "bench": "cvpr-video-identity-tracking-bench",
+                "page": "cvpr-video-identity-tracking-bench.html",
+                "priority": 12,
+                "runtimeModes": [
+                  "simulated",
+                  "cached-real",
+                  "live-colab"
+                ],
+                "models": [
+                  "torch-cuda-centroid-assignment-tracker",
+                  "mask-sequence-identity-drift"
+                ],
+                "expectedCases": 4,
+                "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+                "resultFilter": {
+                  "jobId": "video-identity-tracking",
+                  "mode": "cached-real"
+                }
+              },
+              {
                 "jobId": "metric-geometry",
                 "bench": "cvpr-metric-geometry-bench",
                 "page": "cvpr-metric-geometry-bench.html",
-                "priority": 9,
+                "priority": 13,
                 "runtimeModes": [
                   "simulated",
                   "cached-real",
@@ -10601,7 +15977,7 @@ export const launchInput = {
                 "jobId": "gaussian-splatting",
                 "bench": "cvpr-gaussian-splatting-bench",
                 "page": "cvpr-gaussian-splatting-bench.html",
-                "priority": 10,
+                "priority": 14,
                 "runtimeModes": [
                   "simulated",
                   "cached-real",
@@ -10626,254 +16002,288 @@ export const launchInput = {
               "jobId": "open-vocab-grounding",
               "caseId": "common-clean",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:01:17Z",
               "model": {
-                "embedding": "siglip-base-patch16-224",
-                "detector": "grounding-dino-tiny",
-                "segmenter": "sam-vit-b"
+                "embedding": "google/siglip-base-patch16-224",
+                "detector": "IDEA-Research/grounding-dino-tiny"
               },
               "inputs": {
-                "textQuery": "common clean object",
+                "textQuery": "teal rectangle.",
                 "controls": {
                   "queryRarity": 18,
                   "distractorOverlap": 16,
                   "boxAmbiguity": 18,
                   "evidenceThreshold": 54
                 },
-                "asset": "fixtures/open-vocab/common-clean.png"
+                "asset": "synthetic://common-clean"
               },
               "outputs": {
                 "boxes": [
                   {
-                    "label": "target",
+                    "label": "teal rectangle",
                     "xywh": [
-                      0.18,
-                      0.22,
-                      0.26,
-                      0.24
+                      0.178,
+                      0.216,
+                      0.305,
+                      0.288
                     ],
-                    "score": 0.828
+                    "score": 0.742
                   },
                   {
-                    "label": "distractor",
+                    "label": "teal rectangle",
                     "xywh": [
-                      0.56,
-                      0.26,
-                      0.21,
-                      0.2
+                      0.512,
+                      0.255,
+                      0.272,
+                      0.266
                     ],
-                    "score": 0.917
+                    "score": 0.417
                   }
                 ],
                 "regionScores": {
-                  "target": 84.7,
-                  "longTail": 71.7
+                  "target": 26.8,
+                  "longTail": 39.7
                 },
-                "localizedEvidence": 88.9
+                "embeddingScore": 8.3,
+                "localizedEvidence": 50.2
               },
               "metrics": {
-                "readiness": 84.7,
-                "localizedEvidence": 88.9,
-                "unsupportedRisk": 8.3
+                "readiness": 48.0,
+                "proposalRecall": 74.2,
+                "textRegionScore": 26.8,
+                "longTailRecall": 39.7,
+                "localizedEvidence": 50.2,
+                "unsupportedRisk": 21.0
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-long-tail-grounding-bench"
+                "sourceBench": "cvpr-long-tail-grounding-bench",
+                "execution": "transformers-grounding-dino-siglip-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "open-vocab-grounding",
               "caseId": "rare-visible",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:01:18Z",
               "model": {
-                "embedding": "siglip-base-patch16-224",
-                "detector": "grounding-dino-tiny",
-                "segmenter": "sam-vit-b"
+                "embedding": "google/siglip-base-patch16-224",
+                "detector": "IDEA-Research/grounding-dino-tiny"
               },
               "inputs": {
-                "textQuery": "rare visible object",
+                "textQuery": "teal target rectangle.",
                 "controls": {
                   "queryRarity": 66,
                   "distractorOverlap": 12,
                   "boxAmbiguity": 34,
                   "evidenceThreshold": 62
                 },
-                "asset": "fixtures/open-vocab/rare-visible.png"
+                "asset": "synthetic://rare-visible"
               },
               "outputs": {
                 "boxes": [
                   {
-                    "label": "target",
+                    "label": "teal target rectangle",
                     "xywh": [
-                      0.18,
-                      0.22,
-                      0.26,
-                      0.24
+                      0.178,
+                      0.216,
+                      0.305,
+                      0.288
                     ],
-                    "score": 0.768
+                    "score": 0.752
                   },
                   {
-                    "label": "distractor",
+                    "label": "teal target rectangle",
                     "xywh": [
-                      0.56,
-                      0.26,
-                      0.21,
-                      0.2
+                      0.522,
+                      0.256,
+                      0.273,
+                      0.266
                     ],
-                    "score": 0.837
+                    "score": 0.381
                   }
                 ],
                 "regionScores": {
-                  "target": 85.0,
-                  "longTail": 76.9
+                  "target": 26.7,
+                  "longTail": 43.2
                 },
-                "localizedEvidence": 87.7
+                "embeddingScore": 7.8,
+                "localizedEvidence": 52.2
               },
               "metrics": {
-                "readiness": 83.9,
-                "localizedEvidence": 87.7,
-                "unsupportedRisk": 16.3
+                "readiness": 49.4,
+                "proposalRecall": 75.2,
+                "textRegionScore": 26.7,
+                "longTailRecall": 43.2,
+                "localizedEvidence": 52.2,
+                "unsupportedRisk": 21.2
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-long-tail-grounding-bench"
+                "sourceBench": "cvpr-long-tail-grounding-bench",
+                "execution": "transformers-grounding-dino-siglip-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "open-vocab-grounding",
               "caseId": "rare-distractors",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:01:18Z",
               "model": {
-                "embedding": "siglip-base-patch16-224",
-                "detector": "grounding-dino-tiny",
-                "segmenter": "sam-vit-b"
+                "embedding": "google/siglip-base-patch16-224",
+                "detector": "IDEA-Research/grounding-dino-tiny"
               },
               "inputs": {
-                "textQuery": "rare object with distractors",
+                "textQuery": "teal target rectangle near orange distractor.",
                 "controls": {
                   "queryRarity": 78,
                   "distractorOverlap": 28,
                   "boxAmbiguity": 28,
                   "evidenceThreshold": 76
                 },
-                "asset": "fixtures/open-vocab/rare-distractors.png"
+                "asset": "synthetic://rare-distractors"
               },
               "outputs": {
                 "boxes": [
                   {
-                    "label": "target",
+                    "label": "teal target rectangle orange distract",
                     "xywh": [
-                      0.18,
-                      0.22,
-                      0.26,
-                      0.24
+                      0.177,
+                      0.216,
+                      0.307,
+                      0.289
                     ],
-                    "score": 0.76
+                    "score": 0.794
                   },
                   {
-                    "label": "distractor",
+                    "label": "orange distractor",
                     "xywh": [
-                      0.56,
-                      0.26,
-                      0.21,
-                      0.2
+                      0.484,
+                      0.257,
+                      0.273,
+                      0.266
                     ],
-                    "score": 0.81
+                    "score": 0.587
                   }
                 ],
                 "regionScores": {
-                  "target": 83.6,
-                  "longTail": 81.4
+                  "target": 93.1,
+                  "longTail": 85.2
                 },
-                "localizedEvidence": 87.1
+                "embeddingScore": 98.4,
+                "localizedEvidence": 84.5
               },
               "metrics": {
-                "readiness": 83.8,
-                "localizedEvidence": 87.1,
-                "unsupportedRisk": 19.0
+                "readiness": 88.0,
+                "proposalRecall": 79.4,
+                "textRegionScore": 93.1,
+                "longTailRecall": 85.2,
+                "localizedEvidence": 84.5,
+                "unsupportedRisk": 8.9
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-long-tail-grounding-bench"
+                "sourceBench": "cvpr-long-tail-grounding-bench",
+                "execution": "transformers-grounding-dino-siglip-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "open-vocab-grounding",
               "caseId": "unsupported-query",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:01:18Z",
               "model": {
-                "embedding": "siglip-base-patch16-224",
-                "detector": "grounding-dino-tiny",
-                "segmenter": "sam-vit-b"
+                "embedding": "google/siglip-base-patch16-224",
+                "detector": "IDEA-Research/grounding-dino-tiny"
               },
               "inputs": {
-                "textQuery": "unsupported text query",
+                "textQuery": "transparent glass elephant.",
                 "controls": {
                   "queryRarity": 82,
                   "distractorOverlap": 30,
                   "boxAmbiguity": 32,
                   "evidenceThreshold": 84
                 },
-                "asset": "fixtures/open-vocab/unsupported-query.png"
+                "asset": "synthetic://unsupported-query"
               },
               "outputs": {
                 "boxes": [
                   {
-                    "label": "target",
+                    "label": "transparent glass elephant",
                     "xywh": [
-                      0.18,
-                      0.22,
-                      0.26,
-                      0.24
+                      0.178,
+                      0.216,
+                      0.304,
+                      0.288
                     ],
-                    "score": 0.753
+                    "score": 0.606
                   },
                   {
-                    "label": "distractor",
+                    "label": "transparent glass elephant",
                     "xywh": [
-                      0.56,
-                      0.26,
-                      0.21,
-                      0.2
+                      0.48,
+                      0.256,
+                      0.271,
+                      0.266
                     ],
-                    "score": 0.799
+                    "score": 0.524
+                  },
+                  {
+                    "label": "transparent glass elephant",
+                    "xywh": [
+                      0.178,
+                      0.216,
+                      0.575,
+                      0.306
+                    ],
+                    "score": 0.285
                   }
                 ],
                 "regionScores": {
-                  "target": 84.0,
-                  "longTail": 82.1
+                  "target": 17.0,
+                  "longTail": 40.6
                 },
-                "localizedEvidence": 87.1
+                "embeddingScore": 0.0,
+                "localizedEvidence": 47.0
               },
               "metrics": {
-                "readiness": 83.8,
-                "localizedEvidence": 87.1,
-                "unsupportedRisk": 20.1
+                "readiness": 44.0,
+                "proposalRecall": 60.6,
+                "textRegionScore": 17.0,
+                "longTailRecall": 40.6,
+                "localizedEvidence": 47.0,
+                "unsupportedRisk": 24.9
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-long-tail-grounding-bench"
+                "sourceBench": "cvpr-long-tail-grounding-bench",
+                "execution": "transformers-grounding-dino-siglip-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "restoration-fidelity",
               "caseId": "mild-noise",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:02:40Z",
               "model": {
-                "restorer": "swinir-lightweight",
-                "artifactProbe": "real-esrgan-x2"
+                "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+                "artifactProbe": "pixel-delta-artifact-map"
               },
               "inputs": {
                 "degradationControls": {
@@ -10883,35 +16293,42 @@ export const launchInput = {
                   "lowLight": 20,
                   "hallucinationPenalty": 36
                 },
-                "asset": "fixtures/restoration/mild-noise.png"
+                "asset": "synthetic://mild-noise"
               },
               "outputs": {
-                "restoredImage": "fixtures/restoration/mild-noise-restored.png",
-                "artifactMap": "fixtures/restoration/mild-noise-artifact-map.png",
-                "downstreamScore": 85.3,
-                "fidelityScore": 82.2
+                "restoredImage": "synthetic://restoration/mild-noise-restored.png",
+                "artifactMap": "synthetic://restoration/mild-noise-artifact-map.png",
+                "downstreamScore": 85.1,
+                "fidelityScore": 80.6,
+                "deltaScore": 2.102
               },
               "metrics": {
-                "readiness": 82.0,
-                "downstreamUtility": 85.3,
-                "fabricatedDetailRisk": 25.8,
-                "fidelityScore": 82.2
+                "readiness": 81.6,
+                "degradationLoad": 21.6,
+                "diagnosisConfidence": 78.4,
+                "fidelityScore": 80.6,
+                "artifactRisk": 19.3,
+                "downstreamUtility": 85.1,
+                "fabricatedDetailRisk": 19.3
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-restoration-fidelity-bench"
+                "sourceBench": "cvpr-restoration-fidelity-bench",
+                "execution": "transformers-swin2sr-restoration-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "restoration-fidelity",
               "caseId": "compressed-low-light",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:02:42Z",
               "model": {
-                "restorer": "swinir-lightweight",
-                "artifactProbe": "real-esrgan-x2"
+                "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+                "artifactProbe": "pixel-delta-artifact-map"
               },
               "inputs": {
                 "degradationControls": {
@@ -10921,35 +16338,42 @@ export const launchInput = {
                   "lowLight": 64,
                   "hallucinationPenalty": 16
                 },
-                "asset": "fixtures/restoration/compressed-low-light.png"
+                "asset": "synthetic://compressed-low-light"
               },
               "outputs": {
-                "restoredImage": "fixtures/restoration/compressed-low-light-restored.png",
-                "artifactMap": "fixtures/restoration/compressed-low-light-artifact-map.png",
-                "downstreamScore": 80.9,
-                "fidelityScore": 80.3
+                "restoredImage": "synthetic://restoration/compressed-low-light-restored.png",
+                "artifactMap": "synthetic://restoration/compressed-low-light-artifact-map.png",
+                "downstreamScore": 78.8,
+                "fidelityScore": 85.2,
+                "deltaScore": 1.12
               },
               "metrics": {
-                "readiness": 77.7,
-                "downstreamUtility": 80.9,
-                "fabricatedDetailRisk": 29.4,
-                "fidelityScore": 80.3
+                "readiness": 78.5,
+                "degradationLoad": 43.6,
+                "diagnosisConfidence": 56.4,
+                "fidelityScore": 85.2,
+                "artifactRisk": 13.0,
+                "downstreamUtility": 78.8,
+                "fabricatedDetailRisk": 13.0
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-restoration-fidelity-bench"
+                "sourceBench": "cvpr-restoration-fidelity-bench",
+                "execution": "transformers-swin2sr-restoration-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "restoration-fidelity",
               "caseId": "motion-blur-task",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:02:43Z",
               "model": {
-                "restorer": "swinir-lightweight",
-                "artifactProbe": "real-esrgan-x2"
+                "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+                "artifactProbe": "pixel-delta-artifact-map"
               },
               "inputs": {
                 "degradationControls": {
@@ -10959,35 +16383,42 @@ export const launchInput = {
                   "lowLight": 36,
                   "hallucinationPenalty": 16
                 },
-                "asset": "fixtures/restoration/motion-blur-task.png"
+                "asset": "synthetic://motion-blur-task"
               },
               "outputs": {
-                "restoredImage": "fixtures/restoration/motion-blur-task-restored.png",
-                "artifactMap": "fixtures/restoration/motion-blur-task-artifact-map.png",
-                "downstreamScore": 81.5,
-                "fidelityScore": 79.0
+                "restoredImage": "synthetic://restoration/motion-blur-task-restored.png",
+                "artifactMap": "synthetic://restoration/motion-blur-task-artifact-map.png",
+                "downstreamScore": 82.6,
+                "fidelityScore": 85.0,
+                "deltaScore": 1.597
               },
               "metrics": {
-                "readiness": 77.7,
-                "downstreamUtility": 81.5,
-                "fabricatedDetailRisk": 26.5,
-                "fidelityScore": 79.0
+                "readiness": 80.5,
+                "degradationLoad": 41.2,
+                "diagnosisConfidence": 58.8,
+                "fidelityScore": 85.0,
+                "artifactRisk": 10.9,
+                "downstreamUtility": 82.6,
+                "fabricatedDetailRisk": 10.9
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-restoration-fidelity-bench"
+                "sourceBench": "cvpr-restoration-fidelity-bench",
+                "execution": "transformers-swin2sr-restoration-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "restoration-fidelity",
               "caseId": "over-restored-detail",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:02:45Z",
               "model": {
-                "restorer": "swinir-lightweight",
-                "artifactProbe": "real-esrgan-x2"
+                "restorer": "caidas/swin2SR-realworld-sr-x4-64-bsrgan-psnr",
+                "artifactProbe": "pixel-delta-artifact-map"
               },
               "inputs": {
                 "degradationControls": {
@@ -10997,35 +16428,42 @@ export const launchInput = {
                   "lowLight": 56,
                   "hallucinationPenalty": 18
                 },
-                "asset": "fixtures/restoration/over-restored-detail.png"
+                "asset": "synthetic://over-restored-detail"
               },
               "outputs": {
-                "restoredImage": "fixtures/restoration/over-restored-detail-restored.png",
-                "artifactMap": "fixtures/restoration/over-restored-detail-artifact-map.png",
+                "restoredImage": "synthetic://restoration/over-restored-detail-restored.png",
+                "artifactMap": "synthetic://restoration/over-restored-detail-artifact-map.png",
                 "downstreamScore": 81.2,
-                "fidelityScore": 80.1
+                "fidelityScore": 85.8,
+                "deltaScore": 1.348
               },
               "metrics": {
-                "readiness": 77.8,
+                "readiness": 78.9,
+                "degradationLoad": 45.9,
+                "diagnosisConfidence": 54.1,
+                "fidelityScore": 85.8,
+                "artifactRisk": 13.4,
                 "downstreamUtility": 81.2,
-                "fabricatedDetailRisk": 28.6,
-                "fidelityScore": 80.1
+                "fabricatedDetailRisk": 13.4
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-restoration-fidelity-bench"
+                "sourceBench": "cvpr-restoration-fidelity-bench",
+                "execution": "transformers-swin2sr-restoration-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "adversarial-provenance",
               "caseId": "clean-camera",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:04:05Z",
               "model": {
-                "detector": "watermark-detector",
-                "probe": "clip-perturbation-probe"
+                "detector": "openai/clip-vit-base-patch32",
+                "probe": "clip-provenance-prompt-bank"
               },
               "inputs": {
                 "attackControls": {
@@ -11034,37 +16472,47 @@ export const launchInput = {
                   "watermarkVisibility": 100,
                   "unlearningProbe": 0
                 },
-                "asset": "fixtures/adversarial/clean-camera.png"
+                "asset": "synthetic://clean-camera"
               },
               "outputs": {
-                "provenanceConfidence": 86.4,
-                "attackHeatmap": "fixtures/adversarial/clean-camera-attack-heatmap.png",
-                "leakageRisk": 9.0,
-                "evidence": 82.5
+                "provenanceConfidence": 50.8,
+                "attackHeatmap": "synthetic://adversarial/clean-camera-clip-heatmap.png",
+                "leakageRisk": 1.8,
+                "evidence": 52.2,
+                "clipProbeScores": {
+                  "a clean camera photograph": 41.3,
+                  "a synthetic generated image": 45.2,
+                  "an edited social media image": 0.8,
+                  "an adversarially perturbed image": 6.6,
+                  "a watermarked image": 6.1
+                }
               },
               "metrics": {
-                "readiness": 79.7,
-                "evidence": 82.5,
-                "risk": 17.9,
-                "leakageRisk": 9.0,
-                "provenanceConfidence": 86.4,
-                "attackCoverage": 44.7
+                "readiness": 66.8,
+                "attackCoverage": 3.7,
+                "provenanceConfidence": 50.8,
+                "leakageRisk": 1.8,
+                "evidence": 52.2,
+                "risk": 11.6
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-adversarial-provenance-bench"
+                "sourceBench": "cvpr-adversarial-provenance-bench",
+                "execution": "transformers-clip-provenance-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "adversarial-provenance",
               "caseId": "edited-social-post",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:04:05Z",
               "model": {
-                "detector": "watermark-detector",
-                "probe": "clip-perturbation-probe"
+                "detector": "openai/clip-vit-base-patch32",
+                "probe": "clip-provenance-prompt-bank"
               },
               "inputs": {
                 "attackControls": {
@@ -11073,37 +16521,47 @@ export const launchInput = {
                   "watermarkVisibility": 98,
                   "unlearningProbe": 10
                 },
-                "asset": "fixtures/adversarial/edited-social-post.png"
+                "asset": "synthetic://edited-social-post"
               },
               "outputs": {
-                "provenanceConfidence": 87.9,
-                "attackHeatmap": "fixtures/adversarial/edited-social-post-attack-heatmap.png",
-                "leakageRisk": 14.8,
-                "evidence": 82.9
+                "provenanceConfidence": 39.8,
+                "attackHeatmap": "synthetic://adversarial/edited-social-post-clip-heatmap.png",
+                "leakageRisk": 4.4,
+                "evidence": 44.2,
+                "clipProbeScores": {
+                  "a clean camera photograph": 0.7,
+                  "a synthetic generated image": 91.0,
+                  "an edited social media image": 1.6,
+                  "an adversarially perturbed image": 4.2,
+                  "a watermarked image": 2.4
+                }
               },
               "metrics": {
-                "readiness": 79.8,
-                "evidence": 82.9,
-                "risk": 21.0,
-                "leakageRisk": 14.8,
-                "provenanceConfidence": 87.9,
-                "attackCoverage": 47.2
+                "readiness": 57.7,
+                "attackCoverage": 2.6,
+                "provenanceConfidence": 39.8,
+                "leakageRisk": 4.4,
+                "evidence": 44.2,
+                "risk": 23.7
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-adversarial-provenance-bench"
+                "sourceBench": "cvpr-adversarial-provenance-bench",
+                "execution": "transformers-clip-provenance-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "adversarial-provenance",
               "caseId": "synthetic-watermarked",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:04:05Z",
               "model": {
-                "detector": "watermark-detector",
-                "probe": "clip-perturbation-probe"
+                "detector": "openai/clip-vit-base-patch32",
+                "probe": "clip-provenance-prompt-bank"
               },
               "inputs": {
                 "attackControls": {
@@ -11112,37 +16570,47 @@ export const launchInput = {
                   "watermarkVisibility": 94,
                   "unlearningProbe": 44
                 },
-                "asset": "fixtures/adversarial/synthetic-watermarked.png"
+                "asset": "synthetic://synthetic-watermarked"
               },
               "outputs": {
-                "provenanceConfidence": 92.0,
-                "attackHeatmap": "fixtures/adversarial/synthetic-watermarked-attack-heatmap.png",
-                "leakageRisk": 32.9,
-                "evidence": 83.6
+                "provenanceConfidence": 39.1,
+                "attackHeatmap": "synthetic://adversarial/synthetic-watermarked-clip-heatmap.png",
+                "leakageRisk": 14.1,
+                "evidence": 41.5,
+                "clipProbeScores": {
+                  "a clean camera photograph": 0.0,
+                  "a synthetic generated image": 99.1,
+                  "an edited social media image": 0.0,
+                  "an adversarially perturbed image": 0.1,
+                  "a watermarked image": 0.8
+                }
               },
               "metrics": {
-                "readiness": 79.9,
-                "evidence": 83.6,
-                "risk": 29.9,
-                "leakageRisk": 32.9,
-                "provenanceConfidence": 92.0,
-                "attackCoverage": 54.4
+                "readiness": 53.8,
+                "attackCoverage": 0.1,
+                "provenanceConfidence": 39.1,
+                "leakageRisk": 14.1,
+                "evidence": 41.5,
+                "risk": 29.7
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-adversarial-provenance-bench"
+                "sourceBench": "cvpr-adversarial-provenance-bench",
+                "execution": "transformers-clip-provenance-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "adversarial-provenance",
               "caseId": "adaptive-attack",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:04:05Z",
               "model": {
-                "detector": "watermark-detector",
-                "probe": "clip-perturbation-probe"
+                "detector": "openai/clip-vit-base-patch32",
+                "probe": "clip-provenance-prompt-bank"
               },
               "inputs": {
                 "attackControls": {
@@ -11151,38 +16619,48 @@ export const launchInput = {
                   "watermarkVisibility": 100,
                   "unlearningProbe": 0
                 },
-                "asset": "fixtures/adversarial/adaptive-attack.png"
+                "asset": "synthetic://adaptive-attack"
               },
               "outputs": {
-                "provenanceConfidence": 93.8,
-                "attackHeatmap": "fixtures/adversarial/adaptive-attack-attack-heatmap.png",
-                "leakageRisk": 17.4,
-                "evidence": 85.3
+                "provenanceConfidence": 39.9,
+                "attackHeatmap": "synthetic://adversarial/adaptive-attack-clip-heatmap.png",
+                "leakageRisk": 13.1,
+                "evidence": 42.8,
+                "clipProbeScores": {
+                  "a clean camera photograph": 0.7,
+                  "a synthetic generated image": 85.7,
+                  "an edited social media image": 1.7,
+                  "an adversarially perturbed image": 8.1,
+                  "a watermarked image": 3.9
+                }
               },
               "metrics": {
-                "readiness": 80.8,
-                "evidence": 85.3,
-                "risk": 30.3,
-                "leakageRisk": 17.4,
-                "provenanceConfidence": 93.8,
-                "attackCoverage": 52.6
+                "readiness": 53.9,
+                "attackCoverage": 19.1,
+                "provenanceConfidence": 39.9,
+                "leakageRisk": 13.1,
+                "evidence": 42.8,
+                "risk": 32.7
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-adversarial-provenance-bench"
+                "sourceBench": "cvpr-adversarial-provenance-bench",
+                "execution": "transformers-clip-provenance-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "temporal-rollout",
               "caseId": "short-stable",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:05:38Z",
               "model": {
-                "tracker": "video-feature-tracker",
-                "flow": "raft-lite",
-                "rolloutProbe": "world-rollout-probe"
+                "tracker": "torchvision-raft-small",
+                "flow": "Raft_Small_Weights.C_T_V2",
+                "rolloutProbe": "cuda-optical-flow-consistency"
               },
               "inputs": {
                 "trackingControls": {
@@ -11191,43 +16669,54 @@ export const launchInput = {
                   "physicsViolations": 14,
                   "memoryWindow": 72
                 },
-                "asset": "fixtures/temporal/short-stable.mp4"
+                "asset": "synthetic://temporal/short-stable.mp4"
               },
               "outputs": {
-                "identityTracks": "fixtures/temporal/short-stable-identity-tracks.json",
-                "contactEvents": "fixtures/temporal/short-stable-contacts.json",
+                "identityTracks": "synthetic://temporal/short-stable-raft-tracks.json",
+                "contactEvents": "synthetic://temporal/short-stable-contacts.json",
                 "driftCurve": [
-                  5.2,
-                  10.5,
-                  15.8,
-                  21.0
+                  2.7,
+                  5.4,
+                  8.1,
+                  10.8,
+                  13.5
                 ],
-                "rolloutPlausibility": 85.7
+                "rolloutPlausibility": 85.8,
+                "flowProfile": {
+                  "meanMagnitude": 1.6017,
+                  "meanRoughness": 0.0288,
+                  "meanAcceleration": 0.1546,
+                  "elapsedMs": 1191.22,
+                  "pairs": 5
+                }
               },
               "metrics": {
-                "readiness": 83.3,
-                "identityStability": 80.6,
-                "contactConsistency": 86.6,
-                "rolloutPlausibility": 85.7,
-                "drift": 21.0,
-                "memoryLoad": 26.6
+                "readiness": 86.1,
+                "identityStability": 86.4,
+                "contactConsistency": 85.9,
+                "rolloutPlausibility": 85.8,
+                "drift": 13.5,
+                "memoryLoad": 24.0
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-temporal-rollout-bench"
+                "sourceBench": "cvpr-temporal-rollout-bench",
+                "execution": "torchvision-raft-small-temporal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "temporal-rollout",
               "caseId": "crowded-memory",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:05:38Z",
               "model": {
-                "tracker": "video-feature-tracker",
-                "flow": "raft-lite",
-                "rolloutProbe": "world-rollout-probe"
+                "tracker": "torchvision-raft-small",
+                "flow": "Raft_Small_Weights.C_T_V2",
+                "rolloutProbe": "cuda-optical-flow-consistency"
               },
               "inputs": {
                 "trackingControls": {
@@ -11236,43 +16725,54 @@ export const launchInput = {
                   "physicsViolations": 26,
                   "memoryWindow": 82
                 },
-                "asset": "fixtures/temporal/crowded-memory.mp4"
+                "asset": "synthetic://temporal/crowded-memory.mp4"
               },
               "outputs": {
-                "identityTracks": "fixtures/temporal/crowded-memory-identity-tracks.json",
-                "contactEvents": "fixtures/temporal/crowded-memory-contacts.json",
+                "identityTracks": "synthetic://temporal/crowded-memory-raft-tracks.json",
+                "contactEvents": "synthetic://temporal/crowded-memory-contacts.json",
                 "driftCurve": [
-                  8.2,
-                  16.5,
-                  24.8,
-                  33.0
+                  4.3,
+                  8.6,
+                  12.9,
+                  17.2,
+                  21.6
                 ],
-                "rolloutPlausibility": 80.0
+                "rolloutPlausibility": 79.5,
+                "flowProfile": {
+                  "meanMagnitude": 1.7887,
+                  "meanRoughness": 0.0288,
+                  "meanAcceleration": 0.0894,
+                  "elapsedMs": 168.5,
+                  "pairs": 5
+                }
               },
               "metrics": {
-                "readiness": 75.9,
-                "identityStability": 73.8,
-                "contactConsistency": 79.4,
-                "rolloutPlausibility": 80.0,
-                "drift": 33.0,
-                "memoryLoad": 43.8
+                "readiness": 80.3,
+                "identityStability": 79.9,
+                "contactConsistency": 82.6,
+                "rolloutPlausibility": 79.5,
+                "drift": 21.6,
+                "memoryLoad": 40.3
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-temporal-rollout-bench"
+                "sourceBench": "cvpr-temporal-rollout-bench",
+                "execution": "torchvision-raft-small-temporal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "temporal-rollout",
               "caseId": "contact-heavy",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:05:38Z",
               "model": {
-                "tracker": "video-feature-tracker",
-                "flow": "raft-lite",
-                "rolloutProbe": "world-rollout-probe"
+                "tracker": "torchvision-raft-small",
+                "flow": "Raft_Small_Weights.C_T_V2",
+                "rolloutProbe": "cuda-optical-flow-consistency"
               },
               "inputs": {
                 "trackingControls": {
@@ -11281,43 +16781,54 @@ export const launchInput = {
                   "physicsViolations": 20,
                   "memoryWindow": 82
                 },
-                "asset": "fixtures/temporal/contact-heavy.mp4"
+                "asset": "synthetic://temporal/contact-heavy.mp4"
               },
               "outputs": {
-                "identityTracks": "fixtures/temporal/contact-heavy-identity-tracks.json",
-                "contactEvents": "fixtures/temporal/contact-heavy-contacts.json",
+                "identityTracks": "synthetic://temporal/contact-heavy-raft-tracks.json",
+                "contactEvents": "synthetic://temporal/contact-heavy-contacts.json",
                 "driftCurve": [
-                  8.6,
-                  17.1,
-                  25.7,
-                  34.3
+                  3.9,
+                  7.9,
+                  11.8,
+                  15.7,
+                  19.7
                 ],
-                "rolloutPlausibility": 77.1
+                "rolloutPlausibility": 80.9,
+                "flowProfile": {
+                  "meanMagnitude": 1.732,
+                  "meanRoughness": 0.0313,
+                  "meanAcceleration": 0.1067,
+                  "elapsedMs": 164.0,
+                  "pairs": 5
+                }
               },
               "metrics": {
-                "readiness": 76.2,
-                "identityStability": 74.0,
-                "contactConsistency": 83.6,
-                "rolloutPlausibility": 77.1,
-                "drift": 34.3,
-                "memoryLoad": 42.5
+                "readiness": 81.9,
+                "identityStability": 81.5,
+                "contactConsistency": 84.3,
+                "rolloutPlausibility": 80.9,
+                "drift": 19.7,
+                "memoryLoad": 38.8
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-temporal-rollout-bench"
+                "sourceBench": "cvpr-temporal-rollout-bench",
+                "execution": "torchvision-raft-small-temporal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "temporal-rollout",
               "caseId": "long-rollout-drift",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:05:38Z",
               "model": {
-                "tracker": "video-feature-tracker",
-                "flow": "raft-lite",
-                "rolloutProbe": "world-rollout-probe"
+                "tracker": "torchvision-raft-small",
+                "flow": "Raft_Small_Weights.C_T_V2",
+                "rolloutProbe": "cuda-optical-flow-consistency"
               },
               "inputs": {
                 "trackingControls": {
@@ -11326,207 +16837,54 @@ export const launchInput = {
                   "physicsViolations": 12,
                   "memoryWindow": 92
                 },
-                "asset": "fixtures/temporal/long-rollout-drift.mp4"
+                "asset": "synthetic://temporal/long-rollout-drift.mp4"
               },
               "outputs": {
-                "identityTracks": "fixtures/temporal/long-rollout-drift-identity-tracks.json",
-                "contactEvents": "fixtures/temporal/long-rollout-drift-contacts.json",
+                "identityTracks": "synthetic://temporal/long-rollout-drift-raft-tracks.json",
+                "contactEvents": "synthetic://temporal/long-rollout-drift-contacts.json",
                 "driftCurve": [
-                  9.0,
-                  18.1,
-                  27.1,
-                  36.1
+                  4.1,
+                  8.3,
+                  12.4,
+                  16.6,
+                  20.7
                 ],
-                "rolloutPlausibility": 75.5
+                "rolloutPlausibility": 79.7,
+                "flowProfile": {
+                  "meanMagnitude": 1.8144,
+                  "meanRoughness": 0.0331,
+                  "meanAcceleration": 0.1629,
+                  "elapsedMs": 162.79,
+                  "pairs": 5
+                }
               },
               "metrics": {
-                "readiness": 75.9,
-                "identityStability": 72.7,
-                "contactConsistency": 86.5,
-                "rolloutPlausibility": 75.5,
-                "drift": 36.1,
-                "memoryLoad": 48.1
+                "readiness": 81.3,
+                "identityStability": 79.0,
+                "contactConsistency": 86.4,
+                "rolloutPlausibility": 79.7,
+                "drift": 20.7,
+                "memoryLoad": 44.4
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-temporal-rollout-bench"
-              }
-            },
-            {
-              "jobId": "clinical-shift",
-              "caseId": "same-site-clean",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "embedding": "dicom-embedding-shift-probe",
-                "calibration": "temperature-calibration-head",
-                "triage": "uncertainty-triage-head"
-              },
-              "inputs": {
-                "clinicalControls": {
-                  "scannerShift": 16,
-                  "cohortMix": 22,
-                  "labelNoise": 8,
-                  "reviewThreshold": 62
-                },
-                "asset": "fixtures/clinical/same-site-clean.json"
-              },
-              "outputs": {
-                "domainEmbeddings": "fixtures/clinical/same-site-clean-domain-embeddings.npy",
-                "calibrationCurve": "fixtures/clinical/same-site-clean-calibration.json",
-                "triageScores": "fixtures/clinical/same-site-clean-triage.json",
-                "clinicalEvidence": 90.3
-              },
-              "metrics": {
-                "readiness": 88.5,
-                "shiftLoad": 16.7,
-                "calibration": 84.3,
-                "domainEvidence": 89.1,
-                "triageRate": 25.4,
-                "residualRisk": 9.6,
-                "clinicalEvidence": 90.3
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-clinical-shift-bench"
-              }
-            },
-            {
-              "jobId": "clinical-shift",
-              "caseId": "new-scanner",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "embedding": "dicom-embedding-shift-probe",
-                "calibration": "temperature-calibration-head",
-                "triage": "uncertainty-triage-head"
-              },
-              "inputs": {
-                "clinicalControls": {
-                  "scannerShift": 58,
-                  "cohortMix": 34,
-                  "labelNoise": 16,
-                  "reviewThreshold": 68
-                },
-                "asset": "fixtures/clinical/new-scanner.json"
-              },
-              "outputs": {
-                "domainEmbeddings": "fixtures/clinical/new-scanner-domain-embeddings.npy",
-                "calibrationCurve": "fixtures/clinical/new-scanner-calibration.json",
-                "triageScores": "fixtures/clinical/new-scanner-triage.json",
-                "clinicalEvidence": 84.8
-              },
-              "metrics": {
-                "readiness": 80.5,
-                "shiftLoad": 40.5,
-                "calibration": 77.5,
-                "domainEvidence": 78.6,
-                "triageRate": 39.7,
-                "residualRisk": 21.6,
-                "clinicalEvidence": 84.8
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-clinical-shift-bench"
-              }
-            },
-            {
-              "jobId": "clinical-shift",
-              "caseId": "external-hospital",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "embedding": "dicom-embedding-shift-probe",
-                "calibration": "temperature-calibration-head",
-                "triage": "uncertainty-triage-head"
-              },
-              "inputs": {
-                "clinicalControls": {
-                  "scannerShift": 52,
-                  "cohortMix": 72,
-                  "labelNoise": 16,
-                  "reviewThreshold": 74
-                },
-                "asset": "fixtures/clinical/external-hospital.json"
-              },
-              "outputs": {
-                "domainEmbeddings": "fixtures/clinical/external-hospital-domain-embeddings.npy",
-                "calibrationCurve": "fixtures/clinical/external-hospital-calibration.json",
-                "triageScores": "fixtures/clinical/external-hospital-triage.json",
-                "clinicalEvidence": 82.3
-              },
-              "metrics": {
-                "readiness": 77.1,
-                "shiftLoad": 52.4,
-                "calibration": 75.4,
-                "domainEvidence": 72.9,
-                "triageRate": 47.0,
-                "residualRisk": 26.4,
-                "clinicalEvidence": 82.3
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-clinical-shift-bench"
-              }
-            },
-            {
-              "jobId": "clinical-shift",
-              "caseId": "noisy-rare-cohort",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "embedding": "dicom-embedding-shift-probe",
-                "calibration": "temperature-calibration-head",
-                "triage": "uncertainty-triage-head"
-              },
-              "inputs": {
-                "clinicalControls": {
-                  "scannerShift": 76,
-                  "cohortMix": 84,
-                  "labelNoise": 20,
-                  "reviewThreshold": 84
-                },
-                "asset": "fixtures/clinical/noisy-rare-cohort.json"
-              },
-              "outputs": {
-                "domainEmbeddings": "fixtures/clinical/noisy-rare-cohort-domain-embeddings.npy",
-                "calibrationCurve": "fixtures/clinical/noisy-rare-cohort-calibration.json",
-                "triageScores": "fixtures/clinical/noisy-rare-cohort-triage.json",
-                "clinicalEvidence": 79.1
-              },
-              "metrics": {
-                "readiness": 72.5,
-                "shiftLoad": 67.8,
-                "calibration": 72.4,
-                "domainEvidence": 66.0,
-                "triageRate": 57.0,
-                "residualRisk": 33.5,
-                "clinicalEvidence": 79.1
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-clinical-shift-bench"
+                "sourceBench": "cvpr-temporal-rollout-bench",
+                "execution": "torchvision-raft-small-temporal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "compute-serving",
               "caseId": "desktop-batch",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:06:15Z",
               "model": {
-                "encoder": "quantized-vision-encoder",
-                "router": "student-router",
-                "profiler": "latency-profiler"
+                "encoder": "torch-cuda-matmul-vision-encoder",
+                "router": "student-router-profiler",
+                "profiler": "cuda-event-latency-profiler"
               },
               "inputs": {
                 "servingControls": {
@@ -11535,39 +16893,53 @@ export const launchInput = {
                   "studentRouting": 30,
                   "escalationCost": 10
                 },
-                "asset": "fixtures/compute/desktop-batch.json"
+                "title": "Desktop batch review"
               },
               "outputs": {
-                "latencyProfile": "fixtures/compute/desktop-batch-latency.json",
-                "qualityFloor": 87.4,
-                "routingTrace": "fixtures/compute/desktop-batch-routing.json",
-                "retainedEvidence": 90.9
+                "latencyProfile": {
+                  "perIterationMs": 3.031,
+                  "repeats": 24,
+                  "matrix": [
+                    924,
+                    156,
+                    924
+                  ]
+                },
+                "qualityFloor": 85.8,
+                "routingTrace": {
+                  "studentRouting": 30,
+                  "checksum": 0.066269
+                },
+                "retainedEvidence": 86.6
               },
               "metrics": {
-                "readiness": 76.6,
-                "latency": 58.7,
-                "retainedEvidence": 90.9,
-                "qualityFloor": 87.4,
-                "escalationRate": 17.3,
-                "costSaving": 38.5,
-                "risk": 13.1
+                "readiness": 89.1,
+                "latency": 91.8,
+                "retainedEvidence": 86.6,
+                "qualityFloor": 85.8,
+                "escalationRate": 14.7,
+                "costSaving": 22.7,
+                "risk": 7.2
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-compute-serving-bench"
+                "sourceBench": "cvpr-compute-serving-bench",
+                "execution": "torch-cuda-compute-serving-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "compute-serving",
               "caseId": "mobile-live",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:06:15Z",
               "model": {
-                "encoder": "quantized-vision-encoder",
-                "router": "student-router",
-                "profiler": "latency-profiler"
+                "encoder": "torch-cuda-matmul-vision-encoder",
+                "router": "student-router-profiler",
+                "profiler": "cuda-event-latency-profiler"
               },
               "inputs": {
                 "servingControls": {
@@ -11576,39 +16948,53 @@ export const launchInput = {
                   "studentRouting": 60,
                   "escalationCost": 10
                 },
-                "asset": "fixtures/compute/mobile-live.json"
+                "title": "Mobile live inference"
               },
               "outputs": {
-                "latencyProfile": "fixtures/compute/mobile-live-latency.json",
-                "qualityFloor": 81.6,
-                "routingTrace": "fixtures/compute/mobile-live-routing.json",
-                "retainedEvidence": 87.5
+                "latencyProfile": {
+                  "perIterationMs": 0.168,
+                  "repeats": 24,
+                  "matrix": [
+                    876,
+                    216,
+                    876
+                  ]
+                },
+                "qualityFloor": 81.8,
+                "routingTrace": {
+                  "studentRouting": 60,
+                  "checksum": -0.334
+                },
+                "retainedEvidence": 85.0
               },
               "metrics": {
-                "readiness": 74.6,
-                "latency": 55.5,
-                "retainedEvidence": 87.5,
-                "qualityFloor": 81.6,
-                "escalationRate": 29.8,
-                "costSaving": 45.2,
-                "risk": 18.8
+                "readiness": 87.3,
+                "latency": 93.7,
+                "retainedEvidence": 85.0,
+                "qualityFloor": 81.8,
+                "escalationRate": 24.9,
+                "costSaving": 38.2,
+                "risk": 10.3
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-compute-serving-bench"
+                "sourceBench": "cvpr-compute-serving-bench",
+                "execution": "torch-cuda-compute-serving-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "compute-serving",
               "caseId": "edge-camera",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:06:15Z",
               "model": {
-                "encoder": "quantized-vision-encoder",
-                "router": "student-router",
-                "profiler": "latency-profiler"
+                "encoder": "torch-cuda-matmul-vision-encoder",
+                "router": "student-router-profiler",
+                "profiler": "cuda-event-latency-profiler"
               },
               "inputs": {
                 "servingControls": {
@@ -11617,39 +17003,53 @@ export const launchInput = {
                   "studentRouting": 55,
                   "escalationCost": 8
                 },
-                "asset": "fixtures/compute/edge-camera.json"
+                "title": "Edge camera stream"
               },
               "outputs": {
-                "latencyProfile": "fixtures/compute/edge-camera-latency.json",
-                "qualityFloor": 81.2,
-                "routingTrace": "fixtures/compute/edge-camera-routing.json",
-                "retainedEvidence": 85.7
+                "latencyProfile": {
+                  "perIterationMs": 0.157,
+                  "repeats": 24,
+                  "matrix": [
+                    852,
+                    206,
+                    852
+                  ]
+                },
+                "qualityFloor": 80.9,
+                "routingTrace": {
+                  "studentRouting": 55,
+                  "checksum": -0.14627
+                },
+                "retainedEvidence": 84.0
               },
               "metrics": {
-                "readiness": 73.5,
-                "latency": 56.9,
-                "retainedEvidence": 85.7,
-                "qualityFloor": 81.2,
-                "escalationRate": 28.3,
-                "costSaving": 44.2,
-                "risk": 19.5
+                "readiness": 87.0,
+                "latency": 94.2,
+                "retainedEvidence": 84.0,
+                "qualityFloor": 80.9,
+                "escalationRate": 22.3,
+                "costSaving": 36.8,
+                "risk": 10.1
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-compute-serving-bench"
+                "sourceBench": "cvpr-compute-serving-bench",
+                "execution": "torch-cuda-compute-serving-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "compute-serving",
               "caseId": "fleet-peak-load",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:06:15Z",
               "model": {
-                "encoder": "quantized-vision-encoder",
-                "router": "student-router",
-                "profiler": "latency-profiler"
+                "encoder": "torch-cuda-matmul-vision-encoder",
+                "router": "student-router-profiler",
+                "profiler": "cuda-event-latency-profiler"
               },
               "inputs": {
                 "servingControls": {
@@ -11658,39 +17058,53 @@ export const launchInput = {
                   "studentRouting": 65,
                   "escalationCost": 8
                 },
-                "asset": "fixtures/compute/fleet-peak-load.json"
+                "title": "Fleet peak load"
               },
               "outputs": {
-                "latencyProfile": "fixtures/compute/fleet-peak-load-latency.json",
-                "qualityFloor": 80.1,
-                "routingTrace": "fixtures/compute/fleet-peak-load-routing.json",
-                "retainedEvidence": 87.6
+                "latencyProfile": {
+                  "perIterationMs": 0.165,
+                  "repeats": 24,
+                  "matrix": [
+                    888,
+                    226,
+                    888
+                  ]
+                },
+                "qualityFloor": 81.0,
+                "routingTrace": {
+                  "studentRouting": 65,
+                  "checksum": 0.124414
+                },
+                "retainedEvidence": 84.9
               },
               "metrics": {
-                "readiness": 74.6,
-                "latency": 52.5,
-                "retainedEvidence": 87.6,
-                "qualityFloor": 80.1,
-                "escalationRate": 31.3,
-                "costSaving": 48.2,
-                "risk": 20.3
+                "readiness": 86.9,
+                "latency": 93.2,
+                "retainedEvidence": 84.9,
+                "qualityFloor": 81.0,
+                "escalationRate": 25.7,
+                "costSaving": 42.6,
+                "risk": 10.7
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-compute-serving-bench"
+                "sourceBench": "cvpr-compute-serving-bench",
+                "execution": "torch-cuda-compute-serving-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "constraint-generation",
               "caseId": "light-layout-edit",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:14Z",
               "model": {
-                "layout": "layout-controlnet",
-                "identity": "identity-embedding-lock",
-                "reward": "preference-reward-probe"
+                "layout": "torch-layout-probe",
+                "identity": "torch-identity-embedding-probe",
+                "reward": "constraint-reward-probe"
               },
               "inputs": {
                 "generationControls": {
@@ -11699,40 +17113,43 @@ export const launchInput = {
                   "identityLock": 82,
                   "adversarialPromptPressure": 18
                 },
-                "asset": "fixtures/generation/light-layout-edit.png"
+                "asset": "synthetic://generation/light-layout-edit.png"
               },
               "outputs": {
-                "editedImage": "fixtures/generation/light-layout-edit-edited.png",
-                "layoutMask": "fixtures/generation/light-layout-edit-layout-mask.png",
-                "identityEmbeddingDelta": 18.5,
-                "rewardTrace": "fixtures/generation/light-layout-edit-reward.json"
+                "editedImage": "synthetic://generation/light-layout-edit-edited.png",
+                "layoutMask": "synthetic://generation/light-layout-edit-layout-mask.png",
+                "identityEmbeddingDelta": 19.2,
+                "rewardTrace": "synthetic://generation/light-layout-edit-reward.json"
               },
               "metrics": {
-                "readiness": 84.9,
+                "readiness": 78.5,
                 "editPressure": 21.0,
-                "constraintSatisfaction": 86.1,
-                "identityPreservation": 85.0,
-                "editLocality": 82.8,
-                "rewardAlignment": 87.3,
-                "identityDamage": 18.5,
-                "provenanceRisk": 17.6
+                "constraintSatisfaction": 80.8,
+                "identityPreservation": 80.2,
+                "editLocality": 76.2,
+                "rewardAlignment": 73.6,
+                "identityDamage": 19.2,
+                "provenanceRisk": 20.1
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-constraint-generation-bench"
+                "sourceBench": "cvpr-constraint-generation-bench",
+                "execution": "torch-layout-identity-reward-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "constraint-generation",
               "caseId": "style-with-locks",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:14Z",
               "model": {
-                "layout": "layout-controlnet",
-                "identity": "identity-embedding-lock",
-                "reward": "preference-reward-probe"
+                "layout": "torch-layout-probe",
+                "identity": "torch-identity-embedding-probe",
+                "reward": "constraint-reward-probe"
               },
               "inputs": {
                 "generationControls": {
@@ -11741,40 +17158,43 @@ export const launchInput = {
                   "identityLock": 80,
                   "adversarialPromptPressure": 32
                 },
-                "asset": "fixtures/generation/style-with-locks.png"
+                "asset": "synthetic://generation/style-with-locks.png"
               },
               "outputs": {
-                "editedImage": "fixtures/generation/style-with-locks-edited.png",
-                "layoutMask": "fixtures/generation/style-with-locks-layout-mask.png",
-                "identityEmbeddingDelta": 31.8,
-                "rewardTrace": "fixtures/generation/style-with-locks-reward.json"
+                "editedImage": "synthetic://generation/style-with-locks-edited.png",
+                "layoutMask": "synthetic://generation/style-with-locks-layout-mask.png",
+                "identityEmbeddingDelta": 31.3,
+                "rewardTrace": "synthetic://generation/style-with-locks-reward.json"
               },
               "metrics": {
-                "readiness": 77.4,
-                "editPressure": 39.2,
-                "constraintSatisfaction": 80.9,
-                "identityPreservation": 77.3,
-                "editLocality": 74.4,
-                "rewardAlignment": 81.3,
-                "identityDamage": 31.8,
-                "provenanceRisk": 29.5
+                "readiness": 70.9,
+                "editPressure": 39.3,
+                "constraintSatisfaction": 74.7,
+                "identityPreservation": 73.7,
+                "editLocality": 67.7,
+                "rewardAlignment": 66.0,
+                "identityDamage": 31.3,
+                "provenanceRisk": 32.2
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-constraint-generation-bench"
+                "sourceBench": "cvpr-constraint-generation-bench",
+                "execution": "torch-layout-identity-reward-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "constraint-generation",
               "caseId": "layout-rewrite",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:14Z",
               "model": {
-                "layout": "layout-controlnet",
-                "identity": "identity-embedding-lock",
-                "reward": "preference-reward-probe"
+                "layout": "torch-layout-probe",
+                "identity": "torch-identity-embedding-probe",
+                "reward": "constraint-reward-probe"
               },
               "inputs": {
                 "generationControls": {
@@ -11783,40 +17203,43 @@ export const launchInput = {
                   "identityLock": 92,
                   "adversarialPromptPressure": 28
                 },
-                "asset": "fixtures/generation/layout-rewrite.png"
+                "asset": "synthetic://generation/layout-rewrite.png"
               },
               "outputs": {
-                "editedImage": "fixtures/generation/layout-rewrite-edited.png",
-                "layoutMask": "fixtures/generation/layout-rewrite-layout-mask.png",
-                "identityEmbeddingDelta": 33.1,
-                "rewardTrace": "fixtures/generation/layout-rewrite-reward.json"
+                "editedImage": "synthetic://generation/layout-rewrite-edited.png",
+                "layoutMask": "synthetic://generation/layout-rewrite-layout-mask.png",
+                "identityEmbeddingDelta": 32.4,
+                "rewardTrace": "synthetic://generation/layout-rewrite-reward.json"
               },
               "metrics": {
-                "readiness": 77.5,
+                "readiness": 70.5,
                 "editPressure": 45.7,
-                "constraintSatisfaction": 81.1,
-                "identityPreservation": 78.4,
-                "editLocality": 72.9,
-                "rewardAlignment": 82.4,
-                "identityDamage": 33.1,
-                "provenanceRisk": 29.9
+                "constraintSatisfaction": 73.2,
+                "identityPreservation": 75.0,
+                "editLocality": 65.9,
+                "rewardAlignment": 66.2,
+                "identityDamage": 32.4,
+                "provenanceRisk": 33.1
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-constraint-generation-bench"
+                "sourceBench": "cvpr-constraint-generation-bench",
+                "execution": "torch-layout-identity-reward-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "constraint-generation",
               "caseId": "prompt-attack-edit",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:14Z",
               "model": {
-                "layout": "layout-controlnet",
-                "identity": "identity-embedding-lock",
-                "reward": "preference-reward-probe"
+                "layout": "torch-layout-probe",
+                "identity": "torch-identity-embedding-probe",
+                "reward": "constraint-reward-probe"
               },
               "inputs": {
                 "generationControls": {
@@ -11825,38 +17248,1273 @@ export const launchInput = {
                   "identityLock": 92,
                   "adversarialPromptPressure": 28
                 },
-                "asset": "fixtures/generation/prompt-attack-edit.png"
+                "asset": "synthetic://generation/prompt-attack-edit.png"
               },
               "outputs": {
-                "editedImage": "fixtures/generation/prompt-attack-edit-edited.png",
-                "layoutMask": "fixtures/generation/prompt-attack-edit-layout-mask.png",
-                "identityEmbeddingDelta": 34.8,
-                "rewardTrace": "fixtures/generation/prompt-attack-edit-reward.json"
+                "editedImage": "synthetic://generation/prompt-attack-edit-edited.png",
+                "layoutMask": "synthetic://generation/prompt-attack-edit-layout-mask.png",
+                "identityEmbeddingDelta": 34.0,
+                "rewardTrace": "synthetic://generation/prompt-attack-edit-reward.json"
               },
               "metrics": {
-                "readiness": 77.6,
-                "editPressure": 47.7,
-                "constraintSatisfaction": 82.3,
-                "identityPreservation": 77.3,
-                "editLocality": 73.6,
-                "rewardAlignment": 82.5,
-                "identityDamage": 34.8,
-                "provenanceRisk": 30.0
+                "readiness": 70.8,
+                "editPressure": 47.8,
+                "constraintSatisfaction": 74.7,
+                "identityPreservation": 74.0,
+                "editLocality": 66.7,
+                "rewardAlignment": 66.6,
+                "identityDamage": 34.0,
+                "provenanceRisk": 33.1
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-constraint-generation-bench"
+                "sourceBench": "cvpr-constraint-generation-bench",
+                "execution": "torch-layout-identity-reward-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "depth-normal-consistency",
+              "caseId": "indoor-low-texture",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:22:34Z",
+              "model": {
+                "depth": "torch-cuda-depth-normal-probe",
+                "surface": "finite-difference-normal-consistency"
+              },
+              "inputs": {
+                "depthControls": {
+                  "textureSparsity": 68,
+                  "thinStructure": 24,
+                  "scaleAmbiguity": 54
+                },
+                "asset": "synthetic://depth/indoor-low-texture.png"
+              },
+              "outputs": {
+                "depthMap": "synthetic://depth/depth-map.pt",
+                "normalEnergy": 0.024086,
+                "curvature": 0.004773
+              },
+              "metrics": {
+                "readiness": 81.8,
+                "depthRange": 0.7193,
+                "normalConsistency": 84.4,
+                "surfaceConsistency": 89.4,
+                "scaleDrift": 29.1,
+                "thinStructureRisk": 15.8
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-depth-normal-consistency-bench",
+                "execution": "torch-cuda-depth-normal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "depth-normal-consistency",
+              "caseId": "thin-chair-legs",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:22:34Z",
+              "model": {
+                "depth": "torch-cuda-depth-normal-probe",
+                "surface": "finite-difference-normal-consistency"
+              },
+              "inputs": {
+                "depthControls": {
+                  "textureSparsity": 38,
+                  "thinStructure": 78,
+                  "scaleAmbiguity": 32
+                },
+                "asset": "synthetic://depth/thin-chair-legs.png"
+              },
+              "outputs": {
+                "depthMap": "synthetic://depth/depth-map.pt",
+                "normalEnergy": 0.019778,
+                "curvature": 0.003684
+              },
+              "metrics": {
+                "readiness": 75.7,
+                "depthRange": 0.6591,
+                "normalConsistency": 87.9,
+                "surfaceConsistency": 80.2,
+                "scaleDrift": 19.5,
+                "thinStructureRisk": 46.8
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-depth-normal-consistency-bench",
+                "execution": "torch-cuda-depth-normal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "depth-normal-consistency",
+              "caseId": "reflective-surface",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:22:34Z",
+              "model": {
+                "depth": "torch-cuda-depth-normal-probe",
+                "surface": "finite-difference-normal-consistency"
+              },
+              "inputs": {
+                "depthControls": {
+                  "textureSparsity": 52,
+                  "thinStructure": 34,
+                  "scaleAmbiguity": 46
+                },
+                "asset": "synthetic://depth/reflective-surface.png"
+              },
+              "outputs": {
+                "depthMap": "synthetic://depth/depth-map.pt",
+                "normalEnergy": 0.021851,
+                "curvature": 0.004147
+              },
+              "metrics": {
+                "readiness": 81.6,
+                "depthRange": 0.6839,
+                "normalConsistency": 86.3,
+                "surfaceConsistency": 87.9,
+                "scaleDrift": 25.3,
+                "thinStructureRisk": 21.5
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-depth-normal-consistency-bench",
+                "execution": "torch-cuda-depth-normal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "depth-normal-consistency",
+              "caseId": "wide-room-scale",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:22:34Z",
+              "model": {
+                "depth": "torch-cuda-depth-normal-probe",
+                "surface": "finite-difference-normal-consistency"
+              },
+              "inputs": {
+                "depthControls": {
+                  "textureSparsity": 44,
+                  "thinStructure": 22,
+                  "scaleAmbiguity": 68
+                },
+                "asset": "synthetic://depth/wide-room-scale.png"
+              },
+              "outputs": {
+                "depthMap": "synthetic://depth/depth-map.pt",
+                "normalEnergy": 0.020688,
+                "curvature": 0.00388
+              },
+              "metrics": {
+                "readiness": 82.5,
+                "depthRange": 0.677,
+                "normalConsistency": 87.2,
+                "surfaceConsistency": 90.2,
+                "scaleDrift": 32.0,
+                "thinStructureRisk": 14.4
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-depth-normal-consistency-bench",
+                "execution": "torch-cuda-depth-normal-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "caseId": "motion-blur",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:26:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "probe": "clean-corrupted-logit-delta"
+              },
+              "inputs": {
+                "corruptionControls": {
+                  "corruption": "blur",
+                  "severity": 46
+                },
+                "asset": "synthetic://robustness/motion-blur.png"
+              },
+              "outputs": {
+                "cleanConfidence": 35.2,
+                "corruptedConfidence": 66.3,
+                "jsDivergence": 0.712014,
+                "featureCosine": 0.940137
+              },
+              "metrics": {
+                "readiness": 80.8,
+                "robustness": 86.3,
+                "confidenceCollapse": 15.0,
+                "featureRetention": 94.0,
+                "labelStability": 74.6,
+                "severity": 46,
+                "topClassChanged": 1
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-corruption-robustness-bench",
+                "execution": "torchvision-resnet-corruption-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "caseId": "sensor-noise",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:26:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "probe": "clean-corrupted-logit-delta"
+              },
+              "inputs": {
+                "corruptionControls": {
+                  "corruption": "noise",
+                  "severity": 52
+                },
+                "asset": "synthetic://robustness/sensor-noise.png"
+              },
+              "outputs": {
+                "cleanConfidence": 38.2,
+                "corruptedConfidence": 43.1,
+                "jsDivergence": 0.06174,
+                "featureCosine": 0.963718
+              },
+              "metrics": {
+                "readiness": 84.4,
+                "robustness": 91.9,
+                "confidenceCollapse": 10.0,
+                "featureRetention": 96.4,
+                "labelStability": 99.0,
+                "severity": 52,
+                "topClassChanged": 0
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-corruption-robustness-bench",
+                "execution": "torchvision-resnet-corruption-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "caseId": "patch-attack",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:26:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "probe": "clean-corrupted-logit-delta"
+              },
+              "inputs": {
+                "corruptionControls": {
+                  "corruption": "patch",
+                  "severity": 66
+                },
+                "asset": "synthetic://robustness/patch-attack.png"
+              },
+              "outputs": {
+                "cleanConfidence": 33.5,
+                "corruptedConfidence": 36.9,
+                "jsDivergence": 0.031526,
+                "featureCosine": 0.973741
+              },
+              "metrics": {
+                "readiness": 81.1,
+                "robustness": 90.8,
+                "confidenceCollapse": 11.8,
+                "featureRetention": 97.4,
+                "labelStability": 99.5,
+                "severity": 66,
+                "topClassChanged": 0
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-corruption-robustness-bench",
+                "execution": "torchvision-resnet-corruption-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "corruption-robustness",
+              "caseId": "compression-shift",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:26:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "probe": "clean-corrupted-logit-delta"
+              },
+              "inputs": {
+                "corruptionControls": {
+                  "corruption": "compression",
+                  "severity": 58
+                },
+                "asset": "synthetic://robustness/compression-shift.png"
+              },
+              "outputs": {
+                "cleanConfidence": 38.5,
+                "corruptedConfidence": 39.9,
+                "jsDivergence": 0.009099,
+                "featureCosine": 0.9972
+              },
+              "metrics": {
+                "readiness": 84.1,
+                "robustness": 92.9,
+                "confidenceCollapse": 9.4,
+                "featureRetention": 99.7,
+                "labelStability": 99.9,
+                "severity": 58,
+                "topClassChanged": 0
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-corruption-robustness-bench",
+                "execution": "torchvision-resnet-corruption-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "caseId": "single-object",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:23:49Z",
+              "model": {
+                "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+                "promptProbe": "mask-rcnn-click-robustness-proxy"
+              },
+              "inputs": {
+                "promptControls": {
+                  "objectClutter": 18,
+                  "promptNoise": 8,
+                  "occlusion": 10
+                },
+                "asset": "synthetic://segmentation/single-object.png"
+              },
+              "outputs": {
+                "meanMaskConfidence": 60.7,
+                "maskArea": 0.88176,
+                "maskOverlap": 0.38536
+              },
+              "metrics": {
+                "readiness": 65.4,
+                "maskStability": 57.2,
+                "promptSensitivity": 32.4,
+                "unsupportedRegionRisk": 20.2,
+                "detections": 2
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+                "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "caseId": "cluttered-scene",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:23:49Z",
+              "model": {
+                "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+                "promptProbe": "mask-rcnn-click-robustness-proxy"
+              },
+              "inputs": {
+                "promptControls": {
+                  "objectClutter": 64,
+                  "promptNoise": 18,
+                  "occlusion": 24
+                },
+                "asset": "synthetic://segmentation/cluttered-scene.png"
+              },
+              "outputs": {
+                "meanMaskConfidence": 66.3,
+                "maskArea": 0.9091,
+                "maskOverlap": 0.40537
+              },
+              "metrics": {
+                "readiness": 62.3,
+                "maskStability": 59.4,
+                "promptSensitivity": 48.0,
+                "unsupportedRegionRisk": 22.8,
+                "detections": 2
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+                "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "caseId": "ambiguous-clicks",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:23:49Z",
+              "model": {
+                "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+                "promptProbe": "mask-rcnn-click-robustness-proxy"
+              },
+              "inputs": {
+                "promptControls": {
+                  "objectClutter": 46,
+                  "promptNoise": 62,
+                  "occlusion": 18
+                },
+                "asset": "synthetic://segmentation/ambiguous-clicks.png"
+              },
+              "outputs": {
+                "meanMaskConfidence": 66.7,
+                "maskArea": 0.90569,
+                "maskOverlap": 0.38714
+              },
+              "metrics": {
+                "readiness": 58.3,
+                "maskStability": 60.7,
+                "promptSensitivity": 61.3,
+                "unsupportedRegionRisk": 28.2,
+                "detections": 2
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+                "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "caseId": "occluded-object",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:23:49Z",
+              "model": {
+                "segmenter": "MaskRCNN_ResNet50_FPN_Weights.COCO_V1",
+                "promptProbe": "mask-rcnn-click-robustness-proxy"
+              },
+              "inputs": {
+                "promptControls": {
+                  "objectClutter": 38,
+                  "promptNoise": 26,
+                  "occlusion": 70
+                },
+                "asset": "synthetic://segmentation/occluded-object.png"
+              },
+              "outputs": {
+                "meanMaskConfidence": 66.3,
+                "maskArea": 0.91259,
+                "maskOverlap": 0.40266
+              },
+              "metrics": {
+                "readiness": 57.8,
+                "maskStability": 53.9,
+                "promptSensitivity": 45.5,
+                "unsupportedRegionRisk": 35.1,
+                "detections": 2
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-prompt-segmentation-robustness-bench",
+                "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "caseId": "clean-crossing",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:24:31Z",
+              "model": {
+                "tracker": "torch-cuda-centroid-assignment-tracker",
+                "temporalProbe": "mask-sequence-identity-drift"
+              },
+              "inputs": {
+                "trackingControls": {
+                  "occlusion": 12,
+                  "crowding": 22,
+                  "velocity": 36
+                },
+                "asset": "synthetic://tracking/clean-crossing.mp4"
+              },
+              "outputs": {
+                "frames": 8,
+                "objects": 3,
+                "temporalDelta": 0.01013,
+                "trackTensor": "synthetic://tracking/clean-crossing-tracks.pt"
+              },
+              "metrics": {
+                "readiness": 88.8,
+                "identityStability": 88.9,
+                "occlusionRecovery": 85.0,
+                "trackContinuity": 91.5,
+                "identityDrift": 1.5
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-video-identity-tracking-bench",
+                "execution": "torch-cuda-video-tracking-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "caseId": "identity-crossing",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:24:31Z",
+              "model": {
+                "tracker": "torch-cuda-centroid-assignment-tracker",
+                "temporalProbe": "mask-sequence-identity-drift"
+              },
+              "inputs": {
+                "trackingControls": {
+                  "occlusion": 26,
+                  "crowding": 68,
+                  "velocity": 42
+                },
+                "asset": "synthetic://tracking/identity-crossing.mp4"
+              },
+              "outputs": {
+                "frames": 8,
+                "objects": 3,
+                "temporalDelta": 0.01697,
+                "trackTensor": "synthetic://tracking/identity-crossing-tracks.pt"
+              },
+              "metrics": {
+                "readiness": 82.6,
+                "identityStability": 81.4,
+                "occlusionRecovery": 79.2,
+                "trackContinuity": 90.0,
+                "identityDrift": 2.7
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-video-identity-tracking-bench",
+                "execution": "torch-cuda-video-tracking-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "caseId": "long-occlusion",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:24:31Z",
+              "model": {
+                "tracker": "torch-cuda-centroid-assignment-tracker",
+                "temporalProbe": "mask-sequence-identity-drift"
+              },
+              "inputs": {
+                "trackingControls": {
+                  "occlusion": 74,
+                  "crowding": 36,
+                  "velocity": 34
+                },
+                "asset": "synthetic://tracking/long-occlusion.mp4"
+              },
+              "outputs": {
+                "frames": 8,
+                "objects": 3,
+                "temporalDelta": 0.014317,
+                "trackTensor": "synthetic://tracking/long-occlusion-tracks.pt"
+              },
+              "metrics": {
+                "readiness": 79.6,
+                "identityStability": 79.2,
+                "occlusionRecovery": 75.4,
+                "trackContinuity": 91.1,
+                "identityDrift": 2.3
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-video-identity-tracking-bench",
+                "execution": "torch-cuda-video-tracking-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "caseId": "fast-motion",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:24:31Z",
+              "model": {
+                "tracker": "torch-cuda-centroid-assignment-tracker",
+                "temporalProbe": "mask-sequence-identity-drift"
+              },
+              "inputs": {
+                "trackingControls": {
+                  "occlusion": 22,
+                  "crowding": 42,
+                  "velocity": 78
+                },
+                "asset": "synthetic://tracking/fast-motion.mp4"
+              },
+              "outputs": {
+                "frames": 8,
+                "objects": 3,
+                "temporalDelta": 0.019914,
+                "trackTensor": "synthetic://tracking/fast-motion-tracks.pt"
+              },
+              "metrics": {
+                "readiness": 83.1,
+                "identityStability": 84.0,
+                "occlusionRecovery": 77.9,
+                "trackContinuity": 86.7,
+                "identityDrift": 3.2
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-video-identity-tracking-bench",
+                "execution": "torch-cuda-video-tracking-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "metric-geometry",
+              "caseId": "wide-baseline",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:31:36Z",
+              "model": {
+                "solver": "torch-cuda-differentiable-camera-solver",
+                "geometry": "bundle-adjustment-scale-probe"
+              },
+              "inputs": {
+                "geometryControls": {
+                  "baseline": 82,
+                  "textureSparsity": 18,
+                  "scaleAmbiguity": 24,
+                  "surfaceComplexity": 42
+                },
+                "asset": "synthetic://geometry/wide-baseline.json"
+              },
+              "outputs": {
+                "cameraRecovery": {
+                  "points": 204,
+                  "meanReprojectionError": 0.00851,
+                  "p95ReprojectionError": 0.01639,
+                  "elapsedMs": 1331.44
+                },
+                "scaleRecovery": {
+                  "trueScale": 1.13333,
+                  "recoveredScale": 1.11517,
+                  "relativeError": 0.01602
+                },
+                "optimizationTrace": {
+                  "initialLoss": 0.00534,
+                  "finalLoss": 0.001153,
+                  "iterations": 220,
+                  "calibratedScale": 1.19754
+                }
+              },
+              "metrics": {
+                "poseEvidence": 92.8,
+                "metricEvidence": 100.0,
+                "surfaceConsistency": 87.8,
+                "scaleDrift": 0.6,
+                "topologyRisk": 11.6,
+                "readiness": 92.9
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-metric-geometry-bench",
+                "execution": "torch-cuda-metric-geometry-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "metric-geometry",
+              "caseId": "scale-transfer",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:31:37Z",
+              "model": {
+                "solver": "torch-cuda-differentiable-camera-solver",
+                "geometry": "bundle-adjustment-scale-probe"
+              },
+              "inputs": {
+                "geometryControls": {
+                  "baseline": 66,
+                  "textureSparsity": 28,
+                  "scaleAmbiguity": 44,
+                  "surfaceComplexity": 46
+                },
+                "asset": "synthetic://geometry/scale-transfer.json"
+              },
+              "outputs": {
+                "cameraRecovery": {
+                  "points": 196,
+                  "meanReprojectionError": 0.00963,
+                  "p95ReprojectionError": 0.0193,
+                  "elapsedMs": 742.4
+                },
+                "scaleRecovery": {
+                  "trueScale": 1.24444,
+                  "recoveredScale": 1.21153,
+                  "relativeError": 0.00475
+                },
+                "optimizationTrace": {
+                  "initialLoss": 0.004471,
+                  "finalLoss": 0.001505,
+                  "iterations": 220,
+                  "calibratedScale": 1.25036
+                }
+              },
+              "metrics": {
+                "poseEvidence": 91.7,
+                "metricEvidence": 99.4,
+                "surfaceConsistency": 87.2,
+                "scaleDrift": 3.8,
+                "topologyRisk": 12.5,
+                "readiness": 92.1
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-metric-geometry-bench",
+                "execution": "torch-cuda-metric-geometry-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "metric-geometry",
+              "caseId": "thin-structure",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:31:38Z",
+              "model": {
+                "solver": "torch-cuda-differentiable-camera-solver",
+                "geometry": "bundle-adjustment-scale-probe"
+              },
+              "inputs": {
+                "geometryControls": {
+                  "baseline": 58,
+                  "textureSparsity": 34,
+                  "scaleAmbiguity": 32,
+                  "surfaceComplexity": 72
+                },
+                "asset": "synthetic://geometry/thin-structure.json"
+              },
+              "outputs": {
+                "cameraRecovery": {
+                  "points": 191,
+                  "meanReprojectionError": 0.01438,
+                  "p95ReprojectionError": 0.02784,
+                  "elapsedMs": 759.71
+                },
+                "scaleRecovery": {
+                  "trueScale": 1.17778,
+                  "recoveredScale": 1.15349,
+                  "relativeError": 0.01432
+                },
+                "optimizationTrace": {
+                  "initialLoss": 0.005345,
+                  "finalLoss": 0.00322,
+                  "iterations": 220,
+                  "calibratedScale": 1.19465
+                }
+              },
+              "metrics": {
+                "poseEvidence": 90.2,
+                "metricEvidence": 97.3,
+                "surfaceConsistency": 83.5,
+                "scaleDrift": 3.4,
+                "topologyRisk": 18.3,
+                "readiness": 89.1
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-metric-geometry-bench",
+                "execution": "torch-cuda-metric-geometry-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "metric-geometry",
+              "caseId": "low-texture-indoor",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:31:38Z",
+              "model": {
+                "solver": "torch-cuda-differentiable-camera-solver",
+                "geometry": "bundle-adjustment-scale-probe"
+              },
+              "inputs": {
+                "geometryControls": {
+                  "baseline": 54,
+                  "textureSparsity": 58,
+                  "scaleAmbiguity": 48,
+                  "surfaceComplexity": 50
+                },
+                "asset": "synthetic://geometry/low-texture-indoor.json"
+              },
+              "outputs": {
+                "cameraRecovery": {
+                  "points": 158,
+                  "meanReprojectionError": 0.01534,
+                  "p95ReprojectionError": 0.02952,
+                  "elapsedMs": 768.1
+                },
+                "scaleRecovery": {
+                  "trueScale": 1.26667,
+                  "recoveredScale": 1.23104,
+                  "relativeError": 0.01505
+                },
+                "optimizationTrace": {
+                  "initialLoss": 0.005659,
+                  "finalLoss": 0.003549,
+                  "iterations": 220,
+                  "calibratedScale": 1.2476
+                }
+              },
+              "metrics": {
+                "poseEvidence": 88.1,
+                "metricEvidence": 95.3,
+                "surfaceConsistency": 86.0,
+                "scaleDrift": 6.3,
+                "topologyRisk": 13.9,
+                "readiness": 89.4
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-metric-geometry-bench",
+                "execution": "torch-cuda-metric-geometry-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "gaussian-splatting",
+              "caseId": "dense-novel-view",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:29:24Z",
+              "model": {
+                "renderer": "torch-cuda-gaussian-splat-compositor",
+                "semanticProbe": "splat-label-edit-probe"
+              },
+              "inputs": {
+                "splatControls": {
+                  "viewCount": 86,
+                  "splatDensity": 78,
+                  "semanticEntropy": 24,
+                  "provenanceVisibility": 70
+                },
+                "asset": "synthetic://splat/dense-novel-view.ply"
+              },
+              "outputs": {
+                "renderProfile": {
+                  "splats": 337,
+                  "views": 5,
+                  "elapsedMs": 71.17,
+                  "adjacentFrameDelta": 0.13833
+                },
+                "semanticProbe": {
+                  "meanConfidence": 0.5302,
+                  "margin": 0.45706,
+                  "editLeakageRatio": 0.05605,
+                  "editLocality": 0.94395
+                },
+                "provenanceProbe": {
+                  "visibility": 70,
+                  "trace": 67.7
+                }
+              },
+              "metrics": {
+                "renderFidelity": 85.5,
+                "semanticAttachment": 60.9,
+                "provenanceTrace": 67.7,
+                "viewInstability": 14.1,
+                "editLeakageRisk": 10.2,
+                "readiness": 74.9
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-gaussian-splatting-bench",
+                "execution": "torch-cuda-gaussian-splatting-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "gaussian-splatting",
+              "caseId": "semantic-edit",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:29:24Z",
+              "model": {
+                "renderer": "torch-cuda-gaussian-splat-compositor",
+                "semanticProbe": "splat-label-edit-probe"
+              },
+              "inputs": {
+                "splatControls": {
+                  "viewCount": 74,
+                  "splatDensity": 72,
+                  "semanticEntropy": 34,
+                  "provenanceVisibility": 76
+                },
+                "asset": "synthetic://splat/semantic-edit.ply"
+              },
+              "outputs": {
+                "renderProfile": {
+                  "splats": 319,
+                  "views": 5,
+                  "elapsedMs": 23.13,
+                  "adjacentFrameDelta": 0.13381
+                },
+                "semanticProbe": {
+                  "meanConfidence": 0.55323,
+                  "margin": 0.45882,
+                  "editLeakageRatio": 0.07111,
+                  "editLocality": 0.92889
+                },
+                "provenanceProbe": {
+                  "visibility": 76,
+                  "trace": 72.3
+                }
+              },
+              "metrics": {
+                "renderFidelity": 83.7,
+                "semanticAttachment": 60.7,
+                "provenanceTrace": 72.3,
+                "viewInstability": 15.2,
+                "editLeakageRisk": 12.1,
+                "readiness": 75.2
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-gaussian-splatting-bench",
+                "execution": "torch-cuda-gaussian-splatting-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "gaussian-splatting",
+              "caseId": "provenance-transfer",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:29:24Z",
+              "model": {
+                "renderer": "torch-cuda-gaussian-splat-compositor",
+                "semanticProbe": "splat-label-edit-probe"
+              },
+              "inputs": {
+                "splatControls": {
+                  "viewCount": 68,
+                  "splatDensity": 70,
+                  "semanticEntropy": 42,
+                  "provenanceVisibility": 84
+                },
+                "asset": "synthetic://splat/provenance-transfer.ply"
+              },
+              "outputs": {
+                "renderProfile": {
+                  "splats": 313,
+                  "views": 5,
+                  "elapsedMs": 22.65,
+                  "adjacentFrameDelta": 0.13393
+                },
+                "semanticProbe": {
+                  "meanConfidence": 0.51926,
+                  "margin": 0.42126,
+                  "editLeakageRatio": 0.08418,
+                  "editLocality": 0.91582
+                },
+                "provenanceProbe": {
+                  "visibility": 84,
+                  "trace": 77.6
+                }
+              },
+              "metrics": {
+                "renderFidelity": 82.7,
+                "semanticAttachment": 57.0,
+                "provenanceTrace": 77.6,
+                "viewInstability": 15.9,
+                "editLeakageRisk": 13.5,
+                "readiness": 75.1
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-gaussian-splatting-bench",
+                "execution": "torch-cuda-gaussian-splatting-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "gaussian-splatting",
+              "caseId": "sparse-capture",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T03:29:24Z",
+              "model": {
+                "renderer": "torch-cuda-gaussian-splat-compositor",
+                "semanticProbe": "splat-label-edit-probe"
+              },
+              "inputs": {
+                "splatControls": {
+                  "viewCount": 62,
+                  "splatDensity": 66,
+                  "semanticEntropy": 46,
+                  "provenanceVisibility": 72
+                },
+                "asset": "synthetic://splat/sparse-capture.ply"
+              },
+              "outputs": {
+                "renderProfile": {
+                  "splats": 300,
+                  "views": 5,
+                  "elapsedMs": 21.97,
+                  "adjacentFrameDelta": 0.13495
+                },
+                "semanticProbe": {
+                  "meanConfidence": 0.57297,
+                  "margin": 0.47408,
+                  "editLeakageRatio": 0.07785,
+                  "editLocality": 0.92215
+                },
+                "provenanceProbe": {
+                  "visibility": 72,
+                  "trace": 69.6
+                }
+              },
+              "metrics": {
+                "renderFidelity": 81.4,
+                "semanticAttachment": 60.5,
+                "provenanceTrace": 69.6,
+                "viewInstability": 16.7,
+                "editLeakageRisk": 14.5,
+                "readiness": 73.6
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-gaussian-splatting-bench",
+                "execution": "torch-cuda-gaussian-splatting-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "clinical-shift",
+              "caseId": "clear-baseline",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T01:09:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "shiftProbe": "resnet-logit-divergence-domain-shift"
+              },
+              "inputs": {
+                "clinicalControls": {
+                  "domainShift": 8,
+                  "artifactLoad": 12,
+                  "escalationThreshold": 68
+                },
+                "asset": "synthetic://clinical/clear-baseline.png"
+              },
+              "outputs": {
+                "cleanConfidence": 38.6,
+                "shiftedConfidence": 35.0,
+                "logitDivergence": 0.006642
+              },
+              "metrics": {
+                "readiness": 89.9,
+                "shiftScore": 7.6,
+                "calibration": 89.3,
+                "falseClearRisk": 2.4,
+                "escalationThreshold": 68
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-clinical-shift-bench",
+                "execution": "torchvision-resnet-clinical-shift-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "clinical-shift",
+              "caseId": "scanner-shift",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T01:09:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "shiftProbe": "resnet-logit-divergence-domain-shift"
+              },
+              "inputs": {
+                "clinicalControls": {
+                  "domainShift": 46,
+                  "artifactLoad": 24,
+                  "escalationThreshold": 72
+                },
+                "asset": "synthetic://clinical/scanner-shift.png"
+              },
+              "outputs": {
+                "cleanConfidence": 33.4,
+                "shiftedConfidence": 33.9,
+                "logitDivergence": 0.014008
+              },
+              "metrics": {
+                "readiness": 83.2,
+                "shiftScore": 32.7,
+                "calibration": 91.5,
+                "falseClearRisk": 8.9,
+                "escalationThreshold": 72
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-clinical-shift-bench",
+                "execution": "torchvision-resnet-clinical-shift-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "clinical-shift",
+              "caseId": "rare-presentation",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T01:09:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "shiftProbe": "resnet-logit-divergence-domain-shift"
+              },
+              "inputs": {
+                "clinicalControls": {
+                  "domainShift": 58,
+                  "artifactLoad": 18,
+                  "escalationThreshold": 78
+                },
+                "asset": "synthetic://clinical/rare-presentation.png"
+              },
+              "outputs": {
+                "cleanConfidence": 39.4,
+                "shiftedConfidence": 37.6,
+                "logitDivergence": 0.003941
+              },
+              "metrics": {
+                "readiness": 81.9,
+                "shiftScore": 38.0,
+                "calibration": 90.7,
+                "falseClearRisk": 10.6,
+                "escalationThreshold": 78
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-clinical-shift-bench",
+                "execution": "torchvision-resnet-clinical-shift-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
+              }
+            },
+            {
+              "jobId": "clinical-shift",
+              "caseId": "motion-artifact",
+              "mode": "cached-real",
+              "createdAt": "2026-08-17T01:09:30Z",
+              "model": {
+                "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+                "shiftProbe": "resnet-logit-divergence-domain-shift"
+              },
+              "inputs": {
+                "clinicalControls": {
+                  "domainShift": 38,
+                  "artifactLoad": 66,
+                  "escalationThreshold": 74
+                },
+                "asset": "synthetic://clinical/motion-artifact.png"
+              },
+              "outputs": {
+                "cleanConfidence": 26.4,
+                "shiftedConfidence": 26.2,
+                "logitDivergence": 0.067713
+              },
+              "metrics": {
+                "readiness": 81.1,
+                "shiftScore": 39.0,
+                "calibration": 90.9,
+                "falseClearRisk": 11.1,
+                "escalationThreshold": 74
+              },
+              "provenance": {
+                "runtime": "google-colab-pro-plus",
+                "accelerator": "Tesla T4",
+                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+                "sourceBench": "cvpr-clinical-shift-bench",
+                "execution": "torchvision-resnet-clinical-shift-live-demo",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "driving-safety",
               "caseId": "urban-cut-in",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:48Z",
               "model": {
-                "grounder": "vla-scene-grounder",
+                "grounder": "torch-driving-scene-risk-probe",
                 "riskHead": "ttc-risk-head",
                 "ruleMonitor": "safety-rule-monitor"
               },
@@ -11867,36 +18525,39 @@ export const launchInput = {
                   "occlusion": 10,
                   "actionConfidence": 82
                 },
-                "asset": "fixtures/driving/urban-cut-in.mp4"
+                "asset": "synthetic://driving/urban-cut-in.mp4"
               },
               "outputs": {
-                "sceneGroundingMap": "fixtures/driving/urban-cut-in-grounding.png",
+                "sceneGroundingMap": "synthetic://driving/urban-cut-in-grounding.png",
                 "timeToCollision": 5.15,
-                "riskTrace": "fixtures/driving/urban-cut-in-risk.json",
-                "ruleViolations": 24.0
+                "riskTrace": "synthetic://driving/urban-cut-in-risk.json",
+                "ruleViolations": 32.9
               },
               "metrics": {
-                "readiness": 68.1,
-                "sceneGrounding": 85.7,
+                "readiness": 57.4,
+                "sceneGrounding": 58.1,
                 "timeToCollision": 5.15,
-                "risk": 33.4,
-                "ruleViolation": 24.0,
-                "abstention": 7.6
+                "risk": 33.6,
+                "ruleViolation": 32.9,
+                "abstention": 15.5
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-driving-safety-bench"
+                "sourceBench": "cvpr-driving-safety-bench",
+                "execution": "torch-driving-scene-risk-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "driving-safety",
               "caseId": "night-crosswalk",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:48Z",
               "model": {
-                "grounder": "vla-scene-grounder",
+                "grounder": "torch-driving-scene-risk-probe",
                 "riskHead": "ttc-risk-head",
                 "ruleMonitor": "safety-rule-monitor"
               },
@@ -11907,36 +18568,39 @@ export const launchInput = {
                   "occlusion": 18,
                   "actionConfidence": 78
                 },
-                "asset": "fixtures/driving/night-crosswalk.mp4"
+                "asset": "synthetic://driving/night-crosswalk.mp4"
               },
               "outputs": {
-                "sceneGroundingMap": "fixtures/driving/night-crosswalk-grounding.png",
+                "sceneGroundingMap": "synthetic://driving/night-crosswalk-grounding.png",
                 "timeToCollision": 5.73,
-                "riskTrace": "fixtures/driving/night-crosswalk-risk.json",
-                "ruleViolations": 23.5
+                "riskTrace": "synthetic://driving/night-crosswalk-risk.json",
+                "ruleViolations": 32.8
               },
               "metrics": {
-                "readiness": 68.2,
-                "sceneGrounding": 84.2,
+                "readiness": 57.1,
+                "sceneGrounding": 55.4,
                 "timeToCollision": 5.73,
-                "risk": 31.7,
-                "ruleViolation": 23.5,
-                "abstention": 7.8
+                "risk": 31.9,
+                "ruleViolation": 32.8,
+                "abstention": 16.0
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-driving-safety-bench"
+                "sourceBench": "cvpr-driving-safety-bench",
+                "execution": "torch-driving-scene-risk-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "driving-safety",
               "caseId": "highway-merge",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:48Z",
               "model": {
-                "grounder": "vla-scene-grounder",
+                "grounder": "torch-driving-scene-risk-probe",
                 "riskHead": "ttc-risk-head",
                 "ruleMonitor": "safety-rule-monitor"
               },
@@ -11947,36 +18611,39 @@ export const launchInput = {
                   "occlusion": 16,
                   "actionConfidence": 84
                 },
-                "asset": "fixtures/driving/highway-merge.mp4"
+                "asset": "synthetic://driving/highway-merge.mp4"
               },
               "outputs": {
-                "sceneGroundingMap": "fixtures/driving/highway-merge-grounding.png",
+                "sceneGroundingMap": "synthetic://driving/highway-merge-grounding.png",
                 "timeToCollision": 4.34,
-                "riskTrace": "fixtures/driving/highway-merge-risk.json",
-                "ruleViolations": 24.1
+                "riskTrace": "synthetic://driving/highway-merge-risk.json",
+                "ruleViolations": 33.9
               },
               "metrics": {
-                "readiness": 68.2,
-                "sceneGrounding": 87.3,
+                "readiness": 56.5,
+                "sceneGrounding": 57.0,
                 "timeToCollision": 4.34,
-                "risk": 34.6,
-                "ruleViolation": 24.1,
-                "abstention": 7.4
+                "risk": 34.8,
+                "ruleViolation": 33.9,
+                "abstention": 16.0
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-driving-safety-bench"
+                "sourceBench": "cvpr-driving-safety-bench",
+                "execution": "torch-driving-scene-risk-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             },
             {
               "jobId": "driving-safety",
               "caseId": "construction-zone",
               "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
+              "createdAt": "2026-08-17T03:14:48Z",
               "model": {
-                "grounder": "vla-scene-grounder",
+                "grounder": "torch-driving-scene-risk-probe",
                 "riskHead": "ttc-risk-head",
                 "ruleMonitor": "safety-rule-monitor"
               },
@@ -11987,347 +18654,30 @@ export const launchInput = {
                   "occlusion": 14,
                   "actionConfidence": 72
                 },
-                "asset": "fixtures/driving/construction-zone.mp4"
+                "asset": "synthetic://driving/construction-zone.mp4"
               },
               "outputs": {
-                "sceneGroundingMap": "fixtures/driving/construction-zone-grounding.png",
+                "sceneGroundingMap": "synthetic://driving/construction-zone-grounding.png",
                 "timeToCollision": 5.82,
-                "riskTrace": "fixtures/driving/construction-zone-risk.json",
-                "ruleViolations": 23.7
+                "riskTrace": "synthetic://driving/construction-zone-risk.json",
+                "ruleViolations": 33.0
               },
               "metrics": {
-                "readiness": 68.2,
-                "sceneGrounding": 83.9,
+                "readiness": 57.1,
+                "sceneGrounding": 55.1,
                 "timeToCollision": 5.82,
-                "risk": 31.9,
-                "ruleViolation": 23.7,
-                "abstention": 9.1
+                "risk": 32.1,
+                "ruleViolation": 33.0,
+                "abstention": 17.3
               },
               "provenance": {
                 "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
+                "accelerator": "Tesla T4",
                 "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-driving-safety-bench"
-              }
-            },
-            {
-              "jobId": "metric-geometry",
-              "caseId": "wide-baseline",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "pose": "torch-pose-bundle-adjuster",
-                "scale": "metric-scale-probe",
-                "surface": "surface-consistency-head"
-              },
-              "inputs": {
-                "geometryControls": {
-                  "baseline": 82,
-                  "textureSparsity": 18,
-                  "scaleAmbiguity": 24,
-                  "surfaceComplexity": 42
-                },
-                "asset": "fixtures/geometry/wide-baseline.json"
-              },
-              "outputs": {
-                "poseGraph": "fixtures/geometry/wide-baseline-pose-graph.json",
-                "scaleTrace": "fixtures/geometry/wide-baseline-scale-trace.json",
-                "surfaceResidualMap": "fixtures/geometry/wide-baseline-surface-residual.png",
-                "topologyWarnings": 13.9
-              },
-              "metrics": {
-                "readiness": 85.8,
-                "poseEvidence": 87.0,
-                "metricEvidence": 86.9,
-                "surfaceConsistency": 83.1,
-                "scaleDrift": 10.1,
-                "topologyRisk": 13.9
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-metric-geometry-bench"
-              }
-            },
-            {
-              "jobId": "metric-geometry",
-              "caseId": "scale-transfer",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "pose": "torch-pose-bundle-adjuster",
-                "scale": "metric-scale-probe",
-                "surface": "surface-consistency-head"
-              },
-              "inputs": {
-                "geometryControls": {
-                  "baseline": 66,
-                  "textureSparsity": 28,
-                  "scaleAmbiguity": 44,
-                  "surfaceComplexity": 46
-                },
-                "asset": "fixtures/geometry/scale-transfer.json"
-              },
-              "outputs": {
-                "poseGraph": "fixtures/geometry/scale-transfer-pose-graph.json",
-                "scaleTrace": "fixtures/geometry/scale-transfer-scale-trace.json",
-                "surfaceResidualMap": "fixtures/geometry/scale-transfer-surface-residual.png",
-                "topologyWarnings": 21.0
-              },
-              "metrics": {
-                "readiness": 78.7,
-                "poseEvidence": 79.2,
-                "metricEvidence": 78.8,
-                "surfaceConsistency": 78.4,
-                "scaleDrift": 21.5,
-                "topologyRisk": 21.0
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-metric-geometry-bench"
-              }
-            },
-            {
-              "jobId": "metric-geometry",
-              "caseId": "thin-structure",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "pose": "torch-pose-bundle-adjuster",
-                "scale": "metric-scale-probe",
-                "surface": "surface-consistency-head"
-              },
-              "inputs": {
-                "geometryControls": {
-                  "baseline": 58,
-                  "textureSparsity": 34,
-                  "scaleAmbiguity": 32,
-                  "surfaceComplexity": 72
-                },
-                "asset": "fixtures/geometry/thin-structure.json"
-              },
-              "outputs": {
-                "poseGraph": "fixtures/geometry/thin-structure-pose-graph.json",
-                "scaleTrace": "fixtures/geometry/thin-structure-scale-trace.json",
-                "surfaceResidualMap": "fixtures/geometry/thin-structure-surface-residual.png",
-                "topologyWarnings": 30.0
-              },
-              "metrics": {
-                "readiness": 75.5,
-                "poseEvidence": 76.8,
-                "metricEvidence": 80.4,
-                "surfaceConsistency": 72.5,
-                "scaleDrift": 22.7,
-                "topologyRisk": 30.0
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-metric-geometry-bench"
-              }
-            },
-            {
-              "jobId": "metric-geometry",
-              "caseId": "low-texture-indoor",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "pose": "torch-pose-bundle-adjuster",
-                "scale": "metric-scale-probe",
-                "surface": "surface-consistency-head"
-              },
-              "inputs": {
-                "geometryControls": {
-                  "baseline": 54,
-                  "textureSparsity": 58,
-                  "scaleAmbiguity": 48,
-                  "surfaceComplexity": 50
-                },
-                "asset": "fixtures/geometry/low-texture-indoor.json"
-              },
-              "outputs": {
-                "poseGraph": "fixtures/geometry/low-texture-indoor-pose-graph.json",
-                "scaleTrace": "fixtures/geometry/low-texture-indoor-scale-trace.json",
-                "surfaceResidualMap": "fixtures/geometry/low-texture-indoor-surface-residual.png",
-                "topologyWarnings": 30.0
-              },
-              "metrics": {
-                "readiness": 72.0,
-                "poseEvidence": 70.1,
-                "metricEvidence": 74.7,
-                "surfaceConsistency": 72.2,
-                "scaleDrift": 29.9,
-                "topologyRisk": 30.0
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-metric-geometry-bench"
-              }
-            },
-            {
-              "jobId": "gaussian-splatting",
-              "caseId": "dense-novel-view",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "renderer": "torch-splat-renderer",
-                "semantic": "semantic-splat-attach",
-                "provenance": "provenance-trace-head"
-              },
-              "inputs": {
-                "splatControls": {
-                  "viewCount": 86,
-                  "splatDensity": 78,
-                  "semanticEntropy": 24,
-                  "provenanceVisibility": 70
-                },
-                "asset": "fixtures/splats/dense-novel-view.json"
-              },
-              "outputs": {
-                "novelViewRenders": "fixtures/splats/dense-novel-view-renders/",
-                "semanticSplatMap": "fixtures/splats/dense-novel-view-semantic-map.json",
-                "provenanceTrace": "fixtures/splats/dense-novel-view-provenance.json",
-                "editLeakageReport": 16.7
-              },
-              "metrics": {
-                "readiness": 85.6,
-                "renderFidelity": 86.6,
-                "semanticAttachment": 86.4,
-                "provenanceTrace": 85.5,
-                "viewInstability": 9.4,
-                "editLeakageRisk": 16.7
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-gaussian-splatting-bench"
-              }
-            },
-            {
-              "jobId": "gaussian-splatting",
-              "caseId": "semantic-edit",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "renderer": "torch-splat-renderer",
-                "semantic": "semantic-splat-attach",
-                "provenance": "provenance-trace-head"
-              },
-              "inputs": {
-                "splatControls": {
-                  "viewCount": 74,
-                  "splatDensity": 72,
-                  "semanticEntropy": 34,
-                  "provenanceVisibility": 76
-                },
-                "asset": "fixtures/splats/semantic-edit.json"
-              },
-              "outputs": {
-                "novelViewRenders": "fixtures/splats/semantic-edit-renders/",
-                "semanticSplatMap": "fixtures/splats/semantic-edit-semantic-map.json",
-                "provenanceTrace": "fixtures/splats/semantic-edit-provenance.json",
-                "editLeakageReport": 21.4
-              },
-              "metrics": {
-                "readiness": 82.2,
-                "renderFidelity": 81.5,
-                "semanticAttachment": 82.4,
-                "provenanceTrace": 86.1,
-                "viewInstability": 15.7,
-                "editLeakageRisk": 21.4
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-gaussian-splatting-bench"
-              }
-            },
-            {
-              "jobId": "gaussian-splatting",
-              "caseId": "provenance-transfer",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "renderer": "torch-splat-renderer",
-                "semantic": "semantic-splat-attach",
-                "provenance": "provenance-trace-head"
-              },
-              "inputs": {
-                "splatControls": {
-                  "viewCount": 68,
-                  "splatDensity": 70,
-                  "semanticEntropy": 42,
-                  "provenanceVisibility": 84
-                },
-                "asset": "fixtures/splats/provenance-transfer.json"
-              },
-              "outputs": {
-                "novelViewRenders": "fixtures/splats/provenance-transfer-renders/",
-                "semanticSplatMap": "fixtures/splats/provenance-transfer-semantic-map.json",
-                "provenanceTrace": "fixtures/splats/provenance-transfer-provenance.json",
-                "editLeakageReport": 24.3
-              },
-              "metrics": {
-                "readiness": 80.5,
-                "renderFidelity": 78.9,
-                "semanticAttachment": 79.8,
-                "provenanceTrace": 87.7,
-                "viewInstability": 18.8,
-                "editLeakageRisk": 24.3
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-gaussian-splatting-bench"
-              }
-            },
-            {
-              "jobId": "gaussian-splatting",
-              "caseId": "sparse-capture",
-              "mode": "cached-real",
-              "createdAt": "2026-08-15T00:00:00Z",
-              "model": {
-                "renderer": "torch-splat-renderer",
-                "semantic": "semantic-splat-attach",
-                "provenance": "provenance-trace-head"
-              },
-              "inputs": {
-                "splatControls": {
-                  "viewCount": 62,
-                  "splatDensity": 66,
-                  "semanticEntropy": 46,
-                  "provenanceVisibility": 72
-                },
-                "asset": "fixtures/splats/sparse-capture.json"
-              },
-              "outputs": {
-                "novelViewRenders": "fixtures/splats/sparse-capture-renders/",
-                "semanticSplatMap": "fixtures/splats/sparse-capture-semantic-map.json",
-                "provenanceTrace": "fixtures/splats/sparse-capture-provenance.json",
-                "editLeakageReport": 27.4
-              },
-              "metrics": {
-                "readiness": 77.7,
-                "renderFidelity": 76.2,
-                "semanticAttachment": 77.8,
-                "provenanceTrace": 83.8,
-                "viewInstability": 23.2,
-                "editLeakageRisk": 27.4
-              },
-              "provenance": {
-                "runtime": "google-colab-pro-plus",
-                "accelerator": "GPU",
-                "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-                "sourceBench": "cvpr-gaussian-splatting-bench"
+                "sourceBench": "cvpr-driving-safety-bench",
+                "execution": "torch-driving-scene-risk-probe",
+                "promotedFrom": "live-colab",
+                "canonicalMode": "cached-real"
               }
             }
           ]
@@ -12337,10 +18687,10 @@ export const launchInput = {
             "validator": "validate_cvpr_colab_results",
             "runtimePlane": "google-colab-pro-plus",
             "expectedMode": "cached-real",
-            "jobs": 10,
-            "expectedResults": 40,
-            "actualResults": 40,
-            "validJobs": 10,
+            "jobs": 14,
+            "expectedResults": 56,
+            "actualResults": 56,
+            "validJobs": 14,
             "issues": 0,
             "status": "valid"
           },
@@ -12410,6 +18760,38 @@ export const launchInput = {
               "ready": true
             },
             {
+              "jobId": "depth-normal-consistency",
+              "bench": "cvpr-depth-normal-consistency-bench",
+              "expectedCases": 4,
+              "actualCases": 4,
+              "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+              "ready": true
+            },
+            {
+              "jobId": "corruption-robustness",
+              "bench": "cvpr-corruption-robustness-bench",
+              "expectedCases": 4,
+              "actualCases": 4,
+              "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+              "ready": true
+            },
+            {
+              "jobId": "prompt-segmentation-robustness",
+              "bench": "cvpr-prompt-segmentation-robustness-bench",
+              "expectedCases": 4,
+              "actualCases": 4,
+              "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+              "ready": true
+            },
+            {
+              "jobId": "video-identity-tracking",
+              "bench": "cvpr-video-identity-tracking-bench",
+              "expectedCases": 4,
+              "actualCases": 4,
+              "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+              "ready": true
+            },
+            {
               "jobId": "metric-geometry",
               "bench": "cvpr-metric-geometry-bench",
               "expectedCases": 4,
@@ -12446,20 +18828,20 @@ export const launchInput = {
           "label": "canonical-cached-results",
           "path": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
           "exists": true,
-          "sizeBytes": 47872,
-          "sha256": "5b537ee059dba5a3722989704ff371a4e189a73ddb5fa3b2c813d7e6ec891eba",
-          "rows": 40,
+          "sizeBytes": 76029,
+          "sha256": "5a5afb62541ae0743302449c10d82ac82c77c9c12b69be389bc67b3f73a49fb8",
+          "rows": 56,
           "modes": [
             "cached-real"
           ],
-          "jobs": 10
+          "jobs": 14
         },
         {
           "label": "run-manifest",
           "path": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_run_manifest.json",
           "exists": true,
-          "sizeBytes": 6196,
-          "sha256": "123cef54337dc9ba7e332f7b58098b2f95bd281f624a55af414b022ff580ae92",
+          "sizeBytes": 8661,
+          "sha256": "539d6abc8e684e0ff2bb9c9e4ff40eac8347c6e885e63081739f111061a7ba11",
           "keys": [
             "controlPlane",
             "jobs",
@@ -12471,46 +18853,46 @@ export const launchInput = {
         },
         {
           "label": "verifier-live-export",
-          "path": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
+          "path": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
           "exists": true,
-          "sizeBytes": 49832,
-          "sha256": "04fe3f893876ac079949e389e1c22dd4753632c96f4e75c0d8695beb8b99c9c1",
-          "rows": 40,
+          "sizeBytes": 71829,
+          "sha256": "d91f0dbc6bbf539767014687453aedb997aa1b7de4da78ef28fda23a04c3dc4a",
+          "rows": 56,
           "modes": [
             "live-colab"
           ],
-          "jobs": 10
+          "jobs": 14
         },
         {
           "label": "promotion-live-export",
           "path": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results_live.json",
           "exists": true,
-          "sizeBytes": 50072,
-          "sha256": "e4c0581aacc50df7abd32ad412febe8a2b5705cd80aa5b23344c278f60e8e53e",
-          "rows": 40,
+          "sizeBytes": 78829,
+          "sha256": "7c1bce45c1e3d38891f2523511d5b9bb0adc4242ad2b0f7d4c7d2032c6113e15",
+          "rows": 56,
           "modes": [
             "live-colab"
           ],
-          "jobs": 10
+          "jobs": 14
         },
         {
           "label": "promotion-canonical-results",
           "path": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
           "exists": true,
-          "sizeBytes": 53072,
-          "sha256": "3ffb96134e662f6c3edf63e07bd21d20c0ac0b7bb1d0cff9530a24b3f9691b52",
-          "rows": 40,
+          "sizeBytes": 78885,
+          "sha256": "8d1bd84fc8c82a1def5ced2af64fd27dbe94548b58fae27092bb5d2bb01143cc",
+          "rows": 56,
           "modes": [
             "cached-real"
           ],
-          "jobs": 10
+          "jobs": 14
         },
         {
           "label": "promotion-delta-registry",
           "path": "analysis/cvpr_colab_promotion_delta/registry.json",
           "exists": true,
-          "sizeBytes": 18250,
-          "sha256": "b82ea6c528e307757d5538c39d663a4c76eebabfd532971c9564d0b9129cdc93",
+          "sizeBytes": 25986,
+          "sha256": "4747f9693c3b5dac24625ae8f8041ceebd71dc1276a754f58566744bd80eee55",
           "keys": [
             "missing",
             "modeMismatches",
@@ -12523,8 +18905,8 @@ export const launchInput = {
           "label": "handoff-zip",
           "path": "analysis/cvpr_colab_handoff_package/cvpr_colab_handoff_package.zip",
           "exists": true,
-          "sizeBytes": 34794,
-          "sha256": "7f174373fa2d48225bd7d67ef24fb7aba84ccc30c20bdc0c4fb74c255523b8c7"
+          "sizeBytes": 40779,
+          "sha256": "e403ca36cf4f1989137cb482d35e3d5cbd389fa03340bce02c563612dfeaae76"
         }
       ]
     },
@@ -12534,11 +18916,11 @@ export const launchInput = {
         "status": "ready",
         "stages": 8,
         "commands": 5,
-        "jobs": 10,
-        "runners": 10,
-        "cachedResults": 40,
-        "liveIntakeResults": 40,
-        "promotionResults": 40,
+        "jobs": 14,
+        "runners": 14,
+        "cachedResults": 56,
+        "liveIntakeResults": 56,
+        "promotionResults": 56,
         "importIssues": 0,
         "deltaStatus": "release",
         "deltaRegressions": 0,
@@ -12620,50 +19002,50 @@ export const launchInput = {
           "label": "handoff-zip",
           "path": "analysis/cvpr_colab_handoff_package/cvpr_colab_handoff_package.zip",
           "exists": true,
-          "sizeBytes": 34794,
-          "sha256": "7f174373fa2d48225bd7d67ef24fb7aba84ccc30c20bdc0c4fb74c255523b8c7"
+          "sizeBytes": 40779,
+          "sha256": "e403ca36cf4f1989137cb482d35e3d5cbd389fa03340bce02c563612dfeaae76"
         },
         {
           "label": "canonical-results",
           "path": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
           "exists": true,
-          "sizeBytes": 47872,
-          "sha256": "5b537ee059dba5a3722989704ff371a4e189a73ddb5fa3b2c813d7e6ec891eba"
+          "sizeBytes": 76029,
+          "sha256": "5a5afb62541ae0743302449c10d82ac82c77c9c12b69be389bc67b3f73a49fb8"
         },
         {
           "label": "live-intake-export",
           "path": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
           "exists": true,
-          "sizeBytes": 49832,
-          "sha256": "04fe3f893876ac079949e389e1c22dd4753632c96f4e75c0d8695beb8b99c9c1"
+          "sizeBytes": 78773,
+          "sha256": "0bac6d820eda7a49d46983a0bc4626df5a2e6d684d07b8a9bdf46c3e797fea06"
         },
         {
           "label": "promoted-results",
           "path": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
           "exists": true,
-          "sizeBytes": 53072,
-          "sha256": "3ffb96134e662f6c3edf63e07bd21d20c0ac0b7bb1d0cff9530a24b3f9691b52"
+          "sizeBytes": 78885,
+          "sha256": "8d1bd84fc8c82a1def5ced2af64fd27dbe94548b58fae27092bb5d2bb01143cc"
         },
         {
           "label": "promotion-delta-registry",
           "path": "analysis/cvpr_colab_promotion_delta/registry.json",
           "exists": true,
-          "sizeBytes": 18250,
-          "sha256": "b82ea6c528e307757d5538c39d663a4c76eebabfd532971c9564d0b9129cdc93"
+          "sizeBytes": 25986,
+          "sha256": "4747f9693c3b5dac24625ae8f8041ceebd71dc1276a754f58566744bd80eee55"
         },
         {
           "label": "release-registry",
           "path": "analysis/cvpr_colab_release_bundle/registry.json",
           "exists": true,
-          "sizeBytes": 8825,
-          "sha256": "fe242a266b7535fc0e240e7cfd9393d5a154020e37997abbed0344681a923b8c"
+          "sizeBytes": 19540,
+          "sha256": "445112c8fd895bf0d1692d013c6da76ec3e7c5e6e5da092db8eb291cec7624ed"
         },
         {
           "label": "validation-registry",
           "path": "analysis/cvpr_validation_center/registry.json",
           "exists": true,
-          "sizeBytes": 9489,
-          "sha256": "c565126a8caf707f2d8c9c4f1f172576740dd34d42adcb1531cfe532c0a744a2"
+          "sizeBytes": 10950,
+          "sha256": "246321c86c99859beafd07416926798b6c64f682cc996460c8309eef72e01f76"
         }
       ]
     },
@@ -12943,14 +19325,14 @@ export const launchInput = {
         "commands": 286,
         "steps": 53,
         "packageTests": 148,
-        "workerJobs": 10,
-        "promotedRunners": 10,
-        "cachedResults": 40,
+        "workerJobs": 14,
+        "promotedRunners": 14,
+        "cachedResults": 56,
         "importIssues": 0,
         "promotionDeltaStatus": "release",
         "promotionRegressions": 0,
         "maxReadinessDrop": 0.0,
-        "validImportJobs": 10,
+        "validImportJobs": 14,
         "implementedBenches": 11,
         "benchCases": 44,
         "benchBlock": 0,
@@ -12962,7 +19344,7 @@ export const launchInput = {
           {
             "command": "node source-code/learning/*/tests/core.test.js",
             "returnCode": 0,
-            "durationSec": 20.437,
+            "durationSec": 109.717,
             "testCount": 148,
             "log": "/tmp/cvpr-core-tests.log",
             "stdoutTail": [
@@ -12975,38 +19357,38 @@ export const launchInput = {
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/validate_cvpr_colab_results.py",
+            "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
             "returnCode": 0,
-            "durationSec": 0.049,
+            "durationSec": 0.27,
             "stdoutTail": [
-              "validated CVPR Colab results: 40 results, 0 issues"
+              "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
             ],
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+            "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
             "returnCode": 0,
-            "durationSec": 0.042,
+            "durationSec": 0.262,
             "stdoutTail": [
-              "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+              "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
             ],
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+            "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
             "returnCode": 0,
-            "durationSec": 0.041,
+            "durationSec": 0.261,
             "stdoutTail": [
-              "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+              "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
             ],
             "stderrTail": []
           },
           {
-            "command": "python3 scripts/build_cvpr_mission_control.py",
+            "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
             "returnCode": 0,
-            "durationSec": 0.04,
+            "durationSec": 0.257,
             "stdoutTail": [
-              "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+              "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
             ],
             "stderrTail": []
           }
@@ -13016,7 +19398,7 @@ export const launchInput = {
         {
           "command": "node source-code/learning/*/tests/core.test.js",
           "returnCode": 0,
-          "durationSec": 20.437,
+          "durationSec": 109.717,
           "testCount": 148,
           "log": "/tmp/cvpr-core-tests.log",
           "stdoutTail": [
@@ -13029,38 +19411,38 @@ export const launchInput = {
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/validate_cvpr_colab_results.py",
+          "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
           "returnCode": 0,
-          "durationSec": 0.049,
+          "durationSec": 0.27,
           "stdoutTail": [
-            "validated CVPR Colab results: 40 results, 0 issues"
+            "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+          "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
           "returnCode": 0,
-          "durationSec": 0.042,
+          "durationSec": 0.262,
           "stdoutTail": [
-            "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+            "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+          "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
           "returnCode": 0,
-          "durationSec": 0.041,
+          "durationSec": 0.261,
           "stdoutTail": [
-            "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+            "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_mission_control.py",
+          "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
           "returnCode": 0,
-          "durationSec": 0.04,
+          "durationSec": 0.257,
           "stdoutTail": [
-            "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+            "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
           ],
           "stderrTail": []
         }
@@ -13071,20 +19453,20 @@ export const launchInput = {
         "commands": 286,
         "steps": 53,
         "packageTests": 148,
-        "workerJobs": 10,
-        "promotedRunners": 10,
-        "cachedResults": 40,
+        "workerJobs": 14,
+        "promotedRunners": 14,
+        "cachedResults": 56,
         "importIssues": 0,
-        "durationSec": 21.961
+        "durationSec": 119.128
       },
       "importReport": {
         "validator": "validate_cvpr_colab_results",
         "runtimePlane": "google-colab-pro-plus",
         "expectedMode": "cached-real",
-        "jobs": 10,
-        "expectedResults": 40,
-        "actualResults": 40,
-        "validJobs": 10,
+        "jobs": 14,
+        "expectedResults": 56,
+        "actualResults": 56,
+        "validJobs": 14,
         "issues": 0,
         "status": "valid"
       },
@@ -13093,13 +19475,16 @@ export const launchInput = {
         "runtimePlane": "google-colab-pro-plus",
         "controlPlane": "local-static-cvpr-site",
         "resultPlane": "registry-and-cached-json",
-        "jobs": 10,
-        "liveCapable": 10,
-        "promotedRunners": 10,
-        "cachedCapable": 10,
-        "cachedResults": 40,
-        "validCachedResults": 40,
+        "jobs": 14,
+        "liveCapable": 14,
+        "promotedRunners": 14,
+        "runnerRows": 14,
+        "cachedCapable": 14,
+        "cachedResults": 56,
+        "validCachedResults": 56,
         "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+        "notebookNativeJobs": 10,
+        "externalLiveJobs": 4,
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
         "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
         "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -13176,6 +19561,38 @@ export const launchInput = {
           "strictMode": "require_real_models=True"
         },
         {
+          "jobId": "depth-normal-consistency",
+          "caseSymbol": "DEPTH_NORMAL_CASES",
+          "loader": "load_depth_normal_models",
+          "runner": "run_depth_normal_consistency_batch",
+          "execution": "torch-cuda-depth-normal-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "corruption-robustness",
+          "caseSymbol": "CORRUPTION_CASES",
+          "loader": "load_corruption_models",
+          "runner": "run_corruption_robustness_batch",
+          "execution": "torchvision-resnet-corruption-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "prompt-segmentation-robustness",
+          "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+          "loader": "load_prompt_segmentation_models",
+          "runner": "run_prompt_segmentation_robustness_batch",
+          "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
+          "jobId": "video-identity-tracking",
+          "caseSymbol": "VIDEO_TRACKING_CASES",
+          "loader": "load_video_tracking_models",
+          "runner": "run_video_identity_tracking_batch",
+          "execution": "torch-cuda-video-tracking-live-demo",
+          "strictMode": "require_real_models=True"
+        },
+        {
           "jobId": "metric-geometry",
           "caseSymbol": "GEOMETRY_CASES",
           "loader": "load_metric_geometry_models",
@@ -13218,8 +19635,8 @@ export const launchInput = {
       "promotionDelta": {
         "delta": "cvpr-colab-promotion-delta",
         "status": "release",
-        "cases": 40,
-        "jobs": 10,
+        "cases": 56,
+        "jobs": 14,
         "missing": 0,
         "modeMismatches": 0,
         "regressions": 0,
@@ -13239,14 +19656,14 @@ export const launchInput = {
       "commands": 286,
       "steps": 53,
       "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
       "promotionDeltaStatus": "release",
       "promotionRegressions": 0,
       "maxReadinessDrop": 0.0,
-      "validImportJobs": 10,
+      "validImportJobs": 14,
       "implementedBenches": 11,
       "benchCases": 44,
       "benchBlock": 0,
@@ -13258,7 +19675,7 @@ export const launchInput = {
         {
           "command": "node source-code/learning/*/tests/core.test.js",
           "returnCode": 0,
-          "durationSec": 20.437,
+          "durationSec": 109.717,
           "testCount": 148,
           "log": "/tmp/cvpr-core-tests.log",
           "stdoutTail": [
@@ -13271,38 +19688,38 @@ export const launchInput = {
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/validate_cvpr_colab_results.py",
+          "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
           "returnCode": 0,
-          "durationSec": 0.049,
+          "durationSec": 0.27,
           "stdoutTail": [
-            "validated CVPR Colab results: 40 results, 0 issues"
+            "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+          "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
           "returnCode": 0,
-          "durationSec": 0.042,
+          "durationSec": 0.262,
           "stdoutTail": [
-            "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+            "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+          "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
           "returnCode": 0,
-          "durationSec": 0.041,
+          "durationSec": 0.261,
           "stdoutTail": [
-            "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+            "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_mission_control.py",
+          "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
           "returnCode": 0,
-          "durationSec": 0.04,
+          "durationSec": 0.257,
           "stdoutTail": [
-            "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+            "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
           ],
           "stderrTail": []
         }
@@ -13312,7 +19729,7 @@ export const launchInput = {
       {
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
-        "durationSec": 20.437,
+        "durationSec": 109.717,
         "testCount": 148,
         "log": "/tmp/cvpr-core-tests.log",
         "stdoutTail": [
@@ -13325,38 +19742,38 @@ export const launchInput = {
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/validate_cvpr_colab_results.py",
+        "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.049,
+        "durationSec": 0.27,
         "stdoutTail": [
-          "validated CVPR Colab results: 40 results, 0 issues"
+          "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+        "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.262,
         "stdoutTail": [
-          "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+        "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.261,
         "stdoutTail": [
-          "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_mission_control.py",
+        "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.257,
         "stdoutTail": [
-          "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+          "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       }
@@ -13367,20 +19784,20 @@ export const launchInput = {
       "commands": 286,
       "steps": 53,
       "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
-      "durationSec": 21.961
+      "durationSec": 119.128
     },
     "importReport": {
       "validator": "validate_cvpr_colab_results",
       "runtimePlane": "google-colab-pro-plus",
       "expectedMode": "cached-real",
-      "jobs": 10,
-      "expectedResults": 40,
-      "actualResults": 40,
-      "validJobs": 10,
+      "jobs": 14,
+      "expectedResults": 56,
+      "actualResults": 56,
+      "validJobs": 14,
       "issues": 0,
       "status": "valid"
     },
@@ -13389,13 +19806,16 @@ export const launchInput = {
       "runtimePlane": "google-colab-pro-plus",
       "controlPlane": "local-static-cvpr-site",
       "resultPlane": "registry-and-cached-json",
-      "jobs": 10,
-      "liveCapable": 10,
-      "promotedRunners": 10,
-      "cachedCapable": 10,
-      "cachedResults": 40,
-      "validCachedResults": 40,
+      "jobs": 14,
+      "liveCapable": 14,
+      "promotedRunners": 14,
+      "runnerRows": 14,
+      "cachedCapable": 14,
+      "cachedResults": 56,
+      "validCachedResults": 56,
       "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+      "notebookNativeJobs": 10,
+      "externalLiveJobs": 4,
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
       "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
       "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -13472,6 +19892,38 @@ export const launchInput = {
         "strictMode": "require_real_models=True"
       },
       {
+        "jobId": "depth-normal-consistency",
+        "caseSymbol": "DEPTH_NORMAL_CASES",
+        "loader": "load_depth_normal_models",
+        "runner": "run_depth_normal_consistency_batch",
+        "execution": "torch-cuda-depth-normal-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "corruption-robustness",
+        "caseSymbol": "CORRUPTION_CASES",
+        "loader": "load_corruption_models",
+        "runner": "run_corruption_robustness_batch",
+        "execution": "torchvision-resnet-corruption-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+        "loader": "load_prompt_segmentation_models",
+        "runner": "run_prompt_segmentation_robustness_batch",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "caseSymbol": "VIDEO_TRACKING_CASES",
+        "loader": "load_video_tracking_models",
+        "runner": "run_video_identity_tracking_batch",
+        "execution": "torch-cuda-video-tracking-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
         "jobId": "metric-geometry",
         "caseSymbol": "GEOMETRY_CASES",
         "loader": "load_metric_geometry_models",
@@ -13514,8 +19966,8 @@ export const launchInput = {
     "promotionDelta": {
       "delta": "cvpr-colab-promotion-delta",
       "status": "release",
-      "cases": 40,
-      "jobs": 10,
+      "cases": 56,
+      "jobs": 14,
       "missing": 0,
       "modeMismatches": 0,
       "regressions": 0,
@@ -13532,17 +19984,17 @@ export const launchInput = {
       "commands": 286,
       "steps": 87,
       "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
-      "durationSec": 23.153
+      "durationSec": 127.969
     },
     "steps": [
       {
         "command": "python3 scripts/build_cvpr_systems_lab.py",
         "returnCode": 0,
-        "durationSec": 0.038,
+        "durationSec": 0.243,
         "stdoutTail": [
           "wrote cvpr-systems-lab.html: 11 systems, 33 stages"
         ],
@@ -13551,7 +20003,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_systems_lab.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.125,
         "stdoutTail": [
           "verified CVPR systems lab: 11 systems, 33 stages, 11 clusters"
         ],
@@ -13560,7 +20012,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_demo_lab.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.126,
         "stdoutTail": [
           "wrote cvpr-demo-lab.html: 41 interactive demos (33 stage demos)"
         ],
@@ -13569,7 +20021,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_demo_lab.py",
         "returnCode": 0,
-        "durationSec": 0.022,
+        "durationSec": 0.155,
         "stdoutTail": [
           "verified CVPR demo lab: 41 demos, 8 flagship, 33 stage demos"
         ],
@@ -13578,7 +20030,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_demo_arena.py",
         "returnCode": 0,
-        "durationSec": 0.036,
+        "durationSec": 0.137,
         "stdoutTail": [
           "wrote cvpr-demo-arena.html: 41 demos x 8 scenarios = 328 evaluations"
         ],
@@ -13587,7 +20039,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_demo_arena.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.136,
         "stdoutTail": [
           "verified CVPR demo arena: 41 demos, 8 scenarios, 328 evaluations"
         ],
@@ -13596,7 +20048,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_demo_playbook.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.168,
         "stdoutTail": [
           "wrote cvpr-demo-playbook.html: 8 plays, 0 critical"
         ],
@@ -13605,7 +20057,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_demo_playbook.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.125,
         "stdoutTail": [
           "verified CVPR demo playbook: 8 plays, 0 critical, 8 clusters"
         ],
@@ -13614,34 +20066,34 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.196,
         "stdoutTail": [
-          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
+          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.214,
         "stdoutTail": [
-          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
+          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.204,
         "stdoutTail": [
-          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
+          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.195,
         "stdoutTail": [
           "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
         ],
@@ -13650,7 +20102,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
         "returnCode": 0,
-        "durationSec": 0.024,
+        "durationSec": 0.19,
         "stdoutTail": [
           "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
         ],
@@ -13659,7 +20111,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.163,
         "stdoutTail": [
           "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
         ],
@@ -13668,7 +20120,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.138,
         "stdoutTail": [
           "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
         ],
@@ -13677,7 +20129,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.27,
         "stdoutTail": [
           "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
@@ -13686,7 +20138,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.103,
         "stdoutTail": [
           "wrote cvpr-metric-geometry-bench.html: 4 release cases"
         ],
@@ -13695,7 +20147,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.102,
         "stdoutTail": [
           "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
         ],
@@ -13704,70 +20156,70 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.218,
         "stdoutTail": [
-          "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+          "wrote cvpr-colab-gpu-worker.html: 14 jobs, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/validate_cvpr_colab_results.py",
         "returnCode": 0,
-        "durationSec": 0.049,
+        "durationSec": 0.228,
         "stdoutTail": [
-          "validated CVPR Colab results: 40 results, 0 issues"
+          "validated CVPR Colab results: 56 results, 0 issues"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_gpu_worker.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.174,
         "stdoutTail": [
-          "verified CVPR Colab GPU worker: 10 jobs, 40 cached results"
+          "verified CVPR Colab GPU worker: 14 jobs, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.197,
         "stdoutTail": [
-          "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+          "wrote cvpr-colab-handoff-package.html: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.261,
         "stdoutTail": [
-          "verified CVPR Colab handoff package: 10 jobs, 8 zip entries"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.176,
         "stdoutTail": [
-          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
+          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_driving_safety_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.145,
         "stdoutTail": [
-          "verified CVPR driving safety bench: 4 cases, max risk 34.6"
+          "verified CVPR driving safety bench: 4 cases, max risk 34.8"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.185,
         "stdoutTail": [
           "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
         ],
@@ -13776,7 +20228,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_constraint_generation_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.238,
         "stdoutTail": [
           "verified CVPR constraint generation bench: 4 cases, max identity damage 34.8"
         ],
@@ -13785,7 +20237,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.102,
         "stdoutTail": [
           "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
         ],
@@ -13794,7 +20246,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_compute_serving_bench.py",
         "returnCode": 0,
-        "durationSec": 0.024,
+        "durationSec": 0.183,
         "stdoutTail": [
           "verified CVPR compute serving bench: 4 cases, min evidence 85.7"
         ],
@@ -13803,61 +20255,61 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.23,
         "stdoutTail": [
-          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
+          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_clinical_shift_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.14,
         "stdoutTail": [
-          "verified CVPR clinical shift bench: 4 cases, max risk 33.5"
+          "verified CVPR clinical shift bench: 4 cases, max risk 11.1"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.028,
+        "durationSec": 0.133,
         "stdoutTail": [
-          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
+          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.257,
         "stdoutTail": [
-          "verified CVPR adversarial provenance bench: 4 cases, min evidence 82.5"
+          "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.262,
         "stdoutTail": [
-          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 87.1"
+          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.181,
         "stdoutTail": [
-          "verified CVPR long-tail grounding bench: 4 cases, min evidence 87.1"
+          "verified CVPR long-tail grounding bench: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
         "returnCode": 0,
-        "durationSec": 0.028,
+        "durationSec": 0.202,
         "stdoutTail": [
           "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
         ],
@@ -13866,7 +20318,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_restoration_fidelity_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.186,
         "stdoutTail": [
           "verified CVPR restoration fidelity bench: 4 cases, max fabricated risk 29.4"
         ],
@@ -13875,7 +20327,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.182,
         "stdoutTail": [
           "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
         ],
@@ -13884,7 +20336,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_temporal_rollout_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.232,
         "stdoutTail": [
           "verified CVPR temporal rollout bench: 4 cases, max drift 36.1"
         ],
@@ -13893,7 +20345,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.133,
         "stdoutTail": [
           "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
@@ -13902,7 +20354,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.123,
         "stdoutTail": [
           "verified CVPR VLM answer verification bench: 4 cases, max unsupported risk 32.2"
         ],
@@ -13911,7 +20363,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.114,
         "stdoutTail": [
           "wrote cvpr-metric-geometry-bench.html: 4 release cases"
         ],
@@ -13920,7 +20372,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_metric_geometry_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.11,
         "stdoutTail": [
           "verified CVPR metric geometry bench: 4 cases, max scale drift 29.9"
         ],
@@ -13929,7 +20381,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.222,
         "stdoutTail": [
           "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
         ],
@@ -13938,7 +20390,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_gaussian_splatting_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.127,
         "stdoutTail": [
           "verified CVPR Gaussian Splatting bench: 4 cases, max edit leakage 27.4"
         ],
@@ -13947,7 +20399,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_mission_control.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.224,
         "stdoutTail": [
           "wrote cvpr-mission-control.html: 11 systems, 11 benches"
         ],
@@ -13956,7 +20408,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_mission_control.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.172,
         "stdoutTail": [
           "verified CVPR mission control: 11 systems, 11 benches, 44 cases"
         ],
@@ -13965,7 +20417,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_failure_atlas.py",
         "returnCode": 0,
-        "durationSec": 0.039,
+        "durationSec": 0.223,
         "stdoutTail": [
           "wrote cvpr-failure-atlas.html: 44 cases, 11 families"
         ],
@@ -13974,7 +20426,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_failure_atlas.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.237,
         "stdoutTail": [
           "verified CVPR failure atlas: 44 cases, 11 families"
         ],
@@ -13983,7 +20435,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/cvpr_paper_system_gate_experiments.py",
         "returnCode": 0,
-        "durationSec": 0.036,
+        "durationSec": 0.257,
         "stdoutTail": [
           "wrote cvpr-paper-to-system-gate experiment results"
         ],
@@ -13992,7 +20444,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_paper_system_gate.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.204,
         "stdoutTail": [
           "wrote cvpr-paper-to-system-gate package and page"
         ],
@@ -14001,16 +20453,16 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_validation_center.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.149,
         "stdoutTail": [
-          "wrote cvpr-validation-center.html: 51 steps, 26 tests"
+          "wrote cvpr-validation-center.html: 51 steps, 148 tests"
         ],
         "stderrTail": []
       },
       {
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
-        "durationSec": 20.437,
+        "durationSec": 109.717,
         "testCount": 148,
         "log": "/tmp/cvpr-core-tests.log",
         "stdoutTail": [
@@ -14025,7 +20477,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_validation_center.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.214,
         "stdoutTail": [
           "wrote cvpr-validation-center.html: 53 steps, 148 tests"
         ],
@@ -14034,7 +20486,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_validation_center.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.133,
         "stdoutTail": [
           "verified CVPR validation center: 53 steps, 148 package tests"
         ],
@@ -14043,61 +20495,61 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
         "returnCode": 0,
-        "durationSec": 0.092,
+        "durationSec": 0.339,
         "stdoutTail": [
-          "verified CVPR live Colab intake: 40 live results, 0 issues"
+          "verified CVPR live Colab intake: 56 live results, 0 issues"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
         "returnCode": 0,
-        "durationSec": 0.083,
+        "durationSec": 0.591,
         "stdoutTail": [
-          "verified CVPR live Colab promotion: 40 promoted cached-real results"
+          "verified CVPR live Colab promotion: 56 promoted cached-real results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_promotion_delta.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.208,
         "stdoutTail": [
-          "wrote cvpr-colab-promotion-delta.html: 40 cases, 0 regressions"
+          "wrote cvpr-colab-promotion-delta.html: 56 cases, 0 regressions"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_promotion_delta.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.258,
         "stdoutTail": [
-          "verified CVPR Colab promotion delta: 40 cases, 0 regressions"
+          "verified CVPR Colab promotion delta: 56 cases, 0 regressions"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_release_bundle.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.435,
         "stdoutTail": [
-          "wrote cvpr-colab-release-bundle.html: 10 runners, 40 cached results"
+          "wrote cvpr-colab-release-bundle.html: 14 runners, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_release_bundle.py",
         "returnCode": 0,
-        "durationSec": 0.024,
+        "durationSec": 0.215,
         "stdoutTail": [
-          "verified CVPR Colab release bundle: 10 runners, 40 cached results"
+          "verified CVPR Colab release bundle: 14 runners, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_evidence_ledger.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.269,
         "stdoutTail": [
           "wrote cvpr-colab-evidence-ledger.html: 7 artifacts, status release"
         ],
@@ -14106,7 +20558,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_colab_evidence_ledger.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.213,
         "stdoutTail": [
           "verified CVPR Colab evidence ledger: 7 artifacts"
         ],
@@ -14115,7 +20567,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_colab_run_receipt.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.327,
         "stdoutTail": [
           "wrote cvpr-colab-run-receipt.html: 8 stages, status ready"
         ],
@@ -14124,7 +20576,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_colab_run_receipt.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.123,
         "stdoutTail": [
           "verified CVPR Colab run receipt: 8 stages, 7 artifacts"
         ],
@@ -14133,7 +20585,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_theme_release_matrix.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.224,
         "stdoutTail": [
           "wrote cvpr-theme-release-matrix.html: 8 themes, status release"
         ],
@@ -14142,7 +20594,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_theme_release_matrix.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.313,
         "stdoutTail": [
           "verified CVPR theme release matrix: 8 themes, 11 systems"
         ],
@@ -14151,7 +20603,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_production_release_brief.py",
         "returnCode": 0,
-        "durationSec": 0.043,
+        "durationSec": 0.426,
         "stdoutTail": [
           "wrote cvpr-production-release-brief.html: release gate, 328 arena releases"
         ],
@@ -14160,7 +20612,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_production_release_brief.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.099,
         "stdoutTail": [
           "verified CVPR production release brief: release gate, 328 arena releases"
         ],
@@ -14169,25 +20621,25 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_production_coverage_audit.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.146,
         "stdoutTail": [
-          "wrote cvpr-production-coverage-audit.html: release gate, 10 Colab Pro+ jobs, 0 missing evidence"
+          "wrote cvpr-production-coverage-audit.html: release gate, 14 Colab Pro+ jobs, 0 missing evidence"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_production_coverage_audit.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.314,
         "stdoutTail": [
-          "verified CVPR production coverage audit: 11 systems, 10 Colab Pro+ jobs, 0 missing evidence"
+          "verified CVPR production coverage audit: 11 systems, 14 Colab Pro+ jobs, 0 missing evidence"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_remediation_board.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.268,
         "stdoutTail": [
           "wrote cvpr-remediation-board.html: 0 block tasks, status ready"
         ],
@@ -14196,7 +20648,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_remediation_board.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.155,
         "stdoutTail": [
           "verified CVPR remediation board: 0 block tasks"
         ],
@@ -14205,7 +20657,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_remediation_sprint_plan.py",
         "returnCode": 0,
-        "durationSec": 0.037,
+        "durationSec": 0.291,
         "stdoutTail": [
           "wrote cvpr-remediation-sprint-plan.html: 3 sprints, status ready"
         ],
@@ -14214,7 +20666,7 @@ export const launchInput = {
       {
         "command": "python3 scripts/verify_cvpr_remediation_sprint_plan.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.114,
         "stdoutTail": [
           "verified CVPR remediation sprint plan: 3 sprints, 0 tasks"
         ],
@@ -14223,106 +20675,106 @@ export const launchInput = {
       {
         "command": "python3 scripts/build_cvpr_colab_operations_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.039,
+        "durationSec": 0.212,
         "stdoutTail": [
-          "wrote cvpr-colab-operations-dashboard.html: 10 jobs, status ready"
+          "wrote cvpr-colab-operations-dashboard.html: 14 jobs, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_operations_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.153,
         "stdoutTail": [
-          "verified CVPR Colab operations dashboard: 10 jobs, 53 steps"
+          "verified CVPR Colab operations dashboard: 14 jobs, 53 steps"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_execution_planner.py",
         "returnCode": 0,
-        "durationSec": 0.038,
+        "durationSec": 0.354,
         "stdoutTail": [
-          "wrote cvpr-colab-execution-planner.html: 3 waves, 40 expected results, status ready"
+          "wrote cvpr-colab-execution-planner.html: 3 waves, 56 expected results, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_execution_planner.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.134,
         "stdoutTail": [
-          "verified CVPR Colab execution planner: 3 waves, 40 expected results"
+          "verified CVPR Colab execution planner: 3 waves, 56 expected results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.173,
         "stdoutTail": [
-          "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 40 expected live results, status ready"
+          "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 56 expected live results, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
         "returnCode": 0,
-        "durationSec": 0.028,
+        "durationSec": 0.366,
         "stdoutTail": [
-          "verified CVPR demo evidence cockpit: 41 demos, 40 expected live results"
+          "verified CVPR demo evidence cockpit: 41 demos, 56 expected live results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_result_replay.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.185,
         "stdoutTail": [
-          "wrote cvpr-colab-result-replay.html: 40/40 results, 30 demos, status ready"
+          "wrote cvpr-colab-result-replay.html: 56/56 results, 30 demos, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_result_replay.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.149,
         "stdoutTail": [
-          "verified CVPR Colab result replay: 40/40 results, 30 stage demos"
+          "verified CVPR Colab result replay: 56/56 results, 30 stage demos"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_release_slo_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.172,
         "stdoutTail": [
-          "wrote cvpr-release-slo-dashboard.html: 10/10 SLOs, status release"
+          "wrote cvpr-release-slo-dashboard.html: 9/10 SLOs, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_slo_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.418,
         "stdoutTail": [
-          "verified CVPR release SLO dashboard: 10/10 SLOs, readiness floor 68.1"
+          "verified CVPR release SLO dashboard: 9/10 SLOs, readiness floor 44.0"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_release_regression_drillbook.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.574,
         "stdoutTail": [
-          "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status ready"
+          "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_regression_drillbook.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.168,
         "stdoutTail": [
           "verified CVPR release regression drillbook: 10/10 drills"
         ],
@@ -14344,14 +20796,14 @@ export const launchSteps = [
     "surface": "cvpr-release-slo-dashboard.html",
     "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
     "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
-    "status": "release"
+    "status": "block"
   },
   {
     "step": "Regression drills",
     "surface": "cvpr-release-regression-drillbook.html",
     "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
     "evidence": "analysis/cvpr_release_regression_drillbook/registry.json",
-    "status": "ready"
+    "status": "block"
   },
   {
     "step": "Colab operations",
@@ -14391,10 +20843,10 @@ export const launchSteps = [
 ];
 export const summary = {
   "pack": "cvpr-launch-readiness-pack",
-  "status": "launch-ready",
+  "status": "block",
   "releaseGate": "release",
-  "sloStatus": "release",
-  "drillbookStatus": "ready",
+  "sloStatus": "block",
+  "drillbookStatus": "block",
   "operationsStatus": "ready",
   "validationGate": "release",
   "fullStackStatus": "valid",
@@ -14405,12 +20857,12 @@ export const summary = {
   "benchCases": 44,
   "arenaRelease": 328,
   "arenaPairings": 328,
-  "workerJobs": 10,
-  "cachedResults": 40,
-  "liveIntakeResults": 40,
+  "workerJobs": 14,
+  "cachedResults": 56,
+  "liveIntakeResults": 56,
   "packageTests": 148,
-  "criticalFailures": 0,
+  "criticalFailures": 1,
   "importIssues": 0,
-  "readinessFloor": 68.1,
-  "avgReadiness": 78.22
+  "readinessFloor": 44.0,
+  "avgReadiness": 75.14
 };

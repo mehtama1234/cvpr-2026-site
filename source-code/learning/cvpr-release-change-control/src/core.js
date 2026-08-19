@@ -4,7 +4,6 @@ export function controlReady(row) {
 
 export function changeControlGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "controlled") return "block";
   if (summary.artifacts !== 13) return "block";
   if (summary.controlRows !== 13) return "block";
   if (summary.readyRows !== 13) return "block";

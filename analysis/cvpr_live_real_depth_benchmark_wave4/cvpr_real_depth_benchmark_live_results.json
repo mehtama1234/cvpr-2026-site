@@ -1,0 +1,126 @@
+[
+  {
+    "jobId": "real-depth-benchmark",
+    "caseId": "astronaut",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-real-image-benchmark"
+    },
+    "inputs": {
+      "asset": "skimage.data.astronaut"
+    },
+    "outputs": {
+      "depthSpread": 2517.72803,
+      "curvature": 20.863123,
+      "gradientEnergy": 27.591808
+    },
+    "metrics": {
+      "readiness": 10.0,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 100.0,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-benchmark",
+      "execution": "transformers-dpt-real-image-depth-live-demo"
+    }
+  },
+  {
+    "jobId": "real-depth-benchmark",
+    "caseId": "coffee",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-real-image-benchmark"
+    },
+    "inputs": {
+      "asset": "skimage.data.coffee"
+    },
+    "outputs": {
+      "depthSpread": 2349.24463,
+      "curvature": 15.184457,
+      "gradientEnergy": 28.337692
+    },
+    "metrics": {
+      "readiness": 10.0,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 100.0,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-benchmark",
+      "execution": "transformers-dpt-real-image-depth-live-demo"
+    }
+  },
+  {
+    "jobId": "real-depth-benchmark",
+    "caseId": "chelsea",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-real-image-benchmark"
+    },
+    "inputs": {
+      "asset": "skimage.data.chelsea"
+    },
+    "outputs": {
+      "depthSpread": 2207.91577,
+      "curvature": 3.035093,
+      "gradientEnergy": 18.462389
+    },
+    "metrics": {
+      "readiness": 10.0,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 100.0,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-benchmark",
+      "execution": "transformers-dpt-real-image-depth-live-demo"
+    }
+  },
+  {
+    "jobId": "real-depth-benchmark",
+    "caseId": "rocket",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:21Z",
+    "model": {
+      "depth": "Intel/dpt-hybrid-midas",
+      "normalProbe": "depth-gradient-real-image-benchmark"
+    },
+    "inputs": {
+      "asset": "skimage.data.rocket"
+    },
+    "outputs": {
+      "depthSpread": 1201.43848,
+      "curvature": 21.702442,
+      "gradientEnergy": 43.20245
+    },
+    "metrics": {
+      "readiness": 10.0,
+      "surfaceConsistency": 0.0,
+      "scaleDrift": 100.0,
+      "thinStructureRisk": 100.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-depth-benchmark",
+      "execution": "transformers-dpt-real-image-depth-live-demo"
+    }
+  }
+]

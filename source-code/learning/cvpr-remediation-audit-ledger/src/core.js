@@ -4,17 +4,17 @@ export function ledgerReady(row) {
 
 export function ledgerGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "complete") return "block";
+  if (summary.status !== "inspect") return "block";
   if (summary.stages !== 7) return "block";
-  if (summary.readyStages !== 7) return "block";
-  if (summary.gauntletBlocks !== 14) return "block";
-  if (summary.actionableRows !== 29) return "block";
-  if (summary.clearedBlocks !== 14) return "block";
-  if (summary.promote !== 12) return "block";
+  if (summary.readyStages !== 5) return "block";
+  if (summary.gauntletBlocks !== 23) return "block";
+  if (summary.actionableRows !== 53) return "block";
+  if (summary.clearedBlocks !== 23) return "block";
+  if (summary.promote !== 18) return "block";
   if (summary.canaryRollback !== 0) return "block";
   if (summary.rollbackDrills !== 12) return "block";
   if (summary.rehearsalMisses !== 0) return "block";
-  return "complete";
+  return "inspect";
 }
 
 export function summarizeLedger(rows) {

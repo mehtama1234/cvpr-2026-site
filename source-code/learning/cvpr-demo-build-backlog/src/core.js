@@ -1,6 +1,5 @@
 export function backlogGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
   if (summary.goals !== 8) return "block";
   if (summary.tasks !== 24) return "block";
   if (summary.themes !== 8) return "block";

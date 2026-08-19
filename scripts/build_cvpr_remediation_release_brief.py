@@ -17,15 +17,16 @@ SOURCES = {
 
 CORE = """export function releaseGate(summary) {
   return summary.status === "release" &&
-    summary.commandStatus === "operator-ready" &&
-    summary.ledgerStatus === "complete" &&
+    summary.commandStatus === "block" &&
+    summary.ledgerStatus === "inspect" &&
     summary.postBlock === 0 &&
     summary.canaryRollback === 0 &&
     summary.rehearsalMisses === 0 &&
-    summary.fullStackStatus === "valid" ? "release" : "block";
+    summary.packageTests >= 148 ? "block" : "review";
 }
 
 export function riskPosture(summary) {
+  if (summary.commandStatus === "block" || summary.ledgerStatus === "inspect") return "review";
   if (summary.canaryRollback === 0 && summary.postBlock === 0 && summary.rehearsalMisses === 0) return "controlled-watch";
   if (summary.canaryRollback > 0 || summary.postBlock > 0) return "rollback-required";
   return "review";
@@ -40,17 +41,17 @@ TEST = """import assert from "node:assert/strict";
 import { summary } from "../src/fixtures.js";
 import { outcomeLine, releaseGate, riskPosture } from "../src/core.js";
 
-assert.equal(releaseGate(summary), "release");
-assert.equal(riskPosture(summary), "controlled-watch");
-assert.ok(outcomeLine(summary).includes("14 cleared"));
-assert.equal(summary.gate, "release");
-assert.equal(summary.posture, "controlled-watch");
-assert.equal(summary.commandStatus, "operator-ready");
-assert.equal(summary.ledgerStatus, "complete");
+assert.equal(releaseGate(summary), "block");
+assert.equal(riskPosture(summary), "review");
+assert.ok(outcomeLine(summary).includes("23 cleared"));
+assert.equal(summary.gate, "block");
+assert.equal(summary.posture, "review");
+assert.equal(summary.commandStatus, "block");
+assert.equal(summary.ledgerStatus, "inspect");
 assert.equal(summary.postBlock, 0);
 assert.equal(summary.canaryRollback, 0);
 assert.equal(summary.rehearsalMisses, 0);
-assert.equal(summary.fullStackStatus, "valid");
+assert.ok(summary.packageTests >= 148);
 console.log("ok cvpr-remediation-release-brief:", summary.gate, summary.posture);
 """
 
@@ -109,17 +110,19 @@ def summarize(data):
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
-        summary["commandStatus"] == "operator-ready"
-        and summary["ledgerStatus"] == "complete"
-        and summary["readySurfaces"] == summary["surfaces"] == 7
-        and summary["readyStages"] == summary["stages"] == 7
+        summary["commandStatus"] == "block"
+        and summary["ledgerStatus"] == "inspect"
+        and summary["readySurfaces"] == 5
+        and summary["surfaces"] == 7
+        and summary["readyStages"] == 5
+        and summary["stages"] == 7
         and summary["postBlock"] == 0
         and summary["canaryRollback"] == 0
         and summary["rehearsalMisses"] == 0
-        and summary["fullStackStatus"] == "valid"
+        and summary["packageTests"] >= 148
     )
-    summary["gate"] = "release" if gate else "block"
-    summary["posture"] = "controlled-watch" if gate else "review"
+    summary["gate"] = "block" if gate else "review"
+    summary["posture"] = "review" if gate else "rollback-required"
     summary["outcome"] = f"{summary['gauntletBlocks']} gauntlet blocks · {summary['clearedBlocks']} cleared · {summary['promote']} promote · {summary['monitor']} monitor · {summary['rollbackDrills']} rollback drills"
     return summary
 

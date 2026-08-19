@@ -1,0 +1,14 @@
+[colab] Creating session 'run-e8dab2'...
+[colab] Session READY (run-e8dab2). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_compute_serving_demo.py...
+[colab] Stopping session 'run-e8dab2'...
+[colab] Session terminated.
+
+
+[fallback-attempts]
+[
+  {
+    "gpu": "T4",
+    "returncode": 0,
+    "stderr": "[colab] Creating session 'run-e8dab2'...\n[colab] Session READY (run-e8dab2). Executing /home/manishmehta/ui-projects/cvpr-2026-site/scripts/colab_live_compute_serving_demo.py...\n[colab] Stopping session 'run-e8dab2'...\n[colab] Session terminated.\n"
+  }
+]

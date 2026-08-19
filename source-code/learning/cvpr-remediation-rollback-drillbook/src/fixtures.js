@@ -1,5 +1,80 @@
 export const canaryRows = [
   {
+    "id": "adaptive-serving/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "adaptive-serving/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "promote",
+    "afterDecision": "release",
+    "after": {
+      "readiness": 80.8,
+      "risk": 31.4,
+      "evidence": 82.3,
+      "resilience": 77.0
+    },
+    "metrics": {
+      "drift": 6.2,
+      "rollbackRisk": 20.0,
+      "trafficPct": 20
+    },
+    "canaryStatus": "clean",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "adaptive-serving/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+    "promotionId": "adaptive-serving/adversarial-text-overlay/review-hardening/retest/promotion",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "promote",
+    "afterDecision": "release",
+    "after": {
+      "readiness": 77.8,
+      "risk": 39.4,
+      "evidence": 78.3,
+      "resilience": 72.1
+    },
+    "metrics": {
+      "drift": 7.4,
+      "rollbackRisk": 24.6,
+      "trafficPct": 20
+    },
+    "canaryStatus": "clean",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "adaptive-serving/unsupported-query/review-hardening/retest/promotion/canary",
+    "promotionId": "adaptive-serving/unsupported-query/review-hardening/retest/promotion",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 75.8,
+      "risk": 42.4,
+      "evidence": 74.3,
+      "resilience": 69.3
+    },
+    "metrics": {
+      "drift": 4.4,
+      "rollbackRisk": 12.2,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
     "id": "adaptive-serving/gpu-brownout/review-hardening/retest/promotion/canary",
     "promotionId": "adaptive-serving/gpu-brownout/review-hardening/retest/promotion",
     "demoId": "adaptive-serving",
@@ -75,6 +150,81 @@ export const canaryRows = [
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
+    "id": "constraint-edit/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "constraint-edit/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "promote",
+    "afterDecision": "release",
+    "after": {
+      "readiness": 84.8,
+      "risk": 38.4,
+      "evidence": 85.1,
+      "resilience": 77.0
+    },
+    "metrics": {
+      "drift": 6.8,
+      "rollbackRisk": 23.5,
+      "trafficPct": 20
+    },
+    "canaryStatus": "clean",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "constraint-edit/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+    "promotionId": "constraint-edit/adversarial-text-overlay/review-hardening/retest/promotion",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 81.8,
+      "risk": 46.4,
+      "evidence": 81.1,
+      "resilience": 72.1
+    },
+    "metrics": {
+      "drift": 4.4,
+      "rollbackRisk": 13.1,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "constraint-edit/unsupported-query/review-hardening/retest/promotion/canary",
+    "promotionId": "constraint-edit/unsupported-query/review-hardening/retest/promotion",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 79.8,
+      "risk": 49.4,
+      "evidence": 77.1,
+      "resilience": 69.3
+    },
+    "metrics": {
+      "drift": 4.7,
+      "rollbackRisk": 14.0,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
     "id": "constraint-edit/gpu-brownout/review-hardening/retest/promotion/canary",
     "promotionId": "constraint-edit/gpu-brownout/review-hardening/retest/promotion",
     "demoId": "constraint-edit",
@@ -144,6 +294,81 @@ export const canaryRows = [
     "metrics": {
       "drift": 5.0,
       "rollbackRisk": 13.7,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "open-vocab/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "open-vocab/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "promote",
+    "afterDecision": "release",
+    "after": {
+      "readiness": 87.3,
+      "risk": 36.6,
+      "evidence": 87.6,
+      "resilience": 79.2
+    },
+    "metrics": {
+      "drift": 6.4,
+      "rollbackRisk": 22.3,
+      "trafficPct": 20
+    },
+    "canaryStatus": "clean",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "open-vocab/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+    "promotionId": "open-vocab/adversarial-text-overlay/review-hardening/retest/promotion",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 84.3,
+      "risk": 44.6,
+      "evidence": 83.6,
+      "resilience": 74.3
+    },
+    "metrics": {
+      "drift": 4.2,
+      "rollbackRisk": 12.6,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "open-vocab/unsupported-query/review-hardening/retest/promotion/canary",
+    "promotionId": "open-vocab/unsupported-query/review-hardening/retest/promotion",
+    "demoId": "open-vocab",
+    "demoTitle": "Open-Vocabulary Failure Hunt",
+    "theme": "Naming and locating what's in the picture",
+    "page": "cvpr-open-vocab-failure-hunt.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 82.3,
+      "risk": 47.6,
+      "evidence": 79.6,
+      "resilience": 71.5
+    },
+    "metrics": {
+      "drift": 4.5,
+      "rollbackRisk": 13.4,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -250,6 +475,81 @@ export const canaryRows = [
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
+    "id": "3d-edit-provenance/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "3d-edit-provenance/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 85.8,
+      "risk": 43.3,
+      "evidence": 82.1,
+      "resilience": 75.1
+    },
+    "metrics": {
+      "drift": 4.1,
+      "rollbackRisk": 12.2,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "3d-edit-provenance/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+    "promotionId": "3d-edit-provenance/adversarial-text-overlay/review-hardening/retest/promotion",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 82.8,
+      "risk": 51.3,
+      "evidence": 78.1,
+      "resilience": 70.2
+    },
+    "metrics": {
+      "drift": 4.8,
+      "rollbackRisk": 14.5,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "3d-edit-provenance/unsupported-query/review-hardening/retest/promotion/canary",
+    "promotionId": "3d-edit-provenance/unsupported-query/review-hardening/retest/promotion",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 87.8,
+      "risk": 47.3,
+      "evidence": 78.1,
+      "resilience": 73.7
+    },
+    "metrics": {
+      "drift": 4.5,
+      "rollbackRisk": 13.4,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
     "id": "3d-edit-provenance/gpu-brownout/review-hardening/retest/promotion/canary",
     "promotionId": "3d-edit-provenance/gpu-brownout/review-hardening/retest/promotion",
     "demoId": "3d-edit-provenance",
@@ -344,6 +644,81 @@ export const canaryRows = [
     "metrics": {
       "drift": 7.9,
       "rollbackRisk": 25.6,
+      "trafficPct": 20
+    },
+    "canaryStatus": "clean",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "temporal-counterfactual/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "temporal-counterfactual/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 86.4,
+      "risk": 45.4,
+      "evidence": 69.8,
+      "resilience": 71.9
+    },
+    "metrics": {
+      "drift": 4.7,
+      "rollbackRisk": 13.1,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "temporal-counterfactual/adversarial-text-overlay/evidence-repair/retest/promotion/canary",
+    "promotionId": "temporal-counterfactual/adversarial-text-overlay/evidence-repair/retest/promotion",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 77.4,
+      "risk": 59.4,
+      "evidence": 73.8,
+      "resilience": 64.1
+    },
+    "metrics": {
+      "drift": 5.4,
+      "rollbackRisk": 19.4,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "temporal-counterfactual/unsupported-query/risk-containment/retest/promotion/canary",
+    "promotionId": "temporal-counterfactual/unsupported-query/risk-containment/retest/promotion",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "promote",
+    "afterDecision": "release",
+    "after": {
+      "readiness": 91.4,
+      "risk": 40.4,
+      "evidence": 63.8,
+      "resilience": 74.5
+    },
+    "metrics": {
+      "drift": 8.5,
+      "rollbackRisk": 26.4,
       "trafficPct": 20
     },
     "canaryStatus": "clean",
@@ -450,6 +825,81 @@ export const canaryRows = [
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
   },
   {
+    "id": "grounded-answer/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "grounded-answer/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 83.2,
+      "risk": 48.6,
+      "evidence": 67.9,
+      "resilience": 69.0
+    },
+    "metrics": {
+      "drift": 5.0,
+      "rollbackRisk": 14.0,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "grounded-answer/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+    "promotionId": "grounded-answer/adversarial-text-overlay/review-hardening/retest/promotion",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 88.2,
+      "risk": 48.6,
+      "evidence": 67.9,
+      "resilience": 71.2
+    },
+    "metrics": {
+      "drift": 5.0,
+      "rollbackRisk": 14.0,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "grounded-answer/unsupported-query/evidence-repair/retest/promotion/canary",
+    "promotionId": "grounded-answer/unsupported-query/evidence-repair/retest/promotion",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 79.2,
+      "risk": 58.6,
+      "evidence": 71.9,
+      "resilience": 64.7
+    },
+    "metrics": {
+      "drift": 5.5,
+      "rollbackRisk": 19.3,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
     "id": "grounded-answer/gpu-brownout/review-hardening/retest/promotion/canary",
     "promotionId": "grounded-answer/gpu-brownout/review-hardening/retest/promotion",
     "demoId": "grounded-answer",
@@ -536,18 +986,93 @@ export const canaryRows = [
     "promotion": "promote",
     "afterDecision": "release",
     "after": {
-      "readiness": 87.3,
-      "risk": 38.7,
+      "readiness": 89.0,
+      "risk": 31.6,
       "evidence": 90.8,
-      "resilience": 79.2
+      "resilience": 82.4
     },
     "metrics": {
-      "drift": 6.4,
-      "rollbackRisk": 23.2,
+      "drift": 5.6,
+      "rollbackRisk": 19.4,
       "trafficPct": 20
     },
     "canaryStatus": "clean",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "provenance-red-team/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "provenance-red-team/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 82.0,
+      "risk": 44.6,
+      "evidence": 84.8,
+      "resilience": 73.6
+    },
+    "metrics": {
+      "drift": 4.1,
+      "rollbackRisk": 12.5,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "provenance-red-team/adversarial-text-overlay/review-hardening/retest/promotion/canary",
+    "promotionId": "provenance-red-team/adversarial-text-overlay/review-hardening/retest/promotion",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 79.0,
+      "risk": 52.6,
+      "evidence": 80.8,
+      "resilience": 68.7
+    },
+    "metrics": {
+      "drift": 4.7,
+      "rollbackRisk": 14.7,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "provenance-red-team/unsupported-query/review-hardening/retest/promotion/canary",
+    "promotionId": "provenance-red-team/unsupported-query/review-hardening/retest/promotion",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 85.0,
+      "risk": 47.6,
+      "evidence": 80.8,
+      "resilience": 73.0
+    },
+    "metrics": {
+      "drift": 4.4,
+      "rollbackRisk": 13.4,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
   },
   {
     "id": "provenance-red-team/gpu-brownout/review-hardening/retest/promotion/canary",
@@ -561,14 +1086,14 @@ export const canaryRows = [
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 73.3,
-      "risk": 50.7,
+      "readiness": 75.0,
+      "risk": 43.6,
       "evidence": 83.8,
-      "resilience": 67.5
+      "resilience": 70.6
     },
     "metrics": {
-      "drift": 4.5,
-      "rollbackRisk": 16.9,
+      "drift": 4.1,
+      "rollbackRisk": 12.3,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -586,22 +1111,22 @@ export const canaryRows = [
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 87.3,
-      "risk": 48.7,
-      "evidence": 86.8,
-      "resilience": 75.0
+      "readiness": 81.0,
+      "risk": 49.6,
+      "evidence": 82.8,
+      "resilience": 71.0
     },
     "metrics": {
-      "drift": 4.6,
-      "rollbackRisk": 13.8,
+      "drift": 4.8,
+      "rollbackRisk": 14.1,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
   },
   {
-    "id": "provenance-red-team/compound-launch/risk-containment/retest/promotion/canary",
-    "promotionId": "provenance-red-team/compound-launch/risk-containment/retest/promotion",
+    "id": "provenance-red-team/compound-launch/review-hardening/retest/promotion/canary",
+    "promotionId": "provenance-red-team/compound-launch/review-hardening/retest/promotion",
     "demoId": "provenance-red-team",
     "demoTitle": "Provenance Red-Team Arena",
     "theme": "The frontier - new senses and new duties",
@@ -611,14 +1136,14 @@ export const canaryRows = [
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 82.3,
-      "risk": 44.7,
-      "evidence": 79.8,
-      "resilience": 72.6
+      "readiness": 74.0,
+      "risk": 53.6,
+      "evidence": 77.8,
+      "resilience": 65.5
     },
     "metrics": {
-      "drift": 4.8,
-      "rollbackRisk": 13.0,
+      "drift": 5.4,
+      "rollbackRisk": 18.1,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -633,17 +1158,92 @@ export const canaryRows = [
     "page": "cvpr-safety-deployment-simulator.html",
     "incidentId": "launch-audit",
     "incidentTitle": "Launch audit",
+    "promotion": "promote",
+    "afterDecision": "release",
+    "after": {
+      "readiness": 71.6,
+      "risk": 33.1,
+      "evidence": 69.5,
+      "resilience": 69.5
+    },
+    "metrics": {
+      "drift": 7.3,
+      "rollbackRisk": 22.0,
+      "trafficPct": 20
+    },
+    "canaryStatus": "clean",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py"
+  },
+  {
+    "id": "safety-deployment/rare-object-distractor/review-hardening/retest/promotion/canary",
+    "promotionId": "safety-deployment/rare-object-distractor/review-hardening/retest/promotion",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 70.1,
-      "risk": 40.2,
-      "evidence": 69.5,
-      "resilience": 66.5
+      "readiness": 72.6,
+      "risk": 38.1,
+      "evidence": 67.5,
+      "resilience": 67.8
     },
     "metrics": {
       "drift": 4.4,
-      "rollbackRisk": 14.5,
+      "rollbackRisk": 14.0,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "safety-deployment/adversarial-text-overlay/evidence-repair/retest/promotion/canary",
+    "promotionId": "safety-deployment/adversarial-text-overlay/evidence-repair/retest/promotion",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 63.6,
+      "risk": 52.1,
+      "evidence": 71.5,
+      "resilience": 60.0
+    },
+    "metrics": {
+      "drift": 5.1,
+      "rollbackRisk": 17.6,
+      "trafficPct": 8
+    },
+    "canaryStatus": "watch",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py"
+  },
+  {
+    "id": "safety-deployment/unsupported-query/evidence-repair/retest/promotion/canary",
+    "promotionId": "safety-deployment/unsupported-query/evidence-repair/retest/promotion",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "monitor",
+    "afterDecision": "review",
+    "after": {
+      "readiness": 61.6,
+      "risk": 55.1,
+      "evidence": 67.5,
+      "resilience": 57.2
+    },
+    "metrics": {
+      "drift": 5.4,
+      "rollbackRisk": 18.4,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -661,14 +1261,14 @@ export const canaryRows = [
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 70.1,
-      "risk": 52.2,
+      "readiness": 71.6,
+      "risk": 45.1,
       "evidence": 64.5,
-      "resilience": 61.3
+      "resilience": 64.4
     },
     "metrics": {
-      "drift": 5.3,
-      "rollbackRisk": 17.7,
+      "drift": 4.9,
+      "rollbackRisk": 15.9,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -686,14 +1286,14 @@ export const canaryRows = [
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 64.1,
-      "risk": 56.2,
+      "readiness": 65.6,
+      "risk": 49.1,
       "evidence": 73.5,
-      "resilience": 59.3
+      "resilience": 62.3
     },
     "metrics": {
-      "drift": 5.5,
-      "rollbackRisk": 18.7,
+      "drift": 5.1,
+      "rollbackRisk": 16.9,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -711,14 +1311,14 @@ export const canaryRows = [
     "promotion": "monitor",
     "afterDecision": "review",
     "after": {
-      "readiness": 65.1,
-      "risk": 46.2,
+      "readiness": 66.6,
+      "risk": 39.1,
       "evidence": 58.5,
-      "resilience": 59.8
+      "resilience": 62.9
     },
     "metrics": {
-      "drift": 5.7,
-      "rollbackRisk": 16.7,
+      "drift": 5.3,
+      "rollbackRisk": 14.9,
       "trafficPct": 8
     },
     "canaryStatus": "watch",
@@ -726,28 +1326,6 @@ export const canaryRows = [
   }
 ];
 export const drills = [
-  {
-    "id": "grounded-answer/compound-launch/rollback-drill",
-    "demoId": "grounded-answer",
-    "demoTitle": "Grounded Answer Courtroom",
-    "theme": "Teaching machines to see and talk at once",
-    "page": "cvpr-grounded-answer-courtroom.html",
-    "incidentId": "compound-launch",
-    "incidentTitle": "Compound launch",
-    "promotion": "promote",
-    "currentStatus": "clean",
-    "scenario": {
-      "rollbackRisk": 46.0,
-      "drift": 14.3,
-      "trafficPct": 20
-    },
-    "severity": "critical",
-    "trigger": "rollback risk 46.0 or drift 14.3",
-    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
-    "ownerSurface": "cvpr-grounded-answer-courtroom.html",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
-    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
-  },
   {
     "id": "adaptive-serving/compound-launch/rollback-drill",
     "demoId": "adaptive-serving",
@@ -767,6 +1345,28 @@ export const drills = [
     "trigger": "rollback risk 45.5 or drift 13.6",
     "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
     "ownerSurface": "cvpr-adaptive-serving-stress-lab.html",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
+    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  {
+    "id": "constraint-edit/rare-object-distractor/rollback-drill",
+    "demoId": "constraint-edit",
+    "demoTitle": "Constraint Edit Tournament",
+    "theme": "Making pixels from meaning",
+    "page": "cvpr-constraint-edit-tournament.html",
+    "incidentId": "rare-object-distractor",
+    "incidentTitle": "Rare-object distractor",
+    "promotion": "promote",
+    "currentStatus": "clean",
+    "scenario": {
+      "rollbackRisk": 38.9,
+      "drift": 10.6,
+      "trafficPct": 20
+    },
+    "severity": "high",
+    "trigger": "rollback risk 38.9 or drift 10.6",
+    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
+    "ownerSurface": "cvpr-constraint-edit-tournament.html",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
     "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
   },
@@ -793,6 +1393,116 @@ export const drills = [
     "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
   },
   {
+    "id": "3d-edit-provenance/gpu-brownout/rollback-drill",
+    "demoId": "3d-edit-provenance",
+    "demoTitle": "3D Edit Provenance Room",
+    "theme": "Recovering the 3D world from flat pictures",
+    "page": "cvpr-3d-edit-provenance-room.html",
+    "incidentId": "gpu-brownout",
+    "incidentTitle": "GPU brownout",
+    "promotion": "promote",
+    "currentStatus": "clean",
+    "scenario": {
+      "rollbackRisk": 40.7,
+      "drift": 11.1,
+      "trafficPct": 20
+    },
+    "severity": "high",
+    "trigger": "rollback risk 40.7 or drift 11.1",
+    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
+    "ownerSurface": "cvpr-3d-edit-provenance-room.html",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
+    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  {
+    "id": "temporal-counterfactual/unsupported-query/rollback-drill",
+    "demoId": "temporal-counterfactual",
+    "demoTitle": "Temporal Counterfactual Lab",
+    "theme": "Seeing and making things that move",
+    "page": "cvpr-temporal-counterfactual-lab.html",
+    "incidentId": "unsupported-query",
+    "incidentTitle": "Unsupported query",
+    "promotion": "promote",
+    "currentStatus": "clean",
+    "scenario": {
+      "rollbackRisk": 41.8,
+      "drift": 12.3,
+      "trafficPct": 20
+    },
+    "severity": "high",
+    "trigger": "rollback risk 41.8 or drift 12.3",
+    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
+    "ownerSurface": "cvpr-temporal-counterfactual-lab.html",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
+    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  {
+    "id": "grounded-answer/compound-launch/rollback-drill",
+    "demoId": "grounded-answer",
+    "demoTitle": "Grounded Answer Courtroom",
+    "theme": "Teaching machines to see and talk at once",
+    "page": "cvpr-grounded-answer-courtroom.html",
+    "incidentId": "compound-launch",
+    "incidentTitle": "Compound launch",
+    "promotion": "promote",
+    "currentStatus": "clean",
+    "scenario": {
+      "rollbackRisk": 46.0,
+      "drift": 14.3,
+      "trafficPct": 20
+    },
+    "severity": "critical",
+    "trigger": "rollback risk 46.0 or drift 14.3",
+    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
+    "ownerSurface": "cvpr-grounded-answer-courtroom.html",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
+    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  {
+    "id": "provenance-red-team/launch-audit/rollback-drill",
+    "demoId": "provenance-red-team",
+    "demoTitle": "Provenance Red-Team Arena",
+    "theme": "The frontier - new senses and new duties",
+    "page": "cvpr-provenance-red-team-arena.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "promotion": "promote",
+    "currentStatus": "clean",
+    "scenario": {
+      "rollbackRisk": 34.8,
+      "drift": 9.4,
+      "trafficPct": 20
+    },
+    "severity": "focused",
+    "trigger": "rollback risk 34.8 or drift 9.4",
+    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
+    "ownerSurface": "cvpr-provenance-red-team-arena.html",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
+    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  {
+    "id": "safety-deployment/launch-audit/rollback-drill",
+    "demoId": "safety-deployment",
+    "demoTitle": "Safety Deployment Simulator",
+    "theme": "Using vision to act in the world",
+    "page": "cvpr-safety-deployment-simulator.html",
+    "incidentId": "launch-audit",
+    "incidentTitle": "Launch audit",
+    "promotion": "promote",
+    "currentStatus": "clean",
+    "scenario": {
+      "rollbackRisk": 37.4,
+      "drift": 11.1,
+      "trafficPct": 20
+    },
+    "severity": "high",
+    "trigger": "rollback risk 37.4 or drift 11.1",
+    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
+    "ownerSurface": "cvpr-safety-deployment-simulator.html",
+    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
+    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
+  },
+  {
     "id": "temporal-counterfactual/launch-audit/rollback-drill",
     "demoId": "temporal-counterfactual",
     "demoTitle": "Temporal Counterfactual Lab",
@@ -815,24 +1525,24 @@ export const drills = [
     "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
   },
   {
-    "id": "3d-edit-provenance/gpu-brownout/rollback-drill",
-    "demoId": "3d-edit-provenance",
-    "demoTitle": "3D Edit Provenance Room",
-    "theme": "Recovering the 3D world from flat pictures",
-    "page": "cvpr-3d-edit-provenance-room.html",
-    "incidentId": "gpu-brownout",
-    "incidentTitle": "GPU brownout",
+    "id": "adaptive-serving/adversarial-text-overlay/rollback-drill",
+    "demoId": "adaptive-serving",
+    "demoTitle": "Adaptive Serving Stress Lab",
+    "theme": "Learning more from less, and not breaking",
+    "page": "cvpr-adaptive-serving-stress-lab.html",
+    "incidentId": "adversarial-text-overlay",
+    "incidentTitle": "Adversarial text overlay",
     "promotion": "promote",
     "currentStatus": "clean",
     "scenario": {
-      "rollbackRisk": 40.7,
-      "drift": 11.1,
+      "rollbackRisk": 40.0,
+      "drift": 11.2,
       "trafficPct": 20
     },
     "severity": "high",
-    "trigger": "rollback risk 40.7 or drift 11.1",
+    "trigger": "rollback risk 40.0 or drift 11.2",
     "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
-    "ownerSurface": "cvpr-3d-edit-provenance-room.html",
+    "ownerSurface": "cvpr-adaptive-serving-stress-lab.html",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
     "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
   },
@@ -879,132 +1589,22 @@ export const drills = [
     "ownerSurface": "cvpr-adaptive-serving-stress-lab.html",
     "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
     "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
-  },
-  {
-    "id": "provenance-red-team/launch-audit/rollback-drill",
-    "demoId": "provenance-red-team",
-    "demoTitle": "Provenance Red-Team Arena",
-    "theme": "The frontier - new senses and new duties",
-    "page": "cvpr-provenance-red-team-arena.html",
-    "incidentId": "launch-audit",
-    "incidentTitle": "Launch audit",
-    "promotion": "promote",
-    "currentStatus": "clean",
-    "scenario": {
-      "rollbackRisk": 38.6,
-      "drift": 10.2,
-      "trafficPct": 20
-    },
-    "severity": "high",
-    "trigger": "rollback risk 38.6 or drift 10.2",
-    "response": "freeze promoted traffic, demote to monitor, rerun retest harness",
-    "ownerSurface": "cvpr-provenance-red-team-arena.html",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_promotion_board.py",
-    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
-  },
-  {
-    "id": "safety-deployment/adversarial-content/rollback-drill",
-    "demoId": "safety-deployment",
-    "demoTitle": "Safety Deployment Simulator",
-    "theme": "Using vision to act in the world",
-    "page": "cvpr-safety-deployment-simulator.html",
-    "incidentId": "adversarial-content",
-    "incidentTitle": "Adversarial content",
-    "promotion": "monitor",
-    "currentStatus": "watch",
-    "scenario": {
-      "rollbackRisk": 33.9,
-      "drift": 9.9,
-      "trafficPct": 8
-    },
-    "severity": "focused",
-    "trigger": "rollback risk 33.9 or drift 9.9",
-    "response": "keep traffic capped, reopen remediation action, rerun retest harness",
-    "ownerSurface": "cvpr-safety-deployment-simulator.html",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
-    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
-  },
-  {
-    "id": "safety-deployment/gpu-brownout/rollback-drill",
-    "demoId": "safety-deployment",
-    "demoTitle": "Safety Deployment Simulator",
-    "theme": "Using vision to act in the world",
-    "page": "cvpr-safety-deployment-simulator.html",
-    "incidentId": "gpu-brownout",
-    "incidentTitle": "GPU brownout",
-    "promotion": "monitor",
-    "currentStatus": "watch",
-    "scenario": {
-      "rollbackRisk": 31.1,
-      "drift": 9.1,
-      "trafficPct": 8
-    },
-    "severity": "focused",
-    "trigger": "rollback risk 31.1 or drift 9.1",
-    "response": "keep traffic capped, reopen remediation action, rerun retest harness",
-    "ownerSurface": "cvpr-safety-deployment-simulator.html",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
-    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
-  },
-  {
-    "id": "provenance-red-team/gpu-brownout/rollback-drill",
-    "demoId": "provenance-red-team",
-    "demoTitle": "Provenance Red-Team Arena",
-    "theme": "The frontier - new senses and new duties",
-    "page": "cvpr-provenance-red-team-arena.html",
-    "incidentId": "gpu-brownout",
-    "incidentTitle": "GPU brownout",
-    "promotion": "monitor",
-    "currentStatus": "watch",
-    "scenario": {
-      "rollbackRisk": 30.3,
-      "drift": 8.3,
-      "trafficPct": 8
-    },
-    "severity": "focused",
-    "trigger": "rollback risk 30.3 or drift 8.3",
-    "response": "keep traffic capped, reopen remediation action, rerun retest harness",
-    "ownerSurface": "cvpr-provenance-red-team-arena.html",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
-    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
-  },
-  {
-    "id": "safety-deployment/compound-launch/rollback-drill",
-    "demoId": "safety-deployment",
-    "demoTitle": "Safety Deployment Simulator",
-    "theme": "Using vision to act in the world",
-    "page": "cvpr-safety-deployment-simulator.html",
-    "incidentId": "compound-launch",
-    "incidentTitle": "Compound launch",
-    "promotion": "monitor",
-    "currentStatus": "watch",
-    "scenario": {
-      "rollbackRisk": 33.7,
-      "drift": 10.7,
-      "trafficPct": 8
-    },
-    "severity": "focused",
-    "trigger": "rollback risk 33.7 or drift 10.7",
-    "response": "keep traffic capped, reopen remediation action, rerun retest harness",
-    "ownerSurface": "cvpr-safety-deployment-simulator.html",
-    "responseCommand": "python3 scripts/verify_cvpr_remediation_retest_harness.py",
-    "validationCommand": "python3 scripts/validate_cvpr_full_stack.py"
   }
 ];
 export const summary = {
   "demo": "cvpr-remediation-rollback-drillbook",
   "status": "ready",
   "sourceDemo": "cvpr-remediation-canary-monitor",
-  "sourceCanaries": 29,
+  "sourceCanaries": 53,
   "drills": 12,
   "readyDrills": 12,
   "critical": 2,
-  "high": 6,
-  "focused": 4,
-  "promotedDrills": 8,
-  "monitoredDrills": 4,
-  "themes": 7,
-  "incidents": 4,
+  "high": 9,
+  "focused": 1,
+  "promotedDrills": 12,
+  "monitoredDrills": 0,
+  "themes": 8,
+  "incidents": 7,
   "canaryRollback": 0,
   "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
 };

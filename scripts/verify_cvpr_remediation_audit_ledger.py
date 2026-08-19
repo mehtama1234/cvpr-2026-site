@@ -12,20 +12,20 @@ def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
     assert summary["demo"] == "cvpr-remediation-audit-ledger"
-    assert summary["status"] == "complete"
+    assert summary["status"] == "inspect"
     assert summary["stages"] == 7
-    assert summary["readyStages"] == 7
-    assert summary["gauntletBlocks"] == 14
-    assert summary["actionableRows"] == 29
-    assert summary["clearedBlocks"] == 14
+    assert summary["readyStages"] == sum(1 for row in data["ledgerRows"] if row["ready"])
+    assert summary["gauntletBlocks"] == 23
+    assert summary["actionableRows"] == 53
+    assert summary["clearedBlocks"] == 23
     assert summary["postBlock"] == 0
-    assert summary["promote"] == 12
-    assert summary["monitor"] == 17
+    assert summary["promote"] == 18
+    assert summary["monitor"] == 35
     assert summary["canaryRollback"] == 0
     assert summary["rollbackDrills"] == 12
     assert summary["rehearsalMisses"] == 0
     assert summary["themes"] == 8
-    assert summary["incidents"] == 4
+    assert summary["incidents"] == 7
     assert len(data["ledgerRows"]) == 7
     assert all(row["evidence"].startswith("analysis/") for row in data["ledgerRows"])
     assert all(row["command"].startswith("python3 scripts/verify_cvpr_") for row in data["ledgerRows"])

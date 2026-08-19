@@ -17,6 +17,8 @@ CONSTRAINT_REGISTRY = ROOT / "analysis/cvpr_constraint_generation_bench/registry
 DRIVING_REGISTRY = ROOT / "analysis/cvpr_driving_safety_bench/registry.json"
 GEOMETRY_REGISTRY = ROOT / "analysis/cvpr_metric_geometry_bench/registry.json"
 SPLATTING_REGISTRY = ROOT / "analysis/cvpr_gaussian_splatting_bench/registry.json"
+PROMOTED_MANIFEST = ROOT / "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_run_manifest.json"
+PROMOTED_RESULTS = ROOT / "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json"
 
 WORKER_JOBS = [
     {
@@ -116,6 +118,54 @@ WORKER_JOBS = [
         "priority": 8,
     },
     {
+        "id": "depth-normal-consistency",
+        "title": "Depth-normal consistency GPU run",
+        "bench": "cvpr-depth-normal-consistency-bench",
+        "page": "cvpr-depth-normal-consistency-bench.html",
+        "runtimeModes": ["simulated", "cached-real", "live-colab"],
+        "models": ["torch-cuda-depth-normal-probe", "finite-difference-normal-consistency"],
+        "inputs": ["depth_map", "normal_controls", "scene_geometry"],
+        "outputs": ["normal_map", "consistency_curve", "depth_residual_map", "surface_alerts"],
+        "gpuClass": "T4/L4/A100",
+        "priority": 9,
+    },
+    {
+        "id": "corruption-robustness",
+        "title": "Corruption robustness GPU run",
+        "bench": "cvpr-corruption-robustness-bench",
+        "page": "cvpr-corruption-robustness-bench.html",
+        "runtimeModes": ["simulated", "cached-real", "live-colab"],
+        "models": ["torchvision-resnet18", "clean-corrupted-logit-delta"],
+        "inputs": ["image_batch", "corruption_controls", "severity_schedule"],
+        "outputs": ["feature_retention", "label_drift_curve", "confidence_collapse", "corruption_report"],
+        "gpuClass": "T4/L4/A100",
+        "priority": 10,
+    },
+    {
+        "id": "prompt-segmentation-robustness",
+        "title": "Prompt segmentation robustness GPU run",
+        "bench": "cvpr-prompt-segmentation-robustness-bench",
+        "page": "cvpr-prompt-segmentation-robustness-bench.html",
+        "runtimeModes": ["simulated", "cached-real", "live-colab"],
+        "models": ["torchvision-maskrcnn-resnet50-fpn", "mask-rcnn-click-robustness-proxy"],
+        "inputs": ["image", "prompt_points", "prompt_variants"],
+        "outputs": ["mask_predictions", "click_sensitivity", "iou_trace", "prompt_failure_map"],
+        "gpuClass": "T4/L4/A100",
+        "priority": 11,
+    },
+    {
+        "id": "video-identity-tracking",
+        "title": "Video identity tracking GPU run",
+        "bench": "cvpr-video-identity-tracking-bench",
+        "page": "cvpr-video-identity-tracking-bench.html",
+        "runtimeModes": ["simulated", "cached-real", "live-colab"],
+        "models": ["torch-cuda-centroid-assignment-tracker", "mask-sequence-identity-drift"],
+        "inputs": ["video_clip", "identity_seed", "tracking_controls"],
+        "outputs": ["track_sequence", "identity_drift_curve", "handoff_events", "failure_frames"],
+        "gpuClass": "T4/L4/A100",
+        "priority": 12,
+    },
+    {
         "id": "metric-geometry",
         "title": "Metric geometry GPU run",
         "bench": "cvpr-metric-geometry-bench",
@@ -150,8 +200,32 @@ RUNNER_COVERAGE = [
     {"jobId": "compute-serving", "caseSymbol": "COMPUTE_CASES", "loader": "load_compute_models", "runner": "run_compute_serving_batch", "execution": "torch-serving-latency-profiler", "strictMode": "require_real_models=True"},
     {"jobId": "constraint-generation", "caseSymbol": "CONSTRAINT_CASES", "loader": "load_constraint_models", "runner": "run_constraint_generation_batch", "execution": "torch-layout-identity-reward-probe", "strictMode": "require_real_models=True"},
     {"jobId": "driving-safety", "caseSymbol": "DRIVING_CASES", "loader": "load_driving_models", "runner": "run_driving_safety_batch", "execution": "torch-driving-scene-risk-probe", "strictMode": "require_real_models=True"},
+    {"jobId": "depth-normal-consistency", "caseSymbol": "DEPTH_NORMAL_CASES", "loader": "load_depth_normal_models", "runner": "run_depth_normal_consistency_batch", "execution": "torch-cuda-depth-normal-live-demo", "strictMode": "require_real_models=True"},
+    {"jobId": "corruption-robustness", "caseSymbol": "CORRUPTION_CASES", "loader": "load_corruption_models", "runner": "run_corruption_robustness_batch", "execution": "torchvision-resnet-corruption-live-demo", "strictMode": "require_real_models=True"},
+    {"jobId": "prompt-segmentation-robustness", "caseSymbol": "PROMPT_SEGMENTATION_CASES", "loader": "load_prompt_segmentation_models", "runner": "run_prompt_segmentation_robustness_batch", "execution": "torchvision-maskrcnn-prompt-robustness-live-demo", "strictMode": "require_real_models=True"},
+    {"jobId": "video-identity-tracking", "caseSymbol": "VIDEO_TRACKING_CASES", "loader": "load_video_tracking_models", "runner": "run_video_identity_tracking_batch", "execution": "torch-cuda-video-tracking-live-demo", "strictMode": "require_real_models=True"},
     {"jobId": "metric-geometry", "caseSymbol": "GEOMETRY_CASES", "loader": "load_metric_geometry_models", "runner": "run_metric_geometry_batch", "execution": "torch-metric-geometry-probe", "strictMode": "require_real_models=True"},
     {"jobId": "gaussian-splatting", "caseSymbol": "SPLATTING_CASES", "loader": "load_gaussian_splatting_models", "runner": "run_gaussian_splatting_batch", "execution": "torch-gaussian-splatting-render-probe", "strictMode": "require_real_models=True"},
+]
+
+NOTEBOOK_NATIVE_JOB_IDS = [
+    "open-vocab-grounding",
+    "restoration-fidelity",
+    "adversarial-provenance",
+    "temporal-rollout",
+    "clinical-shift",
+    "compute-serving",
+    "constraint-generation",
+    "driving-safety",
+    "metric-geometry",
+    "gaussian-splatting",
+]
+
+EXTERNAL_LIVE_JOB_IDS = [
+    "depth-normal-consistency",
+    "corruption-robustness",
+    "prompt-segmentation-robustness",
+    "video-identity-tracking",
 ]
 
 CORE = """export function runtimeLabel(mode) {
@@ -232,6 +306,7 @@ export function validateExportContract(results, manifest, runnerCoverage) {
     if (result.mode !== "live-colab") issues.push(`mode:${result.jobId}:${result.caseId}`);
     if (result.provenance?.runtime !== "google-colab-pro-plus") issues.push(`runtime:${result.jobId}:${result.caseId}`);
     if (!result.provenance?.accelerator || result.provenance.accelerator === "CPU") issues.push(`accelerator:${result.jobId}:${result.caseId}`);
+    if (String(result.provenance?.execution || "").toLowerCase().includes("fallback")) issues.push(`fallback:${result.jobId}:${result.caseId}`);
     if (result.provenance?.notebook !== manifest?.notebook) issues.push(`notebook:${result.jobId}:${result.caseId}`);
     if (typeof result.metrics?.readiness !== "number") issues.push(`readiness:${result.jobId}:${result.caseId}`);
   }
@@ -275,7 +350,7 @@ export function validateRunnerCoverage(runnerCoverage, jobs, notebookSource = ""
 """
 
 TEST = """import assert from "node:assert/strict";
-import { cachedResults, runManifest, runnerCoverage, workerJobs } from "../src/fixtures.js";
+import { NOTEBOOK_NATIVE_JOB_IDS, EXTERNAL_LIVE_JOB_IDS, cachedResults, runManifest, runnerCoverage, workerJobs } from "../src/fixtures.js";
 import { chooseRuntime, runtimeLabel, summarizeWorker, validateExportContract, validateGpuResult, validateRunManifest, validateRunnerCoverage } from "../src/core.js";
 
 assert.equal(runtimeLabel("simulated"), "CPU simulation");
@@ -299,10 +374,13 @@ for (const result of cachedResults) {
 }
 
 const summary = summarizeWorker(workerJobs, cachedResults);
-assert.equal(summary.jobs, 10);
-assert.equal(summary.liveCapable, 10);
-assert.equal(summary.cachedResults, 40);
-assert.equal(summary.validCachedResults, 40);
+assert.equal(summary.jobs, workerJobs.length);
+assert.equal(summary.liveCapable, workerJobs.length);
+assert.equal(summary.cachedResults, cachedResults.length);
+assert.equal(summary.validCachedResults, cachedResults.length);
+assert.equal(workerJobs.filter((job) => NOTEBOOK_NATIVE_JOB_IDS.includes(job.id)).length, 10);
+assert.equal(workerJobs.filter((job) => EXTERNAL_LIVE_JOB_IDS.includes(job.id)).length, 4);
+assert.equal(cachedResults.filter((result) => result.jobId === "open-vocab-grounding").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "restoration-fidelity").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "adversarial-provenance").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "temporal-rollout").length, 4);
@@ -310,17 +388,21 @@ assert.equal(cachedResults.filter((result) => result.jobId === "clinical-shift")
 assert.equal(cachedResults.filter((result) => result.jobId === "compute-serving").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "constraint-generation").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "driving-safety").length, 4);
+assert.equal(cachedResults.filter((result) => result.jobId === "depth-normal-consistency").length, 4);
+assert.equal(cachedResults.filter((result) => result.jobId === "corruption-robustness").length, 4);
+assert.equal(cachedResults.filter((result) => result.jobId === "prompt-segmentation-robustness").length, 4);
+assert.equal(cachedResults.filter((result) => result.jobId === "video-identity-tracking").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "metric-geometry").length, 4);
 assert.equal(cachedResults.filter((result) => result.jobId === "gaussian-splatting").length, 4);
 assert.equal(summary.resultStatus, "valid");
 const manifest = validateRunManifest(runManifest, workerJobs, cachedResults);
 assert.equal(manifest.ok, true);
-assert.equal(manifest.jobs, 10);
-assert.equal(manifest.expectedCachedResults, 40);
-assert.equal(manifest.actualCachedResults, 40);
+assert.equal(manifest.jobs, workerJobs.length);
+assert.equal(manifest.expectedCachedResults, cachedResults.length);
+assert.equal(manifest.actualCachedResults, cachedResults.length);
 const runners = validateRunnerCoverage(runnerCoverage, workerJobs);
 assert.equal(runners.ok, true);
-assert.equal(runners.runners, 10);
+assert.equal(runners.runners, workerJobs.length);
 assert.equal(runnerCoverage.every((row) => row.strictMode === "require_real_models=True"), true);
 const liveExport = cachedResults.map((result) => ({
   ...result,
@@ -329,8 +411,10 @@ const liveExport = cachedResults.map((result) => ({
 }));
 const exportContract = validateExportContract(liveExport, runManifest, runnerCoverage);
 assert.equal(exportContract.ok, true);
-assert.equal(exportContract.jobs, 10);
-assert.equal(exportContract.results, 40);
+assert.equal(exportContract.jobs, workerJobs.length);
+assert.equal(exportContract.results, cachedResults.length);
+const fallbackExport = [{ ...liveExport[0], provenance: { ...liveExport[0].provenance, execution: "deterministic-fallback" } }];
+assert.equal(validateExportContract(fallbackExport, runManifest, runnerCoverage).ok, false);
 console.log("ok cvpr-colab-gpu-worker:", summary.jobs, "jobs", summary.cachedResults, "cached results");
 """
 
@@ -954,7 +1038,9 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
                 "\\n",
                 "Colab Pro/Pro+ execution notebook for live CVPR demo outputs. Run this on a GPU runtime, then download `cvpr_gpu_results.json` into `source-code/learning/cvpr-colab-gpu-worker/_incoming/` for intake and promotion.\\n",
                 "\\n",
-                "The first live path is open-vocabulary grounding with GroundingDINO-style zero-shot detection plus SigLIP image-text scoring. The deterministic fallback preserves the JSON contract when model weights are unavailable.\\n",
+                "This notebook is the notebook-native execution path for 10 jobs. The promoted 14-job contract also includes 4 external live worker lanes: `depth-normal-consistency`, `corruption-robustness`, `prompt-segmentation-robustness`, and `video-identity-tracking`.\\n",
+                "\\n",
+                "The live path is strict: the notebook stops on CPU, every notebook-native job runs with `require_real_models=True`, and the export contract rejects fallback outputs.\\n",
             ],
         },
         {
@@ -966,11 +1052,11 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
                 "import json, os, time\\n",
                 "from pathlib import Path\\n",
                 "\\n",
-                "try:\\n",
-                "    import torch\\n",
-                "    accelerator = torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'\\n",
-                "except Exception:\\n",
-                "    accelerator = 'unknown'\\n",
+                "import torch\\n",
+                "if not torch.cuda.is_available():\\n",
+                "    raise RuntimeError('Select a Google Colab GPU runtime before running CVPR live demos')\\n",
+                "accelerator = torch.cuda.get_device_name(0)\\n",
+                "STRICT_LIVE_GPU = True\\n",
                 "\\n",
                 "print('accelerator:', accelerator)\\n",
             ],
@@ -982,8 +1068,12 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "WORKER_JOBS = " + json.dumps(WORKER_JOBS, indent=2) + "\\n",
+                "NOTEBOOK_NATIVE_JOB_IDS = " + json.dumps(NOTEBOOK_NATIVE_JOB_IDS, indent=2) + "\\n",
+                "EXTERNAL_LIVE_JOB_IDS = " + json.dumps(EXTERNAL_LIVE_JOB_IDS, indent=2) + "\\n",
                 "RUN_MANIFEST = " + json.dumps(run_manifest, indent=2) + "\\n",
                 "print('jobs:', [job['id'] for job in WORKER_JOBS])\\n",
+                "print('notebook-native jobs:', NOTEBOOK_NATIVE_JOB_IDS)\\n",
+                "print('external live worker lanes:', EXTERNAL_LIVE_JOB_IDS)\\n",
                 "print('expected live results:', sum(job['expectedCases'] for job in RUN_MANIFEST['jobs']))\\n",
             ],
         },
@@ -993,8 +1083,8 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "metadata": {},
             "outputs": [],
             "source": [
-                "# Run this install cell in Colab before the live open-vocab job.\\n",
-                "# The next cell still has a deterministic fallback so schema validation can run without model downloads.\\n",
+                "# Run this install cell in Colab before the live GPU jobs.\\n",
+                "# The export gate rejects CPU and deterministic fallback outputs.\\n",
                 "%pip -q install 'transformers>=4.44' accelerate pillow sentencepiece protobuf\\n",
             ],
         },
@@ -1102,7 +1192,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when you want the notebook to fail instead of falling back.\\n",
-                "open_vocab_results = run_open_vocab_grounding_batch(GROUNDING_CASES, require_real_models=False)\\n",
+                "open_vocab_results = run_open_vocab_grounding_batch(GROUNDING_CASES, require_real_models=True)\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(open_vocab_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(open_vocab_results))\\n",
                 "print(json.dumps(open_vocab_results[0], indent=2)[:1200])\\n",
@@ -1217,7 +1307,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing restoration release evidence.\\n",
-                "restoration_results = run_restoration_fidelity_batch(RESTORATION_CASES, require_real_models=False)\\n",
+                "restoration_results = run_restoration_fidelity_batch(RESTORATION_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1323,7 +1413,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing adversarial provenance release evidence.\\n",
-                "adversarial_results = run_adversarial_provenance_batch(ADVERSARIAL_CASES, require_real_models=False)\\n",
+                "adversarial_results = run_adversarial_provenance_batch(ADVERSARIAL_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results + adversarial_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1432,7 +1522,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing temporal rollout release evidence.\\n",
-                "temporal_results = run_temporal_rollout_batch(TEMPORAL_CASES, require_real_models=False)\\n",
+                "temporal_results = run_temporal_rollout_batch(TEMPORAL_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results + adversarial_results + temporal_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1539,7 +1629,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing clinical shift release evidence.\\n",
-                "clinical_results = run_clinical_shift_batch(CLINICAL_CASES, require_real_models=False)\\n",
+                "clinical_results = run_clinical_shift_batch(CLINICAL_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results + adversarial_results + temporal_results + clinical_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1633,7 +1723,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing compute serving release evidence.\\n",
-                "compute_results = run_compute_serving_batch(COMPUTE_CASES, require_real_models=False)\\n",
+                "compute_results = run_compute_serving_batch(COMPUTE_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results + adversarial_results + temporal_results + clinical_results + compute_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1758,7 +1848,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing constraint generation release evidence.\\n",
-                "constraint_results = run_constraint_generation_batch(CONSTRAINT_CASES, require_real_models=False)\\n",
+                "constraint_results = run_constraint_generation_batch(CONSTRAINT_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results + adversarial_results + temporal_results + clinical_results + compute_results + constraint_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1874,7 +1964,7 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
             "outputs": [],
             "source": [
                 "# Set require_real_models=True when refreshing driving safety release evidence.\\n",
-                "driving_results = run_driving_safety_batch(DRIVING_CASES, require_real_models=False)\\n",
+                "driving_results = run_driving_safety_batch(DRIVING_CASES, require_real_models=True)\\n",
                 "merged_results = open_vocab_results + restoration_results + adversarial_results + temporal_results + clinical_results + compute_results + constraint_results + driving_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1923,8 +2013,8 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
                 "    return results\\n",
                 "\\n",
                 "# Set require_real_models=True when refreshing 3D geometry and splatting release evidence.\\n",
-                "metric_geometry_results = run_metric_geometry_batch(GEOMETRY_CASES, require_real_models=False)\\n",
-                "gaussian_splatting_results = run_gaussian_splatting_batch(SPLATTING_CASES, require_real_models=False)\\n",
+                "metric_geometry_results = run_metric_geometry_batch(GEOMETRY_CASES, require_real_models=True)\\n",
+                "gaussian_splatting_results = run_gaussian_splatting_batch(SPLATTING_CASES, require_real_models=True)\\n",
                 "merged_results = merged_results + metric_geometry_results + gaussian_splatting_results\\n",
                 "Path('cvpr_gpu_results.json').write_text(json.dumps(merged_results, indent=2))\\n",
                 "print('wrote cvpr_gpu_results.json', len(merged_results))\\n",
@@ -1972,6 +2062,8 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
                 "            issues.append(f'runtime:{job_id}:{result.get(\"caseId\")}')\\n",
                 "        if not provenance.get('accelerator') or provenance.get('accelerator') == 'CPU':\\n",
                 "            issues.append(f'accelerator:{job_id}:{result.get(\"caseId\")}')\\n",
+                "        if 'fallback' in str(provenance.get('execution', '')).lower():\\n",
+                "            issues.append(f'fallback:{job_id}:{result.get(\"caseId\")}')\\n",
                 "        if provenance.get('notebook') != RUN_MANIFEST['notebook']:\\n",
                 "            issues.append(f'notebook:{job_id}:{result.get(\"caseId\")}')\\n",
                 "        readiness = (result.get('metrics') or {}).get('readiness')\\n",
@@ -2010,7 +2102,15 @@ def build_notebook(run_manifest, grounding_cases, restoration_cases, adversarial
 def build_package(cached_results, run_manifest):
     write(BASE / "package.json", json.dumps({"type": "module"}, indent=2) + "\n")
     write(BASE / "src/core.js", CORE)
-    write(BASE / "src/fixtures.js", "export const workerJobs = " + json.dumps(WORKER_JOBS, indent=2) + ";\nexport const runnerCoverage = " + json.dumps(RUNNER_COVERAGE, indent=2) + ";\nexport const cachedResults = " + json.dumps(cached_results, indent=2) + ";\nexport const runManifest = " + json.dumps(run_manifest, indent=2) + ";\n")
+    write(
+        BASE / "src/fixtures.js",
+        "export const workerJobs = " + json.dumps(WORKER_JOBS, indent=2) + ";\n"
+        + "export const runnerCoverage = " + json.dumps(RUNNER_COVERAGE, indent=2) + ";\n"
+        + "export const cachedResults = " + json.dumps(cached_results, indent=2) + ";\n"
+        + "export const runManifest = " + json.dumps(run_manifest, indent=2) + ";\n"
+        + "export const NOTEBOOK_NATIVE_JOB_IDS = " + json.dumps(NOTEBOOK_NATIVE_JOB_IDS, indent=2) + ";\n"
+        + "export const EXTERNAL_LIVE_JOB_IDS = " + json.dumps(EXTERNAL_LIVE_JOB_IDS, indent=2) + ";\n",
+    )
     write(BASE / "tests/core.test.js", TEST)
     write(BASE / "_results/cvpr_gpu_run_manifest.json", json.dumps(run_manifest, indent=2) + "\n")
     write(BASE / "_results/cvpr_gpu_results.json", json.dumps(cached_results, indent=2) + "\n")
@@ -2044,24 +2144,27 @@ This is the production handoff for using Google Colab Pro+ as the GPU execution 
 1. Open `{run_manifest['notebook']}` in Google Colab.
 2. Select a GPU runtime. Prefer L4 or A100 for temporal rollout, constraint generation, driving safety, metric geometry, and Gaussian Splatting jobs.
 3. Run the manifest cell and confirm `RUN_MANIFEST["runtimePlane"] == "google-colab-pro-plus"`.
-4. For `open-vocab-grounding`, run the GroundingDINO/SigLIP cells. Set `require_real_models=True` when refreshing release evidence so model download or runtime failures stop the job instead of using fallback metrics.
-5. For `restoration-fidelity`, run the Swin2SR restoration cells with `require_real_models=True` when refreshing release evidence.
-6. For `adversarial-provenance`, run the CLIP provenance probe cells with `require_real_models=True` when refreshing release evidence.
-7. For `temporal-rollout`, run the RAFT optical-flow rollout cells with `require_real_models=True` when refreshing release evidence.
-8. For `clinical-shift`, run the Torch clinical embedding/calibration cells with `require_real_models=True` when refreshing release evidence.
-9. For `compute-serving`, run the Torch serving latency profiler cells with `require_real_models=True` when refreshing release evidence.
-10. For `constraint-generation`, run the Torch layout/identity/reward probe cells with `require_real_models=True` when refreshing release evidence.
-11. For `driving-safety`, run the Torch driving scene/risk probe cells with `require_real_models=True` when refreshing release evidence.
-12. For `metric-geometry`, run the Torch metric geometry probe cells with `require_real_models=True` when refreshing release evidence.
-13. For `gaussian-splatting`, run the Torch Gaussian Splatting render probe cells with `require_real_models=True` when refreshing release evidence.
-14. Run the final live export contract cell and confirm it prints `status: valid`.
-15. Download `cvpr_gpu_results.json`.
-16. Place it at `{run_manifest['liveExportArtifact']}`.
-17. Run `python3 scripts/stage_cvpr_live_colab_export.py --export {run_manifest['liveExportArtifact']}`.
-18. If the intake report is valid, promote it with `python3 scripts/stage_cvpr_live_colab_export.py --export {run_manifest['liveExportArtifact']} --promote`.
-19. Run `python3 scripts/validate_cvpr_colab_results.py`.
-20. Run `python3 scripts/validate_cvpr_full_stack.py`.
-21. Open `cvpr-validation-center.html`, `cvpr-colab-live-intake.html`, and `cvpr-colab-release-bundle.html` and confirm the release gates remain valid.
+4. Run the notebook-native job cells as written. The notebook uses `require_real_models=True`, stops on CPU, and rejects deterministic fallback rows at export time.
+5. For `open-vocab-grounding`, run the GroundingDINO/SigLIP cells.
+6. For `restoration-fidelity`, run the Swin2SR restoration cells.
+7. For `adversarial-provenance`, run the CLIP provenance probe cells.
+8. For `temporal-rollout`, run the RAFT optical-flow rollout cells.
+9. For `clinical-shift`, run the Torch clinical embedding/calibration cells.
+10. For `compute-serving`, run the Torch serving latency profiler cells.
+11. For `constraint-generation`, run the Torch layout/identity/reward probe cells.
+12. For `driving-safety`, run the Torch driving scene/risk probe cells.
+13. For `metric-geometry`, run the Torch metric geometry probe cells.
+14. For `gaussian-splatting`, run the Torch Gaussian Splatting render probe cells.
+15. Refresh the external live worker lanes for `depth-normal-consistency`, `corruption-robustness`, `prompt-segmentation-robustness`, and `video-identity-tracking` with their dedicated live worker scripts when you need a full 14-job promotion.
+16. Merge the notebook-native results and those 4 external live worker lanes into the staged live export artifact.
+17. Run the final live export contract cell and confirm it prints `status: valid` for the notebook-native portion.
+18. Download `cvpr_gpu_results.json`.
+19. Place it at `{run_manifest['liveExportArtifact']}`.
+20. Run `python3 scripts/stage_cvpr_live_colab_export.py --export {run_manifest['liveExportArtifact']}`.
+21. If the intake report is valid, promote it with `python3 scripts/stage_cvpr_live_colab_export.py --export {run_manifest['liveExportArtifact']} --promote`.
+22. Run `python3 scripts/validate_cvpr_colab_results.py`.
+23. Run `python3 scripts/validate_cvpr_full_stack.py`.
+24. Open `cvpr-validation-center.html`, `cvpr-colab-live-intake.html`, and `cvpr-colab-release-bundle.html` and confirm the release gates remain valid.
 
 ## Job Manifest
 
@@ -2083,13 +2186,16 @@ def build_registry(cached_results, run_manifest):
         "runtimePlane": "google-colab-pro-plus",
         "controlPlane": "local-static-cvpr-site",
         "resultPlane": "registry-and-cached-json",
-        "jobs": len(WORKER_JOBS),
-        "liveCapable": sum(1 for job in WORKER_JOBS if "live-colab" in job["runtimeModes"]),
-        "promotedRunners": len(RUNNER_COVERAGE),
-        "cachedCapable": sum(1 for job in WORKER_JOBS if "cached-real" in job["runtimeModes"]),
+        "jobs": len(run_manifest["jobs"]),
+        "liveCapable": sum(1 for job in run_manifest["jobs"] if "live-colab" in job["runtimeModes"]),
+        "promotedRunners": len(run_manifest["jobs"]),
+        "runnerRows": len(RUNNER_COVERAGE),
+        "cachedCapable": sum(1 for job in run_manifest["jobs"] if "cached-real" in job["runtimeModes"]),
         "cachedResults": len(cached_results),
         "validCachedResults": valid,
-        "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+        "firstGpuBackedBench": run_manifest["jobs"][0]["bench"],
+        "notebookNativeJobs": len(NOTEBOOK_NATIVE_JOB_IDS),
+        "externalLiveJobs": len(EXTERNAL_LIVE_JOB_IDS),
         "notebook": str(NOTEBOOK.relative_to(ROOT)),
         "runbook": str(RUNBOOK.relative_to(ROOT)),
         "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -2100,7 +2206,7 @@ def build_registry(cached_results, run_manifest):
         "fullStackReport": "analysis/cvpr_full_stack_validation/registry.json",
         "status": "interactive-contract",
     }
-    write(ANALYSIS / "registry.json", json.dumps({"summary": summary, "jobs": WORKER_JOBS, "runnerCoverage": RUNNER_COVERAGE, "runManifest": run_manifest, "cachedResults": cached_results}, indent=2) + "\n")
+    write(ANALYSIS / "registry.json", json.dumps({"summary": summary, "jobs": WORKER_JOBS, "runnerCoverage": RUNNER_COVERAGE, "notebookNativeJobIds": NOTEBOOK_NATIVE_JOB_IDS, "externalLiveJobIds": EXTERNAL_LIVE_JOB_IDS, "runManifest": run_manifest, "cachedResults": cached_results}, indent=2) + "\n")
     return summary
 
 
@@ -2108,7 +2214,8 @@ def build_page(summary, cached_results, run_manifest):
     stats = [
         ("GPU jobs", summary["jobs"]),
         ("Live capable", summary["liveCapable"]),
-        ("Runner paths", summary["promotedRunners"]),
+        ("Notebook-native", summary["notebookNativeJobs"]),
+        ("External live", summary["externalLiveJobs"]),
         ("Cached results", summary["cachedResults"]),
     ]
     stats_html = "".join(f"""<article class="stat"><b>{esc(value)}</b><span>{esc(label)}</span></article>""" for label, value in stats)
@@ -2128,12 +2235,17 @@ def build_page(summary, cached_results, run_manifest):
         f"""<tr><td>{esc(row['jobId'])}</td><td>{esc(row['caseSymbol'])}</td><td>{esc(row['loader'])}</td><td>{esc(row['runner'])}</td><td>{esc(row['execution'])}</td><td>{esc(row['strictMode'])}</td></tr>"""
         for row in RUNNER_COVERAGE
     )
+    split_html = "".join(
+        f"""<tr><td>{esc(job_id)}</td><td>{'notebook-native' if job_id in NOTEBOOK_NATIVE_JOB_IDS else 'external-live-worker'}</td></tr>"""
+        for job_id in NOTEBOOK_NATIVE_JOB_IDS + EXTERNAL_LIVE_JOB_IDS
+    )
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CVPR Colab GPU Worker</title>
 <style>:root{{--ink:#101719;--paper:#F5F6F4;--panel:#FBFCFB;--line:#D7DCD9;--muted:#59656A;--accent:#0E7C86;--good:#2F7A4F;--warn:#B37A1E;--bad:#9B2D2D;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Arial,sans-serif}}*{{box-sizing:border-box}}body{{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}}.wrap{{max-width:1180px;margin:0 auto;padding:0 24px}}header{{background:var(--ink);color:#E7ECED;padding:42px 0 34px}}.bug,nav a,.stat span,th,td small,code{{font-family:var(--mono)}}.bug{{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4FC4CE}}h1{{font-size:44px;line-height:1.04;margin:10px 0}}header p{{max-width:88ch;color:#AEBABD}}nav a{{font-size:12px;color:#B7DDE1;margin-right:12px}}a{{color:#0A5A62}}.stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}}.stat,.panel{{background:var(--panel);border:1px solid var(--line);border-radius:8px}}.stat{{padding:13px}}.stat b{{display:block;font-size:28px}}.stat span,td small{{font-size:11px;color:var(--muted)}}.panel{{padding:16px;margin:18px 0}}table{{width:100%;border-collapse:collapse;font-size:13px}}td,th{{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}}th{{font-size:11px;color:var(--muted)}}code{{display:block;background:#EEF3F2;padding:10px;border-radius:6px;white-space:normal}}footer{{border-top:1px solid var(--line);padding:20px 0 54px;color:var(--muted);font-family:var(--mono);font-size:12px}}@media(max-width:900px){{.stats{{grid-template-columns:1fr 1fr}}}}</style></head>
 <body><header><div class="wrap"><div class="bug">CVPR 2026 · Colab Pro+ GPU bridge</div><h1>Colab GPU worker for real model-backed demos</h1><p>The local CVPR site remains the CPU control plane. Colab Pro+ becomes the GPU execution plane. Cached JSON results are the stable evidence plane for pages, registries, and tests.</p><nav><a href="cvpr-mission-control.html">mission control</a><a href="cvpr-failure-atlas.html">failure atlas</a><a href="cvpr-long-tail-grounding-bench.html">first GPU-backed bench</a><a href="{esc(summary['notebook'])}">worker notebook</a><a href="analysis/cvpr_colab_gpu_worker/registry.json">registry</a></nav></div></header>
 <main class="wrap"><section class="stats">{stats_html}</section>
 <section class="panel"><h2>Runtime Contract</h2><code>simulated = CPU scoring · cached-real = downloaded Colab output JSON · live-colab = optional running endpoint while a Colab session is active</code></section>
 <section class="panel"><h2>Pro+ Handoff</h2><p>The runbook is the operator contract for real Colab Pro+ refreshes: runtime selection, manifest checks, result placement, import validation, and full stack release validation.</p><code>{esc(summary['runbook'])}</code></section>
+<section class="panel"><h2>Execution Split</h2><p>The promoted 14-job contract is split into 10 notebook-native jobs in <code>notebooks/cvpr_gpu_worker.ipynb</code> and 4 external live worker lanes merged into the same promoted artifact set.</p><table><thead><tr><th>Job</th><th>Execution path</th></tr></thead><tbody>{split_html}</tbody></table></section>
 <section class="panel"><h2>Import Gate</h2><code>python3 scripts/validate_cvpr_colab_results.py --manifest source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_run_manifest.json --results source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json --report analysis/cvpr_colab_gpu_worker/import_validation.json</code></section>
 <section class="panel"><h2>Live Export Gate</h2><code>notebook final cell: validate_live_colab_export(live_export_results)</code><code>python3 {esc(summary['liveIntakeGate'])} --export {esc(summary['liveExportArtifact'])}</code></section>
 <section class="panel"><h2>Full Stack Gate</h2><code>python3 scripts/validate_cvpr_full_stack.py</code></section>
@@ -2146,8 +2258,12 @@ def build_page(summary, cached_results, run_manifest):
 
 
 def main():
-    cached_results = cached_grounding_results() + cached_restoration_results() + cached_adversarial_results() + cached_temporal_results() + cached_clinical_results() + cached_compute_results() + cached_constraint_results() + cached_driving_results() + cached_geometry_results() + cached_splatting_results()
-    run_manifest = build_run_manifest(cached_results)
+    if PROMOTED_RESULTS.exists() and PROMOTED_MANIFEST.exists():
+        cached_results = json.loads(PROMOTED_RESULTS.read_text(encoding="utf-8"))
+        run_manifest = json.loads(PROMOTED_MANIFEST.read_text(encoding="utf-8"))
+    else:
+        cached_results = cached_grounding_results() + cached_restoration_results() + cached_adversarial_results() + cached_temporal_results() + cached_clinical_results() + cached_compute_results() + cached_constraint_results() + cached_driving_results() + cached_geometry_results() + cached_splatting_results()
+        run_manifest = build_run_manifest(cached_results)
     build_notebook(run_manifest, grounding_cases_for_notebook(), restoration_cases_for_notebook(), adversarial_cases_for_notebook(), temporal_cases_for_notebook(), clinical_cases_for_notebook(), compute_cases_for_notebook(), constraint_cases_for_notebook(), driving_cases_for_notebook(), geometry_cases_for_notebook(), splatting_cases_for_notebook())
     build_package(cached_results, run_manifest)
     build_runbook(run_manifest)

@@ -1,3 +1,3 @@
 # CVPR Second-Round Demo Roadmap
 
-Next implementation roadmap after the gauntlet remediation release brief and closeout pack.
+Next implementation roadmap after the current blocked remediation release posture and closeout pack.

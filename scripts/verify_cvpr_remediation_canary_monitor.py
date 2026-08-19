@@ -14,18 +14,18 @@ def main():
     assert summary["demo"] == "cvpr-remediation-canary-monitor"
     assert summary["status"] == "watching"
     assert summary["sourceDemo"] == "cvpr-remediation-promotion-board"
-    assert summary["rows"] == 29
-    assert summary["sourcePromotions"] == 29
-    assert summary["promotedRows"] == 12
-    assert summary["monitoredRows"] == 17
-    assert summary["clean"] == 12
-    assert summary["watch"] == 17
+    assert summary["rows"] == 53
+    assert summary["sourcePromotions"] == 53
+    assert summary["promotedRows"] == sum(1 for row in data["canaryRows"] if row["promotion"] == "promote")
+    assert summary["monitoredRows"] == sum(1 for row in data["canaryRows"] if row["promotion"] == "monitor")
+    assert summary["clean"] == sum(1 for row in data["canaryRows"] if row["canaryStatus"] == "clean")
+    assert summary["watch"] == sum(1 for row in data["canaryRows"] if row["canaryStatus"] == "watch")
     assert summary["rollback"] == 0
     assert summary["maxRollbackRisk"] <= 36
     assert summary["maxDrift"] <= 12
     assert summary["themes"] == 8
-    assert summary["incidents"] == 4
-    assert len(data["canaryRows"]) == 29
+    assert summary["incidents"] == 7
+    assert len(data["canaryRows"]) == 53
     assert all(row["canaryStatus"] in {"clean", "watch"} for row in data["canaryRows"])
     assert all(row["responseCommand"].startswith("python3 scripts/verify_cvpr_remediation_") for row in data["canaryRows"])
     page = PAGE.read_text(encoding="utf-8")

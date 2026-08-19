@@ -6,17 +6,17 @@
     "notebook": "notebooks/cvpr_gpu_worker.ipynb",
     "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
     "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
-    "workerJobs": 10,
-    "promotedRunners": 10,
-    "runnerRows": 10,
-    "cachedResults": 40,
+    "workerJobs": 14,
+    "promotedRunners": 14,
+    "runnerRows": 14,
+    "cachedResults": 56,
     "importIssues": 0,
     "fullStackStatus": "valid",
     "packageTests": 148,
     "validationGate": "release",
     "liveIntakeStatus": "valid",
-    "liveIntakeResults": 40,
-    "liveIntakePromoted": false,
+    "liveIntakeResults": 56,
+    "liveIntakePromoted": true,
     "promotionDeltaStatus": "release",
     "promotionRegressions": 0,
     "maxReadinessDrop": 0.0,
@@ -90,6 +90,38 @@
       "strictMode": "require_real_models=True"
     },
     {
+      "jobId": "depth-normal-consistency",
+      "caseSymbol": "DEPTH_NORMAL_CASES",
+      "loader": "load_depth_normal_models",
+      "runner": "run_depth_normal_consistency_batch",
+      "execution": "torch-cuda-depth-normal-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseSymbol": "CORRUPTION_CASES",
+      "loader": "load_corruption_models",
+      "runner": "run_corruption_robustness_batch",
+      "execution": "torchvision-resnet-corruption-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+      "loader": "load_prompt_segmentation_models",
+      "runner": "run_prompt_segmentation_robustness_batch",
+      "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "caseSymbol": "VIDEO_TRACKING_CASES",
+      "loader": "load_video_tracking_models",
+      "runner": "run_video_identity_tracking_batch",
+      "execution": "torch-cuda-video-tracking-live-demo",
+      "strictMode": "require_real_models=True"
+    },
+    {
       "jobId": "metric-geometry",
       "caseSymbol": "GEOMETRY_CASES",
       "loader": "load_metric_geometry_models",
@@ -111,13 +143,16 @@
     "runtimePlane": "google-colab-pro-plus",
     "controlPlane": "local-static-cvpr-site",
     "resultPlane": "registry-and-cached-json",
-    "jobs": 10,
-    "liveCapable": 10,
-    "promotedRunners": 10,
-    "cachedCapable": 10,
-    "cachedResults": 40,
-    "validCachedResults": 40,
+    "jobs": 14,
+    "liveCapable": 14,
+    "promotedRunners": 14,
+    "runnerRows": 14,
+    "cachedCapable": 14,
+    "cachedResults": 56,
+    "validCachedResults": 56,
     "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+    "notebookNativeJobs": 10,
+    "externalLiveJobs": 4,
     "notebook": "notebooks/cvpr_gpu_worker.ipynb",
     "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
     "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -128,14 +163,325 @@
     "fullStackReport": "analysis/cvpr_full_stack_validation/registry.json",
     "status": "interactive-contract"
   },
+  "runManifest": {
+    "runtimePlane": "google-colab-pro-plus",
+    "controlPlane": "local-static-cvpr-site",
+    "resultArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
+    "liveExportArtifact": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+    "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+    "jobs": [
+      {
+        "jobId": "open-vocab-grounding",
+        "bench": "cvpr-long-tail-grounding-bench",
+        "page": "cvpr-long-tail-grounding-bench.html",
+        "priority": 1,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "siglip-base-patch16-224",
+          "grounding-dino-tiny",
+          "sam-vit-b"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_long_tail_grounding_bench/registry.json",
+        "resultFilter": {
+          "jobId": "open-vocab-grounding",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "restoration-fidelity",
+        "bench": "cvpr-restoration-fidelity-bench",
+        "page": "cvpr-restoration-fidelity-bench.html",
+        "priority": 2,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "swinir-lightweight",
+          "real-esrgan-x2"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_restoration_fidelity_bench/registry.json",
+        "resultFilter": {
+          "jobId": "restoration-fidelity",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "adversarial-provenance",
+        "bench": "cvpr-adversarial-provenance-bench",
+        "page": "cvpr-adversarial-provenance-bench.html",
+        "priority": 3,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "watermark-detector",
+          "clip-perturbation-probe"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_adversarial_provenance_bench/registry.json",
+        "resultFilter": {
+          "jobId": "adversarial-provenance",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "temporal-rollout",
+        "bench": "cvpr-temporal-rollout-bench",
+        "page": "cvpr-temporal-rollout-bench.html",
+        "priority": 4,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "video-feature-tracker",
+          "raft-lite",
+          "world-rollout-probe"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_temporal_rollout_bench/registry.json",
+        "resultFilter": {
+          "jobId": "temporal-rollout",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "clinical-shift",
+        "bench": "cvpr-clinical-shift-bench",
+        "page": "cvpr-clinical-shift-bench.html",
+        "priority": 5,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "dicom-embedding-shift-probe",
+          "temperature-calibration-head",
+          "uncertainty-triage-head"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_clinical_shift_bench/registry.json",
+        "resultFilter": {
+          "jobId": "clinical-shift",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "compute-serving",
+        "bench": "cvpr-compute-serving-bench",
+        "page": "cvpr-compute-serving-bench.html",
+        "priority": 6,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "quantized-vision-encoder",
+          "student-router",
+          "latency-profiler"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_compute_serving_bench/registry.json",
+        "resultFilter": {
+          "jobId": "compute-serving",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "constraint-generation",
+        "bench": "cvpr-constraint-generation-bench",
+        "page": "cvpr-constraint-generation-bench.html",
+        "priority": 7,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "layout-controlnet",
+          "identity-embedding-lock",
+          "preference-reward-probe"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_constraint_generation_bench/registry.json",
+        "resultFilter": {
+          "jobId": "constraint-generation",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "driving-safety",
+        "bench": "cvpr-driving-safety-bench",
+        "page": "cvpr-driving-safety-bench.html",
+        "priority": 8,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "vla-scene-grounder",
+          "ttc-risk-head",
+          "safety-rule-monitor"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_driving_safety_bench/registry.json",
+        "resultFilter": {
+          "jobId": "driving-safety",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "depth-normal-consistency",
+        "bench": "cvpr-depth-normal-consistency-bench",
+        "page": "cvpr-depth-normal-consistency-bench.html",
+        "priority": 9,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "torch-cuda-depth-normal-probe",
+          "finite-difference-normal-consistency"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+        "resultFilter": {
+          "jobId": "depth-normal-consistency",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "corruption-robustness",
+        "bench": "cvpr-corruption-robustness-bench",
+        "page": "cvpr-corruption-robustness-bench.html",
+        "priority": 10,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "torchvision-resnet18",
+          "clean-corrupted-logit-delta"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+        "resultFilter": {
+          "jobId": "corruption-robustness",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "bench": "cvpr-prompt-segmentation-robustness-bench",
+        "page": "cvpr-prompt-segmentation-robustness-bench.html",
+        "priority": 11,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "torchvision-maskrcnn-resnet50-fpn",
+          "mask-rcnn-click-robustness-proxy"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+        "resultFilter": {
+          "jobId": "prompt-segmentation-robustness",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "bench": "cvpr-video-identity-tracking-bench",
+        "page": "cvpr-video-identity-tracking-bench.html",
+        "priority": 12,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "torch-cuda-centroid-assignment-tracker",
+          "mask-sequence-identity-drift"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
+        "resultFilter": {
+          "jobId": "video-identity-tracking",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "metric-geometry",
+        "bench": "cvpr-metric-geometry-bench",
+        "page": "cvpr-metric-geometry-bench.html",
+        "priority": 13,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "torch-pose-bundle-adjuster",
+          "metric-scale-probe",
+          "surface-consistency-head"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_metric_geometry_bench/registry.json",
+        "resultFilter": {
+          "jobId": "metric-geometry",
+          "mode": "cached-real"
+        }
+      },
+      {
+        "jobId": "gaussian-splatting",
+        "bench": "cvpr-gaussian-splatting-bench",
+        "page": "cvpr-gaussian-splatting-bench.html",
+        "priority": 14,
+        "runtimeModes": [
+          "simulated",
+          "cached-real",
+          "live-colab"
+        ],
+        "models": [
+          "torch-splat-renderer",
+          "semantic-splat-attach",
+          "provenance-trace-head"
+        ],
+        "expectedCases": 4,
+        "importPath": "analysis/cvpr_gaussian_splatting_bench/registry.json",
+        "resultFilter": {
+          "jobId": "gaussian-splatting",
+          "mode": "cached-real"
+        }
+      }
+    ]
+  },
   "importReport": {
     "validator": "validate_cvpr_colab_results",
     "runtimePlane": "google-colab-pro-plus",
     "expectedMode": "cached-real",
-    "jobs": 10,
-    "expectedResults": 40,
-    "actualResults": 40,
-    "validJobs": 10,
+    "jobs": 14,
+    "expectedResults": 56,
+    "actualResults": 56,
+    "validJobs": 14,
     "issues": 0,
     "status": "valid"
   },
@@ -145,11 +491,11 @@
     "commands": 286,
     "steps": 59,
     "packageTests": 148,
-    "workerJobs": 10,
-    "promotedRunners": 10,
-    "cachedResults": 40,
+    "workerJobs": 14,
+    "promotedRunners": 14,
+    "cachedResults": 56,
     "importIssues": 0,
-    "durationSec": 22.254
+    "durationSec": 120.878
   },
   "validationCenter": {
     "dashboard": "cvpr-validation-center",
@@ -159,14 +505,14 @@
     "commands": 286,
     "steps": 53,
     "packageTests": 148,
-    "workerJobs": 10,
-    "promotedRunners": 10,
-    "cachedResults": 40,
+    "workerJobs": 14,
+    "promotedRunners": 14,
+    "cachedResults": 56,
     "importIssues": 0,
     "promotionDeltaStatus": "release",
     "promotionRegressions": 0,
     "maxReadinessDrop": 0.0,
-    "validImportJobs": 10,
+    "validImportJobs": 14,
     "implementedBenches": 11,
     "benchCases": 44,
     "benchBlock": 0,
@@ -178,7 +524,7 @@
       {
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
-        "durationSec": 20.437,
+        "durationSec": 109.717,
         "testCount": 148,
         "log": "/tmp/cvpr-core-tests.log",
         "stdoutTail": [
@@ -191,38 +537,38 @@
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/validate_cvpr_colab_results.py",
+        "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.049,
+        "durationSec": 0.27,
         "stdoutTail": [
-          "validated CVPR Colab results: 40 results, 0 issues"
+          "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+        "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.262,
         "stdoutTail": [
-          "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+        "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.261,
         "stdoutTail": [
-          "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_mission_control.py",
+        "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.257,
         "stdoutTail": [
-          "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+          "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       }
@@ -232,22 +578,23 @@
     "validator": "validate_cvpr_colab_results",
     "runtimePlane": "google-colab-pro-plus",
     "expectedMode": "live-colab",
-    "jobs": 10,
-    "expectedResults": 40,
-    "actualResults": 40,
-    "validJobs": 10,
+    "jobs": 14,
+    "expectedResults": 56,
+    "actualResults": 56,
+    "validJobs": 14,
     "issues": 0,
     "status": "valid",
     "intake": "cvpr-colab-live-intake",
-    "export": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
-    "canonicalArtifact": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
-    "promoted": false
+    "job": null,
+    "export": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results_live.json",
+    "canonicalArtifact": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
+    "promoted": true
   },
   "promotionDelta": {
     "delta": "cvpr-colab-promotion-delta",
     "status": "release",
-    "cases": 40,
-    "jobs": 10,
+    "cases": 56,
+    "jobs": 14,
     "missing": 0,
     "modeMismatches": 0,
     "regressions": 0,

@@ -18,8 +18,8 @@ def main():
     assert summary["benchRelease"] == 44
     assert summary["benchReview"] == 0
     assert summary["benchBlock"] == 0
-    assert summary["colabJobs"] == 10
-    assert summary["cachedResults"] == 40
+    assert summary["colabJobs"] == 14
+    assert summary["cachedResults"] == 56
     assert summary["colabCoveredBenches"] == 10
     assert summary["systemEvidenceCoveredBenches"] == 1
     assert summary["missingBenchSystems"] == 0
@@ -29,7 +29,7 @@ def main():
     assert summary["releaseGate"] == "release"
     assert len(data["systemRows"]) == 11
     assert len(data["stageRows"]) == 33
-    assert len(data["colabRows"]) == 10
+    assert len(data["colabRows"]) == 14
     assert len([row for row in data["systemRows"] if row["runtimeEvidence"] == "colab-pro-plus"]) == 10
     assert len([row for row in data["systemRows"] if row["runtimeEvidence"] == "cached-system-evidence"]) == 1
     assert all(row["cachedResults"] == 4 for row in data["colabRows"])

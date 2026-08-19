@@ -3,10 +3,10 @@
     "validator": "validate_cvpr_colab_results",
     "runtimePlane": "google-colab-pro-plus",
     "expectedMode": "cached-real",
-    "jobs": 10,
-    "expectedResults": 40,
-    "actualResults": 40,
-    "validJobs": 10,
+    "jobs": 14,
+    "expectedResults": 56,
+    "actualResults": 56,
+    "validJobs": 14,
     "issues": 0,
     "status": "valid"
   },
@@ -73,6 +73,38 @@
       "expectedCases": 4,
       "actualCases": 4,
       "importPath": "analysis/cvpr_driving_safety_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "bench": "cvpr-depth-normal-consistency-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_depth_normal_consistency_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "corruption-robustness",
+      "bench": "cvpr-corruption-robustness-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_corruption_robustness_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "bench": "cvpr-prompt-segmentation-robustness-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_prompt_segmentation_robustness_bench/registry.json",
+      "ready": true
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "bench": "cvpr-video-identity-tracking-bench",
+      "expectedCases": 4,
+      "actualCases": 4,
+      "importPath": "analysis/cvpr_video_identity_tracking_bench/registry.json",
       "ready": true
     },
     {

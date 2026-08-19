@@ -59,14 +59,14 @@
         "readiness": 84.9
       },
       "cachedGpuMetrics": {
-        "readiness": 84.9,
+        "readiness": 78.5,
         "editPressure": 21.0,
-        "constraintSatisfaction": 86.1,
-        "identityPreservation": 85.0,
-        "editLocality": 82.8,
-        "rewardAlignment": 87.3,
-        "identityDamage": 18.5,
-        "provenanceRisk": 17.6
+        "constraintSatisfaction": 80.8,
+        "identityPreservation": 80.2,
+        "editLocality": 76.2,
+        "rewardAlignment": 73.6,
+        "identityDamage": 19.2,
+        "provenanceRisk": 20.1
       },
       "decision": "release",
       "acceptancePass": true,
@@ -77,9 +77,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -109,14 +112,14 @@
         "readiness": 77.4
       },
       "cachedGpuMetrics": {
-        "readiness": 77.4,
-        "editPressure": 39.2,
-        "constraintSatisfaction": 80.9,
-        "identityPreservation": 77.3,
-        "editLocality": 74.4,
-        "rewardAlignment": 81.3,
-        "identityDamage": 31.8,
-        "provenanceRisk": 29.5
+        "readiness": 70.9,
+        "editPressure": 39.3,
+        "constraintSatisfaction": 74.7,
+        "identityPreservation": 73.7,
+        "editLocality": 67.7,
+        "rewardAlignment": 66.0,
+        "identityDamage": 31.3,
+        "provenanceRisk": 32.2
       },
       "decision": "release",
       "acceptancePass": true,
@@ -127,9 +130,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -159,14 +165,14 @@
         "readiness": 77.5
       },
       "cachedGpuMetrics": {
-        "readiness": 77.5,
+        "readiness": 70.5,
         "editPressure": 45.7,
-        "constraintSatisfaction": 81.1,
-        "identityPreservation": 78.4,
-        "editLocality": 72.9,
-        "rewardAlignment": 82.4,
-        "identityDamage": 33.1,
-        "provenanceRisk": 29.9
+        "constraintSatisfaction": 73.2,
+        "identityPreservation": 75.0,
+        "editLocality": 65.9,
+        "rewardAlignment": 66.2,
+        "identityDamage": 32.4,
+        "provenanceRisk": 33.1
       },
       "decision": "release",
       "acceptancePass": true,
@@ -177,9 +183,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -209,14 +218,14 @@
         "readiness": 77.6
       },
       "cachedGpuMetrics": {
-        "readiness": 77.6,
-        "editPressure": 47.7,
-        "constraintSatisfaction": 82.3,
-        "identityPreservation": 77.3,
-        "editLocality": 73.6,
-        "rewardAlignment": 82.5,
-        "identityDamage": 34.8,
-        "provenanceRisk": 30.0
+        "readiness": 70.8,
+        "editPressure": 47.8,
+        "constraintSatisfaction": 74.7,
+        "identityPreservation": 74.0,
+        "editLocality": 66.7,
+        "rewardAlignment": 66.6,
+        "identityDamage": 34.0,
+        "provenanceRisk": 33.1
       },
       "decision": "release",
       "acceptancePass": true,
@@ -227,9 +236,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-constraint-generation-bench"
+        "sourceBench": "cvpr-constraint-generation-bench",
+        "execution": "torch-layout-identity-reward-probe",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     }
   ]

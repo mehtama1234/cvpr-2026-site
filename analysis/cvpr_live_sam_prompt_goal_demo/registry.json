@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-sam-prompt-goal-demo",
+  "jobId": "sam-prompt-mask-refinement",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 71.6,
+  "unsupportedRegionRisk": 15.5,
+  "status": "valid"
+}

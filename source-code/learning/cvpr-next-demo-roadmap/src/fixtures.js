@@ -2,7 +2,7 @@ export const roadmapInput = {
   "portfolio": {
     "summary": {
       "portfolio": "cvpr-theme-portfolio-map",
-      "status": "release",
+      "status": "block",
       "themes": 8,
       "systems": 11,
       "stages": 33,
@@ -11,7 +11,7 @@ export const roadmapInput = {
       "missingDemoEvidence": 0,
       "proPlusSystems": 10,
       "cachedEvidenceSystems": 1,
-      "operatorStatus": "operator-ready"
+      "operatorStatus": "block"
     },
     "themeRows": [
       {
@@ -252,10 +252,10 @@ export const roadmapInput = {
       "stageDemos": 33,
       "flagshipDemos": 8,
       "totalDemos": 41,
-      "proPlusJobs": 10,
+      "proPlusJobs": 14,
       "proPlusWaves": 3,
-      "expectedLiveResults": 40,
-      "cachedResults": 40,
+      "expectedLiveResults": 56,
+      "cachedResults": 56,
       "benchRelease": 44,
       "benchCases": 44,
       "missingDemoEvidence": 0,
@@ -1081,14 +1081,14 @@ export const roadmapInput = {
       "replay": "cvpr-colab-result-replay",
       "status": "ready",
       "runtimePlane": "google-colab-pro-plus",
-      "jobs": 10,
-      "replayRows": 10,
-      "results": 40,
-      "validResults": 40,
+      "jobs": 14,
+      "replayRows": 14,
+      "results": 56,
+      "validResults": 56,
       "stageDemosCovered": 30,
       "cachedSystemEvidenceDemos": 3,
-      "minReadiness": 68.1,
-      "avgReadiness": 78.22,
+      "minReadiness": 44.0,
+      "avgReadiness": 75.14,
       "provenanceIssues": 0,
       "releaseGate": "release",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
@@ -1114,9 +1114,9 @@ export const roadmapInput = {
           "rare-visible",
           "unsupported-query"
         ],
-        "minReadiness": 83.8,
-        "avgReadiness": 84.05,
-        "maxReadiness": 84.7,
+        "minReadiness": 44.0,
+        "avgReadiness": 57.35,
+        "maxReadiness": 88.0,
         "inputFields": [
           "asset",
           "controls",
@@ -1124,6 +1124,7 @@ export const roadmapInput = {
         ],
         "outputFields": [
           "boxes",
+          "embeddingScore",
           "localizedEvidence",
           "regionScores"
         ],
@@ -1150,15 +1151,16 @@ export const roadmapInput = {
           "motion-blur-task",
           "over-restored-detail"
         ],
-        "minReadiness": 77.7,
-        "avgReadiness": 78.8,
-        "maxReadiness": 82.0,
+        "minReadiness": 78.5,
+        "avgReadiness": 79.88,
+        "maxReadiness": 81.6,
         "inputFields": [
           "asset",
           "degradationControls"
         ],
         "outputFields": [
           "artifactMap",
+          "deltaScore",
           "downstreamScore",
           "fidelityScore",
           "restoredImage"
@@ -1186,15 +1188,16 @@ export const roadmapInput = {
           "edited-social-post",
           "synthetic-watermarked"
         ],
-        "minReadiness": 79.7,
-        "avgReadiness": 80.05,
-        "maxReadiness": 80.8,
+        "minReadiness": 53.8,
+        "avgReadiness": 58.05,
+        "maxReadiness": 66.8,
         "inputFields": [
           "asset",
           "attackControls"
         ],
         "outputFields": [
           "attackHeatmap",
+          "clipProbeScores",
           "evidence",
           "leakageRisk",
           "provenanceConfidence"
@@ -1222,9 +1225,9 @@ export const roadmapInput = {
           "long-rollout-drift",
           "short-stable"
         ],
-        "minReadiness": 75.9,
-        "avgReadiness": 77.83,
-        "maxReadiness": 83.3,
+        "minReadiness": 80.3,
+        "avgReadiness": 82.4,
+        "maxReadiness": 86.1,
         "inputFields": [
           "asset",
           "trackingControls"
@@ -1232,6 +1235,7 @@ export const roadmapInput = {
         "outputFields": [
           "contactEvents",
           "driftCurve",
+          "flowProfile",
           "identityTracks",
           "rolloutPlausibility"
         ],
@@ -1253,23 +1257,22 @@ export const roadmapInput = {
         "validResults": 4,
         "stageDemos": 3,
         "caseIds": [
-          "external-hospital",
-          "new-scanner",
-          "noisy-rare-cohort",
-          "same-site-clean"
+          "clear-baseline",
+          "motion-artifact",
+          "rare-presentation",
+          "scanner-shift"
         ],
-        "minReadiness": 72.5,
-        "avgReadiness": 79.65,
-        "maxReadiness": 88.5,
+        "minReadiness": 81.1,
+        "avgReadiness": 84.03,
+        "maxReadiness": 89.9,
         "inputFields": [
           "asset",
           "clinicalControls"
         ],
         "outputFields": [
-          "calibrationCurve",
-          "clinicalEvidence",
-          "domainEmbeddings",
-          "triageScores"
+          "cleanConfidence",
+          "logitDivergence",
+          "shiftedConfidence"
         ],
         "provenanceIssues": 0,
         "missingFields": [],
@@ -1294,12 +1297,12 @@ export const roadmapInput = {
           "fleet-peak-load",
           "mobile-live"
         ],
-        "minReadiness": 73.5,
-        "avgReadiness": 74.82,
-        "maxReadiness": 76.6,
+        "minReadiness": 86.9,
+        "avgReadiness": 87.58,
+        "maxReadiness": 89.1,
         "inputFields": [
-          "asset",
-          "servingControls"
+          "servingControls",
+          "title"
         ],
         "outputFields": [
           "latencyProfile",
@@ -1330,9 +1333,9 @@ export const roadmapInput = {
           "prompt-attack-edit",
           "style-with-locks"
         ],
-        "minReadiness": 77.4,
-        "avgReadiness": 79.35,
-        "maxReadiness": 84.9,
+        "minReadiness": 70.5,
+        "avgReadiness": 72.67,
+        "maxReadiness": 78.5,
         "inputFields": [
           "asset",
           "generationControls"
@@ -1366,9 +1369,9 @@ export const roadmapInput = {
           "night-crosswalk",
           "urban-cut-in"
         ],
-        "minReadiness": 68.1,
-        "avgReadiness": 68.17,
-        "maxReadiness": 68.2,
+        "minReadiness": 56.5,
+        "avgReadiness": 57.02,
+        "maxReadiness": 57.4,
         "inputFields": [
           "asset",
           "safetyControls"
@@ -1382,6 +1385,41 @@ export const roadmapInput = {
         "provenanceIssues": 0,
         "missingFields": [],
         "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job driving-safety --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "depth-normal-consistency",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-depth-normal-consistency-bench",
+        "benchPage": "cvpr-depth-normal-consistency-bench.html",
+        "system": "geometry-consistency-probe",
+        "theme": "Recovering the 3D world from flat pictures",
+        "runner": "run_depth_normal_consistency_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "indoor-low-texture",
+          "reflective-surface",
+          "thin-chair-legs",
+          "wide-room-scale"
+        ],
+        "minReadiness": 75.7,
+        "avgReadiness": 80.4,
+        "maxReadiness": 82.5,
+        "inputFields": [
+          "asset",
+          "depthControls"
+        ],
+        "outputFields": [
+          "curvature",
+          "depthMap",
+          "normalEnergy"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job depth-normal-consistency --promote",
         "status": "ready"
       },
       {
@@ -1402,22 +1440,57 @@ export const roadmapInput = {
           "thin-structure",
           "wide-baseline"
         ],
-        "minReadiness": 72.0,
-        "avgReadiness": 78.0,
-        "maxReadiness": 85.8,
+        "minReadiness": 89.1,
+        "avgReadiness": 90.88,
+        "maxReadiness": 92.9,
         "inputFields": [
           "asset",
           "geometryControls"
         ],
         "outputFields": [
-          "poseGraph",
-          "scaleTrace",
-          "surfaceResidualMap",
-          "topologyWarnings"
+          "cameraRecovery",
+          "optimizationTrace",
+          "scaleRecovery"
         ],
         "provenanceIssues": 0,
         "missingFields": [],
         "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job metric-geometry --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "corruption-robustness",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-corruption-robustness-bench",
+        "benchPage": "cvpr-corruption-robustness-bench.html",
+        "system": "robust-perception-gate",
+        "theme": "Naming and locating what's in the picture",
+        "runner": "run_corruption_robustness_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "compression-shift",
+          "motion-blur",
+          "patch-attack",
+          "sensor-noise"
+        ],
+        "minReadiness": 80.8,
+        "avgReadiness": 82.6,
+        "maxReadiness": 84.4,
+        "inputFields": [
+          "asset",
+          "corruptionControls"
+        ],
+        "outputFields": [
+          "cleanConfidence",
+          "corruptedConfidence",
+          "featureCosine",
+          "jsDivergence"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job corruption-robustness --promote",
         "status": "ready"
       },
       {
@@ -1438,22 +1511,92 @@ export const roadmapInput = {
           "semantic-edit",
           "sparse-capture"
         ],
-        "minReadiness": 77.7,
-        "avgReadiness": 81.5,
-        "maxReadiness": 85.6,
+        "minReadiness": 73.6,
+        "avgReadiness": 74.7,
+        "maxReadiness": 75.2,
         "inputFields": [
           "asset",
           "splatControls"
         ],
         "outputFields": [
-          "editLeakageReport",
-          "novelViewRenders",
-          "provenanceTrace",
-          "semanticSplatMap"
+          "provenanceProbe",
+          "renderProfile",
+          "semanticProbe"
         ],
         "provenanceIssues": 0,
         "missingFields": [],
         "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-prompt-segmentation-robustness-bench",
+        "benchPage": "cvpr-prompt-segmentation-robustness-bench.html",
+        "system": "interactive-segmentation-gate",
+        "theme": "Making pixels from meaning",
+        "runner": "run_prompt_segmentation_robustness_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "ambiguous-clicks",
+          "cluttered-scene",
+          "occluded-object",
+          "single-object"
+        ],
+        "minReadiness": 57.8,
+        "avgReadiness": 60.95,
+        "maxReadiness": 65.4,
+        "inputFields": [
+          "asset",
+          "promptControls"
+        ],
+        "outputFields": [
+          "maskArea",
+          "maskOverlap",
+          "meanMaskConfidence"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job prompt-segmentation-robustness --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-video-identity-tracking-bench",
+        "benchPage": "cvpr-video-identity-tracking-bench.html",
+        "system": "video-tracking-release-gate",
+        "theme": "Seeing and making things that move",
+        "runner": "run_video_identity_tracking_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "clean-crossing",
+          "fast-motion",
+          "identity-crossing",
+          "long-occlusion"
+        ],
+        "minReadiness": 79.6,
+        "avgReadiness": 83.52,
+        "maxReadiness": 88.8,
+        "inputFields": [
+          "asset",
+          "trackingControls"
+        ],
+        "outputFields": [
+          "frames",
+          "objects",
+          "temporalDelta",
+          "trackTensor"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job video-identity-tracking --promote",
         "status": "ready"
       }
     ],
@@ -1467,18 +1610,18 @@ export const roadmapInput = {
   "commandCenter": {
     "summary": {
       "center": "cvpr-release-command-center",
-      "status": "operator-ready",
+      "status": "block",
       "surfaces": 8,
-      "readySurfaces": 8,
-      "alerts": 0,
+      "readySurfaces": 2,
+      "alerts": 5,
       "importIssues": 0,
       "fullStackStatus": "valid",
       "packageTests": 148,
       "systems": 11,
       "stages": 33,
       "demos": 41,
-      "workerJobs": 10,
-      "cachedResults": 40
+      "workerJobs": 14,
+      "cachedResults": 56
     },
     "surfaceRows": [
       {
@@ -1493,7 +1636,7 @@ export const roadmapInput = {
       {
         "surface": "cvpr-launch-readiness-pack.html",
         "label": "Launch readiness pack",
-        "actual": "launch-ready",
+        "actual": "block",
         "expected": "launch-ready",
         "metric": "148 package tests",
         "evidence": "analysis/cvpr_launch_readiness_pack/registry.json",
@@ -1502,7 +1645,7 @@ export const roadmapInput = {
       {
         "surface": "cvpr-release-manifest.html",
         "label": "Release manifest",
-        "actual": "sealed",
+        "actual": "block",
         "expected": "sealed",
         "metric": "13 artifacts",
         "evidence": "analysis/cvpr_release_manifest/registry.json",
@@ -1511,7 +1654,7 @@ export const roadmapInput = {
       {
         "surface": "cvpr-release-change-control.html",
         "label": "Release change control",
-        "actual": "controlled",
+        "actual": "block",
         "expected": "controlled",
         "metric": "13/13 rows",
         "evidence": "analysis/cvpr_release_change_control/registry.json",
@@ -1520,7 +1663,7 @@ export const roadmapInput = {
       {
         "surface": "cvpr-release-dependency-graph.html",
         "label": "Release dependency graph",
-        "actual": "ready",
+        "actual": "block",
         "expected": "ready",
         "metric": "15 nodes / 19 edges",
         "evidence": "analysis/cvpr_release_dependency_graph/registry.json",
@@ -1529,18 +1672,18 @@ export const roadmapInput = {
       {
         "surface": "cvpr-post-launch-monitoring.html",
         "label": "Post-launch monitoring",
-        "actual": "watching",
+        "actual": "block",
         "expected": "watching",
-        "metric": "9/9 monitors",
+        "metric": "4/9 monitors",
         "evidence": "analysis/cvpr_post_launch_monitoring/registry.json",
         "command": "python3 scripts/build_cvpr_post_launch_monitoring.py && python3 scripts/verify_cvpr_post_launch_monitoring.py"
       },
       {
         "surface": "cvpr-release-audit-trail.html",
         "label": "Release audit trail",
-        "actual": "complete",
+        "actual": "block",
         "expected": "complete",
-        "metric": "58/58 events",
+        "metric": "56/58 events",
         "evidence": "analysis/cvpr_release_audit_trail/registry.json",
         "command": "python3 scripts/build_cvpr_release_audit_trail.py && python3 scripts/verify_cvpr_release_audit_trail.py"
       },
@@ -1588,7 +1731,7 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 3,
     "benchCases": 4,
-    "readinessFloor": 73.5,
+    "readinessFloor": 86.9,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   },
@@ -1617,7 +1760,7 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 6,
     "benchCases": 8,
-    "readinessFloor": 77.4,
+    "readinessFloor": 70.5,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   },
@@ -1642,7 +1785,7 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 3,
     "benchCases": 4,
-    "readinessFloor": 83.8,
+    "readinessFloor": 44.0,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   },
@@ -1671,7 +1814,7 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 6,
     "benchCases": 8,
-    "readinessFloor": 72.0,
+    "readinessFloor": 73.6,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   },
@@ -1696,7 +1839,7 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 3,
     "benchCases": 4,
-    "readinessFloor": 75.9,
+    "readinessFloor": 80.3,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   },
@@ -1750,7 +1893,7 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 6,
     "benchCases": 8,
-    "readinessFloor": 72.5,
+    "readinessFloor": 53.8,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   },
@@ -1775,20 +1918,20 @@ export const roadmapGoals = [
     "cachedEvidenceSystems": [],
     "stageDemos": 3,
     "benchCases": 4,
-    "readinessFloor": 68.1,
+    "readinessFloor": 56.5,
     "command": "python3 scripts/validate_cvpr_full_stack.py",
     "status": "ready"
   }
 ];
 export const summary = {
   "roadmap": "cvpr-next-demo-roadmap",
-  "status": "ready",
+  "status": "block",
   "goals": 8,
   "themes": 8,
   "linkedSystems": 11,
   "proPlusGoals": 7,
   "cachedEvidenceGoals": 1,
   "missingEvidence": 0,
-  "operatorStatus": "operator-ready",
+  "operatorStatus": "block",
   "packageTests": 148
 };

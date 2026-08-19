@@ -1,0 +1,316 @@
+preprocessor_config.json:   0%|          | 0.00/457 [00:00<?, ?B/s]
+config.json:   0%|          | 0.00/1.64k [00:00<?, ?B/s]
+tokenizer_config.json:   0%|          | 0.00/1.24k [00:00<?, ?B/s]
+vocab.txt:   0%|          | 0.00/232k [00:00<?, ?B/s]
+tokenizer.json:   0%|          | 0.00/711k [00:00<?, ?B/s]
+added_tokens.json:   0%|          | 0.00/82.0 [00:00<?, ?B/s]
+special_tokens_map.json:   0%|          | 0.00/125 [00:00<?, ?B/s]
+model.safetensors: reconstructing file:   0%|          |  0.00B /  689MB        
+model.safetensors: downloading bytes:           |  0.00B            
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]
+preprocessor_config.json:   0%|          | 0.00/368 [00:00<?, ?B/s]
+config.json:   0%|          | 0.00/432 [00:00<?, ?B/s]
+tokenizer_config.json:   0%|          | 0.00/711 [00:00<?, ?B/s]
+spiece.model: reconstructing file:   0%|          |  0.00B /  798kB            
+spiece.model: downloading bytes:           |  0.00B            
+special_tokens_map.json:   0%|          | 0.00/409 [00:00<?, ?B/s]
+tokenizer.json:   0%|          | 0.00/2.40M [00:00<?, ?B/s]
+model.safetensors: reconstructing file:   0%|          |  0.00B /  813MB        
+model.safetensors: downloading bytes:           |  0.00B            
+Loading weights:   0%|          | 0/408 [00:00<?, ?it/s]
+===CVPR_LIVE_JSON_BEGIN===
+{
+  "summary": {
+    "demo": "cvpr-live-open-vocab-grounding-colab-demo",
+    "jobId": "open-vocab-grounding",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 44.0,
+    "maxUnsupportedRisk": 24.9,
+    "status": "valid"
+  },
+  "results": [
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "common-clean",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:01:17Z",
+      "model": {
+        "embedding": "google/siglip-base-patch16-224",
+        "detector": "IDEA-Research/grounding-dino-tiny"
+      },
+      "inputs": {
+        "textQuery": "teal rectangle.",
+        "controls": {
+          "queryRarity": 18,
+          "distractorOverlap": 16,
+          "boxAmbiguity": 18,
+          "evidenceThreshold": 54
+        },
+        "asset": "synthetic://common-clean"
+      },
+      "outputs": {
+        "boxes": [
+          {
+            "label": "teal rectangle",
+            "xywh": [
+              0.178,
+              0.216,
+              0.305,
+              0.288
+            ],
+            "score": 0.742
+          },
+          {
+            "label": "teal rectangle",
+            "xywh": [
+              0.512,
+              0.255,
+              0.272,
+              0.266
+            ],
+            "score": 0.417
+          }
+        ],
+        "regionScores": {
+          "target": 26.8,
+          "longTail": 39.7
+        },
+        "embeddingScore": 8.3,
+        "localizedEvidence": 50.2
+      },
+      "metrics": {
+        "readiness": 48.0,
+        "proposalRecall": 74.2,
+        "textRegionScore": 26.8,
+        "longTailRecall": 39.7,
+        "localizedEvidence": 50.2,
+        "unsupportedRisk": 21.0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo"
+      }
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "rare-visible",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:01:18Z",
+      "model": {
+        "embedding": "google/siglip-base-patch16-224",
+        "detector": "IDEA-Research/grounding-dino-tiny"
+      },
+      "inputs": {
+        "textQuery": "teal target rectangle.",
+        "controls": {
+          "queryRarity": 66,
+          "distractorOverlap": 12,
+          "boxAmbiguity": 34,
+          "evidenceThreshold": 62
+        },
+        "asset": "synthetic://rare-visible"
+      },
+      "outputs": {
+        "boxes": [
+          {
+            "label": "teal target rectangle",
+            "xywh": [
+              0.178,
+              0.216,
+              0.305,
+              0.288
+            ],
+            "score": 0.752
+          },
+          {
+            "label": "teal target rectangle",
+            "xywh": [
+              0.522,
+              0.256,
+              0.273,
+              0.266
+            ],
+            "score": 0.381
+          }
+        ],
+        "regionScores": {
+          "target": 26.7,
+          "longTail": 43.2
+        },
+        "embeddingScore": 7.8,
+        "localizedEvidence": 52.2
+      },
+      "metrics": {
+        "readiness": 49.4,
+        "proposalRecall": 75.2,
+        "textRegionScore": 26.7,
+        "longTailRecall": 43.2,
+        "localizedEvidence": 52.2,
+        "unsupportedRisk": 21.2
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo"
+      }
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "rare-distractors",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:01:18Z",
+      "model": {
+        "embedding": "google/siglip-base-patch16-224",
+        "detector": "IDEA-Research/grounding-dino-tiny"
+      },
+      "inputs": {
+        "textQuery": "teal target rectangle near orange distractor.",
+        "controls": {
+          "queryRarity": 78,
+          "distractorOverlap": 28,
+          "boxAmbiguity": 28,
+          "evidenceThreshold": 76
+        },
+        "asset": "synthetic://rare-distractors"
+      },
+      "outputs": {
+        "boxes": [
+          {
+            "label": "teal target rectangle orange distract",
+            "xywh": [
+              0.177,
+              0.216,
+              0.307,
+              0.289
+            ],
+            "score": 0.794
+          },
+          {
+            "label": "orange distractor",
+            "xywh": [
+              0.484,
+              0.257,
+              0.273,
+              0.266
+            ],
+            "score": 0.587
+          }
+        ],
+        "regionScores": {
+          "target": 93.1,
+          "longTail": 85.2
+        },
+        "embeddingScore": 98.4,
+        "localizedEvidence": 84.5
+      },
+      "metrics": {
+        "readiness": 88.0,
+        "proposalRecall": 79.4,
+        "textRegionScore": 93.1,
+        "longTailRecall": 85.2,
+        "localizedEvidence": 84.5,
+        "unsupportedRisk": 8.9
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo"
+      }
+    },
+    {
+      "jobId": "open-vocab-grounding",
+      "caseId": "unsupported-query",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:01:18Z",
+      "model": {
+        "embedding": "google/siglip-base-patch16-224",
+        "detector": "IDEA-Research/grounding-dino-tiny"
+      },
+      "inputs": {
+        "textQuery": "transparent glass elephant.",
+        "controls": {
+          "queryRarity": 82,
+          "distractorOverlap": 30,
+          "boxAmbiguity": 32,
+          "evidenceThreshold": 84
+        },
+        "asset": "synthetic://unsupported-query"
+      },
+      "outputs": {
+        "boxes": [
+          {
+            "label": "transparent glass elephant",
+            "xywh": [
+              0.178,
+              0.216,
+              0.304,
+              0.288
+            ],
+            "score": 0.606
+          },
+          {
+            "label": "transparent glass elephant",
+            "xywh": [
+              0.48,
+              0.256,
+              0.271,
+              0.266
+            ],
+            "score": 0.524
+          },
+          {
+            "label": "transparent glass elephant",
+            "xywh": [
+              0.178,
+              0.216,
+              0.575,
+              0.306
+            ],
+            "score": 0.285
+          }
+        ],
+        "regionScores": {
+          "target": 17.0,
+          "longTail": 40.6
+        },
+        "embeddingScore": 0.0,
+        "localizedEvidence": 47.0
+      },
+      "metrics": {
+        "readiness": 44.0,
+        "proposalRecall": 60.6,
+        "textRegionScore": 17.0,
+        "longTailRecall": 40.6,
+        "localizedEvidence": 47.0,
+        "unsupportedRisk": 24.9
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo"
+      }
+    }
+  ]
+}
+===CVPR_LIVE_JSON_END===
+{
+  "demo": "cvpr-live-open-vocab-grounding-colab-demo",
+  "jobId": "open-vocab-grounding",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 44.0,
+  "maxUnsupportedRisk": 24.9,
+  "status": "valid"
+}

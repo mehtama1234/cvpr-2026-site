@@ -1034,7 +1034,7 @@ export const matrixInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "maxRisk",
-        "keyMetricValue": 34.6,
+        "keyMetricValue": 34.8,
         "nextAction": "promote safety-critical-action evidence into release notes"
       },
       {
@@ -1047,7 +1047,7 @@ export const matrixInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "minEvidence",
-        "keyMetricValue": 82.5,
+        "keyMetricValue": 51.2,
         "nextAction": "promote adversarial-media evidence into release notes"
       },
       {
@@ -1060,7 +1060,7 @@ export const matrixInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "maxResidualRisk",
-        "keyMetricValue": 33.5,
+        "keyMetricValue": 11.1,
         "nextAction": "promote clinical-shift evidence into release notes"
       },
       {
@@ -1112,7 +1112,7 @@ export const matrixInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "minLocalizedEvidence",
-        "keyMetricValue": 87.1,
+        "keyMetricValue": 56.0,
         "nextAction": "promote long-tail-open-world evidence into release notes"
       },
       {
@@ -1140,12 +1140,12 @@ export const matrixInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 68.2,
+        "avgReadiness": 75.2,
         "acceptancePass": true,
         "playbookSource": "01-driving-and-vision-language-action-safety-critical-action",
         "status": "interactive",
         "keyMetric": "maxRisk",
-        "keyMetricValue": 34.6,
+        "keyMetricValue": 34.8,
         "registry": "analysis/cvpr_driving_safety_bench/registry.json",
         "page": "cvpr-driving-safety-bench.html"
       },
@@ -1161,12 +1161,12 @@ export const matrixInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 80.0,
+        "avgReadiness": 67.6,
         "acceptancePass": true,
         "playbookSource": "02-adversarial-robustness-adversarial-media",
         "status": "interactive",
         "keyMetric": "minEvidence",
-        "keyMetricValue": 82.5,
+        "keyMetricValue": 51.2,
         "registry": "analysis/cvpr_adversarial_provenance_bench/registry.json",
         "page": "cvpr-adversarial-provenance-bench.html"
       },
@@ -1182,12 +1182,12 @@ export const matrixInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 79.7,
+        "avgReadiness": 84.0,
         "acceptancePass": true,
         "playbookSource": "03-vision-for-science-and-medicine-clinical-shift",
         "status": "interactive",
         "keyMetric": "maxResidualRisk",
-        "keyMetricValue": 33.5,
+        "keyMetricValue": 11.1,
         "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
         "page": "cvpr-clinical-shift-bench.html"
       },
@@ -1224,12 +1224,12 @@ export const matrixInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 84.0,
+        "avgReadiness": 83.2,
         "acceptancePass": true,
         "playbookSource": "07-open-vocabulary-vision-long-tail-open-world",
         "status": "interactive",
         "keyMetric": "minLocalizedEvidence",
-        "keyMetricValue": 87.1,
+        "keyMetricValue": 56.0,
         "registry": "analysis/cvpr_long_tail_grounding_bench/registry.json",
         "page": "cvpr-long-tail-grounding-bench.html"
       },
@@ -1378,12 +1378,12 @@ export const matrixInput = {
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 68.2,
+      "avgReadiness": 75.2,
       "acceptancePass": true,
       "playbookSource": "01-driving-and-vision-language-action-safety-critical-action",
       "status": "interactive",
       "keyMetric": "maxRisk",
-      "keyMetricValue": 34.6,
+      "keyMetricValue": 34.8,
       "registry": "analysis/cvpr_driving_safety_bench/registry.json",
       "page": "cvpr-driving-safety-bench.html"
     },
@@ -1399,12 +1399,12 @@ export const matrixInput = {
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 80.0,
+      "avgReadiness": 67.6,
       "acceptancePass": true,
       "playbookSource": "02-adversarial-robustness-adversarial-media",
       "status": "interactive",
       "keyMetric": "minEvidence",
-      "keyMetricValue": 82.5,
+      "keyMetricValue": 51.2,
       "registry": "analysis/cvpr_adversarial_provenance_bench/registry.json",
       "page": "cvpr-adversarial-provenance-bench.html"
     },
@@ -1420,12 +1420,12 @@ export const matrixInput = {
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 79.7,
+      "avgReadiness": 84.0,
       "acceptancePass": true,
       "playbookSource": "03-vision-for-science-and-medicine-clinical-shift",
       "status": "interactive",
       "keyMetric": "maxResidualRisk",
-      "keyMetricValue": 33.5,
+      "keyMetricValue": 11.1,
       "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
       "page": "cvpr-clinical-shift-bench.html"
     },
@@ -1462,12 +1462,12 @@ export const matrixInput = {
       "release": 4,
       "review": 0,
       "block": 0,
-      "avgReadiness": 84.0,
+      "avgReadiness": 83.2,
       "acceptancePass": true,
       "playbookSource": "07-open-vocabulary-vision-long-tail-open-world",
       "status": "interactive",
       "keyMetric": "minLocalizedEvidence",
-      "keyMetricValue": 87.1,
+      "keyMetricValue": 56.0,
       "registry": "analysis/cvpr_long_tail_grounding_bench/registry.json",
       "page": "cvpr-long-tail-grounding-bench.html"
     },
@@ -1604,11 +1604,11 @@ export const matrixInput = {
       "status": "ready",
       "stages": 8,
       "commands": 5,
-      "jobs": 10,
-      "runners": 10,
-      "cachedResults": 40,
-      "liveIntakeResults": 40,
-      "promotionResults": 40,
+      "jobs": 14,
+      "runners": 14,
+      "cachedResults": 56,
+      "liveIntakeResults": 56,
+      "promotionResults": 56,
       "importIssues": 0,
       "deltaStatus": "release",
       "deltaRegressions": 0,
@@ -1690,50 +1690,50 @@ export const matrixInput = {
         "label": "handoff-zip",
         "path": "analysis/cvpr_colab_handoff_package/cvpr_colab_handoff_package.zip",
         "exists": true,
-        "sizeBytes": 34794,
-        "sha256": "7f174373fa2d48225bd7d67ef24fb7aba84ccc30c20bdc0c4fb74c255523b8c7"
+        "sizeBytes": 40779,
+        "sha256": "e403ca36cf4f1989137cb482d35e3d5cbd389fa03340bce02c563612dfeaae76"
       },
       {
         "label": "canonical-results",
         "path": "source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json",
         "exists": true,
-        "sizeBytes": 47872,
-        "sha256": "5b537ee059dba5a3722989704ff371a4e189a73ddb5fa3b2c813d7e6ec891eba"
+        "sizeBytes": 76029,
+        "sha256": "5a5afb62541ae0743302449c10d82ac82c77c9c12b69be389bc67b3f73a49fb8"
       },
       {
         "label": "live-intake-export",
         "path": "analysis/cvpr_colab_live_intake/cvpr_gpu_results_live.verifier.json",
         "exists": true,
-        "sizeBytes": 49832,
-        "sha256": "04fe3f893876ac079949e389e1c22dd4753632c96f4e75c0d8695beb8b99c9c1"
+        "sizeBytes": 78773,
+        "sha256": "0bac6d820eda7a49d46983a0bc4626df5a2e6d684d07b8a9bdf46c3e797fea06"
       },
       {
         "label": "promoted-results",
         "path": "analysis/cvpr_colab_live_intake/promotion_drill/cvpr_gpu_results.promoted.json",
         "exists": true,
-        "sizeBytes": 53072,
-        "sha256": "3ffb96134e662f6c3edf63e07bd21d20c0ac0b7bb1d0cff9530a24b3f9691b52"
+        "sizeBytes": 78885,
+        "sha256": "8d1bd84fc8c82a1def5ced2af64fd27dbe94548b58fae27092bb5d2bb01143cc"
       },
       {
         "label": "promotion-delta-registry",
         "path": "analysis/cvpr_colab_promotion_delta/registry.json",
         "exists": true,
-        "sizeBytes": 18250,
-        "sha256": "b82ea6c528e307757d5538c39d663a4c76eebabfd532971c9564d0b9129cdc93"
+        "sizeBytes": 25986,
+        "sha256": "4747f9693c3b5dac24625ae8f8041ceebd71dc1276a754f58566744bd80eee55"
       },
       {
         "label": "release-registry",
         "path": "analysis/cvpr_colab_release_bundle/registry.json",
         "exists": true,
-        "sizeBytes": 8825,
-        "sha256": "fe242a266b7535fc0e240e7cfd9393d5a154020e37997abbed0344681a923b8c"
+        "sizeBytes": 19540,
+        "sha256": "445112c8fd895bf0d1692d013c6da76ec3e7c5e6e5da092db8eb291cec7624ed"
       },
       {
         "label": "validation-registry",
         "path": "analysis/cvpr_validation_center/registry.json",
         "exists": true,
-        "sizeBytes": 9489,
-        "sha256": "c565126a8caf707f2d8c9c4f1f172576740dd34d42adcb1531cfe532c0a744a2"
+        "sizeBytes": 10950,
+        "sha256": "246321c86c99859beafd07416926798b6c64f682cc996460c8309eef72e01f76"
       }
     ]
   },
@@ -1746,14 +1746,14 @@ export const matrixInput = {
       "commands": 286,
       "steps": 53,
       "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
       "promotionDeltaStatus": "release",
       "promotionRegressions": 0,
       "maxReadinessDrop": 0.0,
-      "validImportJobs": 10,
+      "validImportJobs": 14,
       "implementedBenches": 11,
       "benchCases": 44,
       "benchBlock": 0,
@@ -1765,7 +1765,7 @@ export const matrixInput = {
         {
           "command": "node source-code/learning/*/tests/core.test.js",
           "returnCode": 0,
-          "durationSec": 20.437,
+          "durationSec": 109.717,
           "testCount": 148,
           "log": "/tmp/cvpr-core-tests.log",
           "stdoutTail": [
@@ -1778,38 +1778,38 @@ export const matrixInput = {
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/validate_cvpr_colab_results.py",
+          "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
           "returnCode": 0,
-          "durationSec": 0.049,
+          "durationSec": 0.27,
           "stdoutTail": [
-            "validated CVPR Colab results: 40 results, 0 issues"
+            "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+          "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
           "returnCode": 0,
-          "durationSec": 0.042,
+          "durationSec": 0.262,
           "stdoutTail": [
-            "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+            "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+          "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
           "returnCode": 0,
-          "durationSec": 0.041,
+          "durationSec": 0.261,
           "stdoutTail": [
-            "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+            "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
           ],
           "stderrTail": []
         },
         {
-          "command": "python3 scripts/build_cvpr_mission_control.py",
+          "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
           "returnCode": 0,
-          "durationSec": 0.04,
+          "durationSec": 0.257,
           "stdoutTail": [
-            "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+            "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
           ],
           "stderrTail": []
         }
@@ -1819,7 +1819,7 @@ export const matrixInput = {
       {
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
-        "durationSec": 20.437,
+        "durationSec": 109.717,
         "testCount": 148,
         "log": "/tmp/cvpr-core-tests.log",
         "stdoutTail": [
@@ -1832,38 +1832,38 @@ export const matrixInput = {
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/validate_cvpr_colab_results.py",
+        "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.049,
+        "durationSec": 0.27,
         "stdoutTail": [
-          "validated CVPR Colab results: 40 results, 0 issues"
+          "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
+        "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.262,
         "stdoutTail": [
-          "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
+        "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.261,
         "stdoutTail": [
-          "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
-        "command": "python3 scripts/build_cvpr_mission_control.py",
+        "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.257,
         "stdoutTail": [
-          "wrote cvpr-mission-control.html: 11 systems, 11 benches"
+          "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       }
@@ -1874,20 +1874,20 @@ export const matrixInput = {
       "commands": 286,
       "steps": 53,
       "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
-      "durationSec": 21.961
+      "durationSec": 119.128
     },
     "importReport": {
       "validator": "validate_cvpr_colab_results",
       "runtimePlane": "google-colab-pro-plus",
       "expectedMode": "cached-real",
-      "jobs": 10,
-      "expectedResults": 40,
-      "actualResults": 40,
-      "validJobs": 10,
+      "jobs": 14,
+      "expectedResults": 56,
+      "actualResults": 56,
+      "validJobs": 14,
       "issues": 0,
       "status": "valid"
     },
@@ -1896,13 +1896,16 @@ export const matrixInput = {
       "runtimePlane": "google-colab-pro-plus",
       "controlPlane": "local-static-cvpr-site",
       "resultPlane": "registry-and-cached-json",
-      "jobs": 10,
-      "liveCapable": 10,
-      "promotedRunners": 10,
-      "cachedCapable": 10,
-      "cachedResults": 40,
-      "validCachedResults": 40,
+      "jobs": 14,
+      "liveCapable": 14,
+      "promotedRunners": 14,
+      "runnerRows": 14,
+      "cachedCapable": 14,
+      "cachedResults": 56,
+      "validCachedResults": 56,
       "firstGpuBackedBench": "cvpr-long-tail-grounding-bench",
+      "notebookNativeJobs": 10,
+      "externalLiveJobs": 4,
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
       "runbook": "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md",
       "importValidator": "scripts/validate_cvpr_colab_results.py",
@@ -1979,6 +1982,38 @@ export const matrixInput = {
         "strictMode": "require_real_models=True"
       },
       {
+        "jobId": "depth-normal-consistency",
+        "caseSymbol": "DEPTH_NORMAL_CASES",
+        "loader": "load_depth_normal_models",
+        "runner": "run_depth_normal_consistency_batch",
+        "execution": "torch-cuda-depth-normal-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "corruption-robustness",
+        "caseSymbol": "CORRUPTION_CASES",
+        "loader": "load_corruption_models",
+        "runner": "run_corruption_robustness_batch",
+        "execution": "torchvision-resnet-corruption-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "caseSymbol": "PROMPT_SEGMENTATION_CASES",
+        "loader": "load_prompt_segmentation_models",
+        "runner": "run_prompt_segmentation_robustness_batch",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "caseSymbol": "VIDEO_TRACKING_CASES",
+        "loader": "load_video_tracking_models",
+        "runner": "run_video_identity_tracking_batch",
+        "execution": "torch-cuda-video-tracking-live-demo",
+        "strictMode": "require_real_models=True"
+      },
+      {
         "jobId": "metric-geometry",
         "caseSymbol": "GEOMETRY_CASES",
         "loader": "load_metric_geometry_models",
@@ -2021,8 +2056,8 @@ export const matrixInput = {
     "promotionDelta": {
       "delta": "cvpr-colab-promotion-delta",
       "status": "release",
-      "cases": 40,
-      "jobs": 10,
+      "cases": 56,
+      "jobs": 14,
       "missing": 0,
       "modeMismatches": 0,
       "regressions": 0,

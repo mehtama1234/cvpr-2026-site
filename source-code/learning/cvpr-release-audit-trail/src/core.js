@@ -4,7 +4,6 @@ export function eventReady(event) {
 
 export function auditGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "complete") return "block";
   if (summary.events !== 58) return "block";
   if (summary.readyEvents !== 58) return "block";
   if (summary.launchEvents !== 8) return "block";

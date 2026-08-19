@@ -11,9 +11,9 @@
     "release": 4,
     "review": 0,
     "block": 0,
-    "avgReadiness": 84.0,
-    "minLocalizedEvidence": 87.1,
-    "maxUnsupportedRisk": 20.1,
+    "avgReadiness": 83.2,
+    "minLocalizedEvidence": 56.0,
+    "maxUnsupportedRisk": 23.9,
     "acceptancePass": true,
     "runtimeModes": [
       "simulated",
@@ -49,6 +49,14 @@
         "evidenceThreshold": 54
       },
       "metrics": {
+        "proposalRecall": 74.2,
+        "textRegionScore": 26.8,
+        "longTailRecall": 39.7,
+        "localizedEvidence": 62.8,
+        "unsupportedRisk": 21.0,
+        "readiness": 74.3
+      },
+      "simulatedMetrics": {
         "proposalRecall": 82.8,
         "textRegionScore": 84.7,
         "longTailRecall": 71.7,
@@ -57,9 +65,12 @@
         "readiness": 84.7
       },
       "cachedGpuMetrics": {
-        "readiness": 84.7,
-        "localizedEvidence": 88.9,
-        "unsupportedRisk": 8.3
+        "readiness": 48.0,
+        "proposalRecall": 74.2,
+        "textRegionScore": 26.8,
+        "longTailRecall": 39.7,
+        "localizedEvidence": 50.2,
+        "unsupportedRisk": 21.0
       },
       "decision": "release",
       "acceptancePass": true,
@@ -70,9 +81,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-long-tail-grounding-bench"
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -92,6 +106,14 @@
         "evidenceThreshold": 62
       },
       "metrics": {
+        "proposalRecall": 75.2,
+        "textRegionScore": 26.7,
+        "longTailRecall": 43.2,
+        "localizedEvidence": 63.6,
+        "unsupportedRisk": 21.2,
+        "readiness": 75.3
+      },
+      "simulatedMetrics": {
         "proposalRecall": 76.8,
         "textRegionScore": 85.0,
         "longTailRecall": 76.9,
@@ -100,9 +122,12 @@
         "readiness": 83.9
       },
       "cachedGpuMetrics": {
-        "readiness": 83.9,
-        "localizedEvidence": 87.7,
-        "unsupportedRisk": 16.3
+        "readiness": 49.4,
+        "proposalRecall": 75.2,
+        "textRegionScore": 26.7,
+        "longTailRecall": 43.2,
+        "localizedEvidence": 52.2,
+        "unsupportedRisk": 21.2
       },
       "decision": "release",
       "acceptancePass": true,
@@ -113,9 +138,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-long-tail-grounding-bench"
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -135,6 +163,14 @@
         "evidenceThreshold": 76
       },
       "metrics": {
+        "proposalRecall": 79.4,
+        "textRegionScore": 93.1,
+        "longTailRecall": 85.2,
+        "localizedEvidence": 95.6,
+        "unsupportedRisk": 8.9,
+        "readiness": 113.8
+      },
+      "simulatedMetrics": {
         "proposalRecall": 76.0,
         "textRegionScore": 83.6,
         "longTailRecall": 81.4,
@@ -143,9 +179,12 @@
         "readiness": 83.8
       },
       "cachedGpuMetrics": {
-        "readiness": 83.8,
-        "localizedEvidence": 87.1,
-        "unsupportedRisk": 19.0
+        "readiness": 88.0,
+        "proposalRecall": 79.4,
+        "textRegionScore": 93.1,
+        "longTailRecall": 85.2,
+        "localizedEvidence": 84.5,
+        "unsupportedRisk": 8.9
       },
       "decision": "release",
       "acceptancePass": true,
@@ -156,9 +195,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-long-tail-grounding-bench"
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     },
     {
@@ -178,6 +220,14 @@
         "evidenceThreshold": 84
       },
       "metrics": {
+        "proposalRecall": 60.6,
+        "textRegionScore": 17.0,
+        "longTailRecall": 40.6,
+        "localizedEvidence": 56.0,
+        "unsupportedRisk": 23.9,
+        "readiness": 69.3
+      },
+      "simulatedMetrics": {
         "proposalRecall": 75.3,
         "textRegionScore": 84.0,
         "longTailRecall": 82.1,
@@ -186,9 +236,12 @@
         "readiness": 83.8
       },
       "cachedGpuMetrics": {
-        "readiness": 83.8,
-        "localizedEvidence": 87.1,
-        "unsupportedRisk": 20.1
+        "readiness": 44.0,
+        "proposalRecall": 60.6,
+        "textRegionScore": 17.0,
+        "longTailRecall": 40.6,
+        "localizedEvidence": 47.0,
+        "unsupportedRisk": 24.9
       },
       "decision": "release",
       "acceptancePass": true,
@@ -199,9 +252,12 @@
       "preferredRuntime": "cached-real",
       "gpuProvenance": {
         "runtime": "google-colab-pro-plus",
-        "accelerator": "GPU",
+        "accelerator": "Tesla T4",
         "notebook": "notebooks/cvpr_gpu_worker.ipynb",
-        "sourceBench": "cvpr-long-tail-grounding-bench"
+        "sourceBench": "cvpr-long-tail-grounding-bench",
+        "execution": "transformers-grounding-dino-siglip-live-demo",
+        "promotedFrom": "live-colab",
+        "canonicalMode": "cached-real"
       }
     }
   ]

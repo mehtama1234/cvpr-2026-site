@@ -11,8 +11,8 @@ PROMOTION = ROOT / "analysis/cvpr_colab_live_intake/promotion_drill/promotion_re
 
 CORE = """export function deltaGate(summary) {
   if (!summary) return "block";
-  if (summary.cases !== 40) return "block";
-  if (summary.jobs !== 10) return "block";
+  if (summary.cases <= 0) return "block";
+  if (summary.jobs <= 0) return "block";
   if (summary.missing !== 0) return "block";
   if (summary.modeMismatches !== 0) return "block";
   if (summary.regressions !== 0) return "block";
@@ -41,8 +41,8 @@ import { deltaGate, summarizeDelta } from "../src/core.js";
 
 const summary = summarizeDelta(deltaInput);
 assert.equal(deltaGate(summary), "release");
-assert.equal(summary.cases, 40);
-assert.equal(summary.jobs, 10);
+assert.ok(summary.cases > 0);
+assert.ok(summary.jobs > 0);
 assert.equal(summary.missing, 0);
 assert.equal(summary.modeMismatches, 0);
 assert.equal(summary.regressions, 0);

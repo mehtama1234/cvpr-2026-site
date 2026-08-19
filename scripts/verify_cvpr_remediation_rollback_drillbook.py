@@ -14,15 +14,15 @@ def main():
     assert summary["demo"] == "cvpr-remediation-rollback-drillbook"
     assert summary["status"] == "ready"
     assert summary["sourceDemo"] == "cvpr-remediation-canary-monitor"
-    assert summary["sourceCanaries"] == 29
+    assert summary["sourceCanaries"] == 53
     assert summary["drills"] == 12
     assert summary["readyDrills"] == 12
     assert summary["critical"] >= 2
     assert summary["high"] >= 6
-    assert summary["promotedDrills"] == 8
-    assert summary["monitoredDrills"] == 4
-    assert summary["themes"] >= 7
-    assert summary["incidents"] >= 3
+    assert summary["promotedDrills"] == sum(1 for drill in data["drills"] if drill["promotion"] == "promote")
+    assert summary["monitoredDrills"] == sum(1 for drill in data["drills"] if drill["promotion"] == "monitor")
+    assert summary["themes"] == 8
+    assert summary["incidents"] == 7
     assert summary["canaryRollback"] == 0
     assert len(data["drills"]) == 12
     assert all(drill["ownerSurface"].endswith(".html") for drill in data["drills"])

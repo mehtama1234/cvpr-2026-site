@@ -55,30 +55,84 @@ def canonicalize_live_results(results):
     return canonical
 
 
+def manifest_job_ids(manifest):
+    return {job["jobId"] for job in manifest.get("jobs", [])}
+
+
+def filter_job_rows(results, job_id):
+    return [row for row in results if row.get("jobId") == job_id]
+
+
+def validate_single_job(manifest, results, job_id):
+    allowed = manifest_job_ids(manifest)
+    if job_id not in allowed:
+        raise SystemExit(f"unknown manifest job: {job_id}")
+    scoped = filter_job_rows(results, job_id)
+    report = validate(manifest, scoped, expected_mode="live-colab")
+    report["jobs"] = [job for job in report["jobs"] if job["jobId"] == job_id]
+    report["issues"] = [
+        issue
+        for issue in report["issues"]
+        if issue.get("jobId") == job_id or issue.get("index") is not None
+    ]
+    if not report["jobs"]:
+        report["issues"].append({"type": "missing-job", "jobId": job_id})
+    summary = report["summary"]
+    summary["jobs"] = len(report["jobs"])
+    summary["expectedResults"] = sum(job["expectedCases"] for job in report["jobs"])
+    summary["actualResults"] = len(scoped)
+    summary["validJobs"] = sum(1 for job in report["jobs"] if job["ready"])
+    summary["issues"] = len(report["issues"])
+    summary["status"] = "valid" if not report["issues"] else "invalid"
+    return report, scoped
+
+
+def promote_single_job(canonical_path, live_results, job_id):
+    canonical_path.parent.mkdir(parents=True, exist_ok=True)
+    existing = load_json(canonical_path) if canonical_path.exists() else []
+    remainder = [row for row in existing if row.get("jobId") != job_id]
+    promoted_rows = canonicalize_live_results(live_results)
+    if canonical_path.exists():
+        backup = canonical_path.with_suffix(".cached-real.backup.json")
+        backup.write_text(canonical_path.read_text(encoding="utf-8"), encoding="utf-8")
+    merged = remainder + promoted_rows
+    canonical_path.write_text(json.dumps(merged, indent=2) + "\n", encoding="utf-8")
+    return merged
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
     parser.add_argument("--export", default=DEFAULT_EXPORT)
     parser.add_argument("--report", default=DEFAULT_REPORT)
     parser.add_argument("--canonical-results", default=DEFAULT_RESULTS)
+    parser.add_argument("--job", help="Validate and optionally promote a single job from the live export.")
     parser.add_argument("--promote", action="store_true", help="Replace the canonical GPU results after a clean live intake.")
     args = parser.parse_args()
 
     export_path = Path(args.export)
     canonical_path = Path(args.canonical_results)
     live_results = load_json(export_path)
-    report = validate(load_json(args.manifest), live_results, expected_mode="live-colab")
+    manifest = load_json(args.manifest)
+    if args.job:
+        report, scoped_live_results = validate_single_job(manifest, live_results, args.job)
+    else:
+        report = validate(manifest, live_results, expected_mode="live-colab")
+        scoped_live_results = live_results
     summary = report["summary"]
     promoted = False
 
     if args.promote:
         if summary["status"] != "valid":
             raise SystemExit("refusing to promote invalid live Colab export")
-        canonical_path.parent.mkdir(parents=True, exist_ok=True)
-        if canonical_path.exists():
-            backup = canonical_path.with_suffix(".cached-real.backup.json")
-            backup.write_text(canonical_path.read_text(encoding="utf-8"), encoding="utf-8")
-        canonical_path.write_text(json.dumps(canonicalize_live_results(live_results), indent=2) + "\n", encoding="utf-8")
+        if args.job:
+            promote_single_job(canonical_path, scoped_live_results, args.job)
+        else:
+            canonical_path.parent.mkdir(parents=True, exist_ok=True)
+            if canonical_path.exists():
+                backup = canonical_path.with_suffix(".cached-real.backup.json")
+                backup.write_text(canonical_path.read_text(encoding="utf-8"), encoding="utf-8")
+            canonical_path.write_text(json.dumps(canonicalize_live_results(scoped_live_results), indent=2) + "\n", encoding="utf-8")
         promoted = True
 
     canonical_display = str(canonical_path.relative_to(ROOT) if canonical_path.is_absolute() and canonical_path.is_relative_to(ROOT) else canonical_path)
@@ -86,6 +140,7 @@ def main():
         "summary": {
             **summary,
             "intake": "cvpr-colab-live-intake",
+            "job": args.job,
             "export": str(export_path.relative_to(ROOT) if export_path.is_absolute() and export_path.is_relative_to(ROOT) else export_path),
             "canonicalArtifact": canonical_display,
             "promoted": promoted,

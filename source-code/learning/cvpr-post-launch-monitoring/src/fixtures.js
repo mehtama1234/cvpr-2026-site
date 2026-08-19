@@ -2,12 +2,12 @@ export const monitoringInput = {
   "slos": {
     "summary": {
       "dashboard": "cvpr-release-slo-dashboard",
-      "status": "release",
+      "status": "block",
       "slos": 10,
-      "passingSlos": 10,
-      "criticalFailures": 0,
-      "readinessFloor": 68.1,
-      "avgReadiness": 78.22,
+      "passingSlos": 9,
+      "criticalFailures": 1,
+      "readinessFloor": 44.0,
+      "avgReadiness": 75.14,
       "benchAcceptanceRate": 100.0,
       "releaseGate": "release",
       "fullStackStatus": "valid",
@@ -53,8 +53,8 @@ export const monitoringInput = {
       {
         "id": "pro-plus-result-validity",
         "label": "All cached Pro+ results validate",
-        "actual": 40,
-        "target": 40,
+        "actual": 56,
+        "target": 56,
         "direction": "eq",
         "severity": "critical",
         "evidence": "analysis/cvpr_colab_result_replay/registry.json"
@@ -62,7 +62,7 @@ export const monitoringInput = {
       {
         "id": "readiness-floor",
         "label": "Replay readiness floor stays above release minimum",
-        "actual": 68.1,
+        "actual": 44.0,
         "target": 68.0,
         "direction": "gte",
         "severity": "critical",
@@ -118,14 +118,14 @@ export const monitoringInput = {
       "replay": "cvpr-colab-result-replay",
       "status": "ready",
       "runtimePlane": "google-colab-pro-plus",
-      "jobs": 10,
-      "replayRows": 10,
-      "results": 40,
-      "validResults": 40,
+      "jobs": 14,
+      "replayRows": 14,
+      "results": 56,
+      "validResults": 56,
       "stageDemosCovered": 30,
       "cachedSystemEvidenceDemos": 3,
-      "minReadiness": 68.1,
-      "avgReadiness": 78.22,
+      "minReadiness": 44.0,
+      "avgReadiness": 75.14,
       "provenanceIssues": 0,
       "releaseGate": "release",
       "notebook": "notebooks/cvpr_gpu_worker.ipynb",
@@ -151,9 +151,9 @@ export const monitoringInput = {
           "rare-visible",
           "unsupported-query"
         ],
-        "minReadiness": 83.8,
-        "avgReadiness": 84.05,
-        "maxReadiness": 84.7,
+        "minReadiness": 44.0,
+        "avgReadiness": 57.35,
+        "maxReadiness": 88.0,
         "inputFields": [
           "asset",
           "controls",
@@ -161,6 +161,7 @@ export const monitoringInput = {
         ],
         "outputFields": [
           "boxes",
+          "embeddingScore",
           "localizedEvidence",
           "regionScores"
         ],
@@ -187,15 +188,16 @@ export const monitoringInput = {
           "motion-blur-task",
           "over-restored-detail"
         ],
-        "minReadiness": 77.7,
-        "avgReadiness": 78.8,
-        "maxReadiness": 82.0,
+        "minReadiness": 78.5,
+        "avgReadiness": 79.88,
+        "maxReadiness": 81.6,
         "inputFields": [
           "asset",
           "degradationControls"
         ],
         "outputFields": [
           "artifactMap",
+          "deltaScore",
           "downstreamScore",
           "fidelityScore",
           "restoredImage"
@@ -223,15 +225,16 @@ export const monitoringInput = {
           "edited-social-post",
           "synthetic-watermarked"
         ],
-        "minReadiness": 79.7,
-        "avgReadiness": 80.05,
-        "maxReadiness": 80.8,
+        "minReadiness": 53.8,
+        "avgReadiness": 58.05,
+        "maxReadiness": 66.8,
         "inputFields": [
           "asset",
           "attackControls"
         ],
         "outputFields": [
           "attackHeatmap",
+          "clipProbeScores",
           "evidence",
           "leakageRisk",
           "provenanceConfidence"
@@ -259,9 +262,9 @@ export const monitoringInput = {
           "long-rollout-drift",
           "short-stable"
         ],
-        "minReadiness": 75.9,
-        "avgReadiness": 77.83,
-        "maxReadiness": 83.3,
+        "minReadiness": 80.3,
+        "avgReadiness": 82.4,
+        "maxReadiness": 86.1,
         "inputFields": [
           "asset",
           "trackingControls"
@@ -269,6 +272,7 @@ export const monitoringInput = {
         "outputFields": [
           "contactEvents",
           "driftCurve",
+          "flowProfile",
           "identityTracks",
           "rolloutPlausibility"
         ],
@@ -290,23 +294,22 @@ export const monitoringInput = {
         "validResults": 4,
         "stageDemos": 3,
         "caseIds": [
-          "external-hospital",
-          "new-scanner",
-          "noisy-rare-cohort",
-          "same-site-clean"
+          "clear-baseline",
+          "motion-artifact",
+          "rare-presentation",
+          "scanner-shift"
         ],
-        "minReadiness": 72.5,
-        "avgReadiness": 79.65,
-        "maxReadiness": 88.5,
+        "minReadiness": 81.1,
+        "avgReadiness": 84.03,
+        "maxReadiness": 89.9,
         "inputFields": [
           "asset",
           "clinicalControls"
         ],
         "outputFields": [
-          "calibrationCurve",
-          "clinicalEvidence",
-          "domainEmbeddings",
-          "triageScores"
+          "cleanConfidence",
+          "logitDivergence",
+          "shiftedConfidence"
         ],
         "provenanceIssues": 0,
         "missingFields": [],
@@ -331,12 +334,12 @@ export const monitoringInput = {
           "fleet-peak-load",
           "mobile-live"
         ],
-        "minReadiness": 73.5,
-        "avgReadiness": 74.82,
-        "maxReadiness": 76.6,
+        "minReadiness": 86.9,
+        "avgReadiness": 87.58,
+        "maxReadiness": 89.1,
         "inputFields": [
-          "asset",
-          "servingControls"
+          "servingControls",
+          "title"
         ],
         "outputFields": [
           "latencyProfile",
@@ -367,9 +370,9 @@ export const monitoringInput = {
           "prompt-attack-edit",
           "style-with-locks"
         ],
-        "minReadiness": 77.4,
-        "avgReadiness": 79.35,
-        "maxReadiness": 84.9,
+        "minReadiness": 70.5,
+        "avgReadiness": 72.67,
+        "maxReadiness": 78.5,
         "inputFields": [
           "asset",
           "generationControls"
@@ -403,9 +406,9 @@ export const monitoringInput = {
           "night-crosswalk",
           "urban-cut-in"
         ],
-        "minReadiness": 68.1,
-        "avgReadiness": 68.17,
-        "maxReadiness": 68.2,
+        "minReadiness": 56.5,
+        "avgReadiness": 57.02,
+        "maxReadiness": 57.4,
         "inputFields": [
           "asset",
           "safetyControls"
@@ -419,6 +422,41 @@ export const monitoringInput = {
         "provenanceIssues": 0,
         "missingFields": [],
         "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job driving-safety --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "depth-normal-consistency",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-depth-normal-consistency-bench",
+        "benchPage": "cvpr-depth-normal-consistency-bench.html",
+        "system": "geometry-consistency-probe",
+        "theme": "Recovering the 3D world from flat pictures",
+        "runner": "run_depth_normal_consistency_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "indoor-low-texture",
+          "reflective-surface",
+          "thin-chair-legs",
+          "wide-room-scale"
+        ],
+        "minReadiness": 75.7,
+        "avgReadiness": 80.4,
+        "maxReadiness": 82.5,
+        "inputFields": [
+          "asset",
+          "depthControls"
+        ],
+        "outputFields": [
+          "curvature",
+          "depthMap",
+          "normalEnergy"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job depth-normal-consistency --promote",
         "status": "ready"
       },
       {
@@ -439,22 +477,57 @@ export const monitoringInput = {
           "thin-structure",
           "wide-baseline"
         ],
-        "minReadiness": 72.0,
-        "avgReadiness": 78.0,
-        "maxReadiness": 85.8,
+        "minReadiness": 89.1,
+        "avgReadiness": 90.88,
+        "maxReadiness": 92.9,
         "inputFields": [
           "asset",
           "geometryControls"
         ],
         "outputFields": [
-          "poseGraph",
-          "scaleTrace",
-          "surfaceResidualMap",
-          "topologyWarnings"
+          "cameraRecovery",
+          "optimizationTrace",
+          "scaleRecovery"
         ],
         "provenanceIssues": 0,
         "missingFields": [],
         "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job metric-geometry --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "corruption-robustness",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-corruption-robustness-bench",
+        "benchPage": "cvpr-corruption-robustness-bench.html",
+        "system": "robust-perception-gate",
+        "theme": "Naming and locating what's in the picture",
+        "runner": "run_corruption_robustness_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "compression-shift",
+          "motion-blur",
+          "patch-attack",
+          "sensor-noise"
+        ],
+        "minReadiness": 80.8,
+        "avgReadiness": 82.6,
+        "maxReadiness": 84.4,
+        "inputFields": [
+          "asset",
+          "corruptionControls"
+        ],
+        "outputFields": [
+          "cleanConfidence",
+          "corruptedConfidence",
+          "featureCosine",
+          "jsDivergence"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job corruption-robustness --promote",
         "status": "ready"
       },
       {
@@ -475,22 +548,92 @@ export const monitoringInput = {
           "semantic-edit",
           "sparse-capture"
         ],
-        "minReadiness": 77.7,
-        "avgReadiness": 81.5,
-        "maxReadiness": 85.6,
+        "minReadiness": 73.6,
+        "avgReadiness": 74.7,
+        "maxReadiness": 75.2,
         "inputFields": [
           "asset",
           "splatControls"
         ],
         "outputFields": [
-          "editLeakageReport",
-          "novelViewRenders",
-          "provenanceTrace",
-          "semanticSplatMap"
+          "provenanceProbe",
+          "renderProfile",
+          "semanticProbe"
         ],
         "provenanceIssues": 0,
         "missingFields": [],
         "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-prompt-segmentation-robustness-bench",
+        "benchPage": "cvpr-prompt-segmentation-robustness-bench.html",
+        "system": "interactive-segmentation-gate",
+        "theme": "Making pixels from meaning",
+        "runner": "run_prompt_segmentation_robustness_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "ambiguous-clicks",
+          "cluttered-scene",
+          "occluded-object",
+          "single-object"
+        ],
+        "minReadiness": 57.8,
+        "avgReadiness": 60.95,
+        "maxReadiness": 65.4,
+        "inputFields": [
+          "asset",
+          "promptControls"
+        ],
+        "outputFields": [
+          "maskArea",
+          "maskOverlap",
+          "meanMaskConfidence"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job prompt-segmentation-robustness --promote",
+        "status": "ready"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "wave": "wave-3-generation-driving-3d",
+        "bench": "cvpr-video-identity-tracking-bench",
+        "benchPage": "cvpr-video-identity-tracking-bench.html",
+        "system": "video-tracking-release-gate",
+        "theme": "Seeing and making things that move",
+        "runner": "run_video_identity_tracking_batch",
+        "results": 4,
+        "expectedResults": 4,
+        "validResults": 4,
+        "stageDemos": 0,
+        "caseIds": [
+          "clean-crossing",
+          "fast-motion",
+          "identity-crossing",
+          "long-occlusion"
+        ],
+        "minReadiness": 79.6,
+        "avgReadiness": 83.52,
+        "maxReadiness": 88.8,
+        "inputFields": [
+          "asset",
+          "trackingControls"
+        ],
+        "outputFields": [
+          "frames",
+          "objects",
+          "temporalDelta",
+          "trackTensor"
+        ],
+        "provenanceIssues": 0,
+        "missingFields": [],
+        "promotionCommand": "python3 scripts/stage_cvpr_live_colab_export.py --job video-identity-tracking --promote",
         "status": "ready"
       }
     ],
@@ -504,13 +647,13 @@ export const monitoringInput = {
   "manifest": {
     "summary": {
       "manifest": "cvpr-release-manifest",
-      "status": "sealed",
+      "status": "block",
       "artifacts": 13,
       "missingArtifacts": 0,
-      "launchStatus": "launch-ready",
+      "launchStatus": "block",
       "releaseGate": "release",
-      "sloStatus": "release",
-      "drillbookStatus": "ready",
+      "sloStatus": "block",
+      "drillbookStatus": "block",
       "fullStackStatus": "valid",
       "packageTests": 148,
       "commands": 286,
@@ -521,15 +664,15 @@ export const monitoringInput = {
         "label": "launch-readiness-pack-page",
         "path": "cvpr-launch-readiness-pack.html",
         "exists": true,
-        "sizeBytes": 6576,
-        "sha256": "8fd07ff3a201f5869af1865eec4d7ba038c74c5f480ab3e721f0e09fc46409c2"
+        "sizeBytes": 6565,
+        "sha256": "ba59a7746ce53b593135d8e1c0870ace7211d85223a8fbb00a51206f298c6239"
       },
       {
         "label": "launch-readiness-pack-registry",
         "path": "analysis/cvpr_launch_readiness_pack/registry.json",
         "exists": true,
-        "sizeBytes": 3479,
-        "sha256": "126ed721634a91979ba276f144fb7b6a33df0b57daea2ea784cbc539a8813ae5",
+        "sizeBytes": 3468,
+        "sha256": "d80766106793d9b7919420152f9f9f20f474884a174c7a8c65497bbecba62903",
         "summaryKeys": [
           "arenaPairings",
           "arenaRelease",
@@ -561,14 +704,14 @@ export const monitoringInput = {
         "path": "cvpr-production-release-brief.html",
         "exists": true,
         "sizeBytes": 5758,
-        "sha256": "bc1810aa97d5272f68c30a668d6a474ef112107d7c2da8ecbf95dd7eb5ff0e7a"
+        "sha256": "ea050879bc7012b4f2c3239b99ca2813c4508d71b1b638b9fb45df6242836ff6"
       },
       {
         "label": "production-release-brief-registry",
         "path": "analysis/cvpr_production_release_brief/registry.json",
         "exists": true,
         "sizeBytes": 2607,
-        "sha256": "7edbc38f38c045615dbbadeea13b6e5e0bea834a859393709f2c62559feed7ba",
+        "sha256": "9d69b4b2a6e77b0e20d516b99c9732818502b2e813367c9491bfa8917e2fe00b",
         "summaryKeys": [
           "arenaBlock",
           "arenaPairings",
@@ -603,15 +746,15 @@ export const monitoringInput = {
         "label": "release-slo-dashboard-page",
         "path": "cvpr-release-slo-dashboard.html",
         "exists": true,
-        "sizeBytes": 6092,
-        "sha256": "8882852b10810e86dd387de15a5ff0fced81f921a90dae5e9ded155fe7727ff3"
+        "sizeBytes": 6089,
+        "sha256": "d9a2f0f61210a5c32e8ed6ec2905e1b9fe32436ff45380b71f612f792d253152"
       },
       {
         "label": "release-slo-dashboard-registry",
         "path": "analysis/cvpr_release_slo_dashboard/registry.json",
         "exists": true,
-        "sizeBytes": 3382,
-        "sha256": "d8b9149b77f00625b79dc64208030584ae77741c9e667e83fa89e2585a784613",
+        "sizeBytes": 3379,
+        "sha256": "af6c148ec2a3061e804103d73ec1ab9a928b3c9a9555097f66b1ab5fc9322a3c",
         "summaryKeys": [
           "avgReadiness",
           "benchAcceptanceRate",
@@ -630,15 +773,15 @@ export const monitoringInput = {
         "label": "release-regression-drillbook-page",
         "path": "cvpr-release-regression-drillbook.html",
         "exists": true,
-        "sizeBytes": 9327,
-        "sha256": "960f7f77dca561cc95d7410e93217d5d69e11017ce7f115eea5adec184f93264"
+        "sizeBytes": 9326,
+        "sha256": "c39ac01ccb8331b2ad80e66effc8c10868c4bbd995a86f4a64584b14511db353"
       },
       {
         "label": "release-regression-drillbook-registry",
         "path": "analysis/cvpr_release_regression_drillbook/registry.json",
         "exists": true,
-        "sizeBytes": 8195,
-        "sha256": "7476304780c159a395454ef94021dda6433a697837a31be25d64f4c25b44aae0",
+        "sizeBytes": 8194,
+        "sha256": "6d283bc3303114d5820294100fa102b7d5c117607dfd70e4cb0a120a4f4bedf0",
         "summaryKeys": [
           "activeCriticalFailures",
           "drillbook",
@@ -656,8 +799,8 @@ export const monitoringInput = {
         "label": "colab-result-replay-registry",
         "path": "analysis/cvpr_colab_result_replay/registry.json",
         "exists": true,
-        "sizeBytes": 11602,
-        "sha256": "1ba4f0c7267642338a382c33fc98ac2a034b8ac99461c68e5b59f4ced560ccb7",
+        "sizeBytes": 15930,
+        "sha256": "ddecf1e41a336731b229b4920a4d6feab1b2cc1e4ebb88dd949273de6fe5b290",
         "summaryKeys": [
           "avgReadiness",
           "cachedSystemEvidenceDemos",
@@ -682,7 +825,7 @@ export const monitoringInput = {
         "path": "analysis/cvpr_demo_evidence_cockpit/registry.json",
         "exists": true,
         "sizeBytes": 31535,
-        "sha256": "fe3ae3efc4a3e78bd9f4b9de0a7e746ae04a358c4b9dddbdd82410f7f03b7189",
+        "sha256": "3edbda76f742ae3efe9bafae6092585a2e806bbfca5a83a24f22c32566454d1b",
         "summaryKeys": [
           "benchCases",
           "benchRelease",
@@ -707,8 +850,8 @@ export const monitoringInput = {
         "label": "full-stack-validation-registry",
         "path": "analysis/cvpr_full_stack_validation/registry.json",
         "exists": true,
-        "sizeBytes": 24186,
-        "sha256": "28fd7c39b0c77d91b8701bcbedc9041002774e1b73475a6748fb0be7afb9c5d9",
+        "sizeBytes": 24174,
+        "sha256": "a5f7d9b43071632908c0e332de3ae98898b192114730746415a09bd811a47bc2",
         "summaryKeys": [
           "cachedResults",
           "commands",
@@ -726,8 +869,8 @@ export const monitoringInput = {
         "label": "full-stack-validator",
         "path": "scripts/validate_cvpr_full_stack.py",
         "exists": true,
-        "sizeBytes": 25641,
-        "sha256": "5a45960199a00cee8c5ed63365c84b705cb115d6ec640ee18cecf491d474c998"
+        "sizeBytes": 25670,
+        "sha256": "85b588bc87510b85a6d89311b63e8fe86a8aed4c485cf5bbb61becd729feeab5"
       },
       {
         "label": "site-index",
@@ -748,13 +891,13 @@ export const monitoringInput = {
   "changeControl": {
     "summary": {
       "board": "cvpr-release-change-control",
-      "status": "controlled",
+      "status": "block",
       "artifacts": 13,
       "controlRows": 13,
       "readyRows": 13,
       "missingArtifacts": 0,
-      "launchStatus": "launch-ready",
-      "manifestStatus": "sealed",
+      "launchStatus": "block",
+      "manifestStatus": "block",
       "fullStackStatus": "valid",
       "packageTests": 148
     },
@@ -763,8 +906,8 @@ export const monitoringInput = {
         "artifact": "launch-readiness-pack-page",
         "path": "cvpr-launch-readiness-pack.html",
         "ownerSurface": "cvpr-launch-readiness-pack.html",
-        "currentSha256": "8fd07ff3a201f5869af1865eec4d7ba038c74c5f480ab3e721f0e09fc46409c2",
-        "sizeBytes": 6576,
+        "currentSha256": "ba59a7746ce53b593135d8e1c0870ace7211d85223a8fbb00a51206f298c6239",
+        "sizeBytes": 6565,
         "rebuildCommand": "python3 scripts/build_cvpr_launch_readiness_pack.py",
         "verifyCommand": "python3 scripts/verify_cvpr_launch_readiness_pack.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -776,8 +919,8 @@ export const monitoringInput = {
         "artifact": "launch-readiness-pack-registry",
         "path": "analysis/cvpr_launch_readiness_pack/registry.json",
         "ownerSurface": "cvpr-launch-readiness-pack.html",
-        "currentSha256": "126ed721634a91979ba276f144fb7b6a33df0b57daea2ea784cbc539a8813ae5",
-        "sizeBytes": 3479,
+        "currentSha256": "d80766106793d9b7919420152f9f9f20f474884a174c7a8c65497bbecba62903",
+        "sizeBytes": 3468,
         "rebuildCommand": "python3 scripts/build_cvpr_launch_readiness_pack.py",
         "verifyCommand": "python3 scripts/verify_cvpr_launch_readiness_pack.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -789,7 +932,7 @@ export const monitoringInput = {
         "artifact": "production-release-brief-page",
         "path": "cvpr-production-release-brief.html",
         "ownerSurface": "cvpr-production-release-brief.html",
-        "currentSha256": "bc1810aa97d5272f68c30a668d6a474ef112107d7c2da8ecbf95dd7eb5ff0e7a",
+        "currentSha256": "ea050879bc7012b4f2c3239b99ca2813c4508d71b1b638b9fb45df6242836ff6",
         "sizeBytes": 5758,
         "rebuildCommand": "python3 scripts/build_cvpr_production_release_brief.py",
         "verifyCommand": "python3 scripts/verify_cvpr_production_release_brief.py",
@@ -802,7 +945,7 @@ export const monitoringInput = {
         "artifact": "production-release-brief-registry",
         "path": "analysis/cvpr_production_release_brief/registry.json",
         "ownerSurface": "cvpr-production-release-brief.html",
-        "currentSha256": "7edbc38f38c045615dbbadeea13b6e5e0bea834a859393709f2c62559feed7ba",
+        "currentSha256": "9d69b4b2a6e77b0e20d516b99c9732818502b2e813367c9491bfa8917e2fe00b",
         "sizeBytes": 2607,
         "rebuildCommand": "python3 scripts/build_cvpr_production_release_brief.py",
         "verifyCommand": "python3 scripts/verify_cvpr_production_release_brief.py",
@@ -815,8 +958,8 @@ export const monitoringInput = {
         "artifact": "release-slo-dashboard-page",
         "path": "cvpr-release-slo-dashboard.html",
         "ownerSurface": "cvpr-release-slo-dashboard.html",
-        "currentSha256": "8882852b10810e86dd387de15a5ff0fced81f921a90dae5e9ded155fe7727ff3",
-        "sizeBytes": 6092,
+        "currentSha256": "d9a2f0f61210a5c32e8ed6ec2905e1b9fe32436ff45380b71f612f792d253152",
+        "sizeBytes": 6089,
         "rebuildCommand": "python3 scripts/build_cvpr_release_slo_dashboard.py",
         "verifyCommand": "python3 scripts/verify_cvpr_release_slo_dashboard.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -828,8 +971,8 @@ export const monitoringInput = {
         "artifact": "release-slo-dashboard-registry",
         "path": "analysis/cvpr_release_slo_dashboard/registry.json",
         "ownerSurface": "cvpr-release-slo-dashboard.html",
-        "currentSha256": "d8b9149b77f00625b79dc64208030584ae77741c9e667e83fa89e2585a784613",
-        "sizeBytes": 3382,
+        "currentSha256": "af6c148ec2a3061e804103d73ec1ab9a928b3c9a9555097f66b1ab5fc9322a3c",
+        "sizeBytes": 3379,
         "rebuildCommand": "python3 scripts/build_cvpr_release_slo_dashboard.py",
         "verifyCommand": "python3 scripts/verify_cvpr_release_slo_dashboard.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -841,8 +984,8 @@ export const monitoringInput = {
         "artifact": "release-regression-drillbook-page",
         "path": "cvpr-release-regression-drillbook.html",
         "ownerSurface": "cvpr-release-regression-drillbook.html",
-        "currentSha256": "960f7f77dca561cc95d7410e93217d5d69e11017ce7f115eea5adec184f93264",
-        "sizeBytes": 9327,
+        "currentSha256": "c39ac01ccb8331b2ad80e66effc8c10868c4bbd995a86f4a64584b14511db353",
+        "sizeBytes": 9326,
         "rebuildCommand": "python3 scripts/build_cvpr_release_regression_drillbook.py",
         "verifyCommand": "python3 scripts/verify_cvpr_release_regression_drillbook.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -854,8 +997,8 @@ export const monitoringInput = {
         "artifact": "release-regression-drillbook-registry",
         "path": "analysis/cvpr_release_regression_drillbook/registry.json",
         "ownerSurface": "cvpr-release-regression-drillbook.html",
-        "currentSha256": "7476304780c159a395454ef94021dda6433a697837a31be25d64f4c25b44aae0",
-        "sizeBytes": 8195,
+        "currentSha256": "6d283bc3303114d5820294100fa102b7d5c117607dfd70e4cb0a120a4f4bedf0",
+        "sizeBytes": 8194,
         "rebuildCommand": "python3 scripts/build_cvpr_release_regression_drillbook.py",
         "verifyCommand": "python3 scripts/verify_cvpr_release_regression_drillbook.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -867,8 +1010,8 @@ export const monitoringInput = {
         "artifact": "colab-result-replay-registry",
         "path": "analysis/cvpr_colab_result_replay/registry.json",
         "ownerSurface": "cvpr-colab-result-replay.html",
-        "currentSha256": "1ba4f0c7267642338a382c33fc98ac2a034b8ac99461c68e5b59f4ced560ccb7",
-        "sizeBytes": 11602,
+        "currentSha256": "ddecf1e41a336731b229b4920a4d6feab1b2cc1e4ebb88dd949273de6fe5b290",
+        "sizeBytes": 15930,
         "rebuildCommand": "python3 scripts/build_cvpr_colab_result_replay.py",
         "verifyCommand": "python3 scripts/verify_cvpr_colab_result_replay.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -880,7 +1023,7 @@ export const monitoringInput = {
         "artifact": "demo-evidence-cockpit-registry",
         "path": "analysis/cvpr_demo_evidence_cockpit/registry.json",
         "ownerSurface": "cvpr-demo-evidence-cockpit.html",
-        "currentSha256": "fe3ae3efc4a3e78bd9f4b9de0a7e746ae04a358c4b9dddbdd82410f7f03b7189",
+        "currentSha256": "3edbda76f742ae3efe9bafae6092585a2e806bbfca5a83a24f22c32566454d1b",
         "sizeBytes": 31535,
         "rebuildCommand": "python3 scripts/build_cvpr_demo_evidence_cockpit.py",
         "verifyCommand": "python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
@@ -893,8 +1036,8 @@ export const monitoringInput = {
         "artifact": "full-stack-validation-registry",
         "path": "analysis/cvpr_full_stack_validation/registry.json",
         "ownerSurface": "cvpr-validation-center.html",
-        "currentSha256": "28fd7c39b0c77d91b8701bcbedc9041002774e1b73475a6748fb0be7afb9c5d9",
-        "sizeBytes": 24186,
+        "currentSha256": "a5f7d9b43071632908c0e332de3ae98898b192114730746415a09bd811a47bc2",
+        "sizeBytes": 24174,
         "rebuildCommand": "python3 scripts/validate_cvpr_full_stack.py",
         "verifyCommand": "python3 scripts/validate_cvpr_full_stack.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -906,8 +1049,8 @@ export const monitoringInput = {
         "artifact": "full-stack-validator",
         "path": "scripts/validate_cvpr_full_stack.py",
         "ownerSurface": "cvpr-validation-center.html",
-        "currentSha256": "5a45960199a00cee8c5ed63365c84b705cb115d6ec640ee18cecf491d474c998",
-        "sizeBytes": 25641,
+        "currentSha256": "85b588bc87510b85a6d89311b63e8fe86a8aed4c485cf5bbb61becd729feeab5",
+        "sizeBytes": 25670,
         "rebuildCommand": "python3 scripts/validate_cvpr_full_stack.py",
         "verifyCommand": "python3 scripts/validate_cvpr_full_stack.py",
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
@@ -938,15 +1081,15 @@ export const monitoringInput = {
   "dependencyGraph": {
     "summary": {
       "graph": "cvpr-release-dependency-graph",
-      "status": "ready",
+      "status": "block",
       "nodes": 15,
       "edges": 19,
       "rootNodes": 1,
       "terminalNodes": 1,
       "phases": 8,
-      "changeControlStatus": "controlled",
-      "manifestStatus": "sealed",
-      "launchStatus": "launch-ready",
+      "changeControlStatus": "block",
+      "manifestStatus": "block",
+      "launchStatus": "block",
       "fullStackStatus": "valid",
       "packageTests": 148
     },
@@ -1115,10 +1258,10 @@ export const monitoringInput = {
   "launch": {
     "summary": {
       "pack": "cvpr-launch-readiness-pack",
-      "status": "launch-ready",
+      "status": "block",
       "releaseGate": "release",
-      "sloStatus": "release",
-      "drillbookStatus": "ready",
+      "sloStatus": "block",
+      "drillbookStatus": "block",
       "operationsStatus": "ready",
       "validationGate": "release",
       "fullStackStatus": "valid",
@@ -1129,14 +1272,14 @@ export const monitoringInput = {
       "benchCases": 44,
       "arenaRelease": 328,
       "arenaPairings": 328,
-      "workerJobs": 10,
-      "cachedResults": 40,
-      "liveIntakeResults": 40,
+      "workerJobs": 14,
+      "cachedResults": 56,
+      "liveIntakeResults": 56,
       "packageTests": 148,
-      "criticalFailures": 0,
+      "criticalFailures": 1,
       "importIssues": 0,
-      "readinessFloor": 68.1,
-      "avgReadiness": 78.22
+      "readinessFloor": 44.0,
+      "avgReadiness": 75.14
     },
     "launchSteps": [
       {
@@ -1151,14 +1294,14 @@ export const monitoringInput = {
         "surface": "cvpr-release-slo-dashboard.html",
         "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
         "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
-        "status": "release"
+        "status": "block"
       },
       {
         "step": "Regression drills",
         "surface": "cvpr-release-regression-drillbook.html",
         "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
         "evidence": "analysis/cvpr_release_regression_drillbook/registry.json",
-        "status": "ready"
+        "status": "block"
       },
       {
         "step": "Colab operations",
@@ -1212,17 +1355,17 @@ export const monitoringInput = {
       "commands": 286,
       "steps": 95,
       "packageTests": 148,
-      "workerJobs": 10,
-      "promotedRunners": 10,
-      "cachedResults": 40,
+      "workerJobs": 14,
+      "promotedRunners": 14,
+      "cachedResults": 56,
       "importIssues": 0,
-      "durationSec": 23.414
+      "durationSec": 129.798
     },
     "steps": [
       {
         "command": "python3 scripts/build_cvpr_systems_lab.py",
         "returnCode": 0,
-        "durationSec": 0.038,
+        "durationSec": 0.243,
         "stdoutTail": [
           "wrote cvpr-systems-lab.html: 11 systems, 33 stages"
         ],
@@ -1231,7 +1374,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_systems_lab.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.125,
         "stdoutTail": [
           "verified CVPR systems lab: 11 systems, 33 stages, 11 clusters"
         ],
@@ -1240,7 +1383,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_demo_lab.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.126,
         "stdoutTail": [
           "wrote cvpr-demo-lab.html: 41 interactive demos (33 stage demos)"
         ],
@@ -1249,7 +1392,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_demo_lab.py",
         "returnCode": 0,
-        "durationSec": 0.022,
+        "durationSec": 0.155,
         "stdoutTail": [
           "verified CVPR demo lab: 41 demos, 8 flagship, 33 stage demos"
         ],
@@ -1258,7 +1401,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_demo_arena.py",
         "returnCode": 0,
-        "durationSec": 0.036,
+        "durationSec": 0.137,
         "stdoutTail": [
           "wrote cvpr-demo-arena.html: 41 demos x 8 scenarios = 328 evaluations"
         ],
@@ -1267,7 +1410,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_demo_arena.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.136,
         "stdoutTail": [
           "verified CVPR demo arena: 41 demos, 8 scenarios, 328 evaluations"
         ],
@@ -1276,7 +1419,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_demo_playbook.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.168,
         "stdoutTail": [
           "wrote cvpr-demo-playbook.html: 8 plays, 0 critical"
         ],
@@ -1285,7 +1428,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_demo_playbook.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.125,
         "stdoutTail": [
           "verified CVPR demo playbook: 8 plays, 0 critical, 8 clusters"
         ],
@@ -1294,34 +1437,34 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.196,
         "stdoutTail": [
-          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
+          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.214,
         "stdoutTail": [
-          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
+          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.204,
         "stdoutTail": [
-          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
+          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.195,
         "stdoutTail": [
           "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
         ],
@@ -1330,7 +1473,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
         "returnCode": 0,
-        "durationSec": 0.024,
+        "durationSec": 0.19,
         "stdoutTail": [
           "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
         ],
@@ -1339,7 +1482,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.163,
         "stdoutTail": [
           "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
         ],
@@ -1348,7 +1491,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.138,
         "stdoutTail": [
           "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
         ],
@@ -1357,7 +1500,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.27,
         "stdoutTail": [
           "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
@@ -1366,7 +1509,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.103,
         "stdoutTail": [
           "wrote cvpr-metric-geometry-bench.html: 4 release cases"
         ],
@@ -1375,7 +1518,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.102,
         "stdoutTail": [
           "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
         ],
@@ -1384,70 +1527,70 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_colab_gpu_worker.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.218,
         "stdoutTail": [
-          "wrote cvpr-colab-gpu-worker.html: 10 jobs, 40 cached results"
+          "wrote cvpr-colab-gpu-worker.html: 14 jobs, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/validate_cvpr_colab_results.py",
         "returnCode": 0,
-        "durationSec": 0.049,
+        "durationSec": 0.228,
         "stdoutTail": [
-          "validated CVPR Colab results: 40 results, 0 issues"
+          "validated CVPR Colab results: 56 results, 0 issues"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_gpu_worker.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.174,
         "stdoutTail": [
-          "verified CVPR Colab GPU worker: 10 jobs, 40 cached results"
+          "verified CVPR Colab GPU worker: 14 jobs, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.197,
         "stdoutTail": [
-          "wrote cvpr-colab-handoff-package.html: 10 jobs, 8 zip entries"
+          "wrote cvpr-colab-handoff-package.html: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_handoff_package.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.261,
         "stdoutTail": [
-          "verified CVPR Colab handoff package: 10 jobs, 8 zip entries"
+          "verified CVPR Colab handoff package: 14 jobs, 8 zip entries"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_driving_safety_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.176,
         "stdoutTail": [
-          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.6"
+          "wrote cvpr-driving-safety-bench.html: 4 cases, max risk 34.8"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_driving_safety_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.145,
         "stdoutTail": [
-          "verified CVPR driving safety bench: 4 cases, max risk 34.6"
+          "verified CVPR driving safety bench: 4 cases, max risk 34.8"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_constraint_generation_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.185,
         "stdoutTail": [
           "wrote cvpr-constraint-generation-bench.html: 4 cases, max identity damage 34.8"
         ],
@@ -1456,7 +1599,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_constraint_generation_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.238,
         "stdoutTail": [
           "verified CVPR constraint generation bench: 4 cases, max identity damage 34.8"
         ],
@@ -1465,7 +1608,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_compute_serving_bench.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.102,
         "stdoutTail": [
           "wrote cvpr-compute-serving-bench.html: 4 cases, min evidence 85.7"
         ],
@@ -1474,7 +1617,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_compute_serving_bench.py",
         "returnCode": 0,
-        "durationSec": 0.024,
+        "durationSec": 0.183,
         "stdoutTail": [
           "verified CVPR compute serving bench: 4 cases, min evidence 85.7"
         ],
@@ -1483,61 +1626,61 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_clinical_shift_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.23,
         "stdoutTail": [
-          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 33.5"
+          "wrote cvpr-clinical-shift-bench.html: 4 cases, max risk 11.1"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_clinical_shift_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.14,
         "stdoutTail": [
-          "verified CVPR clinical shift bench: 4 cases, max risk 33.5"
+          "verified CVPR clinical shift bench: 4 cases, max risk 11.1"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.028,
+        "durationSec": 0.133,
         "stdoutTail": [
-          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 82.5"
+          "wrote cvpr-adversarial-provenance-bench.html: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_adversarial_provenance_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.257,
         "stdoutTail": [
-          "verified CVPR adversarial provenance bench: 4 cases, min evidence 82.5"
+          "verified CVPR adversarial provenance bench: 4 cases, min evidence 51.2"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.262,
         "stdoutTail": [
-          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 87.1"
+          "wrote cvpr-long-tail-grounding-bench.html: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_long_tail_grounding_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.181,
         "stdoutTail": [
-          "verified CVPR long-tail grounding bench: 4 cases, min evidence 87.1"
+          "verified CVPR long-tail grounding bench: 4 cases, min evidence 56.0"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_restoration_fidelity_bench.py",
         "returnCode": 0,
-        "durationSec": 0.028,
+        "durationSec": 0.202,
         "stdoutTail": [
           "wrote cvpr-restoration-fidelity-bench.html: 4 cases, max fabricated risk 29.4"
         ],
@@ -1546,7 +1689,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_restoration_fidelity_bench.py",
         "returnCode": 0,
-        "durationSec": 0.023,
+        "durationSec": 0.186,
         "stdoutTail": [
           "verified CVPR restoration fidelity bench: 4 cases, max fabricated risk 29.4"
         ],
@@ -1555,7 +1698,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_temporal_rollout_bench.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.182,
         "stdoutTail": [
           "wrote cvpr-temporal-rollout-bench.html: 4 cases, max drift 36.1"
         ],
@@ -1564,7 +1707,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_temporal_rollout_bench.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.232,
         "stdoutTail": [
           "verified CVPR temporal rollout bench: 4 cases, max drift 36.1"
         ],
@@ -1573,7 +1716,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.133,
         "stdoutTail": [
           "wrote cvpr-vlm-answer-verification-bench.html: 4 release cases"
         ],
@@ -1582,7 +1725,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_vlm_answer_verification_bench.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.123,
         "stdoutTail": [
           "verified CVPR VLM answer verification bench: 4 cases, max unsupported risk 32.2"
         ],
@@ -1591,7 +1734,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_metric_geometry_bench.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.114,
         "stdoutTail": [
           "wrote cvpr-metric-geometry-bench.html: 4 release cases"
         ],
@@ -1600,7 +1743,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_metric_geometry_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.11,
         "stdoutTail": [
           "verified CVPR metric geometry bench: 4 cases, max scale drift 29.9"
         ],
@@ -1609,7 +1752,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_gaussian_splatting_bench.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.222,
         "stdoutTail": [
           "wrote cvpr-gaussian-splatting-bench.html: 4 release cases"
         ],
@@ -1618,7 +1761,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_gaussian_splatting_bench.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.127,
         "stdoutTail": [
           "verified CVPR Gaussian Splatting bench: 4 cases, max edit leakage 27.4"
         ],
@@ -1627,7 +1770,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_mission_control.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.224,
         "stdoutTail": [
           "wrote cvpr-mission-control.html: 11 systems, 11 benches"
         ],
@@ -1636,7 +1779,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_mission_control.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.172,
         "stdoutTail": [
           "verified CVPR mission control: 11 systems, 11 benches, 44 cases"
         ],
@@ -1645,7 +1788,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_failure_atlas.py",
         "returnCode": 0,
-        "durationSec": 0.039,
+        "durationSec": 0.223,
         "stdoutTail": [
           "wrote cvpr-failure-atlas.html: 44 cases, 11 families"
         ],
@@ -1654,7 +1797,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_failure_atlas.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.237,
         "stdoutTail": [
           "verified CVPR failure atlas: 44 cases, 11 families"
         ],
@@ -1663,7 +1806,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/cvpr_paper_system_gate_experiments.py",
         "returnCode": 0,
-        "durationSec": 0.036,
+        "durationSec": 0.257,
         "stdoutTail": [
           "wrote cvpr-paper-to-system-gate experiment results"
         ],
@@ -1672,7 +1815,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_paper_system_gate.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.204,
         "stdoutTail": [
           "wrote cvpr-paper-to-system-gate package and page"
         ],
@@ -1681,16 +1824,16 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_validation_center.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.149,
         "stdoutTail": [
-          "wrote cvpr-validation-center.html: 51 steps, 26 tests"
+          "wrote cvpr-validation-center.html: 51 steps, 148 tests"
         ],
         "stderrTail": []
       },
       {
         "command": "node source-code/learning/*/tests/core.test.js",
         "returnCode": 0,
-        "durationSec": 20.437,
+        "durationSec": 109.717,
         "testCount": 148,
         "log": "/tmp/cvpr-core-tests.log",
         "stdoutTail": [
@@ -1705,7 +1848,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_validation_center.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.214,
         "stdoutTail": [
           "wrote cvpr-validation-center.html: 53 steps, 148 tests"
         ],
@@ -1714,7 +1857,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_validation_center.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.133,
         "stdoutTail": [
           "verified CVPR validation center: 53 steps, 148 package tests"
         ],
@@ -1723,61 +1866,61 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_live_colab_intake.py",
         "returnCode": 0,
-        "durationSec": 0.092,
+        "durationSec": 0.339,
         "stdoutTail": [
-          "verified CVPR live Colab intake: 40 live results, 0 issues"
+          "verified CVPR live Colab intake: 56 live results, 0 issues"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_live_colab_promotion.py",
         "returnCode": 0,
-        "durationSec": 0.083,
+        "durationSec": 0.591,
         "stdoutTail": [
-          "verified CVPR live Colab promotion: 40 promoted cached-real results"
+          "verified CVPR live Colab promotion: 56 promoted cached-real results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_promotion_delta.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.208,
         "stdoutTail": [
-          "wrote cvpr-colab-promotion-delta.html: 40 cases, 0 regressions"
+          "wrote cvpr-colab-promotion-delta.html: 56 cases, 0 regressions"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_promotion_delta.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.258,
         "stdoutTail": [
-          "verified CVPR Colab promotion delta: 40 cases, 0 regressions"
+          "verified CVPR Colab promotion delta: 56 cases, 0 regressions"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_release_bundle.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.435,
         "stdoutTail": [
-          "wrote cvpr-colab-release-bundle.html: 10 runners, 40 cached results"
+          "wrote cvpr-colab-release-bundle.html: 14 runners, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_release_bundle.py",
         "returnCode": 0,
-        "durationSec": 0.024,
+        "durationSec": 0.215,
         "stdoutTail": [
-          "verified CVPR Colab release bundle: 10 runners, 40 cached results"
+          "verified CVPR Colab release bundle: 14 runners, 56 cached results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_evidence_ledger.py",
         "returnCode": 0,
-        "durationSec": 0.041,
+        "durationSec": 0.269,
         "stdoutTail": [
           "wrote cvpr-colab-evidence-ledger.html: 7 artifacts, status release"
         ],
@@ -1786,7 +1929,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_colab_evidence_ledger.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.213,
         "stdoutTail": [
           "verified CVPR Colab evidence ledger: 7 artifacts"
         ],
@@ -1795,7 +1938,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_colab_run_receipt.py",
         "returnCode": 0,
-        "durationSec": 0.04,
+        "durationSec": 0.327,
         "stdoutTail": [
           "wrote cvpr-colab-run-receipt.html: 8 stages, status ready"
         ],
@@ -1804,7 +1947,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_colab_run_receipt.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.123,
         "stdoutTail": [
           "verified CVPR Colab run receipt: 8 stages, 7 artifacts"
         ],
@@ -1813,7 +1956,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_theme_release_matrix.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.224,
         "stdoutTail": [
           "wrote cvpr-theme-release-matrix.html: 8 themes, status release"
         ],
@@ -1822,7 +1965,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_theme_release_matrix.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.313,
         "stdoutTail": [
           "verified CVPR theme release matrix: 8 themes, 11 systems"
         ],
@@ -1831,7 +1974,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_production_release_brief.py",
         "returnCode": 0,
-        "durationSec": 0.043,
+        "durationSec": 0.426,
         "stdoutTail": [
           "wrote cvpr-production-release-brief.html: release gate, 328 arena releases"
         ],
@@ -1840,7 +1983,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_production_release_brief.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.099,
         "stdoutTail": [
           "verified CVPR production release brief: release gate, 328 arena releases"
         ],
@@ -1849,25 +1992,25 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_production_coverage_audit.py",
         "returnCode": 0,
-        "durationSec": 0.034,
+        "durationSec": 0.146,
         "stdoutTail": [
-          "wrote cvpr-production-coverage-audit.html: release gate, 10 Colab Pro+ jobs, 0 missing evidence"
+          "wrote cvpr-production-coverage-audit.html: release gate, 14 Colab Pro+ jobs, 0 missing evidence"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_production_coverage_audit.py",
         "returnCode": 0,
-        "durationSec": 0.025,
+        "durationSec": 0.314,
         "stdoutTail": [
-          "verified CVPR production coverage audit: 11 systems, 10 Colab Pro+ jobs, 0 missing evidence"
+          "verified CVPR production coverage audit: 11 systems, 14 Colab Pro+ jobs, 0 missing evidence"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_remediation_board.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.268,
         "stdoutTail": [
           "wrote cvpr-remediation-board.html: 0 block tasks, status ready"
         ],
@@ -1876,7 +2019,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_remediation_board.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.155,
         "stdoutTail": [
           "verified CVPR remediation board: 0 block tasks"
         ],
@@ -1885,7 +2028,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_remediation_sprint_plan.py",
         "returnCode": 0,
-        "durationSec": 0.037,
+        "durationSec": 0.291,
         "stdoutTail": [
           "wrote cvpr-remediation-sprint-plan.html: 3 sprints, status ready"
         ],
@@ -1894,7 +2037,7 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/verify_cvpr_remediation_sprint_plan.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.114,
         "stdoutTail": [
           "verified CVPR remediation sprint plan: 3 sprints, 0 tasks"
         ],
@@ -1903,106 +2046,106 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_colab_operations_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.039,
+        "durationSec": 0.212,
         "stdoutTail": [
-          "wrote cvpr-colab-operations-dashboard.html: 10 jobs, status ready"
+          "wrote cvpr-colab-operations-dashboard.html: 14 jobs, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_operations_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.153,
         "stdoutTail": [
-          "verified CVPR Colab operations dashboard: 10 jobs, 53 steps"
+          "verified CVPR Colab operations dashboard: 14 jobs, 53 steps"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_execution_planner.py",
         "returnCode": 0,
-        "durationSec": 0.038,
+        "durationSec": 0.354,
         "stdoutTail": [
-          "wrote cvpr-colab-execution-planner.html: 3 waves, 40 expected results, status ready"
+          "wrote cvpr-colab-execution-planner.html: 3 waves, 56 expected results, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_execution_planner.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.134,
         "stdoutTail": [
-          "verified CVPR Colab execution planner: 3 waves, 40 expected results"
+          "verified CVPR Colab execution planner: 3 waves, 56 expected results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_demo_evidence_cockpit.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.173,
         "stdoutTail": [
-          "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 40 expected live results, status ready"
+          "wrote cvpr-demo-evidence-cockpit.html: 41 demos, 56 expected live results, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_demo_evidence_cockpit.py",
         "returnCode": 0,
-        "durationSec": 0.028,
+        "durationSec": 0.366,
         "stdoutTail": [
-          "verified CVPR demo evidence cockpit: 41 demos, 40 expected live results"
+          "verified CVPR demo evidence cockpit: 41 demos, 56 expected live results"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_colab_result_replay.py",
         "returnCode": 0,
-        "durationSec": 0.033,
+        "durationSec": 0.185,
         "stdoutTail": [
-          "wrote cvpr-colab-result-replay.html: 40/40 results, 30 demos, status ready"
+          "wrote cvpr-colab-result-replay.html: 56/56 results, 30 demos, status ready"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_colab_result_replay.py",
         "returnCode": 0,
-        "durationSec": 0.027,
+        "durationSec": 0.149,
         "stdoutTail": [
-          "verified CVPR Colab result replay: 40/40 results, 30 stage demos"
+          "verified CVPR Colab result replay: 56/56 results, 30 stage demos"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_release_slo_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.031,
+        "durationSec": 0.172,
         "stdoutTail": [
-          "wrote cvpr-release-slo-dashboard.html: 10/10 SLOs, status release"
+          "wrote cvpr-release-slo-dashboard.html: 9/10 SLOs, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_slo_dashboard.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.418,
         "stdoutTail": [
-          "verified CVPR release SLO dashboard: 10/10 SLOs, readiness floor 68.1"
+          "verified CVPR release SLO dashboard: 9/10 SLOs, readiness floor 44.0"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_release_regression_drillbook.py",
         "returnCode": 0,
-        "durationSec": 0.042,
+        "durationSec": 0.574,
         "stdoutTail": [
-          "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status ready"
+          "wrote cvpr-release-regression-drillbook.html: 10/10 drills, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_regression_drillbook.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.168,
         "stdoutTail": [
           "verified CVPR release regression drillbook: 10/10 drills"
         ],
@@ -2011,52 +2154,52 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_launch_readiness_pack.py",
         "returnCode": 0,
-        "durationSec": 0.047,
+        "durationSec": 0.202,
         "stdoutTail": [
-          "wrote cvpr-launch-readiness-pack.html: launch-ready, 148 package tests"
+          "wrote cvpr-launch-readiness-pack.html: block, 148 package tests"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_launch_readiness_pack.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.155,
         "stdoutTail": [
-          "verified CVPR launch readiness pack: launch-ready, 148 package tests"
+          "verified CVPR launch readiness pack: block, 148 package tests"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_release_manifest.py",
         "returnCode": 0,
-        "durationSec": 0.036,
+        "durationSec": 0.194,
         "stdoutTail": [
-          "wrote cvpr-release-manifest.html: 13 artifacts, status sealed"
+          "wrote cvpr-release-manifest.html: 13 artifacts, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_manifest.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.438,
         "stdoutTail": [
-          "verified CVPR release manifest: 13 artifacts, status sealed"
+          "verified CVPR release manifest: 13 artifacts, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/build_cvpr_release_change_control.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.221,
         "stdoutTail": [
-          "wrote cvpr-release-change-control.html: 13/13 rows, status controlled"
+          "wrote cvpr-release-change-control.html: 13/13 rows, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_change_control.py",
         "returnCode": 0,
-        "durationSec": 0.029,
+        "durationSec": 0.308,
         "stdoutTail": [
           "verified CVPR release change control: 13/13 rows"
         ],
@@ -2065,16 +2208,16 @@ export const monitoringInput = {
       {
         "command": "python3 scripts/build_cvpr_release_dependency_graph.py",
         "returnCode": 0,
-        "durationSec": 0.03,
+        "durationSec": 0.16,
         "stdoutTail": [
-          "wrote cvpr-release-dependency-graph.html: 15 nodes, 19 edges, status ready"
+          "wrote cvpr-release-dependency-graph.html: 15 nodes, 19 edges, status block"
         ],
         "stderrTail": []
       },
       {
         "command": "python3 scripts/verify_cvpr_release_dependency_graph.py",
         "returnCode": 0,
-        "durationSec": 0.026,
+        "durationSec": 0.13,
         "stdoutTail": [
           "verified CVPR release dependency graph: 15 nodes, 19 edges"
         ],
@@ -2087,7 +2230,7 @@ export const monitorRows = [
   {
     "id": "critical-slo-alerts",
     "signal": "Critical SLO failures",
-    "actual": 0,
+    "actual": 1,
     "target": 0,
     "direction": "eq",
     "cadence": "after every rebuild",
@@ -2097,8 +2240,8 @@ export const monitorRows = [
   {
     "id": "pro-plus-result-validity",
     "signal": "Valid Colab Pro+ replay results",
-    "actual": 40,
-    "target": 40,
+    "actual": 56,
+    "target": 56,
     "direction": "eq",
     "cadence": "after every live export",
     "evidence": "analysis/cvpr_colab_result_replay/registry.json",
@@ -2107,7 +2250,7 @@ export const monitorRows = [
   {
     "id": "readiness-floor",
     "signal": "Replay readiness floor",
-    "actual": 68.1,
+    "actual": 44.0,
     "target": 68.0,
     "direction": "gte",
     "cadence": "after every live export",
@@ -2127,7 +2270,7 @@ export const monitorRows = [
   {
     "id": "manifest-sealed",
     "signal": "Release manifest sealed",
-    "actual": 1,
+    "actual": 0,
     "target": 1,
     "direction": "eq",
     "cadence": "after every controlled change",
@@ -2147,7 +2290,7 @@ export const monitorRows = [
   {
     "id": "dependency-graph-ready",
     "signal": "Release dependency graph ready",
-    "actual": 1,
+    "actual": 0,
     "target": 1,
     "direction": "eq",
     "cadence": "after dependency or command edits",
@@ -2157,7 +2300,7 @@ export const monitorRows = [
   {
     "id": "launch-ready",
     "signal": "Launch readiness pack ready",
-    "actual": 1,
+    "actual": 0,
     "target": 1,
     "direction": "eq",
     "cadence": "before operator handoff",
@@ -2177,15 +2320,15 @@ export const monitorRows = [
 ];
 export const summary = {
   "dashboard": "cvpr-post-launch-monitoring",
-  "status": "watching",
+  "status": "block",
   "monitors": 9,
-  "passingMonitors": 9,
-  "alerts": 0,
+  "passingMonitors": 4,
+  "alerts": 5,
   "releaseGate": "release",
   "fullStackStatus": "valid",
-  "readinessFloor": 68.1,
-  "avgReadiness": 78.22,
-  "manifestStatus": "sealed",
-  "changeControlStatus": "controlled",
+  "readinessFloor": 44.0,
+  "avgReadiness": 75.14,
+  "manifestStatus": "block",
+  "changeControlStatus": "block",
   "packageTests": 148
 };

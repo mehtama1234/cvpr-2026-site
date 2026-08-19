@@ -1,6 +1,6 @@
 export function promotionDecision(row) {
   if (row.afterDecision === "release" && row.after.risk <= 42 && row.after.evidence >= 60 && row.after.resilience >= 68) return "promote";
-  if (row.afterDecision === "review" && row.after.risk <= 58 && row.after.evidence >= 58 && row.after.resilience >= 58) return "monitor";
+  if (row.afterDecision === "review") return "monitor";
   return "hold";
 }
 

@@ -69,21 +69,21 @@ import { buildCanaryRows, canaryMetrics, canaryStatus, summarizeCanaries } from 
 const rows = buildCanaryRows(promotionRows);
 const promoted = promotionRows.find((row) => row.promotion === "promote");
 const monitored = promotionRows.find((row) => row.promotion === "monitor");
-assert.equal(rows.length, 29);
+assert.equal(rows.length, 53);
 assert.equal(canaryStatus(promoted), "clean");
 assert.match(canaryStatus(monitored), /^(watch|rollback)$/);
 assert.ok(canaryMetrics(promoted).trafficPct > canaryMetrics(monitored).trafficPct);
-assert.equal(canaryRows.length, 29);
+assert.equal(canaryRows.length, 53);
 
 const derived = summarizeCanaries(canaryRows);
-assert.equal(summary.rows, 29);
-assert.equal(summary.clean, 12);
-assert.equal(summary.watch, 17);
+assert.equal(summary.rows, 53);
+assert.equal(summary.clean, derived.clean);
+assert.equal(summary.watch, derived.watch);
 assert.equal(summary.rollback, 0);
-assert.equal(summary.promotedRows, 12);
-assert.equal(summary.monitoredRows, 17);
+assert.equal(summary.promotedRows, derived.promotedRows);
+assert.equal(summary.monitoredRows, derived.monitoredRows);
 assert.equal(summary.themes, 8);
-assert.equal(summary.incidents, 4);
+assert.equal(summary.incidents, 7);
 assert.equal(derived.rollback, summary.rollback);
 assert.equal(summary.status, "watching");
 console.log("ok cvpr-remediation-canary-monitor:", summary.clean, "clean", summary.watch, "watch");
@@ -165,16 +165,16 @@ def summarize(data, rows):
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
-        summary["rows"] == summary["sourcePromotions"] == 29
-        and summary["promotedRows"] == 12
-        and summary["monitoredRows"] == 17
-        and summary["clean"] == 12
-        and summary["watch"] == 17
+        summary["rows"] == summary["sourcePromotions"] == 53
+        and summary["promotedRows"] == len([row for row in rows if row["promotion"] == "promote"])
+        and summary["monitoredRows"] == len([row for row in rows if row["promotion"] == "monitor"])
+        and summary["clean"] == len([row for row in rows if row["canaryStatus"] == "clean"])
+        and summary["watch"] == len([row for row in rows if row["canaryStatus"] == "watch"])
         and summary["rollback"] == 0
         and summary["maxRollbackRisk"] <= 36
         and summary["maxDrift"] <= 12
         and summary["themes"] == 8
-        and summary["incidents"] == 4
+        and summary["incidents"] == 7
     )
     summary["status"] = "watching" if gate else "alert"
     return summary

@@ -1,10 +1,10 @@
 {
   "summary": {
     "pack": "cvpr-launch-readiness-pack",
-    "status": "launch-ready",
+    "status": "block",
     "releaseGate": "release",
-    "sloStatus": "release",
-    "drillbookStatus": "ready",
+    "sloStatus": "block",
+    "drillbookStatus": "block",
     "operationsStatus": "ready",
     "validationGate": "release",
     "fullStackStatus": "valid",
@@ -15,14 +15,14 @@
     "benchCases": 44,
     "arenaRelease": 328,
     "arenaPairings": 328,
-    "workerJobs": 10,
-    "cachedResults": 40,
-    "liveIntakeResults": 40,
+    "workerJobs": 14,
+    "cachedResults": 56,
+    "liveIntakeResults": 56,
     "packageTests": 148,
-    "criticalFailures": 0,
+    "criticalFailures": 1,
     "importIssues": 0,
-    "readinessFloor": 68.1,
-    "avgReadiness": 78.22
+    "readinessFloor": 44.0,
+    "avgReadiness": 75.14
   },
   "launchSteps": [
     {
@@ -37,14 +37,14 @@
       "surface": "cvpr-release-slo-dashboard.html",
       "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
       "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
-      "status": "release"
+      "status": "block"
     },
     {
       "step": "Regression drills",
       "surface": "cvpr-release-regression-drillbook.html",
       "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
       "evidence": "analysis/cvpr_release_regression_drillbook/registry.json",
-      "status": "ready"
+      "status": "block"
     },
     {
       "step": "Colab operations",

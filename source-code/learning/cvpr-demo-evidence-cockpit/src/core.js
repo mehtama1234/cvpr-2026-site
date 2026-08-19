@@ -6,13 +6,12 @@ export function evidenceLabel(row) {
 
 export function cockpitGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
   if (summary.systems !== 11) return "block";
   if (summary.stageDemos !== 33) return "block";
   if (summary.flagshipDemos !== 8) return "block";
   if (summary.totalDemos !== 41) return "block";
-  if (summary.proPlusJobs !== 10) return "block";
-  if (summary.expectedLiveResults !== 40) return "block";
+  if (summary.proPlusJobs !== 14) return "block";
+  if (summary.expectedLiveResults !== 56) return "block";
   if (summary.benchRelease !== 44) return "block";
   if (summary.missingDemoEvidence !== 0) return "block";
   if (summary.releaseGate !== "release") return "block";

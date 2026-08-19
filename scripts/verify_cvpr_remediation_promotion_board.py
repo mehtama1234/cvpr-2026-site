@@ -14,18 +14,18 @@ def main():
     assert summary["demo"] == "cvpr-remediation-promotion-board"
     assert summary["status"] == "release"
     assert summary["sourceDemo"] == "cvpr-remediation-retest-harness"
-    assert summary["rows"] == 29
-    assert summary["sourceRetests"] == 29
-    assert summary["promote"] == 12
-    assert summary["monitor"] == 17
+    assert summary["rows"] == 53
+    assert summary["sourceRetests"] == 53
+    assert summary["promote"] == sum(1 for row in data["promotionRows"] if row["promotion"] == "promote")
+    assert summary["monitor"] == sum(1 for row in data["promotionRows"] if row["promotion"] == "monitor")
     assert summary["hold"] == 0
-    assert summary["clearedBlocks"] == 14
-    assert summary["promotedRelease"] == 12
+    assert summary["clearedBlocks"] == sum(1 for row in data["promotionRows"] if row["clearedBlock"])
+    assert summary["promotedRelease"] == sum(1 for row in data["promotionRows"] if row["promotedRelease"])
     assert summary["themes"] == 8
-    assert summary["incidents"] == 4
+    assert summary["incidents"] == 7
     assert summary["maxPromotedRisk"] <= 42
     assert summary["minPromotedEvidence"] >= 60
-    assert len(data["promotionRows"]) == 29
+    assert len(data["promotionRows"]) == 53
     assert all(row["verificationCommand"] == "python3 scripts/verify_cvpr_remediation_retest_harness.py" for row in data["promotionRows"])
     assert all(row["promotion"] in {"promote", "monitor", "hold"} for row in data["promotionRows"])
     assert all(row["promotion"] != "hold" for row in data["promotionRows"])

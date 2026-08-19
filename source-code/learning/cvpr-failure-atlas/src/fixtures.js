@@ -9,11 +9,11 @@ export const failureRows = [
     "case": "Urban cut-in",
     "family": "safety risk",
     "metric": "risk",
-    "metricValue": 33.4,
+    "metricValue": 33.6,
     "threshold": 35,
     "direction": "high",
     "decision": "release",
-    "readiness": 68.1,
+    "readiness": 75.3,
     "controls": {
       "hazardDensity": 48,
       "actorSpeed": 40,
@@ -21,12 +21,12 @@ export const failureRows = [
       "actionConfidence": 82
     },
     "metrics": {
-      "sceneGrounding": 85.7,
+      "sceneGrounding": 78.7,
       "timeToCollision": 5.15,
-      "risk": 33.4,
-      "ruleViolation": 24.0,
-      "abstention": 7.6,
-      "readiness": 68.1
+      "risk": 33.6,
+      "ruleViolation": 22.9,
+      "abstention": 15.5,
+      "readiness": 75.3
     },
     "severity": 0
   },
@@ -40,11 +40,11 @@ export const failureRows = [
     "case": "Night crosswalk",
     "family": "safety risk",
     "metric": "risk",
-    "metricValue": 31.7,
+    "metricValue": 31.9,
     "threshold": 35,
     "direction": "high",
     "decision": "release",
-    "readiness": 68.2,
+    "readiness": 75.8,
     "controls": {
       "hazardDensity": 36,
       "actorSpeed": 34,
@@ -52,12 +52,12 @@ export const failureRows = [
       "actionConfidence": 78
     },
     "metrics": {
-      "sceneGrounding": 84.2,
+      "sceneGrounding": 78.9,
       "timeToCollision": 5.73,
-      "risk": 31.7,
-      "ruleViolation": 23.5,
-      "abstention": 7.8,
-      "readiness": 68.2
+      "risk": 31.9,
+      "ruleViolation": 22.8,
+      "abstention": 16.0,
+      "readiness": 75.8
     },
     "severity": 0
   },
@@ -71,11 +71,11 @@ export const failureRows = [
     "case": "Highway merge",
     "family": "safety risk",
     "metric": "risk",
-    "metricValue": 34.6,
+    "metricValue": 34.8,
     "threshold": 35,
     "direction": "high",
     "decision": "release",
-    "readiness": 68.2,
+    "readiness": 74.3,
     "controls": {
       "hazardDensity": 24,
       "actorSpeed": 72,
@@ -83,12 +83,12 @@ export const failureRows = [
       "actionConfidence": 84
     },
     "metrics": {
-      "sceneGrounding": 87.3,
+      "sceneGrounding": 77.9,
       "timeToCollision": 4.34,
-      "risk": 34.6,
-      "ruleViolation": 24.1,
-      "abstention": 7.4,
-      "readiness": 68.2
+      "risk": 34.8,
+      "ruleViolation": 23.9,
+      "abstention": 16.0,
+      "readiness": 74.3
     },
     "severity": 0
   },
@@ -102,11 +102,11 @@ export const failureRows = [
     "case": "Construction zone",
     "family": "safety risk",
     "metric": "risk",
-    "metricValue": 31.9,
+    "metricValue": 32.1,
     "threshold": 35,
     "direction": "high",
     "decision": "release",
-    "readiness": 68.2,
+    "readiness": 75.5,
     "controls": {
       "hazardDensity": 36,
       "actorSpeed": 32,
@@ -114,12 +114,12 @@ export const failureRows = [
       "actionConfidence": 72
     },
     "metrics": {
-      "sceneGrounding": 83.9,
+      "sceneGrounding": 78.8,
       "timeToCollision": 5.82,
-      "risk": 31.9,
-      "ruleViolation": 23.7,
-      "abstention": 9.1,
-      "readiness": 68.2
+      "risk": 32.1,
+      "ruleViolation": 23.0,
+      "abstention": 17.3,
+      "readiness": 75.5
     },
     "severity": 0
   },
@@ -133,11 +133,11 @@ export const failureRows = [
     "case": "Clean camera image",
     "family": "provenance gap",
     "metric": "evidence",
-    "metricValue": 82.5,
+    "metricValue": 64.7,
     "threshold": 50,
     "direction": "low",
     "decision": "release",
-    "readiness": 79.7,
+    "readiness": 76.2,
     "controls": {
       "attackStrength": 0,
       "generationSource": 56,
@@ -145,12 +145,12 @@ export const failureRows = [
       "unlearningProbe": 0
     },
     "metrics": {
-      "attackCoverage": 44.7,
-      "provenanceConfidence": 86.4,
-      "leakageRisk": 9.0,
-      "evidence": 82.5,
-      "risk": 17.9,
-      "readiness": 79.7
+      "attackCoverage": 3.7,
+      "provenanceConfidence": 50.8,
+      "leakageRisk": 15.1,
+      "evidence": 64.7,
+      "risk": 11.6,
+      "readiness": 76.2
     },
     "severity": 0
   },
@@ -164,11 +164,11 @@ export const failureRows = [
     "case": "Edited social post",
     "family": "provenance gap",
     "metric": "evidence",
-    "metricValue": 82.9,
+    "metricValue": 54.6,
     "threshold": 50,
     "direction": "low",
     "decision": "release",
-    "readiness": 79.8,
+    "readiness": 66.3,
     "controls": {
       "attackStrength": 0,
       "generationSource": 64,
@@ -176,12 +176,12 @@ export const failureRows = [
       "unlearningProbe": 10
     },
     "metrics": {
-      "attackCoverage": 47.2,
-      "provenanceConfidence": 87.9,
-      "leakageRisk": 14.8,
-      "evidence": 82.9,
-      "risk": 21.0,
-      "readiness": 79.8
+      "attackCoverage": 2.6,
+      "provenanceConfidence": 39.8,
+      "leakageRisk": 27.2,
+      "evidence": 54.6,
+      "risk": 23.7,
+      "readiness": 66.3
     },
     "severity": 0
   },
@@ -195,11 +195,11 @@ export const failureRows = [
     "case": "Synthetic watermarked media",
     "family": "provenance gap",
     "metric": "evidence",
-    "metricValue": 83.6,
+    "metricValue": 51.3,
     "threshold": 50,
     "direction": "low",
     "decision": "release",
-    "readiness": 79.9,
+    "readiness": 63.2,
     "controls": {
       "attackStrength": 0,
       "generationSource": 84,
@@ -207,12 +207,12 @@ export const failureRows = [
       "unlearningProbe": 44
     },
     "metrics": {
-      "attackCoverage": 54.4,
-      "provenanceConfidence": 92.0,
-      "leakageRisk": 32.9,
-      "evidence": 83.6,
-      "risk": 29.9,
-      "readiness": 79.9
+      "attackCoverage": 0.1,
+      "provenanceConfidence": 39.1,
+      "leakageRisk": 33.2,
+      "evidence": 51.3,
+      "risk": 29.7,
+      "readiness": 63.2
     },
     "severity": 0
   },
@@ -226,11 +226,11 @@ export const failureRows = [
     "case": "Adaptive provenance attack",
     "family": "provenance gap",
     "metric": "evidence",
-    "metricValue": 85.3,
+    "metricValue": 51.2,
     "threshold": 50,
     "direction": "low",
     "decision": "release",
-    "readiness": 80.8,
+    "readiness": 64.6,
     "controls": {
       "attackStrength": 12,
       "generationSource": 89,
@@ -238,140 +238,140 @@ export const failureRows = [
       "unlearningProbe": 0
     },
     "metrics": {
-      "attackCoverage": 52.6,
-      "provenanceConfidence": 93.8,
-      "leakageRisk": 17.4,
-      "evidence": 85.3,
-      "risk": 30.3,
-      "readiness": 80.8
+      "attackCoverage": 19.1,
+      "provenanceConfidence": 39.9,
+      "leakageRisk": 36.2,
+      "evidence": 51.2,
+      "risk": 32.7,
+      "readiness": 64.6
     },
     "severity": 0
   },
   {
-    "id": "cvpr-clinical-shift-bench/same-site-clean",
+    "id": "cvpr-clinical-shift-bench/clear-baseline",
     "bench": "cvpr-clinical-shift-bench",
     "page": "cvpr-clinical-shift-bench.html",
     "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
     "system": "medical-vision-validation",
     "cluster": "Vision for science and medicine",
-    "case": "Same-site clean validation",
+    "case": "Clear baseline",
     "family": "clinical shift",
     "metric": "residualRisk",
-    "metricValue": 9.6,
+    "metricValue": 2.4,
     "threshold": 50,
     "direction": "high",
     "decision": "release",
-    "readiness": 88.5,
+    "readiness": 89.9,
     "controls": {
-      "scannerShift": 16,
-      "cohortMix": 22,
-      "labelNoise": 8,
-      "reviewThreshold": 62
-    },
-    "metrics": {
-      "shiftLoad": 16.7,
-      "calibration": 84.3,
-      "domainEvidence": 89.1,
-      "triageRate": 25.4,
-      "residualRisk": 9.6,
-      "clinicalEvidence": 90.3,
-      "readiness": 88.5
-    },
-    "severity": 0
-  },
-  {
-    "id": "cvpr-clinical-shift-bench/new-scanner",
-    "bench": "cvpr-clinical-shift-bench",
-    "page": "cvpr-clinical-shift-bench.html",
-    "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
-    "system": "medical-vision-validation",
-    "cluster": "Vision for science and medicine",
-    "case": "New scanner protocol",
-    "family": "clinical shift",
-    "metric": "residualRisk",
-    "metricValue": 21.6,
-    "threshold": 50,
-    "direction": "high",
-    "decision": "release",
-    "readiness": 80.5,
-    "controls": {
-      "scannerShift": 58,
-      "cohortMix": 34,
-      "labelNoise": 16,
+      "scannerShift": 8,
+      "cohortMix": 18,
+      "labelNoise": 12,
       "reviewThreshold": 68
     },
     "metrics": {
-      "shiftLoad": 40.5,
-      "calibration": 77.5,
-      "domainEvidence": 78.6,
-      "triageRate": 39.7,
-      "residualRisk": 21.6,
-      "clinicalEvidence": 84.8,
-      "readiness": 80.5
+      "shiftLoad": 7.6,
+      "calibration": 89.3,
+      "domainEvidence": 96.6,
+      "triageRate": 68.0,
+      "residualRisk": 2.4,
+      "clinicalEvidence": 91.6,
+      "readiness": 89.9
     },
     "severity": 0
   },
   {
-    "id": "cvpr-clinical-shift-bench/external-hospital",
+    "id": "cvpr-clinical-shift-bench/scanner-shift",
     "bench": "cvpr-clinical-shift-bench",
     "page": "cvpr-clinical-shift-bench.html",
     "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
     "system": "medical-vision-validation",
     "cluster": "Vision for science and medicine",
-    "case": "External hospital cohort",
+    "case": "Scanner shift",
     "family": "clinical shift",
     "metric": "residualRisk",
-    "metricValue": 26.4,
+    "metricValue": 8.9,
     "threshold": 50,
     "direction": "high",
     "decision": "release",
-    "readiness": 77.1,
+    "readiness": 83.2,
     "controls": {
-      "scannerShift": 52,
-      "cohortMix": 72,
-      "labelNoise": 16,
+      "scannerShift": 46,
+      "cohortMix": 34,
+      "labelNoise": 24,
+      "reviewThreshold": 72
+    },
+    "metrics": {
+      "shiftLoad": 32.7,
+      "calibration": 91.5,
+      "domainEvidence": 85.3,
+      "triageRate": 72.0,
+      "residualRisk": 8.9,
+      "clinicalEvidence": 87.1,
+      "readiness": 83.2
+    },
+    "severity": 0
+  },
+  {
+    "id": "cvpr-clinical-shift-bench/rare-presentation",
+    "bench": "cvpr-clinical-shift-bench",
+    "page": "cvpr-clinical-shift-bench.html",
+    "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
+    "system": "medical-vision-validation",
+    "cluster": "Vision for science and medicine",
+    "case": "Rare presentation",
+    "family": "clinical shift",
+    "metric": "residualRisk",
+    "metricValue": 10.6,
+    "threshold": 50,
+    "direction": "high",
+    "decision": "release",
+    "readiness": 81.9,
+    "controls": {
+      "scannerShift": 58,
+      "cohortMix": 52,
+      "labelNoise": 18,
+      "reviewThreshold": 78
+    },
+    "metrics": {
+      "shiftLoad": 38.0,
+      "calibration": 90.7,
+      "domainEvidence": 82.9,
+      "triageRate": 78.0,
+      "residualRisk": 10.6,
+      "clinicalEvidence": 85.8,
+      "readiness": 81.9
+    },
+    "severity": 0
+  },
+  {
+    "id": "cvpr-clinical-shift-bench/motion-artifact",
+    "bench": "cvpr-clinical-shift-bench",
+    "page": "cvpr-clinical-shift-bench.html",
+    "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
+    "system": "medical-vision-validation",
+    "cluster": "Vision for science and medicine",
+    "case": "Motion artifact",
+    "family": "clinical shift",
+    "metric": "residualRisk",
+    "metricValue": 11.1,
+    "threshold": 50,
+    "direction": "high",
+    "decision": "release",
+    "readiness": 81.1,
+    "controls": {
+      "scannerShift": 38,
+      "cohortMix": 44,
+      "labelNoise": 66,
       "reviewThreshold": 74
     },
     "metrics": {
-      "shiftLoad": 52.4,
-      "calibration": 75.4,
-      "domainEvidence": 72.9,
-      "triageRate": 47.0,
-      "residualRisk": 26.4,
-      "clinicalEvidence": 82.3,
-      "readiness": 77.1
-    },
-    "severity": 0
-  },
-  {
-    "id": "cvpr-clinical-shift-bench/noisy-rare-cohort",
-    "bench": "cvpr-clinical-shift-bench",
-    "page": "cvpr-clinical-shift-bench.html",
-    "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
-    "system": "medical-vision-validation",
-    "cluster": "Vision for science and medicine",
-    "case": "Noisy rare cohort",
-    "family": "clinical shift",
-    "metric": "residualRisk",
-    "metricValue": 33.5,
-    "threshold": 50,
-    "direction": "high",
-    "decision": "release",
-    "readiness": 72.5,
-    "controls": {
-      "scannerShift": 76,
-      "cohortMix": 84,
-      "labelNoise": 20,
-      "reviewThreshold": 84
-    },
-    "metrics": {
-      "shiftLoad": 67.8,
-      "calibration": 72.4,
-      "domainEvidence": 66.0,
-      "triageRate": 57.0,
-      "residualRisk": 33.5,
-      "clinicalEvidence": 79.1,
-      "readiness": 72.5
+      "shiftLoad": 39.0,
+      "calibration": 90.9,
+      "domainEvidence": 82.5,
+      "triageRate": 74.0,
+      "residualRisk": 11.1,
+      "clinicalEvidence": 85.3,
+      "readiness": 81.1
     },
     "severity": 0
   },
@@ -513,11 +513,11 @@ export const failureRows = [
     "case": "Common clean object",
     "family": "localization gap",
     "metric": "localizedEvidence",
-    "metricValue": 88.9,
+    "metricValue": 62.8,
     "threshold": 55,
     "direction": "low",
     "decision": "release",
-    "readiness": 84.7,
+    "readiness": 74.3,
     "controls": {
       "queryRarity": 18,
       "distractorOverlap": 16,
@@ -525,12 +525,12 @@ export const failureRows = [
       "evidenceThreshold": 54
     },
     "metrics": {
-      "proposalRecall": 82.8,
-      "textRegionScore": 84.7,
-      "longTailRecall": 71.7,
-      "localizedEvidence": 88.9,
-      "unsupportedRisk": 8.3,
-      "readiness": 84.7
+      "proposalRecall": 74.2,
+      "textRegionScore": 26.8,
+      "longTailRecall": 39.7,
+      "localizedEvidence": 62.8,
+      "unsupportedRisk": 21.0,
+      "readiness": 74.3
     },
     "severity": 0
   },
@@ -544,11 +544,11 @@ export const failureRows = [
     "case": "Rare visible object",
     "family": "localization gap",
     "metric": "localizedEvidence",
-    "metricValue": 87.7,
+    "metricValue": 63.6,
     "threshold": 55,
     "direction": "low",
     "decision": "release",
-    "readiness": 83.9,
+    "readiness": 75.3,
     "controls": {
       "queryRarity": 66,
       "distractorOverlap": 12,
@@ -556,12 +556,12 @@ export const failureRows = [
       "evidenceThreshold": 62
     },
     "metrics": {
-      "proposalRecall": 76.8,
-      "textRegionScore": 85.0,
-      "longTailRecall": 76.9,
-      "localizedEvidence": 87.7,
-      "unsupportedRisk": 16.3,
-      "readiness": 83.9
+      "proposalRecall": 75.2,
+      "textRegionScore": 26.7,
+      "longTailRecall": 43.2,
+      "localizedEvidence": 63.6,
+      "unsupportedRisk": 21.2,
+      "readiness": 75.3
     },
     "severity": 0
   },
@@ -575,11 +575,11 @@ export const failureRows = [
     "case": "Rare object with distractors",
     "family": "localization gap",
     "metric": "localizedEvidence",
-    "metricValue": 87.1,
+    "metricValue": 95.6,
     "threshold": 55,
     "direction": "low",
     "decision": "release",
-    "readiness": 83.8,
+    "readiness": 113.8,
     "controls": {
       "queryRarity": 78,
       "distractorOverlap": 28,
@@ -587,12 +587,12 @@ export const failureRows = [
       "evidenceThreshold": 76
     },
     "metrics": {
-      "proposalRecall": 76.0,
-      "textRegionScore": 83.6,
-      "longTailRecall": 81.4,
-      "localizedEvidence": 87.1,
-      "unsupportedRisk": 19.0,
-      "readiness": 83.8
+      "proposalRecall": 79.4,
+      "textRegionScore": 93.1,
+      "longTailRecall": 85.2,
+      "localizedEvidence": 95.6,
+      "unsupportedRisk": 8.9,
+      "readiness": 113.8
     },
     "severity": 0
   },
@@ -606,11 +606,11 @@ export const failureRows = [
     "case": "Unsupported text query",
     "family": "localization gap",
     "metric": "localizedEvidence",
-    "metricValue": 87.1,
+    "metricValue": 56.0,
     "threshold": 55,
     "direction": "low",
     "decision": "release",
-    "readiness": 83.8,
+    "readiness": 69.3,
     "controls": {
       "queryRarity": 82,
       "distractorOverlap": 30,
@@ -618,12 +618,12 @@ export const failureRows = [
       "evidenceThreshold": 84
     },
     "metrics": {
-      "proposalRecall": 75.3,
-      "textRegionScore": 84.0,
-      "longTailRecall": 82.1,
-      "localizedEvidence": 87.1,
-      "unsupportedRisk": 20.1,
-      "readiness": 83.8
+      "proposalRecall": 60.6,
+      "textRegionScore": 17.0,
+      "longTailRecall": 40.6,
+      "localizedEvidence": 56.0,
+      "unsupportedRisk": 23.9,
+      "readiness": 69.3
     },
     "severity": 0
   },

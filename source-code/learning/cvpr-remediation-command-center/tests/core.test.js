@@ -4,18 +4,18 @@ import { remediationGate, summarizeCommandCenter, surfaceReady } from "../src/co
 
 const derived = summarizeCommandCenter(surfaceRows, ledgerSummary);
 assert.equal(derived.surfaces, 7);
-assert.equal(derived.readySurfaces, 7);
-assert.equal(surfaceRows.filter(surfaceReady).length, 7);
+assert.equal(derived.readySurfaces, 5);
+assert.equal(surfaceRows.filter(surfaceReady).length, 5);
 assert.equal(summary.surfaces, 7);
-assert.equal(summary.readySurfaces, 7);
-assert.equal(summary.gauntletBlocks, 14);
-assert.equal(summary.actionableRows, 29);
+assert.equal(summary.readySurfaces, 5);
+assert.equal(summary.gauntletBlocks, 23);
+assert.equal(summary.actionableRows, 53);
 assert.equal(summary.postBlock, 0);
-assert.equal(summary.promote, 12);
-assert.equal(summary.monitor, 17);
+assert.equal(summary.promote, 18);
+assert.equal(summary.monitor, 35);
 assert.equal(summary.canaryRollback, 0);
 assert.equal(summary.rollbackDrills, 12);
 assert.equal(summary.rehearsalMisses, 0);
-assert.equal(remediationGate(summary), "operator-ready");
-assert.equal(summary.status, "operator-ready");
+assert.equal(remediationGate(summary), "block");
+assert.equal(summary.status, "block");
 console.log("ok cvpr-remediation-command-center:", summary.readySurfaces, "surfaces ready");

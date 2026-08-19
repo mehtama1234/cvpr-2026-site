@@ -1,0 +1,122 @@
+[
+  {
+    "jobId": "expanded-attack-suite",
+    "caseId": "pgd",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:46Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "pgd"
+    },
+    "inputs": {
+      "asset": "skimage.data.astronaut"
+    },
+    "outputs": {
+      "cleanConfidence": 7.3,
+      "attackedConfidence": 100.0,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 74.8,
+      "confidenceCollapse": 0.0,
+      "attackSuccess": 74.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-expanded-attack-suite-bench",
+      "execution": "torchvision-resnet-multiattack-live-demo"
+    }
+  },
+  {
+    "jobId": "expanded-attack-suite",
+    "caseId": "patch",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:46Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "patch"
+    },
+    "inputs": {
+      "asset": "skimage.data.astronaut"
+    },
+    "outputs": {
+      "cleanConfidence": 7.3,
+      "attackedConfidence": 8.1,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 61.2,
+      "confidenceCollapse": 31.0,
+      "attackSuccess": 74.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-expanded-attack-suite-bench",
+      "execution": "torchvision-resnet-multiattack-live-demo"
+    }
+  },
+  {
+    "jobId": "expanded-attack-suite",
+    "caseId": "blur-compression",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:46Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "blur-compression"
+    },
+    "inputs": {
+      "asset": "skimage.data.astronaut"
+    },
+    "outputs": {
+      "cleanConfidence": 7.3,
+      "attackedConfidence": 6.9,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 60.5,
+      "confidenceCollapse": 32.5,
+      "attackSuccess": 74.1
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-expanded-attack-suite-bench",
+      "execution": "torchvision-resnet-multiattack-live-demo"
+    }
+  },
+  {
+    "jobId": "expanded-attack-suite",
+    "caseId": "noise-chain",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:46Z",
+    "model": {
+      "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+      "attack": "noise-chain"
+    },
+    "inputs": {
+      "asset": "skimage.data.astronaut"
+    },
+    "outputs": {
+      "cleanConfidence": 7.3,
+      "attackedConfidence": 10.4,
+      "topClassChanged": 1
+    },
+    "metrics": {
+      "readiness": 62.4,
+      "confidenceCollapse": 28.3,
+      "attackSuccess": 74.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-expanded-attack-suite-bench",
+      "execution": "torchvision-resnet-multiattack-live-demo"
+    }
+  }
+]

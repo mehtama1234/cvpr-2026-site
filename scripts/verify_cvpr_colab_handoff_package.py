@@ -12,11 +12,12 @@ PACKAGE = ROOT / "source-code/learning/cvpr-colab-handoff-package"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
+    import_summary = data["importReport"]["summary"]
     assert summary["handoff"] == "cvpr-colab-handoff-package"
     assert summary["status"] == "ready"
-    assert summary["jobs"] == 10
-    assert summary["runners"] == 10
-    assert summary["expectedResults"] == 40
+    assert summary["jobs"] == import_summary["jobs"]
+    assert summary["runners"] == import_summary["validJobs"]
+    assert summary["expectedResults"] == import_summary["expectedResults"]
     assert summary["importIssues"] == 0
     assert summary["notebook"] == "notebooks/cvpr_gpu_worker.ipynb"
     assert summary["runbook"] == "source-code/learning/cvpr-colab-gpu-worker/COLAB_PRO_PLUS_RUNBOOK.md"

@@ -1,15 +1,15 @@
 {
   "summary": {
     "demo": "cvpr-second-round-demo-roadmap",
-    "status": "ready",
+    "status": "block",
     "goals": 6,
     "readyGoals": 6,
     "themes": 6,
     "systems": 11,
     "proPlusGoals": 3,
-    "sourceGate": "release",
-    "closeoutStatus": "sealed",
-    "operatorStatus": "operator-ready",
+    "sourceGate": "block",
+    "closeoutStatus": "block",
+    "operatorStatus": "block",
     "fullStackStatus": "valid",
     "packageTests": 148,
     "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py"
@@ -117,6 +117,6 @@
     "brief": "analysis/cvpr_remediation_release_brief/registry.json",
     "closeout": "analysis/cvpr_remediation_closeout_pack/registry.json",
     "command": "analysis/cvpr_remediation_command_center/registry.json",
-    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+    "validation": "analysis/cvpr_validation_center/registry.json"
   }
 }

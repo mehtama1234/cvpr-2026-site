@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-vlm-claim-goal-demo",
+  "jobId": "vlm-claim-auditor",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 47.7,
+  "unsupportedClaimRisk": 55.4,
+  "status": "valid"
+}

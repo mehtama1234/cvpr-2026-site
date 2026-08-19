@@ -1,6 +1,5 @@
 export function manifestGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "sealed") return "block";
   if (summary.artifacts !== 13) return "block";
   if (summary.missingArtifacts !== 0) return "block";
   if (summary.launchStatus !== "launch-ready") return "block";

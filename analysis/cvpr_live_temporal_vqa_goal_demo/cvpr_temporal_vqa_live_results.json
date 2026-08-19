@@ -1,0 +1,186 @@
+[
+  {
+    "jobId": "temporal-vqa-grounding",
+    "caseId": "stable-count",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:24:53Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-frame-claim-support"
+    },
+    "inputs": {
+      "claims": [
+        "three colored objects remain visible",
+        "objects disappear"
+      ],
+      "frames": 4,
+      "asset": "synthetic://temporal-vqa/stable-count.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        97.9,
+        99.3,
+        99.1,
+        99.2
+      ],
+      "frameContradiction": [
+        2.1,
+        0.7,
+        0.9,
+        0.8
+      ]
+    },
+    "metrics": {
+      "readiness": 96.8,
+      "claimSupport": 98.9,
+      "temporalConsistency": 98.7,
+      "unsupportedClaimRisk": 5.3,
+      "temporalContradiction": 2.1
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-temporal-vqa-grounding-bench",
+      "execution": "transformers-clip-temporal-vqa-live-demo"
+    }
+  },
+  {
+    "jobId": "temporal-vqa-grounding",
+    "caseId": "object-enters",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:24:53Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-frame-claim-support"
+    },
+    "inputs": {
+      "claims": [
+        "a new red object appears",
+        "no object changes"
+      ],
+      "frames": 4,
+      "asset": "synthetic://temporal-vqa/object-enters.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        43.7,
+        30.7,
+        25.8,
+        20.2
+      ],
+      "frameContradiction": [
+        56.3,
+        69.3,
+        74.2,
+        79.8
+      ]
+    },
+    "metrics": {
+      "readiness": 44.0,
+      "claimSupport": 30.1,
+      "temporalConsistency": 66.3,
+      "unsupportedClaimRisk": 88.8,
+      "temporalContradiction": 79.8
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-temporal-vqa-grounding-bench",
+      "execution": "transformers-clip-temporal-vqa-live-demo"
+    }
+  },
+  {
+    "jobId": "temporal-vqa-grounding",
+    "caseId": "attribute-swap",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:24:54Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-frame-claim-support"
+    },
+    "inputs": {
+      "claims": [
+        "the blue object becomes red",
+        "colors remain unchanged"
+      ],
+      "frames": 4,
+      "asset": "synthetic://temporal-vqa/attribute-swap.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        36.4,
+        8.0,
+        10.0,
+        31.7
+      ],
+      "frameContradiction": [
+        63.6,
+        92.0,
+        90.0,
+        68.3
+      ]
+    },
+    "metrics": {
+      "readiness": 35.4,
+      "claimSupport": 21.5,
+      "temporalConsistency": 60.6,
+      "unsupportedClaimRisk": 100.0,
+      "temporalContradiction": 92.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-temporal-vqa-grounding-bench",
+      "execution": "transformers-clip-temporal-vqa-live-demo"
+    }
+  },
+  {
+    "jobId": "temporal-vqa-grounding",
+    "caseId": "occlusion-claim",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:24:55Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-frame-claim-support"
+    },
+    "inputs": {
+      "claims": [
+        "one object is briefly occluded",
+        "all objects are always visible"
+      ],
+      "frames": 4,
+      "asset": "synthetic://temporal-vqa/occlusion-claim.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        97.5,
+        93.0,
+        93.3,
+        97.9
+      ],
+      "frameContradiction": [
+        2.5,
+        7.0,
+        6.7,
+        2.1
+      ]
+    },
+    "metrics": {
+      "readiness": 85.3,
+      "claimSupport": 95.4,
+      "temporalConsistency": 95.1,
+      "unsupportedClaimRisk": 24.6,
+      "temporalContradiction": 7.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-temporal-vqa-grounding-bench",
+      "execution": "transformers-clip-temporal-vqa-live-demo"
+    }
+  }
+]

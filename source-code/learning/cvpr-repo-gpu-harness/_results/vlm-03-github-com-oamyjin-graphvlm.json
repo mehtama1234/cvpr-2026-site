@@ -2,19 +2,86 @@
   "jobId": "vlm-03-github-com-oamyjin-graphvlm",
   "repo": "https://github.com/oamyjin/GraphVLM",
   "mode": "live-colab",
+  "commitSha": "4e6c0f55b9d149b3abc354c4a62c43c2fa6d4274",
+  "createdAt": "2026-08-17T02:53:35Z",
+  "command": "/usr/bin/python3 Aligner/GraphPrompter/src/config.py --help",
+  "fallbackCommands": [
+    "/usr/bin/python3 Aligner/GraphPrompter/src/config.py --help"
+  ],
+  "repairAttempts": [
+    {
+      "missingModule": "torch_geometric",
+      "package": "torch_geometric",
+      "attempted": true,
+      "ok": true,
+      "reason": "mapped-module",
+      "install": {
+        "attempted": true,
+        "ok": true,
+        "packages": [
+          "torch_geometric"
+        ],
+        "command": "/usr/bin/python3 -m pip install -q torch_geometric",
+        "stdout": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 64.4/64.4 kB 4.3 MB/s eta 0:00:00\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.3/1.3 MB 38.4 MB/s eta 0:00:00",
+        "stderr": "",
+        "runtimeSeconds": 4.43
+      }
+    },
+    {
+      "missingModule": "dgl",
+      "package": "dgl",
+      "attempted": true,
+      "ok": true,
+      "reason": "mapped-module",
+      "install": {
+        "attempted": true,
+        "ok": true,
+        "packages": [
+          "dgl"
+        ],
+        "command": "/usr/bin/python3 -m pip install -q dgl",
+        "stdout": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 8.6/8.6 MB 71.6 MB/s eta 0:00:00",
+        "stderr": "",
+        "runtimeSeconds": 4.26
+      }
+    },
+    {
+      "missingModule": "torchdata.datapipes",
+      "package": "torchdata==0.7.1",
+      "attempted": true,
+      "ok": true,
+      "reason": "mapped-module",
+      "install": {
+        "attempted": true,
+        "ok": true,
+        "packages": [
+          "torchdata==0.7.1"
+        ],
+        "command": "/usr/bin/python3 -m pip install -q torchdata==0.7.1",
+        "stdout": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 184.4/184.4 kB 6.7 MB/s eta 0:00:00",
+        "stderr": "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\ntorchtune 0.6.1 requires torchdata==0.11.0, but you have torchdata 0.7.1 which is incompatible.",
+        "runtimeSeconds": 3.69
+      }
+    }
+  ],
   "metrics": {
-    "readiness": 43,
-    "smokePassed": true,
-    "runtimeSeconds": 0.0,
-    "filesScanned": 0
+    "readiness": 90.0,
+    "repoPresent": 100.0,
+    "dependencySetup": 100.0,
+    "commandExecuted": 100.0,
+    "gpuRuntime": 100.0,
+    "executionDepth": 80.0,
+    "repairPasses": 3.0,
+    "runtimeSeconds": 58.98
   },
   "provenance": {
     "runtime": "google-colab-pro-plus",
-    "accelerator": "A100",
-    "notebook": "notebooks/cvpr_repo_harness_worker.ipynb",
-    "source": "live-export-template"
+    "accelerator": "Tesla T4",
+    "notebook": "colab-cli-run",
+    "sourceBench": "cvpr-repo-execution-wave5-bench",
+    "execution": "colab-cli-git-clone-entrypoint-command-live-demo",
+    "failureMode": "none"
   },
-  "viewer": "third-wave-vlm-GraphVLM",
-  "rehydratedFrom": "analysis/cvpr_interactive_expansion_backlog/registry.json",
-  "status": "rehydrated"
+  "sourceArtifact": "analysis/cvpr_live_repo_execution_wave5/cvpr_repo_execution_wave5_results.json",
+  "status": "authoritative-live-colab-wave5"
 }

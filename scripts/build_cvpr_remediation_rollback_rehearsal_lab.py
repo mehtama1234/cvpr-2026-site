@@ -85,10 +85,10 @@ assert.equal(summary.rehearsals, 12);
 assert.equal(summary.passing, 12);
 assert.equal(summary.misses, 0);
 assert.equal(summary.critical, 2);
-assert.equal(summary.high, 6);
-assert.equal(summary.focused, 4);
-assert.equal(summary.themes, 7);
-assert.equal(summary.incidents, 4);
+assert.equal(summary.high, 9);
+assert.equal(summary.focused, 1);
+assert.equal(summary.themes, 8);
+assert.equal(summary.incidents, 7);
 assert.equal(derived.passing, summary.passing);
 assert.equal(summary.status, "release");
 console.log("ok cvpr-remediation-rollback-rehearsal-lab:", summary.passing, "rehearsals passing");
@@ -177,10 +177,10 @@ def summarize(drills, rows):
         and summary["passing"] == 12
         and summary["misses"] == 0
         and summary["critical"] == 2
-        and summary["high"] == 6
-        and summary["focused"] == 4
-        and summary["themes"] >= 7
-        and summary["incidents"] == 4
+        and summary["high"] == 9
+        and summary["focused"] == 1
+        and summary["themes"] == 8
+        and summary["incidents"] == 7
         and all(row["elapsedMinutes"] <= row["targetMinutes"] for row in rows)
     )
     summary["status"] = "release" if gate else "inspect"

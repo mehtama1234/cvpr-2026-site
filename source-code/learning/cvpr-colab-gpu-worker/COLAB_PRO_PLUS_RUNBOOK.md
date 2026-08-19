@@ -8,8 +8,8 @@ This is the production handoff for using Google Colab Pro+ as the GPU execution 
 - Notebook: `notebooks/cvpr_gpu_worker.ipynb`
 - Result artifact: `source-code/learning/cvpr-colab-gpu-worker/_results/cvpr_gpu_results.json`
 - Live export intake: `source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`
-- Expected jobs: `10`
-- Expected cached results: `40`
+- Expected jobs: `14`
+- Expected cached results: `56`
 - Local import validator: `scripts/validate_cvpr_colab_results.py`
 - Live intake gate: `scripts/stage_cvpr_live_colab_export.py`
 - Full release validator: `scripts/validate_cvpr_full_stack.py`
@@ -19,24 +19,27 @@ This is the production handoff for using Google Colab Pro+ as the GPU execution 
 1. Open `notebooks/cvpr_gpu_worker.ipynb` in Google Colab.
 2. Select a GPU runtime. Prefer L4 or A100 for temporal rollout, constraint generation, driving safety, metric geometry, and Gaussian Splatting jobs.
 3. Run the manifest cell and confirm `RUN_MANIFEST["runtimePlane"] == "google-colab-pro-plus"`.
-4. For `open-vocab-grounding`, run the GroundingDINO/SigLIP cells. Set `require_real_models=True` when refreshing release evidence so model download or runtime failures stop the job instead of using fallback metrics.
-5. For `restoration-fidelity`, run the Swin2SR restoration cells with `require_real_models=True` when refreshing release evidence.
-6. For `adversarial-provenance`, run the CLIP provenance probe cells with `require_real_models=True` when refreshing release evidence.
-7. For `temporal-rollout`, run the RAFT optical-flow rollout cells with `require_real_models=True` when refreshing release evidence.
-8. For `clinical-shift`, run the Torch clinical embedding/calibration cells with `require_real_models=True` when refreshing release evidence.
-9. For `compute-serving`, run the Torch serving latency profiler cells with `require_real_models=True` when refreshing release evidence.
-10. For `constraint-generation`, run the Torch layout/identity/reward probe cells with `require_real_models=True` when refreshing release evidence.
-11. For `driving-safety`, run the Torch driving scene/risk probe cells with `require_real_models=True` when refreshing release evidence.
-12. For `metric-geometry`, run the Torch metric geometry probe cells with `require_real_models=True` when refreshing release evidence.
-13. For `gaussian-splatting`, run the Torch Gaussian Splatting render probe cells with `require_real_models=True` when refreshing release evidence.
-14. Run the final live export contract cell and confirm it prints `status: valid`.
-15. Download `cvpr_gpu_results.json`.
-16. Place it at `source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`.
-17. Run `python3 scripts/stage_cvpr_live_colab_export.py --export source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`.
-18. If the intake report is valid, promote it with `python3 scripts/stage_cvpr_live_colab_export.py --export source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json --promote`.
-19. Run `python3 scripts/validate_cvpr_colab_results.py`.
-20. Run `python3 scripts/validate_cvpr_full_stack.py`.
-21. Open `cvpr-validation-center.html`, `cvpr-colab-live-intake.html`, and `cvpr-colab-release-bundle.html` and confirm the release gates remain valid.
+4. Run the notebook-native job cells as written. The notebook uses `require_real_models=True`, stops on CPU, and rejects deterministic fallback rows at export time.
+5. For `open-vocab-grounding`, run the GroundingDINO/SigLIP cells.
+6. For `restoration-fidelity`, run the Swin2SR restoration cells.
+7. For `adversarial-provenance`, run the CLIP provenance probe cells.
+8. For `temporal-rollout`, run the RAFT optical-flow rollout cells.
+9. For `clinical-shift`, run the Torch clinical embedding/calibration cells.
+10. For `compute-serving`, run the Torch serving latency profiler cells.
+11. For `constraint-generation`, run the Torch layout/identity/reward probe cells.
+12. For `driving-safety`, run the Torch driving scene/risk probe cells.
+13. For `metric-geometry`, run the Torch metric geometry probe cells.
+14. For `gaussian-splatting`, run the Torch Gaussian Splatting render probe cells.
+15. Refresh the external live worker lanes for `depth-normal-consistency`, `corruption-robustness`, `prompt-segmentation-robustness`, and `video-identity-tracking` with their dedicated live worker scripts when you need a full 14-job promotion.
+16. Merge the notebook-native results and those 4 external live worker lanes into the staged live export artifact.
+17. Run the final live export contract cell and confirm it prints `status: valid` for the notebook-native portion.
+18. Download `cvpr_gpu_results.json`.
+19. Place it at `source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`.
+20. Run `python3 scripts/stage_cvpr_live_colab_export.py --export source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`.
+21. If the intake report is valid, promote it with `python3 scripts/stage_cvpr_live_colab_export.py --export source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json --promote`.
+22. Run `python3 scripts/validate_cvpr_colab_results.py`.
+23. Run `python3 scripts/validate_cvpr_full_stack.py`.
+24. Open `cvpr-validation-center.html`, `cvpr-colab-live-intake.html`, and `cvpr-colab-release-bundle.html` and confirm the release gates remain valid.
 
 ## Job Manifest
 
@@ -50,8 +53,12 @@ This is the production handoff for using Google Colab Pro+ as the GPU execution 
 | 6 | `compute-serving` | `cvpr-compute-serving-bench` | 4 | simulated, cached-real, live-colab |
 | 7 | `constraint-generation` | `cvpr-constraint-generation-bench` | 4 | simulated, cached-real, live-colab |
 | 8 | `driving-safety` | `cvpr-driving-safety-bench` | 4 | simulated, cached-real, live-colab |
-| 9 | `metric-geometry` | `cvpr-metric-geometry-bench` | 4 | simulated, cached-real, live-colab |
-| 10 | `gaussian-splatting` | `cvpr-gaussian-splatting-bench` | 4 | simulated, cached-real, live-colab |
+| 9 | `depth-normal-consistency` | `cvpr-depth-normal-consistency-bench` | 4 | simulated, cached-real, live-colab |
+| 10 | `corruption-robustness` | `cvpr-corruption-robustness-bench` | 4 | simulated, cached-real, live-colab |
+| 11 | `prompt-segmentation-robustness` | `cvpr-prompt-segmentation-robustness-bench` | 4 | simulated, cached-real, live-colab |
+| 12 | `video-identity-tracking` | `cvpr-video-identity-tracking-bench` | 4 | simulated, cached-real, live-colab |
+| 13 | `metric-geometry` | `cvpr-metric-geometry-bench` | 4 | simulated, cached-real, live-colab |
+| 14 | `gaussian-splatting` | `cvpr-gaussian-splatting-bench` | 4 | simulated, cached-real, live-colab |
 
 ## Acceptance Gate
 

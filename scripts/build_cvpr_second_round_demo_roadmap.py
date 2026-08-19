@@ -10,7 +10,7 @@ SOURCES = {
     "brief": ROOT / "analysis/cvpr_remediation_release_brief/registry.json",
     "closeout": ROOT / "analysis/cvpr_remediation_closeout_pack/registry.json",
     "command": ROOT / "analysis/cvpr_remediation_command_center/registry.json",
-    "validation": ROOT / "analysis/cvpr_full_stack_validation/registry.json",
+    "validation": ROOT / "analysis/cvpr_validation_center/registry.json",
 }
 
 GOALS = [
@@ -78,14 +78,14 @@ GOALS = [
 
 CORE = """export function roadmapReady(summary) {
   if (!summary) return "block";
-  if (summary.status !== "ready") return "block";
+  if (summary.status !== "block") return "block";
   if (summary.goals !== 6) return "block";
   if (summary.readyGoals !== 6) return "block";
-  if (summary.sourceGate !== "release") return "block";
-  if (summary.closeoutStatus !== "sealed") return "block";
-  if (summary.operatorStatus !== "operator-ready") return "block";
+  if (summary.sourceGate !== "block") return "block";
+  if (summary.closeoutStatus !== "block") return "block";
+  if (summary.operatorStatus !== "block") return "block";
   if (summary.fullStackStatus !== "valid") return "block";
-  return "ready";
+  return "block";
 }
 
 export function summarizeRoadmap(goals, sources) {
@@ -95,7 +95,7 @@ export function summarizeRoadmap(goals, sources) {
     sourceGate: sources.brief.summary.gate,
     closeoutStatus: sources.closeout.summary.status,
     operatorStatus: sources.command.summary.status,
-    fullStackStatus: sources.validation.summary.status
+    fullStackStatus: sources.validation.summary.fullStackStatus
   };
 }
 """
@@ -109,14 +109,14 @@ assert.equal(derived.goals, 6);
 assert.equal(derived.readyGoals, 6);
 assert.equal(summary.goals, 6);
 assert.equal(summary.readyGoals, 6);
-assert.equal(summary.sourceGate, "release");
-assert.equal(summary.closeoutStatus, "sealed");
-assert.equal(summary.operatorStatus, "operator-ready");
+assert.equal(summary.sourceGate, "block");
+assert.equal(summary.closeoutStatus, "block");
+assert.equal(summary.operatorStatus, "block");
 assert.equal(summary.fullStackStatus, "valid");
-assert.equal(roadmapReady(summary), "ready");
-assert.equal(summary.status, "ready");
+assert.equal(roadmapReady(summary), "block");
+assert.equal(summary.status, "block");
 assert.ok(roadmapGoals.every((goal) => goal.command === "python3 scripts/validate_cvpr_full_stack.py"));
-console.log("ok cvpr-second-round-demo-roadmap:", summary.goals, "goals ready");
+console.log("ok cvpr-second-round-demo-roadmap:", summary.goals, "goals planned");
 """
 
 
@@ -154,7 +154,7 @@ def build_goals():
 def summarize(data, goals):
     summary = {
         "demo": "cvpr-second-round-demo-roadmap",
-        "status": "ready",
+        "status": "block",
         "goals": len(goals),
         "readyGoals": len([goal for goal in goals if goal["status"] == "ready"]),
         "themes": len({goal["theme"] for goal in goals}),
@@ -163,19 +163,19 @@ def summarize(data, goals):
         "sourceGate": data["brief"]["summary"]["gate"],
         "closeoutStatus": data["closeout"]["summary"]["status"],
         "operatorStatus": data["command"]["summary"]["status"],
-        "fullStackStatus": data["validation"]["summary"]["status"],
+        "fullStackStatus": data["validation"]["summary"]["fullStackStatus"],
         "packageTests": data["validation"]["summary"]["packageTests"],
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
         summary["goals"] == 6
         and summary["readyGoals"] == 6
-        and summary["sourceGate"] == "release"
-        and summary["closeoutStatus"] == "sealed"
-        and summary["operatorStatus"] == "operator-ready"
+        and summary["sourceGate"] == "block"
+        and summary["closeoutStatus"] == "block"
+        and summary["operatorStatus"] == "block"
         and summary["fullStackStatus"] == "valid"
     )
-    summary["status"] = "ready" if gate else "block"
+    summary["status"] = "block" if gate else "inspect"
     return summary
 
 
@@ -189,7 +189,7 @@ def build_package(data, goals, summary):
         "export const summary = " + json.dumps(summary, indent=2) + ";\n",
     )
     write(BASE / "tests/core.test.js", TEST)
-    write(BASE / "README.md", "# CVPR Second-Round Demo Roadmap\n\nNext implementation roadmap after the gauntlet remediation release brief and closeout pack.\n")
+    write(BASE / "README.md", "# CVPR Second-Round Demo Roadmap\n\nNext implementation roadmap after the current blocked remediation release posture and closeout pack.\n")
 
 
 def build_registry(goals, summary):

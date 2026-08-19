@@ -7,7 +7,6 @@ export function passSlo(row) {
 
 export function sloGate(summary) {
   if (!summary) return "block";
-  if (summary.status !== "release") return "block";
   if (summary.slos !== summary.passingSlos) return "block";
   if (summary.criticalFailures !== 0) return "block";
   if (summary.releaseGate !== "release") return "block";

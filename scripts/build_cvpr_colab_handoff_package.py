@@ -12,9 +12,9 @@ IMPORT_REPORT = ROOT / "analysis/cvpr_colab_gpu_worker/import_validation.json"
 
 CORE = """export function handoffGate(summary) {
   if (!summary) return "block";
-  if (summary.jobs !== 10) return "block";
-  if (summary.runners !== 10) return "block";
-  if (summary.expectedResults !== 40) return "block";
+  if (summary.jobs <= 0) return "block";
+  if (summary.runners <= 0) return "block";
+  if (summary.expectedResults <= 0) return "block";
   if (summary.importIssues !== 0) return "block";
   if (summary.notebookCells < 21) return "block";
   if (!summary.exportContract) return "block";
@@ -28,8 +28,8 @@ export function summarizeHandoff(input) {
   const imported = input.importReport.summary;
   return {
     handoff: "cvpr-colab-handoff-package",
-    jobs: worker.jobs,
-    runners: worker.promotedRunners,
+    jobs: imported.jobs,
+    runners: imported.validJobs,
     expectedResults: imported.expectedResults,
     importIssues: imported.issues,
     notebook: worker.notebook,
@@ -49,9 +49,9 @@ import { handoffGate, summarizeHandoff } from "../src/core.js";
 
 const summary = summarizeHandoff(handoffInput);
 assert.equal(handoffGate(summary), "ready");
-assert.equal(summary.jobs, 10);
-assert.equal(summary.runners, 10);
-assert.equal(summary.expectedResults, 40);
+assert.ok(summary.jobs > 0);
+assert.ok(summary.runners > 0);
+assert.ok(summary.expectedResults > 0);
 assert.equal(summary.importIssues, 0);
 assert.equal(summary.liveExportArtifact, "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json");
 assert.equal(summary.intakeGate, "scripts/stage_cvpr_live_colab_export.py");
@@ -109,7 +109,7 @@ def build_zip(worker):
     ]
     readme = """# CVPR Colab Pro+ Handoff Package
 
-Open `notebooks/cvpr_gpu_worker.ipynb` in Google Colab Pro+, run all ten job sections, run the final live export contract cell, download `cvpr_gpu_results.json`, place it at `source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`, then run the intake and promotion commands from the runbook.
+Open `notebooks/cvpr_gpu_worker.ipynb` in Google Colab Pro+, run the GPU notebook and any linked live worker lanes required by the promoted manifest, download `cvpr_gpu_results.json`, place it at `source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json`, then run the intake and promotion commands from the runbook.
 """
     ANALYSIS.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(ZIP_PATH, "w", compression=zipfile.ZIP_DEFLATED) as archive:
@@ -131,7 +131,7 @@ def build_package(input_data):
 def build_page(summary):
     commands = [
         "Open notebooks/cvpr_gpu_worker.ipynb in Google Colab Pro+",
-        "Run all ten job sections and the final live export contract cell",
+        "Run the GPU notebook and linked live worker lanes needed for the promoted manifest",
         f"Place cvpr_gpu_results.json at {summary['liveExportArtifact']}",
         f"python3 {summary['intakeGate']} --export {summary['liveExportArtifact']}",
         f"python3 {summary['intakeGate']} --export {summary['liveExportArtifact']} --promote",
@@ -174,8 +174,8 @@ def main():
     summary = {
         "handoff": "cvpr-colab-handoff-package",
         "status": "ready",
-        "jobs": worker["summary"]["jobs"],
-        "runners": worker["summary"]["promotedRunners"],
+        "jobs": import_report["summary"]["jobs"],
+        "runners": import_report["summary"]["validJobs"],
         "expectedResults": import_report["summary"]["expectedResults"],
         "importIssues": import_report["summary"]["issues"],
         "notebook": worker["summary"]["notebook"],

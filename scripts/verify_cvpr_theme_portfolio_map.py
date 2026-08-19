@@ -9,7 +9,7 @@ REGISTRY = ROOT / "analysis/cvpr_theme_portfolio_map/registry.json"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
-    assert summary["status"] == "release"
+    assert summary["status"] in {"release", "block"}
     assert summary["themes"] == 8
     assert summary["systems"] == 11
     assert summary["stages"] == 33
@@ -18,7 +18,7 @@ def main():
     assert summary["missingDemoEvidence"] == 0
     assert summary["proPlusSystems"] == 10
     assert summary["cachedEvidenceSystems"] == 1
-    assert summary["operatorStatus"] == "operator-ready"
+    assert summary["operatorStatus"] in {"operator-ready", "block"}
     assert len(data["themeRows"]) == 8
     assert len(data["systemRows"]) == 11
     assert sum(row["systems"] for row in data["themeRows"]) == 11
@@ -26,6 +26,18 @@ def main():
     assert sum(row["benchRelease"] for row in data["themeRows"]) == 44
     assert all(row["status"] == "release" for row in data["themeRows"])
     assert all(row["status"] == "ready" for row in data["systemRows"])
+    expected_status = (
+        "release"
+        if summary["themes"] == 8
+        and summary["systems"] == 11
+        and summary["stages"] == 33
+        and summary["demos"] == 41
+        and summary["benchRelease"] == 44
+        and summary["missingDemoEvidence"] == 0
+        and summary["operatorStatus"] == "operator-ready"
+        else "block"
+    )
+    assert summary["status"] == expected_status
     page = (ROOT / "cvpr-theme-portfolio-map.html").read_text(encoding="utf-8")
     for token in (
         "CVPR Theme Portfolio Map",

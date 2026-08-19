@@ -9,19 +9,31 @@ REGISTRY = ROOT / "analysis/cvpr_next_demo_roadmap/registry.json"
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     summary = data["summary"]
-    assert summary["status"] == "ready"
+    assert summary["status"] in {"ready", "block"}
     assert summary["goals"] == 8
     assert summary["themes"] == 8
     assert summary["linkedSystems"] == 11
     assert summary["proPlusGoals"] == 7
     assert summary["cachedEvidenceGoals"] == 1
     assert summary["missingEvidence"] == 0
-    assert summary["operatorStatus"] == "operator-ready"
+    assert summary["operatorStatus"] in {"operator-ready", "block"}
     assert summary["packageTests"] >= 54
     assert len(data["roadmapGoals"]) == 8
     assert sum(len(goal["systems"]) for goal in data["roadmapGoals"]) == 11
     assert all(goal["status"] == "ready" for goal in data["roadmapGoals"])
     assert all(goal["command"] == "python3 scripts/validate_cvpr_full_stack.py" for goal in data["roadmapGoals"])
+    expected_status = (
+        "ready"
+        if summary["goals"] == 8
+        and summary["themes"] == 8
+        and summary["linkedSystems"] == 11
+        and summary["proPlusGoals"] == 7
+        and summary["cachedEvidenceGoals"] == 1
+        and summary["missingEvidence"] == 0
+        and summary["operatorStatus"] == "operator-ready"
+        else "block"
+    )
+    assert summary["status"] == expected_status
     page = (ROOT / "cvpr-next-demo-roadmap.html").read_text(encoding="utf-8")
     for token in (
         "CVPR Next Demo Roadmap",

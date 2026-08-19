@@ -1,9 +1,9 @@
 {
   "summary": {
     "audit": "cvpr-release-audit-trail",
-    "status": "complete",
+    "status": "block",
     "events": 58,
-    "readyEvents": 58,
+    "readyEvents": 56,
     "launchEvents": 8,
     "manifestEvents": 13,
     "changeEvents": 13,
@@ -29,7 +29,7 @@
       "surface": "cvpr-release-slo-dashboard.html",
       "evidence": "analysis/cvpr_release_slo_dashboard/registry.json",
       "command": "python3 scripts/build_cvpr_release_slo_dashboard.py && python3 scripts/verify_cvpr_release_slo_dashboard.py",
-      "status": "pass"
+      "status": "block"
     },
     {
       "id": "evt-003",
@@ -38,7 +38,7 @@
       "surface": "cvpr-release-regression-drillbook.html",
       "evidence": "analysis/cvpr_release_regression_drillbook/registry.json",
       "command": "python3 scripts/build_cvpr_release_regression_drillbook.py && python3 scripts/verify_cvpr_release_regression_drillbook.py",
-      "status": "pass"
+      "status": "block"
     },
     {
       "id": "evt-004",

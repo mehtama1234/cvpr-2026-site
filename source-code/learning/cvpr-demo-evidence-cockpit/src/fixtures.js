@@ -599,8 +599,8 @@ export const cockpitInput = {
       "benchRelease": 44,
       "benchReview": 0,
       "benchBlock": 0,
-      "colabJobs": 10,
-      "cachedResults": 40,
+      "colabJobs": 14,
+      "cachedResults": 56,
       "colabCoveredBenches": 10,
       "systemEvidenceCoveredBenches": 1,
       "missingBenchSystems": 0,
@@ -1248,6 +1248,54 @@ export const cockpitInput = {
         "status": "release"
       },
       {
+        "jobId": "depth-normal-consistency",
+        "bench": "cvpr-depth-normal-consistency-bench",
+        "page": "cvpr-depth-normal-consistency-bench.html",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torch-cuda-depth-normal-probe",
+          "finite-difference-normal-consistency"
+        ],
+        "cachedResults": 4,
+        "status": "release"
+      },
+      {
+        "jobId": "corruption-robustness",
+        "bench": "cvpr-corruption-robustness-bench",
+        "page": "cvpr-corruption-robustness-bench.html",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torchvision-resnet18",
+          "clean-corrupted-logit-delta"
+        ],
+        "cachedResults": 4,
+        "status": "release"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "bench": "cvpr-prompt-segmentation-robustness-bench",
+        "page": "cvpr-prompt-segmentation-robustness-bench.html",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torchvision-maskrcnn-resnet50-fpn",
+          "mask-rcnn-click-robustness-proxy"
+        ],
+        "cachedResults": 4,
+        "status": "release"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "bench": "cvpr-video-identity-tracking-bench",
+        "page": "cvpr-video-identity-tracking-bench.html",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torch-cuda-centroid-assignment-tracker",
+          "mask-sequence-identity-drift"
+        ],
+        "cachedResults": 4,
+        "status": "release"
+      },
+      {
         "jobId": "metric-geometry",
         "bench": "cvpr-metric-geometry-bench",
         "page": "cvpr-metric-geometry-bench.html",
@@ -1288,11 +1336,11 @@ export const cockpitInput = {
       "planner": "cvpr-colab-execution-planner",
       "status": "ready",
       "runtimePlane": "google-colab-pro-plus",
-      "jobs": 10,
+      "jobs": 14,
       "waves": 3,
-      "expectedResults": 40,
-      "cachedResults": 40,
-      "colabCoveredBenches": 10,
+      "expectedResults": 56,
+      "cachedResults": 56,
+      "colabCoveredBenches": 14,
       "systemEvidenceCoveredBenches": 1,
       "missingRuntimeEvidence": 0,
       "releaseStatus": "release",
@@ -1327,11 +1375,12 @@ export const cockpitInput = {
       },
       {
         "wave": "wave-3-generation-driving-3d",
-        "jobs": 4,
-        "expectedResults": 16,
-        "cachedResults": 16,
+        "jobs": 8,
+        "expectedResults": 32,
+        "cachedResults": 32,
         "gpuClasses": [
-          "L4/A100"
+          "L4/A100",
+          "T4/L4/A100"
         ],
         "status": "ready"
       }
@@ -1528,6 +1577,29 @@ export const cockpitInput = {
         "status": "ready"
       },
       {
+        "jobId": "depth-normal-consistency",
+        "title": "Depth-normal consistency GPU run",
+        "wave": "wave-3-generation-driving-3d",
+        "priority": 9,
+        "bench": "cvpr-depth-normal-consistency-bench",
+        "benchPage": "cvpr-depth-normal-consistency-bench.html",
+        "system": "geometry-consistency-probe",
+        "theme": "Recovering the 3D world from flat pictures",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torch-cuda-depth-normal-probe",
+          "finite-difference-normal-consistency"
+        ],
+        "runner": "run_depth_normal_consistency_batch",
+        "execution": "torch-cuda-depth-normal-live-demo",
+        "strictMode": "require_real_models=True",
+        "expectedCases": 4,
+        "cachedResults": 4,
+        "command": "run_job('depth-normal-consistency', mode='live-colab', strict=True)",
+        "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job depth-normal-consistency",
+        "status": "ready"
+      },
+      {
         "jobId": "metric-geometry",
         "title": "Metric geometry GPU run",
         "wave": "wave-3-generation-driving-3d",
@@ -1552,6 +1624,29 @@ export const cockpitInput = {
         "status": "ready"
       },
       {
+        "jobId": "corruption-robustness",
+        "title": "Corruption robustness GPU run",
+        "wave": "wave-3-generation-driving-3d",
+        "priority": 10,
+        "bench": "cvpr-corruption-robustness-bench",
+        "benchPage": "cvpr-corruption-robustness-bench.html",
+        "system": "robust-perception-gate",
+        "theme": "Naming and locating what's in the picture",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torchvision-resnet18",
+          "clean-corrupted-logit-delta"
+        ],
+        "runner": "run_corruption_robustness_batch",
+        "execution": "torchvision-resnet-corruption-live-demo",
+        "strictMode": "require_real_models=True",
+        "expectedCases": 4,
+        "cachedResults": 4,
+        "command": "run_job('corruption-robustness', mode='live-colab', strict=True)",
+        "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job corruption-robustness",
+        "status": "ready"
+      },
+      {
         "jobId": "gaussian-splatting",
         "title": "Gaussian Splatting GPU run",
         "wave": "wave-3-generation-driving-3d",
@@ -1573,6 +1668,52 @@ export const cockpitInput = {
         "cachedResults": 4,
         "command": "run_job('gaussian-splatting', mode='live-colab', strict=True)",
         "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job gaussian-splatting",
+        "status": "ready"
+      },
+      {
+        "jobId": "prompt-segmentation-robustness",
+        "title": "Prompt segmentation robustness GPU run",
+        "wave": "wave-3-generation-driving-3d",
+        "priority": 11,
+        "bench": "cvpr-prompt-segmentation-robustness-bench",
+        "benchPage": "cvpr-prompt-segmentation-robustness-bench.html",
+        "system": "interactive-segmentation-gate",
+        "theme": "Making pixels from meaning",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torchvision-maskrcnn-resnet50-fpn",
+          "mask-rcnn-click-robustness-proxy"
+        ],
+        "runner": "run_prompt_segmentation_robustness_batch",
+        "execution": "torchvision-maskrcnn-prompt-robustness-live-demo",
+        "strictMode": "require_real_models=True",
+        "expectedCases": 4,
+        "cachedResults": 4,
+        "command": "run_job('prompt-segmentation-robustness', mode='live-colab', strict=True)",
+        "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job prompt-segmentation-robustness",
+        "status": "ready"
+      },
+      {
+        "jobId": "video-identity-tracking",
+        "title": "Video identity tracking GPU run",
+        "wave": "wave-3-generation-driving-3d",
+        "priority": 12,
+        "bench": "cvpr-video-identity-tracking-bench",
+        "benchPage": "cvpr-video-identity-tracking-bench.html",
+        "system": "video-tracking-release-gate",
+        "theme": "Seeing and making things that move",
+        "gpuClass": "T4/L4/A100",
+        "models": [
+          "torch-cuda-centroid-assignment-tracker",
+          "mask-sequence-identity-drift"
+        ],
+        "runner": "run_video_identity_tracking_batch",
+        "execution": "torch-cuda-video-tracking-live-demo",
+        "strictMode": "require_real_models=True",
+        "expectedCases": 4,
+        "cachedResults": 4,
+        "command": "run_job('video-identity-tracking', mode='live-colab', strict=True)",
+        "promotionCheck": "python3 scripts/stage_cvpr_live_colab_export.py --job video-identity-tracking",
         "status": "ready"
       }
     ],
@@ -1618,7 +1759,7 @@ export const cockpitInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "maxRisk",
-        "keyMetricValue": 34.6,
+        "keyMetricValue": 34.8,
         "nextAction": "promote safety-critical-action evidence into release notes"
       },
       {
@@ -1631,7 +1772,7 @@ export const cockpitInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "minEvidence",
-        "keyMetricValue": 82.5,
+        "keyMetricValue": 51.2,
         "nextAction": "promote adversarial-media evidence into release notes"
       },
       {
@@ -1644,7 +1785,7 @@ export const cockpitInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "maxResidualRisk",
-        "keyMetricValue": 33.5,
+        "keyMetricValue": 11.1,
         "nextAction": "promote clinical-shift evidence into release notes"
       },
       {
@@ -1696,7 +1837,7 @@ export const cockpitInput = {
         "benchStatus": "implemented",
         "blockedCases": 0,
         "keyMetric": "minLocalizedEvidence",
-        "keyMetricValue": 87.1,
+        "keyMetricValue": 56.0,
         "nextAction": "promote long-tail-open-world evidence into release notes"
       },
       {
@@ -1724,12 +1865,12 @@ export const cockpitInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 68.2,
+        "avgReadiness": 75.2,
         "acceptancePass": true,
         "playbookSource": "01-driving-and-vision-language-action-safety-critical-action",
         "status": "interactive",
         "keyMetric": "maxRisk",
-        "keyMetricValue": 34.6,
+        "keyMetricValue": 34.8,
         "registry": "analysis/cvpr_driving_safety_bench/registry.json",
         "page": "cvpr-driving-safety-bench.html"
       },
@@ -1745,12 +1886,12 @@ export const cockpitInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 80.0,
+        "avgReadiness": 67.6,
         "acceptancePass": true,
         "playbookSource": "02-adversarial-robustness-adversarial-media",
         "status": "interactive",
         "keyMetric": "minEvidence",
-        "keyMetricValue": 82.5,
+        "keyMetricValue": 51.2,
         "registry": "analysis/cvpr_adversarial_provenance_bench/registry.json",
         "page": "cvpr-adversarial-provenance-bench.html"
       },
@@ -1766,12 +1907,12 @@ export const cockpitInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 79.7,
+        "avgReadiness": 84.0,
         "acceptancePass": true,
         "playbookSource": "03-vision-for-science-and-medicine-clinical-shift",
         "status": "interactive",
         "keyMetric": "maxResidualRisk",
-        "keyMetricValue": 33.5,
+        "keyMetricValue": 11.1,
         "registry": "analysis/cvpr_clinical_shift_bench/registry.json",
         "page": "cvpr-clinical-shift-bench.html"
       },
@@ -1808,12 +1949,12 @@ export const cockpitInput = {
         "release": 4,
         "review": 0,
         "block": 0,
-        "avgReadiness": 84.0,
+        "avgReadiness": 83.2,
         "acceptancePass": true,
         "playbookSource": "07-open-vocabulary-vision-long-tail-open-world",
         "status": "interactive",
         "keyMetric": "minLocalizedEvidence",
-        "keyMetricValue": 87.1,
+        "keyMetricValue": 56.0,
         "registry": "analysis/cvpr_long_tail_grounding_bench/registry.json",
         "page": "cvpr-long-tail-grounding-bench.html"
       },
@@ -1970,9 +2111,9 @@ export const cockpitInput = {
       "benchAcceptanceRate": 100.0,
       "failureSeverity": 0,
       "openThemes": 0,
-      "workerJobs": 10,
-      "cachedResults": 40,
-      "liveIntakeResults": 40,
+      "workerJobs": 14,
+      "cachedResults": 56,
+      "liveIntakeResults": 56,
       "evidenceArtifacts": 7,
       "importIssues": 0,
       "packageTests": 148,
@@ -2773,10 +2914,10 @@ export const summary = {
   "stageDemos": 33,
   "flagshipDemos": 8,
   "totalDemos": 41,
-  "proPlusJobs": 10,
+  "proPlusJobs": 14,
   "proPlusWaves": 3,
-  "expectedLiveResults": 40,
-  "cachedResults": 40,
+  "expectedLiveResults": 56,
+  "cachedResults": 56,
   "benchRelease": 44,
   "benchCases": 44,
   "missingDemoEvidence": 0,

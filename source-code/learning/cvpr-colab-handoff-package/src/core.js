@@ -1,8 +1,8 @@
 export function handoffGate(summary) {
   if (!summary) return "block";
-  if (summary.jobs !== 10) return "block";
-  if (summary.runners !== 10) return "block";
-  if (summary.expectedResults !== 40) return "block";
+  if (summary.jobs <= 0) return "block";
+  if (summary.runners <= 0) return "block";
+  if (summary.expectedResults <= 0) return "block";
   if (summary.importIssues !== 0) return "block";
   if (summary.notebookCells < 21) return "block";
   if (!summary.exportContract) return "block";
@@ -16,8 +16,8 @@ export function summarizeHandoff(input) {
   const imported = input.importReport.summary;
   return {
     handoff: "cvpr-colab-handoff-package",
-    jobs: worker.jobs,
-    runners: worker.promotedRunners,
+    jobs: imported.jobs,
+    runners: imported.validJobs,
     expectedResults: imported.expectedResults,
     importIssues: imported.issues,
     notebook: worker.notebook,

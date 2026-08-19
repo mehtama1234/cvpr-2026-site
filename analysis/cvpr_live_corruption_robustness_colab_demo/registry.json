@@ -1,0 +1,180 @@
+{
+  "summary": {
+    "demo": "cvpr-live-corruption-robustness-colab-demo",
+    "jobId": "corruption-robustness",
+    "runtime": "google-colab-pro-plus",
+    "accelerator": "Tesla T4",
+    "results": 4,
+    "minReadiness": 80.8,
+    "confidenceCollapse": 15.0,
+    "status": "valid",
+    "requestedGpuOrder": [
+      "T4"
+    ],
+    "launcherSelectedGpu": "T4",
+    "analysis": "cvpr_live_corruption_robustness_colab_demo",
+    "resultArtifact": "analysis/cvpr_live_corruption_robustness_colab_demo/cvpr_corruption_robustness_live_results.json",
+    "stdoutArtifact": "analysis/cvpr_live_corruption_robustness_colab_demo/colab_stdout.txt",
+    "stderrArtifact": "analysis/cvpr_live_corruption_robustness_colab_demo/colab_stderr.txt",
+    "launcher": "python3 scripts/run_colab_live_demo.py",
+    "worker": "scripts/colab_live_second_wave_demo.py"
+  },
+  "results": [
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "motion-blur",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:26:30Z",
+      "model": {
+        "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+        "probe": "clean-corrupted-logit-delta"
+      },
+      "inputs": {
+        "corruptionControls": {
+          "corruption": "blur",
+          "severity": 46
+        },
+        "asset": "synthetic://robustness/motion-blur.png"
+      },
+      "outputs": {
+        "cleanConfidence": 35.2,
+        "corruptedConfidence": 66.3,
+        "jsDivergence": 0.712014,
+        "featureCosine": 0.940137
+      },
+      "metrics": {
+        "readiness": 80.8,
+        "robustness": 86.3,
+        "confidenceCollapse": 15.0,
+        "featureRetention": 94.0,
+        "labelStability": 74.6,
+        "severity": 46,
+        "topClassChanged": 1
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-corruption-robustness-bench",
+        "execution": "torchvision-resnet-corruption-live-demo"
+      }
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "sensor-noise",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:26:30Z",
+      "model": {
+        "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+        "probe": "clean-corrupted-logit-delta"
+      },
+      "inputs": {
+        "corruptionControls": {
+          "corruption": "noise",
+          "severity": 52
+        },
+        "asset": "synthetic://robustness/sensor-noise.png"
+      },
+      "outputs": {
+        "cleanConfidence": 38.2,
+        "corruptedConfidence": 43.1,
+        "jsDivergence": 0.06174,
+        "featureCosine": 0.963718
+      },
+      "metrics": {
+        "readiness": 84.4,
+        "robustness": 91.9,
+        "confidenceCollapse": 10.0,
+        "featureRetention": 96.4,
+        "labelStability": 99.0,
+        "severity": 52,
+        "topClassChanged": 0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-corruption-robustness-bench",
+        "execution": "torchvision-resnet-corruption-live-demo"
+      }
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "patch-attack",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:26:30Z",
+      "model": {
+        "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+        "probe": "clean-corrupted-logit-delta"
+      },
+      "inputs": {
+        "corruptionControls": {
+          "corruption": "patch",
+          "severity": 66
+        },
+        "asset": "synthetic://robustness/patch-attack.png"
+      },
+      "outputs": {
+        "cleanConfidence": 33.5,
+        "corruptedConfidence": 36.9,
+        "jsDivergence": 0.031526,
+        "featureCosine": 0.973741
+      },
+      "metrics": {
+        "readiness": 81.1,
+        "robustness": 90.8,
+        "confidenceCollapse": 11.8,
+        "featureRetention": 97.4,
+        "labelStability": 99.5,
+        "severity": 66,
+        "topClassChanged": 0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-corruption-robustness-bench",
+        "execution": "torchvision-resnet-corruption-live-demo"
+      }
+    },
+    {
+      "jobId": "corruption-robustness",
+      "caseId": "compression-shift",
+      "mode": "live-colab",
+      "createdAt": "2026-08-17T03:26:30Z",
+      "model": {
+        "classifier": "ResNet18_Weights.IMAGENET1K_V1",
+        "probe": "clean-corrupted-logit-delta"
+      },
+      "inputs": {
+        "corruptionControls": {
+          "corruption": "compression",
+          "severity": 58
+        },
+        "asset": "synthetic://robustness/compression-shift.png"
+      },
+      "outputs": {
+        "cleanConfidence": 38.5,
+        "corruptedConfidence": 39.9,
+        "jsDivergence": 0.009099,
+        "featureCosine": 0.9972
+      },
+      "metrics": {
+        "readiness": 84.1,
+        "robustness": 92.9,
+        "confidenceCollapse": 9.4,
+        "featureRetention": 99.7,
+        "labelStability": 99.9,
+        "severity": 58,
+        "topClassChanged": 0
+      },
+      "provenance": {
+        "runtime": "google-colab-pro-plus",
+        "accelerator": "Tesla T4",
+        "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+        "sourceBench": "cvpr-corruption-robustness-bench",
+        "execution": "torchvision-resnet-corruption-live-demo"
+      }
+    }
+  ]
+}

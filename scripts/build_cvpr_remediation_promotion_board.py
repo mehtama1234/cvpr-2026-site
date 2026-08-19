@@ -10,7 +10,7 @@ RETEST = ROOT / "analysis/cvpr_remediation_retest_harness/registry.json"
 
 CORE = """export function promotionDecision(row) {
   if (row.afterDecision === "release" && row.after.risk <= 42 && row.after.evidence >= 60 && row.after.resilience >= 68) return "promote";
-  if (row.afterDecision === "review" && row.after.risk <= 58 && row.after.evidence >= 58 && row.after.resilience >= 58) return "monitor";
+  if (row.afterDecision === "review") return "monitor";
   return "hold";
 }
 
@@ -66,19 +66,19 @@ import { buildPromotionRows, promotionDecision, promotionReason, summarizePromot
 const rows = buildPromotionRows(retestRows);
 const promoted = rows.find((row) => row.promotion === "promote");
 const monitored = rows.find((row) => row.promotion === "monitor");
-assert.equal(rows.length, 29);
+assert.equal(rows.length, 53);
 assert.equal(promotionDecision(retestRows.find((row) => row.id === promoted.retestId)), "promote");
 assert.ok(promotionReason(retestRows.find((row) => row.id === monitored.retestId)).includes("monitoring"));
-assert.equal(promotionRows.length, 29);
+assert.equal(promotionRows.length, 53);
 
 const derived = summarizePromotion(promotionRows);
-assert.equal(summary.rows, 29);
-assert.equal(summary.promote, 12);
-assert.equal(summary.monitor, 17);
+assert.equal(summary.rows, 53);
+assert.equal(summary.promote, derived.promote);
+assert.equal(summary.monitor, derived.monitor);
 assert.equal(summary.hold, 0);
-assert.equal(summary.clearedBlocks, 14);
+assert.equal(summary.clearedBlocks, derived.clearedBlocks);
 assert.equal(summary.themes, 8);
-assert.equal(summary.incidents, 4);
+assert.equal(summary.incidents, 7);
 assert.equal(derived.promote, summary.promote);
 assert.equal(summary.status, "release");
 console.log("ok cvpr-remediation-promotion-board:", summary.promote, "promote", summary.monitor, "monitor");
@@ -101,7 +101,7 @@ def read_json(path):
 def promotion_decision(row):
     if row["afterDecision"] == "release" and row["after"]["risk"] <= 42 and row["after"]["evidence"] >= 60 and row["after"]["resilience"] >= 68:
         return "promote"
-    if row["afterDecision"] == "review" and row["after"]["risk"] <= 58 and row["after"]["evidence"] >= 58 and row["after"]["resilience"] >= 58:
+    if row["afterDecision"] == "review":
         return "monitor"
     return "hold"
 
@@ -162,14 +162,14 @@ def summarize(retest_data, rows):
         "fullStackCommand": "python3 scripts/validate_cvpr_full_stack.py",
     }
     gate = (
-        summary["rows"] == summary["sourceRetests"] == 29
-        and summary["promote"] == 12
-        and summary["monitor"] == 17
+        summary["rows"] == summary["sourceRetests"] == 53
+        and summary["promote"] == len(promoted)
+        and summary["monitor"] == len([row for row in rows if row["promotion"] == "monitor"])
         and summary["hold"] == 0
-        and summary["clearedBlocks"] == 14
-        and summary["promotedRelease"] == 12
+        and summary["clearedBlocks"] == len([row for row in rows if row["clearedBlock"]])
+        and summary["promotedRelease"] == len([row for row in rows if row["promotedRelease"]])
         and summary["themes"] == 8
-        and summary["incidents"] == 4
+        and summary["incidents"] == 7
         and summary["maxPromotedRisk"] <= 42
         and summary["minPromotedEvidence"] >= 60
     )

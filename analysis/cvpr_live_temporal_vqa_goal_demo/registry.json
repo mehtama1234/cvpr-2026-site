@@ -1,0 +1,10 @@
+{
+  "demo": "cvpr-live-temporal-vqa-goal-demo",
+  "jobId": "temporal-vqa-grounding",
+  "runtime": "google-colab-pro-plus",
+  "accelerator": "Tesla T4",
+  "results": 4,
+  "minReadiness": 35.4,
+  "unsupportedClaimRisk": 100.0,
+  "status": "valid"
+}

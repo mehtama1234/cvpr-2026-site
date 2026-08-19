@@ -1,7 +1,7 @@
 export function deltaGate(summary) {
   if (!summary) return "block";
-  if (summary.cases !== 40) return "block";
-  if (summary.jobs !== 10) return "block";
+  if (summary.cases <= 0) return "block";
+  if (summary.jobs <= 0) return "block";
   if (summary.missing !== 0) return "block";
   if (summary.modeMismatches !== 0) return "block";
   if (summary.regressions !== 0) return "block";

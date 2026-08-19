@@ -1,0 +1,198 @@
+[
+  {
+    "jobId": "real-temporal-vqa",
+    "caseId": "bird-presence",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:13Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-public-video-claim-support"
+    },
+    "inputs": {
+      "frames": 6,
+      "claims": [
+        "a bird is visible",
+        "a person is visible"
+      ],
+      "asset": "imageio:cockatoo.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        97.1,
+        97.6,
+        97.6,
+        98.4,
+        97.9,
+        98.2
+      ],
+      "frameContradiction": [
+        2.9,
+        2.4,
+        2.4,
+        1.6,
+        2.1,
+        1.8
+      ]
+    },
+    "metrics": {
+      "readiness": 97.9,
+      "claimSupport": 97.8,
+      "temporalConsistency": 98.6,
+      "unsupportedClaimRisk": 3.4
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-temporal-vqa-bench",
+      "execution": "transformers-clip-real-video-vqa-live-demo"
+    }
+  },
+  {
+    "jobId": "real-temporal-vqa",
+    "caseId": "perched-vs-flying",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:13Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-public-video-claim-support"
+    },
+    "inputs": {
+      "frames": 6,
+      "claims": [
+        "the bird is perched on a branch",
+        "the bird is flying in open sky"
+      ],
+      "asset": "imageio:cockatoo.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        56.5,
+        52.6,
+        79.6,
+        65.9,
+        61.0,
+        70.7
+      ],
+      "frameContradiction": [
+        43.5,
+        47.4,
+        20.4,
+        34.1,
+        39.0,
+        29.3
+      ]
+    },
+    "metrics": {
+      "readiness": 63.7,
+      "claimSupport": 64.4,
+      "temporalConsistency": 71.5,
+      "unsupportedClaimRisk": 58.7
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-temporal-vqa-bench",
+      "execution": "transformers-clip-real-video-vqa-live-demo"
+    }
+  },
+  {
+    "jobId": "real-temporal-vqa",
+    "caseId": "single-subject",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:13Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-public-video-claim-support"
+    },
+    "inputs": {
+      "frames": 6,
+      "claims": [
+        "one main bird dominates the frame",
+        "multiple animals fill the frame"
+      ],
+      "asset": "imageio:cockatoo.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        99.1,
+        98.5,
+        98.4,
+        99.0,
+        99.1,
+        99.0
+      ],
+      "frameContradiction": [
+        0.9,
+        1.5,
+        1.6,
+        1.0,
+        0.9,
+        1.0
+      ]
+    },
+    "metrics": {
+      "readiness": 98.8,
+      "claimSupport": 98.8,
+      "temporalConsistency": 99.2,
+      "unsupportedClaimRisk": 2.0
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-temporal-vqa-bench",
+      "execution": "transformers-clip-real-video-vqa-live-demo"
+    }
+  },
+  {
+    "jobId": "real-temporal-vqa",
+    "caseId": "vegetation-claim",
+    "mode": "live-colab",
+    "createdAt": "2026-08-17T01:41:13Z",
+    "model": {
+      "visionLanguage": "openai/clip-vit-base-patch32",
+      "frameProbe": "clip-public-video-claim-support"
+    },
+    "inputs": {
+      "frames": 6,
+      "claims": [
+        "green foliage is visible",
+        "an indoor room is visible"
+      ],
+      "asset": "imageio:cockatoo.mp4"
+    },
+    "outputs": {
+      "frameSupport": [
+        21.6,
+        17.1,
+        25.5,
+        46.8,
+        52.2,
+        41.9
+      ],
+      "frameContradiction": [
+        78.4,
+        82.9,
+        74.5,
+        53.2,
+        47.8,
+        58.1
+      ]
+    },
+    "metrics": {
+      "readiness": 40.4,
+      "claimSupport": 34.2,
+      "temporalConsistency": 59.3,
+      "unsupportedClaimRisk": 97.7
+    },
+    "provenance": {
+      "runtime": "google-colab-pro-plus",
+      "accelerator": "Tesla T4",
+      "notebook": "notebooks/cvpr_gpu_worker.ipynb",
+      "sourceBench": "cvpr-real-temporal-vqa-bench",
+      "execution": "transformers-clip-real-video-vqa-live-demo"
+    }
+  }
+]

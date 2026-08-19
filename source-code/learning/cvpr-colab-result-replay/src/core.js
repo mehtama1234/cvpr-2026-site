@@ -4,7 +4,8 @@ export function validateReplayResult(result, notebook) {
   const readiness = result.metrics?.readiness;
   const validReadiness = typeof readiness === "number" && readiness >= 0 && readiness <= 100;
   const validProvenance = result.provenance?.runtime === "google-colab-pro-plus" &&
-    result.provenance?.accelerator === "GPU" &&
+    result.provenance?.accelerator &&
+    result.provenance?.accelerator !== "CPU" &&
     result.provenance?.notebook === notebook;
   return {
     ok: missing.length === 0 && validReadiness && validProvenance,
@@ -17,11 +18,11 @@ export function validateReplayResult(result, notebook) {
 export function replayGate(summary) {
   if (!summary) return "block";
   if (summary.status !== "ready") return "block";
-  if (summary.jobs !== 10) return "block";
-  if (summary.replayRows !== 10) return "block";
-  if (summary.results !== 40) return "block";
-  if (summary.validResults !== 40) return "block";
-  if (summary.stageDemosCovered !== 30) return "block";
+  if (summary.jobs <= 0) return "block";
+  if (summary.replayRows !== summary.jobs) return "block";
+  if (summary.results <= 0) return "block";
+  if (summary.validResults !== summary.results) return "block";
+  if (summary.stageDemosCovered < 30) return "block";
   if (summary.cachedSystemEvidenceDemos !== 3) return "block";
   if (summary.minReadiness <= 0) return "block";
   if (summary.provenanceIssues !== 0) return "block";

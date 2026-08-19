@@ -1,15 +1,15 @@
 {
   "summary": {
     "graph": "cvpr-release-dependency-graph",
-    "status": "ready",
+    "status": "block",
     "nodes": 15,
     "edges": 19,
     "rootNodes": 1,
     "terminalNodes": 1,
     "phases": 8,
-    "changeControlStatus": "controlled",
-    "manifestStatus": "sealed",
-    "launchStatus": "launch-ready",
+    "changeControlStatus": "block",
+    "manifestStatus": "block",
+    "launchStatus": "block",
     "fullStackStatus": "valid",
     "packageTests": 148
   },

@@ -1,16 +1,16 @@
 {
   "summary": {
     "demo": "cvpr-remediation-closeout-pack",
-    "status": "sealed",
+    "status": "block",
     "rows": 7,
-    "readyRows": 7,
-    "releaseGate": "release",
-    "posture": "controlled-watch",
+    "readyRows": 4,
+    "releaseGate": "block",
+    "posture": "review",
     "postBlock": 0,
     "canaryRollback": 0,
     "rehearsalMisses": 0,
-    "promote": 12,
-    "monitor": 17,
+    "promote": 18,
+    "monitor": 35,
     "rollbackDrills": 12,
     "packageTests": 148,
     "fullStackStatus": "valid",
@@ -21,37 +21,37 @@
       "id": "closeout-01-brief",
       "label": "Remediation release brief",
       "ownerSurface": "cvpr-remediation-release-brief.html",
-      "actual": "release",
+      "actual": "block",
       "expected": "release",
       "evidence": "analysis/cvpr_remediation_release_brief/registry.json",
       "verifyCommand": "python3 scripts/verify_cvpr_remediation_release_brief.py",
       "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
       "changePolicy": "verify owner, rerun full stack, keep remediation release brief sealed",
-      "status": "sealed"
+      "status": "block"
     },
     {
       "id": "closeout-02-command",
       "label": "Remediation command center",
       "ownerSurface": "cvpr-remediation-command-center.html",
-      "actual": "operator-ready",
+      "actual": "block",
       "expected": "operator-ready",
       "evidence": "analysis/cvpr_remediation_command_center/registry.json",
       "verifyCommand": "python3 scripts/verify_cvpr_remediation_command_center.py",
       "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
       "changePolicy": "verify owner, rerun full stack, keep remediation release brief sealed",
-      "status": "sealed"
+      "status": "block"
     },
     {
       "id": "closeout-03-ledger",
       "label": "Remediation audit ledger",
       "ownerSurface": "cvpr-remediation-audit-ledger.html",
-      "actual": "complete",
+      "actual": "inspect",
       "expected": "complete",
       "evidence": "analysis/cvpr_remediation_audit_ledger/registry.json",
       "verifyCommand": "python3 scripts/verify_cvpr_remediation_audit_ledger.py",
       "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
       "changePolicy": "verify owner, rerun full stack, keep remediation release brief sealed",
-      "status": "sealed"
+      "status": "block"
     },
     {
       "id": "closeout-04-canary",
@@ -95,7 +95,7 @@
       "ownerSurface": "cvpr-validation-center.html",
       "actual": "valid",
       "expected": "valid",
-      "evidence": "analysis/cvpr_full_stack_validation/registry.json",
+      "evidence": "analysis/cvpr_validation_center/registry.json",
       "verifyCommand": "python3 scripts/validate_cvpr_full_stack.py",
       "closeoutCommand": "python3 scripts/validate_cvpr_full_stack.py",
       "changePolicy": "verify owner, rerun full stack, keep remediation release brief sealed",
@@ -109,6 +109,6 @@
     "canary": "analysis/cvpr_remediation_canary_monitor/registry.json",
     "rollback": "analysis/cvpr_remediation_rollback_drillbook/registry.json",
     "rehearsal": "analysis/cvpr_remediation_rollback_rehearsal_lab/registry.json",
-    "validation": "analysis/cvpr_full_stack_validation/registry.json"
+    "validation": "analysis/cvpr_validation_center/registry.json"
   }
 }

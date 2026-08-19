@@ -1,0 +1,170 @@
+{
+  "summary": {
+    "export": "source-code/learning/cvpr-colab-gpu-worker/_incoming/cvpr_gpu_results_live.json",
+    "jobsExpected": 14,
+    "jobsFound": 14,
+    "jobsMissing": 0,
+    "results": 56,
+    "status": "complete"
+  },
+  "foundJobs": [
+    {
+      "jobId": "open-vocab-grounding",
+      "source": "analysis/cvpr_live_open_vocab_grounding_colab_demo/cvpr_open_vocab_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:01:17Z",
+        "2026-08-17T03:01:18Z"
+      ]
+    },
+    {
+      "jobId": "restoration-fidelity",
+      "source": "analysis/cvpr_live_restoration_fidelity_colab_demo/cvpr_restoration_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:02:40Z",
+        "2026-08-17T03:02:42Z"
+      ]
+    },
+    {
+      "jobId": "adversarial-provenance",
+      "source": "analysis/cvpr_live_adversarial_provenance_colab_demo/cvpr_adversarial_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:04:05Z"
+      ]
+    },
+    {
+      "jobId": "temporal-rollout",
+      "source": "analysis/cvpr_live_temporal_rollout_colab_demo/cvpr_temporal_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:05:38Z"
+      ]
+    },
+    {
+      "jobId": "clinical-shift",
+      "source": "analysis/cvpr_live_clinical_shift_colab_demo/cvpr_clinical_shift_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T01:09:30Z"
+      ]
+    },
+    {
+      "jobId": "compute-serving",
+      "source": "analysis/cvpr_live_compute_serving_colab_demo/cvpr_compute_serving_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:06:15Z"
+      ]
+    },
+    {
+      "jobId": "constraint-generation",
+      "source": "analysis/cvpr_live_constraint_generation_colab_demo/cvpr_constraint_generation_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:14:14Z"
+      ]
+    },
+    {
+      "jobId": "driving-safety",
+      "source": "analysis/cvpr_live_driving_safety_colab_demo/cvpr_driving_safety_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:14:48Z"
+      ]
+    },
+    {
+      "jobId": "depth-normal-consistency",
+      "source": "analysis/cvpr_live_depth_normal_colab_demo/cvpr_depth_normal_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:22:34Z"
+      ]
+    },
+    {
+      "jobId": "corruption-robustness",
+      "source": "analysis/cvpr_live_corruption_robustness_colab_demo/cvpr_corruption_robustness_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:26:30Z"
+      ]
+    },
+    {
+      "jobId": "prompt-segmentation-robustness",
+      "source": "analysis/cvpr_live_prompt_segmentation_colab_demo/cvpr_prompt_segmentation_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:23:49Z"
+      ]
+    },
+    {
+      "jobId": "video-identity-tracking",
+      "source": "analysis/cvpr_live_video_tracking_colab_demo/cvpr_video_tracking_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:24:31Z"
+      ]
+    },
+    {
+      "jobId": "metric-geometry",
+      "source": "analysis/cvpr_live_metric_geometry_colab_demo/cvpr_metric_geometry_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:31:36Z",
+        "2026-08-17T03:31:37Z"
+      ]
+    },
+    {
+      "jobId": "gaussian-splatting",
+      "source": "analysis/cvpr_live_gaussian_splatting_colab_demo/cvpr_gaussian_splatting_live_results.json",
+      "cases": 4,
+      "accelerators": [
+        "Tesla T4"
+      ],
+      "createdAt": [
+        "2026-08-17T03:29:24Z"
+      ]
+    }
+  ],
+  "missingJobs": []
+}
