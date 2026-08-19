@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Spectral graph theory &amp; the Laplacian — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Spectral graph theory &amp; the Laplacian · the mathematics · first principles, no jargon</div>
+<h1>Spectral graph theory &amp; the Laplacian — why it works, mathematically</h1>
+<p class="lead">A network of connected things — whether friendships or power grids — hides structure in how smooth or jumpy its data flows. The Laplacian is a machine that reads off the graph's natural frequencies, revealing clusters and answering which numbers to smooth together and which to keep separate.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Imagine a web of friendships: each person is a node, and a link forms between friends. You assign each person a single number — maybe how happy they are today. If friends tend to have similar happiness, the numbers vary slowly across the network; if happiness jumps wildly between neighbors, it's choppy and rough.<br><br>The question is: which parts of the network are truly connected, and which are islands? And if you want to smooth out noise in those numbers — say, guessing someone's true mood from their friends' moods — which numbers should you average together without blurring real clusters?<br><br>To answer, you need a tool that measures roughness on the graph itself, that reveals the graph's natural ways to vibrate, and that tells you which numbers are meant to stay independent and which can be safely merged. The Laplacian is that tool.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>A graph has its own notion of smooth versus rough</h3><div class="eq">roughness of f on the graph = Σ_{edges (i,j)} (f_i − f_j)²</div><div class="why">A graph's roughness is the sum of how much each person's number differs from their friends' numbers — squared, so big disagreements cost more. Imagine the graph as a piece of cloth with tiny springs connecting neighbors. Roughness measures the total tension if you pull the cloth to have those numbers. Pulling to match 10 nearby people is harder if they disagree; if they all agree, there is no tension at all. The lower the roughness, the fewer the disagreements, the smoother the assignment of numbers to the graph.</div></div><div class="idea"><h3>The Laplacian&#x27;s directions are the graph&#x27;s natural frequencies</h3><div class="eq">L·v_k = λ_k·v_k;   small λ = smooth, large λ = rough</div><div class="why">The Laplacian is a machine that, when fed a number-list, spits out how rough that assignment is — scaled by the structure of the graph itself. Its special directions are the number-lists that vibrate the least (small roughness) and the most (large roughness). A low-roughness direction means that assignment flows smoothly across the graph; a high-roughness direction means it jangles every edge. These directions are the graph's natural frequencies, just as a tuning fork has its own pitch. The Laplacian keeps the graph's shape in the machinery, so its frequencies are that graph's true heartbeat.</div></div><div class="idea"><h3>The lowest frequencies reveal the clusters</h3><div class="eq">the first few smooth directions separate the communities</div><div class="why">The smoothest directions — those with the lowest roughness — tend to treat whole clusters as one unit, assigning the same or nearly the same number to everyone in a tightly-knit group and a different number to people outside it. The next smoothest directions split the cluster further, into smaller pieces, then smaller still. So if you sort the Laplacian's directions from smoothest to roughest, the first few often draw lines between the natural communities hiding inside the network. This is why the Laplacian's easy directions tell you who belongs where.</div></div><div class="idea"><h3>Averaging neighbors is low-pass filtering on the graph</h3><div class="eq">neighbor-averaging keeps small λ, kills large λ → over-smoothing</div><div class="why">Averaging each person's number with their friends' numbers is the simplest form of smoothing. Mathematically, it kills roughness — it removes the jangly, high-roughness directions and keeps the smooth, low-roughness ones. If you do it once, you smooth a little. Do it many times, and you wash away more and more roughness, until everyone ends up with nearly the same number. This is called over-smoothing: you lose the structure you wanted to preserve. The trick is knowing when to stop, which the Laplacian's natural frequencies tell you: keep blending as long as you are erasing noise, stop before you wreck the true clusters.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The Laplacian itself is built the same way on every graph: each node gets a row that counts its neighbors and subtracts the weighted edges. The dials you can turn are simple. <b>Weighting the edges</b> — edges between close friends might count twice as much as distant ones — changes how the roughness is measured. <b>Degree normalization</b> — whether a person with 100 friends should be treated differently than someone with 2 — changes what the natural frequencies measure. <b>Which frequencies to keep</b> — whether you use the top 2 smooth directions or the top 20 — decides how aggressively you cluster the network. <b>What to plug into the machine</b> — signals from the network itself, labels you are trying to predict, or labels you hope to separate — changes the roughness you are optimizing. The thread never changes: measure disagreement at every edge, find the directions that minimize it, and use those directions to understand and reshape the graph.</p>
+
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 4 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Spectral Clustering</div><div class="eq">U_{:,1:k} from L's first k smallest eigenvectors, then k-means</div><div class="why">Instead of looking at raw graph structure, you extract the Laplacian's k most important directions—the ones with the smallest eigenvalues. These directions show you where the graph naturally wants to split into k groups. Stacking them into a table U and running k-means on the rows embeds each node in a k-dimensional space that respects the graph's own low-frequency structure, making clusters jump out.</div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>Laplacian Smoothness Regularization</div><div class="eq">Add λ x^T L x to loss: encourages x_i ≈ x_j for nearby nodes</div><div class="why">When you're trying to learn values x for each node (like predicting a label or score), you can add a penalty that says "nearby nodes should have similar answers." The term x^T L x measures how rough your answer is across the graph—it equals the sum of squared differences across all edges. Turning up λ forces your solution to be smooth, which is especially useful when you have few labels and want to borrow strength from the graph's topology.</div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Polynomial Spectral Filters</div><div class="eq">Apply P(L) to signals, where P is a low-degree polynomial</div><div class="why">You can filter a signal (values on nodes) by applying a polynomial function of the Laplacian itself, like (I - α L) or (I - α L)². This acts as a tunable low-pass filter: it preserves the slow-changing parts of your signal (low frequencies) and dampens the wiggly parts (high frequencies), without ever computing eigenvalues explicitly. Different polynomials give different cutoff sharpness, letting you tune smoothness on the fly.</div></div><div class="sub"><div class="sub-h"><span class="sn">4</span>Cheeger Inequality &amp; Spectral Gap</div><div class="eq">λ₂ bounds the best cut expansion: h_opt ≤ √(2 λ₂)</div><div class="why">The second-smallest eigenvalue λ₂ of the Laplacian—called the spectral gap—gives you a hard limit on how good a balanced partition you can achieve. Specifically, λ₂ tells you the expansion ratio h of the best cut: even if you find the optimal way to split the graph, you can't beat √(2 λ₂). This means a small spectral gap guarantees tight clusters exist, while a large gap means the graph is well-mixed everywhere.</div></div>
+<div class="fp"><b>The through-line.</b> The core problem is: a graph hides structure — clusters, natural frequencies, the right way to smooth — and you need a single tool that exposes all of it without knowing the answer in advance. You cannot measure roughness the same way you do in regular data, because your structure has edges and neighbors, not just abstract distance. And you need the tool to work from the graph's shape alone, without labels or hints.<br><br>Two plain ideas carry it: roughness on a graph is the sum of squared disagreements at every edge (so the graph itself tells you what is rough and what is smooth), and the directions that minimize that roughness — the eigenvectors of the Laplacian — are the graph's natural frequencies (so one machine, one decomposition, tells you the clusters, the smoothness, and the rate of over-smoothing all at once).</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Spectral graph theory &amp; the Laplacian — the quantity being optimized, the core relations, and why they work · part of the 59-theme first-principles collection · CC0.</footer></div>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Information theory — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Information theory · the mathematics · first principles, no jargon</div>
+<h1>Information theory — why it works, mathematically</h1>
+<p class="lead">When you send a message, rarer surprises cost more bits to describe. The real trick is figuring out exactly how rare each possibility is — then build a code that spends fewer bits on common things and more on rare ones.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Imagine you need to send a message about what happened, and you only have so many bits (or characters) to spend. If you know that Monday is 10 times more likely than Tuesday, you'd be wasteful to use the same amount of space for each. You'd want to burn a few bits on Monday and use more bits for the rarer Tuesday.<br><br>But here is the hard part: how do you actually measure how much more bits a rare event deserves? If something is twice as rare, do you spend one more bit, or two, or half? And once you have a way to measure it, how do you figure out what the true rarity is in the first place? If your guess about the rarity is wrong — if you think something is common but it turns out to be rare — you will waste a lot of bits describing it. This is the problem information theory solves: how to measure surprise and cost exactly, and how to find the true pattern so you never waste space.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Surprise is the log of how unlikely, measured in bits</h3><div class="eq">surprise(x) = −log₂ p(x)   — rarer means more bits</div><div class="why">When something happens that you thought was unlikely, you are more surprised. Surprise is just the distance from "I expected this" to "whoa, that was rare." The math here uses a mirror: if something happens with a probability (your best guess about the odds), then its surprise is the log of the flip of that probability, measured in bits. The log means doubling the rarity adds one more bit of surprise — three times rarer means about 1.6 bits more surprised. Rarer is more surprising, more bits. That's all the equation is saying: surprise grows logarithmically with how unlikely the thing was.</div></div><div class="idea"><h3>Entropy is the average surprise — the true cost of describing</h3><div class="eq">H = −Σ_x p(x)·log p(x)</div><div class="why">Now imagine you don't know what will happen next — it could be any of many things, each with its own probability and its own surprise. The average surprise is what you'd expect to feel, on average, if you saw a random outcome. That average is entropy. To calculate it, you take each possible outcome, multiply its probability by its surprise (so common things matter more, rare things matter less), and add them all up. This single number tells you the true cost of describing any message when outcomes follow this pattern. It is the shortest code you could possibly build, if you knew the true probabilities. Entropy is the promised land: the lowest average bits per message you could spend, ever.</div></div><div class="idea"><h3>Mutual information: how much knowing one thing cuts surprise about another</h3><div class="eq">I(X;Y) = H(X) − H(X | Y)</div><div class="why">Now suppose you know two things: the weather and the traffic. Traffic might seem unpredictable, but if you know it is rainy, traffic becomes much less surprising (rain always brings congestion, right?). Mutual information measures exactly how much knowing the weather reduces your surprise about traffic. You start with the surprise you'd normally feel about traffic (its entropy), then subtract the surprise you'd still feel after you know the weather (its conditional entropy — the average surprise left over, given that piece of knowledge). What is left is the overlap: the part of traffic that was really just about the weather all along. That overlap is how much knowing one thing cuts your surprise about the other. It is the shared surprise between them.</div></div><div class="idea"><h3>The gap between your code and reality is wasted bits</h3><div class="eq">wasted bits = KL(true ‖ model) ≥ 0</div><div class="why">Here is where the real world hits hard: you do not know the true probabilities. You only have a guess — your model, your code. If your guess says rain is rare but it actually rains half the time, you built a code that spends way too many bits on rain. The wasted bits are measured by the KL gap, a number that compares your model to reality. It is always zero or positive; zero only if your guess exactly matches the truth. The bigger the gap between what you guessed and what actually happens, the more bits you waste. This number is the penalty for being wrong — and it is always the same as the extra cost your code pays compared to the perfect code that knew the truth. It is not a metaphor; it is the literal wasted space from using a wrong guess.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Information theory is one engine with a few settings. You can measure <b>how rare a single outcome is</b> (surprise, in bits). You can find <b>the average surprise across a whole message</b> (entropy). You can measure <b>how much one piece of data tells you about another</b> (mutual information). Or you can measure <b>how badly a wrong guess wastes your bits</b> (KL divergence). The thread never changes: rarer things deserve more bits, the average of all those bits is your true cost, knowing something else can cut that cost, and mismatch between your guess and the real world is pure waste.</p>
+
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 4 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Quantifying inherent randomness</div><div class="eq">H(X) = -∑ p(x) log₂ p(x)</div><div class="why">H(X) is the average number of bits you need to describe a random event, where p(x) is the probability of outcome x. It tells you the baseline complexity of something: a coin flip needs about 1 bit, but guessing a random word from a huge dictionary needs many bits. When all outcomes are equally likely, the average surprise is high; if one outcome is certain, the average surprise is zero.</div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>Detecting model-reality mismatch</div><div class="eq">D(P||Q) = ∑ p(x) log₂(p(x)/q(x))</div><div class="why">The KL divergence D(P||Q) measures how many extra bits you waste when your assumed model Q is wrong but reality is actually P. If you think a coin is fair (q=0.5 heads) but it's actually biased (p=0.7 heads), this divergence tells you the surplus cost: you'll use unnecessarily long codes for the heads outcomes that actually happen most. Smaller divergence means your model is closer to truth.</div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Exploiting correlation between two things</div><div class="eq">I(X;Y) = H(X) - H(X|Y)</div><div class="why">Mutual information I(X;Y) measures how much learning the value of Y shrinks the uncertainty about X. If X and Y are independent, knowing Y teaches you nothing about X, so I(X;Y) is zero. If they are perfectly correlated, I(X;Y) equals H(X)—knowing Y completely removes all surprise about X. This is how we measure and exploit hidden links between signals: weather predicts crop yield, a patient's symptoms predict their diagnosis.</div></div><div class="sub"><div class="sub-h"><span class="sn">4</span>Reducing surprise with sequential information</div><div class="eq">H(X|Y) = H(X,Y) - H(Y)</div><div class="why">H(X|Y) measures the surprise that remains about X even after you observe Y. If Y tells you everything about X, this shrinks to zero; if Y is useless for predicting X, it stays high. In sequential prediction, each new observation Y cuts your uncertainty: you need fewer bits to describe X once Y is known. This is the core of learning: each real piece of data you gain narrows the average surprise about what comes next.</div></div>
+<div class="fp"><b>The through-line.</b> The core problem is that messages are expensive — each bit is a cost. You want to spend fewer bits on common things and more on rare ones. But you cannot optimize a code without knowing the true probabilities, and even if you know them, you need a way to measure exactly how much surprise each probability carries.<br><br>Two plain ideas carry it: first, surprise from rarity is captured by the logarithm of the flip of probability — doubling the rarity adds one more bit, always — and second, the average surprise (entropy) is the absolute minimum cost you could ever achieve, and any mismatch between your guess and the truth (KL divergence) is wasted bits you can never get back.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Information theory — the quantity being optimized, the core relations, and why they work · part of the 59-theme first-principles collection · CC0.</footer></div>
+</body></html>

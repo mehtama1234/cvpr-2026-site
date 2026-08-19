@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Convex optimization &amp; duality — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Convex optimization &amp; duality · the mathematics · first principles, no jargon</div>
+<h1>Convex optimization &amp; duality — why it works, mathematically</h1>
+<p class="lead">You want the cheapest way to do something, but you are stuck with rules you cannot break. Two tricks turn that hard problem into something solvable: bowl-shaped cost means there is only one bottom to find, and constraints become invisible prices that reveal what actually matters.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Imagine you are running a delivery network. You want to spend as little money as possible on fuel, drivers, and trucks, but you have rules: each delivery must happen on time, each truck can carry only so much, each driver works only so many hours. These constraints are not suggestions — they are hard walls. If you violate one, the plan fails.<br><br>So the question becomes: what is the very best you could possibly do, taking all these walls into account? Testing every possible plan is hopeless. There are too many, and most of them break the rules anyway. One piece of intuition might help: if you had to guess which constraints are actually pinching — which ones you are right at the limit of, and which ones you have room to spare in — you could focus your effort there. But you cannot know that without solving the problem.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>A bowl-shaped problem has one bottom, easy to reach</h3><div class="eq">convex: every local lowest point is the global lowest point</div><div class="why">When a cost-shape looks like a bowl, there is only one bottom — the lowest point you can possibly find. That matters because it means if you find any bottom at all using any simple method, it has to be the global answer. You do not have to worry that you missed a lower point somewhere else. Bowl-shaped (called convex) is the lucky shape where local and global are the same thing. The equation says exactly that: every place where the slope is zero and you cannot go any lower is the true minimum for the whole landscape.</div></div><div class="idea"><h3>Constraints become prices you pay</h3><div class="eq">L(x, λ) = f(x) + Σ_i λ_i·g_i(x)   (λ = the price of breaking g_i)</div><div class="why">Instead of checking if each constraint is satisfied or violated, you assign a price to breaking it. The price is called lambda. If a constraint is easy to break and does not matter much, the price is low or zero. If breaking it would be terrible, the price gets high to discourage it. The Lagrangian equation builds a single combined cost: the original cost you want to minimize, plus the sum of all prices multiplied by how much each constraint is broken. This turns a constrained problem into an unconstrained one — you just find the bottom of one big combined cost, and the prices automatically push you toward obeying the rules.</div></div><div class="idea"><h3>Every problem has a shadow problem that bounds it</h3><div class="eq">max_λ min_x L   ≤   min_x max_λ L</div><div class="why">Here is the key insight: you can always build a simpler shadow problem by asking the reverse question. Instead of minimizing the combined cost directly, you first ask: what is the best answer you could guarantee if I could pick any prices I want? Then you find the prices that make that guarantee as strong as possible. The equation shows that this shadow problem's answer is always less than or equal to the real problem's answer — it gives you a free lower bound. This lower bound gets tighter as the prices get smarter, and sometimes it is exactly equal to the real answer.</div></div><div class="idea"><h3>When the two meet, the prices reveal what actually binds</h3><div class="eq">strong duality: gap = 0;   binding constraints have price λ &gt; 0</div><div class="why">When the two problems give the same answer, the prices become meaningful: they tell you which constraints are actually pinching. If a price is zero, that constraint has slack — you have room to spare, and breaking it would not help. If a price is positive, that constraint is tight — you are right at its limit, and even moving it a tiny bit would change the answer. The equation calls this strong duality. In the delivery network, the prices tell you: this truck is full and extra capacity would save money; this route is saturated and any time saved would be valuable.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The same Lagrangian machine has a few dials: you can change what you count as a cost, you can add or remove constraints, you can choose prices manually or let an algorithm tune them, and you can check whether the shadow problem's answer will exactly match the real problem's. The thread never changes: constraints become prices, prices become intuition, and bowl-shaped cost guarantees you have found the one best answer.</p>
+
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 4 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Convexity: The bowl guarantees one bottom</div><div class="eq">f(θx + (1−θ)y) ≤ θf(x) + (1−θ)f(y), θ∈[0,1]</div><div class="why">This inequality says that the value at any point between two other points on the curve always sits below the straight line connecting them—exactly like a ball resting in a valley. Because of this shape, any local bottom you find is automatically the global bottom. So you never waste effort searching for better solutions or getting stuck in false minima.</div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>Lagrange multipliers: Constraints as prices</div><div class="eq">L(x,λ) = f(x) + λᵀg(x), with λ ≥ 0</div><div class="why">Each entry λᵢ in the price list tells you the cost per unit of loosening constraint i—it measures how much that constraint is actually limiting your goal. If λᵢ is zero, the constraint isn't binding and loosening it won't help. The multipliers λ transform hard constraints into soft penalties that you can reason about numerically.</div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Duality: The shadow problem bounds the original</div><div class="eq">max_λ≥0 min_x L(x,λ) ≤ min_x f(x) subject to g(x)≤0</div><div class="why">Instead of solving the original problem directly, you can flip it around and hunt for prices λ that make the inner minimization worth solving. The shadow problem gives you a ceiling on the true answer, and if the shadow ceiling reaches the original floor, you've found both the best plan and the true shadow prices simultaneously.</div></div><div class="sub"><div class="sub-h"><span class="sn">4</span>Complementary slackness: Which constraints actually bind</div><div class="eq">λᵢ · gᵢ(x) = 0 for each constraint i</div><div class="why">This rule says that a price λᵢ can only be nonzero if constraint i is exactly active (gᵢ equals zero)—a slack constraint with room to spare must have zero price. It reveals which constraints are true bottlenecks: only the active ones get nonzero prices, everything else could relax without changing the answer.</div></div>
+<div class="fp"><b>The through-line.</b> The core problem is finding the cheapest plan when you must obey hard rules, and doing it fast enough to be useful. Most plans are not bowl-shaped — they have many local bottoms, so a simple downhill search gets stuck. Two plain ideas carry it: convex shape guarantees there is only one bottom to find, and the price mechanism turns an impossible constrained problem into a solvable one where you can read off which rules actually bind.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Convex optimization &amp; duality — the quantity being optimized, the core relations, and why they work · part of the 59-theme first-principles collection · CC0.</footer></div>
+</body></html>

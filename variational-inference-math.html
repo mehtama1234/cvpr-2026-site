@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Variational inference — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Variational inference · the mathematics · first principles, no jargon</div>
+<h1>Variational inference — why it works, mathematically</h1>
+<p class="lead">You need to find a probability shape that explains some hidden data, but computing the real shape is impossible. This is the trick that finds a shape you can actually work with by maximizing a measurable lower bound instead of chasing the unreachable answer.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Imagine you observe some data and want to understand the hidden causes behind it. The "true answer" is a probability shape that would perfectly explain how the hidden parts and visible parts fit together. Computing this exact shape requires adding up infinitely many possibilities in a way that is just not doable—it's mathematically intractable.<br><br>So instead of finding the true answer, you play a different game: pick a shape from a simple family of shapes that are fast to work with, and make it as close as possible to the unreachable true answer. The problem is you cannot directly measure how close they are. You need a trick that lets you measure something simpler instead.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>The exact answer is intractable, so approximate it with an easy family</h3><div class="eq">q*(z) = argmin_{q ∈ Q}  gap( q(z),  p(z|x) )</div><div class="why">The true answer—the real probability shape over hidden parts given the data—is intractable to compute. So you restrict your search to a manageable family of simple shapes and find the one in that family that minimizes the gap between it and the truth. You are choosing a placeholder that stays within your family but gets as close as possible to where you cannot reach. This is an admission: you are trading perfect accuracy for actually being able to compute something.</div></div><div class="idea"><h3>You can&#x27;t measure the gap directly, so maximize a computable lower bound</h3><div class="eq">log p(x) = ELBO(q) + gap  ≥  ELBO(q)</div><div class="why">The gap between your placeholder shape and the true shape is invisible—you cannot calculate it directly. But here is the trick: log probability of the data equals the gap plus something called the ELBO (evidence lower bound), a term you can calculate. Since the log probability is fixed and the gap is always non-negative, maximizing the ELBO automatically minimizes the gap. You cannot measure the gap, so you measure the gap's complement instead.</div></div><div class="idea"><h3>The bound splits into fit-the-data versus stay-simple</h3><div class="eq">ELBO = E_q[log p(x,z)] − E_q[log q(z)]</div><div class="why">The ELBO splits into two competing goals: one term measures how well your placeholder shape explains the data paired with hidden parts; the other measures whether your placeholder stays simple and close to a neutral guess. When you maximize the ELBO, you are balancing a trade-off—fit the observations better, yes, but not so much that your shape becomes wildly complicated. The first term pulls toward explaining what you see; the second pulls toward staying ordinary and ordinary.</div></div><div class="idea"><h3>A simple family is fast but cannot capture everything</h3><div class="eq">Q too narrow  ⇒  q can't match the true shape (the cost)</div><div class="why">A simple family of shapes is fast—you can compute with it, optimize it, sample from it. But simplicity has a cost: the true shape might be stretched across multiple bumpy regions, and your smooth simple shape cannot capture that complexity. If the true shape has a tall spike here and another there, but your family only offers smooth mounds, you are stuck. You cannot fix this by working harder; the family itself is too narrow. The gap will always remain, no matter how perfectly you optimize within your constraints.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Different versions of variational inference dial the same core machine with <b>different simple families</b> (mean-field cuts dependencies, hierarchical adds layers, normalizing flows reshape stepwise), <b>different divergences</b> (KL divergence counts mistakes by false surprises, Wasserstein counts distance, others trade off)</b>, and <b>different optimization tricks</b> (the re-routed-randomness trick, score-matching, implicit models). The thread never changes: you cannot compute the true answer, so you maximize a measurable lower bound to find the best approximation within a family you can actually work with.</p>
+
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 4 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Mean-Field Factorization</div><div class="eq">Restrict q to q(x₁)q(x₂)···q(xₙ) instead of full q(x)</div><div class="why">When you parameterize the approximation as fully independent factors, you make the optimization over all possible distributions turn into separate optimization problems for each variable. This is much faster to compute, but it forces the approximation to miss any correlations the true answer has. The trade-off is speed versus accuracy: factorized families can fit data well when the posterior is already nearly independent, but they understate uncertainty and interdependence when the real answer couples different variables together.</div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>KL Direction and Mode-Seeking Versus Mass-Covering</div><div class="eq">Choose KL(p‖q) [forward, averages under p] vs KL(q‖p) [reverse, averages under q]</div><div class="why">Forward KL spreads the approximation over all the high-probability regions of the target, because it penalizes missing any mass that p has. Reverse KL locks the approximation onto whichever peak is tallest, because it penalizes putting q-mass where p is close to zero. This directional choice is not a minor detail—it fundamentally changes whether the approximation captures the breadth of possible explanations or commits to a single confident guess. The right choice depends on what downstream task needs the approximation.</div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Expected Log Joint Plus Entropy as the ELBO</div><div class="eq">Maximize E_q[log p(y,θ)] + H[q] instead of minimizing KL(q‖p(θ|y))</div><div class="why">You cannot directly compute the reverse KL because it requires knowing the normalization constant of the exact posterior, which is what makes inference hard in the first place. The ELBO rewrites that impossible minimization as a sum of two computable pieces: the expected log joint (fit—how well does q predict the data and prior together) and the spread of q (how much uncertainty does q maintain). Maximizing this sum pulls in two directions: bigger log joint values push q toward high-probability explanations, while higher spread resists collapsing q into a point estimate.</div></div><div class="sub"><div class="sub-h"><span class="sn">4</span>Reparameterization for Backpropagation Through Samples</div><div class="eq">Write x = g(θ,ε) where ε is parameter-free noise and g is smooth</div><div class="why">Direct sampling from a random variable and then taking its slope with respect to parameters is awkward because sampling is not smooth—small changes in the parameter can flip which sample you get. Reparameterization sidesteps this by expressing the random variable as a deterministic function of fixed noise and learned parameters, so gradients can flow backward through the smooth deterministic map. This unlocks training deep generative models and complex variational objectives by standard backpropagation, turning a random objective into something you can differentiate.</div></div>
+<div class="fp"><b>The through-line.</b> The core problem is approximating an unreachable probability shape with a simple shape you can actually compute with, when you have no direct way to measure how close you are getting. Two plain ideas carry it: the gap between any two shapes always decomposes into a measurable lower bound plus an invisible remainder, so maximizing what you can measure pulls you toward the unreachable truth, and the family you choose must be simple enough to optimize fast but rich enough to capture the shape of the real answer—a tension with no perfect answer, only trade-offs.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Variational inference — the quantity being optimized, the core relations, and why they work · part of the 59-theme first-principles collection · CC0.</footer></div>
+</body></html>

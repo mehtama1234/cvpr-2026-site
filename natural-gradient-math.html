@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Natural gradient &amp; Fisher information — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Natural gradient &amp; Fisher information · the mathematics · first principles, no jargon</div>
+<h1>Natural gradient &amp; Fisher information — why it works, mathematically</h1>
+<p class="lead">A network is steered by a billion tiny dials, but turning each dial moves the output by a wildly different amount. Plain training steps ignore this imbalance and waste effort, often getting stuck or zigzagging. This is the fix: measure how far you actually went by watching the output change, not the dial positions.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>A network is controlled by a billion small adjustable numbers—let's call them dials. To make the network learn, you nudge each dial in the direction that would shrink the error a little. But here is the trap: when you turn one dial by a tiny amount, the network's answer might shift noticeably. Turn a different dial by the same tiny amount, and the answer barely moves. In other words, some dials have enormous leverage over the output, and some have almost none.<br><br>A normal training step treats all dials the same: it applies the same step size everywhere. This is like trying to steer a car by turning the wheel by a fixed angle, without noticing that sometimes that angle barely changes direction and sometimes it spins you around. You end up wasting motion on the low-leverage dials and sometimes overshooting on the high-leverage ones, leading to slow learning or bouncy, unreliable training.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>The plain slope treats every direction as equal — but they aren&#x27;t</h3><div class="eq">plain step ignores how much the output actually bends per direction</div><div class="why">When you nudge a dial, the output moves by an amount that depends on that dial's sensitivity at the current setting. Some dials steer the output a lot per nudge; others steer it almost not at all. The plain slope (the blame for what went wrong) points downhill at the same rate everywhere, but the output actually bends and curves through the space of dial settings—some directions are steep, others are shallow. A step of size η along the slope works well only if the output bends the same way everywhere. In reality, you need a larger step in a shallow direction and a smaller step in a steep direction to make the same useful progress toward lower error.</div></div><div class="idea"><h3>Measure distance by how much the output changes, not the settings</h3><div class="eq">distance ≈ change in the output spread (the Fisher metric)</div><div class="why">What matters for learning is not how much you changed the dials, but how much the output changed as a result. Two different dial movements could change the output by the same amount, but one might be a tiny dial nudge and the other a huge one—the first is much more efficient. The Fisher information table measures this: it captures how sensitive the output spread is to each dial and each pair of dials. The distance between two dial settings should be measured by how different the output would be, not by how different the dial numbers are. This flips the sense of 'how far you went'—you care about the space of what the network says, not the space of what the dials are.</div></div><div class="idea"><h3>Re-scale the step by that geometry for a straighter path</h3><div class="eq">θ ← θ − η · F⁻¹ · ∇L   (the natural gradient)</div><div class="why">The natural gradient step re-scales your direction of motion to account for the output's curvature. Instead of stepping along the plain slope by η, you step by η times the inverse of the Fisher table times the slope. This inverse table acts like a stretcher: it shrinks your step in steep directions and stretches it in shallow directions, so that every step moves you the same useful distance in the output space. The result is that you take fewer big strides to reach lower error, and the path stays straighter because you are no longer fighting the geometry of the problem.</div></div><div class="idea"><h3>The full geometry is huge, so it is cheaply approximated</h3><div class="eq">F is enormous → use diagonal or block approximations</div><div class="why">The Fisher table has billions of rows and columns—one for each dial and each pair of dials—so storing it and computing its inverse is impossible on a real computer. Instead, people use cheap approximations. The simplest is to use only the diagonal: ignore how dials interact with each other and re-scale each dial independently. This throws away some geometry information but is so fast that you can train. A better middle ground is to use blocks: group nearby dials and keep the geometry within each block while ignoring interactions between blocks. Some methods even skip computing the Fisher explicitly and use tricks like computing the Hessian (the curvature of the loss itself, not the output spread) or using moment estimates from past steps. All of these are different knobs on the same machine: the true goal is always to step in a direction that accounts for where the output is actually sensitive.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The natural gradient is not a single algorithm but a principle: rescale your step by the inverse of how the output bends per dial direction. Different implementations turn three dials: <b>Which table captures the geometry?</b> (Fisher, Hessian, the spread of past slopes), <b>How much of that table do you keep?</b> (full, diagonal, block-diagonal, rank-reduced), and <b>How do you compute or approximate its inverse?</b> (explicit inversion, implicit via conjugate-gradient, online updates, or moment estimation). The thread never changes: always re-scale your step by how much the output would actually change per dial nudge, rather than stepping blindly in the slope direction.</p>
+
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 4 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Fisher Matrix Approximation</div><div class="eq">F ≈ diag(∇log π ⊙ ∇log π) or F̂ = (1/N) ∑ᵢ gᵢgᵢᵀ</div><div class="why">The full Fisher table is huge and slow to invert. Instead, we approximate it using only the diagonal (ignoring interactions between parameters) or by averaging outer products of slope-vectors from sampled actions. This keeps computation cheap while still capturing the main geometry of the problem.</div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>Natural Gradient via Trust Region</div><div class="eq">max_θ E[r] s.t. D_KL(π_old || π_new) ≤ δ</div><div class="why">Instead of rescaling by the inverse Fisher (expensive), we directly limit how much the output probabilities can shift per step using a KL divergence constraint. This keeps updates steady and prevents wild parameter swings that would break off-policy data. The natural geometry is built into the constraint itself rather than explicit table math.</div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Curvature-Aware Step Scaling</div><div class="eq">Δθ_nat = F⁻¹ * ∇J(θ) vs Δθ_plain = α * ∇J(θ)</div><div class="why">When a parameter change produces large shifts in output (high curvature), we shrink the step; when it produces small shifts (flat direction), we can step further. This is like following a contour map where steep slopes get shorter steps. The rescaling by F inverse trades computation cost for far fewer total steps needed to reach a good policy.</div></div><div class="sub"><div class="sub-h"><span class="sn">4</span>Reparameterization &amp; Empirical Fisher</div><div class="eq">F̂_emp = E[(∇log π_θ(a|s))²] via on-policy samples only</div><div class="why">We only compute Fisher information from actions the current policy actually takes, not all possible actions. This empirical version is cheaper, works with gradient samples we already have, and avoids expensive policy-independent computations. The trade-off is that we ignore geometry in regions the policy never explores.</div></div>
+<div class="fp"><b>The through-line.</b> The core problem is that the slope points downhill, but the ground is bumpy—some directions are steep and some are shallow, so the same step size does not make the same progress everywhere. A normal training step walks downhill at a fixed pace, which means slow progress in shallow places and wasted motion in steep places. The natural gradient fixes this by measuring distance in the output space: instead of asking 'how much did I move the dials,' it asks 'how much did the answer change.' Then it rescales the step so that every stride moves you the same distance in the space of what the network says, not the space of what the dials are. Two plain ideas carry it: measuring distance by output-spread change (the Fisher metric) rather than dial change, and rescaling the step direction by the inverse of that metric to flatten out the bumpy terrain and find a straighter path to lower error.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Natural gradient &amp; Fisher information — the quantity being optimized, the core relations, and why they work · part of the 59-theme first-principles collection · CC0.</footer></div>
+</body></html>

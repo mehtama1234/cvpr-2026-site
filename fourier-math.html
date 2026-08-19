@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Fourier view (frequency) — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">The Fourier view (frequency) · the mathematics · first principles, no jargon</div>
+<h1>The Fourier view (frequency) — why it works, mathematically</h1>
+<p class="lead">Every signal—sound, image, radio, earthquake—is really made of invisible pure waves added together. You cannot see them in the original form, but switching to the frequency view exposes what building blocks your signal is made of.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Suppose you record a sound. When you look at the raw numbers—the air pressure at each moment—it looks like random wiggles. You cannot tell whether it is a musical note, speech, noise, or a mix of everything. But if you could see which pure waves are hiding inside it, you would know instantly: a musical note is a few strong pure waves; speech is thousands of weak waves spread everywhere; white noise is every frequency equally loud.
+
+The problem is that the raw form (what you see in time) hides the building blocks. The frequency view strips away the disguise and shows you the recipe: which pure wave matters how much. Once you know that recipe, filtering becomes trivial—turn down the loud high-frequency pure waves and you kill the noise. Compress music by throwing away waves nobody hears. Speed up an image by keeping only the smoothest slow waves. The key to all of it is learning to read the frequency recipe.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Any signal is a sum of pure waves</h3><div class="eq">f(t) = Σ_k a_k·cos(2π k t) + b_k·sin(2π k t)</div><div class="why">A signal in time is built by stacking pure waves on top of each other. Each pure wave is defined by its frequency k (how fast it wiggles—low k means slow and smooth, high k means fast and jiggly) and its strength: two strength numbers, a_k and b_k, one for the smooth cosine wave at that frequency and one for the shifted sine wave. Add them all together and you get the original signal back. This says: any signal you record is just a sum of pieces, each piece a pure wave at its own frequency with its own volume dial. Why this works: pure waves are *orthogonal*—they do not interfere with each other in a special mathematical sense (imagine instruments so tuned that when one plays, another stays perfectly silent even if right next to it), so you can add them and take them apart cleanly.</div></div><div class="idea"><h3>The transform reads off how much of each wave is present</h3><div class="eq">F(ω) = ∫ f(t)·e^{−iωt} dt   — the amount of wave ω in f</div><div class="why">You have a signal in time and you want to know: how much of the pure wave at frequency ω is hiding in it? Multiply the signal by that pure wave—but also multiply by its opposite (the negative frequency, or the rotated version in complex numbers, shown by e^{−iωt})—then add up all the products. The result is F(ω), the strength of pure wave ω in your signal. Why it works: when you multiply the signal by a pure wave at frequency ω and sum, every other frequency inside it washes out to near-zero noise (by orthogonality again), but the frequency ω that matches grows loud. It is like tuning a radio: turn the dial to frequency ω and you hear the station at that frequency louder than the noise. The integral sign means you are summing over all time, and e^{−iωt} is the pure wave (in complex form, which is just a compact way to write both sine and cosine together).</div></div><div class="idea"><h3>Sliding-and-summing in space is plain multiplication in frequency</h3><div class="eq">conv(f, g)  ↔  F·G   (the convolution theorem)</div><div class="why">Suppose you have two signals and you want to combine them by sliding one over the other and adding up all the overlaps at each position—this is called sliding-and-summing. In time, this is slow: you shift one signal, multiply all pairs, add, repeat thousands of times. But in frequency, it is instant multiplication: convert both signals to the frequency view (their F values), multiply F₁(ω) by F₂(ω) at each frequency ω, then convert back. Why it works: pure waves have a magic property—when you slide one pure wave past another, the result is just another pure wave at the same frequency, multiplied by a strength factor. So sliding is multiplication in the frequency view. Why this matters: filters, blurring, edge detection—all are sliding-and-summing in time, but all become a simple dial-turn in frequency.</div></div><div class="idea"><h3>Smooth things are low-frequency; edges and noise are high</h3><div class="eq">smooth ⇒ energy at small ω;   sharp/noisy ⇒ energy at large ω</div><div class="why">The shape of a signal tells you where its energy lives in frequency. A signal that is smooth and gently rolling means it is made of only slow pure waves (low frequency ω). A signal with sharp jumps or crisp edges means it has a lot of fast pure waves (high frequency ω) mixed in—it takes fast waves to make sharp corners. Noise looks like random spikes, so it too is high-frequency. Mathematically: plot F(ω) against ω, and smooth things will have a tall peak at ω near zero and drop to zero at high ω, while sharp or noisy things have energy spread into high ω. This is why you can smooth an image by erasing the high-frequency waves—you lose the sharp details but keep the big structure. Why it works: smoothness is, by definition, things that do not change fast; things that do not change fast can be built from pure waves that do not wiggle fast.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The whole machine stays the same: read the frequency recipe, use it to filter or compress or analyze. The dials you turn are the <b>range of frequencies you keep</b> (high-pass, low-pass, band-pass), the <b>strength you multiply each frequency by</b> (loudness or transparency), and the <b>speed of the pure waves you scan for</b> (the ω dial). Some applications scan at millions of frequencies; others pick just a handful. Some weights are learned from data; others are hand-tuned. The thread never changes: you are always reading how much of each frequency is in your signal, and always using that reading to make a decision.</p>
+
+<h2 id="subthemes">Every approach, and the lever it pulls</h2><p style="color:var(--graphite);font-size:14.5px">One notch deeper: each of the theme&#39;s 4 approach-families and the specific mathematical mechanism that makes its papers work — the exact knob turned on the core relations above. Under each, the specific mathematical note for every paper in that family.</p><div class="sub"><div class="sub-h"><span class="sn">1</span>Reading the recipe: Fourier coefficients</div><div class="eq">c_k = (1/T) ∫ signal(t) · wave_k(t) dt</div><div class="why">To know how much of each pure wave is inside your signal, you slide that wave through the signal and sum up the overlaps. Each c_k number tells you the strength of one frequency. This is the core trick: multiplying the signal by each candidate wave and adding tells you the match.</div></div><div class="sub"><div class="sub-h"><span class="sn">2</span>Frequency filters: keeping or killing waves</div><div class="eq">filtered_signal = Σ (c_k · wave_k(t)) for selected k only</div><div class="why">Once you know the amount of each frequency, you can throw away the ones you don't want. Deleting high-frequency parts smooths out jitter and noise. Keeping only high-frequency parts finds edges and sharp features. You're remaking the signal from a chosen subset of its ingredients.</div></div><div class="sub"><div class="sub-h"><span class="sn">3</span>Bandwidth: when good-enough is enough</div><div class="eq">error = Σ |c_k|² for frequencies above cutoff</div><div class="why">You don't need all the frequencies—only the ones with real strength matter. By adding up how much power lives in the high frequencies you ignore, you can promise a maximum error from skipping them. This trade-off between precision and speed runs many imaging and audio systems.</div></div><div class="sub"><div class="sub-h"><span class="sn">4</span>Speed through structure: the Fast Fourier Transform</div><div class="eq">FFT breaks (N) multiply-sum operations into (N·log N) operations</div><div class="why">Computing coefficients by hand is slow. The FFT (Fast Fourier Transform) notices that many of those sums repeat—you can compute them once and reuse the answer. This one trick cut practical frequency analysis from hours to seconds, and made it central to real-time filtering in phones, cameras, and audio.</div></div>
+<div class="fp"><b>The through-line.</b> The core problem is that a signal in time looks random or overwhelming until you switch to the frequency lens, where the building blocks reveal themselves. The same signal that looks like noise in time might be just three pure waves in frequency—clear as day. Two plain ideas carry it: pure waves are the universal building blocks of all signals (and they do not interfere with each other when you add them), and there is a simple sliding multiplication trick to count how much of each pure wave is in your signal.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of The Fourier view (frequency) — the quantity being optimized, the core relations, and why they work · part of the 59-theme first-principles collection · CC0.</footer></div>
+</body></html>
