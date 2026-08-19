@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Optimal transport — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Optimal transport · the mathematics · first principles, no jargon</div>
+<h1>Optimal transport — why it works, mathematically</h1>
+<p class="lead">You have two piles of sand in different shapes, and you want to morph one into the other as cheaply as possible. The answer depends on finding the right assignment of where each grain goes — but checking all possible assignments is hopeless. This is the trick that finds the best one anyway, and uses the answer to measure how far apart two distributions truly sit.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Imagine you want to move a pile of sand from one place to another, and the new place needs a different shape. Every grain has to go somewhere, and moving a grain costs something — maybe the distance it travels, or the energy it takes. The total cost depends entirely on where each grain ends up; move them smartly and the cost drops. Move them badly and it climbs.<br><br>Now add a hard part: the cost is not the same for every grain. Some grains are cheap to move far, others cost a lot to move even a little. The problem becomes finding the one assignment of grains to destinations that gives the smallest total bill. With a million grains, there are roughly a million-factorial possible assignments — a number so astronomically large that checking them all one by one is not just slow, it is impossible.<br><br>But here is the real question: suppose you solve this problem for two specific piles, and you find the cheapest cost to morph one into the other. Does that cost mean anything? Can you use it to ask 'how different are these two distributions?' — and get an answer that works like a real distance, one that always obeys the triangle inequality and never lies about which piles are close?</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>The cheapest way to move one pile into the shape of another</h3><div class="eq">min_π Σ π(x,y)·cost(x,y),   π moves pile p into pile q</div><div class="why">Imagine laying out all possible routes a single grain could take, tagged with the cost of that route, and then asking: which pairing of grains to routes makes the total cost smallest? That is the assignment problem, and it is exactly what the equation solves. The variable π represents an assignment — it records, for each grain at location x, how much of it goes to each destination y. The cost function gives a price per grain for that route. Multiply cost times the amount moved on that route, add them all up, and you get the total bill. The equation finds the assignment π that makes that sum as small as possible.<br><br>Why this specific setup and not another? Because the assignment must obey a hard constraint: the total amount leaving each source has to equal the amount arriving at the source pile, and every grain has to land somewhere. Those constraints make the problem have a unique, sensible answer — there is always one best pairing, and it is the same no matter how you solve it. The pile morphs into the other pile completely, with nothing lost or gained.</div></div><div class="idea"><h3>This cheapest cost is a true distance between whole distributions</h3><div class="eq">W(p,q) = minimum total cost to morph p into q</div><div class="why">Once you have found the best assignment for two piles, the cost it produces has a magic property: it acts like a true distance between the two distributions. Call it the Wasserstein distance. Just like the distance between two cities, it is zero only when the two piles are identical, grows smoothly as they move farther apart, and obeys the triangle inequality — if pile A is close to pile B and pile B is close to pile C, then pile A must be reasonably close to pile C.<br><br>Why is this true? Because the assignment problem has a deep dual structure: finding the cheapest way to move one pile into another is exactly equivalent to finding the highest-paying way to run a game where you assign prices to every location, then pay based on those prices for moving each grain. The one equals the negative of the other. This duality — which appears in mathematics over and over in disguise — guarantees that the cost of the best assignment really does satisfy all the rules a distance must follow. It is not just a useful number; it is a geometry.</div></div><div class="idea"><h3>It stays meaningful even when the two piles don&#x27;t overlap</h3><div class="eq">W(p,q) grows smoothly with how far apart the piles sit</div><div class="why">The hardest test comes when the two piles do not overlap at all — one sits on one side of a wall and the other sits on the far side. The Wasserstein distance still works. As the piles drift farther from each other, the cheapest assignment routes more grain over longer distances, and the cost climbs smoothly. The moment two piles touch, the cost does not suddenly jump or collapse; it shifts continuously.<br><br>This continuity is crucial. Many other measures of difference between distributions — for instance, ones based on sharp yes-or-no rules — go haywire when the distributions barely overlap, jumping erratically or hitting zero when they should not. The Wasserstein distance never does. It sees smooth motion where other measures see noise, which is exactly why it works so well in real applications: when you are iteratively improving a machine-learning model and the piles of predictions shift a little, the Wasserstein distance changes a little too, letting you steer toward better predictions.</div></div><div class="idea"><h3>A smoothed version makes it fast enough to actually compute</h3><div class="eq">add a spreading term → fast repeated re-balancing (Sinkhorn)</div><div class="why">Computing the true best assignment is hard — too hard for real work. The Sinkhorn algorithm solves a smoothed version by adding an extra term that penalizes assignments being too concentrated in one place, spreading the grain out instead of packing it. Then instead of solving once, you iterate: start with a guess at the assignment, adjust it to lower the bill a little, then adjust again. After enough rounds, the iterates converge to a good answer.<br><br>Why does adding a spreading term help? Because it turns a sharp all-or-nothing problem — 'send all the grain this way or send it that way' — into a smooth one where every grain has a little incentive to split across multiple routes. That smoothness means the re-balancing steps feed you direction to improve in, and the iteration can run efficiently on any computer. You trade a small amount of exactness for a massive gain in speed: instead of giving up entirely because the true solution is unreachable, Sinkhorn gives you a good-enough answer in the time it takes to iterate a few dozen times.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Every solution to optimal transport is the same machine with a few dials.<br><br><b>Dial one — how you measure cost.</b> The plain version uses physical distance: moving a grain one mile costs one mile. Other versions might measure cost as a learned distance, or as a mismatch in some feature space. The assignment problem stays identical; only the price tag changes.<br><br><b>Dial two — whether you want the true answer or a fast approximation.</b> Linear programming solvers give the exact best assignment but only for small problems. Sinkhorn and related methods give a smooth, slightly-approximate answer but scale to millions of grains. A third family uses neural networks to learn a good assignment without computing any single optimal path explicitly.<br><br><b>Dial three — whether the piles are at fixed locations or whether you are learning how to morph them.</b> The plain version treats the source and destination piles as given and finds the cheapest assignment between them. Generative models reverse it: they start with random noise and learn a path that lands on a target spread, using the assignment problem as the measure of how well they are doing.<br><br>The thread never changes: define what it costs to move each grain, find or approximate the assignment that makes the total cost smallest, and treat that cost as a true distance between distributions.</p>
+
+
+<div class="fp"><b>The through-line.</b> The core problem is assigning each grain in one pile to a destination in another so the total movement cost is smallest — a problem with factorial-sized complexity that nevertheless has a sensible, unique answer that behaves like a real distance. The key insight is that the assignment problem has a hidden dual structure: finding the cheapest paths is mathematically the same as finding the highest-paying pricing scheme, and that duality guarantees the cost satisfies all the rules a distance must obey.<br><br>Two plain ideas carry the whole thing: the assignment problem always has a unique best solution because the constraints force everything to balance perfectly, and that solution is robust enough to be a true distance even when piles do not overlap. The Sinkhorn algorithm then trades exactness for speed by softening the problem — spreading grain across routes instead of forcing all-or-nothing picks — which turns the hard combinatorial problem into one that can be solved by gentle iteration.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Optimal transport — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>

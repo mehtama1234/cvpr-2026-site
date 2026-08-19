@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Generative adversarial networks — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Generative adversarial networks · the mathematics · first principles, no jargon</div>
+<h1>Generative adversarial networks — why it works, mathematically</h1>
+<p class="lead">Two networks fight each other: one tries to forge perfect fakes, the other tries to spot them. Their duel trains both to get better, until fakes become indistinguishable from real data.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p><p>A network can be trained to recognize patterns in real data, but creating new, realistic data from scratch is much harder. You could ask the network to guess what real data looks like and produce it — but the network has no way to know if its guess is good or bad. There's no scoreboard, no error message, no clear path to improvement.</p><br><br><p>One way out is to set up a competition: train one network to forge convincing fakes, and train a second network to tell real data from fakes. The forger learns by watching the detector catch mistakes. The detector learns by checking both real and fake samples. As they duel, both get sharper — and eventually the fakes become so good that the detector can't tell the difference.</p></p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Two networks in a duel: a forger and a detective</h3><div class="eq">min_G max_D  E_x[log D(x)] + E_z[log(1 − D(G(z)))]</div><div class="why"><p>This is the core setup: two networks playing against each other. The detector (often called D) takes any piece of data and outputs a number between 0 and 1 — how confident it is that the data is real. The forger (called G) takes random noise as input and outputs fake data that it hopes will fool the detector. The equation says: the detector wants to be right as often as possible (make real data give numbers close to 1, fake data close to 0), while the forger wants the detector to be wrong (make it output numbers close to 1 for the fakes).</p><br><br><p>The equation is a minimax game: one player (detector) tries to maximize its score, the other (forger) tries to minimize it. The detector looks at real examples x and measures how expected they are under its own view — how close to 1 its outputs are. Then it looks at fake examples made by the forger from random noise z, and measures how expected *those* are to be fakes — how close to 0 its outputs are. The forger wants to raise those fake-data scores, to fool the detector. This setup forces both to improve together.</div></div><div class="idea"><h3>The detective&#x27;s feedback tells the forger how to improve</h3><div class="eq">G is nudged to raise D(G(z)) — to fool the current detective</div><div class="why"><p>The forger doesn't get explicit feedback like "your fake is wrong because the nose is too wide." Instead, it gets a single number from the detector: a score between 0 and 1. The forger's job is to adjust its internal numbers (its weights) to make that score higher. If the detector outputs 0.2 for a fake, the forger wants the next fake to push it toward 1.</p><br><br><p>This is where the duel creates a training signal. The detector is not static — it's being retrained constantly to get better at catching fakes. So the forger is always chasing a moving target. When the forger improves, the detector retrains itself to spot the new generation of fakes, which forces the forger to improve again. The two networks push each other upward in a feedback loop.</div></div><div class="idea"><h3>At the ideal balance, fakes are indistinguishable from real</h3><div class="eq">optimum: p_G = p_data,   D ≡ 1/2 everywhere</div><div class="why"><p>If both networks train perfectly, something remarkable happens: the forger becomes so good that its fake data comes from the exact same spread as the real data. The detector can no longer tell them apart, so its best strategy is to guess randomly — output 0.5 for everything. At this ideal point, the forger's output spread equals the real data's spread, and the detector outputs 0.5 everywhere.</p><br><br><p>This equilibrium is the goal. In practice, networks don't reach it perfectly — training stops early, architectures matter, and hyperparameters affect the path — but the math shows us what we're aiming for: a forger that has learned to mimic the true data, indistinguishable in the detector's eyes.</div></div><div class="idea"><h3>The duel can go unstable: mode collapse and endless oscillation</h3><div class="eq">G collapses to a few outputs;   D and G chase each other, never settling</div><div class="why"><p>The duel doesn't always reach balance. Sometimes the forger gets stuck making only a few kinds of fake outputs — say, always generating faces that look similar, even though real faces are diverse. This is called mode collapse: the forger found a shortcut that fools the current detector, and never learned the full range. Meanwhile, the detector keeps improving at spotting the one trick the forger knows.</p><br><br><p>Other times, neither network settles. The detector improves, forcing the forger to change; the forger changes, forcing the detector to retrain; they chase each other without reaching stability. The equations themselves don't prevent this — they just describe what each network wants at each step. Making the duel actually converge to the ideal balance is a separate problem that researchers solve with tricks: different loss functions, architectural choices, or training schedules.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The core duel stays the same, but researchers tune the game to make it stable. <b>The loss function</b> can be swapped: a smoother distance measure penalizes the gap between the fakes and the real data differently than the plain scoring, sometimes with better convergence. <b>The network architectures</b> affect what patterns the forger and detector can learn — deeper, wider, or convolutional networks learn different kinds of features. <b>Training schedules</b> control how many steps each network trains before the other retains — training the detector too many times can overfit to the current fakes, while training the forger too many times can cause it to memorize. <b>Spectral normalization and other regularizers</b> keep the detector's slopes under control so it doesn't collapse or blow up during training. The thread never changes: two networks in competition, each improving by responding to the other's feedback.</p>
+
+
+<div class="fp"><b>The through-line.</b> <p>The core problem is: how do you train a network to generate realistic data when you have no way to measure if the output is good? Traditional training needs an error signal — a comparison to a ground truth. GANs sidestep this by building the error signal into a second network. The detector learns to spot fakes, and its feedback becomes the forger's training signal.</p><br><br><p>Two plain ideas carry it: <b>an adversarial game replaces a direct error measure</b> — instead of comparing fake-to-real pixel by pixel, let one network learn what real data looks like and judge the fakes against its learned model, and <b>this game only converges to a good solution if both networks improve together</b> — the detector must stay sharp enough to guide the forger, but not so sharp that the forger gives up. Balancing that tension is where the art of training GANs lives.</p></div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Generative adversarial networks — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>

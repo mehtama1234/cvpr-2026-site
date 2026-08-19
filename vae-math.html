@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Variational autoencoders — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Variational autoencoders · the mathematics · first principles, no jargon</div>
+<h1>Variational autoencoders — why it works, mathematically</h1>
+<p class="lead">You want to squeeze complicated pictures into a compact, tidy code—then pull them back out. But training stumbles: you can't learn by randomly guessing the code, and the code space wants to collapse. A VAE routes the randomness through the network itself and trains against a bound instead of the impossible.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Suppose you want a machine that understands pictures. It should be able to take a messy real photograph and compress it—force all its information into a short list of numbers, far shorter than the pixel count. Then, it should be able to do the opposite: take that short code and rebuild a picture from it. That sounds useful, like a private language the network invents for pictures.<br><br>The catch: for the machine to <strong>generate</strong> new pictures on its own (feeding it random codes and hoping for plausible output), the code space needs structure. Codes should cluster in a smooth, tidy region, and nearby codes should decode to similar-looking pictures. During training, though, two things go wrong. First, if you just sample random codes from some guessed spread, the network can't learn from the randomness—the blame can't be traced back through a random number. Second, if you only train the compression and rebuild, the network will ignore the code space entirely, dumping all information into an unstructured mess, making generation impossible.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Squeeze into a compact code, then rebuild from it</h3><div class="eq">x → z → x̂:   encode q(z|x), decode p(x|z),   dim(z) ≪ dim(x)</div><div class="why">The core idea is radical simplicity: take your input (a picture, say), push it through a <strong>compressor</strong> network that outputs a short <strong>code</strong>—that is your compressed representation. Then push that code through a <strong>decoder</strong> network that tries to rebuild the input from scratch. Call the compressor the 'encoder' and the decoder the 'decoder.' The code is much shorter than the input, so the network is forced to throw away details it doesn't need. You measure how well the decoder did by checking how close the rebuilt output is to the original. The whole machine—encoder plus decoder together—learns to compress and decompress anything you throw at it. The trick is that the code size is fixed and small, so bottleneck forces the encoder to distill the important structure.</div></div><div class="idea"><h3>You can&#x27;t learn through random sampling, so re-route the randomness</h3><div class="eq">z = μ(x) + σ(x)·ε,   ε ~ N(0,I)   (reparameterization)</div><div class="why">Here is the hard part: you want the network to adjust its internal numbers based on random samples from the code, but the blame cannot be traced back through randomness—you cannot compute a slope through a coin flip. The solution is to <strong>reroute</strong> the randomness. Instead of sampling the code directly, the encoder outputs two things: a <strong>center</strong> (call it μ, the mean) and a <strong>spread</strong> (call it σ, the standard deviation). Then, outside the network, you generate a random list of noise values from a standard bell curve (that is ε). You build the actual code by mixing them: code = center + spread × noise. The blame traces back through the center and spread smoothly. The randomness itself is outside the network, so it never blocks the slope signal. This is <strong>reparameterization</strong>: you rerouted the source of randomness so the network can learn.</div></div><div class="idea"><h3>Train against a bound you can actually compute</h3><div class="eq">L = E_q[log p(x|z)] − KL(q(z|x) ‖ p(z))   (the evidence lower bound)</div><div class="why">Training against a loss function (a measure of wrongness) is straightforward: make the rebuilt output as close to the input as possible. But that is only half the problem. You also need the code space to be smooth and structured—you want nearby codes to decode to similar outputs, and codes should cluster in a sensible region. The solution is to train against a <strong>lower bound</strong> on a quantity called the 'evidence,' which wraps both goals into one number. The bound has two parts: first, <strong>how well does the rebuilt output match the input?</strong> (call this the <strong>reconstruction term</strong>). Second, <strong>how close is the learned code spread to a tidy, standard bell curve?</strong> (call this the <strong>KL term</strong>, which measures mismatch from the ideal). By maximizing this bound—equivalently, minimizing its negative—you push the network to compress faithfully <strong>and</strong> keep the code space tidy. You never need to sample from the code spread itself during training; the bound gives you a concrete target that works.</div></div><div class="idea"><h3>A tug-of-war: rebuild faithfully vs. keep the code space tidy</h3><div class="eq">reconstruction term  vs.  KL term   (a β dial sets the balance)</div><div class="why">The bound has a knob attached. The reconstruction term pulls the network toward rebuilding inputs perfectly. The KL term pulls the network toward matching a standard bell curve. These two forces fight: pack information densely into the code and you wreck the bell curve shape; smooth out the code space and you lose precision in the output. The knob is a scaling factor (often called β) that sets which goal matters more. Turn β up and the network obsesses over a tidy code space, accepting blurry rebuilds. Turn β down and the network rebuilds sharply but lets the code space sprawl. The VAE is doing a deliberate trade-off: <strong>Do you want a better generator, or a better compressor?</strong> The dial lets you answer that question for your task.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The same autoencoder machinery can be tuned several ways. <b>The encoder architecture</b>—how many layers, how wide, which nonlinearities—shapes how much information flows into the code. <b>The decoder architecture</b>—the mirror question for rebuild—shapes how faithfully the network can reconstruct. <b>The code size</b> sets how much compression is forced: shrink it and the network distills harder, but rebuilds suffer. <b>The β dial</b> shifts the balance between reconstruction fidelity and code-space tidiness. <b>The choice of prior</b> (the standard bell curve, or something else) changes the shape the network is pushed toward. The thread never changes: an encoder forces information through a bottleneck, a decoder tries to rebuild it, reparameterization keeps randomness outside the backward pass, and a lower bound on evidence ties reconstruction and prior-matching into one goal.</p>
+
+
+<div class="fp"><b>The through-line.</b> The core problem is learning a compressed representation of high-dimensional data, while also building a probability model over that code space so you can generate new examples. Naive approaches fail: you cannot trace the blame back through random sampling, and an unstructured code space makes generation useless. A VAE solves this by rerouting randomness through the encoder's outputs (mean and spread) so the network can learn them, and by training against a lower bound on evidence instead of an impossible direct objective.<br><br>Two plain ideas carry it: <strong>reparameterization keeps the blame flowing by moving the source of randomness outside the network</strong>, and <strong>a tractable lower bound wraps the dual goals—faithful compression and tidy code space—into a single loss function the network can optimize</strong>.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Variational autoencoders — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Normalization (batch / layer norm) — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Normalization (batch / layer norm) · the mathematics · first principles, no jargon</div>
+<h1>Normalization (batch / layer norm) — why it works, mathematically</h1>
+<p class="lead">A network's layers pass numbers between them, but if one layer feeds numbers of wildly different sizes to the next, learning gets confused and slow. This is the trick that makes sure every layer receives signals in a standard, predictable range — freeing it to learn faster.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>A neural network is a tall stack of operations, each one taking numbers from the layer below and producing new numbers to pass up. The problem is that the outputs of one layer can drift — sometimes all tiny, sometimes all huge. The next layer, which was trained assuming numbers in a certain size range, now gets garbage and can't use what it learned.<br><br>Imagine tuning a radio. You learned that turning the knob by 1 degree changes the volume by a small, predictable amount. But then someone starts feeding you a pre-amplified signal that is 100 times louder. Now the same 1-degree turn screams. The knob-to-volume relationship you learned is useless. That is what happens when a layer's input sizes drift unpredictably — the layer's learned rules no longer match reality.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Re-center and re-scale each layer&#x27;s signals to a standard shape</h3><div class="eq">x̂ = (x − μ) / √(σ² + ε)</div><div class="why">The core idea is to grab the numbers coming out of a layer, measure how spread out they are (the average value and the spread around it), and then shrink them back to a predictable shape. The equation subtracts the center point (called μ, the middle value) from each number, then divides by the spread (called σ, a measure of how far numbers scatter), plus a tiny safety number ε so we never divide by zero. The result is a bundle of numbers that cluster around zero with a standard, predictable scatter. Every layer receives the same kind of signal shape, so it can rely on what it learned.</div></div><div class="idea"><h3>Hand the freedom back with a learned scale and shift</h3><div class="eq">y = γ·x̂ + β   (γ, β learned)</div><div class="why">Here's the catch: if every layer is forced to the same shape, they all start to look the same. No variety, no specialization. So after standardizing, the network is allowed to unstandardize — it learns two new numbers (γ and β) that scale and shift the standardized result. Think of it as handing the freedom back. The network learns whether this particular layer wants its signal taller, shorter, or shifted sideways. This pair of learned numbers is tiny compared to the cost of getting the signal into a usable range first.</div></div><div class="idea"><h3>It stops each layer from chasing a moving target</h3><div class="eq">keeps the signal's scale steady across layers → allows bigger steps</div><div class="why">Without normalization, a layer can push its output numbers bigger and bigger, because that makes it feel more confident in what it learned. But when you push one layer's output huge, the next layer receives huge inputs, and that breaks the next layer's learned rules. It is like feedback: size begets size. Normalization cuts that feedback loop. It forces each layer to stay in a predictable range, so the next layer does not need to re-learn everything. Because signals stay steady, the learning algorithm can take bigger steps without overshooting — it knows the signal range is stable, so the knob-to-output relationship it learned is still true.</div></div><div class="idea"><h3>Averaged over what: across examples, or across features</h3><div class="eq">batch-norm: μ,σ over examples;   layer-norm: μ,σ over features</div><div class="why">The two types of normalization answer one question differently: what do we average over. Batch normalization measures the center and spread by looking at the same number's value across all the examples in a training batch — it pools information across a group of inputs. Layer normalization measures the center and spread by looking across all the numbers in one example — it pools information within a single sample. Batch norm works better in large batches because averaging over many examples gives a stable estimate. Layer norm works better when examples arrive one at a time (like in inference or when batch size is tiny), because it does not depend on the batch. Most modern networks use layer norm because it does not change behavior between training and deployment.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Normalization is really a single machine with a few adjustable dials. The core step is always the same: measure the center and spread, then standardize. The choices are <b>what to average over</b> (batch norm across examples, layer norm across features, instance norm across space, group norm across subsets), <b>when to standardize</b> (before the next operation, after, or with a delay), and <b>whether to include learned scale and shift</b> (almost always yes, because the network needs freedom to specialize). The thread never changes: predictable signal shapes let each layer trust what it learned, so the whole stack can train faster and more stably.</p>
+
+
+<div class="fp"><b>The through-line.</b> The core problem is that when signals drift in scale between layers, learning gets confused — each layer expects a certain size range but receives something wildly different, breaking the relationship it learned. Without a steady signal shape, the learning algorithm has to be cautious, taking tiny steps because it cannot trust its own rules. Two plain ideas carry it: measure the center and spread of each layer's output, then squeeze it back to a predictable shape (so the next layer sees a reliable range), and hand the freedom back by letting the network learn a custom scale and shift (so it can specialize for its own job without losing the stability gain).</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Normalization (batch / layer norm) — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>

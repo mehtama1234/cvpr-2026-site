@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Residual / skip connections — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Residual / skip connections · the mathematics · first principles, no jargon</div>
+<h1>Residual / skip connections — why it works, mathematically</h1>
+<p class="lead">A deep network often gets tangled trying to compute an answer from scratch at each layer. Skip connections hand the original input straight forward, so each layer only needs to compute a small refinement—turning learning into a series of gentle tweaks instead of starting over each time.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>A deep network turns an input into an answer by stacking many layers, each one transforming the result of the layer before it. The deeper the network, the more layers the input passes through. But there is a catch: when you stack many layers, the numbers that carry blame backward—the clues about which numbers to adjust—can shrink so much that the early layers learn almost nothing. It is as if the signal carrying the fix gets lost on the long journey back.<br><br>There is another problem: each layer is forced to learn to compute a complete answer by itself, starting from whatever the layer before sent it. What if some of that earlier result was already good? The layer has to throw it away and reconstruct it from scratch, wasting learning power. Imagine having to rewrite a whole paragraph every time you want to add one sentence—you would spend all your effort retyping the parts that were already right.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Learn the small change to add, not a whole new value</h3><div class="eq">y = x + F(x)   — F learns the change</div><div class="why">The core idea is simple: instead of asking each layer to learn a whole new number-list from scratch, let it learn just the small change to add to what came in. Call what comes in x (the number-list), call what the layer computes F(x) (the small adjustment), and call the output y. By adding them together—y = x plus F(x)—the layer does not have to learn to rebuild everything; it only learns the delta, the bit that is different. This shift is enormous. It means the layer can return x almost unchanged, or it can add a big F(x) if needed. The layer has the freedom to refine or to pass straight through. Layers stop fighting each other and start cooperating: one can do the heavy lifting, and the next can add a polish, and the next can add another.</div></div><div class="idea"><h3>The shortcut gives the blame a clear path straight back</h3><div class="eq">∂L/∂x = ∂L/∂y · (1 + ∂F/∂x)   — the 1 keeps blame alive</div><div class="why">When blame travels backward through a layer, it now has two paths to follow. One path goes through the change F(x)—the slope of how much the change depends on the input gets multiplied into the blame, as always. But the new path is direct: there is a 1 added to the slope, representing the straight wire connecting input to output without any computation. That 1 stays there no matter how the F(x) part changes. It means the blame never shrinks away entirely; even if the F(x) path becomes very flat, the 1 keeps a constant flow of blame moving backward. In a very deep network, this makes all the difference. The blame can now reach the early layers instead of dissolving into noise.</div></div><div class="idea"><h3>Doing nothing is easy, so extra depth never hurts</h3><div class="eq">F(x) ≈ 0  ⇒  y ≈ x   (identity is the default)</div><div class="why">When a layer is initialized (set up at the start), the change it learns is usually tiny—close to zero. That means y is almost x. This is perfect. It gives the network permission to do nothing. A shallow layer can add nothing, and the input passes through unchanged. If deeper layers need that input intact, they have it. The network is never forced to corrupt the data at layer one just to make layer 20 work. This is a profound shift: instead of requiring every layer to do something, we make it easy for layers to do nothing. That freedom means a very deep network can work; without it, depth becomes a liability.</div></div><div class="idea"><h3>A deep network becomes many small refinements</h3><div class="eq">x_{l+1} = x_l + F_l(x_l)   — one step of a smooth flow</div><div class="why">A deep network with many skip connections is like a smooth flow, where the input is nudged a little at each layer. Instead of thinking of each layer as making a big jump from one number-list to a different one, think of it as one small step in a smooth journey. The input at layer l becomes the input to layer l+1 by adding one small adjustment F. Layer after layer, the number-list drifts—always slightly, never violently. This smoothness has a blessing: blame can trace through each small step without shrinking or exploding. The refinements also compose naturally. One layer sharpens the outline, the next layer adds texture, the next layer fixes an edge. A problem that was locked into one step is now spread across depth, easier to solve.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>Skip connections can be <b>direct shortcuts</b> (straight from layer l to layer l+1, adding x_l and x_{l+1}) or <b>denser highways</b> (wiring early layers to many later layers at once), or <b>gated shortcuts</b> (learning a number between 0 and 1 to decide how much of the shortcut to keep). Some networks <b>group layers into blocks</b>, so the shortcut spans multiple layers, not just one. The thread never changes: give each layer the freedom to refine instead of rebuild, so depth becomes an advantage instead of a curse.</p>
+
+
+<div class="fp"><b>The through-line.</b> The core problem is that when you stack many layers, the clues about what to fix (the blame) fade away before reaching the early layers, and each layer wastes effort reconstructing what the layer before it already built. Two plain ideas carry it: let each layer learn only the small change to add, not a whole new answer, and wire the input directly forward so blame has a constant path backward no matter how deep the network grows.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Residual / skip connections — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>

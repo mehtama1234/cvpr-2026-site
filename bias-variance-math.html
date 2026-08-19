@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bias, variance &amp; double descent — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Bias, variance &amp; double descent · the mathematics · first principles, no jargon</div>
+<h1>Bias, variance &amp; double descent — why it works, mathematically</h1>
+<p class="lead">A learner can stumble in two opposite ways: by staying too rigid and missing the real pattern, or by bouncing around and memorizing noise. The first suffers from rigidity, the second from jitter. This is the hidden equation governing how many adjustable numbers your learner actually needs — and the surprising discovery that sometimes more numbers, beyond some point, suddenly helps again.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>Imagine you are teaching a learner to predict house prices from square footage. If your learner is too simple — say, just a single straight line through the data — it will never quite hit the real prices, because real prices don't follow a perfect line. But if you make your learner more complex, letting it bend and twist to touch every single training example, it will memorize the noise in the training set and then fail on new houses it has never seen. There is no clear answer to where the sweet spot is.<br><br>Even stranger: in recent years, researchers discovered that if you make your learner wildly complex — far more flexible than traditional wisdom said was safe — something unexpected happens. Instead of getting worse and worse as it memorizes junk, the error eventually starts to improve again. This goes against everything the old rules said should happen. Understanding why this happens requires untangling two separate sources of error, and seeing that they move in opposite directions as your learner gets more flexible.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Two ways to be wrong: too rigid, or too jumpy</h3><div class="eq">error ≈ bias² + variance + unavoidable noise</div><div class="why">Your learner can fail in two distinct ways. The first is rigidity: if it is not flexible enough, it cannot bend to match the true pattern in the world, so it will make a systematic error no matter how much training data you give it. This systematic error is called bias, and it depends only on how limited your learner is, not on luck or randomness. The second is jitter: if your learner is very flexible, it can fit not just the true pattern but also the random noise that appears in any real dataset. On new data without that particular noise, the learner gives different answers — wildly different answers. This scatter in predictions is called variance. The total error you see is the sum of these two sources, plus an irreducible floor of noise baked into the world itself.</div></div><div class="idea"><h3>The classic trade-off: more flexibility swaps one for the other</h3><div class="eq">↑ flexibility  ⇒  ↓ bias, ↑ variance</div><div class="why">As your learner becomes more flexible — more able to bend its internal numbers to match the training data — bias shrinks because it can now capture more of the real pattern. But variance grows, because that same flexibility means it also captures more of the random noise in your particular training set. These two move in opposite directions. When your learner is very rigid, bias is huge and variance is tiny. When your learner is very flexible, bias is tiny and variance is huge. In the middle, the total error forms a U-shape: it falls as you add flexibility (bias dropping faster than variance rises), hits a bottom, then rises again as flexibility keeps growing (variance rising faster than bias dropping).</div></div><div class="idea"><h3>Overfitting is fitting the noise instead of the signal</h3><div class="eq">training error ↓  while  test error ↑</div><div class="why">Overfitting is the moment when your learner stops learning the true pattern and starts memorizing noise instead. You can see this happen by comparing two error numbers: the error on the training data you showed your learner, and the error on brand-new test data it has never seen. While your learner is learning the true pattern, both errors drop together. But once your learner becomes flexible enough to also memorize the noise in the training set, something breaks. Training error keeps falling — it gets lower and lower because the learner is now fitting the noise — but test error starts to rise, because the noise it memorized is not in the test data.</div></div><div class="idea"><h3>The modern surprise: past the tipping point, error falls again</h3><div class="eq">test error: down, up, then down again as flexibility grows (double descent)</div><div class="why">The surprise discovery is that this U-shaped error curve does not keep rising forever. If you keep adding flexibility — giving your learner way more adjustable numbers than traditional statistics said was wise — the error eventually stops rising and starts falling again. The reason is subtle: with enough flexibility and enough data, the learner can fit all the true patterns plus have so much leftover flexibility that the extra adjustable numbers start to average out the noise rather than memorizing it. This second descent is called double descent because the error goes down, then up, then down again as you steadily make your learner more flexible.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The same fundamental trade-off between rigidity and jitter holds across all learners, but you can move the danger zones by adjusting these dials: <b>model size</b> (how many adjustable numbers), <b>training data</b> (more data reduces variance because your learner has less room to memorize noise), <b>regularization</b> (a penalty on large numbers that forces the learner to stay simpler), and <b>early stopping</b> (pause training before the learner memorizes noise). The thread never changes: there is always a rigidity-versus-jitter trade-off, and modern learning has shown that you can sometimes escape the worst part of it by going to the extreme of very large models with very large datasets.</p>
+
+
+<div class="fp"><b>The through-line.</b> The core problem is predicting how well your learner will work on new data, given only that it trained on old data. You cannot just make it arbitrarily complex, because at some point it will memorize noise and fail. But you also cannot make it too simple, or it will miss the pattern entirely. For decades, the answer seemed to be: stop somewhere in the middle, at the bottom of the U-shaped error curve. The modern discovery is that the U-shape has a surprising second act — if you go far enough into the regime of enormous flexibility, error falls again. Two plain ideas carry it: error splits into two sources that move in opposite directions as you change flexibility, and fitting noise in training data is not the end of the story if you have so much flexibility that the noise-fitting gets averaged out by all the other unused flexibility.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Bias, variance &amp; double descent — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gradient descent &amp; optimizers — the mathematics, from first principles</title><style>
+ :root{--ink:#0F1619;--paper:#F5F6F4;--panel:#FBFCFB;--tint:#E4ECEB;--line:#D7DCD9;--graphite:#59656A;
+  --accent:#0E7C86;--accent-deep:#0A5A62;--accent-lite:#4FC4CE;--warn:#B37A1E;--warn-bg:#F5EBD8;--good:#2F7A4F;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Arial,sans-serif;}
+ *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.68}
+ .wrap{max-width:840px;margin:0 auto;padding:0 26px}
+ header{background:var(--ink);color:#E7ECED;padding:44px 0 38px;border-bottom:1px solid #000}
+ header .bug{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite)}
+ header h1{margin:11px 0 0;font-size:32px;letter-spacing:-.03em;color:#F8FAFA;line-height:1.14}
+ header p{margin:13px 0 0;color:#AEBABD;font-size:16px;max-width:64ch}
+ nav{position:sticky;top:0;background:rgba(15,22,25,.96);z-index:5;border-bottom:1px solid #263237}
+ nav .wrap{display:flex;gap:4px;padding:9px 26px;flex-wrap:wrap}
+ nav a{font-family:var(--mono);font-size:12px;color:#AEBABD;text-decoration:none;padding:6px 10px;border-radius:6px} nav a:hover{background:#1b262c;color:#fff}
+ .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:34px 0 6px}
+ .doc h1{font-size:25px;margin:6px 0 8px} .doc h2{font-size:20px;margin:26px 0 6px} .doc h3{font-size:16px;margin:18px 0 4px}
+ .doc p{font-size:16px;color:#23302C;margin:11px 0} .doc li{font-size:15.5px;color:#23302C;margin:5px 0}
+ .doc em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+ .tgrp{margin:10px 0} .tgl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-bottom:5px}
+ .tgrp a{display:inline-block;font-size:13.5px;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 11px;margin:3px 4px 3px 0;background:#fff}
+ .tgrp a:hover{border-color:var(--accent)}
+ .page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+ .page h1{font-size:22px;margin:0 0 4px} .page h2{font-size:16px;color:var(--accent-deep);margin:20px 0 6px} .page h3{font-size:14.5px;margin:14px 0 3px}
+ .page p{font-size:15.5px;color:#23302C;margin:10px 0} .page li{font-size:15px;margin:4px 0}
+ .page em{color:var(--graphite);font-style:normal;font-family:var(--mono);font-size:12.5px}
+ .pc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin:10px 0}
+ .pc h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
+ .pc p{font-size:14px;color:#23302C;margin:6px 0} .pc .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+ .pc .tags{margin-top:8px} .pc .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--graphite);background:var(--tint);border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}
+ .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+ table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+ th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:9px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+ td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top} tr:last-child td{border-bottom:none}
+ td.tt{font-weight:600} td.repo a{font-family:var(--mono);font-size:11.5px;color:var(--accent-deep)}
+ .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+ footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+ a{color:var(--accent-deep)}
+
+.fp{border-left:3px solid var(--accent);background:#eef6f6;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.note{border-left:3px solid var(--graphite);background:#eef1f0;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14.5px;margin:14px 0}
+.doc h2{margin:34px 0 10px;font-size:22px}
+.idea{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;background:var(--paper)}
+.idea h3{margin:0 0 8px;font-size:17px}
+.eq{font-family:var(--mono);font-size:14.5px;background:#0f1417;color:#d7ded9;border-radius:8px;padding:12px 15px;margin:10px 0;overflow-x:auto;line-height:1.55}
+.eq .c{color:#8aa;}
+.idea .why{font-size:14.5px;line-height:1.62;margin-top:8px}
+.lead{font-size:16px;line-height:1.6}
+.sub{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin:12px 0;background:var(--paper)}
+.sub-h{font-size:15px;font-weight:600;margin-bottom:6px}
+.sub-h .sn{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:50%;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px}
+.sub .eq{font-size:13.5px;margin:6px 0}
+.sub .why{font-size:14px;line-height:1.56;margin-top:6px}
+.pps{margin-top:6px}
+.pp{font-size:12.5px;line-height:1.5;margin:4px 0;padding-left:14px;text-indent:-14px}
+.pp .ppt{font-weight:600}
+.pp .ppn{color:var(--graphite);font-family:var(--mono);font-size:12px}
+.pintro{font-size:14.5px;line-height:1.62;margin:12px 0 4px;color:var(--ink)}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);margin:14px 0 6px}
+.pcard{display:block;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 13px;margin:7px 0;background:#fbfcfb;text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s,background .1s}
+a.pcard:hover{transform:translateY(-1px);box-shadow:0 3px 9px rgba(0,0,0,.07);background:#fff}
+.pct{font-weight:600;font-size:13.5px;line-height:1.35;color:var(--accent-deep)}
+.pcn{font-size:13.5px;line-height:1.58;margin-top:4px;color:var(--ink)}
+.pcarrow{float:right;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--accent);opacity:.75;margin-left:8px}
+a.pcard:hover .pcarrow{opacity:1}
+.plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
+.plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
+.plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+</style></head><body>
+<header><div class="wrap"><div class="bug">Gradient descent &amp; optimizers · the mathematics · first principles, no jargon</div>
+<h1>Gradient descent &amp; optimizers — why it works, mathematically</h1>
+<p class="lead">A network makes an answer wrong. To fix it, you nudge each adjustable number downhill toward a better answer—but the space has billions of dimensions, and you need to do it cheaply, over and over, without getting stuck or overshooting.</p></div></header>
+<nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
+<div class="wrap"><article class="doc">
+
+<h2>The problem, as a quantity</h2>
+<p>A network turns an input into an answer by pushing it through a long chain of small numeric operations, each governed by adjustable numbers—often billions of them. Every time the answer comes out wrong, you need to nudge each number a little bit in a direction that would have made the answer slightly better. That means measuring how wrong the answer is, then figuring out which way to nudge each number.<br><br>But here is the knot: you cannot just tweak every number and measure again—that would take a billion separate test runs per update, which is impossibly slow. And even if you knew which way to go, taking huge steps might overshoot the best answer, or get stuck thrashing around. You need a cheap way to find the slope in every dimension at once, then take a careful step that does not waste effort on dimensions that barely matter.</p>
+<h2>The core ideas — and why they work</h2>
+<div class="idea"><h3>Feel the slope, take a small step downhill</h3><div class="eq">θ ← θ − η·∇L(θ)   (η = step size)</div><div class="why">The core idea is to compute the slope—the direction in which a small change to the answer makes the error bigger or smaller. That slope tells you which way to nudge each number to reduce the error. You start with a guess for all the numbers, compute the slope at that guess (this is the price you pay once per step), then move a small distance down the slope. The step size, often written η (eta), controls how far you go—too small and learning crawls; too large and you bounce past the answer and crash into worse answers. This one sweep—measure slope, step downhill—repeats hundreds of thousands of times until the answer stops improving much.</div></div><div class="idea"><h3>Use a small random handful of examples each step</h3><div class="eq">∇L_batch = ∇L_full + noise,   E[noise] = 0</div><div class="why">The slope is expensive to compute if you use all the data every time. A shortcut is to use only a small random handful of examples—perhaps 32 or 128 out of millions—and compute the slope on just those. Because you pick them randomly, the slope you measure on this handful is almost the same as the true slope on all the data, but with a little random noise added in. The magic is that the noise is balanced—on average it points nowhere—so over many steps the random wiggles cancel out and you still drift reliably downhill. This way you get fast steps without re-examining all the data each time.</div></div><div class="idea"><h3>Momentum: keep a running direction to power through</h3><div class="eq">v ← μ·v − η·∇L,   θ ← θ + v</div><div class="why">A problem with pure downhill stepping is that the landscape has ravines—narrow valleys where the slope points sideways more than downward. Momentum fixes this by giving the step a memory: instead of stopping at the slope, you keep a running average of all the slopes you have seen, and step in that accumulated direction. This is like rolling a heavy ball downhill—inertia carries it straight through the noise and wiggles, and it picks up speed on long consistent slopes. Momentum is written as a new running direction (v, often called velocity) that pulls from the old direction and the new slope, and you step by adding that v to your numbers rather than subtracting the slope directly.</div></div><div class="idea"><h3>Give each direction its own step size</h3><div class="eq">θ ← θ − η · m̂ / (√v̂ + ε)   — per-direction (Adam)</div><div class="why">Different dimensions of the answer-space are not all equal. Some change easily with small nudges; others need big pushes. If one dimension has been changing reliably downhill, it has proven it knows where to go—so you can afford to step boldly in that direction. If another dimension keeps switching back and forth, the signal is noisy—so you step timidly. Adaptive methods like Adam keep a separate running total of recent changes in each dimension (m, called the first moment), and a separate running total of recent noise in each dimension (v, called the second moment). Then for each dimension you compute a step size by dividing the signal by the noise. Dimensions with consistent signal get large steps; noisy dimensions get small ones. A tiny number ε is added to the denominator just to avoid dividing by zero.</div></div>
+<h2>The approaches, as variations on the math</h2>
+<p>The core machine is the same for all optimizers: find the slope, take a step downhill. But different versions tune <b>how much history to remember</b> (vanilla stepping forgets instantly; momentum keeps a rolling average; Adam keeps two rolling averages), <b>what counts as the slope</b> (all data versus a random handful), and <b>what step size to use</b> (fixed for all dimensions versus per-dimension adaptive). Each dial trades off between speed (fewer steps to reach a good answer), robustness (not overshooting or getting lost in noise), and the cost of bookkeeping. The thread never changes: measure how the error depends on each number, take a careful step in the direction that reduces it, repeat.</p>
+
+
+<div class="fp"><b>The through-line.</b> The core problem is updating billions of numbers efficiently when every update costs money—either in computation or in bumping into a worse answer. Two plain ideas carry it: first, the slope in all directions can be computed in one backward sweep (via backpropagation, not written here but the reason these methods work at all), not a billion separate measurements. And second, you do not need the exact truth about the best step—a noisy estimate from a handful of examples, smoothed by memory and per-dimension adaptation, drifts toward the answer reliably and stays cheap.</div>
+<p style="margin-top:16px"><a href="math.html">→ The mathematics that recurs across every theme</a> · <a href="index.html">All themes</a></p>
+</article></div>
+<div class="wrap"><footer>First-principles mathematics of Gradient descent &amp; optimizers — the quantity being optimized, the core relations, and why they work · part of the 49-theme first-principles collection · CC0.</footer></div>
+</body></html>
