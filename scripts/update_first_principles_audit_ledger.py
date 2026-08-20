@@ -89,6 +89,8 @@ def render() -> str:
     family_blocks = count_occurrences("*-deepdive.html", "<b>The fundamental point.</b>")
     family_principles = count_occurrences("*-deepdive.html", "family-principles:start")
     paper_depth_total, paper_depth_covered = count_search_paper_depth()
+    cluster_paper_blocks = count_occurrences("cluster-*.html", '<li style="margin:9px 0">')
+    cluster_paper_depth = count_occurrences("cluster-*.html", "cluster-paper-depth:start")
 
     cells = [
         ("math pages", f"{math_covered}/{math_total}", "key turn + failure + examples"),
@@ -105,6 +107,7 @@ def render() -> str:
         ("usage patterns", f"{pattern_moves}/{pattern_blocks}", "quantity/rule/why-this-use"),
         ("subtheme families", f"{family_principles}/{family_blocks}", "hidden quantity / evidence / equation / counterexample"),
         ("search paper notes", f"{paper_depth_covered}/{paper_depth_total}", "hidden thing / evidence / rule / proof / break"),
+        ("cluster paper rows", f"{cluster_paper_depth}/{cluster_paper_blocks}", "same paper-depth reused in paper-family lists"),
     ]
     grid = "".join(f'<div class="cell"><b>{value}</b><span>{name}</span><p>{note}</p></div>' for name, value, note in cells)
     return (
