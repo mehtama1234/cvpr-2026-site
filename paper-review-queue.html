@@ -1,11 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Paper Review Queue — CVPR 2026</title>
-<style>:root{--ink:#101719;--paper:#F5F6F4;--panel:#FBFCFB;--line:#D7DCD9;--muted:#59656A;--accent:#0E7C86;--accent-deep:#0A5A62;--warn:#B37A1E;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.58}.wrap{max-width:1180px;margin:0 auto;padding:0 24px}header{background:var(--ink);color:#E7ECED;padding:42px 0 34px}.bug,.meta,.stat span,nav a,summary,label,.count{font-family:var(--mono)}.bug{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4FC4CE}h1{font-size:42px;line-height:1.05;margin:10px 0}header p{max-width:88ch;color:#AEBABD}nav a{font-size:12px;color:#B7DDE1;margin-right:12px}a{color:var(--accent-deep)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:11px}.stat b{display:block;font-size:24px}.stat span{font-size:11px;color:var(--muted)}.controls{position:sticky;top:0;z-index:4;background:rgba(245,246,244,.97);border-bottom:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:1fr 260px auto;gap:10px;align-items:end}label{display:block;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}input,select{width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:14px var(--sans);padding:8px 9px;margin-top:4px}.count{font-size:12px;color:var(--accent-deep);white-space:nowrap;padding-bottom:9px}.queue{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 36px}.card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:15px 16px}.card[hidden]{display:none}.meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--muted)}.meta span:first-child{color:var(--accent-deep);font-weight:700}.card h2{font-size:19px;line-height:1.22;margin:7px 0 8px}.one{font-size:14.5px;color:#23302C}.depth{background:#fffdf4;border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:9px 11px;margin:10px 0}.depth p{font-size:13.5px;line-height:1.55;margin:6px 0}details{margin-top:10px}summary{cursor:pointer;color:var(--accent-deep);font-size:12px}details p{font-size:13.5px;color:#23302C}.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--muted);background:#E4ECEB;border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}footer{border-top:1px solid var(--line);padding:22px 0 54px;color:var(--muted);font-family:var(--mono);font-size:12px}@media(max-width:900px){.queue,.stats,.controls{grid-template-columns:1fr}h1{font-size:34px}.count{padding-bottom:0}}</style></head>
+<style>:root{--ink:#101719;--paper:#F5F6F4;--panel:#FBFCFB;--line:#D7DCD9;--muted:#59656A;--accent:#0E7C86;--accent-deep:#0A5A62;--warn:#B37A1E;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.58}.wrap{max-width:1180px;margin:0 auto;padding:0 24px}header{background:var(--ink);color:#E7ECED;padding:42px 0 34px}.bug,.meta,.stat span,nav a,summary,label,.count,.links,.rubric li{font-family:var(--mono)}.bug{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4FC4CE}h1{font-size:42px;line-height:1.05;margin:10px 0}header p{max-width:88ch;color:#AEBABD}nav a{font-size:12px;color:#B7DDE1;margin-right:12px}a{color:var(--accent-deep)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat,.rubric{background:var(--panel);border:1px solid var(--line);border-radius:8px}.stat{padding:11px}.stat b{display:block;font-size:24px}.stat span{font-size:11px;color:var(--muted)}.rubric{border-left:4px solid var(--warn);border-radius:0 8px 8px 0;padding:14px 16px;margin:16px 0}.rubric h2{font-size:20px;margin:0 0 8px}.rubric p{font-size:14.5px;color:#23302C;margin:7px 0}.rubric ul{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 0;padding:0;list-style:none}.rubric li{font-size:12px;color:#23302C;background:#fffdf4;border:1px solid var(--line);border-radius:6px;padding:8px}.controls{position:sticky;top:0;z-index:4;background:rgba(245,246,244,.97);border-bottom:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:1fr 260px auto;gap:10px;align-items:end}label{display:block;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}input,select{width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:14px var(--sans);padding:8px 9px;margin-top:4px}.count{font-size:12px;color:var(--accent-deep);white-space:nowrap;padding-bottom:9px}.queue{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 36px}.card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:15px 16px}.card[hidden]{display:none}.meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--muted)}.meta span:first-child{color:var(--accent-deep);font-weight:700}.card h2{font-size:19px;line-height:1.22;margin:7px 0 8px}.one{font-size:14.5px;color:#23302C}.links{font-size:12px;margin:8px 0}.depth{background:#fffdf4;border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:9px 11px;margin:10px 0}.depth p{font-size:13.5px;line-height:1.55;margin:6px 0}details{margin-top:10px}summary{cursor:pointer;color:var(--accent-deep);font-size:12px}details p{font-size:13.5px;color:#23302C}.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--muted);background:#E4ECEB;border-radius:4px;padding:1px 6px;margin:2px 3px 0 0}footer{border-top:1px solid var(--line);padding:22px 0 54px;color:var(--muted);font-family:var(--mono);font-size:12px}@media(max-width:900px){.queue,.stats,.controls,.rubric ul{grid-template-columns:1fr}h1{font-size:34px}.count{padding-bottom:0}}</style></head>
 <body><header><div class="wrap"><div class="bug">CVPR 2026 · paper review</div><h1>Paper Review Queue</h1><p>A smaller review surface for checking whether the new paper notes are truly first-principles, detailed, and plain. Each card shows the hidden quantity, evidence, mathematical rule, naive failure, proof test, and counterexample.</p><nav><a href="index.html">all themes</a><a href="search.html">all papers</a><a href="first-principles-audit.html">audit</a><a href="math.html">math pages</a></nav></div></header>
-<main class="wrap"><section class="stats"><div class="stat"><b>64</b><span>review papers</span></div><div class="stat"><b>4031</b><span>source papers</span></div><div class="stat"><b>8</b><span>themes balanced</span></div><div class="stat"><b>7</b><span>depth fields per paper</span></div><div class="stat"><b>8</b><span>Frontier sensors, science, and trust</span></div><div class="stat"><b>8</b><span>3D reconstruction and geometry</span></div><div class="stat"><b>8</b><span>Video, motion, and time</span></div><div class="stat"><b>8</b><span>Generation, editing, and restoration</span></div><div class="stat"><b>8</b><span>Vision-language reasoning</span></div><div class="stat"><b>8</b><span>Detection, segmentation, and recognition</span></div><div class="stat"><b>8</b><span>Robotics, driving, and action</span></div><div class="stat"><b>8</b><span>Learning, adaptation, and efficiency</span></div></section><section class="controls"><label>Search<input id="q" placeholder="title, evidence, failure, tag"></label><label>Theme<select id="theme"><option value="">All themes</option><option value="emerging">Frontier sensors, science, and trust</option><option value="threed">3D reconstruction and geometry</option><option value="video">Video, motion, and time</option><option value="generation">Generation, editing, and restoration</option><option value="vlm">Vision-language reasoning</option><option value="perceive">Detection, segmentation, and recognition</option><option value="embodied">Robotics, driving, and action</option><option value="learning">Learning, adaptation, and efficiency</option></select></label><div class="count" id="count"></div></section><section class="queue" id="queue"><article class="card" id="paper-1" data-theme="emerging" data-search="forensic-friendly image manipulation via controllable latent diffusion forensic-friendly image manipulation is about editing images in a way that remains easier for investigators to detect. the everyday problem is that diffusion edits can look seamless, making altered regions hard to separate from untouched content after the fact online diffusion model-based image editing services enable malicious users to create deepfakes and forged content. active defense measures like watermarking and backdoors require consensus and proprietary algorithms inaccessible to third-pa online diffusion model-based image editing services enable malicious users to create deepfakes and forged content. active defense measures like watermarking and backdoors require consensus and proprietary algorithms inaccessible to third-party forensic investi the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image the raw measurement, its timing, its noise, its calibration, and the checks that show whether the signal changes when the real world changes measurement modeling: first ask what the device or test actually measures, then recover the hidden cause without pretending the data is an ordinary photo a normal-image treatment can confuse sensor noise, timing artifacts, or spoofed traces with real structure. good evidence would show controlled changes in the hidden cause producing the expected change in both the measured signal and the model output. a counterexample is a stable confident output after the sensor cue, provenance mark, or scientific signal is removed or scrambled. image-forensics image-manipulation diffusion-models detection authenticity adversarial">
+<main class="wrap"><section class="stats"><div class="stat"><b>64</b><span>review papers</span></div><div class="stat"><b>4031</b><span>source papers</span></div><div class="stat"><b>8</b><span>themes balanced</span></div><div class="stat"><b>7</b><span>depth fields per paper</span></div><div class="stat"><b>8</b><span>Frontier sensors, science, and trust</span></div><div class="stat"><b>8</b><span>3D reconstruction and geometry</span></div><div class="stat"><b>8</b><span>Video, motion, and time</span></div><div class="stat"><b>8</b><span>Generation, editing, and restoration</span></div><div class="stat"><b>8</b><span>Vision-language reasoning</span></div><div class="stat"><b>8</b><span>Detection, segmentation, and recognition</span></div><div class="stat"><b>8</b><span>Robotics, driving, and action</span></div><div class="stat"><b>8</b><span>Learning, adaptation, and efficiency</span></div></section><section class="rubric"><h2>How to review a paper note</h2><p>Read the card as a claim about what the paper is really trying to recover, measure, control, or prove. A strong note should let a careful reader understand the paper without already knowing the subfield.</p><ul><li>Ask what hidden thing the method is trying to infer from incomplete evidence.</li><li>Check whether the mathematical rule says what changes, what stays fixed, and why.</li><li>Use the counterexample as the break test: if that case happens, the explanation is too weak.</li></ul></section><section class="controls"><label>Search<input id="q" placeholder="title, evidence, failure, tag"></label><label>Theme<select id="theme"><option value="">All themes</option><option value="emerging">Frontier sensors, science, and trust</option><option value="threed">3D reconstruction and geometry</option><option value="video">Video, motion, and time</option><option value="generation">Generation, editing, and restoration</option><option value="vlm">Vision-language reasoning</option><option value="perceive">Detection, segmentation, and recognition</option><option value="embodied">Robotics, driving, and action</option><option value="learning">Learning, adaptation, and efficiency</option></select></label><div class="count" id="count"></div></section><section class="queue" id="queue"><article class="card" id="paper-1" data-theme="emerging" data-search="forensic-friendly image manipulation via controllable latent diffusion forensic-friendly image manipulation is about editing images in a way that remains easier for investigators to detect. the everyday problem is that diffusion edits can look seamless, making altered regions hard to separate from untouched content after the fact online diffusion model-based image editing services enable malicious users to create deepfakes and forged content. active defense measures like watermarking and backdoors require consensus and proprietary algorithms inaccessible to third-pa online diffusion model-based image editing services enable malicious users to create deepfakes and forged content. active defense measures like watermarking and backdoors require consensus and proprietary algorithms inaccessible to third-party forensic investi the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image the raw measurement, its timing, its noise, its calibration, and the checks that show whether the signal changes when the real world changes measurement modeling: first ask what the device or test actually measures, then recover the hidden cause without pretending the data is an ordinary photo a normal-image treatment can confuse sensor noise, timing artifacts, or spoofed traces with real structure. good evidence would show controlled changes in the hidden cause producing the expected change in both the measured signal and the model output. a counterexample is a stable confident output after the sensor cue, provenance mark, or scientific signal is removed or scrambled. image-forensics image-manipulation diffusion-models detection authenticity adversarial">
 <div class="meta"><span>01</span><span>Frontier sensors, science, and trust</span><a href="https://github.com/chloeadrian12/FFIM" target="_blank" rel="noopener">code</a></div>
 <h2>Forensic-Friendly Image Manipulation via Controllable Latent Diffusion</h2>
 <p class="one">Forensic-Friendly Image Manipulation is about editing images in a way that remains easier for investigators to detect. The everyday problem is that diffusion edits can look seamless, making altered regions hard to separate from untouched content after the fact</p>
+<p class="links"><a href="search.html?q=Forensic-Friendly+Image+Manipulation+via+Controllable+Latent+Diffusion&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=Forensic-Friendly+Image+Manipulation+via+Controllable+Latent+Diffusion">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Forensic-Friendly Image Manipulation via Controllable Latent Diffusion: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -21,6 +22,7 @@
 <div class="meta"><span>02</span><span>Frontier sensors, science, and trust</span><a href="https://github.com/markus-42/occufly" target="_blank" rel="noopener">code</a></div>
 <h2>OccuFly: A 3D Vision Benchmark for Semantic Scene Completion from Aerial UAV Views</h2>
 <p class="one">OccuFly is about semantic scene completion from aerial UAV views. The everyday problem is inferring a 3D labeled occupancy map from overhead camera images when LiDAR-style ground truth is unavailable.</p>
+<p class="links"><a href="search.html?q=OccuFly%3A+A+3D+Vision+Benchmark+for+Semantic+Scene+Completion+from+Aerial+UAV+Views&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=OccuFly%3A+A+3D+Vision+Benchmark+for+Semantic+Scene+Completion+from+Aerial+UAV+Views">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> OccuFly: A 3D Vision Benchmark for Semantic Scene Completion from Aerial UAV Views: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -36,6 +38,7 @@
 <div class="meta"><span>03</span><span>Frontier sensors, science, and trust</span><a href="https://github.com/Zhangyr2022/UniGenDet" target="_blank" rel="noopener">code</a></div>
 <h2>UniGenDet: A Unified Generative-Discriminative Framework for Co-Evolutionary Image Generation and Generated Image Detection</h2>
 <p class="one">UniGenDet is about making image generators and fake-image detectors improve together. The everyday problem is that detectors usually chase yesterday&#x27;s generator artifacts while generators are never asked to expose what makes them detectable.</p>
+<p class="links"><a href="search.html?q=UniGenDet%3A+A+Unified+Generative-Discriminative+Framework+for+Co-Evolutionary+Image+Generation+and+Generated+Image+Detection&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=UniGenDet%3A+A+Unified+Generative-Discriminative+Framework+for+Co-Evolutionary+Image+Generation+and+Generated+Image+Detection">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> UniGenDet: A Unified Generative-Discriminative Framework for Co-Evolutionary Image Generation and Generated Image Detection: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -51,6 +54,7 @@
 <div class="meta"><span>04</span><span>Frontier sensors, science, and trust</span></div>
 <h2>BuildingGPT: Auto-Regressive Building Wireframe Reconstruction Model with Reinforcement Learning</h2>
 <p class="one">BuildingGPT is about reconstructing building wireframes. The everyday problem is that buildings have structured lines, corners, and loops, and a single local mistake can break the whole layout.</p>
+<p class="links"><a href="search.html?q=BuildingGPT%3A+Auto-Regressive+Building+Wireframe+Reconstruction+Model+with+Reinforcement+Learning&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=BuildingGPT%3A+Auto-Regressive+Building+Wireframe+Reconstruction+Model+with+Reinforcement+Learning">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> BuildingGPT: Auto-Regressive Building Wireframe Reconstruction Model with Reinforcement Learning: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -66,6 +70,7 @@
 <div class="meta"><span>05</span><span>Frontier sensors, science, and trust</span></div>
 <h2>Decoupling Defense Strategies for Robust Image Watermarking</h2>
 <p class="one">This paper is about making image watermarks survive different attacks without ruining clean image quality. The everyday problem is that defending against adversarial evasion, distortion, and regeneration are not the same job.</p>
+<p class="links"><a href="search.html?q=Decoupling+Defense+Strategies+for+Robust+Image+Watermarking&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=Decoupling+Defense+Strategies+for+Robust+Image+Watermarking">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Decoupling Defense Strategies for Robust Image Watermarking: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -81,6 +86,7 @@
 <div class="meta"><span>06</span><span>Frontier sensors, science, and trust</span></div>
 <h2>E2EGS: Event-to-Edge Gaussian Splatting for Pose-Free 3D Reconstruction</h2>
 <p class="one">E2EGS is about reconstructing 3D scenes from event streams without known camera poses. The everyday problem is that events are sparse and noisy, and non-edge flicker can mislead pose and geometry optimization.</p>
+<p class="links"><a href="search.html?q=E2EGS%3A+Event-to-Edge+Gaussian+Splatting+for+Pose-Free+3D+Reconstruction&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=E2EGS%3A+Event-to-Edge+Gaussian+Splatting+for+Pose-Free+3D+Reconstruction">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> E2EGS: Event-to-Edge Gaussian Splatting for Pose-Free 3D Reconstruction: Read this as a timing claim: the paper must show that event or spike timing recovers information a normal frame missed, especially under fast motion or low light.</p>
 <p><b>Hidden quantity.</b> the sharp motion signal that happened between normal camera frames</p>
@@ -96,6 +102,7 @@
 <div class="meta"><span>07</span><span>Frontier sensors, science, and trust</span></div>
 <h2>GeoDiT: A Diffusion-based Vision-Language Model for Geospatial Understanding</h2>
 <p class="one">GeoDiT is about geospatial understanding with a diffusion-based vision-language model. The everyday problem is that maps and overhead images require reasoning about terrain, scale, region layout, and language descriptions together.</p>
+<p class="links"><a href="search.html?q=GeoDiT%3A+A+Diffusion-based+Vision-Language+Model+for+Geospatial+Understanding&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=GeoDiT%3A+A+Diffusion-based+Vision-Language+Model+for+Geospatial+Understanding">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> GeoDiT: A Diffusion-based Vision-Language Model for Geospatial Understanding: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -111,6 +118,7 @@
 <div class="meta"><span>08</span><span>Frontier sensors, science, and trust</span></div>
 <h2>LiDAR-to-4DRadar Diffusion Bridge via Cross-Modal Alignment and Translation</h2>
 <p class="one">This paper is about translating LiDAR information to 4D radar. The everyday problem is that LiDAR and radar observe the world differently, but radar systems can benefit from LiDAR-like structure.</p>
+<p class="links"><a href="search.html?q=LiDAR-to-4DRadar+Diffusion+Bridge+via+Cross-Modal+Alignment+and+Translation&amp;theme=emerging">open this paper in search</a> · <a href="paper-note-quality.html#q=LiDAR-to-4DRadar+Diffusion+Bridge+via+Cross-Modal+Alignment+and+Translation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> LiDAR-to-4DRadar Diffusion Bridge via Cross-Modal Alignment and Translation: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -126,6 +134,7 @@
 <div class="meta"><span>09</span><span>3D reconstruction and geometry</span></div>
 <h2>No Calibration, No Depth, No Problem: Cross-Sensor View Synthesis with 3D</h2>
 <p class="one">This paper is about making views from mismatched sensors agree when there is no shared calibration or depth map. The everyday problem is like trying to line up a thermal photo, a normal photo, and a new viewpoint when none of them came with the measuring ruler</p>
+<p class="links"><a href="search.html?q=No+Calibration%2C+No+Depth%2C+No+Problem%3A+Cross-Sensor+View+Synthesis+with+3D&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=No+Calibration%2C+No+Depth%2C+No+Problem%3A+Cross-Sensor+View+Synthesis+with+3D">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> No Calibration, No Depth, No Problem: Cross-Sensor View Synthesis with 3D: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -141,6 +150,7 @@
 <div class="meta"><span>10</span><span>3D reconstruction and geometry</span></div>
 <h2>4C4D: 4 Camera 4D Gaussian Splatting</h2>
 <p class="one">4C4D is about reconstructing a moving 3D scene over time from only four cameras. The everyday problem is capturing a dynamic performance, person, or object without a studio full of cameras, while still being able to view the motion from new angles.</p>
+<p class="links"><a href="search.html?q=4C4D%3A+4+Camera+4D+Gaussian+Splatting&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=4C4D%3A+4+Camera+4D+Gaussian+Splatting">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> 4C4D: 4 Camera 4D Gaussian Splatting: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -156,6 +166,7 @@
 <div class="meta"><span>11</span><span>3D reconstruction and geometry</span><a href="https://github.com/PRBonn/Pi3MOS-SLAM" target="_blank" rel="noopener">code</a></div>
 <h2>Dynamic Visual SLAM using a General 3D Prior</h2>
 <p class="one">Dynamic Visual SLAM with a General 3D Prior is about estimating camera motion in scenes where objects move. The everyday problem is that a walking person or moving car can fool the system into thinking the camera moved.</p>
+<p class="links"><a href="search.html?q=Dynamic+Visual+SLAM+using+a+General+3D+Prior&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=Dynamic+Visual+SLAM+using+a+General+3D+Prior">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Dynamic Visual SLAM using a General 3D Prior: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -171,6 +182,7 @@
 <div class="meta"><span>12</span><span>3D reconstruction and geometry</span><a href="https://github.com/liuQuan98/L3DR" target="_blank" rel="noopener">code</a></div>
 <h2>L3DR: 3D-aware LiDAR Diffusion and Rectification</h2>
 <p class="one">The paper is about generating LiDAR that looks physically correct in 3D, not just realistic in a 2D range image. The everyday problem is avoiding fake points, wavy surfaces, and rounded edges that would confuse a driving stack.</p>
+<p class="links"><a href="search.html?q=L3DR%3A+3D-aware+LiDAR+Diffusion+and+Rectification&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=L3DR%3A+3D-aware+LiDAR+Diffusion+and+Rectification">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> L3DR: 3D-aware LiDAR Diffusion and Rectification: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -186,6 +198,7 @@
 <div class="meta"><span>13</span><span>3D reconstruction and geometry</span><a href="https://github.com/DanyalMaq/petar-release" target="_blank" rel="noopener">code</a></div>
 <h2>PETAR: Localized Findings Generation with Mask-Aware Vision-Language Modeling for PET Automated Reporting</h2>
 <p class="one">PETAR is about generating localized PET findings. The everyday problem is that a report should say where abnormal uptake appears and what it indicates, not only produce a generic scan summary.</p>
+<p class="links"><a href="search.html?q=PETAR%3A+Localized+Findings+Generation+with+Mask-Aware+Vision-Language+Modeling+for+PET+Automated+Reporting&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=PETAR%3A+Localized+Findings+Generation+with+Mask-Aware+Vision-Language+Modeling+for+PET+Automated+Reporting">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> PETAR: Localized Findings Generation with Mask-Aware Vision-Language Modeling for PET Automated Reporting: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -201,6 +214,7 @@
 <div class="meta"><span>14</span><span>3D reconstruction and geometry</span><a href="https://github.com/HyeonjeongPark37/RARE" target="_blank" rel="noopener">code</a></div>
 <h2>RARE: Learn to RAnk and REtrieve for Monocular 3D Object Detection</h2>
 <p class="one">RARE is about monocular 3D object detection. The everyday problem is that one image gives weak depth evidence, so similar known examples can help infer plausible 3D boxes.</p>
+<p class="links"><a href="search.html?q=RARE%3A+Learn+to+RAnk+and+REtrieve+for+Monocular+3D+Object+Detection&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=RARE%3A+Learn+to+RAnk+and+REtrieve+for+Monocular+3D+Object+Detection">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> RARE: Learn to RAnk and REtrieve for Monocular 3D Object Detection: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -216,6 +230,7 @@
 <div class="meta"><span>15</span><span>3D reconstruction and geometry</span></div>
 <h2>3D-Object Perception Transformer (3PT)</h2>
 <p class="one">The paper focuses on perceiving 3D objects as objects, not just clouds of points or image patches. The challenge is to bind scattered geometric evidence into a stable object-level description.</p>
+<p class="links"><a href="search.html?q=3D-Object+Perception+Transformer+%283PT%29&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=3D-Object+Perception+Transformer+%283PT%29">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> 3D-Object Perception Transformer (3PT): Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -231,6 +246,7 @@
 <div class="meta"><span>16</span><span>3D reconstruction and geometry</span></div>
 <h2>Any4D: Unified Feed-Forward Metric 4D Reconstruction</h2>
 <p class="one">Any4D is about reconstructing metric 3D geometry and motion over time from diverse sensor inputs in one feed-forward pass. The everyday problem is that robots need real-scale depth, camera motion, and object motion, not normalized guesses that only look right </p>
+<p class="links"><a href="search.html?q=Any4D%3A+Unified+Feed-Forward+Metric+4D+Reconstruction&amp;theme=threed">open this paper in search</a> · <a href="paper-note-quality.html#q=Any4D%3A+Unified+Feed-Forward+Metric+4D+Reconstruction">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Any4D: Unified Feed-Forward Metric 4D Reconstruction: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -249,6 +265,7 @@ single model and fail in bl vision-language-action (vla) models are vulnerable t
 <div class="meta"><span>17</span><span>Video, motion, and time</span><a href="https://github.com/yuyi-sd/UPA-RFAS" target="_blank" rel="noopener">code</a></div>
 <h2>When Robots Obey the Patch: Universal Transferable Patch Attacks on</h2>
 <p class="one">This paper is about adversarial patches that can fool vision-language-action robots. The everyday problem is that a small visual pattern placed in the camera view may redirect a robot&#x27;s decisions even when the rest of the scene is normal.</p>
+<p class="links"><a href="search.html?q=When+Robots+Obey+the+Patch%3A+Universal+Transferable+Patch+Attacks+on&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=When+Robots+Obey+the+Patch%3A+Universal+Transferable+Patch+Attacks+on">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> When Robots Obey the Patch: Universal Transferable Patch Attacks on: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -267,6 +284,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>18</span><span>Video, motion, and time</span></div>
 <h2>Global Prior Meets Local Consistency: Dual-Memory Augmented Vision-Language-Action Model for Efficient Robotic Manipulation</h2>
 <p class="one">This VLA paper is about robots using both broad prior knowledge and local scene consistency. The everyday problem is that a robot needs general knowledge about objects, but it must also remember the exact current scene it is acting in.</p>
+<p class="links"><a href="search.html?q=Global+Prior+Meets+Local+Consistency%3A+Dual-Memory+Augmented+Vision-Language-Action+Model+for+Efficient+Robotic+Manipulation&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=Global+Prior+Meets+Local+Consistency%3A+Dual-Memory+Augmented+Vision-Language-Action+Model+for+Efficient+Robotic+Manipulation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Global Prior Meets Local Consistency: Dual-Memory Augmented Vision-Language-Action Model for Efficient Robotic Manipulation: Read this as a grounding claim: the paper must show which words, answers, or actions are forced by visual evidence and which would disappear if that evidence changed.</p>
 <p><b>Hidden quantity.</b> the grounded claim: which words, answers, tool actions, or reasoning steps are actually supported by visible evidence</p>
@@ -282,6 +300,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>19</span><span>Video, motion, and time</span></div>
 <h2>SwiftVLA: Unlocking Spatiotemporal Dynamics for Lightweight VLA Models at Minimal Overhead</h2>
 <p class="one">SwiftVLA is about giving a small robot policy a sense of 3D motion without making it carry a heavy 4D model at test time. The everyday problem is acting from cheap camera input while still knowing how the scene moves through space.</p>
+<p class="links"><a href="search.html?q=SwiftVLA%3A+Unlocking+Spatiotemporal+Dynamics+for+Lightweight+VLA+Models+at+Minimal+Overhead&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=SwiftVLA%3A+Unlocking+Spatiotemporal+Dynamics+for+Lightweight+VLA+Models+at+Minimal+Overhead">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> SwiftVLA: Unlocking Spatiotemporal Dynamics for Lightweight VLA Models at Minimal Overhead: Read this as a controlled-update claim: the paper must show what changes in the model, what stays protected, and why the update helps without erasing or overfitting.</p>
 <p><b>Hidden quantity.</b> the reusable rule inside the data: what should transfer, what should adapt, what should be compressed, and what must not be forgotten</p>
@@ -297,6 +316,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>20</span><span>Video, motion, and time</span><a href="https://github.com/xuzhang1199/HeROD" target="_blank" rel="noopener">code</a></div>
 <h2>Heuristic-inspired Reasoning Priors Facilitate Data-Efficient Referring Object</h2>
 <p class="one">The paper is about finding referred objects when labeled data is scarce. The everyday problem is using common-sense visual reasoning, like near the red box or left of the table, instead of needing thousands of examples.</p>
+<p class="links"><a href="search.html?q=Heuristic-inspired+Reasoning+Priors+Facilitate+Data-Efficient+Referring+Object&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=Heuristic-inspired+Reasoning+Priors+Facilitate+Data-Efficient+Referring+Object">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Heuristic-inspired Reasoning Priors Facilitate Data-Efficient Referring Object: Read this as a grounding claim: the paper must show which words, answers, or actions are forced by visual evidence and which would disappear if that evidence changed.</p>
 <p><b>Hidden quantity.</b> the grounded claim: which words, answers, tool actions, or reasoning steps are actually supported by visible evidence</p>
@@ -312,6 +332,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>21</span><span>Video, motion, and time</span><a href="https://github.com/elainew728/motion-edit" target="_blank" rel="noopener">code</a></div>
 <h2>MotionEdit: Benchmarking and Learning Motion-Centric Image Editing</h2>
 <p class="one">The paper is about editing images in ways that change motion, pose, or interaction rather than only appearance. The everyday problem is changing what someone is doing while keeping the rest of the image coherent.</p>
+<p class="links"><a href="search.html?q=MotionEdit%3A+Benchmarking+and+Learning+Motion-Centric+Image+Editing&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=MotionEdit%3A+Benchmarking+and+Learning+Motion-Centric+Image+Editing">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> MotionEdit: Benchmarking and Learning Motion-Centric Image Editing: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -327,6 +348,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>22</span><span>Video, motion, and time</span><a href="https://github.com/DeepSota/RunawayEvil" target="_blank" rel="noopener">code</a></div>
 <h2>RunawayEvil: Jailbreaking the Image-to-Video Generative Models</h2>
 <p class="one">RunawayEvil is about exposing how image-to-video generators can be pushed past safety filters. The everyday problem is that a harmless-looking input or prompt sequence can become unsafe after motion and temporal context are generated.</p>
+<p class="links"><a href="search.html?q=RunawayEvil%3A+Jailbreaking+the+Image-to-Video+Generative+Models&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=RunawayEvil%3A+Jailbreaking+the+Image-to-Video+Generative+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> RunawayEvil: Jailbreaking the Image-to-Video Generative Models: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -342,6 +364,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>23</span><span>Video, motion, and time</span></div>
 <h2>AnyID: Ultra-Fidelity Universal Identity-Preserving Video Generation from Any Visual References</h2>
 <p class="one">AnyID is about preserving a person&#x27;s identity in generated video using many possible reference images or clips. The everyday problem is making a video where the person still looks like the same individual across new poses, expressions, and viewpoints.</p>
+<p class="links"><a href="search.html?q=AnyID%3A+Ultra-Fidelity+Universal+Identity-Preserving+Video+Generation+from+Any+Visual+References&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=AnyID%3A+Ultra-Fidelity+Universal+Identity-Preserving+Video+Generation+from+Any+Visual+References">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> AnyID: Ultra-Fidelity Universal Identity-Preserving Video Generation from Any Visual References: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -357,6 +380,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>24</span><span>Video, motion, and time</span></div>
 <h2>Beyond Mimicry: Learning Whole-Body Human-Humanoid Interaction from Human-Human Demonstrations</h2>
 <p class="one">This paper is about teaching a humanoid robot interactive motion from videos of humans interacting with humans. The everyday problem is that copying body poses is not enough: a handshake, hug, or push depends on where contact happens and when the other person </p>
+<p class="links"><a href="search.html?q=Beyond+Mimicry%3A+Learning+Whole-Body+Human-Humanoid+Interaction+from+Human-Human+Demonstrations&amp;theme=video">open this paper in search</a> · <a href="paper-note-quality.html#q=Beyond+Mimicry%3A+Learning+Whole-Body+Human-Humanoid+Interaction+from+Human-Human+Demonstrations">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Beyond Mimicry: Learning Whole-Body Human-Humanoid Interaction from Human-Human Demonstrations: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -372,6 +396,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>25</span><span>Generation, editing, and restoration</span></div>
 <h2>FlowHijack: A Dynamics-Aware Backdoor Attack on Flow-Matching Vision-Language-Action Models</h2>
 <p class="one">FlowHijack is about attacking robot action models whose actions are generated as continuous motion flows. The everyday problem is that a harmless-looking scene change can push the early direction of a robot trajectory, and the solver then amplifies that small </p>
+<p class="links"><a href="search.html?q=FlowHijack%3A+A+Dynamics-Aware+Backdoor+Attack+on+Flow-Matching+Vision-Language-Action+Models&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=FlowHijack%3A+A+Dynamics-Aware+Backdoor+Attack+on+Flow-Matching+Vision-Language-Action+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> FlowHijack: A Dynamics-Aware Backdoor Attack on Flow-Matching Vision-Language-Action Models: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -387,6 +412,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>26</span><span>Generation, editing, and restoration</span></div>
 <h2>Towards Stealthy and Effective Backdoor Attacks on Lane Detection: A Naturalistic Data Poisoning Approach</h2>
 <p class="one">This paper is about backdoor attacks on lane detection. The everyday problem is that a small hidden trigger could make a driving system draw lanes incorrectly while looking harmless to a human reviewer.</p>
+<p class="links"><a href="search.html?q=Towards+Stealthy+and+Effective+Backdoor+Attacks+on+Lane+Detection%3A+A+Naturalistic+Data+Poisoning+Approach&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=Towards+Stealthy+and+Effective+Backdoor+Attacks+on+Lane+Detection%3A+A+Naturalistic+Data+Poisoning+Approach">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Towards Stealthy and Effective Backdoor Attacks on Lane Detection: A Naturalistic Data Poisoning Approach: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -402,6 +428,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>27</span><span>Generation, editing, and restoration</span><a href="https://github.com/XianguiKang/AdaIAT.git" target="_blank" rel="noopener">code</a></div>
 <h2>AdaIAT: Adaptively Increasing Attention to Generated Text to Alleviate</h2>
 <p class="one">AdaIAT is about reducing hallucinations in large vision-language models without making their captions repetitive or awkward. The everyday problem is that forcing more attention to image tokens can ground the answer, but it can also damage fluent language gener</p>
+<p class="links"><a href="search.html?q=AdaIAT%3A+Adaptively+Increasing+Attention+to+Generated+Text+to+Alleviate&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=AdaIAT%3A+Adaptively+Increasing+Attention+to+Generated+Text+to+Alleviate">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> AdaIAT: Adaptively Increasing Attention to Generated Text to Alleviate: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -417,6 +444,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>28</span><span>Generation, editing, and restoration</span><a href="https://github.com/Ferry-Li/BlackMirror" target="_blank" rel="noopener">code</a></div>
 <h2>BlackMirror: Black-Box Backdoor Detection for Text-to-Image Models via Instruction-Response Deviation</h2>
 <p class="one">BlackMirror is about detecting backdoors in text-to-image models when only prompt access is available. The everyday problem is that modern backdoors may create diverse images, so simple output similarity no longer reveals the trigger.</p>
+<p class="links"><a href="search.html?q=BlackMirror%3A+Black-Box+Backdoor+Detection+for+Text-to-Image+Models+via+Instruction-Response+Deviation&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=BlackMirror%3A+Black-Box+Backdoor+Detection+for+Text-to-Image+Models+via+Instruction-Response+Deviation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> BlackMirror: Black-Box Backdoor Detection for Text-to-Image Models via Instruction-Response Deviation: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -432,6 +460,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>29</span><span>Generation, editing, and restoration</span><a href="https://github.com/Lyxxx1211/CVPR2026-EnAR" target="_blank" rel="noopener">code</a></div>
 <h2>Envision, Attend, Then Respond: Counterfactual Hallucination Mitigation in Large Vision-Language Models</h2>
 <p class="one">This paper is about reducing hallucinations in LVLMs. The everyday problem is that a model may answer from language expectation even when the image does not support the claim.</p>
+<p class="links"><a href="search.html?q=Envision%2C+Attend%2C+Then+Respond%3A+Counterfactual+Hallucination+Mitigation+in+Large+Vision-Language+Models&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=Envision%2C+Attend%2C+Then+Respond%3A+Counterfactual+Hallucination+Mitigation+in+Large+Vision-Language+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Envision, Attend, Then Respond: Counterfactual Hallucination Mitigation in Large Vision-Language Models: Read this as a grounding claim: the paper must show which words, answers, or actions are forced by visual evidence and which would disappear if that evidence changed.</p>
 <p><b>Hidden quantity.</b> the grounded claim: which words, answers, tool actions, or reasoning steps are actually supported by visible evidence</p>
@@ -447,6 +476,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>30</span><span>Generation, editing, and restoration</span></div>
 <h2>Agentic Retoucher for Text-To-Image Generation</h2>
 <p class="one">Agentic Retoucher is about fixing small defects in generated images after the first image is made. The everyday problem is that a prompt may produce a good picture with broken hands, distorted text, odd faces, or object mistakes that need local repair.</p>
+<p class="links"><a href="search.html?q=Agentic+Retoucher+for+Text-To-Image+Generation&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=Agentic+Retoucher+for+Text-To-Image+Generation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Agentic Retoucher for Text-To-Image Generation: Read this as a grounding claim: the paper must show which words, answers, or actions are forced by visual evidence and which would disappear if that evidence changed.</p>
 <p><b>Hidden quantity.</b> the grounded claim: which words, answers, tool actions, or reasoning steps are actually supported by visible evidence</p>
@@ -462,6 +492,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>31</span><span>Generation, editing, and restoration</span></div>
 <h2>Conversational Image Segmentation: Grounding Abstract Concepts with Scalable Supervision</h2>
 <p class="one">This paper is about segmenting image regions described by conversational and abstract intent. The everyday problem is pointing to the thing that is safe to sit on, unstable, useful for cutting, or relevant to a user&#x27;s goal.</p>
+<p class="links"><a href="search.html?q=Conversational+Image+Segmentation%3A+Grounding+Abstract+Concepts+with+Scalable+Supervision&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=Conversational+Image+Segmentation%3A+Grounding+Abstract+Concepts+with+Scalable+Supervision">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Conversational Image Segmentation: Grounding Abstract Concepts with Scalable Supervision: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -477,6 +508,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>32</span><span>Generation, editing, and restoration</span></div>
 <h2>DrivePTS: A Progressive Learning Framework with Textual and Structural Enhancement for Driving Scene Generation</h2>
 <p class="one">DrivePTS is about generating driving scenes from maps, boxes, and text. The everyday problem is that road layout, object structure, and language conditions can change independently, but the generated scene must keep them consistent.</p>
+<p class="links"><a href="search.html?q=DrivePTS%3A+A+Progressive+Learning+Framework+with+Textual+and+Structural+Enhancement+for+Driving+Scene+Generation&amp;theme=generation">open this paper in search</a> · <a href="paper-note-quality.html#q=DrivePTS%3A+A+Progressive+Learning+Framework+with+Textual+and+Structural+Enhancement+for+Driving+Scene+Generation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> DrivePTS: A Progressive Learning Framework with Textual and Structural Enhancement for Driving Scene Generation: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -492,6 +524,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>33</span><span>Vision-language reasoning</span><a href="https://github.com/lijunxian111/IAG" target="_blank" rel="noopener">code</a></div>
 <h2>IAG: Input-aware Backdoor Attack on VLM-based Visual Grounding</h2>
 <p class="one">IAG is about backdoor attacks against visual grounding models. The everyday problem is that an attacker can make the model point to the wrong region only for certain inputs, while ordinary clean examples still look normal.</p>
+<p class="links"><a href="search.html?q=IAG%3A+Input-aware+Backdoor+Attack+on+VLM-based+Visual+Grounding&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=IAG%3A+Input-aware+Backdoor+Attack+on+VLM-based+Visual+Grounding">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> IAG: Input-aware Backdoor Attack on VLM-based Visual Grounding: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -507,6 +540,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>34</span><span>Vision-language reasoning</span></div>
 <h2>BOP-ASK: Object-Interaction Reasoning for Vision-Language Models</h2>
 <p class="one">The paper is about asking whether VLMs understand how robots should interact with objects. The everyday problem is knowing not just what an object is, but where to grasp it and how to move without collision.</p>
+<p class="links"><a href="search.html?q=BOP-ASK%3A+Object-Interaction+Reasoning+for+Vision-Language+Models&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=BOP-ASK%3A+Object-Interaction+Reasoning+for+Vision-Language+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> BOP-ASK: Object-Interaction Reasoning for Vision-Language Models: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -522,6 +556,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>35</span><span>Vision-language reasoning</span></div>
 <h2>RealVLG-R1: A Large-Scale Real-World Visual-Language Grounding Benchmark for Robotic Perception and Manipulation</h2>
 <p class="one">RealVLG-R1 is about grounding language all the way down to robot grasp evidence. The everyday problem is following an instruction by locating the object, mask, grasp pose, and contact point needed to act.</p>
+<p class="links"><a href="search.html?q=RealVLG-R1%3A+A+Large-Scale+Real-World+Visual-Language+Grounding+Benchmark+for+Robotic+Perception+and+Manipulation&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=RealVLG-R1%3A+A+Large-Scale+Real-World+Visual-Language+Grounding+Benchmark+for+Robotic+Perception+and+Manipulation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> RealVLG-R1: A Large-Scale Real-World Visual-Language Grounding Benchmark for Robotic Perception and Manipulation: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -537,6 +572,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>36</span><span>Vision-language reasoning</span></div>
 <h2>HYCAL: A Training-Free Prototype Calibration Method for Cross-Discipline Few-Shot Class-Incremental Learning Eunju Lee∗</h2>
 <p class="one">HyCal is about few-shot class-incremental learning across different disciplines. The everyday problem is that some domains pull the embedding space harder than others, so new class prototypes drift toward overrepresented or low-entropy domains.</p>
+<p class="links"><a href="search.html?q=HYCAL%3A+A+Training-Free+Prototype+Calibration+Method+for+Cross-Discipline+Few-Shot+Class-Incremental+Learning+Eunju+Lee%E2%88%97&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=HYCAL%3A+A+Training-Free+Prototype+Calibration+Method+for+Cross-Discipline+Few-Shot+Class-Incremental+Learning+Eunju+Lee%E2%88%97">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> HYCAL: A Training-Free Prototype Calibration Method for Cross-Discipline Few-Shot Class-Incremental Learning Eunju Lee∗: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -552,6 +588,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>37</span><span>Vision-language reasoning</span></div>
 <h2>MindPower: Enabling Theory-of-Mind Reasoning in VLM-based Embodied</h2>
 <p class="one">MindPower is about giving embodied vision-language agents a theory-of-mind style ability. The everyday problem is that an agent should infer what another person or agent believes, wants, or intends before deciding what to do.</p>
+<p class="links"><a href="search.html?q=MindPower%3A+Enabling+Theory-of-Mind+Reasoning+in+VLM-based+Embodied&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=MindPower%3A+Enabling+Theory-of-Mind+Reasoning+in+VLM-based+Embodied">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> MindPower: Enabling Theory-of-Mind Reasoning in VLM-based Embodied: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -567,6 +604,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>38</span><span>Vision-language reasoning</span></div>
 <h2>Synthetic Object Compositions for Scalable and Accurate Learning in Detection, Segmentation, and Grounding</h2>
 <p class="one">Synthetic Object Compositions is about scaling detection and segmentation training without manually labeling every object. The everyday problem is that real annotations are expensive, while naive synthetic scenes can be unrealistic or too narrow.</p>
+<p class="links"><a href="search.html?q=Synthetic+Object+Compositions+for+Scalable+and+Accurate+Learning+in+Detection%2C+Segmentation%2C+and+Grounding&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=Synthetic+Object+Compositions+for+Scalable+and+Accurate+Learning+in+Detection%2C+Segmentation%2C+and+Grounding">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Synthetic Object Compositions for Scalable and Accurate Learning in Detection, Segmentation, and Grounding: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -582,6 +620,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>39</span><span>Vision-language reasoning</span><a href="https://github.com/cqu-student/CC-" target="_blank" rel="noopener">code</a></div>
 <h2>CC-VQA: Conflict- and Correlation-Aware Method for Mitigating Knowledge Conflict in Knowledge-Based Visual Question Answering</h2>
 <p class="one">CC-VQA is about resolving conflicts between a model&#x27;s stored knowledge and retrieved external knowledge. The everyday problem is that retrieved context may contradict what the vision-language model already believes, and the model may ignore or misuse it.</p>
+<p class="links"><a href="search.html?q=CC-VQA%3A+Conflict-+and+Correlation-Aware+Method+for+Mitigating+Knowledge+Conflict+in+Knowledge-Based+Visual+Question+Answering&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=CC-VQA%3A+Conflict-+and+Correlation-Aware+Method+for+Mitigating+Knowledge+Conflict+in+Knowledge-Based+Visual+Question+Answering">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> CC-VQA: Conflict- and Correlation-Aware Method for Mitigating Knowledge Conflict in Knowledge-Based Visual Question Answering: Read this as a grounding claim: the paper must show which words, answers, or actions are forced by visual evidence and which would disappear if that evidence changed.</p>
 <p><b>Hidden quantity.</b> the grounded claim: which words, answers, tool actions, or reasoning steps are actually supported by visible evidence</p>
@@ -597,6 +636,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>40</span><span>Vision-language reasoning</span><a href="https://github.com/ChelsieLei/CrossHOI-Bench" target="_blank" rel="noopener">code</a></div>
 <h2>CrossHOI-Bench: A Unified Benchmark for HOI Evaluation across Vision-Language Models and HOI-Specific Methods</h2>
 <p class="one">The paper is about fairly evaluating human-object interaction across both specialist HOI detectors and general vision-language models. The everyday problem is that people can describe the same interaction in valid different words.</p>
+<p class="links"><a href="search.html?q=CrossHOI-Bench%3A+A+Unified+Benchmark+for+HOI+Evaluation+across+Vision-Language+Models+and+HOI-Specific+Methods&amp;theme=vlm">open this paper in search</a> · <a href="paper-note-quality.html#q=CrossHOI-Bench%3A+A+Unified+Benchmark+for+HOI+Evaluation+across+Vision-Language+Models+and+HOI-Specific+Methods">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> CrossHOI-Bench: A Unified Benchmark for HOI Evaluation across Vision-Language Models and HOI-Specific Methods: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -612,6 +652,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>41</span><span>Detection, segmentation, and recognition</span><a href="https://github.com/WenddHe0119/Batman" target="_blank" rel="noopener">code</a></div>
 <h2>Batman: Benign Knowledge Alignment Through Malicious Null Space in Federated Backdoor Attack</h2>
 <p class="one">Batman is about a federated backdoor attack that hides malicious behavior while looking benign. The everyday problem is that federated servers inspect client updates, but an attacker can align with normal knowledge on the surface while placing the trigger beha</p>
+<p class="links"><a href="search.html?q=Batman%3A+Benign+Knowledge+Alignment+Through+Malicious+Null+Space+in+Federated+Backdoor+Attack&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=Batman%3A+Benign+Knowledge+Alignment+Through+Malicious+Null+Space+in+Federated+Backdoor+Attack">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Batman: Benign Knowledge Alignment Through Malicious Null Space in Federated Backdoor Attack: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -627,6 +668,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>42</span><span>Detection, segmentation, and recognition</span><a href="https://github.com/Trusted-LLM/LMR" target="_blank" rel="noopener">code</a></div>
 <h2>Logit-Margin Repulsion for Backdoor Defense</h2>
 <p class="one">Logit-Margin Repulsion is about defending a model from hidden backdoor triggers. The everyday problem is that a poisoned model can act normal on clean data but jump to an attacker-chosen class when a trigger appears, even after compression changes.</p>
+<p class="links"><a href="search.html?q=Logit-Margin+Repulsion+for+Backdoor+Defense&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=Logit-Margin+Repulsion+for+Backdoor+Defense">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Logit-Margin Repulsion for Backdoor Defense: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -642,6 +684,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>43</span><span>Detection, segmentation, and recognition</span></div>
 <h2>AutoDebias: An Automated Framework for Detecting and Mitigating Backdoor Biases</h2>
 <p class="one">AutoDebias is about finding and reducing hidden backdoor or bias behavior without manual inspection. The everyday problem is that a model can look accurate overall while secretly depending on a trigger pattern or a spurious shortcut.</p>
+<p class="links"><a href="search.html?q=AutoDebias%3A+An+Automated+Framework+for+Detecting+and+Mitigating+Backdoor+Biases&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=AutoDebias%3A+An+Automated+Framework+for+Detecting+and+Mitigating+Backdoor+Biases">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> AutoDebias: An Automated Framework for Detecting and Mitigating Backdoor Biases: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -657,6 +700,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>44</span><span>Detection, segmentation, and recognition</span></div>
 <h2>Phantom: Physical Object Interactions as Dynamic Triggers for NMS-Exploited Backdoors</h2>
 <p class="one">Phantom is about backdoor attacks on object detectors using dynamic physical interactions. The everyday problem is that detectors use non-maximum suppression, so object configurations can suppress or reveal detections in ways an attacker can exploit.</p>
+<p class="links"><a href="search.html?q=Phantom%3A+Physical+Object+Interactions+as+Dynamic+Triggers+for+NMS-Exploited+Backdoors&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=Phantom%3A+Physical+Object+Interactions+as+Dynamic+Triggers+for+NMS-Exploited+Backdoors">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Phantom: Physical Object Interactions as Dynamic Triggers for NMS-Exploited Backdoors: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -672,6 +716,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>45</span><span>Detection, segmentation, and recognition</span></div>
 <h2>TANGO: Learning Distribution-wise Foundation Prior Consistency and Instance-wise Style Calibration for Medical Image Generalization</h2>
 <p class="one">TANGO is about adapting generation or recognition across styles while keeping foundation-model priors consistent. The everyday problem is that a dataset may have its own style, but each individual image also has local appearance quirks.</p>
+<p class="links"><a href="search.html?q=TANGO%3A+Learning+Distribution-wise+Foundation+Prior+Consistency+and+Instance-wise+Style+Calibration+for+Medical+Image+Generalization&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=TANGO%3A+Learning+Distribution-wise+Foundation+Prior+Consistency+and+Instance-wise+Style+Calibration+for+Medical+Image+Generalization">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> TANGO: Learning Distribution-wise Foundation Prior Consistency and Instance-wise Style Calibration for Medical Image Generalization: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -687,6 +732,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>46</span><span>Detection, segmentation, and recognition</span><a href="https://github.com/IdanYankelev/AntiStyler" target="_blank" rel="noopener">code</a></div>
 <h2>AntiStyler: Defending Object Detection Models Against Adversarial Patch Attacks Using Style Removal</h2>
 <p class="one">AntiStyler is about defending object detectors from adversarial patches. The everyday problem is that patches often work by injecting misleading style patterns, but defenses must not slow detection or harm clean images.</p>
+<p class="links"><a href="search.html?q=AntiStyler%3A+Defending+Object+Detection+Models+Against+Adversarial+Patch+Attacks+Using+Style+Removal&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=AntiStyler%3A+Defending+Object+Detection+Models+Against+Adversarial+Patch+Attacks+Using+Style+Removal">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> AntiStyler: Defending Object Detection Models Against Adversarial Patch Attacks Using Style Removal: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -702,6 +748,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>47</span><span>Detection, segmentation, and recognition</span><a href="https://github.com/L-AILab/PPD" target="_blank" rel="noopener">code</a></div>
 <h2>Attack for Defense: Adversarial Agents for Point Prompt Optimization Empowering Segment Anything Model</h2>
 <p class="one">Attack for Defense is about improving point prompts using adversarial agents. The everyday problem is that segmentation prompts can be fragile: a slightly bad point can make the mask fail.</p>
+<p class="links"><a href="search.html?q=Attack+for+Defense%3A+Adversarial+Agents+for+Point+Prompt+Optimization+Empowering+Segment+Anything+Model&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=Attack+for+Defense%3A+Adversarial+Agents+for+Point+Prompt+Optimization+Empowering+Segment+Anything+Model">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Attack for Defense: Adversarial Agents for Point Prompt Optimization Empowering Segment Anything Model: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -717,6 +764,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>48</span><span>Detection, segmentation, and recognition</span><a href="https://github.com/YC-Che/COG" target="_blank" rel="noopener">code</a></div>
 <h2>COG: Confidence-aware Optimal Geometric Correspondence for Unsupervised Single-reference Novel Object Pose Estimation</h2>
 <p class="one">COG is about estimating a new object&#x27;s 3D pose from one reference view without labels. The everyday problem is that many points do not overlap under a new view or occlusion, so hard one-to-one matching can trust the wrong correspondences.</p>
+<p class="links"><a href="search.html?q=COG%3A+Confidence-aware+Optimal+Geometric+Correspondence+for+Unsupervised+Single-reference+Novel+Object+Pose+Estimation&amp;theme=perceive">open this paper in search</a> · <a href="paper-note-quality.html#q=COG%3A+Confidence-aware+Optimal+Geometric+Correspondence+for+Unsupervised+Single-reference+Novel+Object+Pose+Estimation">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> COG: Confidence-aware Optimal Geometric Correspondence for Unsupervised Single-reference Novel Object Pose Estimation: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -732,6 +780,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>49</span><span>Robotics, driving, and action</span></div>
 <h2>DextER: Language-driven Dexterous Grasp Generation with Embodied Reasoning</h2>
 <p class="one">DextER is about turning a language instruction into a dexterous hand grasp. The everyday problem is deciding which fingertips should touch which object surfaces before committing to a full hand pose.</p>
+<p class="links"><a href="search.html?q=DextER%3A+Language-driven+Dexterous+Grasp+Generation+with+Embodied+Reasoning&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=DextER%3A+Language-driven+Dexterous+Grasp+Generation+with+Embodied+Reasoning">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> DextER: Language-driven Dexterous Grasp Generation with Embodied Reasoning: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -747,6 +796,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>50</span><span>Robotics, driving, and action</span><a href="https://github.com/Thinklab-SJTU/ActiveAD" target="_blank" rel="noopener">code</a></div>
 <h2>ActiveAD: Planning-Oriented Active Learning for End-to-End Autonomous Driving</h2>
 <p class="one">ActiveAD is about choosing which autonomous-driving clips are worth labeling. The everyday problem is not paying humans to annotate endless easy straight-road driving when rare hard scenes teach the planner much more.</p>
+<p class="links"><a href="search.html?q=ActiveAD%3A+Planning-Oriented+Active+Learning+for+End-to-End+Autonomous+Driving&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=ActiveAD%3A+Planning-Oriented+Active+Learning+for+End-to-End+Autonomous+Driving">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> ActiveAD: Planning-Oriented Active Learning for End-to-End Autonomous Driving: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -762,6 +812,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>51</span><span>Robotics, driving, and action</span><a href="https://github.com/codeshop715/EnergyAction" target="_blank" rel="noopener">code</a></div>
 <h2>EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models</h2>
 <p class="one">EnergyAction is about composing one-hand actions into two-hand actions. The everyday problem is that two hands must coordinate, not just duplicate independent motions.</p>
+<p class="links"><a href="search.html?q=EnergyAction%3A+Unimanual+to+Bimanual+Composition+with+Energy-Based+Models&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=EnergyAction%3A+Unimanual+to+Bimanual+Composition+with+Energy-Based+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -777,6 +828,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>52</span><span>Robotics, driving, and action</span><a href="https://github.com/tairanhuang/seba" target="_blank" rel="noopener">code</a></div>
 <h2>SEBA: Sample-Efficient Black-Box Attacks on Visual Reinforcement Learning</h2>
 <p class="one">SEBA is about attacking visual reinforcement learning agents in a black-box setting. The everyday problem is that continuous-action agents are hard to attack because the attacker sees high-dimensional images and cannot inspect the policy internals.</p>
+<p class="links"><a href="search.html?q=SEBA%3A+Sample-Efficient+Black-Box+Attacks+on+Visual+Reinforcement+Learning&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=SEBA%3A+Sample-Efficient+Black-Box+Attacks+on+Visual+Reinforcement+Learning">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> SEBA: Sample-Efficient Black-Box Attacks on Visual Reinforcement Learning: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -792,6 +844,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>53</span><span>Robotics, driving, and action</span></div>
 <h2>All Vehicles Can Lie: Efficient Adversarial Defense in Fully Untrusted-Vehicle Collaborative Perception via Pseudo-Random Bayesian Inference</h2>
 <p class="one">This paper is about defending collaborative driving when every nearby vehicle might send false perception features. The everyday problem is deciding which shared messages to trust without assuming one honest car.</p>
+<p class="links"><a href="search.html?q=All+Vehicles+Can+Lie%3A+Efficient+Adversarial+Defense+in+Fully+Untrusted-Vehicle+Collaborative+Perception+via+Pseudo-Random+Bayesian+Inference&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=All+Vehicles+Can+Lie%3A+Efficient+Adversarial+Defense+in+Fully+Untrusted-Vehicle+Collaborative+Perception+via+Pseudo-Random+Bayesian+Inference">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> All Vehicles Can Lie: Efficient Adversarial Defense in Fully Untrusted-Vehicle Collaborative Perception via Pseudo-Random Bayesian Inference: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -807,6 +860,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>54</span><span>Robotics, driving, and action</span></div>
 <h2>Beyond Rule-Based Agents: Active Markov Games for Realistic Multi-Agent Interaction in Autonomous Driving</h2>
 <p class="one">This paper is about training autonomous-driving agents around other drivers that react strategically instead of following fixed scripts. The everyday problem is that at an intersection, what one car does changes what the others decide next.</p>
+<p class="links"><a href="search.html?q=Beyond+Rule-Based+Agents%3A+Active+Markov+Games+for+Realistic+Multi-Agent+Interaction+in+Autonomous+Driving&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=Beyond+Rule-Based+Agents%3A+Active+Markov+Games+for+Realistic+Multi-Agent+Interaction+in+Autonomous+Driving">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Beyond Rule-Based Agents: Active Markov Games for Realistic Multi-Agent Interaction in Autonomous Driving: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -822,6 +876,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>55</span><span>Robotics, driving, and action</span></div>
 <h2>LIBERO-Plus: A Progressive Robustness Benchmark for Visual-Language-Action Models</h2>
 <p class="one">The paper is about testing VLA manipulation models under progressively harder variations. The everyday problem is finding where a robot policy stops working as objects, scenes, or instructions drift away from the easy setup.</p>
+<p class="links"><a href="search.html?q=LIBERO-Plus%3A+A+Progressive+Robustness+Benchmark+for+Visual-Language-Action+Models&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=LIBERO-Plus%3A+A+Progressive+Robustness+Benchmark+for+Visual-Language-Action+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> LIBERO-Plus: A Progressive Robustness Benchmark for Visual-Language-Action Models: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -837,6 +892,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>56</span><span>Robotics, driving, and action</span></div>
 <h2>Opening the Sim-to-Real Door for Humanoid Pixel-to-Action Policy Transfer</h2>
 <p class="one">DoorMan is about getting a humanoid robot to open real doors using only camera pixels. The everyday problem is that a robot trained in simulation sees perfect hidden state, while the real robot must act from noisy images, keep balance, reach a handle, and reco</p>
+<p class="links"><a href="search.html?q=Opening+the+Sim-to-Real+Door+for+Humanoid+Pixel-to-Action+Policy+Transfer&amp;theme=embodied">open this paper in search</a> · <a href="paper-note-quality.html#q=Opening+the+Sim-to-Real+Door+for+Humanoid+Pixel-to-Action+Policy+Transfer">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Opening the Sim-to-Real Door for Humanoid Pixel-to-Action Policy Transfer: Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.</p>
 <p><b>Hidden quantity.</b> the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion</p>
@@ -852,6 +908,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>57</span><span>Learning, adaptation, and efficiency</span></div>
 <h2>Exemplar-Free Continual Learning for State Space Models Isaac Ning Lee1,2 Leila Mahmoodi1 Trung Le1 Mehrtash Harandi1</h2>
 <p class="one">This paper is about continual learning for state space models without storing old examples. The everyday problem is learning a new task while the model&#x27;s internal recurrence keeps changing, without replaying the past data.</p>
+<p class="links"><a href="search.html?q=Exemplar-Free+Continual+Learning+for+State+Space+Models+Isaac+Ning+Lee1%2C2+Leila+Mahmoodi1+Trung+Le1+Mehrtash+Harandi1&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=Exemplar-Free+Continual+Learning+for+State+Space+Models+Isaac+Ning+Lee1%2C2+Leila+Mahmoodi1+Trung+Le1+Mehrtash+Harandi1">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Exemplar-Free Continual Learning for State Space Models Isaac Ning Lee1,2 Leila Mahmoodi1 Trung Le1 Mehrtash Harandi1: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -867,6 +924,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>58</span><span>Learning, adaptation, and efficiency</span><a href="https://github.com/aup520/FS_" target="_blank" rel="noopener">code</a></div>
 <h2>Robustness Under Data Scarcity: Few-Shot Continual Adversarial Training for Evolving</h2>
 <p class="one">This paper is about keeping models robust as they learn from small new datasets. The everyday problem is that adversarial training usually needs lots of data, but deployed models often evolve from only a few examples.</p>
+<p class="links"><a href="search.html?q=Robustness+Under+Data+Scarcity%3A+Few-Shot+Continual+Adversarial+Training+for+Evolving&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=Robustness+Under+Data+Scarcity%3A+Few-Shot+Continual+Adversarial+Training+for+Evolving">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Robustness Under Data Scarcity: Few-Shot Continual Adversarial Training for Evolving: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -882,6 +940,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>59</span><span>Learning, adaptation, and efficiency</span></div>
 <h2>Immunizing Models Against Harmful Long-Horizon Fine-Tuning via Contractive Optimization Dynamics</h2>
 <p class="one">This paper is about making models harder to repurpose through long harmful fine-tuning. The everyday problem is protecting an open model from thousands of malicious update steps while keeping benign fine-tuning possible.</p>
+<p class="links"><a href="search.html?q=Immunizing+Models+Against+Harmful+Long-Horizon+Fine-Tuning+via+Contractive+Optimization+Dynamics&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=Immunizing+Models+Against+Harmful+Long-Horizon+Fine-Tuning+via+Contractive+Optimization+Dynamics">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Immunizing Models Against Harmful Long-Horizon Fine-Tuning via Contractive Optimization Dynamics: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -897,6 +956,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>60</span><span>Learning, adaptation, and efficiency</span><a href="https://github.com/ivanluizmatos/BISE" target="_blank" rel="noopener">code</a></div>
 <h2>Bias In, Bias Out? Finding Unbiased Subnetworks in Vanilla Models</h2>
 <p class="one">Bias In, Bias Out asks whether a normal biased model already contains a less biased subnetwork. The everyday problem is that retraining with special balanced data can be expensive or impossible, but some neurons may already support the task without relying on </p>
+<p class="links"><a href="search.html?q=Bias+In%2C+Bias+Out%3F+Finding+Unbiased+Subnetworks+in+Vanilla+Models&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=Bias+In%2C+Bias+Out%3F+Finding+Unbiased+Subnetworks+in+Vanilla+Models">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Bias In, Bias Out? Finding Unbiased Subnetworks in Vanilla Models: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -912,6 +972,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>61</span><span>Learning, adaptation, and efficiency</span><a href="https://github.com/siege-research/DASH" target="_blank" rel="noopener">code</a></div>
 <h2>DASH: A Meta-Attack Framework for Synthesizing Effective and Stealthy Adversarial Examples</h2>
 <p class="one">DASH is about making adversarial examples by combining several attack strategies instead of betting on one. The everyday problem is finding a tiny image change that fools a defended model while still looking almost unchanged to a person.</p>
+<p class="links"><a href="search.html?q=DASH%3A+A+Meta-Attack+Framework+for+Synthesizing+Effective+and+Stealthy+Adversarial+Examples&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=DASH%3A+A+Meta-Attack+Framework+for+Synthesizing+Effective+and+Stealthy+Adversarial+Examples">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> DASH: A Meta-Attack Framework for Synthesizing Effective and Stealthy Adversarial Examples: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -927,6 +988,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>62</span><span>Learning, adaptation, and efficiency</span><a href="https://github.com/molarsu/RaPA" target="_blank" rel="noopener">code</a></div>
 <h2>RaPA: Enhancing Transferable Targeted Attacks via Random Parameter Pruning</h2>
 <p class="one">RaPA is about transferable targeted attacks. The everyday problem is that an attack crafted on one model often fails on another unless it targets robust shared weaknesses.</p>
+<p class="links"><a href="search.html?q=RaPA%3A+Enhancing+Transferable+Targeted+Attacks+via+Random+Parameter+Pruning&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=RaPA%3A+Enhancing+Transferable+Targeted+Attacks+via+Random+Parameter+Pruning">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> RaPA: Enhancing Transferable Targeted Attacks via Random Parameter Pruning: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
@@ -942,6 +1004,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>63</span><span>Learning, adaptation, and efficiency</span><a href="https://github.com/Li-aobo/PreSTA" target="_blank" rel="noopener">code</a></div>
 <h2>Rethinking Knowledge Transfer in Image Quality Assessment: A Perceptual Preference Structure Alignment Perspective</h2>
 <p class="one">This paper is about transferring knowledge for image quality assessment. The everyday problem is that a model trained for one kind of quality signal may not match human preference when distortions, content, or generation style changes.</p>
+<p class="links"><a href="search.html?q=Rethinking+Knowledge+Transfer+in+Image+Quality+Assessment%3A+A+Perceptual+Preference+Structure+Alignment+Perspective&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=Rethinking+Knowledge+Transfer+in+Image+Quality+Assessment%3A+A+Perceptual+Preference+Structure+Alignment+Perspective">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Rethinking Knowledge Transfer in Image Quality Assessment: A Perceptual Preference Structure Alignment Perspective: Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.</p>
 <p><b>Hidden quantity.</b> the ability the test is supposed to measure, separated from shortcuts that only pass the test format</p>
@@ -957,6 +1020,7 @@ single model and fail in bl</p><p>Vision-Language-Action (VLA) models are vulner
 <div class="meta"><span>64</span><span>Learning, adaptation, and efficiency</span><a href="https://github.com/zhang-lilin/RobustLT" target="_blank" rel="noopener">code</a></div>
 <h2>Taming the Long Tail: Rebalancing Adversarial Training via</h2>
 <p class="one">This paper is about adversarial training on long-tailed data. The everyday problem is that common classes dominate robustness training, while rare classes get too little pressure and remain fragile.</p>
+<p class="links"><a href="search.html?q=Taming+the+Long+Tail%3A+Rebalancing+Adversarial+Training+via&amp;theme=learning">open this paper in search</a> · <a href="paper-note-quality.html#q=Taming+the+Long+Tail%3A+Rebalancing+Adversarial+Training+via">check it in the quality audit</a></p>
 <div class="depth">
 <p><b>What to review.</b> Taming the Long Tail: Rebalancing Adversarial Training via: Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement instead of the most visually familiar answer.</p>
 <p><b>Hidden quantity.</b> the measured cause behind difficult data, such as a new sensor stream, a brain trace, a security mark, or a scientific image</p>
