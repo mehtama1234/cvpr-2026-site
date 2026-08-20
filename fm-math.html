@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Flow matching · the mathematics · first principles, no jargon</div>
 <h1>Flow matching — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because straighter, better-behaved paths can make generation faster and easier to control.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Diffusion gives a path from noise to data, but the path can be long and indirect. We may want a more direct learned motion from one distribution to another.</p><p><b>The mathematical move.</b> The principle is matching a flow field. Flow matching trains a model to predict the velocity that moves samples along a chosen path from noise to data. The object learned is direction of motion, not only noise removal.</p><p><b>What changes.</b> Generation becomes following a learned vector field. If the field is accurate, samples can travel from simple noise to data in fewer, straighter steps.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>The goal is the same one diffusion faces: produce a fresh realistic picture, even though the set of realistic pictures is an unimaginably thin sliver of all possible pictures and there is no formula that lets you reach into it directly.<br><br>Flow matching sets up a journey. At the start you have an easy-to-make random point — pure speckle. At the end you want a real picture. If you knew, at every point along the way and every moment of the trip, which direction to nudge the point and how fast, you could start from speckle and simply follow those nudges to a finished picture. The whole problem becomes: learn that field of nudges — a direction-and-speed at every point and moment — so that following it reliably carries random starts to realistic pictures, and so that the trip can be completed in as few steps as possible.</p>
 <h2>The core ideas — and why they work</h2>

@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Equivariance · the mathematics · first principles, no jargon</div>
 <h1>Equivariance — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it stops the model from relearning the same fact in every pose. One example teaches a whole family of transformed examples.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> If an object moves, rotates, or changes viewpoint, the answer should change in a predictable way. Without that rule, the model must relearn the same fact for every transformed copy.</p><p><b>The mathematical move.</b> The principle is symmetry as a contract. A function is equivariant when transforming the input transforms the output in the matching way. The equation f(g x) = rho(g) f(x) says the model must respect the world&#x27;s known transformations.</p><p><b>What changes.</b> The model stops treating every transformed example as new. It builds the transformation rule into the function class, saving data and preventing answers that break known geometry.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Many things in the world do not change their nature when you turn or flip them: a tumor is a tumor at any orientation, a molecule behaves the same however it is rotated in space, an object is the same object wherever it sits in the frame. An ordinary network does not know this. Shown only upright examples, it can be thrown by a rotated one, because to it the rotated version is simply unfamiliar input.<br><br>The wasteful fix is to show it every orientation and hope it learns the pattern. The better fix is to build the rule directly into the network so it holds automatically. The problem is how to do that: how to guarantee that turning the input turns the answer in lockstep, at every layer and for every possible turn, and what you gain — and give up — by making that guarantee part of the architecture rather than something learned.</p>
 <h2>The core ideas — and why they work</h2>

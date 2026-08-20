@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Bias, variance &amp; double descent · the mathematics · first principles, no jargon</div>
 <h1>Bias, variance &amp; double descent — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model can fail because it is too simple to capture the pattern or because it is flexible enough to chase noise.</p><p><b>The mathematical move.</b> The principle is error decomposition. Bias is error from the model&#x27;s limited shape; variance is error from sensitivity to the particular sample. Generalization depends on both.</p><p><b>What changes.</b> Model choice stops being &#x27;more flexible is always better.&#x27; The right question becomes how much structure the data supports, and whether extra capacity learns signal or accidents.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you are teaching a learner to predict house prices from square footage. If your learner is too simple — say, just a single straight line through the data — it will never quite hit the real prices, because real prices don't follow a perfect line. But if you make your learner more complex, letting it bend and twist to touch every single training example, it will memorize the noise in the training set and then fail on new houses it has never seen. There is no clear answer to where the sweet spot is.<br><br>Even stranger: in recent years, researchers discovered that if you make your learner wildly complex — far more flexible than traditional wisdom said was safe — something unexpected happens. Instead of getting worse and worse as it memorizes junk, the error eventually starts to improve again. This goes against everything the old rules said should happen. Understanding why this happens requires untangling two separate sources of error, and seeing that they move in opposite directions as your learner gets more flexible.</p>
 <h2>The core ideas — and why they work</h2>

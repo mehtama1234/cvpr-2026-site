@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Sampling by random walk (MCMC) · the mathematics · first principles, no jargon</div>
 <h1>Sampling by random walk (MCMC) — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Some probability distributions are known only up to an impossible missing total. You can compare two states, but cannot list and normalize every state.</p><p><b>The mathematical move.</b> The principle is sampling by local balance. MCMC builds a random walk whose long-run visit rate equals the target probability, using accept-or-reject rules that cancel the missing total.</p><p><b>What changes.</b> The model stops needing the full sum over all possibilities. Samples become the working representation of belief, as long as the walk mixes well enough.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you have a map of probabilities—a spread—but there's no easy way to pick points directly from it. For instance, the spread might be the shape of a learned network's beliefs about the world, or the long-tail output of a Bayesian calculation; you can evaluate how likely any specific point is, but you cannot invert the formula to generate a sample the way you would from a coin flip or bell curve. You need to draw many independent samples, all in proportion to their real probabilities, because that's the only way to estimate what the spread actually looks like.<br><br>The direct approach—try random guesses until one lands in the right probability zone—fails catastrophically in high dimensions. There are too many possible number-lists, and the true-probability zones are tiny islands in an ocean of worthless space. You would wait forever.<br><br>The solution is to stop trying to find the zones by blind guessing. Instead, take a walk: start at any point, then take small random steps, but accept or reject each step by checking how likely it makes you. This way, the walk gets stuck in the high-probability zones where it belongs, and spends its time there proportionally to how probable each part is.</p>
 <h2>The core ideas — and why they work</h2>

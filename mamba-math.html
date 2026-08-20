@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">State-space models / Mamba · the mathematics · first principles, no jargon</div>
 <h1>State-space models / Mamba — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because long inputs are expensive. A good memory lets a model handle long streams without all-pairs comparison.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Long sequences make full attention expensive because each new item wants to compare itself with all earlier items. For text, video, audio, and sensor streams, the past can be too long to reread every time.</p><p><b>The mathematical move.</b> The principle is state as compressed history. A state-space model keeps a running summary that is updated as the sequence arrives. The mathematics asks what must be remembered so the future can be predicted without storing every past token.</p><p><b>What changes.</b> The model stops rereading the whole past and starts carrying a live summary of it. This makes long streams cheaper, but it also makes the summary itself the bottleneck: anything not stored in the state is gone.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A model reading a long sequence — a paragraph, an hour of sensor readings, a whole book — has a memory problem. To use something from far back it must have kept it somehow. One way is to let every piece look back at every earlier piece, but the bookkeeping for that grows with the square of the length, and the record of the past keeps growing without bound, so it eventually becomes impossible on very long or never-ending inputs.<br><br>The alternative is to carry a <em>running summary</em>: a fixed amount of memory that you update as each new piece arrives, the way you hold the gist of a book in your head rather than re-reading every page. That keeps the cost per step flat no matter how long the sequence gets. But it raises its own hard question: with only a fixed amount of room, <em>what do you keep and what do you let fade?</em> A summary that forgets on a fixed schedule will drop the one crucial clue and clutter itself with filler. The real problem is to carry a small fixed-size memory through an arbitrarily long sequence and still be smart about what goes into it.</p>
 <h2>The core ideas — and why they work</h2>

@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Embeddings &amp; distributional meaning · the mathematics · first principles, no jargon</div>
 <h1>Embeddings &amp; distributional meaning — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Symbols by themselves have no distance. A model cannot know that two words, patches, products, or users are related unless relation is represented somewhere.</p><p><b>The mathematical move.</b> The principle is meaning as geometry. An embedding maps each item to a vector so that useful relations become distances, angles, and directions.</p><p><b>What changes.</b> The model stops handling each symbol as an isolated ID. It can share evidence between nearby items, compare them, retrieve them, and compose them through vector operations.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A model needs to understand words. But a word is just a symbol — the string "dog" is not inherently more similar to "cat" than to "refrigerator." A computer sees only the label, not what it points to. To learn, the model must first turn each word into a number-list it can use in calculations. But how do you decide what numbers to use?<br><br>Raw counting does not work. Rare words stay rare; common words dominate. What matters is not frequency, but the pattern: which words appear near each other, reliably, across a thousand texts. That pattern is meaning. If you capture it in the numbers themselves — so that "dog" and "cat" get similar number-lists because they are used in similar contexts — then the model can start to reason about words without being told what they mean.</p>
 <h2>The core ideas — and why they work</h2>

@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Vision-language-action (robot policies) · the mathematics · first principles, no jargon</div>
 <h1>Vision-language-action (robot policies) — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it closes the loop from seeing and speaking to doing.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A robot must connect what it sees, what language asks, and what its body can do. A good caption is not enough; the answer must become action.</p><p><b>The mathematical move.</b> The principle is grounding symbols in control. Visual features, language tokens, and action variables are mapped into a shared decision process, often through sequence prediction or policy learning.</p><p><b>What changes.</b> Vision-language stops ending at description. It closes the loop into movement. The hard part is that small perception or language errors can become physical mistakes.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A robot policy takes in what the robot sees and what it was told, and outputs an action — where to move, how to grip. The subtle difficulty is that the right answer is usually not a single action but a whole family of good ones: to reach around an obstacle you could sweep left or sweep right, both perfectly fine.<br><br>That plurality breaks the naive approach. If you train the policy to emit one best action, the safest single number it can report is the average of the good options — and the average of 'go left' and 'go right' is 'go straight,' directly into the obstacle. So the policy must somehow represent the whole spread of good actions and commit to one of them, never blend. On top of that, it has to connect words to things — 'the red block' must attach to the actual red block in view. The problem is to ground language in the scene and to produce a committed action from a space where many actions are good.</p>
 <h2>The core ideas — and why they work</h2>

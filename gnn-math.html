@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Graph neural networks · the mathematics · first principles, no jargon</div>
 <h1>Graph neural networks — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many real problems are not grids or lists. They are networks, and the links are part of the data.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Many things are not grids: molecules, roads, social links, skeletons, and scene graphs. The useful fact is not a left-right pixel order but who is connected to whom.</p><p><b>The mathematical move.</b> The principle is local propagation on a graph. Each node updates itself by mixing information from its neighbors. Algebraically this is smoothing and message passing over the graph&#x27;s adjacency structure.</p><p><b>What changes.</b> The model stops forcing graph data into a fake image shape. It learns by moving information along real edges. The danger is oversmoothing: after too many rounds, different nodes can become too similar.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A lot of data is naturally a network: people joined by friendships, atoms joined by bonds, road junctions joined by streets. You want to predict something about each dot — is this person a student, is this atom part of a ring — but often each dot on its own carries little useful information. What tells you the answer is the pattern of connections around it.<br><br>Two things make this awkward for an ordinary network. First, the useful signal is spread across the links, so a method must let each dot learn from the dots it is connected to. Second, a network has no natural order — there is no first dot or second dot — so whatever you compute must not depend on the arbitrary order you happened to list the dots in. The problem is to build something that reads who-is-connected-to-whom, mixes information along the links, and does so without caring how the dots are labeled.</p>
 <h2>The core ideas — and why they work</h2>

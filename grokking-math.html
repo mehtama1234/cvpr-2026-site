@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Optimization landscapes and grokking · the mathematics · first principles, no jargon</div>
 <h1>Optimization landscapes and grokking — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because early success can be fake. We need to know whether a model learned the rule or merely stored the cases.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model can fit the training set long before it learns the underlying rule. For a while, memorization and understanding can look the same from training loss alone.</p><p><b>The mathematical move.</b> The principle is competing solutions with the same training error. Optimization may first find a memorizing solution, then later drift toward a simpler rule that generalizes better.</p><p><b>What changes.</b> Training stops being judged only by when loss reaches zero. The path through solution space matters, because different zero-loss answers can behave very differently on new data.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>During training a network is scored only on the examples it is shown, and it can reach a perfect score on those while still being useless on anything new — it has memorized the answers rather than learned the rule behind them.<br><br>That alone is a puzzle: how can a perfect training score coexist with total failure on new cases? Stranger still is what sometimes happens next. Keep training well past the point where the seen examples are all correct, and much later the network abruptly starts getting <em>new</em> examples right too, jumping from chance to near-perfect. The problem is to understand why fitting the seen examples does not pin down the rule, what tips a network from memorizing toward genuinely understanding, and why that switch, when it comes, arrives as a sudden leap rather than a gradual climb.</p>
 <h2>The core ideas — and why they work</h2>

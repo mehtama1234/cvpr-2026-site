@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">The manifold hypothesis · the mathematics · first principles, no jargon</div>
 <h1>The manifold hypothesis — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it explains why learning is possible at all. The world is not random pixels; it has a shape the model can exploit.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Pixel space is enormous, but real images occupy only a tiny part of it. Most possible pixel grids are not meaningful scenes.</p><p><b>The mathematical move.</b> The principle is low-dimensional structure inside a high-dimensional space. Real data varies along a smaller set of hidden causes: pose, lighting, shape, identity, viewpoint, and motion.</p><p><b>What changes.</b> Learning stops searching the whole space blindly. It tries to learn the thin surface where real data lives. This explains why interpolation, generation, and adversarial failure all depend on geometry.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A photo is a huge list of numbers, one per pixel — often millions. Taken at face value, the space of all possible such lists is beyond astronomical, and no achievable amount of data could ever cover it. If real photos were spread all through that space, learning would be hopeless.<br><br>But they are not. Almost every random pixel-list is meaningless static; real photos occupy only a vanishingly thin, structured sliver of the whole space, because the things that actually vary in a real scene are few. Understanding that sliver — how few real degrees of freedom underlie the millions of pixels, what shape the sliver has, and what lives in the empty space around it — turns out to explain why learning works at all, why models are fragile in a particular way, and how new images can be generated.</p>
 <h2>The core ideas — and why they work</h2>

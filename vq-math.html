@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Vector Quantization / Visual Tokenizers · the mathematics · first principles, no jargon</div>
 <h1>Vector Quantization / Visual Tokenizers — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because discrete tokens let images and sounds be handled with the same tools used for language.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Continuous features can be hard to store, transmit, or use as discrete symbols. But hard rounding breaks learning because a tiny change can suddenly jump to a different code.</p><p><b>The mathematical move.</b> The principle is learned quantization. A codebook stores reusable vectors, and each input chooses the nearest code. Training uses tricks that let gradients update the encoder and the codebook despite the hard choice.</p><p><b>What changes.</b> The model turns messy continuous signals into a vocabulary of learned tokens. This helps compression and generation, but the codebook must avoid dead entries and overused entries.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Some of the strongest image models work like a writer: they build a picture one piece at a time, each new piece chosen from a fixed menu of options, just as each next word is chosen from a fixed vocabulary. That only works if there <em>is</em> a fixed menu. A word is one of a few tens of thousands of known symbols — but a patch of an image is a smooth spread of color and texture with endlessly many possible shades, no two exactly alike. There is no ready-made menu to pick from.<br><br>So before such a model can 'speak' in images, every patch has to be boiled down to one of a fixed set of standard patches — a visual dictionary. Two difficulties come with that. First, replacing a patch with the nearest standard one is a hard, jumpy choice, and a hard choice offers no gentle slope for the surrounding networks to learn along. Second, a fixed dictionary is only as good as its entries: if most of them go unused, a large dictionary quietly behaves like a tiny, crude one. The problem is to build that dictionary, snap patches to it, and still keep everything trainable.</p>
 <h2>The core ideas — and why they work</h2>

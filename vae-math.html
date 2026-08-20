@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Variational autoencoders · the mathematics · first principles, no jargon</div>
 <h1>Variational autoencoders — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model needs a code that can rebuild data but also remains smooth enough to sample from. A private code per example is not enough.</p><p><b>The mathematical move.</b> The principle is likelihood with a controlled code space. A VAE uses a lower bound that rewards reconstruction while charging a KL cost when the code distribution drifts from a simple prior.</p><p><b>What changes.</b> The model stops memorizing each example in an unstructured hiding place. It learns a code space where nearby points tend to decode to sensible examples.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Suppose you want a machine that understands pictures. It should be able to take a messy real photograph and compress it—force all its information into a short list of numbers, far shorter than the pixel count. Then, it should be able to do the opposite: take that short code and rebuild a picture from it. That sounds useful, like a private language the network invents for pictures.<br><br>The catch: for the machine to <strong>generate</strong> new pictures on its own (feeding it random codes and hoping for plausible output), the code space needs structure. Codes should cluster in a smooth, tidy region, and nearby codes should decode to similar-looking pictures. During training, though, two things go wrong. First, if you just sample random codes from some guessed spread, the network can't learn from the randomness—the blame can't be traced back through a random number. Second, if you only train the compression and rebuild, the network will ignore the code space entirely, dumping all information into an unstructured mess, making generation impossible.</p>
 <h2>The core ideas — and why they work</h2>

@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">World models · the mathematics · first principles, no jargon</div>
 <h1>World models — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because acting well often means imagining consequences before moving.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> An agent cannot plan well if it only reacts to the current observation. It needs some idea of what will happen after possible actions.</p><p><b>The mathematical move.</b> The principle is learned prediction of hidden state. A world model compresses history into a state and learns how that state changes under actions. Planning then happens inside the learned model before acting outside.</p><p><b>What changes.</b> The agent stops choosing only from the present frame. It can test futures in its own model. The danger is model error: a bad imagined future can lead to a bad real action.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>An agent that must act — a robot, a game player — faces a bind. Trying things out in the real world to see what happens is slow, and often risky: you cannot crash a real robot ten thousand times to learn. Yet to plan well it needs to know what its actions will lead to.<br><br>The way out is to learn a model of how the world responds, and then do the trying-out in imagination instead of reality — run a plan forward in the head, see how it turns out, adjust. But an imagined world is never perfectly accurate, and its errors feed on themselves as you imagine further ahead, so the daydream slowly peels away from what would really happen. The problem is to build a mental simulator worth planning in, understand how far ahead it can be trusted before drift ruins it, and use it within that limit.</p>
 <h2>The core ideas — and why they work</h2>

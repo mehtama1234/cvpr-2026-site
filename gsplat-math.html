@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Gaussian splatting · the mathematics · first principles, no jargon</div>
 <h1>Gaussian splatting — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it made 3D scenes fast to train and fast to view. That speed changed what researchers could try.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A 3D scene must be stored in a form that can render quickly from new views. A dense volume is expensive, and a mesh can be hard to recover from photos.</p><p><b>The mathematical move.</b> The principle is differentiable scene particles. Gaussian splatting represents the scene as many soft colored blobs in 3D. Rendering projects and blends those blobs, and the image error can train their positions, shapes, colors, and opacity.</p><p><b>What changes.</b> 3D reconstruction stops needing a slow ray march through every point in space. The scene becomes a set of editable blobs that draw fast, but quality depends on whether the blobs cover the true surfaces cleanly.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>You want the full 3D of a scene back from a few photos, and you want to be able to move a virtual camera through it smoothly, in real time. One approach represents the scene as a function you query along every pixel's sightline — accurate, but so slow that a single frame takes many heavy function-calls per pixel, and flying through it crawls.<br><br>The problem is to find a scene representation that (a) can be drawn extremely fast, (b) still blends into smooth, continuous surfaces rather than looking like a pile of dots, and (c) can be shaped automatically from photos — nobody hand-places anything. The answer is to build the scene out of soft blobs that can be stamped onto the screen cheaply, and to let the photos themselves arrange those blobs.</p>
 <h2>The core ideas — and why they work</h2>

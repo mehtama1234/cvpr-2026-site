@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">3D from an image · the mathematics · first principles, no jargon</div>
 <h1>3D from an image — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because action needs space. A model that knows what an object is but not where it sits cannot safely grasp it, avoid it, or rebuild it.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A flat image has lost distance. The same 2D picture can come from many possible 3D worlds, so depth cannot be read directly from pixels alone.</p><p><b>The mathematical move.</b> The principle is inverse geometry with priors. The model combines projective constraints, scale cues, multiple views when available, and learned regularities about the world to choose among many possible depths.</p><p><b>What changes.</b> Depth estimation stops pretending the answer is visible in one pixel. It becomes a constrained guess about the hidden 3D cause of the image. The remaining risk is underdetermination: some worlds still cast the same picture.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A photograph is flat. Recovering the 3D it came from — how far away everything is — is the goal, but part of that goal is provably impossible from a single image, and knowing exactly which part is the whole game.<br><br>When a camera makes a picture it projects the 3D world onto a flat plane, dividing everything by how far away it is — which is why distant things look smaller. That division quietly destroys information: a small object nearby and a large object far away can land in exactly the same place on the image. So the problem splits in two. From one photo you can hope to recover the <em>shape</em> of a scene — what is nearer than what — but not its true <em>size</em>, because size was thrown away. To pin down real distances in meters you need something more: a second viewpoint, or a moving camera that supplies one for free.</p>
 <h2>The core ideas — and why they work</h2>

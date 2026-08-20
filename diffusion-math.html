@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Diffusion · the mathematics · first principles, no jargon</div>
 <h1>Diffusion — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many creative and repair tasks can be written as 'start messy, then make it more consistent with the goal.' The hard part is keeping the result faithful, not merely pretty.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Drawing a realistic image, video, or action in one jump is too hard. The target data lives in a thin, structured part of a huge space.</p><p><b>The mathematical move.</b> The principle is reversing noise by small learned steps. Add noise until data becomes easy random static; then train a model to predict how to step back toward clean data at each noise level.</p><p><b>What changes.</b> Generation stops being one impossible leap. It becomes many easier corrections. The cost is time: many small steps can be slow unless the path is shortened or distilled.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Suppose you want a computer to produce a brand-new photo of a face that belongs to no real person. A photo that size is a million numbers, and only an unimaginably thin sliver of all possible million-number combinations happens to look like a face — the rest is meaningless speckle. To draw a new face you would need to reach into exactly that thin sliver, and nobody can write down where it is.<br><br>So drawing a realistic picture directly is out. But there is one direction that <em>is</em> easy: taking a real picture and slowly sprinkling random specks onto it, a few more at a time, until every trace of the original is buried and you are left with pure static. That corruption has a plain formula — you can do it to any picture in one line of arithmetic.<br><br>Diffusion's whole move is to learn that easy process run <em>backwards</em>. If a network could start from pure static and take away specks a little at a time, undoing each stage of the corruption, it would arrive at a fresh realistic picture. The catch is that undoing corruption needs one piece of knowledge at every stage: given a speckled picture, which direction leads back toward a real one. That direction has to be learned from data — and the rest of this page is how.</p>
 <h2>The core ideas — and why they work</h2>

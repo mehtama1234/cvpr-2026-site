@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Normalization (batch / layer norm) · the mathematics · first principles, no jargon</div>
 <h1>Normalization (batch / layer norm) — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Deep layers can send numbers whose scale drifts during training. The next layer then has to learn from inputs that keep changing size and center.</p><p><b>The mathematical move.</b> The principle is scale control. Normalization subtracts a mean and divides by a spread, then lets the model learn a new scale and shift if useful.</p><p><b>What changes.</b> Each layer receives numbers in a stable range. This keeps forward signals and backward gradients from becoming too large or too small, while still allowing the network to choose its own final scale.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A neural network is a tall stack of operations, each one taking numbers from the layer below and producing new numbers to pass up. The problem is that the outputs of one layer can drift — sometimes all tiny, sometimes all huge. The next layer, which was trained assuming numbers in a certain size range, now gets garbage and can't use what it learned.<br><br>Imagine tuning a radio. You learned that turning the knob by 1 degree changes the volume by a small, predictable amount. But then someone starts feeding you a pre-amplified signal that is 100 times louder. Now the same 1-degree turn screams. The knob-to-volume relationship you learned is useless. That is what happens when a layer's input sizes drift unpredictably — the layer's learned rules no longer match reality.</p>
 <h2>The core ideas — and why they work</h2>

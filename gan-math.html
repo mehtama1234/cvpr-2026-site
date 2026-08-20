@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Generative adversarial networks · the mathematics · first principles, no jargon</div>
 <h1>Generative adversarial networks — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A generator trained only by simple reconstruction can produce averages that score well numerically but look fake.</p><p><b>The mathematical move.</b> The principle is adversarial distribution matching. A discriminator learns to tell real from fake, while the generator learns to make fake samples that the discriminator cannot separate from real ones.</p><p><b>What changes.</b> The generator stops aiming only at a fixed pixel loss. It receives a moving training signal from a judge that learns realism. The tradeoff is instability because both sides change at once.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p><p>A network can be trained to recognize patterns in real data, but creating new, realistic data from scratch is much harder. You could ask the network to guess what real data looks like and produce it — but the network has no way to know if its guess is good or bad. There's no scoreboard, no error message, no clear path to improvement.</p><br><br><p>One way out is to set up a competition: train one network to forge convincing fakes, and train a second network to tell real data from fakes. The forger learns by watching the detector catch mistakes. The detector learns by checking both real and fake samples. As they duel, both get sharper — and eventually the fakes become so good that the detector can't tell the difference.</p></p>
 <h2>The core ideas — and why they work</h2>

@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Optical flow · the mathematics · first principles, no jargon</div>
 <h1>Optical flow — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because change is often the evidence. One still frame can hide whether something is approaching, leaving, opening, or closing.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A single image cannot tell motion directly. To estimate how pixels move, the model must match pieces across time while handling missing parts, new parts, and repeated textures.</p><p><b>The mathematical move.</b> The principle is correspondence under change. Optical flow assigns a displacement vector so that a point in one frame lines up with its likely source in another. The core math balances matching evidence with smoothness over nearby pixels.</p><p><b>What changes.</b> Motion becomes a field of arrows instead of a vague difference between frames. The model can track change, but it must handle the fact that some matches are hidden, ambiguous, or no longer visible.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>You want the motion of every point between two video frames: a little arrow at each pixel saying where that bit of the world went. The trouble is that pixels do not come labeled with arrows — all you have are two grids of brightness, and you must infer the motion that carried one into the other.<br><br>To get any grip at all you need an assumption, and the natural one is that a bit of the world keeps its brightness over a tiny slice of time. But that single assumption yields only one clue per point, and one clue turns out to be fundamentally not enough to fix a two-part motion. So the problem is twofold: turn 'brightness stays the same' into something you can solve, and then find extra information — from neighbors, or from an assumption that motion is smooth — to make up for the fact that one clue per point leaves the answer half-unknown.</p>
 <h2>The core ideas — and why they work</h2>

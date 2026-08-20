@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Energy-based &amp; score models · the mathematics · first principles, no jargon</div>
 <h1>Energy-based &amp; score models — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many problems are easier to check than to build. Energy gives the model a way to repair by moving from bad states toward better ones.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Sometimes it is easier to score whether something looks compatible than to directly produce it or normalize its full probability.</p><p><b>The mathematical move.</b> The principle is energy as preference. An energy model assigns low scores to good states and high scores to bad ones. Learning shapes the energy landscape so data sits in low valleys.</p><p><b>What changes.</b> Modeling stops requiring an explicit normalized probability at every point. The hard part moves to sampling: finding low-energy states can take a search or a learned denoising process.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Here is the most flexible possible way to model data: hand every possible picture a single number — call it a <em>badness</em> score, low for pictures that look real and high for ones that look wrong. Any scoring function at all is allowed, so this can express any pattern you like.<br><br>The problem shows up when you try to turn those scores into genuine probabilities. To do that you must divide every score by the grand total of the scores over <em>every possible picture</em> — and in a space of million-number images that total is astronomically large and flatly uncomputable. It seems to block everything: you cannot say how probable a picture is, cannot train by matching probabilities, cannot sample. The whole subject is a set of ways to get everything you want — generating, training, comparing — while never once computing that impossible grand total.</p>
 <h2>The core ideas — and why they work</h2>

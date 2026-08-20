@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Autoregressive generation · the mathematics · first principles, no jargon</div>
 <h1>Autoregressive generation — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many hard objects become manageable when ordered as a sequence. The weakness is drift: one bad early choice becomes context for later choices.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A large object such as text, an image token grid, or a video cannot be predicted all at once without modeling how its parts depend on earlier parts.</p><p><b>The mathematical move.</b> The principle is chain-rule factorization. A joint probability is broken into a product of next-step probabilities: each new piece is predicted from the pieces already made.</p><p><b>What changes.</b> Generation becomes repeated conditional prediction. This makes huge outputs tractable, but mistakes can accumulate because each new step depends on the previous ones.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Making a whole picture, or a whole sentence, in one shot means choosing among an astronomically huge number of possible wholes — far too many to handle head-on. You need a way to break that one giant choice into small, manageable pieces without giving anything up.<br><br>There is an exact way to do it, and most of the behaviour of these models — their strength, their slowness, their tendency to drift — follows from that one choice and its consequences. The problem is to turn 'produce a whole' into 'produce the next piece given everything so far,' learn that next-piece step well, and then live with the fact that generating for real means feeding the model its own output, one piece after another, in strict order.</p>
 <h2>The core ideas — and why they work</h2>

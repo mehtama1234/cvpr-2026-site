@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Spectral graph theory &amp; the Laplacian · the mathematics · first principles, no jargon</div>
 <h1>Spectral graph theory &amp; the Laplacian — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A graph has no regular grid, so ordinary left-right or low-high frequency does not directly apply.</p><p><b>The mathematical move.</b> The principle is frequency from the Laplacian. The graph Laplacian measures how much a signal changes across edges. Its eigenvectors are the graph&#x27;s smooth-to-sharp modes.</p><p><b>What changes.</b> Graph structure becomes analyzable like a signal. Clusters, cuts, smoothing, and diffusion over nodes can be described by which graph frequencies are kept or removed.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine a web of friendships: each person is a node, and a link forms between friends. You assign each person a single number — maybe how happy they are today. If friends tend to have similar happiness, the numbers vary slowly across the network; if happiness jumps wildly between neighbors, it's choppy and rough.<br><br>The question is: which parts of the network are truly connected, and which are islands? And if you want to smooth out noise in those numbers — say, guessing someone's true mood from their friends' moods — which numbers should you average together without blurring real clusters?<br><br>To answer, you need a tool that measures roughness on the graph itself, that reveals the graph's natural ways to vibrate, and that tells you which numbers are meant to stay independent and which can be safely merged. The Laplacian is that tool.</p>
 <h2>The core ideas — and why they work</h2>

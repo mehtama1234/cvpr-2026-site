@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Gradient descent &amp; optimizers · the mathematics · first principles, no jargon</div>
 <h1>Gradient descent &amp; optimizers — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Knowing the error is not enough. The model needs a rule for how to move its settings so the next error is lower.</p><p><b>The mathematical move.</b> The principle is local slope as a guide to movement. Gradient descent follows the direction where the loss rises fastest, but steps the other way. Momentum and adaptive methods change how steps are carried across uneven ground.</p><p><b>What changes.</b> Training becomes controlled movement through a loss surface. The model does not guess new settings; it uses measured slope, step size, and memory of past slopes.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A network turns an input into an answer by pushing it through a long chain of small numeric operations, each governed by adjustable numbers—often billions of them. Every time the answer comes out wrong, you need to nudge each number a little bit in a direction that would have made the answer slightly better. That means measuring how wrong the answer is, then figuring out which way to nudge each number.<br><br>But here is the knot: you cannot just tweak every number and measure again—that would take a billion separate test runs per update, which is impossibly slow. And even if you knew which way to go, taking huge steps might overshoot the best answer, or get stuck thrashing around. You need a cheap way to find the slope in every dimension at once, then take a careful step that does not waste effort on dimensions that barely matter.</p>
 <h2>The core ideas — and why they work</h2>

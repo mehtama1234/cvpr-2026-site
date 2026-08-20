@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Expectation–Maximization · the mathematics · first principles, no jargon</div>
 <h1>Expectation–Maximization — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Hidden causes create a circular problem: to fit the model you need assignments, but to know assignments you need the model.</p><p><b>The mathematical move.</b> The principle is alternating hidden guesses and parameter fitting. The E-step estimates soft responsibility for each hidden cause; the M-step refits the model using those responsibilities.</p><p><b>What changes.</b> Training stops being stuck between missing labels and unknown parameters. Each round improves or preserves the current data fit under the model&#x27;s own hidden-cause story.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you hear a voice on the phone but can't see the speaker. You're trying to figure out two things at once: who is actually speaking (the hidden cause), and what the person's true voice patterns are (the settings that make that voice). Here's the trap: if you already knew who was speaking, you could learn their voice patterns by listening carefully. But to figure out who is speaking, you'd need to already know what each person's voice sounds like. You can't measure one without knowing the other, and you can't know the other without measuring the one.<br><br>This circularity appears everywhere data has invisible causes. A medical test comes back with a number, but the true state you care about (disease or no disease) is hidden. To learn what the test number *means*, you'd need to know the true state. But you don't know it. Or a customer's purchases tell you something about which product category they love most — but you never see their true preference, only their buying behavior. To learn what drives purchases, you need to know the hidden preferences. But the only way to infer preferences is to already understand what drives purchases.</p>
 <h2>The core ideas — and why they work</h2>

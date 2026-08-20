@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Test-time compute · the mathematics · first principles, no jargon</div>
 <h1>Test-time compute — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because some problems are not solved by one quick guess. But extra thinking only helps when the checker is honest.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Some problems deserve more work at the moment they are asked. A fixed compute budget spends the same effort on easy and hard cases.</p><p><b>The mathematical move.</b> The principle is spending samples to reduce error. Test-time compute draws, searches, verifies, or refines multiple candidate answers, then uses an aggregation rule to choose.</p><p><b>What changes.</b> The model stops being limited to its first answer. It can trade time for quality. The risk is verifier quality: more attempts help only if the selection rule actually recognizes better answers.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A trained model is fixed, yet on a hard question a single attempt may be wrong. You could retrain it, but there is a cheaper lever: at answer-time, let it try the question many times and combine the tries into one final answer.<br><br>This works because the model's attempts vary — there is randomness in how it generates — so many tries explore different answers, and if you combine them well the right one can surface. But 'combine them well' hides everything. Whether trying more helps depends on two things being true: the correct answer has to actually appear among the attempts, and the way you pick or vote among them has to reliably favor it. When both hold, spending more compute at answer-time genuinely raises accuracy; when they fail, spending more drives you deeper into error. The problem is knowing which situation you are in.</p>
 <h2>The core ideas — and why they work</h2>

@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Self-supervised Learning · the mathematics · first principles, no jargon</div>
 <h1>Self-supervised Learning — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because labels are expensive and narrow. Raw data is abundant, and the model can learn useful structure before labels arrive.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Labels are scarce, but raw data is abundant. The model needs useful structure before humans have named every example.</p><p><b>The mathematical move.</b> The principle is learning from constraints inside the data. Self-supervision creates a task where the answer is already present: predict a missing part, match two views of the same item, or separate different items.</p><p><b>What changes.</b> Learning stops waiting for hand labels. The model extracts invariances and structure from the data itself. The danger is shortcut learning: the created task may be solved in a way that does not build useful meaning.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>To learn, models usually need labeled examples — this is a cat, that is a dog — and labeling enough of them by hand is ruinously expensive. Yet raw unlabeled data is nearly free and nearly endless. The question is whether data can teach itself.<br><br>It can, if you invent a task whose answer is already contained in the data, so the data grades the model's attempt without any human. But this opens a trap. If the invented task is even slightly too easy to satisfy in a degenerate way, the model will take the cheat: it discovers some trivial answer that technically wins the task while learning nothing at all. So the real problem is twofold — manufacture a label-free task that forces genuine understanding, and relentlessly block the lazy shortcut, called <em>collapse</em>, that would let the model win without understanding anything.</p>
 <h2>The core ideas — and why they work</h2>

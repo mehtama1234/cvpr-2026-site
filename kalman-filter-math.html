@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Kalman filtering &amp; state estimation · the mathematics · first principles, no jargon</div>
 <h1>Kalman filtering &amp; state estimation — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A noisy sensor is not enough, and a prediction model is not enough. Each can be wrong in different ways at different times.</p><p><b>The mathematical move.</b> The principle is belief update with uncertainty. The Kalman filter carries a mean and variance, predicts both forward, then uses the Kalman gain to mix prediction and measurement according to their uncertainty.</p><p><b>What changes.</b> State estimation stops choosing blindly between sensor and model. The uncertainty decides the blend, and the estimate becomes more or less flexible as evidence changes.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine a delivery robot navigating a warehouse using GPS. Every second, the GPS spits out a position reading — but GPS is noisy. The real position is hidden; all you see is a measurement corrupted by random glitches. You need to know where the robot actually is, not just what the sensor guesses.<br><br>Your only tools are two imperfect sources: a model that predicts where the robot should go next (based on physics and the last position), and a fresh sensor reading that you know is contaminated by noise. Neither one is trustworthy on its own. The sensor might drift. The model might have lag. But together, playing them off each other, you can build something better than either alone.<br><br>The Kalman filter is the method that automatically balances these two sources at every step, using them to maintain a running best guess and track how confident that guess is. It answers a simple but powerful question: given what you predicted and what you just measured, what should you believe right now?</p>
 <h2>The core ideas — and why they work</h2>

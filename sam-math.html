@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Segment Anything · the mathematics · first principles, no jargon</div>
 <h1>Segment Anything — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many visual tasks start by deciding what region we are talking about.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Segmentation is not only naming pixels. A user may point, box, or hint at what they mean, and the system must carve out the matching region.</p><p><b>The mathematical move.</b> The principle is prompted set selection. The image is encoded once, the prompt becomes a query, and the mask is the set of pixels whose features match that query under learned geometry.</p><p><b>What changes.</b> Segmentation stops being a fixed list of classes. It becomes an interactive selection problem: tell the model what kind of region you mean, and it returns the boundary that fits.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>The task is to outline exactly the thing a user means from a light hint — a click, a rough box, a few words — for objects the system was never specifically trained on, including ones it has no name for.<br><br>The catch is built into the hint. Click one point on a person's shirt and you might mean the shirt, or the whole person, or the person together with what they are carrying — several correct, nested answers. If the model is forced to return exactly one outline, its safest guess is a mushy average of all of them, which matches none. And it cannot lean on knowing what things are called, because the whole point is to outline unfamiliar objects. So the real problem has two parts: handle the genuine ambiguity in a light hint without collapsing to a blur, and do it from something more general than a fixed list of known object types.</p>
 <h2>The core ideas — and why they work</h2>

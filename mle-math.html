@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Maximum likelihood &amp; cross-entropy · the mathematics · first principles, no jargon</div>
 <h1>Maximum likelihood &amp; cross-entropy — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model needs a clear way to prefer one setting over another using the data it saw. Accuracy alone throws away confidence and probability.</p><p><b>The mathematical move.</b> The principle is likelihood. Choose the settings that make the observed data most expected. Taking logs turns many probabilities into a sum, which becomes a practical loss.</p><p><b>What changes.</b> Training stops being only right-versus-wrong counting. A confident wrong answer is punished more than an uncertain wrong answer, because it made the real data very surprising.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>You have a bag of observations: a coin landed heads 7 times and tails 3 times, or a person clicked an ad or didn't, or a photo showed a cat or didn't. These are the facts. You also have a model—a guessing machine with tunable settings—that assigns a score to how likely each outcome should be under those settings. The problem is: which settings would make the facts you actually saw look least surprising? If you turned the dial one way, the model might say "heads should happen 60% of the time" and your 7 heads out of 10 looks pretty normal. If you turned it another way, the model says "heads should happen 1% of the time" and your 7 heads look almost impossible. You want the dial where the data looks most natural—where the model would say "yes, I would have expected exactly that."<br><br>The challenge is that "natural" is slippery. Some settings make one data point natural but others unlikely. And with millions of dials (like in a neural network), checking each combination is hopeless. You need a single, clean rule that points to the best settings without checking them all.</p>
 <h2>The core ideas — and why they work</h2>

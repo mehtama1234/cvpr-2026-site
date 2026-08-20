@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Test-time adaptation · the mathematics · first principles, no jargon</div>
 <h1>Test-time adaptation — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because the world at deployment is never exactly the world in training.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model trained in one world may be used in another: new lighting, new cameras, new weather, new patients. The original settings may no longer be right.</p><p><b>The mathematical move.</b> The principle is cautious adaptation from test evidence. Test-time adaptation changes the model using signals available at deployment, often entropy, consistency, or normalization statistics, without true labels.</p><p><b>What changes.</b> The model stops being frozen at training time. It can adjust to the current stream. The danger is self-confirming error: if the model adapts to its own wrong guesses, it can drift further from the truth.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A model learns on one kind of data and is then deployed into a world that has drifted — fog instead of sun, a new camera, a different hospital's scanner. Its accuracy falls, sometimes steeply, because the incoming data no longer matches what it trained on.<br><br>Retraining would fix it, but retraining needs labels, and the whole difficulty is that the new data arrives unlabeled — nobody is standing by to say what each foggy image contains. So the question is whether a model can adapt itself using only the unlabeled stream it is now seeing. That turns out to be possible to a point, by leaning on the model's own internal signals and its own confidence — but the very signal you must lean on hides a trap that can make the model confidently worse instead of better.</p>
 <h2>The core ideas — and why they work</h2>

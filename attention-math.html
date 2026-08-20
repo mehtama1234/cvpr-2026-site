@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Attention · the mathematics · first principles, no jargon</div>
 <h1>Attention — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because modern models often fail or succeed based on what they look at. Attention turns reading into a learned operation instead of a hand-written rule.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A word, image patch, or object slot cannot be understood only from itself. Its meaning often sits somewhere else: a pronoun needs its noun, a pixel needs a matching edge, and a robot command needs the scene part it refers to.</p><p><b>The mathematical move.</b> The principle is differentiable retrieval. Instead of making a hard lookup, the model gives every possible source a match score, turns those scores into shares that add to one, and reads a weighted blend. The softmax is the mathematical hinge: it turns choice into something smooth enough to learn.</p><p><b>What changes.</b> The model stops carrying fixed messages forward. Each item can ask, at that layer, which other items matter now. The price is the square-law comparison cost: if every item can look at every other item, the number of comparisons grows as n times n.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Read this sentence: 'The cup fell off the shelf because it was pushed.' To handle the word 'it', a model has to look back through the sentence and work out that 'it' stands for the cup and not the shelf. The clue it needs is somewhere else in the sentence, and nothing marks in advance where.<br><br>This is the situation attention is built for, and it comes up everywhere: the items can be words, or patches of an image, or points in a 3D scan — each one stored as a list of numbers. For one item at a time, the model has to gather information from whichever other items are relevant to it, and leave the rest alone. Two things make that hard.<br><br>First, 'find the one relevant item and copy it' is a hard yes-or-no choice. But a model learns only by making tiny adjustments that lower its mistakes, and a step that suddenly jumps from picking one item to picking another gives it no direction to adjust in. So a hard pick cannot be learned; the model needs a soft version that still, in the end, leans almost all the way toward the right item.<br><br>Second, to know which items are relevant to which, every item has to be compared against every other item. With n items that is n×n comparisons — a cost that grows with the <em>square</em> of how many items there are, and turns into the wall you hit on a big image or a long piece of text.</p>
 <h2>The core ideas — and why they work</h2>

@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Natural gradient &amp; Fisher information · the mathematics · first principles, no jargon</div>
 <h1>Natural gradient &amp; Fisher information — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A step that is small in parameter numbers can be large in model behavior, and a large parameter step can barely change behavior.</p><p><b>The mathematical move.</b> The principle is geometry of distributions. The Fisher information measures how much the output distribution changes when parameters move, and the natural gradient rescales steps by that geometry.</p><p><b>What changes.</b> Optimization stops measuring distance only in settings. It measures distance in what the model predicts, making updates more consistent across curved parameter spaces.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A network is controlled by a billion small adjustable numbers—let's call them dials. To make the network learn, you nudge each dial in the direction that would shrink the error a little. But here is the trap: when you turn one dial by a tiny amount, the network's answer might shift noticeably. Turn a different dial by the same tiny amount, and the answer barely moves. In other words, some dials have enormous leverage over the output, and some have almost none.<br><br>A normal training step treats all dials the same: it applies the same step size everywhere. This is like trying to steer a car by turning the wheel by a fixed angle, without noticing that sometimes that angle barely changes direction and sometimes it spins you around. You end up wasting motion on the low-leverage dials and sometimes overshooting on the high-leverage ones, leading to slow learning or bouncy, unreliable training.</p>
 <h2>The core ideas — and why they work</h2>

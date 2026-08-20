@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Optimal transport · the mathematics · first principles, no jargon</div>
 <h1>Optimal transport — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Two probability shapes may contain the same total mass but place it in different locations. Matching totals alone ignores the work needed to move one shape into the other.</p><p><b>The mathematical move.</b> The principle is minimum-cost mass movement. Optimal transport searches for a plan that moves all source mass to target mass while minimizing amount moved times distance moved.</p><p><b>What changes.</b> Distribution comparison stops being blind to geometry. The distance between shapes reflects how hard one must be moved to become the other.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you want to move a pile of sand from one place to another, and the new place needs a different shape. Every grain has to go somewhere, and moving a grain costs something — maybe the distance it travels, or the energy it takes. The total cost depends entirely on where each grain ends up; move them smartly and the cost drops. Move them badly and it climbs.<br><br>Now add a hard part: the cost is not the same for every grain. Some grains are cheap to move far, others cost a lot to move even a little. The problem becomes finding the one assignment of grains to destinations that gives the smallest total bill. With a million grains, there are roughly a million-factorial possible assignments — a number so astronomically large that checking them all one by one is not just slow, it is impossible.<br><br>But here is the real question: suppose you solve this problem for two specific piles, and you find the cheapest cost to morph one into the other. Does that cost mean anything? Can you use it to ask 'how different are these two distributions?' — and get an answer that works like a real distance, one that always obeys the triangle inequality and never lies about which piles are close?</p>
 <h2>The core ideas — and why they work</h2>

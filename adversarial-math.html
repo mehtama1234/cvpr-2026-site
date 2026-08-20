@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Adversarial robustness · the mathematics · first principles, no jargon</div>
 <h1>Adversarial robustness — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because accuracy on clean examples can hide fragile behavior. Robustness asks whether the model's answer is tied to the real cause or to a small accident in the input.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model can be right on normal examples but fail when the input is changed in a tiny, targeted way. The change may be nearly invisible to a person but large in the model&#x27;s decision space.</p><p><b>The mathematical move.</b> The principle is worst-case local change. Instead of asking whether the model handles the average nearby input, adversarial analysis asks whether any allowed small change can flip the answer.</p><p><b>What changes.</b> Robustness stops meaning &#x27;works on the test set&#x27; and becomes a boundary question: how far is this point from a wrong decision? Training can then push the boundary away from real data.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A well-trained network can be highly accurate on ordinary images and yet be flipped to a confident wrong answer by a change so small no human could perceive it. This is not a rare glitch; for a typical network you can find such a change for almost any image.<br><br>That combination — accurate yet brittle — is the whole problem. It means high accuracy on clean data does not guarantee the model is actually relying on the things a human would; it may be leaning on fragile patterns that a tiny, carefully chosen nudge can overturn. Understanding this requires seeing why the fragility exists, why it is so easy to exploit, how to train a model that resists it, and why that resistance comes at an honest cost.</p>
 <h2>The core ideas — and why they work</h2>

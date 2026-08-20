@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">NeRF / neural fields · the mathematics · first principles, no jargon</div>
 <h1>NeRF / neural fields — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it showed that ordinary photos can teach a hidden 3D world, as long as the picture-making process is built from smooth steps you can trace a mistake back through.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A set of photos shows a scene from several views, but not the full 3D field of color and density that produced them.</p><p><b>The mathematical move.</b> The principle is differentiable volume rendering. A neural field maps a 3D location and view direction to density and color. Rays through the field produce pixels, and photo error trains the field.</p><p><b>What changes.</b> The model stops storing only observed images and learns the hidden scene that could render them. It can synthesize new views, but training must solve the hard inverse problem of placing density in 3D from 2D evidence.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A photograph is flat. In squashing the world onto a rectangle it throws away depth, throws away what is hidden behind what, and offers nothing at all for the viewpoints the camera never stood at. From a few such photos you want the full 3D scene back, so you can look at it from anywhere.<br><br>The long-standing way is to build an explicit shape first — a surface stitched from tiny triangles, or a stack of little 3D boxes — and then draw a picture from that shape. The trouble is the drawing step. The usual way of turning a shape into pixels works by hard decisions — this triangle covers this pixel, that one does not — and a hard decision has no gentle slope to follow. So when a drawn pixel comes out the wrong color, there is no trail leading backward from that mistake to say which part of the shape to move. The thing doing the fitting is blind to the very step that made the picture.<br><br>That is the real bottleneck: unless the drawing step is built out of smooth math that you can trace a mistake back through, photos can never teach a fitter about 3D shape. NeRF turns the usual order around. Instead of building a shape and then drawing it, it represents the entire scene as a single smooth function — ask it about any point in space, from any viewing direction, and it answers with a color and a how-solid number. Making a picture is then defined as a smooth sum along each sightline, which you <em>can</em> trace a mistake back through. Nobody puts the geometry in by hand; it emerges because that is what makes the pictures come out right.</p>
 <h2>The core ideas — and why they work</h2>

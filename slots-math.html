@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Object-centric learning · the mathematics · first principles, no jargon</div>
 <h1>Object-centric learning — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many tasks get easier when the world is represented as objects that can move and interact.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A scene is made of things, but an image arrives as pixels. Without a pressure to separate objects, a model can smear several things into one representation.</p><p><b>The mathematical move.</b> The principle is competition for explanation. Slot models give several small memory cells a chance to explain parts of the input. Attention-like assignment makes pixels compete for slots and slots compete for pixels.</p><p><b>What changes.</b> The model stops storing the scene as one undivided feature. It learns separate object files. The danger is collapse: one slot can take too much, or many slots can split one object for the wrong reason.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Show a computer a photo of three fruits on a table and all it receives is a grid of numbers: for every dot in the picture, three numbers saying how red, how green, and how blue that dot is. Nothing in those numbers says 'the apple stops here and the pear starts there.' Yet to do almost anything useful the model has to work that out — dots that belong to the same fruit should be grouped together, dots on different fruits kept apart — and no answer key is provided.<br><br>Why is that hard? Two reasons. First, the number of ways to sort the dots into groups is astronomically large: with N dots there are far more possible groupings than anyone could ever check one at a time. Second, a model learns only by making tiny adjustments that lower its mistakes, and for that to work every step has to change <em>smoothly</em> when you nudge it. 'Just decide which group each dot is in' is not smooth — it is a hard yes-or-no choice with no in-between — so the model cannot learn it that way.<br><br>The way around this is to give the model a small, fixed number of placeholders — call them <em>slots</em>, where a slot is simply a short list of numbers that will come to stand for one object. Every slot competes for every dot, and the model is trained to repaint the original photo using only what the slots have captured. The competition is what splits the picture into groups; the repainting is what forces those groups to line up with real objects.</p>
 <h2>The core ideas — and why they work</h2>

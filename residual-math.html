@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Residual / skip connections · the mathematics · first principles, no jargon</div>
 <h1>Residual / skip connections — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A very deep plain network must transform the signal at every layer. Even preserving useful information becomes something the model has to learn.</p><p><b>The mathematical move.</b> The principle is identity plus correction. A residual block passes the input forward and learns only the change to add, written as output = input + small learned update.</p><p><b>What changes.</b> Depth stops forcing every layer to rebuild the whole representation. Information and gradients get a clear path through the network, so added layers can refine instead of overwrite.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A deep network turns an input into an answer by stacking many layers, each one transforming the result of the layer before it. The deeper the network, the more layers the input passes through. But there is a catch: when you stack many layers, the numbers that carry blame backward—the clues about which numbers to adjust—can shrink so much that the early layers learn almost nothing. It is as if the signal carrying the fix gets lost on the long journey back.<br><br>There is another problem: each layer is forced to learn to compute a complete answer by itself, starting from whatever the layer before sent it. What if some of that earlier result was already good? The layer has to throw it away and reconstruct it from scratch, wasting learning power. Imagine having to rewrite a whole paragraph every time you want to add one sentence—you would spend all your effort retyping the parts that were already right.</p>
 <h2>The core ideas — and why they work</h2>

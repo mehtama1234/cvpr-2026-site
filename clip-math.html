@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CLIP · the mathematics · first principles, no jargon</div>
 <h1>CLIP — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because fixed label lists are too small for the real world. Language gives vision a flexible way to ask for new things without retraining from scratch.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Images and words live in different forms, but many tasks need them to meet. A picture of a dog and the phrase &#x27;a dog&#x27; should land near each other without a custom classifier for every label.</p><p><b>The mathematical move.</b> The principle is contrastive alignment. Matching image-text pairs are pulled together in a shared space, while mismatched pairs are pushed apart. Softmax over many comparisons turns alignment into a learnable probability problem.</p><p><b>What changes.</b> Recognition stops depending only on a fixed label head. Text becomes a way to name directions in image space, enabling open-vocabulary matching. The cost is that the shared space inherits biases and blind spots from the paired data.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine a folder of millions of photos, and you want to pull out every photo of 'a dog on a skateboard' just by typing that phrase — even though nobody ever trained the computer on that exact phrase, or maybe on skateboards at all. That is the job CLIP is built for: sort pictures by <em>any</em> words at all, not a fixed list of a thousand categories fixed in advance.<br><br>Two things stand in the way. First, you cannot list every possible label ahead of time — there are hundreds of thousands of nouns and endless combinations of them, so the set of things you might search for is open and never finished. Second, a picture and a phrase start life as completely different kinds of data: a picture is a grid of brightness numbers, a phrase is a string of word-codes, and there is no obvious way to say how close a particular picture is to a particular phrase — they are not even the same kind of thing.<br><br>So the problem is to build a shared space that does not exist yet: a common set of number-lists where the number-list for 'a photo of a dog' sits close to the number-list made from an actual dog photo, and far from a cat photo. And it has to be built with only the faintest of hints — the fact that some pictures on the web came with a caption that was, roughly, about the same thing.</p>
 <h2>The core ideas — and why they work</h2>

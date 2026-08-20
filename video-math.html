@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Video / arrow of time · the mathematics · first principles, no jargon</div>
 <h1>Video / arrow of time — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many facts only exist across time: cause, motion, intent, and change.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A frame can show what is present, but not what is changing, causing, approaching, or disappearing. Meaning in video often lives between frames.</p><p><b>The mathematical move.</b> The principle is temporal state. A video model must carry information forward, compare moments, and separate stable identity from changing position. Mathematically this is sequence modeling over visual evidence.</p><p><b>What changes.</b> The model stops treating frames as unrelated pictures. It learns persistence, motion, and order. The hard part is keeping long-range facts without letting small frame errors grow over time.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A video is a sequence of frames, and modeling it means being able to predict how it continues. But video has structure that a plain list of pictures does not, and the interesting questions live in that structure.<br><br>Why does a reversed diving clip look absurd while a reversed spinning top looks fine? Why does an hour of video compress to a tiny fraction of its raw size? Why can a model guess the next frame almost perfectly yet be helpless about a frame a minute from now? Each of these is really a question about the <em>transitions</em> between frames — about how much one frame determines the next, and in which direction. The problem is to understand what information those transitions carry, because that is what a video model can learn from and what sets the limits on what it can do.</p>
 <h2>The core ideas — and why they work</h2>

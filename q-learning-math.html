@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Value-based RL (Q-learning &amp; Bellman) · the mathematics · first principles, no jargon</div>
 <h1>Value-based RL (Q-learning &amp; Bellman) — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> An action can be useful because of what it leads to later, not because of the reward it gives now.</p><p><b>The mathematical move.</b> The principle is Bellman recursion. The value of an action equals immediate reward plus the discounted value of the best future state it reaches.</p><p><b>What changes.</b> The agent stops judging actions only by the next reward. It learns a table or function of long-run consequences that can be updated from experience.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine a robot that can move left or right, and every move leads to some reward — maybe a step left earns five points, a step right earns one, but only this turn. A naive choice is to chase the five points and step left every time. But what if stepping right one move leads to a corridor of ten-point rewards for the rest of time, while stepping left leads to a dead end?<br><br>The whole problem is that the best move today depends on where it leads tomorrow. A robot needs to know not just the immediate reward from a move but the <em>total future</em> reward: today's points plus tomorrow's best move plus the day after, all the way to the end. That total is what makes a move truly valuable.<br><br>Learning this by checking every possible path ahead is hopeless—there are too many. The solution is a trick: each move's value must agree with itself one step later. If you know the value of tomorrow's best move, you can compute today's value without looking past tomorrow. That one idea, repeated over and over, builds up the value of every move in a runnable algorithm.</p>
 <h2>The core ideas — and why they work</h2>

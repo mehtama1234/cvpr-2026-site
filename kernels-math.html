@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Kernels &amp; Gaussian processes · the mathematics · first principles, no jargon</div>
 <h1>Kernels &amp; Gaussian processes — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Some patterns are simple only after changing how similarity is measured. In raw coordinates, a straight separator may be too weak.</p><p><b>The mathematical move.</b> The principle is implicit feature space. A kernel computes inner products in a richer space without explicitly building that space, so learning can use curved similarity while keeping the math tractable.</p><p><b>What changes.</b> The model stops depending only on raw coordinates. It predicts by relation to examples through a chosen similarity rule, often gaining curved decisions and uncertainty estimates.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Learning a rule from examples usually starts with guessing its shape: is it a line, or curvy? Too simple a shape and the rule misses the true pattern. Too complex and it latches onto noise instead of the real signal.<br><br>There is another path. Instead of deciding upfront what form the rule takes, ask: how similar is this new point to the examples you have already seen? A point near a well-performed example will probably perform well too. This is not a guess at the global shape; it is local, and it flows directly from the training data. The trick is making this work in high-dimensional spaces—where 'similar' can mean almost anything—without having to build all those hidden dimensions explicitly.</p>
 <h2>The core ideas — and why they work</h2>

@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Information bottleneck · the mathematics · first principles, no jargon</div>
 <h1>Information bottleneck — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because generalization depends on forgetting the right things. A model that keeps every detail may keep the wrong details.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A representation that keeps everything may keep noise, accidents, and private details that do not help the task. A representation that keeps too little loses the signal.</p><p><b>The mathematical move.</b> The principle is useful compression. The information bottleneck asks for a code that keeps information about the target while discarding information about the input that is not needed.</p><p><b>What changes.</b> Representation learning stops rewarding storage alone. It rewards keeping the bits that predict and dropping the bits that distract.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>When a model learns to recognize something, most of what it is shown is accidental — the exact lighting on a face, the background behind it, a stray hair — and only a little of it actually identifies the thing. If the model keeps everything, it drags all that accidental clutter along and gets confused by it on new examples; if it keeps too little, it throws away the very details it needs.<br><br>So a good internal summary has to strike a balance: hold on to the part that predicts the answer, and deliberately forget the part that is just accident. The problem is how to make a model forget on purpose — to build a summary that is narrow enough to shed the noise yet wide enough to keep the signal — and how to find the point between squeezing too little and squeezing too much.</p>
 <h2>The core ideas — and why they work</h2>

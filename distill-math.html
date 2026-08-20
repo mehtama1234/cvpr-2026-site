@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Knowledge distillation · the mathematics · first principles, no jargon</div>
 <h1>Knowledge distillation — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because deployment usually has a budget. Distillation is how a strong idea survives outside the lab.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A large model may know useful distinctions that are not visible in the hard label alone. If a small model only sees the final answer, it misses the teacher&#x27;s graded sense of which wrong answers are almost right.</p><p><b>The mathematical move.</b> The principle is information transfer through probabilities. The teacher&#x27;s output distribution carries soft structure: near misses, class relations, and uncertainty. Distillation trains the student to match that distribution, not only the label.</p><p><b>What changes.</b> Learning stops being only imitation of answers and becomes imitation of judgment. The student can inherit part of the teacher&#x27;s shape of knowledge, but only the parts expressed in the teacher&#x27;s outputs or intermediate signals.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>You have a large model that is accurate but too heavy to run where you need it — on a phone, in a camera, at high speed. You want a small model that keeps most of the accuracy at a fraction of the cost.<br><br>The obvious plan — train the small model from scratch on the same labeled data — leaves a real gap: the small model ends up noticeably worse. The puzzle is that the large model clearly knows something the labels do not contain, since it does better on the same data. The problem is to get that extra something out of the big model and into the small one. It turns out the big model's <em>full answer</em> — not just the label it picks, but the whole spread of how strongly it considered every option — carries exactly that missing knowledge, if you can coax it into view.</p>
 <h2>The core ideas — and why they work</h2>

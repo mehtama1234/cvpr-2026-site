@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Scaling laws and emergence · the mathematics · first principles, no jargon</div>
 <h1>Scaling laws and emergence — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it turns guesswork into planning. It helps decide whether a failure needs a better idea or simply more scale.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Model progress can look mysterious if each size is treated as a separate experiment. But loss often changes predictably as data, compute, and parameters grow.</p><p><b>The mathematical move.</b> The principle is smooth error decay with scale. Scaling laws fit curves that relate resources to loss, separating reducible error from the floor that remains.</p><p><b>What changes.</b> Scaling stops being only trial and error. It becomes forecasting. The catch is that capabilities can look sudden when a smooth loss curve crosses a task threshold.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Modern models improve when you scale them up — more data, a bigger model, more compute. The striking thing is that this improvement is not haphazard: it follows a regular curve, regular enough that you can measure it on small cheap runs and forecast a large expensive one before paying for it.<br><br>But the curve raises its own questions. It flattens rather than falling to zero, so there is a floor scale cannot cross — and knowing where you sit relative to it decides whether more spending is worth it. Sometimes an ability seems to appear suddenly at a certain scale, looking like magic. And with a fixed budget you must split it wisely between a bigger model and more data. The problem is to read this curve well enough to plan: how far improvement will go, when a 'sudden' ability is really a smooth trend in disguise, and how to spend a budget for the lowest error.</p>
 <h2>The core ideas — and why they work</h2>

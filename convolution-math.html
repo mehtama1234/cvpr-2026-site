@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Convolution &amp; weight sharing · the mathematics · first principles, no jargon</div>
 <h1>Convolution &amp; weight sharing — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> The same visual pattern can appear anywhere in an image. A model that uses different weights for every location wastes data learning the same detector repeatedly.</p><p><b>The mathematical move.</b> The principle is translation sharing. A convolution applies the same small filter at every location, making one learned local test serve across the whole image.</p><p><b>What changes.</b> The model stops treating shifted copies as unrelated. It learns local patterns once and reuses them everywhere, which lowers the number of weights and builds in a basic fact about images.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you train a network to spot stop signs. It learns a detector for a red octagon shape. But that shape can appear anywhere in a picture — top left, bottom right, upside down. If you have a billion pixels, and a network learns one detector pattern per pixel location, you'd need a billion separate detectors even though they're all doing the same job. The core insight is: use one detector, then slide it to every position in the image. Same small learned pattern everywhere. That is weight sharing — the same numbers do the work at every location. But how do you slide it efficiently? And what happens when you stack many detectors on top of each other?</p>
 <h2>The core ideas — and why they work</h2>

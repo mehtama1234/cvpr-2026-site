@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Uncertainty and calibration · the mathematics · first principles, no jargon</div>
 <h1>Uncertainty and calibration — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because knowing when not to trust the model can be as important as the prediction itself.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model&#x27;s answer is not enough. A wrong answer with high confidence is much more dangerous than a wrong answer with clear doubt.</p><p><b>The mathematical move.</b> The principle is calibrated belief. Uncertainty methods try to make confidence match observed correctness, either by modeling probability, sampling multiple plausible answers, or measuring distance from known data.</p><p><b>What changes.</b> Prediction stops being only a label or number. It includes a measure of trust. This lets systems defer, ask for help, or choose safer actions when evidence is weak.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A trained network almost always reports a confidence with its answer — 'sandal: 0.95.' It is tempting to read that as a 95% chance of being right, but it usually is not, and the gap can be enormous: shown something outside everything it was trained on, a model will often still answer with near-total confidence.<br><br>That is dangerous wherever a wrong-but-confident answer causes harm — a medical call, a self-driving decision. The problem has several layers: understand why a model's stated confidence is not its chance of being correct, measure how far off it is, correct it, separate the kinds of not-knowing that call for different responses, and get a model to raise its hand and say 'this input is unlike anything I know' instead of bluffing.</p>
 <h2>The core ideas — and why they work</h2>

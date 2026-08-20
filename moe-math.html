@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Mixture of experts · the mathematics · first principles, no jargon</div>
 <h1>Mixture of experts — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it gives a model more capacity without paying the full cost on every example.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> One large model has to spend the same computation on every input, even when different inputs need different skills. A simple image, a rare object, and a hard reasoning case all pass through the same full machinery.</p><p><b>The mathematical move.</b> The principle is conditional work. A router assigns the input to a few experts using soft or nearly hard shares. The mathematical issue is load and choice: choose the right experts while keeping the experts from collapsing into one favorite path.</p><p><b>What changes.</b> Capacity can grow without using all capacity every time. The model becomes a market of specialists, but the router must be trained so the market does not jam, starve some experts, or send hard cases to the wrong place.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A model that knows a lot — grammar, geography, chemistry, poetry — stores that knowledge as a huge pile of adjustable numbers, and normally it runs the whole pile for every incoming piece of input, say each word. That is wasteful: the numbers that are expert in rare chemistry still get run on an ordinary word about the weather. And it caps how much the model can know, because doubling the knowledge doubles the work done on every piece.<br><br>The obvious wish is to let the model switch on only the handful of its parts that matter for the piece in front of it, and leave the rest idle. The obstacle is learning. Picking 'these parts, not those' is a hard yes-or-no choice, and a model learns only by making tiny adjustments that lower its mistakes — a hard choice offers no gentle slope to adjust along. And the lazy escape — softly running <em>all</em> the parts a little and blending them — brings back exactly the full cost you were trying to avoid.<br><br>So the real problem is sharp: build a chooser that switches on a genuine small subset of the model's parts, cheaply, yet can still be improved by small nudges — and, as we will see, keep that chooser from quietly collapsing into always picking the same part.</p>
 <h2>The core ideas — and why they work</h2>

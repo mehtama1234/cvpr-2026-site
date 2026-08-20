@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Associative memory (Hopfield → attention) · the mathematics · first principles, no jargon</div>
 <h1>Associative memory (Hopfield → attention) — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A memory system should recover a stored pattern from a partial or noisy cue, not only store exact copies.</p><p><b>The mathematical move.</b> The principle is energy descent. Stored patterns are made into low-score states, and the update rule moves the current state toward lower score.</p><p><b>What changes.</b> Recall becomes a dynamics problem. A broken cue can roll toward the nearest stored pattern. Modern attention keeps the same retrieval spirit but uses soft, continuous matching.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>When you remember something, you don't look it up by a file number. You recognize it by its shape—a few features are enough to pull the whole memory into mind. A face in a crowd, the opening notes of a song, the smell of coffee that summons a morning from years ago. The hard part is that these fragments are noisy and incomplete. Your brain somehow reaches into its store, finds the nearest neighbor to that rough input, and delivers back the full, clean version.<br><br>Building a system that does this is a puzzle. You could store each memory at an exact number (like a computer address), but then a slightly corrupted version—a face half-hidden, or a melody played in a different key—would miss entirely. Or you could search all stored memories to find the closest one, but that search gets slower the more you remember. What you really need is a trick: encode the stored memories in such a way that a partial, noisy cue automatically steers itself toward the right full memory, like water running downhill finding the valley floor.</p>
 <h2>The core ideas — and why they work</h2>

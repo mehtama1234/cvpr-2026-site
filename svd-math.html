@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">SVD, PCA &amp; low-rank structure · the mathematics · first principles, no jargon</div>
 <h1>SVD, PCA &amp; low-rank structure — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A large matrix can look like many unrelated numbers, even when most of its useful variation follows a few patterns.</p><p><b>The mathematical move.</b> The principle is ranked directions of stretch. SVD breaks a matrix into directions and singular values, ordered by how much energy each direction carries.</p><p><b>What changes.</b> The table stops being a wall of entries. You can keep the strongest directions, drop small ones, and know exactly how much squared error that choice creates.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you have a table of numbers — maybe pixels in an image, or measurements across many sensors, or price movements of a thousand stocks. The table is often huge: millions of entries. Directly working with all of them is slow and wasteful. The vast majority of what happens in the table follows just a few patterns — the main directions along which the numbers actually change. Strip down to those patterns, and you keep the essential information while discarding the noise and the redundant stuff. But how do you find those patterns automatically, without knowing in advance what you are looking for?</p>
 <h2>The core ideas — and why they work</h2>

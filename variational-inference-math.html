@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Variational inference · the mathematics · first principles, no jargon</div>
 <h1>Variational inference — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Exact posterior belief over hidden causes is often too expensive. The desired answer is clear but not usable.</p><p><b>The mathematical move.</b> The principle is approximate belief by optimization. Pick a simpler family of distributions and move it toward the true posterior by optimizing a lower bound or a divergence.</p><p><b>What changes.</b> Inference stops being an impossible exact sum. It becomes a fit: choose the closest usable belief shape and know what approximation you are making.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Imagine you observe some data and want to understand the hidden causes behind it. The "true answer" is a probability shape that would perfectly explain how the hidden parts and visible parts fit together. Computing this exact shape requires adding up infinitely many possibilities in a way that is just not doable—it's mathematically intractable.<br><br>So instead of finding the true answer, you play a different game: pick a shape from a simple family of shapes that are fast to work with, and make it as close as possible to the unreachable true answer. The problem is you cannot directly measure how close they are. You need a trick that lets you measure something simpler instead.</p>
 <h2>The core ideas — and why they work</h2>

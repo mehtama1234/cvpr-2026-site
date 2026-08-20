@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Neural ODEs · the mathematics · first principles, no jargon</div>
 <h1>Neural ODEs — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many real systems change continuously, while ordinary networks often pretend change happens in fixed jumps.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> Some systems change continuously, not in neat layer-sized jumps. A fixed stack of layers can be a poor fit for motion, flows, and processes where time itself is part of the structure.</p><p><b>The mathematical move.</b> The principle is learning a velocity field. A neural ODE says the state changes according to a learned derivative, and the final state is found by integrating that derivative through time.</p><p><b>What changes.</b> A network stops being only a list of blocks and becomes a learned process. Depth becomes time. This gives flexible continuous motion, but the solver and the learned field must stay stable.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A deep network transforms its input by passing it through a stack of layers, each one nudging the running value a little closer to the final answer. The number of layers is fixed in advance, baked into the design.<br><br>But look closely at what a stack of 'add a small nudge' layers is doing, step after step, and it is exactly how you would trace out smooth motion in tiny time-steps — following a current for a while. That suggests a reframing: what if the transformation were a genuinely continuous flow, governed by a single rule that says, at any moment, which way and how fast to move — and the network's 'depth' became simply how long you let that flow run? The problem this opens up is how to make such a continuous-flow network real: how to train the rule of the flow, what it can and cannot do, and what you gain by letting a smart simulator, rather than a fixed layer count, decide how finely to trace the motion.</p>
 <h2>The core ideas — and why they work</h2>

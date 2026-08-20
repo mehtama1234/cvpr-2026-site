@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Backpropagation · the mathematics · first principles, no jargon</div>
 <h1>Backpropagation — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A model&#x27;s final error is one number, but the model may contain billions of internal numbers. Each one needs to know how it contributed to that error.</p><p><b>The mathematical move.</b> The principle is the chain rule as blame accounting. Each operation knows its local sensitivity, and multiplying those local sensitivities backward gives the effect of an early number on the final loss.</p><p><b>What changes.</b> Learning stops testing weights one by one. One backward pass turns the final error into update directions for all parameters. The same long product also explains why gradients can vanish or explode.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A network turns an input into an answer by pushing it through a long chain of small numeric operations, each governed by adjustable numbers — often billions of them. When the answer comes out wrong, learning means nudging each of those numbers in the direction that would have made the answer a little better.<br><br>But that requires knowing, for every single one of the billion numbers, how much it contributed to the error — its share of the blame. The brute-force way is unthinkable: wiggle one number, re-run the whole network, see how the error changed, then repeat a billion times. That is a billion full network-runs for a single learning step. The problem is to get every number's blame-share at once, cheaply enough that training is actually possible — and to understand why, done naively, that blame can fade to nothing or blow up as it travels through a deep network.</p>
 <h2>The core ideas — and why they work</h2>

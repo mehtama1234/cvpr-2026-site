@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Normalizing flows · the mathematics · first principles, no jargon</div>
 <h1>Normalizing flows — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because it gives exact probability, not just samples. The price is that the transformation must stay reversible.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> We want a generator that can both sample data and know exact likelihood. Many generators can do one of those well but not the other.</p><p><b>The mathematical move.</b> The principle is invertible change of variables. A normalizing flow transforms simple noise into data through reversible steps, and the determinant of each step tracks how volume changes.</p><p><b>What changes.</b> Generation and density evaluation become two sides of the same map. The price is architectural: every step must stay invertible, which limits what the model can do easily.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Two things you often want from a model of some data: to generate fresh realistic samples, and to say exactly how likely any particular sample is. Most methods do one of these well and only estimate the other.<br><br>A normalizing flow aims for both at once by a single trick: connect an easy starting cloud of random points — arranged in a simple bell shape, whose density you know everywhere — to the complicated data, using a smooth, fully reversible reshaping. The hard part is keeping the probabilities honest. When you reshape a cloud, you stretch some regions and squeeze others, and that changes how densely the points are packed. So the real problem is to build a reshaping powerful enough to turn a plain bell into complicated data, reversible enough to run both ways, and simple enough that you can exactly track how much it stretches the density at every point — because without that last piece the likelihoods are meaningless.</p>
 <h2>The core ideas — and why they work</h2>

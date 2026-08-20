@@ -84,6 +84,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .fail p{font-size:14.7px;line-height:1.62;margin:10px 0;color:#23302C}
 .fail b{color:var(--ink)}
 
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">The Fourier view (frequency) · the mathematics · first principles, no jargon</div>
 <h1>The Fourier view (frequency) — why it works, mathematically</h1>
@@ -91,6 +97,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#subthemes">Every approach</a><a href="math.html">The mathematics ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A signal may look tangled as raw values: blur, noise, edges, and repeating patterns are mixed together.</p><p><b>The mathematical move.</b> The principle is change of basis into waves. Fourier analysis rewrites the signal as amounts of pure frequencies. Slow waves carry broad structure; fast waves carry sharp changes.</p><p><b>What changes.</b> Filtering, compression, denoising, and convolution become easier because the parts are separated. You can act on frequencies directly instead of guessing from the raw signal.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>Suppose you record a sound. When you look at the raw numbers—the air pressure at each moment—it looks like random wiggles. You cannot tell whether it is a musical note, speech, noise, or a mix of everything. But if you could see which pure waves are hiding inside it, you would know instantly: a musical note is a few strong pure waves; speech is thousands of weak waves spread everywhere; white noise is every frequency equally loud.
 

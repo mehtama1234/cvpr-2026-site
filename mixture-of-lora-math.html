@@ -65,6 +65,12 @@ a.pcard:hover .pcarrow{opacity:1}
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h3{margin:0 0 8px;font-size:16px;color:var(--accent-deep)}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.turn{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;background:#eef6f6}
+.turn h2{margin-top:0}
+.turn p{font-size:14.8px;line-height:1.63;margin:10px 0;color:#23302C}
+.turn b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Mixture of LoRA · the mathematics · first principles, no jargon</div>
 <h1>Mixture of LoRA — why it works, mathematically</h1>
@@ -84,6 +90,7 @@ a.pcard:hover .pcarrow{opacity:1}
 <p>It matters because many users need custom behavior, but copying and retraining a huge model for every case is wasteful.</p>
 </div>
 
+<!-- depth-key-turn:start --><section class="turn" id="key-turn"><h2>The key turn — the principle at work</h2><p><b>The stuck point.</b> A full model update is huge, but most tasks only need a small change in behavior. Storing a separate full model for each task wastes memory and makes switching expensive.</p><p><b>The mathematical move.</b> The principle is low-rank change. LoRA writes the task update as the product of two small matrices, so the change can only move in a few learned directions. A mixture adds routing: different inputs combine different small updates.</p><p><b>What changes.</b> Adaptation stops meaning &#x27;copy and rewrite the whole model.&#x27; It becomes &#x27;learn a few useful change directions and choose among them.&#x27; The risk is that too few directions miss the task, while too many lose the point of compression.</p></section><!-- depth-key-turn:end -->
 <h2>The problem, as a quantity</h2>
 <p>A big pretrained model is expensive to retrain — it holds billions of adjustable numbers, and adjusting all of them to add one narrow skill is enormously costly. You want to teach it many skills without paying that price each time, and you want the skills to stay clean: adding a new one should not blur or overwrite the old ones, and you should be able to mix them as a task demands.<br><br>So the problem has three parts. Make each new skill cheap to learn and cheap to run. Let the model decide, per input, which skills to bring to bear. And add skills side by side so they accumulate rather than collide. The pieces that follow solve each part in turn, and together they turn one frozen base model into a growing library of combinable skills.</p>
 <h2>The core ideas — and why they work</h2>
