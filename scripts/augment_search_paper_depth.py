@@ -15,6 +15,7 @@ CSS = """
 .paper-depth{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;background:#fffdf4;padding:10px 12px;margin:9px 0}
 .paper-depth p{font-size:13.7px;line-height:1.58;margin:6px 0;color:#23302C}
 .paper-depth b{color:var(--ink)}
+.review-links{font-family:var(--mono);font-size:12px;margin:7px 0}.review-links a{margin-right:10px}
 """
 
 THEME = {
@@ -172,23 +173,35 @@ def depth_for(record: dict) -> dict:
 
 
 def upsert_css(text: str) -> str:
-    if ".paper-depth{" in text:
-        return text
-    return text.replace("</style>", CSS + "\n</style>", 1)
+    if ".paper-depth{" not in text:
+        return text.replace("</style>", CSS + "\n</style>", 1)
+    if ".review-links{" not in text:
+        return text.replace("</style>", ".review-links{font-family:var(--mono);font-size:12px;margin:7px 0}.review-links a{margin-right:10px}\n</style>", 1)
+    return text
 
 
 def upsert_render(text: str) -> str:
     if "paper-depth:start" in text:
-        return (
+        text = (
             text.replace("Hidden thing.", "Hidden quantity.")
             .replace("Math rule.", "Mathematical rule.")
             .replace("Why the simple method fails.", "Why the naive version fails.")
             .replace("What would prove it.", "Evidence that would prove it.")
             .replace("What would break it.", "Counterexample.")
         )
+        if "reviewHref(d)" not in text:
+            marker = "   ${d.pd?`<!-- paper-depth:start -->"
+            text = text.replace(
+                marker,
+                '   <p class="review-links"><a href="${reviewHref(d)}">review this paper</a><a href="${qualityHref(d)}">quality audit</a><a href="${searchHref(d)}">paper permalink</a></p>\n'
+                + marker,
+                1,
+            )
+        return text
     old = "   ${d.ff?`<p><b>Paper focus.</b> ${esc(d.ff)}</p>`:''}\n   <p>${esc(d.p)}</p>"
     new = (
         "   ${d.ff?`<p><b>Paper focus.</b> ${esc(d.ff)}</p>`:''}\n"
+        "   <p class=\"review-links\"><a href=\"${reviewHref(d)}\">review this paper</a><a href=\"${qualityHref(d)}\">quality audit</a><a href=\"${searchHref(d)}\">paper permalink</a></p>\n"
         "   ${d.pd?`<!-- paper-depth:start --><div class=\"paper-depth\"><p><b>Deeper first-principles read.</b> ${esc(d.pd.s)}</p><p><b>Hidden quantity.</b> ${esc(d.pd.h)}</p><p><b>Evidence.</b> ${esc(d.pd.e)}</p><p><b>Mathematical rule.</b> ${esc(d.pd.m)}</p><p><b>Why the naive version fails.</b> ${esc(d.pd.n)}</p><p><b>Evidence that would prove it.</b> ${esc(d.pd.p)}</p><p><b>Counterexample.</b> ${esc(d.pd.b)}</p></div><!-- paper-depth:end -->`:''}\n"
         "   <p>${esc(d.p)}</p>"
     )
@@ -219,6 +232,18 @@ def upsert_search_depth_filter(text: str) -> str:
     elif "pd.s,pd.h,pd.e,pd.m,pd.n,pd.p,pd.b" not in text:
         raise ValueError("missing search filter insertion point")
     old_init = "const q=document.getElementById('q'),th=document.getElementById('th'),cc=document.getElementById('code'),res=document.getElementById('res'),nn=document.getElementById('n');"
+    helpers = (
+        "function paperParams(d){const p=new URLSearchParams(); p.set('q',d.t||''); if(d.th)p.set('theme',d.th); return p.toString();}\n"
+        "function reviewHref(d){return `paper-review-queue.html#${paperParams(d)}`;}\n"
+        "function qualityHref(d){const p=new URLSearchParams(); p.set('q',d.t||''); return `paper-note-quality.html#${p}`;}\n"
+        "function searchHref(d){return `search.html?${paperParams(d)}`;}"
+    )
+    if "function reviewHref(d)" not in text:
+        text = text.replace(
+            "function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}",
+            "function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}\n" + helpers,
+            1,
+        )
     new_init = (
         "const q=document.getElementById('q'),th=document.getElementById('th'),cc=document.getElementById('code'),res=document.getElementById('res'),nn=document.getElementById('n');\n"
         "const rawParams=location.search?location.search:location.hash.replace(/^#/,'?'); const params=new URLSearchParams(rawParams); q.value=params.get('q')||''; th.value=params.get('theme')||''; cc.checked=params.get('code')==='1';"
