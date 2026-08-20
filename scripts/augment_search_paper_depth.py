@@ -25,6 +25,7 @@ THEME = {
         "naive": "the simple method treats every input as a normal image, so it can mistake sensor noise, timing artifacts, or a fake clue for real structure",
         "proof": "the claim gets stronger when controlled changes in the hidden cause create the expected change in the measured signal and in the model output",
         "break": "it breaks if the method gives the same confident answer after the sensor cue, provenance mark, or scientific signal is removed or scrambled",
+        "prompt": "Read this as a measurement claim: the paper must show which hard signal is being recovered, what noise or nuisance is being separated away, and why the output follows the measurement rather than a convenient visual prior.",
     },
     "threed": {
         "hidden": "the 3D world that caused the flat pictures: depth, camera position, surface shape, empty space, material, and sometimes motion",
@@ -33,6 +34,7 @@ THEME = {
         "naive": "the simple method fits each view separately, which can make a good-looking front view while hiding wrong depth, floating surfaces, or broken scale",
         "proof": "the claim gets stronger when the same recovered scene explains views the model did not directly optimize for",
         "break": "it breaks if moving the camera reveals that surfaces jump, depth flips, objects float, or the same point lands in different places across views",
+        "prompt": "Read this as an inverse-geometry claim: the paper must show how flat evidence is constrained into one shared 3D world, and where ambiguity, scale, or view inconsistency would otherwise enter.",
     },
     "video": {
         "hidden": "the changing state through time: object identity, motion, camera movement, cause, and what should remain the same from frame to frame",
@@ -41,6 +43,7 @@ THEME = {
         "naive": "the simple method predicts or edits each frame on its own, so small mistakes become flicker, identity swaps, or drift over many steps",
         "proof": "the claim gets stronger when identity, geometry, and cause stay stable even after occlusion, fast motion, or a long generated sequence",
         "break": "it breaks if the first frame and later frame cannot be explained by the same object, camera path, or physical event",
+        "prompt": "Read this as a time-state claim: the paper must show what is carried forward across frames, what is allowed to change, and how it prevents small errors from turning into drift.",
     },
     "generation": {
         "hidden": "the rule for making a valid image: identity, layout, style, geometry, text instruction, and the range of outputs that still satisfy the request",
@@ -49,6 +52,7 @@ THEME = {
         "naive": "the simple method makes something plausible-looking but may ignore the instruction, change identity, alter layout, or invent details not supported by the condition",
         "proof": "the claim gets stronger when changing one condition changes only the intended part of the output while the protected parts stay fixed",
         "break": "it breaks if a beautiful sample violates the prompt, loses the reference identity, changes the wrong region, or cannot repeat the requested control",
+        "prompt": "Read this as a controlled-sampling claim: the paper must show how randomness is pushed toward the requested output while preserving the parts the condition says should not move.",
     },
     "vlm": {
         "hidden": "the grounded claim: which words, answers, tool actions, or reasoning steps are actually supported by visible evidence",
@@ -57,6 +61,7 @@ THEME = {
         "naive": "the simple method lets language habit fill gaps, so it can produce a fluent answer that is not tied to the picture",
         "proof": "the claim gets stronger when removing or changing the relevant visual evidence changes the answer, explanation, or action in the right way",
         "break": "it breaks if the model keeps the same confident answer when the object is hidden, replaced, moved, or contradicted by the image",
+        "prompt": "Read this as a grounding claim: the paper must show which words, answers, or actions are forced by visual evidence and which would disappear if that evidence changed.",
     },
     "perceive": {
         "hidden": "the set of things in the image: object identity, box, mask, boundary, part, pose, count, or relationship",
@@ -65,6 +70,7 @@ THEME = {
         "naive": "the simple method classifies local patches or pixels alone, so it can merge nearby objects, miss thin parts, duplicate one object, or trust background shortcuts",
         "proof": "the claim gets stronger when the predicted object, boundary, or part changes exactly when the real object, boundary, or part changes",
         "break": "it breaks if similar objects are merged, rare objects vanish, boxes attach to the wrong evidence, or masks look smooth while cutting off important parts",
+        "prompt": "Read this as a structured-assignment claim: the paper must show how pixels, boxes, masks, parts, or labels are assigned without merging distinct things or trusting background shortcuts.",
     },
     "embodied": {
         "hidden": "the action-relevant state: goal, object pose, contact, friction, safety margin, future consequence, and what the agent cannot directly see",
@@ -73,6 +79,7 @@ THEME = {
         "naive": "the simple method maps the current image straight to an action, so it can ignore hidden state, delayed harm, contact physics, or uncertainty",
         "proof": "the claim gets stronger when the same policy succeeds after changes in viewpoint, object placement, timing, or physical conditions",
         "break": "it breaks if the action looks reasonable in the current frame but causes a later crash, missed grasp, unsafe motion, or simulator-only success",
+        "prompt": "Read this as an action-under-uncertainty claim: the paper must show how visual evidence becomes a safe future action rather than a reaction to the current frame alone.",
     },
     "learning": {
         "hidden": "the useful rule inside the data: what should transfer, what should adapt, what should be compressed, and what must not be forgotten",
@@ -81,6 +88,7 @@ THEME = {
         "naive": "the simple method updates everything or averages everything, so it can overfit, erase old skills, copy teacher mistakes, or waste compute on unimportant parts",
         "proof": "the claim gets stronger when the update improves the target case without damaging old behavior, rare cases, or calibration",
         "break": "it breaks if a gain on the new task comes from forgetting, shortcut learning, unstable gradients, or a compressed model that loses the hard examples",
+        "prompt": "Read this as a controlled-update claim: the paper must show what changes in the model, what stays protected, and why the update helps without erasing or overfitting.",
     },
 }
 
@@ -93,6 +101,7 @@ KEYWORDS = [
         "naive": "the simple method lets the generator paint a likely image even when the brain evidence is weak or ambiguous",
         "proof": "the claim gets stronger when different stimuli create reliably different decoded content for the same subject and across subjects",
         "break": "it breaks if many different stimuli collapse into the same pleasant reconstruction or if the output follows the image prior more than the brain signal",
+        "prompt": "Read this as a noisy-decoding claim: the paper must show that the recovered content follows the measured brain signal, not just the generator's favorite image.",
     }),
     (("event-camera", "event camera", "spike", "spiking", "neuromorphic"), {
         "hidden": "the sharp motion signal that happened between normal camera frames",
@@ -101,6 +110,7 @@ KEYWORDS = [
         "naive": "the simple method treats events like a blurry picture, losing the very timing information that made the sensor useful",
         "proof": "the claim gets stronger when fast motion becomes sharper without damaging still regions",
         "break": "it breaks if the output is clean only for slow scenes and fails exactly when motion is fast, dark, or partly hidden",
+        "prompt": "Read this as a timing claim: the paper must show that event or spike timing recovers information a normal frame missed, especially under fast motion or low light.",
     }),
     (("benchmark", "dataset", "testbed", "evaluation"), {
         "hidden": "the ability the test is supposed to measure, separated from shortcuts that only pass the test format",
@@ -109,6 +119,7 @@ KEYWORDS = [
         "naive": "the simple method counts a score without asking whether the examples isolate the intended ability",
         "proof": "the claim gets stronger when models that truly handle the hidden ability score higher across controlled variants",
         "break": "it breaks if a model can win by memorizing templates, exploiting dataset bias, or optimizing the metric while failing the intended task",
+        "prompt": "Read this as a measurement-validity claim: the paper must show that its dataset, benchmark, or metric measures the intended ability rather than a shortcut in the test design.",
     }),
     (("adversarial", "attack", "backdoor", "poison", "jailbreak", "watermark", "provenance"), {
         "hidden": "the smallest hidden change that can flip, fake, steal, or misattribute the model output",
@@ -117,6 +128,7 @@ KEYWORDS = [
         "naive": "the simple method checks normal examples only, so it misses failures placed just outside the usual data",
         "proof": "the claim gets stronger when the defense or detector still works after realistic transformations and unseen attacks",
         "break": "it breaks if the protection works only for known attacks or disappears after common edits, compression, cropping, or sensor changes",
+        "prompt": "Read this as a worst-case-risk claim: the paper must show what harmful change is allowed, how close it is to normal data, and why the defense survives unseen variants.",
     }),
     (("architecture", "nas", "automl", "fine-tuning", "distillation", "continual", "federated", "compression", "pruning", "quantization", "gradient"), THEME["learning"]),
     (("depth", "3d", "pose", "reconstruction", "view", "gaussian", "splat", "nerf", "point cloud"), THEME["threed"]),
@@ -155,7 +167,7 @@ def depth_for(record: dict) -> dict:
         "n": lens["naive"],
         "p": lens["proof"],
         "b": lens["break"],
-        "s": f"{title} should be read as a claim about this hidden thing, not as a claim that a new model name is automatically better.",
+        "s": f"{title}: {lens["prompt"]}",
     }
 
 
