@@ -47,6 +47,7 @@ def render() -> str:
     subdeep_total, subdeep_covered = count_pages("*-deep-reads.html", "dr-math-lens:start", exclude={"deep-reads.html"})
     cluster_total, cluster_covered = count_pages("cluster-*.html", "cluster-principles:start")
     deepdives_total, deepdives_covered = count_pages("*-deepdive.html", "mathematical principles underneath")
+    cvpr_total, cvpr_covered = count_pages("cvpr-*.html", "decision-math:start")
 
     deep = (ROOT / "deep-reads.html").read_text(encoding="utf-8")
     cards = deep.count('<div class="pc"')
@@ -64,6 +65,7 @@ def render() -> str:
         ("subtheme deep reads", f"{subdeep_covered}/{subdeep_total}", "paper-block math lenses"),
         ("cluster pages", f"{cluster_covered}/{cluster_total}", "cluster principle bridges"),
         ("broad theme pages", f"{deepdives_covered}/{deepdives_total}", "theme principle modules"),
+        ("cvpr operational pages", f"{cvpr_covered}/{cvpr_total}", "decision math for gates and demos"),
         ("standout papers", f"{card_lenses}/{cards}", "paper-card mathematical lenses"),
         ("subtheme paper blocks", f"{sub_lenses}/{sub_blocks}", "hidden/evidence/objective/failure"),
         ("usage patterns", f"{pattern_moves}/{pattern_blocks}", "quantity/rule/why-this-use"),
