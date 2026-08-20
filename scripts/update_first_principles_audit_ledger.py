@@ -106,7 +106,7 @@ def render() -> str:
         ("subtheme paper blocks", f"{sub_lenses}/{sub_blocks}", "hidden/evidence/objective/failure"),
         ("usage patterns", f"{pattern_moves}/{pattern_blocks}", "quantity/rule/why-this-use"),
         ("subtheme families", f"{family_principles}/{family_blocks}", "hidden quantity / evidence / equation / counterexample"),
-        ("search paper notes", f"{paper_depth_covered}/{paper_depth_total}", "hidden thing / evidence / rule / proof / break"),
+        ("search paper notes", f"{paper_depth_covered}/{paper_depth_total}", "hidden quantity / evidence / mathematical rule / proof / counterexample"),
         ("cluster paper rows", f"{cluster_paper_depth}/{cluster_paper_blocks}", "same paper-depth reused in paper-family lists"),
     ]
     grid = "".join(f'<div class="cell"><b>{value}</b><span>{name}</span><p>{note}</p></div>' for name, value, note in cells)
