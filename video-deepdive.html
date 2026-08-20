@@ -37,6 +37,18 @@
  .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
  footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
  a{color:var(--accent-deep)}
+
+.bridge{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;padding:18px 20px;margin:22px 0;background:#f4faf6}
+.bridge h2{margin-top:0}
+.bridge .bintro{font-size:15.5px;line-height:1.65;color:#23302C;margin:10px 0 16px}
+.blink{margin:10px 0 16px}
+.blink .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);display:block;margin-bottom:6px}
+.blink a{display:inline-block;font-size:13px;border:1px solid var(--line);border-radius:18px;padding:3px 10px;margin:3px 4px 3px 0;background:#fff;text-decoration:none;color:var(--accent-deep)}
+.bitem{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}
+.bitem h3{font-size:17px;margin:0 0 7px;color:var(--accent-deep)}
+.bitem p{font-size:14.7px;line-height:1.62;margin:8px 0;color:#23302C}
+.bitem b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CVPR 2026 · topic deep dive</div><h1>Seeing and making things that move</h1><p>adding the dimension of time — understanding and generating video</p></div></header><nav><div class="wrap"><a href="index.html">← All themes</a><a href="#overview">Overview</a><a href="#subthemes">Sub-themes</a><a href="#papers">The papers</a></div></nav><style>
  .dframe{position:relative;border:1px solid #1E2A33;border-radius:9px 9px 0 0;overflow:hidden;background:#0D131A}
@@ -61,7 +73,7 @@
 
 <p>Why does this matter? Video is how humans learn to understand the world. Every embodied agent—robot, animal, human child—learns by observing and acting on sequences. Autonomous vehicles must predict pedestrian motion. Doctors must track pathology evolution in ultrasound or surgery. Content creators must control both what appears and how it changes. The gap between understanding static scenes and understanding their unfolding over time is the gap between passive observation and active decision-making.</p>
 
-<h2>The approaches — how the field tackles it</h2>
+<!-- broad-principles:start --><section class="bridge" id="math-principles"><h2>The mathematical principles underneath video</h2><p class="bintro">Video is not many images pasted together. The extra thing is time. Time creates identity, motion, cause, and drift. A model has to decide what stayed the same, what moved, what disappeared, and what the next frame is allowed to be.</p><div class="blink"><span class="lbl">Math pages to keep open</span><a href="flow-math.html">motion fields</a><a href="video-math.html">time and state</a><a href="mamba-math.html">compressed history</a><a href="wm-math.html">future prediction</a><a href="diffusion-math.html">generated paths</a></div><div class="bitem"><h3>Identity must persist through change</h3><p><b>Everyday evidence.</b> A person walking behind a pole is still the same person after they come out. A point on a hand should stay attached to that hand as the hand moves.</p><p><b>Fundamental math principle.</b> The principle is temporal correspondence. The model must match entities across frames under motion, deformation, occlusion, and viewpoint change.</p><p><b>How it shows up in the papers.</b> Tracking, optical flow, video segmentation, point tracking, and object persistence papers all ask which thing at time t is the same thing at time t plus one.</p></div><div class="bitem"><h3>Motion is a field, not a label</h3><p><b>Everyday evidence.</b> A frame difference can show that something changed, but not cleanly where every part went.</p><p><b>Fundamental math principle.</b> The principle is vector-valued change over space and time. Optical flow and motion fields assign local arrows, while video models learn longer-range state updates.</p><p><b>How it shows up in the papers.</b> Flow, action, video prediction, and temporal reconstruction papers use motion fields or hidden state to make change measurable.</p></div><div class="bitem"><h3>Long memory is expensive</h3><p><b>Everyday evidence.</b> To understand a long video, a model may need a fact from many seconds ago. Rereading every frame against every other frame is too costly.</p><p><b>Fundamental math principle.</b> The principle is temporal compression. The model must keep a state, memory, or sparse set of important tokens that preserves what later frames need.</p><p><b>How it shows up in the papers.</b> Long-video transformers, Mamba-style sequence models, memory banks, token pruning, and video diffusion papers all choose what past evidence is worth carrying forward.</p></div><div class="bitem"><h3>Generated time must obey consistency</h3><p><b>Everyday evidence.</b> A generated image can look good alone. A generated video fails if a face changes identity, an object flickers, or motion breaks physics.</p><p><b>Fundamental math principle.</b> The principle is sequential constraint. Each frame must be plausible by itself and compatible with the frames around it. The distribution is over paths, not isolated images.</p><p><b>How it shows up in the papers.</b> Video diffusion, world-model, temporal editing, and controllable-video papers are judged by path consistency: appearance, geometry, action, and cause over time.</p></div></section><!-- broad-principles:end --><h2>The approaches — how the field tackles it</h2>
 
 <h3>Motion as a learnable representation</h3>
 

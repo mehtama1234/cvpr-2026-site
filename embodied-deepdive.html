@@ -37,6 +37,18 @@
  .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
  footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
  a{color:var(--accent-deep)}
+
+.bridge{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;padding:18px 20px;margin:22px 0;background:#f4faf6}
+.bridge h2{margin-top:0}
+.bridge .bintro{font-size:15.5px;line-height:1.65;color:#23302C;margin:10px 0 16px}
+.blink{margin:10px 0 16px}
+.blink .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);display:block;margin-bottom:6px}
+.blink a{display:inline-block;font-size:13px;border:1px solid var(--line);border-radius:18px;padding:3px 10px;margin:3px 4px 3px 0;background:#fff;text-decoration:none;color:var(--accent-deep)}
+.bitem{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}
+.bitem h3{font-size:17px;margin:0 0 7px;color:var(--accent-deep)}
+.bitem p{font-size:14.7px;line-height:1.62;margin:8px 0;color:#23302C}
+.bitem b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CVPR 2026 · topic deep dive</div><h1>Using vision to act in the world</h1><p>closing the loop — from seeing to deciding to moving</p></div></header><nav><div class="wrap"><a href="index.html">← All themes</a><a href="#overview">Overview</a><a href="#subthemes">Sub-themes</a><a href="#papers">The papers</a></div></nav><style>
  .dframe{position:relative;border:1px solid #1E2A33;border-radius:9px 9px 0 0;overflow:hidden;background:#0D131A}
@@ -61,7 +73,7 @@
 
 <p>The core tension is this: autonomy requires breaking the classical pipeline. You cannot have a perception module that hands off clean semantic labels to a decision module that hands off clean commands to a control module. Instead, the agent must learn to see and act as a unified process, where visual information shapes action selection in flight, and action outcomes reshape what the agent looks for next.</p>
 
-<h2>The approaches — how the field tackles it</h2>
+<!-- broad-principles:start --><section class="bridge" id="math-principles"><h2>The mathematical principles underneath embodied vision</h2><p class="bintro">Embodied vision closes the loop. Seeing is no longer only description; it changes what a robot or car does next. The first-principles problem is that perception errors become physical errors.</p><div class="blink"><span class="lbl">Math pages to keep open</span><a href="rl-math.html">future reward</a><a href="q-learning-math.html">stored value</a><a href="wm-math.html">learned futures</a><a href="vla-math.html">vision to action</a><a href="kalman-filter-math.html">hidden state</a><a href="uncertainty-math.html">safe doubt</a></div><div class="bitem"><h3>Action depends on hidden state</h3><p><b>Everyday evidence.</b> A robot sees one camera view, but the real state includes object weight, friction, contact, goal, and what happened a moment ago.</p><p><b>Fundamental math principle.</b> The principle is partial observability. The policy must act from incomplete evidence, often by carrying memory or estimating a hidden state.</p><p><b>How it shows up in the papers.</b> Robot policy, driving, navigation, manipulation, and world-model papers all try to infer enough hidden state to act safely.</p></div><div class="bitem"><h3>Reward is delayed</h3><p><b>Everyday evidence.</b> A steering choice may look fine now and cause trouble later. A grasp may look awkward now but lead to success.</p><p><b>Fundamental math principle.</b> The principle is future return. Reinforcement learning values actions by the outcomes they lead to over time, not only by the immediate result.</p><p><b>How it shows up in the papers.</b> RL, imitation, planning, driving policy, and VLA papers all deal with credit assignment across action sequences.</p></div><div class="bitem"><h3>Plans need a model of what changes</h3><p><b>Everyday evidence.</b> Before moving, an agent benefits from asking what will happen if it moves left, speeds up, grasps here, or waits.</p><p><b>Fundamental math principle.</b> The principle is predictive dynamics. A world model or planner estimates how state changes under action, allowing search before real-world commitment.</p><p><b>How it shows up in the papers.</b> World models, model-predictive control, diffusion policies, trajectory generation, and navigation papers all learn or use dynamics.</p></div><div class="bitem"><h3>Safety is a constraint, not an afterthought</h3><p><b>Everyday evidence.</b> In a deployed robot or car, a rare failure can matter more than average accuracy.</p><p><b>Fundamental math principle.</b> The principle is constrained decision-making under uncertainty. The action must satisfy safety margins, physical limits, and uncertainty-aware checks, not only maximize expected reward.</p><p><b>How it shows up in the papers.</b> Driving safety, collision avoidance, robot reliability, uncertainty, and test-time verification papers all add checks around the action loop.</p></div></section><!-- broad-principles:end --><h2>The approaches — how the field tackles it</h2>
 
 <h3>End-to-end learning with visual representations</h3>
 

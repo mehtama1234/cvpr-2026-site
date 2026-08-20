@@ -37,6 +37,18 @@
  .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
  footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
  a{color:var(--accent-deep)}
+
+.bridge{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;padding:18px 20px;margin:22px 0;background:#f4faf6}
+.bridge h2{margin-top:0}
+.bridge .bintro{font-size:15.5px;line-height:1.65;color:#23302C;margin:10px 0 16px}
+.blink{margin:10px 0 16px}
+.blink .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);display:block;margin-bottom:6px}
+.blink a{display:inline-block;font-size:13px;border:1px solid var(--line);border-radius:18px;padding:3px 10px;margin:3px 4px 3px 0;background:#fff;text-decoration:none;color:var(--accent-deep)}
+.bitem{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}
+.bitem h3{font-size:17px;margin:0 0 7px;color:var(--accent-deep)}
+.bitem p{font-size:14.7px;line-height:1.62;margin:8px 0;color:#23302C}
+.bitem b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CVPR 2026 · topic deep dive</div><h1>Naming and locating what&#x27;s in the picture</h1><p>the classic core — turning pixels into labeled, located structure</p></div></header><nav><div class="wrap"><a href="index.html">← All themes</a><a href="#overview">Overview</a><a href="#subthemes">Sub-themes</a><a href="#papers">The papers</a></div></nav><style>
  .dframe{position:relative;border:1px solid #1E2A33;border-radius:9px 9px 0 0;overflow:hidden;background:#0D131A}
@@ -61,7 +73,7 @@
 
 <p>At its core, this is a two-way bridge problem. Pixels are low-level and local; meaning is high-level and global. You need to extract features that capture both texture and shape, learn what combinations of low-level cues predict high-level concepts, and organize those predictions into spatially coherent structures (objects, regions, scenes). The more precise and robust you want to be, the harder it becomes.</p>
 
-<h2>The approaches — how the field tackles it</h2>
+<!-- broad-principles:start --><section class="bridge" id="math-principles"><h2>The mathematical principles underneath perception</h2><p class="bintro">Perception is the classic core: find, name, outline, count, and read what is in the picture. The first-principles issue is turning a grid of brightness values into discrete things with boundaries, identities, and relations.</p><div class="blink"><span class="lbl">Math pages to keep open</span><a href="detr-math.html">set prediction</a><a href="sam-math.html">prompted masks</a><a href="slots-math.html">object grouping</a><a href="convolution-math.html">local detectors</a><a href="equivariance-math.html">known transforms</a></div><div class="bitem"><h3>A pixel is not an object</h3><p><b>Everyday evidence.</b> A cat is spread across many pixels. Some pixels belong to the cat, some to the background, and some sit on the boundary.</p><p><b>Fundamental math principle.</b> The principle is grouping. Features must be assigned to objects, regions, or parts. Segmentation, detection, and keypoint estimation are different forms of assigning pixels or patches to structured outputs.</p><p><b>How it shows up in the papers.</b> Detection, segmentation, pose, part parsing, and object-centric papers all ask how local evidence becomes object-level structure.</p></div><div class="bitem"><h3>Boundaries are decisions under uncertainty</h3><p><b>Everyday evidence.</b> Edges can be blurry, occluded, transparent, shadowed, or partly outside the image.</p><p><b>Fundamental math principle.</b> The principle is spatial classification with smoothness and evidence. The model must decide where one thing ends and another begins while respecting local texture and larger shape.</p><p><b>How it shows up in the papers.</b> SAM-like segmentation, medical segmentation, matting, edge detection, and camouflaged-object papers all depend on boundary evidence plus shape priors.</p></div><div class="bitem"><h3>Open vocabulary changes the label space</h3><p><b>Everyday evidence.</b> A fixed classifier can only name classes it was trained to name. Real users ask for any phrase.</p><p><b>Fundamental math principle.</b> The principle is label as embedding. Instead of a fixed output slot for every class, the label becomes a text vector that can be compared with visual regions.</p><p><b>How it shows up in the papers.</b> Open-vocabulary detection, grounding, zero-shot segmentation, and text-guided recognition papers all replace closed labels with language-aligned similarity.</p></div><div class="bitem"><h3>Counting and relations need structure</h3><p><b>Everyday evidence.</b> Knowing that objects are present is not enough to answer how many, which one is left of another, or whether one part belongs to another.</p><p><b>Fundamental math principle.</b> The principle is set and relation modeling. The output is not one label but a structured collection of entities and links.</p><p><b>How it shows up in the papers.</b> DETR-like set prediction, scene graphs, counting, relationship detection, and compositional perception papers all turn perception into structured prediction.</p></div></section><!-- broad-principles:end --><h2>The approaches — how the field tackles it</h2>
 
 <h3>Strong extractors: learning and refining features from the raw image</h3>
 

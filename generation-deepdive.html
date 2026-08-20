@@ -37,6 +37,18 @@
  .count{font-family:var(--mono);font-size:12px;color:var(--graphite)}
  footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
  a{color:var(--accent-deep)}
+
+.bridge{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;padding:18px 20px;margin:22px 0;background:#f4faf6}
+.bridge h2{margin-top:0}
+.bridge .bintro{font-size:15.5px;line-height:1.65;color:#23302C;margin:10px 0 16px}
+.blink{margin:10px 0 16px}
+.blink .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);display:block;margin-bottom:6px}
+.blink a{display:inline-block;font-size:13px;border:1px solid var(--line);border-radius:18px;padding:3px 10px;margin:3px 4px 3px 0;background:#fff;text-decoration:none;color:var(--accent-deep)}
+.bitem{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}
+.bitem h3{font-size:17px;margin:0 0 7px;color:var(--accent-deep)}
+.bitem p{font-size:14.7px;line-height:1.62;margin:8px 0;color:#23302C}
+.bitem b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CVPR 2026 · topic deep dive</div><h1>Making pixels from meaning</h1><p>the reverse bridge — turning an idea or instruction into an image</p></div></header><nav><div class="wrap"><a href="index.html">← All themes</a><a href="#overview">Overview</a><a href="#subthemes">Sub-themes</a><a href="#papers">The papers</a></div></nav><style>
  .dframe{position:relative;border:1px solid #1E2A33;border-radius:9px 9px 0 0;overflow:hidden;background:#0D131A}
@@ -61,7 +73,7 @@
 
 <p>The field attacks this in two main ways: by refining the core generative primitives (diffusion, flow matching, autoregressive decoding) to be faster, more controllable, and higher-fidelity; and by adding structure on top—reasoning, decomposition, language grounding, reward signals—to steer synthesis toward human intent. Neither approach is sufficient alone; the best results combine both.</p>
 
-<h2>The approaches — how the field tackles it</h2>
+<!-- broad-principles:start --><section class="bridge" id="math-principles"><h2>The mathematical principles underneath generation</h2><p class="bintro">Generation is the reverse bridge: from meaning to pixels. The hard part is that there is no single correct image. A prompt names a region of possible images, and the model must land inside that region while still looking real.</p><div class="blink"><span class="lbl">Math pages to keep open</span><a href="diffusion-math.html">noise reversal</a><a href="fm-math.html">flow fields</a><a href="gan-math.html">learned judge</a><a href="vae-math.html">tidy code</a><a href="normflow-math.html">reversible density</a><a href="information-theory-math.html">probability cost</a></div><div class="bitem"><h3>Real data is a thin target</h3><p><b>Everyday evidence.</b> Most possible pixel grids are static, nonsense, or broken shapes. Real images occupy a tiny structured part of the space.</p><p><b>Fundamental math principle.</b> The principle is distribution modeling on a manifold. The generator learns the shape of real data and then samples from it.</p><p><b>How it shows up in the papers.</b> Diffusion, flow matching, GANs, VAEs, normalizing flows, and autoregressive image models are different ways to move samples onto that thin data region.</p></div><div class="bitem"><h3>Noise gives a path into structure</h3><p><b>Everyday evidence.</b> Drawing a whole image in one step is hard. Cleaning a slightly noisy image is easier. Repeating small cleanups can make a full image.</p><p><b>Fundamental math principle.</b> The principle is learned reverse process. Diffusion corrupts data into noise, then learns the direction back from noise to data at each noise level.</p><p><b>How it shows up in the papers.</b> Image, video, 3D, action, editing, and acceleration papers all reuse this: learn a direction field that turns disorder into structured samples.</p></div><div class="bitem"><h3>Control is conditioning</h3><p><b>Everyday evidence.</b> A user does not only want a realistic image. They want this object, this pose, this layout, this identity, or this edit while the rest stays stable.</p><p><b>Fundamental math principle.</b> The principle is conditional probability. The generated sample should come from the data distribution given extra evidence: text, mask, depth, pose, reference image, camera, or trajectory.</p><p><b>How it shows up in the papers.</b> Text-to-image, controllable generation, image editing, personalization, layout control, and guided video papers differ in what evidence they condition on and how strongly it steers the sample.</p></div><div class="bitem"><h3>Fidelity and diversity pull against each other</h3><p><b>Everyday evidence.</b> A model can make safe similar outputs, or varied outputs that sometimes miss the request. Both failures matter.</p><p><b>Fundamental math principle.</b> The principle is probability mass allocation. The model must put enough mass on all valid answers without spreading mass onto invalid ones.</p><p><b>How it shows up in the papers.</b> Distillation, guidance, preference optimization, adversarial training, and evaluation papers all tune this balance: sharpness, diversity, prompt faithfulness, and safety.</p></div></section><!-- broad-principles:end --><h2>The approaches — how the field tackles it</h2>
 
 <h3>Distillation and fast sampling</h3>
 
