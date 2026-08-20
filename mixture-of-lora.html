@@ -49,10 +49,20 @@
 .tx{font-family:var(--mono);font-size:12.5px;padding:3px 5px;border:1px solid;border-radius:5px;white-space:pre}
 .bar{display:flex;height:3px;border-radius:2px;overflow:hidden}.bar span{display:block}
 .out{font-family:var(--mono);font-size:12px;color:var(--graphite);border-top:1px dashed var(--line);padding-top:8px}.out b{color:var(--ink)}
+
+.navigation-principles{border:1px solid var(--line,#d8ded8);border-left:3px solid var(--accent,#365f54);border-radius:0 12px 12px 0;background:#f7faf8;margin:18px auto;padding:16px 18px;max-width:1120px}
+.navigation-principles h2{margin:0 0 8px;font-size:20px;color:var(--ink,#16211d)}
+.navigation-principles h3{margin:0 0 6px;font-size:14px;color:var(--ink,#16211d)}
+.navigation-principles p{margin:7px 0;line-height:1.62;color:var(--muted,#46524c);font-size:14.5px}
+.navigation-principles .np-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.navigation-principles article{background:#fff;border:1px solid var(--line,#d8ded8);border-radius:8px;padding:10px 12px}
+.navigation-principles .np-links{font-size:13px}
+.navigation-principles a{color:var(--accent,#365f54)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Mixture-of-LoRA · hands-on deep-dive</div>
 <h1>Mixture-of-LoRA, built and watched</h1>
-<p>One LoRA teaches a frozen model one new skill for a few megabytes. Real systems need many at once. This is how the field composes them — with a working X-LoRA build where you can watch a learned gate route each token to the right expert.</p></div></header>
+<p>One LoRA teaches a frozen model one new skill for a few megabytes. Real systems need many at once. This is how the field composes them — with a working X-LoRA build where you can watch a learned gate route each token to the right expert.</p></div></header><!-- navigation-principles:start --><section class="navigation-principles" id="navigation-principles"><h2>How to read this page from first principles</h2><p><b>Mixture-of-LoRA, built and watched</b> is a principle index, not just a collection of links or cards. The page says: One LoRA teaches a frozen model one new skill for a few megabytes. Real systems need many at once. This is how the field composes them — with a working X-LoRA build where you can watch a learned gate route each token to the right expert.</p><div class="np-grid"><article><h3>Hidden structure</h3><p>Reuse: the same few mathematical rules keep reappearing under different names across vision papers.</p></article><article><h3>Evidence on the page</h3><p>The recurring primitive cards, math routes, and idea-graph links are evidence that different papers are sharing one underlying operation.</p></article><article><h3>Mathematical move</h3><p>The mathematical move is abstraction. Strip away implementation detail until the same operation is visible in several places: compare, compress, smooth, sample, optimize, remember, or control.</p></article><article><h3>Failure mode</h3><p>The index fails if abstraction becomes vague. A real principle must say what quantity changes, what stays fixed, and what mistake the rule is designed to prevent.</p></article></div><p class="np-links"><b>Principles underneath:</b> <a href="optimization-math.html">optimization</a> · <a href="kernels-math.html">kernels</a> · <a href="mcmc-math.html">mcmc</a>. These links connect the page-level reading move back to the reusable math pages, so the navigation layer is part of the same first-principles graph rather than a separate table of contents.</p></section><!-- navigation-principles:end -->
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="mixture-of-lora-why.html">The big picture</a><a href="lora-foundations.html">What a LoRA is</a><a href="#families">The families</a><a href="#how">How X-LoRA works</a><a href="#watch">Watch it route</a><a href="#variants">Variants</a><a href="#mixlora">MixLoRA</a><a href="#rank">Rank-as-expert</a><a href="mixture-of-lora-map.html">The design space (50+ methods)</a></div></nav>
 <div class="wrap"><article class="doc">
 

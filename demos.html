@@ -20,9 +20,19 @@
  pre{background:var(--ink);color:#D7DEDF;border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:12.5px} pre code{background:none;color:inherit;padding:0}
  .verdict{border-left:3px solid var(--good);background:#EEF5F0;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14.5px}
  a{color:var(--accent-deep)} footer{color:var(--graphite);font-family:var(--mono);font-size:12px;padding:26px 0 60px;border-top:1px solid var(--line);margin-top:24px}
+
+.navigation-principles{border:1px solid var(--line,#d8ded8);border-left:3px solid var(--accent,#365f54);border-radius:0 12px 12px 0;background:#f7faf8;margin:18px auto;padding:16px 18px;max-width:1120px}
+.navigation-principles h2{margin:0 0 8px;font-size:20px;color:var(--ink,#16211d)}
+.navigation-principles h3{margin:0 0 6px;font-size:14px;color:var(--ink,#16211d)}
+.navigation-principles p{margin:7px 0;line-height:1.62;color:var(--muted,#46524c);font-size:14.5px}
+.navigation-principles .np-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.navigation-principles article{background:#fff;border:1px solid var(--line,#d8ded8);border-radius:8px;padding:10px 12px}
+.navigation-principles .np-links{font-size:13px}
+.navigation-principles a{color:var(--accent,#365f54)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CVPR 2026 · see it in action</div><h1>Running the ideas, not just reading them</h1>
-<p>The themes in this corpus are built on a few open engines you can actually run. Below: real outputs we produced live — depth from one photo, segmentation from one click — plus a real CVPR 2026 paper cloned and run.</p></div></header>
+<p>The themes in this corpus are built on a few open engines you can actually run. Below: real outputs we produced live — depth from one photo, segmentation from one click — plus a real CVPR 2026 paper cloned and run.</p></div></header><!-- navigation-principles:start --><section class="navigation-principles" id="navigation-principles"><h2>How to read this page from first principles</h2><p><b>Running the ideas, not just reading them</b> is a system overview, not just a collection of links or cards. The page says: The themes in this corpus are built on a few open engines you can actually run. Below: real outputs we produced live — depth from one photo, segmentation from one click — plus a real CVPR 2026 paper cloned and run.</p><div class="np-grid"><article><h3>Hidden structure</h3><p>A pipeline: pixels, prompts, scenes, or paper claims move through stages, and each stage changes the kind of uncertainty the system carries.</p></article><article><h3>Evidence on the page</h3><p>Stage labels, demos, controls, outputs, and risk notes are evidence about where the pipeline gains information and where it can lose it.</p></article><article><h3>Mathematical move</h3><p>The mathematical move is composition. A system is not one magic function; it is several functions chained together, and the output is only as trustworthy as the weakest transformation.</p></article><article><h3>Failure mode</h3><p>The overview fails if it shows the happy path without the bottleneck: where information is compressed, where a constraint is enforced, where uncertainty should stop the system.</p></article></div><p class="np-links"><b>Principles underneath:</b> <a href="backprop-math.html">backprop</a> · <a href="kalman-filter-math.html">kalman filtering</a> · <a href="optimization-math.html">optimization</a>. These links connect the page-level reading move back to the reusable math pages, so the navigation layer is part of the same first-principles graph rather than a separate table of contents.</p></section><!-- navigation-principles:end -->
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="#sota">SOTA paper models</a><a href="#gen">Text→image</a><a href="#depth">Depth</a><a href="#seg">Segmentation</a><a href="#vlm">VLM Q&amp;A</a><a href="#gs">3D splatting</a><a href="#video">Video</a><a href="#mechanisms">Mechanisms</a><a href="#clone">Clone &amp; run a paper</a></div></nav>
 <div class="wrap">
 

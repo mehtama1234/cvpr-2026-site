@@ -53,12 +53,22 @@
 .plain{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:18px 0;background:#fbfcfb}
 .plain h2{margin:0 0 8px;font-size:20px}
 .plain p{font-size:15.5px;line-height:1.68;margin:10px 0}
+
+.navigation-principles{border:1px solid var(--line,#d8ded8);border-left:3px solid var(--accent,#365f54);border-radius:0 12px 12px 0;background:#f7faf8;margin:18px auto;padding:16px 18px;max-width:1120px}
+.navigation-principles h2{margin:0 0 8px;font-size:20px;color:var(--ink,#16211d)}
+.navigation-principles h3{margin:0 0 6px;font-size:14px;color:var(--ink,#16211d)}
+.navigation-principles p{margin:7px 0;line-height:1.62;color:var(--muted,#46524c);font-size:14.5px}
+.navigation-principles .np-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.navigation-principles article{background:#fff;border:1px solid var(--line,#d8ded8);border-radius:8px;padding:10px 12px}
+.navigation-principles .np-links{font-size:13px}
+.navigation-principles a{color:var(--accent,#365f54)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">The mathematics · the primitives beneath the field</div>
 <h1>The mathematics — the same few ideas, everywhere</h1>
 <p class="lead">Each theme has its own <em>why it works, mathematically</em> page, and the foundation pages now expose the machinery underneath. Step back across all 59
 and the striking thing is how few distinct mathematical moves recur. This page names those primitives and shows
-the new foundational lenses — bottlenecks, manifolds, scaling, and grokking — that explain why the moves work.</p></div></header>
+the new foundational lenses — bottlenecks, manifolds, scaling, and grokking — that explain why the moves work.</p></div></header><!-- navigation-principles:start --><section class="navigation-principles" id="navigation-principles"><h2>How to read this page from first principles</h2><p><b>The mathematics — the same few ideas, everywhere</b> is a principle index, not just a collection of links or cards. The page says: Each theme has its own why it works, mathematically page, and the foundation pages now expose the machinery underneath. Step back across all 59 and the striking thing is how few distinct mathematical moves recur. This page names those primitives and shows the new foundational lenses — bottlenecks, manifolds, scaling, and grokking — that explain why the moves work.</p><div class="np-grid"><article><h3>Hidden structure</h3><p>Reuse: the same few mathematical rules keep reappearing under different names across vision papers.</p></article><article><h3>Evidence on the page</h3><p>The recurring primitive cards, math routes, and idea-graph links are evidence that different papers are sharing one underlying operation.</p></article><article><h3>Mathematical move</h3><p>The mathematical move is abstraction. Strip away implementation detail until the same operation is visible in several places: compare, compress, smooth, sample, optimize, remember, or control.</p></article><article><h3>Failure mode</h3><p>The index fails if abstraction becomes vague. A real principle must say what quantity changes, what stays fixed, and what mistake the rule is designed to prevent.</p></article></div><p class="np-links"><b>Principles underneath:</b> <a href="optimization-math.html">optimization</a> · <a href="kernels-math.html">kernels</a> · <a href="mcmc-math.html">mcmc</a>. These links connect the page-level reading move back to the reusable math pages, so the navigation layer is part of the same first-principles graph rather than a separate table of contents.</p></section><!-- navigation-principles:end -->
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="course.html">Plain course spine</a><a href="hub.html">The one machine</a><a href="math-routes.html">Math routes</a><a href="#primitives">The primitives</a><a href="#all">The 35 theme pages</a><a href="#foundations">Foundations (24)</a><a href="idea-graph.html">The idea graph ↗</a></div></nav>
 <div class="wrap"><article class="doc">
 <div class="plain"><h2>Start here: the plain version</h2>

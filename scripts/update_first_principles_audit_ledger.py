@@ -11,6 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "first-principles-audit.html"
 START = "<!-- depth-ledger:start -->"
 END = "<!-- depth-ledger:end -->"
+NAV_EXCLUDE_SUFFIXES = (
+    "-math.html",
+    "-why.html",
+    "-playground.html",
+    "-in-the-wild.html",
+    "-deep-reads.html",
+    "-deepdive.html",
+)
 
 CSS = """
 .depth-ledger{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:16px 0 22px}
@@ -39,6 +47,16 @@ def count_occurrences(pattern: str, marker: str, *, exclude: set[str] | None = N
     )
 
 
+def count_navigation_pages() -> tuple[int, int]:
+    pages = [
+        p
+        for p in sorted(ROOT.glob("*.html"))
+        if not p.name.startswith(("cvpr-", "cluster-")) and not p.name.endswith(NAV_EXCLUDE_SUFFIXES)
+    ]
+    covered = sum(1 for p in pages if "navigation-principles:start" in p.read_text(encoding="utf-8", errors="ignore"))
+    return len(pages), covered
+
+
 def render() -> str:
     math_total, math_covered = count_pages("*-math.html", "The key turn")
     why_total, why_covered = count_pages("*-why.html", "Mathematical core")
@@ -48,6 +66,7 @@ def render() -> str:
     cluster_total, cluster_covered = count_pages("cluster-*.html", "cluster-principles:start")
     deepdives_total, deepdives_covered = count_pages("*-deepdive.html", "mathematical principles underneath")
     cvpr_total, cvpr_covered = count_pages("cvpr-*.html", "decision-math:start")
+    nav_total, nav_covered = count_navigation_pages()
 
     deep = (ROOT / "deep-reads.html").read_text(encoding="utf-8")
     cards = deep.count('<div class="pc"')
@@ -66,6 +85,7 @@ def render() -> str:
         ("cluster pages", f"{cluster_covered}/{cluster_total}", "cluster principle bridges"),
         ("broad theme pages", f"{deepdives_covered}/{deepdives_total}", "theme principle modules"),
         ("cvpr operational pages", f"{cvpr_covered}/{cvpr_total}", "decision math for gates and demos"),
+        ("navigation & specialty", f"{nav_covered}/{nav_total}", "first-principles page reading guides"),
         ("standout papers", f"{card_lenses}/{cards}", "paper-card mathematical lenses"),
         ("subtheme paper blocks", f"{sub_lenses}/{sub_blocks}", "hidden/evidence/objective/failure"),
         ("usage patterns", f"{pattern_moves}/{pattern_blocks}", "quantity/rule/why-this-use"),
