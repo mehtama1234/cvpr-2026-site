@@ -215,10 +215,32 @@ def upsert_search_depth_filter(text: str) -> str:
         " });"
     )
     if old in text:
-        return text.replace(old, new, 1)
-    if "pd.s,pd.h,pd.e,pd.m,pd.n,pd.p,pd.b" in text:
-        return text
-    raise ValueError("missing search filter insertion point")
+        text = text.replace(old, new, 1)
+    elif "pd.s,pd.h,pd.e,pd.m,pd.n,pd.p,pd.b" not in text:
+        raise ValueError("missing search filter insertion point")
+    old_init = "const q=document.getElementById('q'),th=document.getElementById('th'),cc=document.getElementById('code'),res=document.getElementById('res'),nn=document.getElementById('n');"
+    new_init = (
+        "const q=document.getElementById('q'),th=document.getElementById('th'),cc=document.getElementById('code'),res=document.getElementById('res'),nn=document.getElementById('n');\n"
+        "const rawParams=location.search?location.search:location.hash.replace(/^#/,'?'); const params=new URLSearchParams(rawParams); q.value=params.get('q')||''; th.value=params.get('theme')||''; cc.checked=params.get('code')==='1';"
+    )
+    old_params = "const params=new URLSearchParams(location.search); q.value=params.get('q')||''; th.value=params.get('theme')||''; cc.checked=params.get('code')==='1';"
+    new_params = "const rawParams=location.search?location.search:location.hash.replace(/^#/,'?'); const params=new URLSearchParams(rawParams); q.value=params.get('q')||''; th.value=params.get('theme')||''; cc.checked=params.get('code')==='1';"
+    if old_params in text:
+        text = text.replace(old_params, new_params, 1)
+    elif old_init in text and "rawParams=location.search" not in text:
+        text = text.replace(old_init, new_init, 1)
+    elif "rawParams=location.search" not in text:
+        raise ValueError("missing search init insertion point")
+    old_handlers = "q.oninput=render;th.onchange=render;cc.onchange=render;render();"
+    new_handlers = (
+        "function syncUrl(){const p=new URLSearchParams(); if(q.value.trim())p.set('q',q.value.trim()); if(th.value)p.set('theme',th.value); if(cc.checked)p.set('code','1'); const next=p.toString()?`${location.pathname}?${p}`:location.pathname; history.replaceState(null,'',next);}\n"
+        "q.oninput=()=>{syncUrl();render();};th.onchange=()=>{syncUrl();render();};cc.onchange=()=>{syncUrl();render();};render();"
+    )
+    if old_handlers in text:
+        text = text.replace(old_handlers, new_handlers, 1)
+    elif "function syncUrl()" not in text:
+        raise ValueError("missing search handler insertion point")
+    return text
 
 
 def main() -> None:

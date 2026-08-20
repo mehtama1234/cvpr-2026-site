@@ -8,6 +8,7 @@ import html
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlencode
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -151,8 +152,9 @@ def candidate_rows(data: list[dict], limit: int = 80) -> str:
         overlap, missing = specificity(record)
         pd = record.get("pd") or {}
         missing_text = ", ".join(missing[:10])
+        query = urlencode({"q": record.get("t", ""), "theme": record.get("th", "")})
         rows.append(
-            f"""<tr><td><b>{esc(record.get('t', ''))}</b><br><span>{esc(THEME_NAMES.get(record.get('th'), record.get('th', '')))}</span></td>
+            f"""<tr><td><a href="search.html#{esc(query)}"><b>{esc(record.get('t', ''))}</b></a><br><span>{esc(THEME_NAMES.get(record.get('th'), record.get('th', '')))}</span></td>
 <td>{overlap}</td><td>{esc(missing_text)}</td><td>{esc(pd.get('m', ''))}</td>
 <td>{esc(pd.get('b', ''))}</td></tr>"""
         )
