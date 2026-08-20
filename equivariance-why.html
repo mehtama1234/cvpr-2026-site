@@ -46,6 +46,12 @@
 .mxtable th,.mxtable td{border:1px solid var(--line);padding:7px 10px;text-align:center}
 .mxtable th{background:var(--tint);font-family:var(--mono);font-size:11px;letter-spacing:.03em;text-transform:uppercase}
 .big{font-family:var(--mono);font-weight:700}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Equivariance · first principles · building symmetry into the network</div>
 <h1>Equivariance — teaching a network the symmetries of the world</h1>
@@ -58,7 +64,7 @@ had to collect.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="equivariance-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="equivariance-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — the same thing, in a new pose</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating which transformations should move the answer predictably.</p><p><b>Evidence.</b> The model sees rotations, shifts, permutations, views, coordinate frames, and consistency losses.</p><p><b>Rule.</b> The fundamental rule is to tie the model&#x27;s output to the symmetry of the task, so transformed input gives transformed output.</p><p><b>Failure test.</b> Without the symmetry, the model has to relearn the same fact in every pose and fails outside the seen geometry.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — the same thing, in a new pose</h2>
 <p>Almost everything a vision system sees could appear at any position, any orientation, any scale, and it would
 mean the same thing. A plain network does not know this. Unless you show it a wrench at every angle, it may
 recognize the upright one and miss the tilted one — so you pour in more data, more augmentation, more parameters,

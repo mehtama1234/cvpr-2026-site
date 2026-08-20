@@ -43,6 +43,12 @@
 .eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
 .stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
 .tworow{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:14px 0}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Normalizing flows · first principles · exact probability by reversible transport</div>
 <h1>Normalizing flows — reshaping a Gaussian into your data, reversibly</h1>
@@ -55,7 +61,7 @@ pays — on a real run.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="normflow-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="normflow-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — sampling and exact probability at once</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the invertible map between simple noise and complex data.</p><p><b>Evidence.</b> The model sees latent variables, exact likelihood, inverse reconstruction, and Jacobian terms.</p><p><b>Rule.</b> The fundamental rule is to transform probability mass while tracking how density changes exactly.</p><p><b>Failure test.</b> The map may be exact but too constrained to represent the true data shape.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — sampling and exact probability at once</h2>
 <p>Two things you might want from a model of a distribution: draw new samples from it, and evaluate the exact
 probability of any given point (its likelihood). Most methods give you only one. A GAN samples but has no
 likelihood; an autoregressive model has a likelihood but samples slowly; diffusion samples beautifully but its

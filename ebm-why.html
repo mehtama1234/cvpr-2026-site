@@ -43,6 +43,12 @@
 .eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
 .stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
 .tworow{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:14px 0}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Energy-based &amp; score models · first principles · probability without a normalizer</div>
 <h1>Energy-based models — describing a distribution by its landscape</h1>
@@ -55,7 +61,7 @@ real run. It is also the parent of diffusion.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ebm-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="ebm-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — the normalizer you can't compute</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the energy score that ranks valid states below invalid states.</p><p><b>Evidence.</b> The model sees positive examples, negative samples, gradients, constraints, and sampling behavior.</p><p><b>Rule.</b> The fundamental rule is to shape a landscape where good explanations sit in low-energy valleys.</p><p><b>Failure test.</b> Sampling can get stuck, negatives can miss important failures, or shortcuts can receive low energy.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — the normalizer you can't compute</h2>
 <p>Suppose you describe a distribution with any function you like: give each point x a score, and say more score =
 more probable. It is maximally expressive. But to make it a real probability you must divide by the total score
 summed over <em>every</em> possible x — an integral in a huge space that you cannot compute. Most of probabilistic

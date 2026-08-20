@@ -51,6 +51,12 @@
 .bar{height:15px;border-radius:3px;background:var(--accent);min-width:2px}
 .bar.alt{background:#b5651d}
 .hm{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:8px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Attention · first principles · letting tokens choose</div>
 <h1>Why attention — letting each token choose what to look at</h1>
@@ -62,7 +68,7 @@ the same mechanism now drives robots.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="attention-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it took over</a><a href="#cost">The one weakness</a><a href="#robots">The surprise</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — how does a token get the <em>right</em> context?</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating which other pieces of context matter right now.</p><p><b>Evidence.</b> The model sees queries, keys, values, token positions, and the downstream loss.</p><p><b>Rule.</b> The fundamental rule is to compare every query with possible sources, turn similarities into weights, then average the values those weights select.</p><p><b>Failure test.</b> If the weights point at the wrong evidence, the model receives context but not truth; if every token compares with every other token, cost grows quadratically.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — how does a token get the <em>right</em> context?</h2>
 <p>A model reads a sequence — words, or the little patches an image is cut into. No token means much on
 its own; each one needs information from <em>other</em> tokens to make sense. The word &ldquo;it&rdquo;
 needs whatever noun it refers to; an image patch of an ear needs the patches that make it a <em>cat</em>.

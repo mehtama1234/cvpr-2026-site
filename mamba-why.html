@@ -49,6 +49,12 @@
 .mxtable th,.mxtable td{border:1px solid var(--line);padding:7px 10px;text-align:right;vertical-align:top;font-family:var(--mono);font-size:12px}
 .mxtable td:first-child,.mxtable th:first-child{text-align:left}
 .mxtable th{background:var(--tint);font-size:11px;letter-spacing:.03em;text-transform:uppercase}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">State-space models · first principles · read in order, remember a little</div>
 <h1>State-space models — linear-time sequence modeling, and why Mamba needed selectivity</h1>
@@ -60,7 +66,7 @@ run — including the one ingredient, <em>selectivity</em>, without which the ch
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="mamba-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="mamba-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — attention compares everyone to everyone</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the running memory state that can replace full attention over long sequences.</p><p><b>Evidence.</b> The model sees the ordered input stream, gates, state updates, prediction loss, latency, and memory use.</p><p><b>Rule.</b> The fundamental rule is to scan through the sequence with a selective state update that keeps useful history and discards the rest.</p><p><b>Failure test.</b> If the state forgets the wrong detail, speed is gained by losing the long-range fact the task needed.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — attention compares everyone to everyone</h2>
 <p>The engine inside a transformer is attention: to process a sequence, every token is compared against every
 other token, so the model can pull in whatever context it needs from anywhere. It is wonderfully flexible — and
 its bill grows with the <em>square</em> of the length. Double the resolution or the video length and the cost

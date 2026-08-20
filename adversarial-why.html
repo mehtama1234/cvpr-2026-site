@@ -51,6 +51,12 @@
 .barrow{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
 .barrow .lab{width:56px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:15px;border-radius:3px;min-width:2px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Adversarial robustness · first principles · the paper-thin boundary</div>
 <h1>Why models are fragile — the boundary that looks solid isn't</h1>
@@ -62,7 +68,7 @@ a wrong <em>move</em>.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="adversarial-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The attack</a><a href="#run">The cliff</a><a href="#defense">The defense</a><a href="#why">Why so fragile</a><a href="#robots">The surprise</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — &ldquo;accurate&rdquo; is not &ldquo;robust&rdquo;</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the nearest direction or trigger that flips behavior.</p><p><b>Evidence.</b> The model sees gradients, perturbation budgets, corrupted inputs, confidence, and stress tests.</p><p><b>Rule.</b> The fundamental rule is to measure worst-case risk around each example instead of average accuracy alone.</p><p><b>Failure test.</b> A model can be accurate on clean data while a tiny, targeted change crosses a nearby decision boundary.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — &ldquo;accurate&rdquo; is not &ldquo;robust&rdquo;</h2>
 <p>A trained classifier carves the space of images into regions — this region is <em>cat</em>, that one is
 <em>dog</em> — and on ordinary photos it lands in the right region most of the time. It looks like it has
 learned a solid, sensible boundary. But &ldquo;right on the images it was tested on&rdquo; and &ldquo;right

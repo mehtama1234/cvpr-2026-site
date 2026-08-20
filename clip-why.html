@@ -49,6 +49,12 @@
 .barrow .lab{width:96px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:15px;border-radius:3px;background:var(--accent);min-width:2px}
 #clipmap{width:100%;max-width:520px;height:auto;display:block;margin:12px auto;background:#0f1417;border-radius:10px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CLIP · first principles · connecting words and pixels</div>
 <h1>CLIP — teaching a model to connect words and pixels</h1>
@@ -61,7 +67,7 @@ version can and cannot show.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="clip-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#ceiling">The honest ceiling</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="clip-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — a model only knows what it was labeled to name</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the shared meaning coordinate where text and image evidence meet.</p><p><b>Evidence.</b> The model sees caption-image pairs, region features, negatives, prompts, and similarity scores.</p><p><b>Rule.</b> The fundamental rule is to pull matching text and visual examples together while pushing mismatches apart.</p><p><b>Failure test.</b> Language can overpower seeing, so the model may retrieve or ground a likely concept instead of the visible one.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — a model only knows what it was labeled to name</h2>
 <p>Train an ordinary classifier on a fixed list of categories and it is blind to everything off that list. Show
 it a thing it has a label for and it works; ask for anything else and it cannot even represent the question.
 That fixed vocabulary is a cage: every new category means new labeled images and retraining. What we actually

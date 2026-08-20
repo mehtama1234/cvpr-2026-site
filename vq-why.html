@@ -55,6 +55,12 @@
 .barrow{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
 .barrow .lab{width:64px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:15px;border-radius:3px;background:var(--accent);min-width:2px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Tokenizing the visual world · first principles · pixels into words</div>
 <h1>Tokenizing the visual world — turning an image into a vocabulary of words</h1>
@@ -67,7 +73,7 @@ very same trick lets a robot describe what it <em>does</em>.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="vq-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#collapse">The collapse</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="vq-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — words are discrete, pictures are not</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the discrete code that stands in for continuous detail.</p><p><b>Evidence.</b> The model sees encoder outputs, codebook entries, reconstruction loss, commitment loss, and token usage.</p><p><b>Rule.</b> The fundamental rule is to quantize continuous signals into reusable symbols that later models can predict or compose.</p><p><b>Failure test.</b> The codebook can collapse, waste entries, or throw away detail the downstream model needs.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — words are discrete, pictures are not</h2>
 <p>A language model works because text is already made of discrete pieces: a fixed vocabulary of tokens, and
 the model just predicts the next one. That single fact — a finite alphabet — is what makes generation,
 in-context learning, and the whole transformer toolkit work. An image has no alphabet. It is a grid of

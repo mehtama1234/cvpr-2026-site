@@ -48,6 +48,12 @@
 .kltab{border-collapse:collapse;font-size:13px;margin:8px 0;max-width:460px;width:100%}
 .kltab th,.kltab td{border:1px solid var(--line);padding:6px 9px;text-align:center;font-family:var(--mono)}
 .kltab th{background:var(--tint);font-size:11px;text-transform:uppercase}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Reinforcement learning · first principles · learning from reward, not answers</div>
 <h1>Reinforcement learning — learning from reward</h1>
@@ -59,7 +65,7 @@ reward it can cheat, and the leash that reins it in, on a real run.</p></div></h
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="rl-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="rl-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — no answer key, only a score</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the future value of actions under a policy.</p><p><b>Evidence.</b> The model sees states, actions, rewards, trajectories, demonstrations, and constraint violations.</p><p><b>Rule.</b> The fundamental rule is to choose behavior by expected future return and assign credit to the actions that caused it.</p><p><b>Failure test.</b> Reward can be delayed, sparse, hacked, or credited to the wrong step, so the learned policy optimizes the wrong behavior.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — no answer key, only a score</h2>
 <p>For many goals there is no labelled right answer to imitate. What is the &ldquo;correct&rdquo; sequence of moves
 to win a game, the correct motor commands to walk, the correct next sentence to be most helpful? You cannot write
 those down — but you <em>can</em> say, afterwards, how good the outcome was: you won, you fell, the user approved.

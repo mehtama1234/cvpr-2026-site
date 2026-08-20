@@ -43,6 +43,12 @@
 .eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
 .stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
 .tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:14px 0}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">World models · first principles · learning a simulator you can dream inside</div>
 <h1>World models — learning to dream, so you can plan</h1>
@@ -55,7 +61,7 @@ planning it unlocks, all on a real run.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="wm-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="wm-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — you cannot try everything for real</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the hidden world state that predicts future observations and rewards.</p><p><b>Evidence.</b> The model sees past observations, actions, latent state, predicted frames, rewards, and rollout error.</p><p><b>Rule.</b> The fundamental rule is to learn a compact simulator that updates under actions so planning can happen inside imagined futures.</p><p><b>Failure test.</b> Model error compounds during rollout, so imagined futures can become confident but physically wrong.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — you cannot try everything for real</h2>
 <p>To act well, an agent needs to know the consequences of its actions: if I turn the wheel now, where will the
 car be in two seconds? The obvious way to find out — just try it — is hopeless when the real world is slow,
 expensive, or dangerous, and when there are countless action sequences to consider. A chess engine can look ahead

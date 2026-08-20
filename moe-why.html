@@ -52,6 +52,12 @@
 .grid .h{color:var(--graphite);text-align:center}
 .grid .rl{color:var(--graphite);padding-right:4px;text-align:right;white-space:nowrap}
 .cell{height:15px;border-radius:2px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Mixture-of-experts · first principles · many specialists, one router</div>
 <h1>Mixture-of-experts — the capacity of a giant at the cost of a small model</h1>
@@ -63,7 +69,7 @@ most of its experts quietly die.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="moe-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="moe-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — a dense model spends everything on everything</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating which expert should handle each token, patch, task, or scene.</p><p><b>Evidence.</b> The model sees router scores, expert outputs, capacity limits, load balance, and task loss.</p><p><b>Rule.</b> The fundamental rule is to activate only a small subset of specialists for each input while keeping the rest inactive.</p><p><b>Failure test.</b> Routing can collapse onto a few experts, starve rare cases, or split related examples across incompatible specialists.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — a dense model spends everything on everything</h2>
 <p>A normal neural network runs its <em>entire</em> self on every input. To make it know more, you make it
 bigger — but then every input, however simple, pays for all those extra parameters. You want a model that holds
 a huge amount of specialized knowledge yet only spends a little of it on any one input. A dense network cannot

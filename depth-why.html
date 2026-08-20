@@ -47,6 +47,12 @@
 .imrow{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;margin:14px 0}
 .arrow{align-self:center;font-size:22px;color:var(--graphite)}
 .stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">3D from a flat image · first principles · putting the dimension back</div>
 <h1>3D from a flat image — recovering the depth a photo throws away</h1>
@@ -59,7 +65,7 @@ photographer does.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="depth-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#scale">One image can't fix scale</a><a href="#shape">Shape survives</a><a href="#twoviews">A second view</a><a href="#robots">The robot's stake</a><a href="depth-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — a photo throws a dimension away</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the hidden distance or surface behind each pixel.</p><p><b>Evidence.</b> The model sees perspective, scale cues, stereo or motion, priors, and geometric consistency.</p><p><b>Rule.</b> The fundamental rule is to infer a depth field that makes the flat image plausible as a 3D scene.</p><p><b>Failure test.</b> One image can match many worlds, so weak constraints produce plausible but wrong scale, shape, or free space.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — a photo throws a dimension away</h2>
 <p>Point a camera at the world and every ray of light that reaches it is stamped with <em>where</em> it landed
 on the sensor — but not <em>how far</em> it came. All the points along a single ray, near and far, pile onto the
 same pixel. So a photograph is a shadow of a 3D scene with one dimension deleted, and undoing that is guessing

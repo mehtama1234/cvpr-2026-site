@@ -50,6 +50,12 @@
 .barrow{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
 .barrow .lab{width:120px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:15px;border-radius:3px;background:var(--accent);min-width:2px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Optical flow · first principles · finding the same point twice</div>
 <h1>Optical flow — finding the same point in the next frame</h1>
@@ -61,7 +67,7 @@ where you can watch that limit appear and measure it.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="flow-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#aperture">The aperture problem</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="flow-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — where did this pixel go?</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the correspondence field from one frame to the next.</p><p><b>Evidence.</b> The model sees two frames, local texture, edges, occlusion cues, smoothness, and matching error.</p><p><b>Rule.</b> The fundamental rule is to assign each point a motion that explains the second observation while staying spatially coherent.</p><p><b>Failure test.</b> Flat texture, repeated patterns, and occlusion create multiple possible matches, so the wrong correspondence breaks motion reasoning.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — where did this pixel go?</h2>
 <p>Two consecutive frames of a video are almost the same picture, shifted a little by motion. Optical flow is
 the dense answer to one question asked at every pixel: <em>which way, and how far, did the little patch of
 world under this pixel move?</em> Get it right and you can follow objects, infer a camera's motion, warp one

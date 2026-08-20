@@ -48,6 +48,12 @@
 @media(max-width:640px){.two{grid-template-columns:1fr}}
 .wcard{border:1px solid var(--line);border-radius:10px;background:#fbfcfc;padding:8px}
 .wcard .cap{font-family:var(--mono);font-size:11.5px;color:var(--graphite);text-align:center;margin-top:4px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Vision-language-action · first principles · seeing and hearing into doing</div>
 <h1>Why vision-language-action — turning perception into a plan of action</h1>
@@ -59,7 +65,7 @@ into a wall, how real VLAs are built, and how the vision world is bringing all t
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="vla-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#build">How real VLAs work</a><a href="#cvpr">The vision angle</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — labelling is not the point; acting is</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the action-relevant state that connects words, pixels, and motor commands.</p><p><b>Evidence.</b> The model sees instructions, image regions, robot state, affordances, past actions, and success feedback.</p><p><b>Rule.</b> The fundamental rule is to ground language into scene variables and choose actions that satisfy the goal under physical limits.</p><p><b>Failure test.</b> A fluent instruction can still produce an unsafe action if grounding, reachability, or hidden state is wrong.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — labelling is not the point; acting is</h2>
 <p>Most of machine vision ends at a label: this is a cat, that pixel is three metres away. A robot cannot
 stop there. It has to <em>do</em> something — pick up the mug, turn left at the door, hand over the tool —
 and it is usually told what to do in ordinary language. So the real task is a mapping of a different kind:

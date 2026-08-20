@@ -47,6 +47,12 @@
 .mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
 .mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
 .mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">NeRF · first principles · a scene stored inside a network</div>
 <h1>NeRF — how a neural network becomes a 3D scene</h1>
@@ -59,7 +65,7 @@ overtake it.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="nerf-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="nerf-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — a scene you can re-view from anywhere</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the continuous scene field that explains camera rays.</p><p><b>Evidence.</b> The model sees posed images, rays, colors, densities, depth hints, and rendering error.</p><p><b>Rule.</b> The fundamental rule is to fit a function that renders the observed views and can be queried from new cameras.</p><p><b>Failure test.</b> Underconstrained views can create blurred surfaces, floating density, or geometry that only works from training angles.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — a scene you can re-view from anywhere</h2>
 <p>You have a handful of photos of a place and you want to fly a camera through it — to see it from angles no
 photo was taken from. That needs the actual 3D scene behind the pictures, and a way to draw it. A mesh of
 triangles is hard to recover accurately and bad at fuzzy things; storing every viewing angle is impossible. You

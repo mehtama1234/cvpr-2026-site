@@ -48,6 +48,12 @@
 .barrow .lab{width:150px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:16px;border-radius:3px;background:var(--accent);min-width:2px}
 .barc{height:16px;border-radius:3px;background:var(--graphite);min-width:2px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Video · first principles · the arrow of time</div>
 <h1>Video and the arrow of time — why a video is more than a stack of frames</h1>
@@ -59,7 +65,7 @@ learns nothing when there is no arrow to find.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="video-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#arrow">The arrow of time</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="video-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — frames in a row are not a video</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the hidden trajectory of objects, camera, identity, and cause.</p><p><b>Evidence.</b> The model sees ordered frames, memory, flow, actions, and temporal consistency.</p><p><b>Rule.</b> The fundamental rule is to model the sequence as connected states, where each frame constrains what can happen next.</p><p><b>Failure test.</b> Small frame errors accumulate into flicker, identity swaps, impossible motion, or long-horizon drift.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — frames in a row are not a video</h2>
 <p>The lazy way to handle video is to treat it as a bag of frames: run an image model on each and pool the
 results. It throws away the one thing video actually adds — <em>how things change</em>. Two clips can contain
 the identical set of frames and mean opposite things depending on their order (a glass shattering versus a

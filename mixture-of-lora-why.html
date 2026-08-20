@@ -76,6 +76,12 @@
 .sb-bar{height:15px;border-radius:3px;background:var(--accent);transition:width .25s,background .25s;min-width:2px}
 .sb-bar.dead{background:#C4CCCA}.sb-bar.top{background:#0b5f68}
 .sb-status{font-family:var(--mono);font-size:12.5px;color:var(--graphite);margin-top:8px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Mixture-of-LoRA · the big picture, connecting the dots</div>
 <h1>Why mix LoRAs at all</h1>
@@ -87,7 +93,7 @@ LoRAs we trained on a laptop CPU.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="mixture-of-lora-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#break">Why the easy answers break</a><a href="#reframe">The reframe</a><a href="#approaches">The approaches</a><a href="#saw">What we saw</a><a href="#payoff">Why it matters</a><a href="mixture-of-lora-in-the-wild.html">In the wild</a><a href="mixture-of-lora-playground.html">Playground</a><a href="lora-foundations.html">Foundations →</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem, in one sentence</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the small low-rank change needed to adapt a frozen model.</p><p><b>Evidence.</b> The model sees base-model activations, adapter matrices, routing signals, ranks, and validation loss.</p><p><b>Rule.</b> The fundamental rule is to express each adaptation as a low-rank direction, then choose or combine directions without rewriting the base model.</p><p><b>Failure test.</b> Adapters can interfere, overwrite identity or style, or help one domain while damaging another.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem, in one sentence</h2>
 <p>We have one very capable model. We want it to be genuinely good at <em>many different jobs</em> —
 not one skill, but a whole shelf of them: answer math, write code, speak French, format JSON, follow
 a house style. And we want that without paying for a separate model per job, without the jobs

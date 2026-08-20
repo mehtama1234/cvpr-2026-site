@@ -47,6 +47,12 @@
 .mxtable{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
 .mxtable th,.mxtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
 .mxtable th{background:var(--tint);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Segment Anything · first principles · point at anything, cut it out</div>
 <h1>Segment Anything — cutting out any object you point at</h1>
@@ -58,7 +64,7 @@ several things at once, and the neat trick that answers it.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="sam-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="sam-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — a fixed list of things is a cage</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the mask boundary for the requested object or part.</p><p><b>Evidence.</b> The model sees points, boxes, text prompts, image features, edges, masks, and overlap or physical success.</p><p><b>Rule.</b> The fundamental rule is to condition segmentation on a prompt and separate the target pixels from the rest while keeping useful boundary detail.</p><p><b>Failure test.</b> A mask can look reasonable but still merge objects, cut off thin parts, or give a robot the wrong grasp region.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — a fixed list of things is a cage</h2>
 <p>Classic segmentation learns to label every pixel with a class from a fixed list. Train it on cars and roads
 and it will never help you with a coral, a surgical tool, or a part it was not told about — it cannot even
 represent the request. Every new kind of object means new labeled masks and retraining. What you actually want

@@ -53,6 +53,12 @@
 .barrow{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
 .barrow .lab{width:60px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:14px;border-radius:3px;background:var(--accent);min-width:2px}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Self-supervised learning · first principles · a teacher made of data</div>
 <h1>Why self-supervised learning — teaching a model with no teacher</h1>
@@ -64,7 +70,7 @@ the same idea to learn from their own experience.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ssl-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#collapse">The enemy: collapse</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — labels are the bottleneck</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the visual structure that survives without labels.</p><p><b>Evidence.</b> The model sees augmentations, masked views, teacher predictions, agreement losses, and downstream transfer.</p><p><b>Rule.</b> The fundamental rule is to make representations stable under harmless changes while preserving information later tasks need.</p><p><b>Failure test.</b> Bad augmentations can teach shortcuts, erase important detail, or collapse different examples into the same representation.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — labels are the bottleneck</h2>
 <p>A deep network learns from examples, and for most of the field's history each example had to come with
 a human-written <em>label</em>: this image is a cat, that pixel is 3 metres away, this frame contains a
 fall. Labelling is slow, expensive, and for many things nearly impossible — nobody can hand-annotate the

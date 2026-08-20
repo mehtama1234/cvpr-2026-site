@@ -45,6 +45,12 @@
 .mxtable{border-collapse:collapse;max-width:460px;width:100%;margin:12px 0;font-size:13.5px}
 .mxtable th,.mxtable td{border:1px solid var(--line);padding:7px 10px;text-align:center;font-family:var(--mono)}
 .mxtable th{background:var(--tint);font-size:11px;text-transform:uppercase}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Object-centric learning · first principles · one slot per object</div>
 <h1>Object-centric learning — giving every object its own slot</h1>
@@ -56,7 +62,7 @@ story of that idea — the competition between slots at its heart — on a real 
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="slots-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="slots-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — a scene is not one thing</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating which pixels or features belong to the same object.</p><p><b>Evidence.</b> The model sees image features, slot vectors, attention weights, reconstruction loss, and competition between slots.</p><p><b>Rule.</b> The fundamental rule is to let a small set of object memories compete to explain the scene so each slot binds one coherent part.</p><p><b>Failure test.</b> Slots can collapse onto the same object, split one object into pieces, or bind background texture instead of object identity.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — a scene is not one thing</h2>
 <p>A scene is made of separate objects, but a standard encoder collapses it into a single feature vector — one blob
 in which the cup and the book and the phone are blended together with no boundaries. That entangled representation
 is fine for a single global label, but it cannot say <em>this</em> object versus <em>that</em> one, cannot count,

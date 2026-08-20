@@ -43,6 +43,12 @@
 .eq{font-family:var(--mono);font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto}
 .stat{display:inline-block;font-family:var(--mono);font-weight:700;color:var(--accent)}
 .tworow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:14px 0}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Knowledge distillation · first principles · a big teacher trains a small student</div>
 <h1>Knowledge distillation — pouring a big model into a small one</h1>
@@ -54,7 +60,7 @@ soft answers beat hard labels, and how a 64×-smaller model closes most of the g
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="distill-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="distill-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — the best model is too big to use</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the behavior of a larger system that a smaller one should preserve.</p><p><b>Evidence.</b> The model sees teacher probabilities, intermediate features, gradients, examples, and student errors.</p><p><b>Rule.</b> The fundamental rule is to match the teacher&#x27;s function shape rather than only the final hard label.</p><p><b>Failure test.</b> The student can copy the answer while losing uncertainty, rare-case behavior, or the reason the teacher generalized.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — the best model is too big to use</h2>
 <p>You train a large network and it is excellent. Now you have to run it somewhere real — and it is too slow, too
 large, or too hungry for the device you have. Shrinking it by just training a small network from scratch loses
 accuracy, because a small model learning from raw labels has to rediscover everything alone. And often you do not

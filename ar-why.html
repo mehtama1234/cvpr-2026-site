@@ -47,6 +47,12 @@
 .tcol .imgs{display:flex;gap:6px}
 .tcol .t{font-family:var(--mono);font-size:12px;color:var(--accent);text-align:center;margin-bottom:6px}
 .crow{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;margin:12px 0}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Autoregressive generation · first principles · a GPT that writes pixels</div>
 <h1>Autoregressive generation — writing an image one piece at a time</h1>
@@ -58,7 +64,7 @@ where you can watch its two famous quirks appear: a temperature dial with a cost
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ar-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#why">Why it matters</a><a href="#robots">The surprise</a><a href="ar-deep-reads.html">The papers</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — how do you generate a whole image?</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the next token, pixel, frame, action, or latent given the past.</p><p><b>Evidence.</b> The model sees previous sequence elements, causal masks, likelihood, and rollout error.</p><p><b>Rule.</b> The fundamental rule is to factor a hard joint distribution into a chain of next-step predictions.</p><p><b>Failure test.</b> Early mistakes become part of the future context, so errors compound over long rollouts.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — how do you generate a whole image?</h2>
 <p>An image is a huge, structured object — a grid of thousands of pixels that all have to agree with each other
 to look like anything. You cannot just sample each pixel independently; you would get noise. You need to model
 how every part depends on every other part. Diffusion answers this by denoising the whole canvas together. But

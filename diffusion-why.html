@@ -53,6 +53,12 @@
 .barrow .lab{width:60px;font-family:var(--mono);font-size:12px;color:var(--graphite)}
 .bar{height:13px;border-radius:2px;background:var(--accent)}
 .bar.alt{background:#b5651d}
+
+.wcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:15px 18px;margin:18px 0 22px}
+.wcore .wlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.wcore p{font-size:14.5px;line-height:1.62;margin:7px 0;color:#23302C}
+.wcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Diffusion · first principles · order from noise</div>
 <h1>Why diffusion — making a picture by removing noise</h1>
@@ -64,7 +70,7 @@ which draws a cat also moves a robot arm.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="diffusion-math.html">🧮 The math</a><a href="#problem">The problem</a><a href="#reframe">The reframe</a><a href="#run">Seen on a real run</a><a href="#knobs">The two knobs</a><a href="#why">Why it took over</a><a href="#robots">The surprise</a></div></nav>
 <div class="wrap"><article class="doc">
 
-<h2 id="problem">1 · The problem — sampling from a distribution you can't write down</h2>
+<!-- why-math-core:start --><section class="wcore" id="mathematical-core"><div class="wlabel">Mathematical core</div><p><b>Hidden quantity.</b> The page is really about estimating the reverse path from noise to a clean sample.</p><p><b>Evidence.</b> The model sees noisy samples, time step, conditioning, the true noise or score, and denoising loss.</p><p><b>Rule.</b> The fundamental rule is to learn to undo one small corruption step and repeat that step until noise becomes data.</p><p><b>Failure test.</b> A wrong denoising direction can create sharp but unsupported detail, drift from the condition, or collapse to only a few modes.</p></section><!-- why-math-core:end --><h2 id="problem">1 · The problem — sampling from a distribution you can't write down</h2>
 <p>Generation is the reverse bridge: not pixels → meaning, but <em>meaning → pixels</em>. You want to
 produce a <em>new</em> image that matches an idea. Picture the space of all images as an astronomically
 large room. Almost every point in it is television static — random noise. The images that look like
