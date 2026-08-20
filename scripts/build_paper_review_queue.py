@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html
+import hashlib
 import json
 import re
 from collections import defaultdict
@@ -36,6 +37,11 @@ PRIORITY = (
 
 def esc(value: str) -> str:
     return html.escape(value or "", quote=True)
+
+
+def stable_key(record: dict) -> str:
+    raw = f'{record.get("th", "")}|{record.get("t", "")}'
+    return "pr-" + hashlib.sha1(raw.encode("utf-8")).hexdigest()[:12]
 
 
 def load_records() -> list[dict]:
@@ -72,6 +78,8 @@ def select(records: list[dict], per_theme: int = 8) -> list[dict]:
 
 def card(record: dict, idx: int) -> str:
     pd = record["pd"]
+    key = stable_key(record)
+    legacy_key = f"paper-{idx}"
     tags = "".join(f'<span class="tag">{esc(tag)}</span>' for tag in (record.get("tg") or [])[:8])
     repo = f'<a href="{esc(record["r"])}" target="_blank" rel="noopener">code</a>' if record.get("r") else ""
     search_href = "search.html?" + urlencode({"q": record.get("t", ""), "theme": record.get("th", "")})
@@ -96,8 +104,8 @@ def card(record: dict, idx: int) -> str:
 <h2>{esc(record["t"])}</h2>
 <p class="one">{esc(record.get("fp") or record.get("p") or "")}</p>
 <p class="links"><a href="{esc(search_href)}">open this paper in search</a> · <a href="{esc(quality_href)}">check it in the quality audit</a></p>
-<label class="status-control">Review status<select class="status" data-paper="paper-{idx}"><option value="todo">todo</option><option value="ok">clear</option><option value="rewrite">needs rewrite</option><option value="uncertain">uncertain</option></select></label>
-<label class="note-control">Reviewer note<textarea class="review-note" data-paper="paper-{idx}" placeholder="What is missing, wrong, unclear, or strong about this explanation?"></textarea></label>
+<label class="status-control">Review status<select class="status" data-paper="{esc(key)}" data-legacy-paper="{esc(legacy_key)}"><option value="todo">todo</option><option value="ok">clear</option><option value="rewrite">needs rewrite</option><option value="uncertain">uncertain</option></select></label>
+<label class="note-control">Reviewer note<textarea class="review-note" data-paper="{esc(key)}" data-legacy-paper="{esc(legacy_key)}" placeholder="What is missing, wrong, unclear, or strong about this explanation?"></textarea></label>
 <div class="depth">
 <p><b>What to review.</b> {esc(pd["s"])}</p>
 <p><b>Hidden quantity.</b> {esc(pd["h"])}</p>
@@ -133,18 +141,18 @@ const statusSelects=[...document.querySelectorAll(".status")], noteFields=[...do
 const saved=JSON.parse(localStorage.getItem(storageKey)||"{{}}");
 function setCardStatus(sel, value){{ sel.value=value; sel.closest(".card").dataset.status=value; }}
 function saveState(){{ localStorage.setItem(storageKey, JSON.stringify(saved)); }}
-function entryFor(id){{ const value=saved[id]; if(typeof value==="string") return {{status:value,note:""}}; return value&&typeof value==="object"?{{status:value.status||"todo",note:value.note||""}}:{{status:"todo",note:""}}; }}
-function updateEntry(id, patch){{ saved[id]={{...entryFor(id), ...patch}}; saveState(); }}
-for (const sel of statusSelects){{ const entry=entryFor(sel.dataset.paper); setCardStatus(sel, entry.status); sel.addEventListener("change", ()=>{{ updateEntry(sel.dataset.paper, {{status:sel.value}}); setCardStatus(sel, sel.value); applyFilters(); }}); }}
-for (const field of noteFields){{ field.value=entryFor(field.dataset.paper).note; field.addEventListener("input", ()=>{{ updateEntry(field.dataset.paper, {{note:field.value}}); }}); }}
+function entryFor(id, legacyId){{ const value=saved[id]??(legacyId?saved[legacyId]:undefined); if(typeof value==="string") return {{status:value,note:""}}; return value&&typeof value==="object"?{{status:value.status||"todo",note:value.note||""}}:{{status:"todo",note:""}}; }}
+function updateEntry(id, legacyId, patch){{ saved[id]={{...entryFor(id, legacyId), ...patch}}; saveState(); }}
+for (const sel of statusSelects){{ const entry=entryFor(sel.dataset.paper, sel.dataset.legacyPaper); setCardStatus(sel, entry.status); sel.addEventListener("change", ()=>{{ updateEntry(sel.dataset.paper, sel.dataset.legacyPaper, {{status:sel.value}}); setCardStatus(sel, sel.value); applyFilters(); }}); }}
+for (const field of noteFields){{ field.value=entryFor(field.dataset.paper, field.dataset.legacyPaper).note; field.addEventListener("input", ()=>{{ updateEntry(field.dataset.paper, field.dataset.legacyPaper, {{note:field.value}}); }}); }}
 const params=new URLSearchParams(location.hash.replace(/^#/,"")); q.value=params.get("q")||""; theme.value=params.get("theme")||""; statusFilter.value=params.get("status")||"";
 function syncUrl(){{ const p=new URLSearchParams(); if(q.value.trim())p.set("q",q.value.trim()); if(theme.value)p.set("theme",theme.value); if(statusFilter.value)p.set("status",statusFilter.value); const next=p.toString()?`${{location.pathname}}#${{p}}`:location.pathname; history.replaceState(null,"",next); }}
 function applyFilters(){{ const term=q.value.trim().toLowerCase(), th=theme.value, st=statusFilter.value; let shown=0; const totals={{todo:0,ok:0,rewrite:0,uncertain:0}}; for (const card of cards){{ const cardStatus=card.dataset.status||"todo"; totals[cardStatus]++; const okTheme=!th || card.dataset.theme===th; const okText=!term || card.dataset.search.includes(term); const okStatus=!st || cardStatus===st; const show=okTheme && okText && okStatus; card.hidden=!show; if(show) shown++; }} count.textContent=`showing ${{shown}} / ${{cards.length}} · todo ${{totals.todo}} · clear ${{totals.ok}} · rewrite ${{totals.rewrite}} · uncertain ${{totals.uncertain}}`; }}
 function exportState(){{ stateBox.value=JSON.stringify(saved, null, 2); stateNote.textContent=`exported ${{Object.keys(saved).length}} saved paper states`; }}
 function depthField(card, label){{ const row=[...card.querySelectorAll(".depth p")].find(p=>p.textContent.startsWith(label)); return row?row.textContent.replace(label,"").trim():""; }}
-function exportRewriteQueue(){{ const rows=[]; for (const card of cards){{ const entry=entryFor(card.id); if(!["rewrite","uncertain"].includes(entry.status)) continue; const title=card.querySelector("h2").textContent.trim(), themeName=card.querySelector(".meta span:nth-child(2)").textContent.trim(), links=[...card.querySelectorAll(".links a")].map(a=>`${{a.textContent.trim()}}: ${{a.getAttribute("href")}}`).join(" | "), hidden=depthField(card,"Hidden quantity."), rule=depthField(card,"Mathematical rule."), proof=depthField(card,"Evidence that would prove it."), counter=depthField(card,"Counterexample."), note=entry.note.trim()||"(no reviewer note yet)"; rows.push(`## ${{title}}\\nstatus: ${{entry.status}}\\ntheme: ${{themeName}}\\nlinks: ${{links}}\\nhidden quantity: ${{hidden}}\\nmathematical rule: ${{rule}}\\nproof test: ${{proof}}\\ncounterexample: ${{counter}}\\nreviewer note: ${{note}}`); }} stateBox.value=rows.length?`# Paper rewrite queue\\n\\n${{rows.join("\\n\\n")}}`:"# Paper rewrite queue\\n\\nNo papers marked needs rewrite or uncertain."; stateNote.textContent=`exported ${{rows.length}} rewrite/uncertain papers`; }}
+function exportRewriteQueue(){{ const rows=[]; for (const card of cards){{ const sel=card.querySelector(".status"), entry=entryFor(sel.dataset.paper, sel.dataset.legacyPaper); if(!["rewrite","uncertain"].includes(entry.status)) continue; const title=card.querySelector("h2").textContent.trim(), themeName=card.querySelector(".meta span:nth-child(2)").textContent.trim(), links=[...card.querySelectorAll(".links a")].map(a=>`${{a.textContent.trim()}}: ${{a.getAttribute("href")}}`).join(" | "), hidden=depthField(card,"Hidden quantity."), rule=depthField(card,"Mathematical rule."), proof=depthField(card,"Evidence that would prove it."), counter=depthField(card,"Counterexample."), note=entry.note.trim()||"(no reviewer note yet)"; rows.push(`## ${{title}}\\nstatus: ${{entry.status}}\\ntheme: ${{themeName}}\\nlinks: ${{links}}\\nhidden quantity: ${{hidden}}\\nmathematical rule: ${{rule}}\\nproof test: ${{proof}}\\ncounterexample: ${{counter}}\\nreviewer note: ${{note}}`); }} stateBox.value=rows.length?`# Paper rewrite queue\\n\\n${{rows.join("\\n\\n")}}`:"# Paper rewrite queue\\n\\nNo papers marked needs rewrite or uncertain."; stateNote.textContent=`exported ${{rows.length}} rewrite/uncertain papers`; }}
 function jumpToStatus(statuses){{ const visible=cards.filter(card=>!card.hidden && statuses.includes(card.dataset.status||"todo")); if(!visible.length){{ stateNote.textContent=`no visible papers with status ${{statuses.join(" or ")}}`; return; }} const after=visible.find(card=>card.getBoundingClientRect().top>80)||visible[0]; after.scrollIntoView({{behavior:"smooth",block:"center"}}); after.querySelector(".review-note")?.focus({{preventScroll:true}}); stateNote.textContent=`jumped to ${{after.id}}`; }}
-function importState(){{ try{{ const incoming=JSON.parse(stateBox.value||"{{}}"), allowed=new Set(["todo","ok","rewrite","uncertain"]), normalized={{}}; for (const [key,value] of Object.entries(incoming)){{ if(!/^paper-\\d+$/.test(key)) throw new Error("invalid review state"); if(typeof value==="string"){{ if(!allowed.has(value)) throw new Error("invalid review state"); normalized[key]={{status:value,note:""}}; }} else if(value&&typeof value==="object"){{ const status=value.status||"todo", note=value.note||""; if(!allowed.has(status)||typeof note!=="string") throw new Error("invalid review state"); normalized[key]={{status,note}}; }} else throw new Error("invalid review state"); }} for (const key of Object.keys(saved)) delete saved[key]; Object.assign(saved, normalized); saveState(); for (const sel of statusSelects) setCardStatus(sel, entryFor(sel.dataset.paper).status); for (const field of noteFields) field.value=entryFor(field.dataset.paper).note; applyFilters(); stateNote.textContent=`imported ${{Object.keys(saved).length}} saved paper states`; }}catch(err){{ stateNote.textContent="import failed: paste the exported JSON object"; }} }}
+function importState(){{ try{{ const incoming=JSON.parse(stateBox.value||"{{}}"), allowed=new Set(["todo","ok","rewrite","uncertain"]), normalized={{}}; for (const [key,value] of Object.entries(incoming)){{ if(!/^(paper-\\d+|pr-[a-f0-9]{{12}})$/.test(key)) throw new Error("invalid review state"); if(typeof value==="string"){{ if(!allowed.has(value)) throw new Error("invalid review state"); normalized[key]={{status:value,note:""}}; }} else if(value&&typeof value==="object"){{ const status=value.status||"todo", note=value.note||""; if(!allowed.has(status)||typeof note!=="string") throw new Error("invalid review state"); normalized[key]={{status,note}}; }} else throw new Error("invalid review state"); }} for (const key of Object.keys(saved)) delete saved[key]; Object.assign(saved, normalized); saveState(); for (const sel of statusSelects) setCardStatus(sel, entryFor(sel.dataset.paper, sel.dataset.legacyPaper).status); for (const field of noteFields) field.value=entryFor(field.dataset.paper, field.dataset.legacyPaper).note; applyFilters(); stateNote.textContent=`imported ${{Object.keys(saved).length}} saved paper states`; }}catch(err){{ stateNote.textContent="import failed: paste the exported JSON object"; }} }}
 function clearState(){{ for (const key of Object.keys(saved)) delete saved[key]; saveState(); for (const sel of statusSelects) setCardStatus(sel, "todo"); for (const field of noteFields) field.value=""; stateBox.value=""; applyFilters(); stateNote.textContent="cleared saved paper states"; }}
 q.addEventListener("input", ()=>{{ syncUrl(); applyFilters(); }}); theme.addEventListener("change", ()=>{{ syncUrl(); applyFilters(); }}); statusFilter.addEventListener("change", ()=>{{ syncUrl(); applyFilters(); }}); applyFilters();
 document.getElementById("nextTodo").addEventListener("click", ()=>jumpToStatus(["todo"])); document.getElementById("nextNeedsWork").addEventListener("click", ()=>jumpToStatus(["rewrite","uncertain"])); document.getElementById("exportState").addEventListener("click", exportState); document.getElementById("exportRewriteQueue").addEventListener("click", exportRewriteQueue); document.getElementById("importState").addEventListener("click", importState); document.getElementById("clearState").addEventListener("click", clearState);
