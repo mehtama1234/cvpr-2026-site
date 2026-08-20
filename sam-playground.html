@@ -43,6 +43,12 @@ canvas{width:100%;max-width:420px;height:auto;display:block;margin:0 auto;backgr
 .read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:10px;line-height:1.7;text-align:center}
 .read b{color:var(--accent)}
 .btn{font-family:var(--mono);font-size:12.5px;padding:7px 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--graphite);cursor:pointer;margin:8px auto 0;display:block}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Segment Anything · the ambiguity sandbox</div>
 <h1>One click, several right answers</h1>
@@ -51,7 +57,7 @@ single click is ambiguous. Here you can feel it. Click anywhere on the scene. If
 are nested, several masks are <em>all</em> valid — the small part, the middle object, the whole thing — and you
 can cycle through them. Click a corner and there is only one answer.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="sam-math.html">🧮 The math</a><a href="sam-why.html">The big picture</a><a href="sam-in-the-wild.html">In the wild</a><a href="sam-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes a prompted mask: which pixels belong to the requested object or part.</p><p><b>What the controls mean.</b> Prompt and boundary controls change what region is selected.</p><p><b>What to watch for.</b> Watch a plausible mask fail when it merges objects or cuts off a thin part.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="420" height="360"></canvas>
   <div class="read" id="read">Click anywhere on the scene.</div>

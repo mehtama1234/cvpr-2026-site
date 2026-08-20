@@ -48,6 +48,12 @@ canvas{width:460px;max-width:100%;height:230px;display:block;margin:0 auto;backg
 .big{text-align:center;font-family:var(--mono);margin-top:8px}
 .big .n{font-size:30px;font-weight:700}
 .read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:8px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Test-time compute · the scaling sandbox</div>
 <h1>Spend compute, buy accuracy</h1>
@@ -55,7 +61,7 @@ canvas{width:460px;max-width:100%;height:230px;display:block;margin:0 auto;backg
 but only if the aggregation is sound. Here is that whole trade as one dial and one switch, walking along the real
 measured curves. Add samples; flip between voting and a good vs a noisy verifier; watch the ceiling move.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ttc-why.html">The big picture</a><a href="ttc-math.html">The math</a><a href="ttc-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes failure diagnosis: which measurable cause explains a bad output.</p><p><b>What the controls mean.</b> Shift, subgroup, confidence, and intervention controls change the suspected cause.</p><p><b>What to watch for.</b> Watch a repair fail when it fixes the visible symptom instead of the cause.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="460" height="230"></canvas>
   <div class="ctl"><span class="seg"><button id="mVote" class="on">majority vote</button><button id="mOra">perfect verifier</button><button id="mNoi">noisy verifier</button></span></div>

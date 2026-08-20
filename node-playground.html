@@ -45,6 +45,12 @@ canvas{width:320px;height:320px;background:#0f1417;border-radius:10px;display:bl
 .ctl label{font-weight:600;font-size:13px;display:block;margin-bottom:5px}
 .read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:10px}
 .read b{color:var(--accent)}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Neural ODEs · the continuous-flow sandbox</div>
 <h1>Watch depth become time</h1>
@@ -53,7 +59,7 @@ data drifts continuously from time 0 to time 1 until the classes separate. Here 
 the real run. Slide time and watch two tangled moons pull apart — not in discrete jumps, but as one continuous
 deformation of the plane.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="node-why.html">The big picture</a><a href="node-math.html">The math</a><a href="node-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes a learned derivative field: how the state moves locally over time.</p><p><b>What the controls mean.</b> Step size and field shape change the integrated path.</p><p><b>What to watch for.</b> Watch small local errors compound into a wrong trajectory.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="320" height="320"></canvas>
   <div class="ctl"><label for="sT">integration time t — <span id="vT" style="font-family:var(--mono);color:var(--accent)"></span></label>

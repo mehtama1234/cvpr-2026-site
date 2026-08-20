@@ -52,6 +52,12 @@
 .ctl{text-align:center;margin:14px 0}
 .ctl input[type=range]{width:100%;max-width:360px}
 .read{font-family:var(--mono);font-size:13px;color:var(--ink);text-align:center;margin-top:10px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Knowledge distillation · the soft-label sandbox</div>
 <h1>What a hard label throws away</h1>
@@ -60,7 +66,7 @@ from a plain label. Here is that soft answer, for real. A hard label would give 
 0s. The teacher gives a whole distribution — and the temperature knob controls how much of its hidden
 &#39;dark knowledge&#39; shows through.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="distill-math.html">🧮 The math</a><a href="distill-why.html">The big picture</a><a href="distill-in-the-wild.html">In the wild</a><a href="distill-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes teacher-to-student behavior matching: which parts of the teacher&#x27;s function the student preserves.</p><p><b>What the controls mean.</b> Temperature and target choice change whether the student sees only hard labels or the whole probability shape.</p><p><b>What to watch for.</b> Watch a student match easy answers while losing uncertainty or rare behavior.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <div style="text-align:center;margin-bottom:10px"><span class="seg" id="pick"></span></div>
   <div class="row">

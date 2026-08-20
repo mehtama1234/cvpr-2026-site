@@ -46,6 +46,12 @@ canvas{width:340px;height:300px;background:#0f1417;border-radius:10px;display:bl
 .btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 13px;font-size:12.5px;font-family:var(--mono);cursor:pointer;margin:4px}
 .read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:10px;line-height:1.7}
 .read b{color:var(--accent)}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Graph neural networks · the message-passing sandbox</div>
 <h1>Watch a message spread — then blur</h1>
@@ -54,7 +60,7 @@ Here is that process, live. Drop a signal on one node, then add rounds of messag
 the edges to fill its community — and then, if you go too far, watch every node melt into the same grey. That
 melt is over-smoothing.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="gnn-math.html">🧮 The math</a><a href="gnn-why.html">The big picture</a><a href="gnn-in-the-wild.html">In the wild</a><a href="gnn-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes message passing over edges: which neighbors update each node.</p><p><b>What the controls mean.</b> Edge strength and number of rounds change how far information travels.</p><p><b>What to watch for.</b> Watch too few rounds miss relations and too many rounds blur distinct nodes together.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="340" height="300"></canvas>
   <div class="ctl" style="margin-top:12px"><button class="btn" id="seed">drop a signal on a random node</button></div>

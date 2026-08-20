@@ -53,6 +53,12 @@
 .avbig{font-family:var(--mono);font-size:22px;font-weight:700}
 .avbar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:4px}
 .avbar>div{height:100%;background:var(--accent);transition:width .15s,background .15s}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Adversarial robustness · the attack sandbox</div>
 <h1>Flip the model's mind — without changing the picture</h1>
@@ -61,7 +67,7 @@ classifier's answer. Here is the real thing: the pictures and predictions below 
 outputs of the model we trained. Drag the perturbation up and watch the label — and the model's
 confidence — change while the image barely moves.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="adversarial-math.html">🧮 The math</a><a href="adversarial-why.html">The big picture</a><a href="adversarial-in-the-wild.html">In the wild</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes nearest failure direction: which small input change flips the model.</p><p><b>What the controls mean.</b> Perturbation size and direction controls change how close the boundary is.</p><p><b>What to watch for.</b> Watch accuracy look fine while a tiny targeted nudge crosses the boundary.</p></section><!-- playground-principles:end -->
 <div class="apwrap">
   <div>
     <div class="avpick" id="av_pick"></div>

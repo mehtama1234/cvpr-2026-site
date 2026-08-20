@@ -46,6 +46,12 @@ canvas{width:320px;height:320px;background:#0f1417;border-radius:10px;display:bl
 .btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 13px;font-size:12.5px;font-family:var(--mono);cursor:pointer;margin:4px}
 .read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:10px}
 .read b{color:var(--accent)}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Energy-based models · the Langevin sandbox</div>
 <h1>Roll downhill, with a little noise</h1>
@@ -54,7 +60,7 @@ dash of noise — Langevin dynamics — needing only the gradient, never the nor
 background is a learned energy (<span style="color:#0E7C86">bright = low energy = likely</span>); the dots are
 samples flowing through it. The one knob is the noise.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ebm-why.html">The big picture</a><a href="ebm-math.html">The math</a><a href="ebm-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes an energy landscape: which states are low-cost explanations.</p><p><b>What the controls mean.</b> Temperature and sampling controls change how the system searches valleys.</p><p><b>What to watch for.</b> Watch sampling get stuck in a local low-energy shortcut.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="80" height="80"></canvas>
   <div class="ctl"><button class="btn" id="reset">scatter fresh samples</button></div>

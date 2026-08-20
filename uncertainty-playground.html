@@ -47,6 +47,12 @@ canvas{width:320px;height:320px;background:#0f1417;border-radius:10px;display:bl
 .meter .lab{color:var(--graphite);margin-bottom:3px}
 .meter .num{font-size:20px;font-weight:700}
 .read{font-family:var(--mono);font-size:13px;text-align:center;margin-top:12px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Uncertainty · the confidence sandbox</div>
 <h1>When many models disagree</h1>
@@ -55,7 +61,7 @@ inputs it has never seen — a useless alarm — while the <em>disagreement</em>
 you can drive it. Slide the query point out of the known data and watch the single model stay smugly confident
 while the ensemble&#39;s votes scatter.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="uncertainty-math.html">🧮 The math</a><a href="uncertainty-why.html">The big picture</a><a href="uncertainty-in-the-wild.html">In the wild</a><a href="uncertainty-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes calibrated belief: how strongly the evidence supports a prediction.</p><p><b>What the controls mean.</b> Noise and confidence controls change the gap between score and true error.</p><p><b>What to watch for.</b> Watch overconfidence become dangerous before accuracy visibly drops.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="320" height="320"></canvas>
   <div class="ctl"><label style="font-size:13px;font-weight:600">drag the query from known data into the unknown — <span id="vD" style="font-family:var(--mono);color:var(--accent)"></span></label><br>

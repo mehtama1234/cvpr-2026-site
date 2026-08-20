@@ -46,6 +46,12 @@ canvas{width:320px;height:320px;display:block;margin:0 auto;background:#0f1417;b
 .btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 14px;font-size:13px;font-family:var(--mono);cursor:pointer;margin:0 5px}
 .read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:12px;text-align:center;line-height:1.7}
 .read b{color:var(--accent)}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">World models · the planning-in-imagination sandbox</div>
 <h1>Plan by dreaming</h1>
@@ -54,7 +60,7 @@ its world model and taking the first step of the best one. Here it runs live. Th
 imagination is — turn up <em>model error</em> and watch the dreamed rollouts scatter and the planning fall apart,
 just as compounding drift eats a real world model.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="wm-math.html">🧮 The math</a><a href="wm-why.html">The big picture</a><a href="wm-in-the-wild.html">In the wild</a><a href="wm-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes latent world state: what imagined future follows from action.</p><p><b>What the controls mean.</b> Horizon and model-error controls change rollout trust.</p><p><b>What to watch for.</b> Watch small prediction errors compound into a false imagined world.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="320" height="320"></canvas>
   <div class="ctl"><label for="sE">Model error (imagination drift) — <span id="vE" style="font-family:var(--mono);color:var(--accent)"></span></label>

@@ -52,6 +52,12 @@
 .vbtn{font-family:var(--mono);font-size:13px;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:8px;cursor:pointer}
 .vbtn.sec{background:var(--paper);color:var(--accent)}
 .vstatus{font-family:var(--mono);font-size:13px;color:var(--graphite);margin-top:12px;min-height:20px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Vision-language-action · the action sandbox</div>
 <h1>Drive the policy — and watch the naive one crash</h1>
@@ -60,7 +66,7 @@ and drives into the obstacle, while a generative policy commits to a side and ge
 <em>real</em> rollouts of the two policies we trained. Pick a target, choose the action head, and press
 Drive — run the generative head a few times to see it take different routes.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="vla-math.html">🧮 The math</a><a href="vla-why.html">The big picture</a><a href="vla-in-the-wild.html">In the wild</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes action-relevant grounded state: which words, pixels, and robot states make an action valid.</p><p><b>What the controls mean.</b> Instruction and affordance controls change the chosen action.</p><p><b>What to watch for.</b> Watch fluent language fail when the object grounding or reachability is wrong.</p></section><!-- playground-principles:end -->
 <div class="vwrap">
   <div><canvas id="v_canvas" width="320" height="320"></canvas></div>
   <div class="vpanel">

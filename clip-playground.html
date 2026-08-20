@@ -49,6 +49,12 @@ canvas{width:100%;max-width:600px;height:auto;display:block;margin:0 auto;backgr
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .chip{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--line);border-radius:14px;background:var(--paper);cursor:pointer}
 .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">CLIP · the alignment sandbox</div>
 <h1>Pull the words into the pictures</h1>
@@ -57,7 +63,7 @@ from the real run — each dot is a test image (colour = its true class), each l
 Slide the <em>alignment</em> up to pull the words in from the modality gap, and watch zero-shot accuracy climb.
 Then click a name to query the space by word.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="clip-math.html">🧮 The math</a><a href="clip-why.html">The big picture</a><a href="clip-in-the-wild.html">In the wild</a><a href="clip-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes image-text similarity: where words and visual evidence meet in embedding space.</p><p><b>What the controls mean.</b> Prompt and negative controls change the direction of the query.</p><p><b>What to watch for.</b> Watch language bias pull retrieval toward likely words instead of visible evidence.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <canvas id="cv" width="600" height="380"></canvas>
   <div class="ctl"><label for="sA">Alignment — how well the words are pulled into their pictures — <span id="vA" style="font-family:var(--mono);color:var(--accent)"></span></label>

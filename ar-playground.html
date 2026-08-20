@@ -49,6 +49,12 @@
 .meter .now{position:absolute;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translateX(-50%);border:2px solid #fff}
 .read{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:12px;text-align:center;line-height:1.7}
 .read b{color:var(--accent)}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Autoregressive generation · the temperature sandbox</div>
 <h1>Turn the boldness dial</h1>
@@ -57,7 +63,7 @@ real samples. The one knob at generation time is <em>temperature</em> — how bo
 pixel. Slide it and watch the same model swing from a bland, repetitive average, through recognizable garments,
 to pure noise.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ar-math.html">🧮 The math</a><a href="ar-why.html">The big picture</a><a href="ar-in-the-wild.html">In the wild</a><a href="ar-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes next-step prediction: what token, pixel, frame, or action comes next.</p><p><b>What the controls mean.</b> Temperature and context controls change uncertainty and rollout drift.</p><p><b>What to watch for.</b> Watch early mistakes become input for later mistakes.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <div class="imgs" id="imgs"></div>
   <div class="ctl"><label for="sT">Temperature — <span id="vT" style="font-family:var(--mono);color:var(--accent)"></span></label>

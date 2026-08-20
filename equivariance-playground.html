@@ -47,6 +47,12 @@ canvas{width:220px;height:220px;background:#0f1417;border-radius:8px;display:blo
 .ctl{text-align:center;margin:16px 0}
 .ctl input[type=range]{width:100%;max-width:420px}
 .key{font-family:var(--mono);font-size:11px;color:var(--graphite);text-align:center;margin-top:6px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Equivariance · the commuting-square sandbox</div>
 <h1>Does the square commute?</h1>
@@ -57,7 +63,7 @@ answer rotates the same way. That is something you can <em>watch</em>. In each p
 network is truly equivariant, the two must always line up. Drag the rotation and see which one keeps its
 promise.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="equivariance-math.html">🧮 The math</a><a href="equivariance-why.html">The big picture</a><a href="equivariance-in-the-wild.html">In the wild</a><a href="equivariance-deep-reads.html">The papers</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes transformation consistency: how an output should move when the input is rotated, shifted, or permuted.</p><p><b>What the controls mean.</b> The transformation knob changes whether the answer should stay fixed or move predictably.</p><p><b>What to watch for.</b> Watch a model that lacks the symmetry relearn the same fact in each pose.</p></section><!-- playground-principles:end -->
 <div class="pwrap">
   <div class="grid">
     <div class="panel"><h4>built-in-equivariant network</h4><canvas id="cvE" width="220" height="220"></canvas><div class="verdict" id="vE"></div></div>

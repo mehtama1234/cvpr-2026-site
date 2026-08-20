@@ -56,6 +56,12 @@
 .dgmetrics b{color:var(--ink)}
 #dg_canvas{width:100%;max-width:460px;aspect-ratio:1;border:1px solid var(--line);border-radius:12px;background:#fbfcfc;display:block}
 .dgstatus{font-family:var(--mono);font-size:12.5px;color:var(--graphite);margin-top:8px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Diffusion · the denoising sandbox</div>
 <h1>Watch noise become a picture — and watch guidance collapse it</h1>
@@ -65,7 +71,7 @@ Gaussian-mixture denoiser, not the trained model) so it runs live — but it tur
 <a href="diffusion-why.html#knobs">real ablation</a> measures: <em>guidance</em> and <em>steps</em>. The
 third switch reveals <em>why</em> guidance kills diversity.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="diffusion-math.html">🧮 The math</a><a href="diffusion-why.html">The big picture</a><a href="diffusion-why.html#knobs">The real ablation</a><a href="diffusion-in-the-wild.html">In the wild</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes a reverse denoising path: how random noise becomes a structured sample through repeated small corrections.</p><p><b>What the controls mean.</b> Guidance and step controls change how strongly the path follows the condition and how long it has to settle.</p><p><b>What to watch for.</b> Watch too few steps leave noise, and too much guidance collapse diversity or invent unsupported detail.</p></section><!-- playground-principles:end -->
 <div class="dgwrap">
   <div>
     <div class="dgpanel">

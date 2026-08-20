@@ -56,6 +56,12 @@
 .slmetrics b{color:var(--ink)}
 #sl_canvas{width:100%;max-width:460px;aspect-ratio:1;border:1px solid var(--line);border-radius:12px;background:#fbfcfc;display:block}
 .slstatus{font-family:var(--mono);font-size:12.5px;color:var(--graphite);margin-top:8px}
+
+.pgcore{border:1px solid var(--line);border-left:3px solid var(--good);border-radius:0 12px 12px 0;background:#f3faf4;padding:14px 17px;margin:18px 0 20px}
+.pgcore .pglabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--good);font-weight:700;margin-bottom:6px}
+.pgcore p{font-size:14.5px;line-height:1.6;margin:7px 0;color:#23302C}
+.pgcore b{color:var(--ink)}
+
 </style></head><body>
 <header><div class="wrap"><div class="bug">Self-supervised learning · the collapse sandbox</div>
 <h1>Watch it collapse — and watch the negatives save it</h1>
@@ -65,7 +71,7 @@ by mapping <em>everything</em> to one point. Here you can trigger it. Each dot i
 its hidden class). The attractive force pulls views together; the <em>negatives</em> push different images
 apart. Turn the negatives off and press Train — watch the whole cloud implode.</p></div></header>
 <nav><div class="wrap"><a href="index.html">← All themes</a><a href="ssl-math.html">🧮 The math</a><a href="ssl-why.html">The big picture</a><a href="ssl-in-the-wild.html">In the wild</a></div></nav>
-<div class="wrap"><article class="doc">
+<div class="wrap"><article class="doc"><!-- playground-principles:start --><section class="pgcore" id="playground-principles"><div class="pglabel">First-principles guide</div><p><b>Quantity shown.</b> This sandbox exposes label-free representation agreement: what stays stable across two views of the same data.</p><p><b>What the controls mean.</b> Augmentation strength changes which facts are treated as harmless.</p><p><b>What to watch for.</b> Watch bad augmentations erase the information a later task needs.</p></section><!-- playground-principles:end -->
 <div class="slwrap">
   <div><div class="slpanel">
     <div class="slctl">
