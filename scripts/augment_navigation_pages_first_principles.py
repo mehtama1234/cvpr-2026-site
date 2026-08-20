@@ -148,7 +148,8 @@ def render_block(path: Path, source: str) -> str:
     title = text_between(clean_source, "h1") or path.stem.replace("-", " ")
     summary = text_between(clean_source, "p")
     profile = choose_profile(path)
-    links = " · ".join(f'<a href="{href}">{html.escape(label)}</a>' for label, href in profile.links)
+    rel_prefix = "" if path.parent == ROOT else "../" * len(path.relative_to(ROOT).parent.parts)
+    links = " · ".join(f'<a href="{rel_prefix}{href}">{html.escape(label)}</a>' for label, href in profile.links)
     summary_sentence = (
         f" The page says: {html.escape(summary)}"
         if summary
@@ -190,7 +191,7 @@ def upsert_block(source: str, block: str) -> str:
 
 def main() -> None:
     updated = 0
-    targets = [p for p in sorted(ROOT.glob("*.html")) if is_target(p)]
+    targets = [p for p in sorted(ROOT.rglob("*.html")) if is_target(p)]
     for path in targets:
         source = path.read_text(encoding="utf-8", errors="ignore")
         block = render_block(path, source)

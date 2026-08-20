@@ -50,7 +50,7 @@ def count_occurrences(pattern: str, marker: str, *, exclude: set[str] | None = N
 def count_navigation_pages() -> tuple[int, int]:
     pages = [
         p
-        for p in sorted(ROOT.glob("*.html"))
+        for p in sorted(ROOT.rglob("*.html"))
         if not p.name.startswith(("cvpr-", "cluster-")) and not p.name.endswith(NAV_EXCLUDE_SUFFIXES)
     ]
     covered = sum(1 for p in pages if "navigation-principles:start" in p.read_text(encoding="utf-8", errors="ignore"))
