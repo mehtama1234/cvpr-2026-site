@@ -75,6 +75,8 @@ def render() -> str:
     sub_lenses = count_occurrences("*-deep-reads.html", "dr-math-lens:start", exclude={"deep-reads.html"})
     pattern_blocks = count_occurrences("*-in-the-wild.html", '<div class="pat"')
     pattern_moves = count_occurrences("*-in-the-wild.html", "pattern-math-move:start")
+    family_blocks = count_occurrences("*-deepdive.html", "<b>The fundamental point.</b>")
+    family_principles = count_occurrences("*-deepdive.html", "family-principles:start")
 
     cells = [
         ("math pages", f"{math_covered}/{math_total}", "key turn + failure + examples"),
@@ -89,6 +91,7 @@ def render() -> str:
         ("standout papers", f"{card_lenses}/{cards}", "paper-card mathematical lenses"),
         ("subtheme paper blocks", f"{sub_lenses}/{sub_blocks}", "hidden/evidence/objective/failure"),
         ("usage patterns", f"{pattern_moves}/{pattern_blocks}", "quantity/rule/why-this-use"),
+        ("subtheme families", f"{family_principles}/{family_blocks}", "hidden quantity / evidence / equation / counterexample"),
     ]
     grid = "".join(f'<div class="cell"><b>{value}</b><span>{name}</span><p>{note}</p></div>' for name, value, note in cells)
     return (
