@@ -26,18 +26,18 @@ FALLBACKS = {
         "h": "the grounded medical claim: which phrase in the report is supported by which visible region or clinical finding",
         "e": "chest X-ray regions, generated phrases, phrase-region matches, preference feedback, and whether a factual correction changes the report in the expected place",
         "m": "grounded preference optimization: reward reports that are both preferred and tied to evidence, while penalizing text that sounds plausible but lacks visual support",
-        "n": "the simple method optimizes report fluency or global similarity, so it can produce a medically smooth sentence that is not supported by the scan",
-        "p": "the claim gets stronger when changing or masking the relevant image region changes the specific phrase that refers to it",
-        "b": "it breaks if the report keeps the same finding after the supporting region is hidden, contradicted, or replaced",
+        "n": "Optimizing report fluency or global similarity can produce a medically smooth sentence that is not supported by the scan.",
+        "p": "Good evidence would show changing or masking the relevant image region changing the specific phrase that refers to it.",
+        "b": "A counterexample is the report keeping the same finding after the supporting region is hidden, contradicted, or replaced.",
     },
     "Fuel Gauge: Estimating Chain-of-Thought Length Ahead of Time in Large Language Models": {
         "s": "Fuel Gauge should be read as a claim about predicting how much reasoning a question needs before spending tokens, not as a claim that longer reasoning is automatically better.",
         "h": "the needed reasoning length: how many intermediate steps are useful before the model should stop and answer",
         "e": "question difficulty, early hidden states, past reasoning traces, answer correctness, token cost, and failures from stopping too early or thinking too long",
         "m": "cost-aware prediction: estimate the value of more computation before paying for it, balancing answer quality against wasted reasoning tokens",
-        "n": "the simple method uses a fixed reasoning length, so easy questions waste work and hard questions stop before enough evidence has been combined",
-        "p": "the claim gets stronger when predicted length rises on genuinely harder examples and shorter predicted traces keep easy answers correct",
-        "b": "it breaks if the length predictor mostly follows surface wording, or if saving tokens lowers correctness on cases that truly need multiple steps",
+        "n": "A fixed reasoning length wastes work on easy questions and stops too early on hard questions before enough evidence has been combined.",
+        "p": "Good evidence would show predicted length rising on genuinely harder examples while shorter predicted traces keep easy answers correct.",
+        "b": "A counterexample is a length predictor that mostly follows surface wording, or token savings that lower correctness on cases that truly need multiple steps.",
     },
 }
 
@@ -81,11 +81,12 @@ def render(pd: dict) -> str:
         START
         + '<div class="cluster-paper-depth">'
         + f"<p><b>First-principles depth.</b> {esc(pd['s'])}</p>"
-        + f"<p><b>Hidden thing.</b> {esc(pd['h'])}</p>"
+        + f"<p><b>Hidden quantity.</b> {esc(pd['h'])}</p>"
         + f"<p><b>Evidence.</b> {esc(pd['e'])}</p>"
-        + f"<p><b>Math rule.</b> {esc(pd['m'])}</p>"
-        + f"<p><b>Simple failure.</b> {esc(pd['n'])}</p>"
-        + f"<p><b>Proof and break test.</b> {esc(pd['p'])} {esc(pd['b'])}</p>"
+        + f"<p><b>Mathematical rule.</b> {esc(pd['m'])}</p>"
+        + f"<p><b>Why the naive version fails.</b> {esc(pd['n'])}</p>"
+        + f"<p><b>Evidence that would prove it.</b> {esc(pd['p'])}</p>"
+        + f"<p><b>Counterexample.</b> {esc(pd['b'])}</p>"
         + "</div>"
         + END
     )
