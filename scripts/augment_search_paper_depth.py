@@ -234,7 +234,7 @@ def upsert_search_depth_filter(text: str) -> str:
     old_init = "const q=document.getElementById('q'),th=document.getElementById('th'),cc=document.getElementById('code'),res=document.getElementById('res'),nn=document.getElementById('n');"
     helpers = (
         "function paperParams(d){const p=new URLSearchParams(); p.set('q',d.t||''); if(d.th)p.set('theme',d.th); return p.toString();}\n"
-        "function reviewHref(d){return `paper-review-queue.html#${paperParams(d)}`;}\n"
+        "function reviewHref(d){return `paper-review.html?${paperParams(d)}`;}\n"
         "function qualityHref(d){const p=new URLSearchParams(); p.set('q',d.t||''); return `paper-note-quality.html#${p}`;}\n"
         "function searchHref(d){return `search.html?${paperParams(d)}`;}"
     )
@@ -243,6 +243,11 @@ def upsert_search_depth_filter(text: str) -> str:
             "function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}",
             "function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}\n" + helpers,
             1,
+        )
+    else:
+        text = text.replace(
+            "function reviewHref(d){return `paper-review-queue.html#${paperParams(d)}`;}",
+            "function reviewHref(d){return `paper-review.html?${paperParams(d)}`;}",
         )
     new_init = (
         "const q=document.getElementById('q'),th=document.getElementById('th'),cc=document.getElementById('code'),res=document.getElementById('res'),nn=document.getElementById('n');\n"
