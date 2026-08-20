@@ -122,14 +122,19 @@ def lens_cards(data: list[dict]) -> str:
         by_rule[pd.get("m", "")].append(record)
     cards = []
     for rule, rows in sorted(by_rule.items(), key=lambda item: (-len(item[1]), item[0])):
-        examples = "".join(f"<li>{esc(row['t'])}</li>" for row in rows[:4])
+        examples = "".join(
+            f"""<li><a href="search.html#{esc(urlencode({"q": row.get("t", ""), "theme": row.get("th", "")}))}">{esc(row['t'])}</a></li>"""
+            for row in rows[:4]
+        )
         hidden = rows[0].get("pd", {}).get("h", "")
         counter = rows[0].get("pd", {}).get("b", "")
+        lens_query = urlencode({"q": rule})
         cards.append(
             f"""<article class="card"><div class="meta">{len(rows)} papers</div>
 <h3>{esc(rule)}</h3>
 <p><b>Hidden quantity:</b> {esc(hidden)}</p>
 <p><b>Counterexample:</b> {esc(counter)}</p>
+<p><a href="search.html#{esc(lens_query)}">Review this lens in search</a></p>
 <details><summary>Example papers</summary><ul>{examples}</ul></details></article>"""
         )
     return "".join(cards)
