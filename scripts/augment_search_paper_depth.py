@@ -197,6 +197,30 @@ def upsert_render(text: str) -> str:
     return text.replace(old, new, 1)
 
 
+def upsert_search_depth_filter(text: str) -> str:
+    text = text.replace(
+        "Search and filter every analyzed paper (4031) by keyword, theme, tag, or whether it released code.",
+        "Search and filter every analyzed paper (4031) by keyword, theme, tag, code, hidden quantity, evidence, mathematical rule, naive failure, proof test, or counterexample.",
+    ).replace(
+        "Search title, problem, tags…",
+        "Search title, problem, tags, evidence, counterexamples…",
+    )
+    old = (
+        "   return (d.t+' '+d.p+' '+(d.fp||'')+' '+(d.ff||'')+' '+(d.tg||[]).join(' ')).toLowerCase().includes(term);\n"
+        " });"
+    )
+    new = (
+        "   const pd=d.pd||{};\n"
+        "   return [d.t,d.p,d.fp,d.ff,(d.tg||[]).join(' '),pd.s,pd.h,pd.e,pd.m,pd.n,pd.p,pd.b].join(' ').toLowerCase().includes(term);\n"
+        " });"
+    )
+    if old in text:
+        return text.replace(old, new, 1)
+    if "pd.s,pd.h,pd.e,pd.m,pd.n,pd.p,pd.b" in text:
+        return text
+    raise ValueError("missing search filter insertion point")
+
+
 def main() -> None:
     text = PAGE.read_text(encoding="utf-8")
     data, before, after = extract_data(text)
@@ -204,7 +228,7 @@ def main() -> None:
         record["pd"] = depth_for(record)
     compact = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     out = before + compact + after
-    out = upsert_css(upsert_render(out))
+    out = upsert_search_depth_filter(upsert_css(upsert_render(out)))
     PAGE.write_text(out, encoding="utf-8")
     print(f"updated search.html paper depth: {len(data)} records")
 
