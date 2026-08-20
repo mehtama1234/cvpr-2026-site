@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -57,6 +58,16 @@ def count_navigation_pages() -> tuple[int, int]:
     return len(pages), covered
 
 
+def count_search_paper_depth() -> tuple[int, int]:
+    text = (ROOT / "search.html").read_text(encoding="utf-8", errors="ignore")
+    match = re.search(r"const D=(.*?);const THT=", text, re.S)
+    if not match:
+        return 0, 0
+    records = json.loads(match.group(1))
+    covered = sum(1 for record in records if isinstance(record.get("pd"), dict))
+    return len(records), covered
+
+
 def render() -> str:
     math_total, math_covered = count_pages("*-math.html", "The key turn")
     why_total, why_covered = count_pages("*-why.html", "Mathematical core")
@@ -77,6 +88,7 @@ def render() -> str:
     pattern_moves = count_occurrences("*-in-the-wild.html", "pattern-math-move:start")
     family_blocks = count_occurrences("*-deepdive.html", "<b>The fundamental point.</b>")
     family_principles = count_occurrences("*-deepdive.html", "family-principles:start")
+    paper_depth_total, paper_depth_covered = count_search_paper_depth()
 
     cells = [
         ("math pages", f"{math_covered}/{math_total}", "key turn + failure + examples"),
@@ -92,6 +104,7 @@ def render() -> str:
         ("subtheme paper blocks", f"{sub_lenses}/{sub_blocks}", "hidden/evidence/objective/failure"),
         ("usage patterns", f"{pattern_moves}/{pattern_blocks}", "quantity/rule/why-this-use"),
         ("subtheme families", f"{family_principles}/{family_blocks}", "hidden quantity / evidence / equation / counterexample"),
+        ("search paper notes", f"{paper_depth_covered}/{paper_depth_total}", "hidden thing / evidence / rule / proof / break"),
     ]
     grid = "".join(f'<div class="cell"><b>{value}</b><span>{name}</span><p>{note}</p></div>' for name, value, note in cells)
     return (
